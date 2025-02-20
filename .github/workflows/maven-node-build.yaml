@@ -15,10 +15,10 @@ jobs:
       fail-fast: false
       matrix:
         include: # hier müssen die Pfade angegeben werden
-          - app-path: refarch-backend
-          - app-path: refarch-frontend
-          - app-path: refarch-eai
-          - app-path: refarch-webcomponent
+          - app-path: ehrenamt-justiz-backend
+          - app-path: ehrenamt-justiz-frontend
+          - app-path: ehrenamt-justiz-eai
+          - app-path: ehrenamt-justiz-webcomponent
 
     steps:
       - uses: it-at-m/lhm_actions/action-templates/actions/action-checkout@v1.0.0

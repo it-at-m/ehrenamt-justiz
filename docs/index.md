@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "RefArch Templates"
+  name: "Ehrenamtjustiz"
   text: "Documentation"
   tagline: "Starter files for web application projects based on the reference architecture of it@M"
   actions:

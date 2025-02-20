@@ -1,6 +1,6 @@
 <!-- General project links -->
-[open-issues]: https://github.com/it-at-m/refarch-templates/issues
-[new-issue]: https://github.com/it-at-m/refarch-templates/issues/new/choose
+[open-issues]: https://github.com/it-at-m/ehrenamt-justiz/issues
+[new-issue]: https://github.com/it-at-m/ehrenamt-justiz/issues/new/choose
 [milestones]: https://github.com/it-at-m/refarch-templates/milestones
 [project-board]: https://github.com/orgs/it-at-m/projects/16
 [documentation]: https://refarch-templates.oss.muenchen.de/

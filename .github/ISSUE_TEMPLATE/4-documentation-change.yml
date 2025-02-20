@@ -19,10 +19,10 @@ body:
       multiple: true
       description: Affected documentation parts
       options:
-        - refarch-frontend
-        - refarch-backend
-        - refarch-eai
-        - refarch-webcomponent
+        - ehrenamt-justiz-frontend
+        - ehrenamt-justiz-backend
+        - ehrenamt-justiz-eai
+        - ehrenamt-justiz-webcomponent
         - Other
     validations:
       required: true
