@@ -4,11 +4,11 @@ import EhrenamtJustizHelloWorldVueComponent from "@/ehrenamt-justiz-hello-world-
 
 // convert into custom element constructor
 const EhrenamtJustizHelloWorldWebComponent = defineCustomElement(
-    EhrenamtJustizHelloWorldVueComponent
+  EhrenamtJustizHelloWorldVueComponent
 );
 
 // register
 customElements.define(
   "ehrenamt-justiz-hello-world-webcomponent",
-    EhrenamtJustizHelloWorldWebComponent
+  EhrenamtJustizHelloWorldWebComponent
 );
