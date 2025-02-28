@@ -1,20 +1,21 @@
 package de.muenchen.ehrenamtjustiz.backend.security;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.security.access.prepost.PreAuthorize;
-
 /**
- * Each possible authority in this project is represented by an enum.
- * The enums are used within the {@link PagingAndSortingRepository}
- * in the annotation e.g. {@link PreAuthorize}.
+ * Each possible authority validation
  */
+@SuppressWarnings("PMD.DataClass")
 public final class Authorities {
-    public static final String HAS_AUTHORITY_READ_THEENTITY = "hasAuthority(READ_THEENTITY)";
-    public static final String HAS_AUTHORITY_WRITE_THEENTITY = "hasAuthority(WRITE_THEENTITY)";
-    public static final String HAS_AUTHORITY_DELETE_THEENTITY = "hasAuthority(DELETE_THEENTITY)";
+    public static final String HAS_AUTHORITY_READ_KONFIGURATION = "hasAuthority(READ_KONFIGURATION)";
+    public static final String HAS_AUTHORITY_WRITE_KONFIGURATION = "hasAuthority(WRITE_KONFIGURATION)";
+    public static final String HAS_AUTHORITY_DELETE_KONFIGURATION = "hasAuthority(DELETE_KONFIGURATION)";
+    public static final String HAS_AUTHORITY_READ_EHRENAMTJUSTIZDATEN = "hasAuthority(READ_EHRENAMTJUSTIZDATEN)";
+    public static final String HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN = "hasAuthority(WRITE_EHRENAMTJUSTIZDATEN)";
+    public static final String HAS_AUTHORITY_DELETE_EHRENAMTJUSTIZDATEN = "hasAuthority(DELETE_EHRENAMTJUSTIZDATEN)";
+    public static final String HAS_AUTHORITY_EWOSUCHE = "hasAuthority(EWOSUCHE)";
+    public static final String HAS_AUTHORITY_EWOSUCHEMITOM = "hasAuthority(EWOSUCHEMITOM)";
+    public static final String HAS_AUTHORITY_ONLINEBEWERBEN = "hasAuthority(ONLINEBEWERBEN)";
 
     private Authorities() {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
-    // add your authorities here and also add these new authorities to sso-authorisation.json.
 }

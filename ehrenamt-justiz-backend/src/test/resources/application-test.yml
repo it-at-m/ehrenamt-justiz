@@ -8,3 +8,11 @@ security:
   # Currently only dummy values, will later be changed for testing security.
   requestLogging: all
   userInfoUri: NotNeeded
+
+de:
+  muenchen:
+    ewo:
+      eai:
+        server: http://localhost:8083
+        user: test
+        password: test

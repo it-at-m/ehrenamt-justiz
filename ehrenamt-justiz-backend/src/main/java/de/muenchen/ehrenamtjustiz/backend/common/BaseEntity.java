@@ -1,18 +1,14 @@
 package de.muenchen.ehrenamtjustiz.backend.common;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.UUID;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @MappedSuperclass
 @NoArgsConstructor
@@ -20,14 +16,15 @@ import lombok.ToString;
 @Setter
 @ToString
 @EqualsAndHashCode
-public abstract class BaseEntity implements Serializable {
+@SuperBuilder
+public abstract class BaseEntity implements Cloneable, Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "id", length = 36)
+    @Column(name = "id")
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    // @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private UUID id;
 
 }

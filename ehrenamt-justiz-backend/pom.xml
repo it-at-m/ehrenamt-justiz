@@ -58,7 +58,7 @@
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version> <!-- Needed to make MapStruct and Lombok work together -->
 
         <!-- Flyway maven plugin configuration for local stack database -->
-        <flyway.url>jdbc:postgresql://localhost:5432/postgres</flyway.url>
+        <flyway.url>jdbc:postgresql://localhost:5432/postgres?currentSchema=ej</flyway.url>
         <flyway.user>admin</flyway.user>
         <flyway.password>admin</flyway.password>
         <flyway.locations>classpath:db/migration/schema,classpath:db/migration/testdata</flyway.locations>
@@ -80,7 +80,12 @@
 
 
     <dependencies>
-
+        <!-- EAI -->
+        <dependency>
+            <groupId>de.muenchen.eai.ej</groupId>
+            <artifactId>ejewoouteai-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
         <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

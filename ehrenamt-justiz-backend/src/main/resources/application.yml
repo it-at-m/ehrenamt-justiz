@@ -59,3 +59,10 @@ info:
   build:
     java.version: @java.version@
     spring-cloud.version: @spring-cloud-dependencies.version@
+
+# Define eai
+de:
+  muenchen:
+    ewo:
+      eai:
+        basepath: /personeninfo/api

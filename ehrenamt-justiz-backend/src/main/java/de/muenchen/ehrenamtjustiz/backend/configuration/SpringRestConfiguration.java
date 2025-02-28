@@ -1,5 +1,7 @@
 package de.muenchen.ehrenamtjustiz.backend.configuration;
 
+import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
+import de.muenchen.ehrenamtjustiz.backend.domain.Person;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -29,6 +31,8 @@ public class SpringRestConfiguration implements RepositoryRestConfigurer {
     @Override
     public void configureRepositoryRestConfiguration(final RepositoryRestConfiguration config, final CorsRegistry corsRegistry) {
         config.setRepositoryDetectionStrategy(RepositoryDetectionStrategies.DEFAULT);
+        // ID auch zurückgbeben: Das ist notwendig, damit im Frontend die id verwendet werden kann!
+        config.exposeIdsFor(Konfiguration.class, Person.class);
     }
 
     /**

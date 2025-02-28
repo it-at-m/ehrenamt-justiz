@@ -1,5 +1,6 @@
-package de.muenchen.ehrenamtjustiz;
+package de.muenchen.ehrenamtjustiz.backend;
 
+import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,18 +17,26 @@ public final class TestConstants {
 
     public static final String SPRING_NO_SECURITY_PROFILE = "no-security";
 
-    public static final String SPRING_JSON_LOGGING_PROFILE = "json-logging";
-
     public static final String TESTCONTAINERS_POSTGRES_IMAGE = "postgres:16.0-alpine3.18";
+
+    public static final String SPRING_JSON_LOGGING_PROFILE = "json-logging";
 
     @NoArgsConstructor
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = true)
     @ToString(callSuper = true)
-    public static class TheEntityDto extends RepresentationModel {
+    public static class KonfigurationDto extends RepresentationModel {
 
-        private String textAttribute;
+        private Ehrenamtjustizart ehrenamtjustizart;
+        private String bezeichnung;
+        private boolean aktiv;
+        private java.time.LocalDate amtsperiodevon;
+        private java.time.LocalDate amtsperiodebis;
+        private long altervon;
+        private long alterbis;
+        private String staatsangehoerigkeit;
+        private String wohnsitz;
 
     }
 

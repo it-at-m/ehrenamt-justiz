@@ -1,9 +1,10 @@
 package de.muenchen.ehrenamtjustiz.backend.configuration;
 
 import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
-import de.muenchen.ehrenamtjustiz.TestConstants;
-import de.muenchen.ehrenamtjustiz.backend.theentity.TheEntity;
-import de.muenchen.ehrenamtjustiz.backend.theentity.TheEntityRepository;
+import de.muenchen.ehrenamtjustiz.backend.TestConstants;
+import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
+import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
+import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,13 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
+import java.math.BigInteger;
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.UUID;
 
-import static de.muenchen.ehrenamtjustiz.TestConstants.SPRING_TEST_PROFILE;
-import static de.muenchen.ehrenamtjustiz.TestConstants.SPRING_NO_SECURITY_PROFILE;
-import static de.muenchen.ehrenamtjustiz.TestConstants.TheEntityDto;
+import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFILE;
+import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Testcontainers
@@ -38,7 +40,7 @@ class UnicodeConfigurationTest {
     private static final PostgreSQLContainer<?> POSTGRE_SQL_CONTAINER = new PostgreSQLContainer<>(
             DockerImageName.parse(TestConstants.TESTCONTAINERS_POSTGRES_IMAGE));
 
-    private static final String ENTITY_ENDPOINT_URL = "/theEntities";
+    private static final String ENTITY_ENDPOINT_URL = "/konfigurationen";
 
     /**
      * Decomposed string:
@@ -56,27 +58,38 @@ class UnicodeConfigurationTest {
     private TestRestTemplate testRestTemplate;
 
     @Autowired
-    private TheEntityRepository theEntityRepository;
+    private KonfigurationRepository konfigurationRepository;
 
     @Test
     void testForNfcNormalization() {
         // Persist entity with decomposed string.
-        final TheEntityDto theEntityDto = new TheEntityDto();
-        theEntityDto.setTextAttribute(TEXT_ATTRIBUTE_DECOMPOSED);
-        assertEquals(TEXT_ATTRIBUTE_DECOMPOSED.length(), theEntityDto.getTextAttribute().length());
-        final TheEntityDto response = testRestTemplate.postForEntity(URI.create(ENTITY_ENDPOINT_URL), theEntityDto, TheEntityDto.class).getBody();
+        final Konfiguration konfiguration = new Konfiguration();
+        konfiguration.setId(UUID.randomUUID());
+        konfiguration.setAktiv(true);
+        konfiguration.setEhrenamtjustizart(Ehrenamtjustizart.VERWALTUNGSRICHTER);
+        konfiguration.setBezeichnung(TEXT_ATTRIBUTE_DECOMPOSED);
+        konfiguration.setAltervon(BigInteger.valueOf(18));
+        konfiguration.setAlterbis(BigInteger.valueOf(75));
+        konfiguration.setStaatsangehoerigkeit("deutsch");
+        konfiguration.setWohnsitz("München");
+        konfiguration.setAmtsperiodevon(LocalDate.of(2025, 1, 1));
+        konfiguration.setAmtsperiodebis(LocalDate.of(2029, 12, 31));
+
+        assertEquals(TEXT_ATTRIBUTE_DECOMPOSED.length(), konfiguration.getBezeichnung().length());
+        final TestConstants.KonfigurationDto response = testRestTemplate
+                .postForEntity(URI.create(ENTITY_ENDPOINT_URL), konfiguration, TestConstants.KonfigurationDto.class).getBody();
 
         // Check whether response contains a composed string.
-        assertEquals(TEXT_ATTRIBUTE_COMPOSED, response.getTextAttribute());
-        assertEquals(TEXT_ATTRIBUTE_COMPOSED.length(), response.getTextAttribute().length());
+        assertEquals(TEXT_ATTRIBUTE_COMPOSED, response.getBezeichnung());
+        assertEquals(TEXT_ATTRIBUTE_COMPOSED.length(), response.getBezeichnung().length());
 
         // Extract uuid from self link.
         final UUID uuid = UUID.fromString(StringUtils.substringAfterLast(response.getRequiredLink("self").getHref(), "/"));
 
         // Check persisted entity contains a composed string via JPA repository.
-        final TheEntity theEntity = theEntityRepository.findById(uuid).orElse(null);
-        assertEquals(TEXT_ATTRIBUTE_COMPOSED, theEntity.getTextAttribute());
-        assertEquals(TEXT_ATTRIBUTE_COMPOSED.length(), theEntity.getTextAttribute().length());
+        final Konfiguration findKonfiguration = konfigurationRepository.findById(uuid).orElse(null);
+        assertEquals(TEXT_ATTRIBUTE_COMPOSED, findKonfiguration.getBezeichnung());
+        assertEquals(TEXT_ATTRIBUTE_COMPOSED.length(), findKonfiguration.getBezeichnung().length());
     }
 
 }

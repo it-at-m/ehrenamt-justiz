@@ -1,7 +1,7 @@
 package de.muenchen.ehrenamtjustiz.backend.configuration;
 
 import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
-import de.muenchen.ehrenamtjustiz.TestConstants;
+import de.muenchen.ehrenamtjustiz.backend.TestConstants;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,8 +17,8 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import static de.muenchen.ehrenamtjustiz.TestConstants.SPRING_TEST_PROFILE;
-import static de.muenchen.ehrenamtjustiz.TestConstants.SPRING_NO_SECURITY_PROFILE;
+import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFILE;
+import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -36,7 +36,7 @@ class CacheControlConfigurationTest {
     private static final PostgreSQLContainer<?> POSTGRE_SQL_CONTAINER = new PostgreSQLContainer<>(
             DockerImageName.parse(TestConstants.TESTCONTAINERS_POSTGRES_IMAGE));
 
-    private static final String ENTITY_ENDPOINT_URL = "/theEntities";
+    private static final String ENTITY_ENDPOINT_URL = "/konfigurationen";
 
     private static final String EXPECTED_CACHE_CONTROL_HEADER_VALUES = "no-cache, no-store, must-revalidate";
 

@@ -1,6 +1,6 @@
 package de.muenchen.ehrenamtjustiz.backend.configuration;
 
-import static de.muenchen.ehrenamtjustiz.TestConstants.SPRING_JSON_LOGGING_PROFILE;
+import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_JSON_LOGGING_PROFILE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.PrintWriter;
