@@ -1,0 +1,46 @@
+server:
+  port: 39146
+spring:
+  # Spring JPA
+  jpa:
+    # Logging for database operation
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    url: jdbc:postgresql://172.17.0.1:5432/postgres?currentSchema=ej
+    password: admin
+    username: admin
+  flyway:
+    locations:
+      - classpath:db/migration/schema
+      - classpath:db/migration/testdata
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${sso.url}/auth/realms/${sso.realm}/protocol/openid-connect/certs
+          audiences:
+            - ${sso.client}
+
+# Define eai
+de:
+  muenchen:
+    ewo:
+      eai:
+        server: http://172.17.0.1:8083
+        user: testuser
+        password: testpw
+
+# Define the local keycloak configuration here
+# Deduplication-only property
+sso:
+  url: http://172.17.0.1:8100
+  realm: local_realm
+  client: local
+
+security:
+  # possible values: none, all, changing (With changing, only changing requests such as POST, PUT, DELETE are logged)
+  requestLogging: all
+  userInfoUri: ${sso.url}/auth/realms/${sso.realm}/protocol/openid-connect/userinfo
