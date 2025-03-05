@@ -9,7 +9,7 @@ spring:
       hibernate:
         format_sql: true
   datasource:
-    url: jdbc:postgresql://0.0.0.0:5432/postgres?currentSchema=ej
+    url: jdbc:postgresql://postgres:5432/postgres?currentSchema=ej
     password: admin
     username: admin
   flyway:
@@ -29,14 +29,14 @@ de:
   muenchen:
     ewo:
       eai:
-        server: http://0.0.0.0:8083
+        server: http://172.17.0.1:8083
         user: testuser
         password: testpw
 
 # Define the local keycloak configuration here
 # Deduplication-only property
 sso:
-  url: http://0.0.0.0:8100
+  url: http://keycloak:8100
   realm: local_realm
   client: local
 
