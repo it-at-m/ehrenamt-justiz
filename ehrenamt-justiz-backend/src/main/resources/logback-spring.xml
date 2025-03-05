@@ -8,7 +8,7 @@
     <springProperty scope="context" name="springAppName" source="spring.application.name"/>
 
 
-    <springProfile name="local | test">
+    <springProfile name="docker | local | test">
 
         <!-- Log appender -->
         <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -48,7 +48,7 @@
     </springProfile>
 
 
-    <springProfile name="!local &amp; !test">
+    <springProfile name="!local &amp; !test &amp; !docker">
 
         <appender name="JSON_STDOUT" class="ch.qos.logback.core.ConsoleAppender">
             <encoder class="net.logstash.logback.encoder.LogstashEncoder">
