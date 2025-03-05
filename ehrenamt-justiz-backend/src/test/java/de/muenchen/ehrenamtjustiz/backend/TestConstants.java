@@ -19,8 +19,6 @@ public final class TestConstants {
 
     public static final String TESTCONTAINERS_POSTGRES_IMAGE = "postgres:16.0-alpine3.18";
 
-    public static final String SPRING_JSON_LOGGING_PROFILE = "json-logging";
-
     @NoArgsConstructor
     @Getter
     @Setter

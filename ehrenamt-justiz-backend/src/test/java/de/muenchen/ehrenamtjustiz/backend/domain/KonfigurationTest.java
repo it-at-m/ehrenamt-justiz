@@ -43,7 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @ActiveProfiles(profiles = { SPRING_TEST_PROFILE, SPRING_NO_SECURITY_PROFILE })
-class KonfigurationIntegrationTest {
+class KonfigurationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -69,12 +69,12 @@ class KonfigurationIntegrationTest {
         konfiguration.setAktiv(true);
         konfiguration.setEhrenamtjustizart(Ehrenamtjustizart.VERWALTUNGSRICHTER);
         konfiguration.setBezeichnung("Verwaltungsrichter 2025 - 2029");
-        konfiguration.setAltervon(BigInteger.valueOf(18));
-        konfiguration.setAlterbis(BigInteger.valueOf(75));
+        konfiguration.setAltervon(BigInteger.valueOf(25));
+        konfiguration.setAlterbis(BigInteger.valueOf(120));
         konfiguration.setStaatsangehoerigkeit("deutsch");
         konfiguration.setWohnsitz("München");
-        konfiguration.setAmtsperiodevon(LocalDate.of(2025, 1, 1));
-        konfiguration.setAmtsperiodebis(LocalDate.of(2029, 12, 31));
+        konfiguration.setAmtsperiodevon(LocalDate.of(2030, 4, 1));
+        konfiguration.setAmtsperiodebis(LocalDate.of(2035, 3, 31));
         testEntityId = konfigurationRepository.save(konfiguration).getId();
     }
 

@@ -100,7 +100,7 @@ public interface PersonRepository extends PagingAndSortingRepository<Person, UUI
     void delete(Person entity);
 
     @Modifying
-    @Query("delete from Person p where p.id = :id and p.status='InErfassung'")
+    @Query("delete from Person p where p.id = :id and p.status='INERFASSUNG'")
     @Transactional
     void deleteInErfassung(@Param("id") UUID id);
 
