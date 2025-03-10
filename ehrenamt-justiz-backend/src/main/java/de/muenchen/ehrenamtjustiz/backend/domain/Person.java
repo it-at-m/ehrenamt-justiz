@@ -12,6 +12,7 @@ import de.muenchen.ehrenamtjustiz.backend.common.BaseEntity;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -29,8 +30,8 @@ import lombok.experimental.SuperBuilder;
  */
 @Entity
 // Definition of getter, setter, ...
-@Getter
-@Setter
+@Setter(onMethod_ = @SuppressFBWarnings({ "EI_EXPOSE_REP" }))
+@Getter(onMethod_ = @SuppressFBWarnings({ "EI_EXPOSE_REP" }))
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

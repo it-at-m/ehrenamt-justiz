@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.UUID;
 
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-@Getter
-@Setter
+@Setter(onMethod_ = @SuppressFBWarnings({ "EI_EXPOSE_REP" }))
+@Getter(onMethod_ = @SuppressFBWarnings({ "EI_EXPOSE_REP" }))
 @ToString(callSuper = true)
 @EqualsAndHashCode
 @NoArgsConstructor

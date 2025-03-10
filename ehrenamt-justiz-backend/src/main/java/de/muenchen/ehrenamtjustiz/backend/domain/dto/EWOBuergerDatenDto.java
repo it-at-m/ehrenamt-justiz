@@ -8,14 +8,15 @@ import java.util.UUID;
 
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-@Getter
-@Setter
+@Setter(onMethod_ = @SuppressFBWarnings({ "EI_EXPOSE_REP" }))
+@Getter(onMethod_ = @SuppressFBWarnings({ "EI_EXPOSE_REP" }))
 @ToString(callSuper = true)
 @SuperBuilder
 @NoArgsConstructor
