@@ -1,4 +1,4 @@
-import { AD2IMAGE_URL } from "@/constants";
+import { AD2IMAGE_URL } from "@/Constants.ts";
 
 export class Ad2imageAvatarClient {
   base: string;

@@ -1,0 +1,43 @@
+export default interface PersonCSV {
+  // Achtung: export-to-csv kennt nur einige wenige Datentypen: string, boolean .. aber z.B. keine Listen
+  [key: string]: string;
+  id: string;
+  familienname: string;
+  geburtsname: string;
+  vorname: string;
+  geburtsdatum: string;
+  geschlecht: string;
+  ewo_id: string;
+  akademischergrad: string;
+  geburtsort: string;
+  geburtsland: string;
+  familienstand: string;
+  staatsangehoerigkeit: string;
+  wohnungsgeber: string;
+  strasse: string;
+  hausnummer: string;
+  appartmentnummer: string;
+  buchstabehausnummer: string;
+  stockwerk: string;
+  teilnummerhausnummer: string;
+  adresszusatz: string;
+  konfliktfeld: string;
+  postleitzahl: string;
+  ort: string;
+  inmuenchenseit: string;
+  wohnungsstatus: string;
+  auskunftssperre: string;
+  derzeitausgeuebterberuf: string;
+  arbeitgeber: string;
+  telefonnummer: string;
+  telefongesch: string;
+  telefonmobil: string;
+  mailadresse: string;
+  ausgeuebteehrenaemter: string;
+  onlinebewerbung: string;
+  neuervorschlag: string;
+  warbereitstaetigals: string;
+  bewerbungvom: string;
+  konfiguration_id: string;
+  status: string;
+}

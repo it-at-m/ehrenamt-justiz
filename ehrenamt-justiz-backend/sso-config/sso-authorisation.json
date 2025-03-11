@@ -1,0 +1,250 @@
+{
+  "allowRemoteResourceManagement": false,
+  "policyEnforcementMode": "ENFORCING",
+  "resources": [
+    {
+      "name": "READ_EWOBUERGER",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "WRITE_EWOBUERGER",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "DELETE_EWOBUERGER",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "READ_EHRENAMTJUSTIZDATEN",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "WRITE_EHRENAMTJUSTIZDATEN",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "DELETE_EHRENAMTJUSTIZDATEN",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "READ_KONFIGURATION",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "WRITE_KONFIGURATION",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "DELETE_KONFIGURATION",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "EWOSUCHE",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "EWOSUCHEMITOM",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "ONLINEBEWERBEN",
+      "type": "backend-backend-service",
+      "scopes": []
+    }
+  ],
+  "policies": [
+    {
+      "name": "rolepolicy_sachbearbeiter",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "roles": "[{\"id\":\"ej-app/clientrole_sachbearbeiter\",\"required\":false}]"
+      }
+    },
+    {
+      "name": "rolepolicy_sondersachbearbeiter",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "roles": "[{\"id\":\"ej-app/clientrole_sondersachbearbeiter\",\"required\":false}]"
+      }
+    },
+    {
+      "name": "rolepolicy_technischernutzer",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "roles": "[{\"id\":\"ej-app/clientrole_technischernutzer\",\"required\":false}]"
+      }
+    },
+    {
+      "name": "rolepolicy_admin",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "roles": "[{\"id\":\"ej-app/clientrole_admin\",\"required\":false}]"
+      }
+    },
+    {
+      "name": "permission_READ_EWOBUERGER",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"READ_EWOBUERGER\"]",
+        "applyPolicies": "[\"rolepolicy_sachbearbeiter\", \"rolepolicy_sondersachbearbeiter\", \"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_WRITE_EWOBUERGER",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"WRITE_EWOBUERGER\"]",
+        "applyPolicies": "[\"rolepolicy_sachbearbeiter\", \"rolepolicy_sondersachbearbeiter\", \"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_DELETE_EWOBUERGER",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"DELETE_EWOBUERGER\"]",
+        "applyPolicies": "[\"rolepolicy_sondersachbearbeiter\", \"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_READ_EHRENAMTJUSTIZDATEN",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"READ_EHRENAMTJUSTIZDATEN\"]",
+        "applyPolicies": "[\"rolepolicy_sachbearbeiter\", \"rolepolicy_sondersachbearbeiter\", \"rolepolicy_technischernutzer\", \"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_WRITE_EHRENAMTJUSTIZDATEN",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"WRITE_EHRENAMTJUSTIZDATEN\"]",
+        "applyPolicies": "[\"rolepolicy_sachbearbeiter\", \"rolepolicy_sondersachbearbeiter\", \"rolepolicy_technischernutzer\", \"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_DELETE_EHRENAMTJUSTIZDATEN",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"DELETE_EHRENAMTJUSTIZDATEN\"]",
+        "applyPolicies": "[\"rolepolicy_sondersachbearbeiter\", \"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_DELETE_EHRENAMTJUSTIZDATEN",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"DELETE_EHRENAMTJUSTIZDATEN\"]",
+        "applyPolicies": "[\"rolepolicy_sondersachbearbeiter\", \"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE\"]",
+        "applyPolicies": "[\"rolepolicy_sondersachbearbeiter\", \"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_READ_KONFIGURATION",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"READ_KONFIGURATION\"]",
+        "applyPolicies": "[\"rolepolicy_sachbearbeiter\", \"rolepolicy_sondersachbearbeiter\", \"rolepolicy_technischernutzer\", \"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_WRITE_KONFIGURATION",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"WRITE_KONFIGURATION\"]",
+        "applyPolicies": "[\"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_DELETE_KONFIGURATION",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"DELETE_KONFIGURATION\"]",
+        "applyPolicies": "[\"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_EWOSUCHE",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"EWOSUCHE\"]",
+        "applyPolicies": "[\"rolepolicy_sachbearbeiter\", \"rolepolicy_sondersachbearbeiter\", \"rolepolicy_technischernutzer\", \"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_EWOSUCHEMITOM",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"EWOSUCHEMITOM\"]",
+        "applyPolicies": "[\"rolepolicy_sachbearbeiter\", \"rolepolicy_sondersachbearbeiter\", \"rolepolicy_technischernutzer\", \"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_ONLINEBEWERBEN",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"ONLINEBEWERBEN\"]",
+        "applyPolicies": "[\"rolepolicy_technischernutzer\", \"rolepolicy_admin\"]"
+      }
+    }
+  ],
+  "scopes": []
+}

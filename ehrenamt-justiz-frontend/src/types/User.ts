@@ -7,7 +7,8 @@ class User {
   telephoneNumber = "";
   email = "";
   username = "";
-  givenname = "";
+  given_name = "";
+  family_name = "";
   department = "";
   lhmObjectID = "";
   // LHM_Extended
@@ -22,7 +23,19 @@ export function UserLocalDevelopment(): User {
   u.username = "Local Development User";
   u.displayName = "Local Development User";
   u.authorities = [
-    // todo add authorities
+    "READ_KONFIGURATION",
+    "WRITE_KONFIGURATION",
+    "DELETE_KONFIGURATION",
+    "READ_EWOBUERGER",
+    "WRITE_EWOBUERGER",
+    "DELETE_EWOBUERGER",
+    "READ_EHRENAMTJUSTIZDATEN",
+    "WRITE_EHRENAMTJUSTIZDATEN",
+    "DELETE_EHRENAMTJUSTIZDATEN",
+    "READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE",
+    "EWOSUCHE",
+    "EWOSUCHEMITOM",
+    "ONLINEBEWERBEN",
   ];
   u.user_roles = [
     // todo add user roles

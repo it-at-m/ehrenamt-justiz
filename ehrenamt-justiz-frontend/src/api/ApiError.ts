@@ -1,4 +1,4 @@
-import { STATUS_INDICATORS } from "@/constants";
+import { STATUS_INDICATORS } from "@/Constants.ts";
 
 export class ApiError extends Error {
   level: string;

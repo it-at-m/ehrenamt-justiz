@@ -4,54 +4,86 @@
     <v-app-bar color="primary">
       <v-row align="center">
         <v-col
-          cols="3"
+          cols="5"
           class="d-flex align-center justify-start"
         >
           <v-app-bar-nav-icon @click.stop="toggleDrawer()" />
           <router-link to="/">
             <v-toolbar-title class="font-weight-bold">
-              <span class="text-white">Ehrenamtjustiz-</span>
-              <span class="text-secondary">Kick</span>
-              <span class="text-white">Starter</span>
+              <v-tooltip location="top">
+                <template #activator="{ props }">
+                  <span
+                    :class="gatewayStatus"
+                    v-bind="props"
+                  >
+                    <v-icon
+                      size="mdi-18px"
+                      :icon="mdiCircle"
+                  /></span>
+                </template>
+                <span>Status Gateway</span>
+              </v-tooltip>
+              <v-tooltip location="top">
+                <template #activator="{ props }">
+                  <span
+                    :class="backendStatus"
+                    v-bind="props"
+                  >
+                    <v-icon
+                      size="mdi-18px"
+                      :icon="mdiCircle"
+                  /></span>
+                </template>
+                <span>Status Backend</span>
+              </v-tooltip>
+              <v-tooltip location="top">
+                <template #activator="{ props }">
+                  <span
+                    :class="eaiStatus"
+                    v-bind="props"
+                  >
+                    <v-icon
+                      size="mdi-18px"
+                      :icon="mdiCircle"
+                  /></span>
+                </template>
+                <span>Status EWO-EAI</span>
+              </v-tooltip>
+              <span class="text-white"> KVR-</span>
+              <span class="text-secondary">{{ ehrenamtjustizart }}</span>
             </v-toolbar-title>
           </router-link>
         </v-col>
         <v-col
-          cols="6"
-          class="d-flex align-center justify-center"
+          cols="4"
+          class="d-flex justify-start"
         >
-          <v-text-field
-            id="searchField"
-            v-model="query"
-            flat
-            variant="solo-inverted"
-            hide-details
-            label="Suche"
-            clearable
-            :prepend-inner-icon="mdiMagnify"
-            theme="dark"
-            @keyup.enter="search"
-          />
+          <span class="text-secondary font-weight-bold">
+            <h3>{{ bezeichnungApp }}</h3></span
+          >
         </v-col>
         <v-col
           cols="3"
           class="d-flex align-center justify-end"
         >
+          <span>{{ userinfo }}</span>
+          <v-tooltip location="top">
+            <template #activator="{ props }">
+              <span v-bind="props">
+                <v-btn
+                  style="font-size: 12px"
+                  :onclick="hilfeAnzeigen"
+                  :icon="mdiHelp"
+              /></span>
+            </template>
+            <span>Online-Hilfe</span>
+          </v-tooltip>
           <app-switcher
             v-if="appswitcherBaseUrl"
             :base-url="appswitcherBaseUrl"
             :tags="['global']"
             :icon="mdiApps"
           />
-          <v-btn
-            variant="text"
-            icon
-          >
-            <ad2-image-avatar
-              v-if="userStore.getUser !== null"
-              :username="userStore.getUser.username"
-            />
-          </v-btn>
         </v-col>
       </v-row>
     </v-app-bar>
@@ -59,6 +91,51 @@
       <v-list>
         <v-list-item :to="{ name: ROUTES_GETSTARTED }">
           <v-list-item-title>Get started</v-list-item-title>
+        </v-list-item>
+        <v-list-item
+          :to="{ name: 'bewerbung.create' }"
+          :disabled="
+            !user ||
+            !user.authorities.includes('READ_EWOBUERGER') ||
+            !globalSettingsStore ||
+            !globalSettingsStore.getKonfiguration
+          "
+        >
+          <v-list-item-title>Bewerbung erstellen</v-list-item-title>
+        </v-list-item>
+        <v-list-item
+          :to="{ name: 'bewerbung.index' }"
+          :disabled="
+            !user ||
+            !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
+            !globalSettingsStore ||
+            !globalSettingsStore.getKonfiguration
+          "
+        >
+          <v-list-item-title>Bewerbungen</v-list-item-title>
+        </v-list-item>
+        <v-list-item
+          :to="{ name: 'konflikte.index' }"
+          :disabled="
+            !user ||
+            !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
+            !globalSettingsStore ||
+            !globalSettingsStore.getKonfiguration
+          "
+        >
+          <v-list-item-title>Konflikte</v-list-item-title>
+        </v-list-item>
+        <v-list-item
+          :to="{ name: 'vorschlaege.index' }"
+          :disabled="
+            !user || !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN')
+          "
+        >
+          <v-list-item-title>Vorschläge</v-list-item-title>
+        </v-list-item>
+        <v-list-item :to="{ name: 'konfiguration.index' }">
+          <!-- :disabled="!user || !user.authorities.includes('READ_KONFIGURATION')"-->
+          <v-list-item-title>Konfiguration</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -75,10 +152,12 @@
 </template>
 
 <script setup lang="ts">
-import { mdiApps, mdiMagnify } from "@mdi/js";
+import type Konfiguration from "@/types/Konfiguration";
+
+import { mdiApps, mdiCircle, mdiHelp } from "@mdi/js";
 import { AppSwitcher } from "@muenchen/appswitcher-vue";
 import { useToggle } from "@vueuse/core";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import {
   VApp,
   VAppBar,
@@ -87,33 +166,47 @@ import {
   VCol,
   VContainer,
   VFadeTransition,
+  VIcon,
   VList,
   VListItem,
   VListItemTitle,
   VMain,
   VNavigationDrawer,
   VRow,
-  VTextField,
   VToolbarTitle,
+  VTooltip,
 } from "vuetify/components";
 
+import { EhrenamtJustizService } from "@/api/EhrenamtJustizService";
+import { EWOBuergerApiService } from "@/api/EWOBuergerApiService";
+import HealthService from "@/api/HealthService";
+import { KonfigurationApiService } from "@/api/KonfigurationApiService";
 import { getUser } from "@/api/user-client";
-import Ad2ImageAvatar from "@/components/common/Ad2ImageAvatar.vue";
 import TheSnackbar from "@/components/TheSnackbar.vue";
-import { APPSWITCHER_URL, ROUTES_GETSTARTED } from "@/constants";
+import { APPSWITCHER_URL, ROUTES_GETSTARTED } from "@/Constants.ts";
+import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { useUserStore } from "@/stores/user";
+import HealthState from "@/types/HealthState";
 import User, { UserLocalDevelopment } from "@/types/User";
 
-const query = ref<string>("");
 const appswitcherBaseUrl = APPSWITCHER_URL;
-
+const globalSettingsStore = useGlobalSettingsStore();
 const snackbarStore = useSnackbarStore();
 const userStore = useUserStore();
 const [drawer, toggleDrawer] = useToggle();
+const user = computed(() => userStore.getUser);
+const userinfo = ref<string>("");
+const bezeichnungApp = ref("Aktive Konfiguration fehlt");
+const ehrenamtjustizart = ref("");
+const gatewayStatus = ref("DOWN");
+const backendStatus = ref("DOWN");
+const eaiStatus = ref("DOWN");
 
 onMounted(() => {
   loadUser();
+  healthCheckTimer();
+  loadActiveKonfiguration();
 });
 
 /**
@@ -121,7 +214,16 @@ onMounted(() => {
  */
 function loadUser(): void {
   getUser()
-    .then((user: User) => userStore.setUser(user))
+    .then((user: User) => {
+      userinfo.value = user.given_name + " " + user.family_name;
+      if (userinfo.value.trim() === "") {
+        userinfo.value = user.username;
+        if (userinfo.value.trim() === "") {
+          userinfo.value = user.preferred_username;
+        }
+      }
+      userStore.setUser(user);
+    })
     .catch(() => {
       // No user info received, so fallback
       if (import.meta.env.DEV) {
@@ -133,20 +235,79 @@ function loadUser(): void {
 }
 
 /**
- * Navigates to the page with the search results and sends an event to trigger further searches.
+ * Lädt aktive Konfiguration vom Backend und setzt diese im Store.
  */
-
-async function search(): Promise<void> {
-  if (query.value !== "" && query.value !== null) {
-    snackbarStore.showMessage({
-      message: "Sie haben nach " + query.value + " gesucht. ;)",
+function loadActiveKonfiguration(): void {
+  KonfigurationApiService.getAktiveKonfiguration()
+    .then((konfiguration: Konfiguration) => {
+      globalSettingsStore.setKonfiguration(konfiguration);
+      ehrenamtjustizart.value = konfiguration.ehrenamtjustizart;
+      bezeichnungApp.value = konfiguration.bezeichnung;
+    })
+    .catch(() => {
+      snackbarStore.showMessage({
+        message:
+          "Es konnte keine aktive Konfiguration gefunden werden! Bitte nur eine aktive Konfiguration anlegen und dann die Anwenndung neu laden!",
+      });
     });
-  }
+}
+
+function healthCheckTimer(): void {
+  checkGatewayHealth();
+  checkBackendStatus();
+  checkEAIStatus();
+
+  loadActiveKonfiguration();
+
+  setTimeout(() => {
+    healthCheckTimer();
+  }, 60000);
+}
+
+function checkGatewayHealth(): void {
+  gatewayStatus.value = "DOWN";
+  HealthService.checkHealth()
+    .then((content: HealthState) => {
+      gatewayStatus.value = content.status;
+    })
+    .catch((error) => {
+      snackbarStore.showMessage(error);
+    });
+}
+function checkBackendStatus(): void {
+  backendStatus.value = "DOWN";
+  EhrenamtJustizService.checkBackendStatus()
+    .then((content: string) => {
+      backendStatus.value = content;
+    })
+    .catch((error) => {
+      snackbarStore.showMessage(error);
+    });
+}
+function checkEAIStatus(): void {
+  eaiStatus.value = "DOWN";
+  EWOBuergerApiService.checkEwoEaiStatus()
+    .then((content: string) => {
+      eaiStatus.value = content;
+    })
+    .catch((error) => {
+      snackbarStore.showMessage(error);
+    });
+}
+function hilfeAnzeigen(): void {
+  globalSettingsStore.setOnlineHelpDialogComponentVisible(true);
 }
 </script>
 
 <style>
 .main {
   background-color: white;
+}
+.UP {
+  color: limegreen;
+}
+
+.DOWN {
+  color: lightcoral;
 }
 </style>

@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-import { STATUS_INDICATORS } from "@/constants";
+import { STATUS_INDICATORS } from "@/Constants.ts";
 
 export interface SnackbarState {
   message: string | undefined;

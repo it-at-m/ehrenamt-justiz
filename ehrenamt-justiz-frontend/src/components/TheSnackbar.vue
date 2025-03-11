@@ -21,7 +21,7 @@
 import { computed, ref, watch } from "vue";
 import { VBtn, VSnackbar } from "vuetify/components";
 
-import { SNACKBAR_DEFAULT_TIMEOUT, STATUS_INDICATORS } from "@/constants";
+import { SNACKBAR_DEFAULT_TIMEOUT, STATUS_INDICATORS } from "@/Constants.ts";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const snackbarStore = useSnackbarStore();
@@ -43,7 +43,7 @@ watch(
   () => {
     color.value = snackbarStore.level;
     if (color.value === STATUS_INDICATORS.ERROR) {
-      timeout.value = 0;
+      timeout.value = 10000; //TODO: richtig? Bei error und "timeout.value=0" wird Snackbar nur extrem kurz angezeigt!!
     } else {
       timeout.value = SNACKBAR_DEFAULT_TIMEOUT;
     }
@@ -58,7 +58,7 @@ watch(
       setTimeout(() => {
         show.value = true;
         snackbarStore.show = false;
-      }, timeout.value);
+      }, 100); // TODO: richtig? Wartezeit bis die Meldung angezeigt wird
     }
   }
 );

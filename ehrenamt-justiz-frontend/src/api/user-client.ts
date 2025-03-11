@@ -33,7 +33,7 @@ export function getUser(): Promise<User> {
       u.telephoneNumber = json.telephoneNumber || "";
       u.email = json.email || "";
       u.username = json.username || "";
-      u.givenname = json.givenname || "";
+      u.given_name = json.given_name || "";
       u.department = json.department || "";
       u.lhmObjectID = json.lhmObjectID || "";
 
