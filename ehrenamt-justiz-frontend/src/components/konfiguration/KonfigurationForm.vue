@@ -149,7 +149,7 @@
 <script setup lang="ts">
 import type KonfigurationFormData from "@/types/KonfigurationFormData";
 
-import Vue, { computed, ref } from "vue";
+import { computed, createApp, ref } from "vue";
 import {
   VBtn,
   VCol,
@@ -159,6 +159,7 @@ import {
   VTextField,
 } from "vuetify/components";
 
+import App from "@/App.vue";
 import { useRules } from "@/composables/rules";
 import { BEARBEIGUNGS_MODUS } from "@/Constants";
 import { STATUS_INDICATORS } from "@/Constants.ts";
@@ -174,8 +175,9 @@ const emits = defineEmits<{
 }>();
 const rules = useRules();
 const snackbarStore = useSnackbarStore();
-
-const form = ref<(Vue & { validate: () => void }) | null>(null);
+/* eslint-disable @typescript-eslint/no-unused-vars */
+const myV3App = createApp(App);
+const form = ref<(typeof myV3App & { validate: () => void }) | null>(null);
 
 const formValid = ref(false);
 
