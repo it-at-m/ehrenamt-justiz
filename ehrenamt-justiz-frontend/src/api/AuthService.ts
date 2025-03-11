@@ -2,7 +2,9 @@
 import { useUserStore } from "@/stores/user";
 import {STATUS_INDICATORS} from "@/Constants.ts";*/
 
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export default class AuthService {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   static checkAuth(authority: string): boolean {
     return true;
 

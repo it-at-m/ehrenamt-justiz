@@ -3,7 +3,12 @@ import type PagedEntity from "@/types/base/PagedEntity";
 import { API_BASE, STATUS_INDICATORS } from "@/Constants.ts";
 import HttpMethod from "@/types/base/HttpMethod";
 import { ApiError } from "./ApiError";
-import FetchUtils from "./FetchUtils";
+import {
+  getDELETEConfig,
+  getGETConfig,
+  getPOSTConfig,
+  getPUTConfig,
+} from "./FetchUtils";
 
 const BASE_URL = `${API_BASE}/api/ej-app-backend-service`;
 
@@ -78,7 +83,7 @@ export default class EntityApiService<T extends Idable> {
    */
   public get(id: Id, loadRelations: string[] = []): Promise<T> {
     return new Promise<T>((resolve, reject) => {
-      fetch(`${this.entityBaseUrl}/${id}`, FetchUtils.getGETConfig())
+      fetch(`${this.entityBaseUrl}/${id}`, getGETConfig())
         .then((res) => {
           if (res.status != 200) {
             EntityApiService.handleWrongResponse(HttpMethod.GET, res);
@@ -94,7 +99,7 @@ export default class EntityApiService<T extends Idable> {
                       EntityApiService.removeProjectionsFromUrl(
                         entity["_links"][relationName]["href"]
                       ),
-                      FetchUtils.getGETConfig()
+                      getGETConfig()
                     ).then((res) => {
                       if (res.ok) {
                         res
@@ -152,7 +157,7 @@ export default class EntityApiService<T extends Idable> {
     return await new Promise<PagedEntity<T>>((resolve, reject) => {
       let url = `${this.entityBaseUrl}?page=${pageIndex}&size=${pageSize}&sort=amtsperiodevon,asc`;
       if (projection !== null) url = `${url}&projection=${projection}`;
-      fetch(url, FetchUtils.getGETConfig())
+      fetch(url, getGETConfig())
         .then((res) => {
           if (res.status != 200) {
             EntityApiService.handleWrongResponse(HttpMethod.GET, res);
@@ -184,7 +189,7 @@ export default class EntityApiService<T extends Idable> {
   /* eslint-disable no-async-promise-executor */
   public async delete(id: Id): Promise<void> {
     return await new Promise<void>(async (resolve, reject) => {
-      await fetch(`${this.entityBaseUrl}/${id}`, FetchUtils.getDELETEConfig())
+      await fetch(`${this.entityBaseUrl}/${id}`, getDELETEConfig())
         .then((res) => {
           if (res.ok) return resolve();
           EntityApiService.handleWrongResponse(HttpMethod.DELETE, res);
@@ -201,7 +206,7 @@ export default class EntityApiService<T extends Idable> {
    */
   public create(instance: T): Promise<T> {
     return new Promise<T>((resolve, reject) => {
-      fetch(`${this.entityBaseUrl}`, FetchUtils.getPOSTConfig(instance))
+      fetch(`${this.entityBaseUrl}`, getPOSTConfig(instance))
         .then((res) => {
           res
             .json()
@@ -229,7 +234,7 @@ export default class EntityApiService<T extends Idable> {
     foreignEntityName: string,
     foreignEntityId: string
   ): Promise<void> {
-    const config = FetchUtils.getPUTConfig("");
+    const config = getPUTConfig("");
     (config.headers as Headers).set("Content-Type", "text/uri-list");
     config.body = `${BASE_URL}/${foreignEntityName}/${foreignEntityId}`;
     return new Promise<void>((resolve, reject) => {
@@ -254,7 +259,7 @@ export default class EntityApiService<T extends Idable> {
     return new Promise<T>((resolve, reject) => {
       fetch(
         `${this.entityBaseUrl}/${instance.id?.toString()}`,
-        FetchUtils.getPUTConfig(instance)
+        getPUTConfig(instance)
       )
         .then((res) => {
           res
@@ -315,7 +320,7 @@ export default class EntityApiService<T extends Idable> {
 
   public async postData(instance: T, path: string): Promise<T> {
     return await new Promise<T>((resolve, reject) => {
-      fetch(`${this.getBaseUrl()}/${path}`, FetchUtils.getPOSTConfig(instance))
+      fetch(`${this.getBaseUrl()}/${path}`, getPOSTConfig(instance))
         .then((res) => {
           res
             .json()
@@ -332,7 +337,7 @@ export default class EntityApiService<T extends Idable> {
 
   public getArrayData(path: string): Promise<T[]> {
     return new Promise<T[]>((resolve, reject) => {
-      fetch(`${this.getBaseUrl()}/${path}`, FetchUtils.getGETConfig())
+      fetch(`${this.getBaseUrl()}/${path}`, getGETConfig())
         .then((res) => {
           res
             .json()
@@ -349,7 +354,7 @@ export default class EntityApiService<T extends Idable> {
 
   public getData(path: string): Promise<T> {
     return new Promise<T>((resolve, reject) => {
-      fetch(`${this.getBaseUrl()}${path}`, FetchUtils.getGETConfig())
+      fetch(`${this.getBaseUrl()}${path}`, getGETConfig())
         .then((res) => {
           res
             .json()

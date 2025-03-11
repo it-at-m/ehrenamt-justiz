@@ -1,7 +1,7 @@
 import type Konfiguration from "@/types/Konfiguration";
 
 import EntityApiService from "@/api/EntityApiService";
-import FetchUtils from "@/api/FetchUtils";
+import { getPOSTConfig } from "@/api/FetchUtils";
 import HttpMethod from "@/types/base/HttpMethod";
 
 class KonfigurationApiServiceClass extends EntityApiService<Konfiguration> {
@@ -15,7 +15,7 @@ class KonfigurationApiServiceClass extends EntityApiService<Konfiguration> {
     return new Promise<Konfiguration>((resolve, reject) => {
       fetch(
         `${this.getBaseUrl()}/konfiguration/updateKonfiguration`,
-        FetchUtils.getPOSTConfig(konfiguration)
+        getPOSTConfig(konfiguration)
       )
         .then((res) => {
           res
@@ -35,7 +35,7 @@ class KonfigurationApiServiceClass extends EntityApiService<Konfiguration> {
     return new Promise<Konfiguration>((resolve, reject) => {
       fetch(
         `${this.getBaseUrl()}/konfiguration/setactive`,
-        FetchUtils.getPOSTConfig(konfiguration)
+        getPOSTConfig(konfiguration)
       )
         .then((res) => {
           res

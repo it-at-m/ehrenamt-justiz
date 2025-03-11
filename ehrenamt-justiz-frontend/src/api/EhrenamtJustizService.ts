@@ -4,7 +4,7 @@ import type PersonCSV from "@/types/PersonCSV";
 import { asBlob, generateCsv, mkConfig } from "export-to-csv";
 
 import EntityApiService from "@/api/EntityApiService";
-import FetchUtils from "@/api/FetchUtils";
+import { getGETConfig, getPOSTConfig } from "@/api/FetchUtils";
 import { PersonApiService } from "@/api/PersonApiService";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import HttpMethod from "@/types/base/HttpMethod";
@@ -14,7 +14,7 @@ class EhrenamtJustizServiceClass {
     return await new Promise<string>((resolve, reject) => {
       fetch(
         `${EntityApiService.getBaseUrl()}/ehrenamtjustiz/pruefeGeburtsdatum`,
-        FetchUtils.getPOSTConfig(geburtsdatum)
+        getPOSTConfig(geburtsdatum)
       )
         .then(async (res) => {
           await res
@@ -36,7 +36,7 @@ class EhrenamtJustizServiceClass {
     return await new Promise<string>((resolve, reject) => {
       fetch(
         `${EntityApiService.getBaseUrl()}/ehrenamtjustiz/pruefeStaatsangehoerigkeit`,
-        FetchUtils.getPOSTConfig(staatsangehoerigkeit)
+        getPOSTConfig(staatsangehoerigkeit)
       )
         .then(async (res) => {
           await res
@@ -56,7 +56,7 @@ class EhrenamtJustizServiceClass {
     return await new Promise<string>((resolve, reject) => {
       fetch(
         `${EntityApiService.getBaseUrl()}/ehrenamtjustiz/pruefeWohnsitz`,
-        FetchUtils.getPOSTConfig(ort)
+        getPOSTConfig(ort)
       )
         .then(async (res) => {
           await res
@@ -76,7 +76,7 @@ class EhrenamtJustizServiceClass {
     return new Promise<EhrenamtJustizStatus>((resolve, reject) => {
       fetch(
         `${EntityApiService.getBaseUrl()}/ehrenamtjustiz/ehrenamtJustizStatus`,
-        FetchUtils.getGETConfig()
+        getGETConfig()
       )
         .then((res) => {
           res
@@ -94,10 +94,7 @@ class EhrenamtJustizServiceClass {
 
   public async checkBackendStatus(): Promise<string> {
     return await new Promise<string>((resolve, reject) => {
-      fetch(
-        `${EntityApiService.getBaseUrl()}/actuator/health`,
-        FetchUtils.getGETConfig()
-      )
+      fetch(`${EntityApiService.getBaseUrl()}/actuator/health`, getGETConfig())
         .then(async (res) => {
           await res
             .text()

@@ -4,7 +4,7 @@ import type PersonCSV from "@/types/PersonCSV";
 import type PersonenTableData from "@/types/PersonenTableData";
 
 import EntityApiService from "@/api/EntityApiService";
-import FetchUtils from "@/api/FetchUtils";
+import { getGETConfig, getPOSTConfig } from "@/api/FetchUtils";
 import HttpMethod from "@/types/base/HttpMethod";
 
 interface SortItem {
@@ -36,7 +36,7 @@ class PersonenApiServiceClass extends EntityApiService<Person> {
       }
       let url = `${this.entityBaseUrl}/findPersonen?search=${search}&sortby=${sortString}&page=${pageIndex}&size=${pageSize}&status=${status}`;
       if (projection !== null) url = `${url}&projection=${projection}`;
-      fetch(url, FetchUtils.getGETConfig())
+      fetch(url, getGETConfig())
         .then((res) => {
           if (res.status != 200) {
             EntityApiService.handleWrongResponse(HttpMethod.GET, res);
@@ -69,7 +69,7 @@ class PersonenApiServiceClass extends EntityApiService<Person> {
     return await new Promise<void>((resolve, reject) => {
       fetch(
         `${this.getBaseUrl()}/personen/deletePersonen`,
-        FetchUtils.getPOSTConfig(uuids)
+        getPOSTConfig(uuids)
       )
         .then((res) => {
           if (res.ok) return resolve();
@@ -94,7 +94,7 @@ class PersonenApiServiceClass extends EntityApiService<Person> {
     return await new Promise<Person[]>((resolve, reject) => {
       fetch(
         `${this.getBaseUrl()}/personen/validiereAufVorschlagslisteSetzen`,
-        FetchUtils.getPOSTConfig(uuids)
+        getPOSTConfig(uuids)
       )
         .then((res) => {
           if (res.ok) {
@@ -116,7 +116,7 @@ class PersonenApiServiceClass extends EntityApiService<Person> {
     return await new Promise<void>((resolve, reject) => {
       fetch(
         `${this.getBaseUrl()}/personen/aufVorschlagslisteSetzen`,
-        FetchUtils.getPOSTConfig(uuids)
+        getPOSTConfig(uuids)
       )
         .then((res) => {
           if (res.ok) return resolve();
@@ -131,7 +131,7 @@ class PersonenApiServiceClass extends EntityApiService<Person> {
     return await new Promise<void>((resolve, reject) => {
       fetch(
         `${this.getBaseUrl()}/personen/aufBewerberlisteSetzen`,
-        FetchUtils.getPOSTConfig(uuids)
+        getPOSTConfig(uuids)
       )
         .then((res) => {
           if (res.ok) return resolve();
@@ -149,7 +149,7 @@ class PersonenApiServiceClass extends EntityApiService<Person> {
     return await new Promise<PersonCSV[]>((resolve, reject) => {
       fetch(
         `${this.getBaseUrl()}/personen/lesenPersonenCSV`,
-        FetchUtils.getPOSTConfig({ uuids, status })
+        getPOSTConfig({ uuids, status })
       )
         .then((res) => {
           if (res.ok) {
@@ -171,7 +171,7 @@ class PersonenApiServiceClass extends EntityApiService<Person> {
     return await new Promise<PersonCSV[]>((resolve, reject) => {
       fetch(
         `${EntityApiService.getBaseUrl()}/personen/getNeueVorschlaege`,
-        FetchUtils.getGETConfig()
+        getGETConfig()
       )
         .then((res) => {
           res
@@ -191,7 +191,7 @@ class PersonenApiServiceClass extends EntityApiService<Person> {
     return await new Promise<void>((resolve, reject) => {
       fetch(
         `${EntityApiService.getBaseUrl()}/personen/alsBenachrichtigtMarkieren`,
-        FetchUtils.getPOSTConfig(null)
+        getPOSTConfig(null)
       )
         .then((res) => {
           if (res.ok) return resolve();

@@ -179,7 +179,7 @@ import {
 
 import { EhrenamtJustizService } from "@/api/EhrenamtJustizService";
 import { EWOBuergerApiService } from "@/api/EWOBuergerApiService";
-import HealthService from "@/api/HealthService";
+import { checkHealth } from "@/api/HealthService";
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";
 import { getUser } from "@/api/user-client";
 import TheSnackbar from "@/components/TheSnackbar.vue";
@@ -266,7 +266,7 @@ function healthCheckTimer(): void {
 
 function checkGatewayHealth(): void {
   gatewayStatus.value = "DOWN";
-  HealthService.checkHealth()
+  checkHealth()
     .then((content: HealthState) => {
       gatewayStatus.value = content.status;
     })
