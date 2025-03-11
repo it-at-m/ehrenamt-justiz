@@ -150,20 +150,21 @@
 import type KonfigurationFormData from "@/types/KonfigurationFormData";
 
 import { computed, createApp, ref } from "vue";
-
-import { STATUS_INDICATORS } from "@/Constants.ts";
-import App from "@/App.vue";
-import { BEARBEIGUNGS_MODUS } from "@/Constants";
-import { useRules } from "@/composables/rules";
-import { useSnackbarStore } from "@/stores/snackbar";
 import {
+  VBtn,
+  VCol,
   VForm,
   VRow,
-  VCol,
-  VTextField,
   VSelect,
-  VBtn
+  VTextField,
 } from "vuetify/components";
+
+import App from "@/App.vue";
+import { useRules } from "@/composables/rules";
+import { BEARBEIGUNGS_MODUS } from "@/Constants";
+import { STATUS_INDICATORS } from "@/Constants.ts";
+import { useSnackbarStore } from "@/stores/snackbar";
+
 const props = defineProps<{
   modelValue: KonfigurationFormData;
   isAnimation: boolean;

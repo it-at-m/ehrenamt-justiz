@@ -14,7 +14,7 @@
       />
     </v-card>
     <online-help-dialog-component
-        component="Das ist die Onlinehilfe für die Erfassung einer Konfiguration (Under Construction)"
+      component="Das ist die Onlinehilfe für die Erfassung einer Konfiguration (Under Construction)"
     />
   </v-container>
 </template>
@@ -24,17 +24,15 @@ import type KonfigurationFormData from "@/types/KonfigurationFormData";
 
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+import { VCard, VContainer } from "vuetify/components";
 
-import { STATUS_INDICATORS } from "@/Constants.ts";
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";
-import { BEARBEIGUNGS_MODUS } from "@/Constants";
 import KonfigurationForm from "@/components/konfiguration/KonfigurationForm.vue";
-import { useSnackbarStore } from "@/stores/snackbar";
-import {
-  VCard,
-  VContainer,
-} from "vuetify/components";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
+import { BEARBEIGUNGS_MODUS } from "@/Constants";
+import { STATUS_INDICATORS } from "@/Constants.ts";
+import { useSnackbarStore } from "@/stores/snackbar";
+
 const snackbarStore = useSnackbarStore();
 const router = useRouter();
 

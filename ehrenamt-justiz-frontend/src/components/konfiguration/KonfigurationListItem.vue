@@ -74,11 +74,11 @@ import {
   VTooltip,
 } from "vuetify/components";
 
-import { BEARBEIGUNGS_MODUS } from "@/Constants";
 import AuthService from "@/api/AuthService";
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";
 import DeleteDialog from "@/components/common/DeleteDialog.vue";
 import ListItemActions from "@/components/common/ListItemActions.vue";
+import { BEARBEIGUNGS_MODUS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const props = defineProps<{

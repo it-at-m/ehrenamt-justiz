@@ -37,11 +37,11 @@ import type KonfigurationFormData from "@/types/KonfigurationFormData";
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
-import { STATUS_INDICATORS } from "@/Constants.ts";
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";
-import { BEARBEIGUNGS_MODUS } from "@/Constants";
 import KonfigurationForm from "@/components/konfiguration/KonfigurationForm.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
+import { BEARBEIGUNGS_MODUS } from "@/Constants";
+import { STATUS_INDICATORS } from "@/Constants.ts";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const route = useRoute();

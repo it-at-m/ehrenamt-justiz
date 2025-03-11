@@ -4,9 +4,9 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import { ROUTES_GETSTARTED, ROUTES_HOME } from "@/Constants.ts";
 import GetStartedView from "@/views/GetStartedView.vue";
 import HomeView from "@/views/HomeView.vue";
-import KonfigurationIndex from "@/views/konfiguration/KonfigurationIndex.vue";
 import KonfigurationCreate from "@/views/konfiguration/KonfigurationCreate.vue";
 import KonfigurationEdit from "@/views/konfiguration/KonfigurationEdit.vue";
+import KonfigurationIndex from "@/views/konfiguration/KonfigurationIndex.vue";
 
 const routes = [
   {
