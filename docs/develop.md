@@ -1,4 +1,4 @@
-# Development
+# Develop
 
 We include various development tools to simplify the development process and make development more comfortable and error-resistant.
 Those tools are further explained below.
@@ -16,7 +16,8 @@ Key technologies used in the templates include:
 [Docker](https://www.docker.com/) is used to run a local development stack including all necessary services.
 
 ::: danger IMPORTANT
-When developing locally, you need Docker installed on your system and the stack must always be running.
+If you are developing locally, you will need to have Docker installed on your system and the stack running at all times.
+Also make sure you have `kubernetes.docker.internal` in your hosts file. This should normally be done automatically by the Docker installation.
 :::
 
 Inside the `stack` folder, you will find a `docker-compose.yml` file that will spin up everything needed for local development.
@@ -38,13 +39,38 @@ Some tools provide local Browser-based UIs. We encourage you to use the UI provi
 
 ### Vite
 
-[Vite](https://vite.dev/) is used as the build tool, along with the testing framework [Vitest](https://vitest.dev/).
+[Vite](https://vite.dev/) is used as the build tool for JavaScript-based projects, along with the testing framework [Vitest](https://vitest.dev/).
 
 The following npm scripts are provided for working with those tools:
 
 - Start Vite development server: `npm run dev`
 - Run Vitest test execution: `npm run test`
 - Build the Vite project (for production): `npm run build`
+
+::: danger IMPORTANT
+When you experience a refresh loop while developing with the Vite development server, please make sure to re-login via the running API Gateway.
+To avoid this problem, we recommend accessing the development server using the API Gateway as a proxy.
+Benefits like Hot Module Reloading (HMR) still work when tunneling.
+:::
+
+### Maven
+
+[Maven](https://maven.apache.org/) is used as the build tool for Java-based projects.
+
+The following maven commands are useful when working locally:
+
+- Compile the application and execute tests: `mvn clean verify`  
+  (add `-DskipTests` to skip test execution)
+- Run the application: `mvn spring-boot:run -Dspring-boot.run.profiles=local`
+
+::: info Information
+Instead of compiling and running the application using the commands above, you can also use the features of your IDE directly.
+:::
+
+By default, two different Spring profiles are provided to run the application:
+
+- `local`: Uses the local Docker stack to run the application and provides useful logging information while developing
+- `no-security`: Disables all security mechanisms
 
 ### Component libraries
 
@@ -157,12 +183,15 @@ The templates by default make use of a centralized configuration we provide for 
 To modify the default Renovate settings, the `renovate.json5` file in the project's root directory can be edited.
 
 ::: info Information
-To make Renovate work, make sure that it has access to your GitHub repository.
-For projects in the `it-at-m` organization Renovate automatically has access and is enabled when the configuration file is found in your repository.
+By default Renovate creates grouped PRs for dependency bumps. This means that if a particular dependency is found in multiple package manager files, the bump will be applied to all occurrences.
+If you want Renovate to create separate PRs by subfolder, add <code v-pre>"additionalBranchPrefix": "{{parentDir}}-"</code> to your Renovate configuration.
+Check the official [Renovate documentation](https://docs.renovatebot.com/configuration-options/#additionalbranchprefix) for further information and configuration options.
 :::
 
 ::: danger IMPORTANT
-To finish the onboarding process of Renovate, you need to open a PR for a dependency update found by Renovate through the "Dependency Dashboard" issue.
+To make Renovate work, make sure that it has access to your GitHub repository.
+For projects in the `it-at-m` organization, Renovate has access by default and is enabled when the configuration file is found in your repository.
+However, to finish the onboarding process of Renovate, you need to open a PR for a dependency update found by Renovate through the "Dependency Dashboard" issue.
 This PR then has to be merged manually once.
 After that's done Renovate will start opening PRs automatically.
 :::
@@ -204,6 +233,22 @@ To ensure that only dependencies with approved licenses are included, a [global 
 This is enabled by default when using the templates. To learn more about the Dependency Review feature itself, please check the official [GitHub documentation](https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/about-dependency-review).
 
 The allowed licenses can be viewed [here](https://opensource.muenchen.de/licenses.html#integration-in-in-house-developments).
+
+### Require PR checklist
+
+The templates provide a workflow for validating checklist status in a PR description and the PR discussion. To merge a PR, all checklist items must be ticked off by the PR creator.
+
+The templates by default ship with a [PR template](./organize.html#pull-request-template), which makes use of a checklist.
+
+::: info Information
+If some of the PR checklist items are not relevant for your PR, you should adjust the checklist inside the PR description to the specific PR changes.
+If you want to disable the feature completely, you need to remove the file `.github/workflows/pr-checklist.yml`.
+:::
+
+::: danger IMPORTANT
+This functionality conflicts with the [Finishing touches](https://docs.coderabbit.ai/finishing-touches/docstrings/) feature of CodeRabbit. That's why this feature of CodeRabbit is disabled inside its configuration file by default.
+If you don't use "Require PR checklist" you can re-enable this functionality by altering the `.coderabbit.yaml` file.
+:::
 
 ### GitHub Rulesets
 
