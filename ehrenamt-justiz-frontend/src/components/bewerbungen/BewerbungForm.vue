@@ -7,7 +7,10 @@
     @keydown.enter.prevent="speichern"
   >
     <v-row>
-      <v-col class="text-left">
+      <v-col
+        class="text-left"
+        cols="4"
+      >
         <div class="text-h5">
           {{
             bewerbung.status == PERSONENSTATUS.STATUS_VORSCHLAG
@@ -21,7 +24,7 @@
           }}
         </div>
       </v-col>
-      <v-col>
+      <v-col cols="2">
         <div
           v-if="bewerbung.ewo_auskunftssperre.length > 0"
           class="text-h5 auskunftssperre"
@@ -29,7 +32,10 @@
           Auskunftssperre
         </div>
       </v-col>
-      <v-col class="text-right">
+      <v-col
+        class="text-right"
+        cols="6"
+      >
         <v-btn
           variant="text"
           exact

@@ -4,6 +4,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import { ROUTES_GETSTARTED, ROUTES_HOME } from "@/Constants.ts";
 import BewerbungEdit from "@/views/bewerbungen/BewerbungEdit.vue";
 import BewerbungenIndex from "@/views/bewerbungen/BewerbungenIndex.vue";
+import EWOBuergerCreate from "@/views/ewobuerger/EWOBuergerCreate.vue";
 import GetStartedView from "@/views/GetStartedView.vue";
 import HomeView from "@/views/HomeView.vue";
 import KonfigurationCreate from "@/views/konfiguration/KonfigurationCreate.vue";
@@ -25,7 +26,7 @@ const routes = [
   {
     path: "/bewerbung/create",
     name: "bewerbung.create",
-    component: GetStartedView,
+    component: EWOBuergerCreate,
     // meta: { authority: "READ_EWOBUERGER" },
   },
   {
