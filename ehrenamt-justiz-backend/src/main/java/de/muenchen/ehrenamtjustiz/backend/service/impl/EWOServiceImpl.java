@@ -43,11 +43,11 @@ public class EWOServiceImpl implements EWOService {
     @PreAuthorize(Authorities.HAS_AUTHORITY_EWOSUCHE)
     @SuppressFBWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     public List<EWOBuergerDatenDto> ewoSuche(final EWOBuergerSucheDto eWOBuergerSucheDto) {
-        EWOBuergerDatenDto eWOBuergerDaten=new EWOBuergerDatenDto();
+        EWOBuergerDatenDto eWOBuergerDaten = new EWOBuergerDatenDto();
 
         // Für Testzwecke
         eWOBuergerDaten.setId(UUID.randomUUID());
-        eWOBuergerDaten.setOrdnungsmerkmal(String.valueOf((int)(Math.random() * 10000)));
+        eWOBuergerDaten.setOrdnungsmerkmal(String.valueOf((int) (Math.random() * 10000)));
         eWOBuergerDaten.setFamilienname(eWOBuergerSucheDto.getFamilienname());
         eWOBuergerDaten.setVorname(eWOBuergerSucheDto.getVorname());
         eWOBuergerDaten.setGeburtsdatum(eWOBuergerSucheDto.getGeburtsdatum());
@@ -56,20 +56,19 @@ public class EWOServiceImpl implements EWOService {
         eWOBuergerDaten.setFamilienstand("verheiratet");
         eWOBuergerDaten.setGeburtsland("Deutschland");
         eWOBuergerDaten.setGeburtsort("München");
-        eWOBuergerDaten.setInmuenchenseit(LocalDate.of(2000,1,1));
+        eWOBuergerDaten.setInmuenchenseit(LocalDate.of(2000, 1, 1));
         eWOBuergerDaten.getStaatsangehoerigkeit().add("deutsch");
         eWOBuergerDaten.setPostleitzahl("80634");
         eWOBuergerDaten.setOrt("München");
         eWOBuergerDaten.setStrasse("Leopoldstr.");
         eWOBuergerDaten.setHausnummer("9");
 
-        List<EWOBuergerDatenDto> eWOBuergerDatenDtos=new ArrayList<>();
+        List<EWOBuergerDatenDto> eWOBuergerDatenDtos = new ArrayList<>();
         eWOBuergerDatenDtos.add(eWOBuergerDaten);
-
 
         // Für Testzwecke
         eWOBuergerDaten.setId(UUID.randomUUID());
-        eWOBuergerDaten.setOrdnungsmerkmal(String.valueOf((int)(Math.random() * 10000)));
+        eWOBuergerDaten.setOrdnungsmerkmal(String.valueOf((int) (Math.random() * 10000)));
         eWOBuergerDaten.setFamilienname(eWOBuergerSucheDto.getFamilienname());
         eWOBuergerDaten.setVorname(eWOBuergerSucheDto.getVorname());
         eWOBuergerDaten.setGeburtsdatum(eWOBuergerSucheDto.getGeburtsdatum());
@@ -78,7 +77,7 @@ public class EWOServiceImpl implements EWOService {
         eWOBuergerDaten.setFamilienstand("verheiratet");
         eWOBuergerDaten.setGeburtsland("Deutschland");
         eWOBuergerDaten.setGeburtsort("München");
-        eWOBuergerDaten.setInmuenchenseit(LocalDate.of(2000,1,1));
+        eWOBuergerDaten.setInmuenchenseit(LocalDate.of(2000, 1, 1));
         eWOBuergerDaten.getStaatsangehoerigkeit().add("deutsch");
         eWOBuergerDaten.setPostleitzahl("80634");
         eWOBuergerDaten.setOrt("München");
