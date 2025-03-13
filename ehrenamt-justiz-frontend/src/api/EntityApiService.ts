@@ -320,7 +320,7 @@ export default class EntityApiService<T extends Idable> {
 
   public async postData(instance: T, path: string): Promise<T> {
     return await new Promise<T>((resolve, reject) => {
-      fetch(`${this.getBaseUrl()}/${path}`, getPOSTConfig(instance))
+      fetch(`${this.getBaseUrl()}${path}`, getPOSTConfig(instance))
         .then((res) => {
           res
             .json()
@@ -337,7 +337,7 @@ export default class EntityApiService<T extends Idable> {
 
   public getArrayData(path: string): Promise<T[]> {
     return new Promise<T[]>((resolve, reject) => {
-      fetch(`${this.getBaseUrl()}/${path}`, getGETConfig())
+      fetch(`${this.getBaseUrl()}${path}`, getGETConfig())
         .then((res) => {
           res
             .json()

@@ -159,7 +159,7 @@ class EhrenamtJustizServiceClass {
           displayLabel: "Geschlecht",
         },
         {
-          key: "ewo_id",
+          key: "ewoid",
           displayLabel: "Ordnungsmerkmal",
         },
         {

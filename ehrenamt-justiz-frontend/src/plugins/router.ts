@@ -2,6 +2,8 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import { ROUTES_GETSTARTED, ROUTES_HOME } from "@/Constants.ts";
+import BewerbungEdit from "@/views/bewerbungen/BewerbungEdit.vue";
+import BewerbungenIndex from "@/views/bewerbungen/BewerbungenIndex.vue";
 import GetStartedView from "@/views/GetStartedView.vue";
 import HomeView from "@/views/HomeView.vue";
 import KonfigurationCreate from "@/views/konfiguration/KonfigurationCreate.vue";
@@ -24,24 +26,24 @@ const routes = [
     path: "/bewerbung/create",
     name: "bewerbung.create",
     component: GetStartedView,
-    meta: { authority: "READ_EWOBUERGER" },
+    // meta: { authority: "READ_EWOBUERGER" },
   },
   {
     path: "/bewerbung/index",
     name: "bewerbung.index",
-    component: GetStartedView,
-    meta: { authority: "READ_EHRENAMTJUSTIZDATEN" },
+    component: BewerbungenIndex,
+    // meta: { authority: "READ_EHRENAMTJUSTIZDATEN" },
   },
   {
     path: "/bewerbung/:id:action",
     name: "bewerbung.edit",
-    component: GetStartedView,
-    meta: { authority: "WRITE_EHRENAMTJUSTIZDATEN" },
+    component: BewerbungEdit,
+    // meta: { authority: "WRITE_EHRENAMTJUSTIZDATEN" },
   },
   {
     path: "/bewerbung/:id:action",
     name: "bewerbung.display",
-    component: GetStartedView,
+    component: BewerbungEdit,
     meta: { authority: "READ_EHRENAMTJUSTIZDATEN" },
   },
   {

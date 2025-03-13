@@ -25,5 +25,5 @@ export default interface EWOBuergerDaten {
   inmuenchenseit: string;
   wohnungsstatus: string;
   auskunftssperre: string[];
-  ewo_id_bereitserfasst: boolean;
+  ewoidbereitserfasst: boolean;
 }

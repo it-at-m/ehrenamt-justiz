@@ -103,15 +103,13 @@
         >
           <v-list-item-title>Bewerbung erstellen</v-list-item-title>
         </v-list-item>
-        <v-list-item
-          :to="{ name: 'bewerbung.index' }"
-          :disabled="
-            !user ||
-            !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
-            !globalSettingsStore ||
-            !globalSettingsStore.getKonfiguration
-          "
-        >
+        <v-list-item :to="{ name: 'bewerbung.index' }">
+          <!-- :disabled="
+          !user ||
+          !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
+          !globalSettingsStore ||
+          !globalSettingsStore.getKonfiguration" -->
+
           <v-list-item-title>Bewerbungen</v-list-item-title>
         </v-list-item>
         <v-list-item

@@ -5,7 +5,7 @@ export default interface Person {
   vorname: string;
   geburtsdatum: string;
   geschlecht: string;
-  ewo_id: string;
+  ewoid: string;
   akademischergrad: string;
   geburtsort: string;
   geburtsland: string;
@@ -36,6 +36,6 @@ export default interface Person {
   neuervorschlag: string;
   warbereitstaetigals: string;
   bewerbungvom: string;
-  konfiguration_id: string;
+  konfigurationid: string;
   status: string;
 }

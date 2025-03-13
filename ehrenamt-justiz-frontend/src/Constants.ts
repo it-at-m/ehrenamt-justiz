@@ -13,6 +13,20 @@ export const enum BEARBEIGUNGS_MODUS {
   DISPLAY_MODUS = "display_modus",
 }
 
+// Allgemeine Konstanten für Tabellen:
+export const enum TABELLEN {
+  NO_RESULTS_TEXT = "Liste ist leer",
+  LOADING_ITEMS = "Daten werden gelesen",
+}
+
+// Status einer Person:
+export const enum PERSONENSTATUS {
+  STATUS_INERFASSUNG = "INERFASSUNG",
+  STATUS_BEWERBUNG = "BEWERBUNG",
+  STATUS_VORSCHLAG = "VORSCHLAG",
+  STATUS_KONFLIKT = "KONFLIKT",
+}
+
 export const enum STATUS_INDICATORS {
   SUCCESS = "success",
   INFO = "info",

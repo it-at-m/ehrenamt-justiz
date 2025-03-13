@@ -1,0 +1,503 @@
+<template>
+  <v-container>
+    <v-card flat>
+      <v-card-title>
+        <v-row>
+          <v-col
+            class="col"
+            cols="4"
+          >
+            <v-text-field
+              v-model="search"
+              prepend-inner-icon="mdi-magnify"
+              label="Suche"
+              single-line
+              hide-details
+              select-strategy="all"
+              clearable
+              autofocus
+              @keydown.enter.prevent="enableReload && reload()"
+            ></v-text-field>
+          </v-col>
+          <v-col
+            class="col"
+            cols="2"
+          >
+            <!--            <v-btn
+              :disabled="
+                !user ||
+                !user.authorities.includes('DELETE_EHRENAMTJUSTIZDATEN') ||
+                selectedUUIDs.length == 0
+              "
+              color="error"
+              @click="deleteRequested"
+              >Löschen</v-btn
+            >-->
+            <v-btn
+              :disabled="selectedUUIDs.length == 0"
+              color="error"
+              @click="deleteRequested"
+              >Löschen</v-btn
+            >
+          </v-col>
+          <v-col
+            class="col"
+            cols="3"
+          >
+            <!--            <v-btn
+              :disabled="
+                !user ||
+                !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
+                !user.authorities.includes(
+                  'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
+                ) ||
+                selectedUUIDs.length == 0
+              "
+              color="accent"
+              :loading="vorschlagsListeAnimationAktiv"
+              @click="aufVorschlagslisteSetzen"
+              >Auf Vorschlagsliste setzen</v-btn
+            >-->
+            <v-btn
+              :disabled="selectedUUIDs.length == 0"
+              color="accent"
+              :loading="vorschlagsListeAnimationAktiv"
+              @click="aufVorschlagslisteSetzen"
+              >Auf Vorschlagsliste setzen</v-btn
+            >
+          </v-col>
+          <v-col
+            class="col"
+            cols="3"
+          >
+            <!--            <v-btn
+              :disabled="
+                !user ||
+                !user.authorities.includes(
+                  'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
+                )
+              "
+              color="accent"
+              @click="datenHerunterladen"
+              >Daten herunterladen</v-btn
+            >-->
+            <v-btn
+              color="accent"
+              @click="datenHerunterladen"
+              >Daten herunterladen</v-btn
+            >
+          </v-col>
+        </v-row>
+      </v-card-title>
+      <v-data-table-server
+        v-model="selectedUUIDs"
+        v-model:items-per-page="itemsPerPage"
+        :headers="headers"
+        :items="personenTableData"
+        :items-length="totalItems"
+        show-select
+        items-per-page-text="Bewerber je Seite"
+        :row-props="getRowProps"
+        :loading="loadingAnimationAktiv"
+        :multi-sort="true"
+        @update:options="loadItems"
+      >
+        <template #[`item.geburtsdatum`]="{ item }">
+          <span v-if="isAuskunftssperreSichtbar(item)">{{
+            new Date(item.geburtsdatum).toLocaleDateString()
+          }}</span>
+        </template>
+        <template #[`item.derzeitausgeuebterberuf`]="{ item }">
+          <span v-if="isAuskunftssperreSichtbar(item)">{{
+            item.derzeitausgeuebterberuf
+          }}</span>
+        </template>
+        <template #[`item.mailadresse`]="{ item }">
+          <span v-if="isAuskunftssperreSichtbar(item)">{{
+            item.mailadresse
+          }}</span>
+        </template>
+        <template #[`item.actions`]="{ item }">
+          <v-tooltip
+            v-if="AuthService.checkAuth('WRITE_EHRENAMTJUSTIZDATEN')"
+            location="bottom"
+          >
+            <template #activator="{ props }">
+              <span v-bind="props">
+                <v-icon
+                  v-bind="props"
+                  @click="editItem(item)"
+                  :icon="mdiPencil"
+              /></span>
+            </template>
+            <span>Bewerber ändern</span>
+          </v-tooltip>
+          <v-tooltip location="bottom">
+            <template #activator="{ props }">
+              <span v-bind="props">
+                <v-icon
+                  v-bind="props"
+                  @click="displayItem(item)"
+                  :icon="mdiEye"
+              /></span>
+            </template>
+            <span>Bewerber anzeigen</span>
+          </v-tooltip>
+        </template>
+        <template
+          #[`header.data-table-select`]="{
+            allSelected,
+            selectAll,
+            someSelected,
+          }"
+        >
+          <v-checkbox-btn
+            v-if="
+              AuthService.checkAuth('READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE')
+            "
+            :indeterminate="someSelected && !allSelected"
+            :model-value="allSelected"
+            color="primary"
+            @update:model-value="selectAll(!allSelected)"
+          ></v-checkbox-btn>
+        </template>
+        <template #no-data>
+          {{ TABELLEN.NO_RESULTS_TEXT }}
+        </template>
+        <template #loading>
+          {{ TABELLEN.LOADING_ITEMS }}
+        </template>
+      </v-data-table-server>
+      <invalide-personen-select
+        :model-value="invalidePersonenSelectVisible"
+        :vorschlags-liste-animation-aktiv="vorschlagsListeAnimationAktiv"
+        :invalide-personen="invalidePersonen"
+        @cancel-invalide-personen-select="
+          abbruchBewerberAufVorschlagslisteUebernehmen
+        "
+        @invalide-personen-select="bewerberAufVorschlagslisteUebernehmen"
+      ></invalide-personen-select>
+    </v-card>
+    <yes-no-dialog
+      v-model="yesNoDialogVisible"
+      dialogtitle="Auf Vorschlagsliste setzen"
+      :dialogtext="
+        'Bestätigen Sie die Übernahme von ' +
+        selectedUUIDs.length +
+        ' Bewerbung(en) in die Vorschlagsliste'
+      "
+      :is-animation="vorschlagsListeAnimationAktiv"
+      @no="abbruchAufVorschlagslisteSetzen"
+      @yes="bewerberAufVorschlagslisteUebernehmen"
+    />
+  </v-container>
+  <delete-dialog
+    v-model="deleteDialogVisible"
+    :is-animation="deleteAnimationAktiv"
+    :descriptor-string="selectedUUIDs.length + ' Bewerber'"
+    :type-string="2"
+    @delete="deleteConfirmed"
+    @cancel="deleteCanceled"
+  />
+</template>
+
+<script setup lang="ts">
+import type PersonenTableData from "@/types/PersonenTableData";
+
+import { mdiEye, mdiPencil } from "@mdi/js";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import {
+  VBtn,
+  VCard,
+  VCardTitle,
+  VCheckboxBtn,
+  VCol,
+  VContainer,
+  VDataTable,
+  VDataTableServer,
+  VIcon,
+  VRow,
+  VTextField,
+  VTooltip,
+} from "vuetify/components";
+
+import AuthService from "@/api/AuthService";
+import { EhrenamtJustizService } from "@/api/EhrenamtJustizService";
+import { PersonApiService } from "@/api/PersonApiService";
+import DeleteDialog from "@/components/common/DeleteDialog.vue";
+import YesNoDialog from "@/components/common/YesNoDialog.vue";
+import {
+  BEARBEIGUNGS_MODUS,
+  PERSONENSTATUS,
+  STATUS_INDICATORS,
+  TABELLEN,
+} from "@/Constants.ts";
+import { useGlobalSettingsStore } from "@/stores/globalsettings";
+import { useSnackbarStore } from "@/stores/snackbar";
+import InvalidePersonenSelect from "@/views/vorschlaege/InvalidePersonenSelect.vue";
+
+const headers: ReadonlyHeaders = [
+  {
+    title: "Familienname",
+    value: "familienname",
+    align: "start",
+    sortable: true,
+  },
+  {
+    title: "Vorname",
+    value: "vorname",
+    align: "start",
+    sortable: true,
+  },
+  {
+    title: "Geburtsdatum",
+    value: "geburtsdatum",
+    align: "end",
+    sortable: true,
+  },
+  {
+    title: "Derzeitiger Beruf",
+    value: "derzeitausgeuebterberuf",
+    align: "start",
+    sortable: true,
+  },
+  {
+    title: "Arbeitgeber",
+    value: "arbeitgeber",
+    align: "start",
+    sortable: true,
+  },
+  {
+    title: "Mailadresse",
+    value: "mailadresse",
+    align: "start",
+    sortable: true,
+  },
+  {
+    title: "Ausgeübte Ehrenämter",
+    value: "ausgeuebteehrenaemter",
+    align: "start",
+    sortable: true,
+  },
+  {
+    title: "Aktionen",
+    value: "actions",
+    align: "start",
+    sortable: false,
+  },
+];
+const snackbarStore = useSnackbarStore();
+const router = useRouter();
+const personenTableData = ref<PersonenTableData[]>([]);
+const totalItems = ref(0);
+const itemsPerPage = ref(10);
+const itemsSort = ref();
+const selectedUUIDs = ref<string[]>([]);
+const search = ref("");
+// Vermeidet mehrfaches Einlesen der Table, wenn während des reload() die Taste Enter gedrückt wird:
+const enableReload = ref(true);
+type ReadonlyHeaders = VDataTable["$props"]["headers"];
+const deleteDialogVisible = ref(false);
+const loadingAnimationAktiv = ref(false);
+const deleteAnimationAktiv = ref(false);
+const vorschlagsListeAnimationAktiv = ref(false);
+const yesNoDialogVisible = ref(false);
+const invalidePersonenSelectVisible = ref(false);
+const invalidePersonen = ref<PersonenTableData[]>([]);
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function loadItems(options: any) {
+  itemsSort.value = options.sortBy;
+  loadingAnimationAktiv.value = true;
+  PersonApiService.getSelectionPaged(
+    search.value,
+    options.page - 1,
+    options.itemsPerPage,
+    PERSONENSTATUS.STATUS_BEWERBUNG,
+    options.sortBy
+  )
+    .then((pagedData) => {
+      personenTableData.value = [];
+      personenTableData.value.push(...pagedData.data);
+      totalItems.value = pagedData.totalElements;
+    })
+    .catch((err) => {
+      snackbarStore.showMessage(err);
+    })
+    .finally(() => {
+      loadingAnimationAktiv.value = false;
+      enableReload.value = true;
+    });
+}
+
+function editItem(item: { id: { toString: () => string } }) {
+  router.push({
+    name: "bewerbung.edit",
+    params: {
+      id: item.id.toString(),
+      action: BEARBEIGUNGS_MODUS.EDIT_MODUS,
+    },
+  });
+}
+
+function displayItem(item: { id: { toString: () => string } }) {
+  router.push({
+    name: "bewerbung.display",
+    params: {
+      id: item.id.toString(),
+      action: BEARBEIGUNGS_MODUS.DISPLAY_MODUS,
+    },
+  });
+}
+
+function deleteRequested() {
+  deleteDialogVisible.value = true;
+}
+
+// Personen löschen
+async function deleteConfirmed() {
+  deleteAnimationAktiv.value = true;
+  await PersonApiService.deletePersons(selectedUUIDs.value)
+    .then(() => {
+      inTabelleEntfernen();
+    })
+    .catch((err) => {
+      snackbarStore.showMessage(err);
+    })
+    .finally(() => {
+      deselectAll();
+      deleteAnimationAktiv.value = false;
+      deleteDialogVisible.value = false;
+    });
+}
+
+// Löschen der selektierten Zeilen
+function deselectAll() {
+  selectedUUIDs.value = selectedUUIDs.value.filter((item) => item !== item);
+}
+
+function deleteCanceled() {
+  deleteDialogVisible.value = false;
+}
+
+// Gelöschte Personen in Table entfernen
+function inTabelleEntfernen(): void {
+  personenTableData.value = personenTableData.value.filter(
+    (ar) => !selectedUUIDs.value.find((rm) => rm == ar.id)
+  );
+}
+
+/*
+  Personen auf Vorschlagsliste übernehmen
+  - Validierung Staatsangehörigkeit, Wohnsitz und Geburtsdatum
+  - Wenn keine fehlerhafte Personen: Update Person: Status = Vorschlag, Neuer Vorschlag = true
+  - Wenn fehlerhafte Personen und Berechtigung für Auskunftssperre vorhanden: Bestätigung aller ungültigen Datensästze in einer Übersicht
+  - Wenn fehlerhafte Personen und keine Berechtigung für Auskunftssperre vorhanden: Meldung: Bitte wenden Sie sich an einen Sondersachbearbeiter, der diese Validierung umgehen kann.
+  - Bei Update: Konflikte ermitteln
+ */
+async function aufVorschlagslisteSetzen(): Promise<void> {
+  vorschlagsListeAnimationAktiv.value = true;
+  await PersonApiService.validiereAufVorschlagslisteSetzen(selectedUUIDs.value)
+    .then((fehlerhaftePersonen) => {
+      vorschlagsListeAnimationAktiv.value = false;
+      if (fehlerhaftePersonen.length == 0) {
+        // Da keine fehlerhaften Personen: Bestätigungsdialog für alle fehlerfreien Personen auf Vorschlagsliste setzen
+        yesNoDialogVisible.value = true;
+      }
+      // Fehlerhaften Personen:
+      else if (
+        AuthService.checkAuth("READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE")
+      ) {
+        // Berechtigung vorhanden: Bestätigung von Anwender einholen
+        invalidePersonen.value = fehlerhaftePersonen;
+        invalidePersonenSelectVisible.value = true;
+      } else {
+        // Keine Berechtigung: Fehlermeldung
+        snackbarStore.showMessage({
+          level: STATUS_INDICATORS.ERROR,
+          message:
+            "Die Auswahl enthält invalide Personen. Bitte wenden Sie sich an einen Sondersachbearbeiter, der diese Validierung umgehen kann.",
+        });
+      }
+    })
+    .catch((err) => {
+      snackbarStore.showMessage(err);
+    })
+    .finally(() => {
+      vorschlagsListeAnimationAktiv.value = false;
+    });
+}
+
+function abbruchAufVorschlagslisteSetzen() {
+  yesNoDialogVisible.value = false;
+}
+
+function abbruchBewerberAufVorschlagslisteUebernehmen() {
+  invalidePersonenSelectVisible.value = false;
+}
+
+async function bewerberAufVorschlagslisteUebernehmen() {
+  vorschlagsListeAnimationAktiv.value = true;
+  await PersonApiService.aufVorschlagslisteSetzen(selectedUUIDs.value)
+    .then(() => {
+      inTabelleEntfernen();
+      deselectAll();
+    })
+    .catch((err) => {
+      snackbarStore.showMessage(err);
+    })
+    .finally(() => {
+      invalidePersonenSelectVisible.value = false;
+      yesNoDialogVisible.value = false;
+      vorschlagsListeAnimationAktiv.value = false;
+    });
+}
+
+function reload() {
+  enableReload.value = false;
+  personenTableData.value = [];
+  deselectAll();
+  loadItems({
+    page: 1,
+    itemsPerPage: itemsPerPage.value,
+    sortBy: itemsSort.value,
+  });
+}
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function getRowProps(data: any) {
+  if (
+    data.item.auskunftssperre != undefined &&
+    data.item.auskunftssperre.length > 0
+  ) {
+    if (AuthService.checkAuth("READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE")) {
+      return { class: "auskunftssperre" };
+    } else {
+      return { class: "auskunftssperre v-selection-control--disabled" };
+    }
+  }
+}
+
+function isAuskunftssperreSichtbar(person: PersonenTableData): boolean {
+  return (
+    person.auskunftssperre.length == 0 ||
+    AuthService.checkAuth("READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE")
+  );
+}
+
+function datenHerunterladen() {
+  const globalSettingsStore = useGlobalSettingsStore();
+  EhrenamtJustizService.convertToCSVFile(
+    selectedUUIDs.value,
+    globalSettingsStore.getKonfiguration?.ehrenamtjustizart ?? "",
+    PERSONENSTATUS.STATUS_BEWERBUNG
+  );
+}
+</script>
+
+<style scoped>
+:deep(.auskunftssperre) {
+  background: lightcoral;
+}
+</style>

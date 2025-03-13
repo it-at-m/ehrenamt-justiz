@@ -79,7 +79,7 @@ public class PersonRestController {
             final String[] sorts = new String[sortDefinition.length];
             String direction = "false";
             for (int i = 0; i < sortDefinition.length; i++) {
-                final val sortAtr = sortDefinition[i].split("/");
+                val sortAtr = sortDefinition[i].split("/");
                 sorts[i] = sortAtr[0];
                 direction = sortAtr[1];
             }
@@ -195,7 +195,7 @@ public class PersonRestController {
          * new Random().nextBytes(array2);
          *
          * person.setId(UUID.randomUUID());
-         * person.setEwo_id(String.valueOf(i + j * 1000 + 3973));
+         * person.setEwoid(String.valueOf(i + j * 1000 + 3973));
          * personRepository.save(person);
          * }
          *
