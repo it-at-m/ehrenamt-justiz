@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,8 @@ public class EWOServiceImpl implements EWOService {
     private static final String STATUS_UP = "UP";
     private static final String STATUS_DOWN = "DOWN";
 
+    private static final SecureRandom RANDOM = new SecureRandom();
+
     @Override
     @PreAuthorize(Authorities.HAS_AUTHORITY_EWOSUCHEMITOM)
     public EWOBuergerDatenDto ewoSucheMitOM(final String om) {
@@ -50,11 +53,22 @@ public class EWOServiceImpl implements EWOService {
     @PreAuthorize(Authorities.HAS_AUTHORITY_EWOSUCHE)
     @SuppressFBWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     public List<EWOBuergerDatenDto> ewoSuche(final EWOBuergerSucheDto eWOBuergerSucheDto) {
-        final EWOBuergerDatenDto eWOBuergerDaten = new EWOBuergerDatenDto();
 
         // Für Testzwecke
+        final List<EWOBuergerDatenDto> eWOBuergerDatenDtos = new ArrayList<>();
+        eWOBuergerDatenDtos.add(getExampleBuergerDaten(eWOBuergerSucheDto));
+
+        // Für Testzwecke
+        eWOBuergerDatenDtos.add(getExampleBuergerDaten(eWOBuergerSucheDto));
+
+        return eWOBuergerDatenDtos;
+
+    }
+
+    private static EWOBuergerDatenDto getExampleBuergerDaten(final EWOBuergerSucheDto eWOBuergerSucheDto) {
+        final EWOBuergerDatenDto eWOBuergerDaten = new EWOBuergerDatenDto();
         eWOBuergerDaten.setId(UUID.randomUUID());
-        eWOBuergerDaten.setOrdnungsmerkmal(String.valueOf((int) (Math.random() * ZEHNTAUSEND)));
+        eWOBuergerDaten.setOrdnungsmerkmal(String.valueOf(RANDOM.nextInt(ZEHNTAUSEND)));
         eWOBuergerDaten.setFamilienname(eWOBuergerSucheDto.getFamilienname());
         eWOBuergerDaten.setVorname(eWOBuergerSucheDto.getVorname());
         eWOBuergerDaten.setGeburtsdatum(eWOBuergerSucheDto.getGeburtsdatum());
@@ -69,32 +83,7 @@ public class EWOServiceImpl implements EWOService {
         eWOBuergerDaten.setOrt(MUENCHEN);
         eWOBuergerDaten.setStrasse(LEOPOLDSTR);
         eWOBuergerDaten.setHausnummer("9");
-
-        final List<EWOBuergerDatenDto> eWOBuergerDatenDtos = new ArrayList<>();
-        eWOBuergerDatenDtos.add(eWOBuergerDaten);
-
-        // Für Testzwecke
-        eWOBuergerDaten.setId(UUID.randomUUID());
-        eWOBuergerDaten.setOrdnungsmerkmal(String.valueOf((int) (Math.random() * ZEHNTAUSEND)));
-        eWOBuergerDaten.setFamilienname(eWOBuergerSucheDto.getFamilienname());
-        eWOBuergerDaten.setVorname(eWOBuergerSucheDto.getVorname());
-        eWOBuergerDaten.setGeburtsdatum(eWOBuergerSucheDto.getGeburtsdatum());
-        eWOBuergerDaten.setGeschlecht(Geschlecht.MAENNLICH);
-        eWOBuergerDaten.setWohnungsstatus(Wohnungsstatus.HAUPTWOHNUNG);
-        eWOBuergerDaten.setFamilienstand(VERHEIRATET);
-        eWOBuergerDaten.setGeburtsland(DEUTSCHLAND);
-        eWOBuergerDaten.setGeburtsort(MUENCHEN);
-        eWOBuergerDaten.setInmuenchenseit(LocalDate.of(2000, 1, 1));
-        eWOBuergerDaten.getStaatsangehoerigkeit().add(DEUTSCH);
-        eWOBuergerDaten.setPostleitzahl(PLZ);
-        eWOBuergerDaten.setOrt(MUENCHEN);
-        eWOBuergerDaten.setStrasse(LEOPOLDSTR);
-        eWOBuergerDaten.setHausnummer("7");
-
-        eWOBuergerDatenDtos.add(eWOBuergerDaten);
-
-        return eWOBuergerDatenDtos;
-
+        return eWOBuergerDaten;
     }
 
     @Override
