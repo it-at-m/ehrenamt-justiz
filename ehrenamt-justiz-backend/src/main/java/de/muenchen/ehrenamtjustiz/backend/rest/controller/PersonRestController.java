@@ -79,7 +79,7 @@ public class PersonRestController {
             final String[] sorts = new String[sortDefinition.length];
             String direction = "false";
             for (int i = 0; i < sortDefinition.length; i++) {
-                val sortAtr = sortDefinition[i].split("/");
+                final val sortAtr = sortDefinition[i].split("/");
                 sorts[i] = sortAtr[0];
                 direction = sortAtr[1];
             }
