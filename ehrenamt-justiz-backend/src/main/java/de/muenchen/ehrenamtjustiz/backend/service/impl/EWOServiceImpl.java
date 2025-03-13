@@ -25,6 +25,13 @@ import java.util.UUID;
 @SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public class EWOServiceImpl implements EWOService {
 
+    public static final String MUENCHEN = "München";
+    public static final String DEUTSCHLAND = "Deutschland";
+    public static final String LEOPOLDSTR = "Leopoldstr.";
+    public static final String VERHEIRATET = "verheiratet";
+    public static final int ZEHNTAUSEND = 10_000;
+    public static final String DEUTSCH = "deutsch";
+    public static final String PLZ = "80634";
     @Autowired
     private RestTemplate restTemplate;
 
@@ -43,46 +50,46 @@ public class EWOServiceImpl implements EWOService {
     @PreAuthorize(Authorities.HAS_AUTHORITY_EWOSUCHE)
     @SuppressFBWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     public List<EWOBuergerDatenDto> ewoSuche(final EWOBuergerSucheDto eWOBuergerSucheDto) {
-        EWOBuergerDatenDto eWOBuergerDaten = new EWOBuergerDatenDto();
+        final EWOBuergerDatenDto eWOBuergerDaten = new EWOBuergerDatenDto();
 
         // Für Testzwecke
         eWOBuergerDaten.setId(UUID.randomUUID());
-        eWOBuergerDaten.setOrdnungsmerkmal(String.valueOf((int) (Math.random() * 10000)));
+        eWOBuergerDaten.setOrdnungsmerkmal(String.valueOf((int) (Math.random() * ZEHNTAUSEND)));
         eWOBuergerDaten.setFamilienname(eWOBuergerSucheDto.getFamilienname());
         eWOBuergerDaten.setVorname(eWOBuergerSucheDto.getVorname());
         eWOBuergerDaten.setGeburtsdatum(eWOBuergerSucheDto.getGeburtsdatum());
         eWOBuergerDaten.setGeschlecht(Geschlecht.MAENNLICH);
         eWOBuergerDaten.setWohnungsstatus(Wohnungsstatus.HAUPTWOHNUNG);
-        eWOBuergerDaten.setFamilienstand("verheiratet");
-        eWOBuergerDaten.setGeburtsland("Deutschland");
-        eWOBuergerDaten.setGeburtsort("München");
+        eWOBuergerDaten.setFamilienstand(VERHEIRATET);
+        eWOBuergerDaten.setGeburtsland(DEUTSCHLAND);
+        eWOBuergerDaten.setGeburtsort(MUENCHEN);
         eWOBuergerDaten.setInmuenchenseit(LocalDate.of(2000, 1, 1));
-        eWOBuergerDaten.getStaatsangehoerigkeit().add("deutsch");
-        eWOBuergerDaten.setPostleitzahl("80634");
-        eWOBuergerDaten.setOrt("München");
-        eWOBuergerDaten.setStrasse("Leopoldstr.");
+        eWOBuergerDaten.getStaatsangehoerigkeit().add(DEUTSCH);
+        eWOBuergerDaten.setPostleitzahl(PLZ);
+        eWOBuergerDaten.setOrt(MUENCHEN);
+        eWOBuergerDaten.setStrasse(LEOPOLDSTR);
         eWOBuergerDaten.setHausnummer("9");
 
-        List<EWOBuergerDatenDto> eWOBuergerDatenDtos = new ArrayList<>();
+        final List<EWOBuergerDatenDto> eWOBuergerDatenDtos = new ArrayList<>();
         eWOBuergerDatenDtos.add(eWOBuergerDaten);
 
         // Für Testzwecke
         eWOBuergerDaten.setId(UUID.randomUUID());
-        eWOBuergerDaten.setOrdnungsmerkmal(String.valueOf((int) (Math.random() * 10000)));
+        eWOBuergerDaten.setOrdnungsmerkmal(String.valueOf((int) (Math.random() * ZEHNTAUSEND)));
         eWOBuergerDaten.setFamilienname(eWOBuergerSucheDto.getFamilienname());
         eWOBuergerDaten.setVorname(eWOBuergerSucheDto.getVorname());
         eWOBuergerDaten.setGeburtsdatum(eWOBuergerSucheDto.getGeburtsdatum());
         eWOBuergerDaten.setGeschlecht(Geschlecht.MAENNLICH);
         eWOBuergerDaten.setWohnungsstatus(Wohnungsstatus.HAUPTWOHNUNG);
-        eWOBuergerDaten.setFamilienstand("verheiratet");
-        eWOBuergerDaten.setGeburtsland("Deutschland");
-        eWOBuergerDaten.setGeburtsort("München");
+        eWOBuergerDaten.setFamilienstand(VERHEIRATET);
+        eWOBuergerDaten.setGeburtsland(DEUTSCHLAND);
+        eWOBuergerDaten.setGeburtsort(MUENCHEN);
         eWOBuergerDaten.setInmuenchenseit(LocalDate.of(2000, 1, 1));
-        eWOBuergerDaten.getStaatsangehoerigkeit().add("deutsch");
-        eWOBuergerDaten.setPostleitzahl("80634");
-        eWOBuergerDaten.setOrt("München");
-        eWOBuergerDaten.setStrasse("Leopoldstr.");
-        eWOBuergerDaten.setHausnummer("9");
+        eWOBuergerDaten.getStaatsangehoerigkeit().add(DEUTSCH);
+        eWOBuergerDaten.setPostleitzahl(PLZ);
+        eWOBuergerDaten.setOrt(MUENCHEN);
+        eWOBuergerDaten.setStrasse(LEOPOLDSTR);
+        eWOBuergerDaten.setHausnummer("7");
 
         eWOBuergerDatenDtos.add(eWOBuergerDaten);
 
