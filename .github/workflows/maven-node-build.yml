@@ -15,10 +15,10 @@ jobs:
       fail-fast: false
       matrix:
         include: # hier müssen die Pfade angegeben werden
-          - app-path: ehenamt-justiz-backend
-          - app-path: ehenamt-justiz-frontend
-          - app-path: ehenamt-justiz-eai
-          - app-path: ehenamt-justiz-webcomponent
+          - app-path: ehrenamt-justiz-backend
+          - app-path: ehrenamt-justiz-frontend
+          - app-path: ehrenamt-justiz-eai
+          - app-path: ehrenamt-justiz-webcomponent
 
     steps:
       - uses: it-at-m/lhm_actions/action-templates/actions/action-checkout@6b19f8dd2bee160bee82bde4fa04ac9f6c1d5e1e # v1.0.5

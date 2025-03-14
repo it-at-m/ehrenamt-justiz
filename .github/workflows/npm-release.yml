@@ -15,9 +15,9 @@ on:  # yamllint disable-line rule:truthy
         type: choice
         description: "Select the node service to release"
         required: true
-        default: ehenamt-justiz-frontend
+        default: ehrenamt-justiz-frontend
         options:
-          - ehenamt-justiz-frontend # Add or modify frontend paths according to your project structure
+          - ehrenamt-justiz-frontend # Add or modify frontend paths according to your project structure
 jobs:
   release:
     name: release

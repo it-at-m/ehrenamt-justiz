@@ -16,8 +16,8 @@ on:
         description: Service-Name
         required: true
         options:
-          - ehenamt-justiz-backend
-          - ehenamt-justiz-eai
+          - ehrenamt-justiz-backend
+          - ehrenamt-justiz-eai
 
 jobs:
   release-maven:
