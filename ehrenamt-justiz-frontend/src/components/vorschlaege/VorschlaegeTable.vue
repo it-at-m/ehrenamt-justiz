@@ -24,68 +24,63 @@
             cols="2"
           >
             <!--            <v-btn
-              :disabled="
-                !user ||
-                !user.authorities.includes('DELETE_EHRENAMTJUSTIZDATEN') ||
-                selectedUUIDs.length == 0
-              "
-              color="error"
-              @click="deleteRequested"
-              >Löschen</v-btn
-            >-->
+                          :disabled="
+                            !user ||
+                            !user.authorities.includes('DELETE_EHRENAMTJUSTIZDATEN') ||
+                            selectedUUIDs.length == 0
+                          "
+                          color="error"
+                          @click="deleteRequested"
+                          >Löschen</v-btn
+                        >-->
             <v-btn
-              :disabled="selectedUUIDs.length == 0"
               color="error"
               @click="deleteRequested"
-              >Löschen</v-btn
-            >
+              >Löschen
+            </v-btn>
           </v-col>
           <v-col
             class="col"
             cols="3"
           >
             <!--            <v-btn
-              :disabled="
-                !user ||
-                !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
-                !user.authorities.includes(
-                  'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
-                ) ||
-                selectedUUIDs.length == 0
-              "
-              color="accent"
-              :loading="vorschlagsListeAnimationAktiv"
-              @click="aufVorschlagslisteSetzen"
-              >Auf Vorschlagsliste setzen</v-btn
-            >-->
+                          :disabled="
+                            !user ||
+                            !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
+                            selectedUUIDs.length == 0
+                          "
+                          color="accent"
+                          :loading="bewerberListeAnimationAktiv"
+                          @click="aufBewerberlisteSetzen"
+                          >Auf Bewerberliste setzen</v-btn
+                        >-->
             <v-btn
-              :disabled="selectedUUIDs.length == 0"
               color="accent"
-              :loading="vorschlagsListeAnimationAktiv"
-              @click="aufVorschlagslisteSetzen"
-              >Auf Vorschlagsliste setzen</v-btn
-            >
+              :loading="bewerberListeAnimationAktiv"
+              @click="aufBewerberlisteSetzen"
+              >Auf Bewerberliste setzen
+            </v-btn>
           </v-col>
           <v-col
             class="col"
             cols="3"
           >
             <!--            <v-btn
-              :disabled="
-                !user ||
-                !user.authorities.includes(
-                  'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
-                )
-              "
-              color="accent"
-              @click="datenHerunterladen"
-              >Daten herunterladen</v-btn
-            >-->
+                          :disabled="
+                            !user ||
+                            !user.authorities.includes(
+                              'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
+                            )
+                          "
+                          color="accent"
+                          @click="datenHerunterladen"
+                          >Daten herunterladen</v-btn
+                        >-->
             <v-btn
               color="accent"
               @click="datenHerunterladen"
-              >Daten herunterladen</v-btn
-            >
+              >Daten herunterladen
+            </v-btn>
           </v-col>
         </v-row>
       </v-card-title>
@@ -96,12 +91,22 @@
         :items="personenTableData"
         :items-length="totalItems"
         show-select
-        items-per-page-text="Bewerber je Seite"
+        items-per-page-text="Vorschläge je Seite"
         :row-props="getRowProps"
         :loading="loadingAnimationAktiv"
         :multi-sort="true"
         @update:options="loadItems"
       >
+        <template #top>
+          <delete-dialog
+            v-model="deleteDialogVisible"
+            :is-animation="deleteAnimationAktiv"
+            :descriptor-string="selectedUUIDs.length + ' Vorschläge'"
+            :type-string="2"
+            @delete="deleteConfirmed"
+            @cancel="deleteCanceled"
+          />
+        </template>
         <template #[`item.geburtsdatum`]="{ item }">
           <span v-if="isAuskunftssperreSichtbar(item)">{{
             new Date(item.geburtsdatum).toLocaleDateString()
@@ -132,7 +137,10 @@
             </template>
             <span>Bewerber ändern</span>
           </v-tooltip>
-          <v-tooltip location="bottom">
+          <v-tooltip
+            v-if="AuthService.checkAuth('READ_EHRENAMTJUSTIZDATEN')"
+            location="bottom"
+          >
             <template #activator="{ props }">
               <span v-bind="props">
                 <v-icon
@@ -168,37 +176,22 @@
           {{ TABELLEN.LOADING_ITEMS }}
         </template>
       </v-data-table-server>
-      <invalide-personen-select
-        :model-value="invalidePersonenSelectVisible"
-        :vorschlags-liste-animation-aktiv="vorschlagsListeAnimationAktiv"
-        :invalide-personen="invalidePersonen"
-        @cancel-invalide-personen-select="
-          abbruchBewerberAufVorschlagslisteUebernehmen
-        "
-        @invalide-personen-select="bewerberAufVorschlagslisteUebernehmen"
-      ></invalide-personen-select>
     </v-card>
     <yes-no-dialog
       v-model="yesNoDialogVisible"
-      dialogtitle="Auf Vorschlagsliste setzen"
+      dialogtitle="Auf Bewerbungsliste setzen"
       :dialogtext="
         'Bestätigen Sie die Übernahme von ' +
         selectedUUIDs.length +
-        ' Bewerbung(en) in die Vorschlagsliste'
+        ' ' +
+        (selectedUUIDs.length == 1 ? 'Vorschlag' : 'Vorschlägen') +
+        ' in die Bewerbungsliste'
       "
-      :is-animation="vorschlagsListeAnimationAktiv"
-      @no="abbruchAufVorschlagslisteSetzen"
-      @yes="bewerberAufVorschlagslisteUebernehmen"
+      :is-animation="bewerberListeAnimationAktiv"
+      @no="abbruchAufBewerbungslisteSetzen"
+      @yes="aufBewerbungslisteUebernehmen"
     />
   </v-container>
-  <delete-dialog
-    v-model="deleteDialogVisible"
-    :is-animation="deleteAnimationAktiv"
-    :descriptor-string="selectedUUIDs.length + ' Bewerber'"
-    :type-string="2"
-    @delete="deleteConfirmed"
-    @cancel="deleteCanceled"
-  />
 </template>
 
 <script setup lang="ts">
@@ -227,15 +220,9 @@ import { EhrenamtJustizService } from "@/api/EhrenamtJustizService";
 import { PersonApiService } from "@/api/PersonApiService";
 import DeleteDialog from "@/components/common/DeleteDialog.vue";
 import YesNoDialog from "@/components/common/YesNoDialog.vue";
-import {
-  BEARBEIGUNGS_MODUS,
-  PERSONENSTATUS,
-  STATUS_INDICATORS,
-  TABELLEN,
-} from "@/Constants.ts";
+import { BEARBEIGUNGS_MODUS, PERSONENSTATUS, TABELLEN } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
-import InvalidePersonenSelect from "@/views/vorschlaege/InvalidePersonenSelect.vue";
 
 const headers: ReadonlyHeaders = [
   {
@@ -301,10 +288,8 @@ type ReadonlyHeaders = VDataTable["$props"]["headers"];
 const deleteDialogVisible = ref(false);
 const loadingAnimationAktiv = ref(false);
 const deleteAnimationAktiv = ref(false);
-const vorschlagsListeAnimationAktiv = ref(false);
+const bewerberListeAnimationAktiv = ref(false);
 const yesNoDialogVisible = ref(false);
-const invalidePersonenSelectVisible = ref(false);
-const invalidePersonen = ref<PersonenTableData[]>([]);
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function loadItems(options: any) {
@@ -314,7 +299,7 @@ function loadItems(options: any) {
     search.value,
     options.page - 1,
     options.itemsPerPage,
-    PERSONENSTATUS.STATUS_BEWERBUNG,
+    PERSONENSTATUS.STATUS_VORSCHLAG,
     options.sortBy
   )
     .then((pagedData) => {
@@ -330,6 +315,8 @@ function loadItems(options: any) {
       enableReload.value = true;
     });
 }
+
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 function editItem(item: { id: { toString: () => string } }) {
   router.push({
@@ -388,69 +375,24 @@ function inTabelleEntfernen(): void {
   );
 }
 
-/*
-  Personen auf Vorschlagsliste übernehmen
-  - Validierung Staatsangehörigkeit, Wohnsitz und Geburtsdatum
-  - Wenn keine fehlerhafte Personen: Update Person: Status = Vorschlag, Neuer Vorschlag = true
-  - Wenn fehlerhafte Personen und Berechtigung für Auskunftssperre vorhanden: Bestätigung aller ungültigen Datensästze in einer Übersicht
-  - Wenn fehlerhafte Personen und keine Berechtigung für Auskunftssperre vorhanden: Meldung: Bitte wenden Sie sich an einen Sondersachbearbeiter, der diese Validierung umgehen kann.
-  - Bei Update: Konflikte ermitteln
- */
-async function aufVorschlagslisteSetzen(): Promise<void> {
-  vorschlagsListeAnimationAktiv.value = true;
-  await PersonApiService.validiereAufVorschlagslisteSetzen(selectedUUIDs.value)
-    .then((fehlerhaftePersonen) => {
-      vorschlagsListeAnimationAktiv.value = false;
-      if (fehlerhaftePersonen.length == 0) {
-        // Da keine fehlerhaften Personen: Bestätigungsdialog für alle fehlerfreien Personen auf Vorschlagsliste setzen
-        yesNoDialogVisible.value = true;
-      }
-      // Fehlerhaften Personen:
-      else if (
-        AuthService.checkAuth("READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE")
-      ) {
-        // Berechtigung vorhanden: Bestätigung von Anwender einholen
-        invalidePersonen.value = fehlerhaftePersonen;
-        invalidePersonenSelectVisible.value = true;
-      } else {
-        // Keine Berechtigung: Fehlermeldung
-        snackbarStore.showMessage({
-          level: STATUS_INDICATORS.ERROR,
-          message:
-            "Die Auswahl enthält invalide Personen. Bitte wenden Sie sich an einen Sondersachbearbeiter, der diese Validierung umgehen kann.",
-        });
-      }
-    })
-    .catch((err) => {
-      snackbarStore.showMessage(err);
-    })
-    .finally(() => {
-      vorschlagsListeAnimationAktiv.value = false;
-    });
+async function aufBewerberlisteSetzen(): Promise<void> {
+  yesNoDialogVisible.value = true;
 }
 
-function abbruchAufVorschlagslisteSetzen() {
+function abbruchAufBewerbungslisteSetzen() {
   yesNoDialogVisible.value = false;
 }
 
-function abbruchBewerberAufVorschlagslisteUebernehmen() {
-  invalidePersonenSelectVisible.value = false;
-}
-
-async function bewerberAufVorschlagslisteUebernehmen() {
-  vorschlagsListeAnimationAktiv.value = true;
-  await PersonApiService.aufVorschlagslisteSetzen(selectedUUIDs.value)
+async function aufBewerbungslisteUebernehmen() {
+  bewerberListeAnimationAktiv.value = true;
+  await PersonApiService.aufBewerberlisteSetzen(selectedUUIDs.value)
     .then(() => {
       inTabelleEntfernen();
       deselectAll();
-    })
-    .catch((err) => {
-      snackbarStore.showMessage(err);
+      yesNoDialogVisible.value = false;
     })
     .finally(() => {
-      invalidePersonenSelectVisible.value = false;
-      yesNoDialogVisible.value = false;
-      vorschlagsListeAnimationAktiv.value = false;
+      bewerberListeAnimationAktiv.value = false;
     });
 }
 
@@ -479,6 +421,7 @@ function getRowProps(data: any) {
   }
 }
 
+/* eslint-enable @typescript-eslint/no-explicit-any */
 function isAuskunftssperreSichtbar(person: PersonenTableData): boolean {
   return (
     person.auskunftssperre.length == 0 ||
@@ -491,12 +434,12 @@ function datenHerunterladen() {
   const dateiname =
     (globalSettingsStore.getKonfiguration?.ehrenamtjustizart ?? "") +
     "_" +
-    PERSONENSTATUS.STATUS_BEWERBUNG +
+    PERSONENSTATUS.STATUS_VORSCHLAG +
     "_";
   EhrenamtJustizService.convertToCSVFile(
     selectedUUIDs.value,
     dateiname,
-    PERSONENSTATUS.STATUS_BEWERBUNG
+    PERSONENSTATUS.STATUS_VORSCHLAG
   );
 }
 </script>

@@ -121,12 +121,9 @@
         >
           <v-list-item-title>Konflikte</v-list-item-title>
         </v-list-item>
-        <v-list-item
-          :to="{ name: 'vorschlaege.index' }"
-          :disabled="
-            !user || !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN')
-          "
-        >
+        <v-list-item :to="{ name: 'vorschlaege.index' }">
+          <!-- :disabled="!user || !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN')"-->
+
           <v-list-item-title>Vorschläge</v-list-item-title>
         </v-list-item>
         <v-list-item :to="{ name: 'konfiguration.index' }">

@@ -10,6 +10,7 @@ import HomeView from "@/views/HomeView.vue";
 import KonfigurationCreate from "@/views/konfiguration/KonfigurationCreate.vue";
 import KonfigurationEdit from "@/views/konfiguration/KonfigurationEdit.vue";
 import KonfigurationIndex from "@/views/konfiguration/KonfigurationIndex.vue";
+import VorschlaegeIndex from "@/views/vorschlaege/VorschlaegeIndex.vue";
 
 const routes = [
   {
@@ -74,7 +75,7 @@ const routes = [
   {
     path: "/vorschlaege/index",
     name: "vorschlaege.index",
-    component: GetStartedView,
+    component: VorschlaegeIndex,
     meta: { authority: "READ_EHRENAMTJUSTIZDATEN" },
   },
   {
