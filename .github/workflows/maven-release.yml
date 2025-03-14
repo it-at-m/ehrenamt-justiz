@@ -16,8 +16,8 @@ on:
         description: Service-Name
         required: true
         options:
-          - refarch-backend
-          - refarch-eai
+          - ehenamt-justiz-backend
+          - ehenamt-justiz-eai
 
 jobs:
   release-maven:
