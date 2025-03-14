@@ -15,8 +15,8 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-@Setter(onMethod_ = @SuppressFBWarnings({ "EI_EXPOSE_REP" }))
-@Getter(onMethod_ = @SuppressFBWarnings({ "EI_EXPOSE_REP" }))
+@Setter
+@Getter
 @ToString(callSuper = true)
 @SuperBuilder
 @NoArgsConstructor
@@ -47,6 +47,7 @@ public class EWOBuergerDatenDto {
 
     private String familienstand;
 
+    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
     private java.util.List<String> staatsangehoerigkeit = new java.util.ArrayList<>();
 
     private String wohnungsgeber;
@@ -65,6 +66,7 @@ public class EWOBuergerDatenDto {
 
     private String adresszusatz;
 
+    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
     private java.util.List<String> konfliktfeld = new java.util.ArrayList<>();
 
     private String postleitzahl;
@@ -75,6 +77,7 @@ public class EWOBuergerDatenDto {
 
     private Wohnungsstatus wohnungsstatus;
 
+    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
     private java.util.List<String> auskunftssperre = new java.util.ArrayList<>();
 
     private boolean ewoidbereitserfasst;

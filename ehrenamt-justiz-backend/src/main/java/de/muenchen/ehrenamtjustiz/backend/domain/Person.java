@@ -30,8 +30,8 @@ import lombok.experimental.SuperBuilder;
  */
 @Entity
 // Definition of getter, setter, ...
-@Setter(onMethod_ = @SuppressFBWarnings({ "EI_EXPOSE_REP" }))
-@Getter(onMethod_ = @SuppressFBWarnings({ "EI_EXPOSE_REP" }))
+@Setter
+@Getter
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
@@ -202,6 +202,7 @@ public class Person extends BaseEntity {
     @CollectionTable(name = "auskunftssperre", joinColumns = { @JoinColumn(name = "personid") })
     @ElementCollection(fetch = FetchType.EAGER)
     @Size(max = 255)
+    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
     private java.util.List<String> auskunftssperre = new java.util.ArrayList<>();
 
     @Column(name = "person_attribut")
@@ -209,6 +210,7 @@ public class Person extends BaseEntity {
     @CollectionTable(name = "konfliktfeld", joinColumns = { @JoinColumn(name = "personid") })
     @ElementCollection(fetch = FetchType.EAGER)
     @Size(max = 255)
+    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
     private java.util.List<String> konfliktfeld = new java.util.ArrayList<>();
 
     @Column(name = "staatsangehoerigkeit_text")
@@ -216,6 +218,7 @@ public class Person extends BaseEntity {
     @CollectionTable(name = "staatsangehoerigkeit", joinColumns = { @JoinColumn(name = "personid") })
     @ElementCollection(fetch = FetchType.EAGER)
     @Size(max = 255)
+    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
     private java.util.List<String> staatsangehoerigkeit = new java.util.ArrayList<>();
 
 }

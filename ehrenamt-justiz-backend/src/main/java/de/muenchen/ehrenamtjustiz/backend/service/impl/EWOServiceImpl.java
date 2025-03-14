@@ -6,7 +6,6 @@ import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
 import de.muenchen.ehrenamtjustiz.backend.security.Authorities;
 import de.muenchen.ehrenamtjustiz.backend.service.EWOService;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,7 +50,6 @@ public class EWOServiceImpl implements EWOService {
 
     @Override
     @PreAuthorize(Authorities.HAS_AUTHORITY_EWOSUCHE)
-    @SuppressFBWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     public List<EWOBuergerDatenDto> ewoSuche(final EWOBuergerSucheDto eWOBuergerSucheDto) {
 
         // Für Testzwecke

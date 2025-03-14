@@ -9,8 +9,8 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-@Setter(onMethod_ = @SuppressFBWarnings({ "EI_EXPOSE_REP" }))
-@Getter(onMethod_ = @SuppressFBWarnings({ "EI_EXPOSE_REP" }))
+@Setter
+@Getter
 @ToString(callSuper = true)
 @EqualsAndHashCode
 @NoArgsConstructor
@@ -24,8 +24,10 @@ public class PersonenTableDatenDto {
 
     private LocalDate geburtsdatum;
 
+    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
     private List<String> konfliktfeld;
 
+    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
     private List<String> auskunftssperre;
 
     private String derzeitausgeuebterberuf;
