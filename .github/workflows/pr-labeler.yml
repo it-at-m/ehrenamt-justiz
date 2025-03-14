@@ -1,0 +1,13 @@
+name: "pr-labeler"
+on:
+  - pull_request_target
+
+jobs:
+  pr-labeler:
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Label PR"
+        uses: it-at-m/lhm_actions/action-templates/actions/action-pr-labeler@6b19f8dd2bee160bee82bde4fa04ac9f6c1d5e1e # v1.0.5
