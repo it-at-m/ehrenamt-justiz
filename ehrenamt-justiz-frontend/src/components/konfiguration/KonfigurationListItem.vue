@@ -85,8 +85,8 @@ const props = defineProps<{
   konfiguration: Konfiguration;
 }>();
 const emits = defineEmits<{
-  (e: "deleted", p: Konfiguration): void;
-  (e: "reloadItems"): void;
+  deleted: [p: Konfiguration];
+  reloadItems: [];
 }>();
 const snackbarStore = useSnackbarStore();
 const router = useRouter();

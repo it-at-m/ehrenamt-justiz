@@ -78,8 +78,9 @@ const headers: ReadonlyHeaders = [
   },
 ];
 const emits = defineEmits<{
-  (e: "update:modelValue", v: boolean): void;
-  (e: "invalidePersonenSelect" | "cancelInvalidePersonenSelect"): void;
+  "update:modelValue": [v: boolean];
+  invalidePersonenSelect: [];
+  cancelInvalidePersonenSelect: [];
 }>();
 
 const visible = computed({

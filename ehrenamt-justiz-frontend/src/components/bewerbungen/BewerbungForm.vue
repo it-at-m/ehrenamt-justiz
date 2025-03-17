@@ -582,8 +582,9 @@ const props = defineProps<{
   isAnimation: boolean;
 }>();
 const emits = defineEmits<{
-  (e: "update:modelValue", v: BewerbungFormData): void;
-  (e: "save" | "cancel"): void;
+  "update:modelValue": [v: BewerbungFormData];
+  save: [];
+  cancel: [];
 }>();
 const rules = useRules();
 const snackbarStore = useSnackbarStore();

@@ -83,19 +83,19 @@ const props = withDefaults(defineProps<Props>(), {
   showSetActive: true,
 });
 
-const emit = defineEmits<{
+const emits = defineEmits<{
   edit: [];
   delete: [];
   open: [];
 }>();
 
 function edit(): void {
-  emit("edit");
+  emits("edit");
 }
 function open(): void {
-  emit("open");
+  emits("open");
 }
 function deletes(): void {
-  emit("delete");
+  emits("delete");
 }
 </script>

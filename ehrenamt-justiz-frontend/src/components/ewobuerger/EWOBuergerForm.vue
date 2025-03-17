@@ -121,8 +121,8 @@ const props = defineProps<{
   isAnimation: boolean;
 }>();
 const emits = defineEmits<{
-  (e: "update:modelValue", v: EWOBuergerSuche): void;
-  (e: "save"): void;
+  "update:modelValue": [v: EWOBuergerSuche];
+  save: [];
 }>();
 const rules = useRules();
 const snackbarStore = useSnackbarStore();

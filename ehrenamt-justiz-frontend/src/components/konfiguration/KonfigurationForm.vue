@@ -170,8 +170,8 @@ const props = defineProps<{
   isAnimation: boolean;
 }>();
 const emits = defineEmits<{
-  (e: "update:modelValue", v: KonfigurationFormData): void;
-  (e: "save"): void;
+  "update:modelValue": [v: KonfigurationFormData];
+  save: [];
 }>();
 const rules = useRules();
 const snackbarStore = useSnackbarStore();

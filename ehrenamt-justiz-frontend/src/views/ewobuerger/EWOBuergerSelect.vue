@@ -105,17 +105,16 @@ const headers: ReadonlyHeaders = [
   },
   {
     title: "Bereits erfasst",
-    value: "ewo_id_bereitserfasst",
+    value: "ewoidbereitserfasst",
     align: "start",
     sortable: true,
   },
 ];
 const emits = defineEmits<{
-  (e: "update:modelValue", v: boolean): void;
-  (e: "selectBuerger", v: EWOBuergerDaten): void;
-  (e: "cancelBuergerSelect"): void;
+  "update:modelValue": [v: boolean];
+  selectBuerger: [v: EWOBuergerDaten];
+  cancelBuergerSelect: [];
 }>();
-
 const visible = computed({
   get: () => props.modelValue,
   set: (v) => emits("update:modelValue", v),

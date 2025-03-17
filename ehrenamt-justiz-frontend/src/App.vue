@@ -110,15 +110,12 @@
 
           <v-list-item-title>Bewerbungen</v-list-item-title>
         </v-list-item>
-        <v-list-item
-          :to="{ name: 'konflikte.index' }"
-          :disabled="
-            !user ||
-            !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
-            !globalSettingsStore ||
-            !globalSettingsStore.getKonfiguration
-          "
-        >
+        <v-list-item :to="{ name: 'konflikte.index' }">
+          <!-- :disabled="
+         !user ||
+         !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
+         !globalSettingsStore ||
+         !globalSettingsStore.getKonfiguration" -->
           <v-list-item-title>Konflikte</v-list-item-title>
         </v-list-item>
         <v-list-item :to="{ name: 'vorschlaege.index' }">
@@ -150,7 +147,7 @@ import type Konfiguration from "@/types/Konfiguration";
 import { mdiApps, mdiCircle, mdiHelp } from "@mdi/js";
 import { AppSwitcher } from "@muenchen/appswitcher-vue";
 import { useToggle } from "@vueuse/core";
-import { computed, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import {
   VApp,
   VAppBar,
@@ -188,7 +185,6 @@ const globalSettingsStore = useGlobalSettingsStore();
 const snackbarStore = useSnackbarStore();
 const userStore = useUserStore();
 const [drawer, toggleDrawer] = useToggle();
-const user = computed(() => userStore.getUser);
 const userinfo = ref<string>("");
 const bezeichnungApp = ref("Aktive Konfiguration fehlt");
 const ehrenamtjustizart = ref("");

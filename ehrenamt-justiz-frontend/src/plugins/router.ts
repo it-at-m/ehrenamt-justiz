@@ -10,6 +10,8 @@ import HomeView from "@/views/HomeView.vue";
 import KonfigurationCreate from "@/views/konfiguration/KonfigurationCreate.vue";
 import KonfigurationEdit from "@/views/konfiguration/KonfigurationEdit.vue";
 import KonfigurationIndex from "@/views/konfiguration/KonfigurationIndex.vue";
+import KonflikteIndex from "@/views/konflikte/KonflikteIndex.vue";
+import KonfliktLoesenEdit from "@/views/konflikte/KonfliktLoesenEdit.vue";
 import VorschlaegeIndex from "@/views/vorschlaege/VorschlaegeIndex.vue";
 
 const routes = [
@@ -46,37 +48,25 @@ const routes = [
     path: "/bewerbung/:id:action",
     name: "bewerbung.display",
     component: BewerbungEdit,
-    meta: { authority: "READ_EHRENAMTJUSTIZDATEN" },
+    // meta: { authority: "READ_EHRENAMTJUSTIZDATEN" },
   },
   {
     path: "/konflikte/index",
     name: "konflikte.index",
-    component: GetStartedView,
-    meta: { authority: "READ_EHRENAMTJUSTIZDATEN" },
+    component: KonflikteIndex,
+    // meta: { authority: "READ_EHRENAMTJUSTIZDATEN" },
   },
   {
     path: "/konfliktloesen/:id/edit",
     name: "konfliktloesen.edit",
-    component: GetStartedView,
-    meta: { authority: "WRITE_EHRENAMTJUSTIZDATEN" },
-  },
-  {
-    path: "/konflikte/index",
-    name: "konflikte.index",
-    component: GetStartedView,
-    meta: { authority: "READ_EHRENAMTJUSTIZDATEN" },
-  },
-  {
-    path: "/konfliktloesen/:id/edit",
-    name: "konfliktloesen.edit",
-    component: GetStartedView,
-    meta: { authority: "WRITE_EHRENAMTJUSTIZDATEN" },
+    component: KonfliktLoesenEdit,
+    // meta: { authority: "WRITE_EHRENAMTJUSTIZDATEN" },
   },
   {
     path: "/vorschlaege/index",
     name: "vorschlaege.index",
     component: VorschlaegeIndex,
-    meta: { authority: "READ_EHRENAMTJUSTIZDATEN" },
+    // meta: { authority: "READ_EHRENAMTJUSTIZDATEN" },
   },
   {
     path: "/configuration",

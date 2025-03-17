@@ -52,15 +52,15 @@ defineProps<{
   descriptorString: string;
 }>();
 
-const emit = defineEmits<{
+const emits = defineEmits<{
   cancel: [];
   delete: [];
 }>();
 
 function cancel(): void {
-  emit("cancel");
+  emits("cancel");
 }
 function deleteItem(): void {
-  emit("delete");
+  emits("delete");
 }
 </script>
