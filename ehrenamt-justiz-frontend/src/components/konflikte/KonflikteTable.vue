@@ -163,7 +163,6 @@ import { PersonApiService } from "@/api/PersonApiService";
 import DeleteDialog from "@/components/common/DeleteDialog.vue";
 import { PERSONENSTATUS, TABELLEN } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
-import { useUserStore } from "@/stores/user";
 
 const headers: ReadonlyHeaders = [
   {
@@ -236,8 +235,6 @@ type ReadonlyHeaders = VDataTable["$props"]["headers"];
 const deleteDialogVisible = ref(false);
 const loadingAnimationAktiv = ref(false);
 const deleteAnimationAktiv = ref(false);
-const userStore = useUserStore();
-const user = userStore.getUser;
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function loadItems(options: any) {
