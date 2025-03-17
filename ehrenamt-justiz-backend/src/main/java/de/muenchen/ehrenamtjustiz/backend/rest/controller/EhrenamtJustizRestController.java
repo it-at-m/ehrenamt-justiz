@@ -129,7 +129,7 @@ public class EhrenamtJustizRestController {
 
         final Konfiguration[] konfiguration = konfigurationRepository.findByAktiv(true);
 
-        // OM aus EWO bereits in Tabelle Person?
+        // OM from EWO already in table Person?
         final Person person = personRepository.findByOM(eWOBuergerDaten.getOrdnungsmerkmal(), konfiguration[0].getId());
         if (person == null) {
             log.info("pruefenNeuePerson: NOT_FOUND");
@@ -154,7 +154,7 @@ public class EhrenamtJustizRestController {
             person.setKonfigurationid(konfiguration[0].getId());
         }
 
-        // SchoeffenGrunddaten N E U schreiben
+        // SchoeffenGrunddaten insert record
         personRepository.save(person);
 
         return new ResponseEntity<>(person, HttpStatus.OK);

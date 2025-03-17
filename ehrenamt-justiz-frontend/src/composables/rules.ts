@@ -1,9 +1,9 @@
 /**
- * rules stellt generelle Rules für die Vuetify-Validierung bereit.
+ * rules offers validation-checks
  *
- * Die Texte für Validierungsfehler sind deshalb allgemein und nicht auf die
- * Felder bezogen. Im Fall, dass der Text nicht passt, kann in der Komponente
- * eine extra Rule erzeugt werden (z.B. `if (typeof RULE_MAIL(value) == 'string') {...}`).
+ * The texts for validation errors are therefore general and not related to the fields.
+ * If the text does not match, an extra rule can be created in the component
+ * (example: `if (typeof RULE_MAIL(value) == 'string') {...}`).
  */
 
 import moment from "moment";
@@ -18,6 +18,11 @@ export function useRules() {
     },
     /* eslint-enable @typescript-eslint/no-explicit-any */
 
+    /**
+     * validate mail
+     * @param v
+     * @constructor
+     */
     RULE_MAIL: (v: string): boolean | string => {
       return (
         !v ||
@@ -28,6 +33,11 @@ export function useRules() {
       );
     },
 
+    /**
+     * validate birthday
+     * @param v
+     * @constructor
+     */
     RULE_GEBURTSDATUM: (v: Date): boolean | string => {
       const alter = moment(
         useGlobalSettingsStore().getKonfiguration?.amtsperiodevon
@@ -43,6 +53,12 @@ export function useRules() {
             " Jahren liegen."
         : true;
     },
+
+    /**
+     * validate nationality
+     * @param v
+     * @constructor
+     */
     RULE_STAATSANGEHOERIGKEIT: (v: string[]): boolean | string => {
       const staatsangehoerigkeitAusKonfiguration =
         useGlobalSettingsStore().getKonfiguration?.staatsangehoerigkeit;
@@ -53,6 +69,12 @@ export function useRules() {
         : "Die Staatsangehörigkeit enhält nicht " +
             staatsangehoerigkeitAusKonfiguration;
     },
+
+    /**
+     * validate residence
+     * @param v
+     * @constructor
+     */
     RULE_WOHNSITZ: (v: string): boolean | string => {
       const wohnsitzAusKonfiguration =
         useGlobalSettingsStore().getKonfiguration?.wohnsitz;

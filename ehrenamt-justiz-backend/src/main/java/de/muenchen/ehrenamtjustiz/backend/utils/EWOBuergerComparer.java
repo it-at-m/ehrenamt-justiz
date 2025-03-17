@@ -18,7 +18,7 @@ public final class EWOBuergerComparer {
     }
 
     /**
-     * Konfliktfelder ermitteln, Abgleich mit EWO-Daten
+     * Get attributes with conflict. Compare with EWO-data
      *
      * @param currentBuerger Daten aus EJ
      * @param newBuerger Daten aus EWO
@@ -31,9 +31,9 @@ public final class EWOBuergerComparer {
 
         final Method[] methods = EWOBuergerDatenDto.class.getMethods();
         Arrays.stream(methods)
-                /* Nur getter sind relevant */
+                /* only getter */
                 .filter(method -> method.getName().startsWith("get") || method.getName().startsWith("is"))
-                /* Diese Getter sollen vom Vergleich nicht berücksichtigt werden */
+                /* Dont consider this getter: */
                 .filter(method -> !"getKonfliktfeld".equals(method.getName()) &&
                         !"isEwoidbereitserfasst".equals(method.getName()) &&
                         !"getType".equals(method.getName()) &&

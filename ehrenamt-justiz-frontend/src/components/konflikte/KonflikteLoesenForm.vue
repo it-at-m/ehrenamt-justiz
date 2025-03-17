@@ -76,7 +76,7 @@
       class="div"
     >
       <br />
-      <!-- da Label vom ersten Feld wird nur teilweise angezeig wird -->
+      <!-- As the label of the first field is only partially displayed -->
       <v-row>
         <v-col
           class="col"
@@ -1344,7 +1344,7 @@ function removeKonflikt(feldname: string): void {
   }
 }
 
-// Alle Konflikte lösen
+// Resolve all conflicts
 function alleUebernehmen(): void {
   konfliktLoesenFamilienname();
   konfliktLoesenGeburtsname();
@@ -1372,7 +1372,7 @@ function alleUebernehmen(): void {
   konfliktLoesenAuskunftssperren();
 }
 
-// Einzelne Konflikte Lösen
+// Resolve single conflict
 function konfliktLoesenFamilienname() {
   if (!isKonflikt(FAMILIENNAME)) return;
   konfliktloesenformdata.value["person_familienname"] =

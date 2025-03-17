@@ -31,7 +31,7 @@ public class EhrenamtJustizServiceImpl implements EhrenamtJustizService {
             log.info("Person {} führte in EWO zu keinem Treffer.", person.getEwoid());
             final List<String> konfliktfelder = new ArrayList<>();
             konfliktfelder.add(ERROR_NO_HITS);
-            // Keinen EWO-Eintrag gefunden
+            // no EWO-entry
             return konfliktfelder;
         }
 

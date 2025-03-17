@@ -295,7 +295,7 @@ const itemsPerPage = ref(10);
 const itemsSort = ref();
 const selectedUUIDs = ref<string[]>([]);
 const search = ref("");
-// Vermeidet mehrfaches Einlesen der Table, wenn während des reload() die Taste Enter gedrückt wird:
+// Avoids multiple reading of the table if the Enter key is pressed during reload():
 const enableReload = ref(true);
 type ReadonlyHeaders = VDataTable["$props"]["headers"];
 const deleteDialogVisible = ref(false);
@@ -355,7 +355,7 @@ function deleteRequested() {
   deleteDialogVisible.value = true;
 }
 
-// Personen löschen
+// Delete person
 async function deleteConfirmed() {
   deleteAnimationAktiv.value = true;
   await PersonApiService.deletePersons(selectedUUIDs.value)
@@ -372,7 +372,7 @@ async function deleteConfirmed() {
     });
 }
 
-// Löschen der selektierten Zeilen
+// Delete the selected lines
 function deselectAll() {
   selectedUUIDs.value = selectedUUIDs.value.filter((item) => item !== item);
 }
@@ -381,7 +381,7 @@ function deleteCanceled() {
   deleteDialogVisible.value = false;
 }
 
-// Gelöschte Personen in Table entfernen
+// Remove deleted persons
 function inTabelleEntfernen(): void {
   personenTableData.value = personenTableData.value.filter(
     (ar) => !selectedUUIDs.value.find((rm) => rm == ar.id)
@@ -402,18 +402,18 @@ async function aufVorschlagslisteSetzen(): Promise<void> {
     .then((fehlerhaftePersonen) => {
       vorschlagsListeAnimationAktiv.value = false;
       if (fehlerhaftePersonen.length == 0) {
-        // Da keine fehlerhaften Personen: Bestätigungsdialog für alle fehlerfreien Personen auf Vorschlagsliste setzen
+        // Since no faulty persons: Confirmation dialog for all error-free persons:
         yesNoDialogVisible.value = true;
       }
-      // Fehlerhaften Personen:
+      // Persons with error:
       else if (
         AuthService.checkAuth("READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE")
       ) {
-        // Berechtigung vorhanden: Bestätigung von Anwender einholen
+        // Authorization available: Obtain confirmation from user:
         invalidePersonen.value = fehlerhaftePersonen;
         invalidePersonenSelectVisible.value = true;
       } else {
-        // Keine Berechtigung: Fehlermeldung
+        // No authorization: Error:
         snackbarStore.showMessage({
           level: STATUS_INDICATORS.ERROR,
           message:

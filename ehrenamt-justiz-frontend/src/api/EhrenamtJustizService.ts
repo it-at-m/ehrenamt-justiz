@@ -280,13 +280,13 @@ class EhrenamtJustizServiceClass {
       ],
     });
 
-    // Konvertiert das Array(personenCSV) in einen CsvOutput-String basierend auf der Konfiguration:
+    // Convert Array(personenCSV) --> CsvOutput-String
     const csv = generateCsv(csvConfig)(personenCSV);
 
-    // Blob erzeugen:
+    // create blob:
     const blob = asBlob(csvConfig)(csv);
 
-    // CSV-Datei ausgeben:
+    // Write CSV-file:
     const link = document.createElement("a");
     link.href = window.URL.createObjectURL(blob);
     const date = new Date();

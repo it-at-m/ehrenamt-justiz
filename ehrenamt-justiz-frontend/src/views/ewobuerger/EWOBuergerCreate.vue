@@ -62,22 +62,22 @@ async function save() {
       validierungdeaktivieren: ewobuergerSuche.value.validierungdeaktivieren,
     }).then((ewoBuergers) => {
       if (ewoBuergers.length == 0) {
-        // Keinen Bürger gefunden: Fehler
+        // No citizen found
         snackbarStore.showMessage({
           level: STATUS_INDICATORS.WARNING,
           message: "Keine Person im Einwohnermeldewesen gefunden!",
           show: true,
         });
       } else if (ewoBuergers.length > 1) {
-        // Mehr als 1 Bürger: Dann muss der Bürger vom Anwender ausgewählt werden
+        // More than one citizen: Select citizen by User
         ewoBuergerSelect.value = ewoBuergers;
         ewoBuergerSelectVisible.value = true;
       } else {
-        // Prüfen, ob Person schon vorhanden
+        // Check, if person already exist
         EWOBuergerApiService.pruefenNeuePerson(ewoBuergers[0]).then(
           (person) => {
             if (person == null) {
-              // Person vorbereiten aus den EWO-Daten und in Tabelle Person speichern
+              // Prepare person data from EWO und insert data in DB
               EWOBuergerApiService.vorbereitenUndSpeichernPerson(
                 ewoBuergers[0]
               ).then((person) => {
@@ -110,11 +110,11 @@ async function save() {
 }
 
 async function einBuergerAusgewaehlt(ewoBuerger: EWOBuergerDaten) {
-  // Prüfen, ob Person schon vorhanden
+  // Check if person alread exist
   await EWOBuergerApiService.pruefenNeuePerson(ewoBuerger).then((person) => {
     if (person == null) {
       ewoBuergerSelectVisible.value = false;
-      // Person vorbereiten aus den EWO-Daten und in Tabelle Person speichern
+      // Prepare person data from EWO and insert data in DB
       EWOBuergerApiService.vorbereitenUndSpeichernPerson(ewoBuerger).then(
         (person) => {
           router.push({

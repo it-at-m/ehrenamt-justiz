@@ -119,7 +119,7 @@
                 )
               "
             >
-              <!--Hidden und nicht v-if, damit RULEs noch ausgefuehrt werden-->
+              <!--Hidden and no v-if: guarantee of execution of rules-->
               <v-row>
                 <v-col class="col">
                   <v-text-field
@@ -646,8 +646,8 @@ const labelWarBereitsTaetigAls = ref(
 );
 
 function isDirty(): boolean {
-  // Während der Neu-Erfassung einer Bewerbung das Menü wechseln muss verhindert werden, da ansonsten
-  // eine Bewerbung im Status "InErfassung" erhalten bleibt
+  // Switching the menu during the new-entry of a person must be prevented, as otherwise
+  // an application remains in the status “INERFASSUNG”
   return (
     props.modelValue.status == PERSONENSTATUS.STATUS_INERFASSUNG &&
     !abbruchOderSpeichern.value
@@ -697,7 +697,7 @@ function setFocusAufFehler() {
   for (const v_input of v_inputs) {
     const v_messages = v_input.getElementsByClassName("v-messages__message");
 
-    // Element mit Message: Fehler
+    // Element with: error
     if (v_messages.length > 0) {
       let istAufTab1 = false;
       for (const value of tab1) {
@@ -708,13 +708,13 @@ function setFocusAufFehler() {
       }
 
       if (istAufTab1) {
-        // Auf Tab "ewo" positionieren:
+        // Switch to tab "ewo":
         active_tab.value = "ewo";
       } else {
-        // Auf Tab "bewerber" positionieren:
+        // Switch to tab "bewerber":
         active_tab.value = "bewerber";
       }
-      // Timeout 300, da ansonsten zwei mal auf "speichern" ge-clicked werden muss:
+      // Timeout 300, otherwise you will have to click on “Save” twice:
       setTimeout(() => {
         v_input.scrollIntoView({
           behavior: "smooth",

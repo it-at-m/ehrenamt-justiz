@@ -108,7 +108,10 @@ public interface KonfigurationRepository extends PagingAndSortingRepository<Konf
     void deleteAll();
 
     /**
-     * Aktive Konfiguration lesen
+     * Get active configuration
+     *
+     * @param aktiv
+     * @return
      */
     Konfiguration[] findByAktiv(@Param("aktiv") boolean aktiv);
 

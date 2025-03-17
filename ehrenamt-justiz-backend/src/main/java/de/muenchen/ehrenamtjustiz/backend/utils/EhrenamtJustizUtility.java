@@ -54,7 +54,7 @@ public final class EhrenamtJustizUtility {
     }
 
     public static Person getPersonAusEWOBuergerDaten(final EWOBuergerDatenDto eWOBuergerDaten) {
-        // EWO-Daten in Personen-Daten übertragen
+        // set data of person by data of EWO
         final Person person = new Person();
         person.setId(eWOBuergerDaten.getId());
         person.setFamilienname(eWOBuergerDaten.getFamilienname());

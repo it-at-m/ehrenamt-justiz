@@ -182,7 +182,7 @@ export default class EntityApiService<T extends Idable> {
   }
 
   /**
-   * Löscht das Item mit der gegebenen Id.
+   * Delete by id
    * @param id
    * @returns Promise<void>
    */
@@ -200,7 +200,7 @@ export default class EntityApiService<T extends Idable> {
   /* eslint-enable no-async-promise-executor */
 
   /**
-   * Erzeugt eine Instanz des Models im Backend und gibt diese als Objekt in einem Promise zurück.
+   * Creates an instance of the model in the backend and returns it as an object in a Promise.
    * @param instance
    * @returns Promise
    */
@@ -249,11 +249,11 @@ export default class EntityApiService<T extends Idable> {
   }
 
   /**
-   * Aktualisiert die Daten einer Instanz eines Models im Backend, hierbei werden alle Daten mit den Daten aus dem
-   * übergebenem Objekt überschrieben.
+   * Updates the data of an instance of a model in the backend, overwriting all data with the data from the
+   * transferred object.
    *
-   * @param instance Instanz des Models mit den aktuellen Daten
-   * @returns instanz des Models mit dem aktuellem Stand vom Server
+   * @param instance instance of the model with the current data
+   * @returns instance of the model with the current status from the server
    */
   public update(instance: T): Promise<T> {
     return new Promise<T>((resolve, reject) => {
@@ -276,7 +276,7 @@ export default class EntityApiService<T extends Idable> {
   }
 
   /**
-   * Handled nicht erfolgreiche Status-Codes und wandelt diese in nicht-technische Meldungen für den Benutzer um.
+   * Handles unsuccessful status codes and converts them into non-technical messages for the user.
    *
    * @param httpMethod
    * @param res

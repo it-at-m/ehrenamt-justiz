@@ -108,7 +108,7 @@ onMounted(() => {
 });
 
 async function loadPerson(): Promise<void> {
-  // Daten aus Person ermitteln
+  // Get Data from Person
   await PersonApiService.get(personenDatenId.value)
     .then((personenDaten) => {
       konfliktLoesenFormData.value.person_familienname =
@@ -179,7 +179,7 @@ async function loadPerson(): Promise<void> {
         personenDaten.konfigurationid;
       konfliktLoesenFormData.value.person_status = personenDaten.status;
 
-      // Daten aus EWO ermitteln
+      // Get data from EWO
       EWOBuergerApiService.ewoSucheMitOM(personenDaten.ewoid)
         .then((eWOBuerger) => {
           konfliktLoesenFormData.value.ewo_familienname =

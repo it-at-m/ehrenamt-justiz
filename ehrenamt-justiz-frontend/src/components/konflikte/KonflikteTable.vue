@@ -229,7 +229,7 @@ const itemsPerPage = ref(10);
 const itemsSort = ref();
 const selectedUUIDs = ref<string[]>([]);
 const search = ref("");
-// Vermeidet mehrfaches Einlesen der Table, wenn während des reload() die Taste Enter gedrückt wird:
+// Avoids multiple reading of the table if the Enter key is pressed during reload():
 const enableReload = ref(true);
 type ReadonlyHeaders = VDataTable["$props"]["headers"];
 const deleteDialogVisible = ref(false);
@@ -275,7 +275,7 @@ function deleteRequested() {
   deleteDialogVisible.value = true;
 }
 
-// Personen löschen
+// Delete person
 async function deleteConfirmed() {
   deleteAnimationAktiv.value = true;
   await PersonApiService.deletePersons(selectedUUIDs.value)
@@ -292,7 +292,7 @@ async function deleteConfirmed() {
     });
 }
 
-// Löschen der selektierten Zeilen
+// Remove selected lines
 function deselectAll() {
   selectedUUIDs.value = selectedUUIDs.value.filter((item) => item !== item);
 }
@@ -301,7 +301,7 @@ function deleteCanceled() {
   deleteDialogVisible.value = false;
 }
 
-// Gelöschte Personen in Table entfernen
+// Remove deleted person from table:
 function inTabelleEntfernen(): void {
   personenTableData.value = personenTableData.value.filter(
     (ar) => !selectedUUIDs.value.find((rm) => rm == ar.id)

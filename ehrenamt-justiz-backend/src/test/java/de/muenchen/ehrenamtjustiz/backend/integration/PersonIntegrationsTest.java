@@ -87,7 +87,7 @@ class PersonIntegrationsTest {
     void before() {
         konfigurationRepository.deleteAll();
 
-        // Konfiguration neu anlegen
+        // insert new configuration
         final Konfiguration konfiguration = new Konfiguration();
         konfiguration.setId(UUID.randomUUID());
         konfiguration.setAktiv(true);
@@ -103,7 +103,7 @@ class PersonIntegrationsTest {
 
         uuidKonfiguration = konfiguration.getId();
 
-        // Eine Person anlegen
+        // insert person
         final Person person = initPerson();
         personRepository.save(person);
 
@@ -138,7 +138,7 @@ class PersonIntegrationsTest {
     @Test
     void testLesenPersonenCSV() {
 
-        // Für das Exportieren der Personen müssen die Daten in CSV convertiert werden. Alle Felder sind dabei Sting-Werte
+        // Convert to csv. All attributes are string
         final List<UUID> uuids = new ArrayList<>();
         uuids.add(uuidPerson);
         final Map<String, Object> request = new HashMap<>();
@@ -154,7 +154,7 @@ class PersonIntegrationsTest {
 
         final List<PersonCSVDto> personCSVS = result.getBody();
 
-        // CSV-Daten prüfen:
+        // check csv data
         assertEquals(uuidKonfiguration.toString(), personCSVS.getFirst().getKonfigurationid());
         assertEquals(uuidPerson.toString(), personCSVS.getFirst().getId());
         assertEquals(Status.VORSCHLAG.toString(), personCSVS.getFirst().getStatus());
@@ -178,7 +178,7 @@ class PersonIntegrationsTest {
     @Test
     void testfindPerson() {
 
-        // Lesen Personen für Füllen Table
+        // get persons for table
         final ResponseEntity<RestPageImpl<PersonenTableDatenDto>> result = testRestTemplate.exchange(
                 "/personen/findPersonen?search=Hans&sortDirection=asc&page=0&size=20&status=VORSCHLAG", HttpMethod.GET, null,
                 new ParameterizedTypeReference<>() {
@@ -193,16 +193,16 @@ class PersonIntegrationsTest {
     @Test
     void testCancelBewerbung() {
 
-        // Person mit Status in Erfassung anlegen
+        // Insert person with status INERFASSUNG:
         final Person person = initPerson();
         person.setStatus(Status.INERFASSUNG);
         final Person personInErfassung = personRepository.save(person);
 
-        // Person wird im Status in Erfassung wieder gelöscht:
+        // Person with state INERFASSUNG will be deleted:
         final ResponseEntity<?> result = testRestTemplate.postForEntity("/personen/cancelBewerbung", personInErfassung, Person.class);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
-        // Prüfen, ob gelöscht:
+        // Check delete:
         final Optional<Person> personCancelled = personRepository.findById(personInErfassung.getId());
 
         assertTrue(personCancelled.isEmpty());

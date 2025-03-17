@@ -61,13 +61,13 @@ public class OnlineBewerbungRestController {
         log.debug("Online-Bewerbung erhalten! {} | {} | {}", onlineBewerbungDatenDto.getVorname(), onlineBewerbungDatenDto.getNachname(),
                 onlineBewerbungDatenDto.getGeburtsdatum());
 
-        // EWO-Suche
+        // EWO-search
         final List<EWOBuergerDatenDto> eWOBuergerDaten = ewoSuche(onlineBewerbungDatenDto);
         if (eWOBuergerDaten == null) {
             return ERROR;
         }
 
-        // Bei erfolgreicher Suche Daten speichern
+        // succussful search: save data
         try {
 
             final Person person = EhrenamtJustizUtility.getPersonAusEWOBuergerDaten(eWOBuergerDaten.getFirst());

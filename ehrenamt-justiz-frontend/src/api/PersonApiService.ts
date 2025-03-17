@@ -26,7 +26,7 @@ class PersonenApiServiceClass extends EntityApiService<Person> {
     projection: string | null = null
   ): Promise<PagedEntity<PersonenTableData>> {
     return new Promise<PagedEntity<PersonenTableData>>((resolve, reject) => {
-      // Sortierung ins Format "feldname1/sortierung,feldname2/sortierung..." (z.B. "familienname/asc,vorname/asc,geburtsdatum/desc") bringen
+      // Sort to "feldname1/sortierung,feldname2/sortierung..." (for example "familienname/asc,vorname/asc,geburtsdatum/desc") bringen
       let sortString = "";
       for (let i = 0; i < sortBy.length; i++) {
         sortString = sortString + sortBy[i].key + "/" + sortBy[i].order;
@@ -61,7 +61,7 @@ class PersonenApiServiceClass extends EntityApiService<Person> {
   }
 
   /**
-   * Löscht Personen
+   * Delete persons
    * @returns Promise<void>
    * @param uuids
    */

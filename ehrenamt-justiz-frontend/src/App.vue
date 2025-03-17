@@ -224,7 +224,7 @@ function loadUser(): void {
 }
 
 /**
- * Lädt aktive Konfiguration vom Backend und setzt diese im Store.
+ * Loads active configuration from the backend and sets it in the store.
  */
 function loadActiveKonfiguration(): void {
   KonfigurationApiService.getAktiveKonfiguration()

@@ -74,7 +74,7 @@ class PersonTest {
 
     @BeforeEach
     public void setUp() {
-        // Konfiguration neu anlegen
+        // new configuration
         final Konfiguration konfiguration = new Konfiguration();
         konfiguration.setId(UUID.randomUUID());
         konfiguration.setAktiv(true);
@@ -92,7 +92,7 @@ class PersonTest {
 
         final Konfiguration persistedKonfiguration = konfigurationRepository.findById(konfiguration.getId()).orElse(null);
 
-        // Testperson anlegen
+        // insert test-person
         final Person person = new Person();
         person.setId(UUID.randomUUID());
         person.setStatus(Status.VORSCHLAG);

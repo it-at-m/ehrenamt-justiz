@@ -52,11 +52,11 @@ public class EWOServiceImpl implements EWOService {
     @PreAuthorize(Authorities.HAS_AUTHORITY_EWOSUCHE)
     public List<EWOBuergerDatenDto> ewoSuche(final EWOBuergerSucheDto eWOBuergerSucheDto) {
 
-        // Für Testzwecke
+        // only for tests
         final List<EWOBuergerDatenDto> eWOBuergerDatenDtos = new ArrayList<>();
         eWOBuergerDatenDtos.add(getExampleBuergerDaten(eWOBuergerSucheDto));
 
-        // Für Testzwecke
+        // only for tests
         eWOBuergerDatenDtos.add(getExampleBuergerDaten(eWOBuergerSucheDto));
 
         return eWOBuergerDatenDtos;

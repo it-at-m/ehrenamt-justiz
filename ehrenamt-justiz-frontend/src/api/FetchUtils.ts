@@ -2,7 +2,7 @@ import { ApiError } from "@/api/ApiError";
 import { STATUS_INDICATORS } from "@/Constants.ts";
 
 /**
- * Liefert eine default GET-Config für fetch
+ * Returns a default GET-Config for fetch
  */
 export function getGETConfig(): RequestInit {
   return {
@@ -14,7 +14,7 @@ export function getGETConfig(): RequestInit {
 }
 
 /**
- * Liefert eine default POST-Config für fetch
+ * Returns a default POST-Config for fetch
  * @param body Optional zu übertragender Body
  */
 // eslint-disable-next-line
@@ -30,7 +30,7 @@ export function getPOSTConfig(body: any): RequestInit {
   };
 }
 /**
- * Liefert eine default DELETE-Config für fetch
+ * Returns a default DELETE-Config for fetch
  */
 export function getDELETEConfig(): RequestInit {
   const requestMethod = "DELETE";
@@ -43,10 +43,9 @@ export function getDELETEConfig(): RequestInit {
   };
 }
 /**
- * Liefert eine default PUT-Config für fetch
- * In dieser wird, wenn vorhanden, die Version der zu aktualisierenden Entität
- * als "If-Match"-Header mitgesetzt.
- * @param body Optional zu übertragender Body
+ * Returns a default PUT-Config for fetch
+ * In this configuration, if available, the version of the entity to be updated is also set as an “If-Match” header.
+ * @param body Optional Body
  */
 // eslint-disable-next-line
 export function getPUTConfig(body: any): RequestInit {
@@ -67,10 +66,9 @@ export function getPUTConfig(body: any): RequestInit {
 }
 
 /**
- * Liefert eine default PATCH-Config für fetch
- * In dieser wird, wenn vorhanden, die Version der zu aktualisierenden Entität
- * als "If-Match"-Header mitgesetzt.
- * @param body Optional zu übertragender Body
+ * Returns a default PATCH-Config for fetch
+ * In this configuration, if available, the version of the entity to be updated is also set as an “If-Match” header.
+ * @param body Optional body
  */
 // eslint-disable-next-line
 export function getPATCHConfig(body: any): RequestInit {
@@ -91,14 +89,14 @@ export function getPATCHConfig(body: any): RequestInit {
 }
 
 /**
- * Deckt das Default-Handling einer Response ab. Dazu zählt:
+ * Covers the default handling of a response. This includes:
  *
- * - Fehler bei fehlenden Berechtigungen --> HTTP 403
- * - Reload der App bei Session-Timeout --> HTTP 3xx
- * - Default-Fehler bei allen HTTP-Codes !2xx
+ * - Error with missing authorizations --> HTTP 403
+ * - Reload of the App if Session-Timeout --> HTTP 3xx
+ * - Default-Error if HTTP-Code !2xx
  *
- * @param response Die response aus fetch-Befehl die geprüft werden soll.
- * @param errorMessage Die Fehlermeldung, welche bei einem HTTP-Code != 2xx angezeigt werden soll.
+ * @param response response of fetch-Befehl
+ * @param errorMessage The errormessage, if HTTP-Code != 2xx
  */
 export function defaultResponseHandler(
   response: Response,
@@ -121,9 +119,9 @@ export function defaultResponseHandler(
 }
 
 /**
- * Default Catch-Handler für alle Anfragen des Service.
- * Schmeißt derzeit nur einen ApiError
- * @param error die Fehlermeldung aus fetch-Befehl
+ * Default Catch-Handler
+ * Throws at the moment an ApiError
+ * @param error Errormessage caused by fetch
  * @param errorMessage
  */
 export function defaultCatchHandler(
@@ -137,7 +135,7 @@ export function defaultCatchHandler(
 }
 
 /**
- *  Baut den Header fuer den Request auf
+ *  Creates header
  * @returns {Headers}
  */
 export function getHeaders(requestMethod = "GET"): Headers {
@@ -154,7 +152,7 @@ export function getHeaders(requestMethod = "GET"): Headers {
 }
 
 /**
- * Liefert den XSRF-TOKEN zurück.
+ * Get the XSRF-TOKEN
  * @returns {string|string}
  */
 export function _getXSRFToken(): string {

@@ -64,17 +64,17 @@ public class PersonRestController {
         log.info("findPersonen: Suchstring: {}, Seite: {}, Seitengröße: {}, Status: {}, Sortiert nach: {}", searchFilter, page, sizeFilter, status, sortby);
 
         if (sizeFilter < 0) {
-            // Alles einlesen
+            // get all
             sizeFilter = Integer.MAX_VALUE;
         }
 
         final Pageable pageWithGivenElements;
         if (sortby.isEmpty()) {
-            // Ohne Sortierung
+            // without sorting
             pageWithGivenElements = PageRequest.of(page, sizeFilter);
 
         } else {
-            // Mit Sortierung
+            // with sorting
             final String[] sortDefinition = sortby.split(",");
             final String[] sorts = new String[sortDefinition.length];
             String direction = "false";
@@ -91,7 +91,7 @@ public class PersonRestController {
         }
 
         if (searchFilter == null || searchFilter.isEmpty() || "null".equals(searchFilter)) {
-            // Suche alles
+            // get all
             searchFilter = "*";
         }
 
@@ -137,7 +137,7 @@ public class PersonRestController {
             person.ifPresent(personsToDelete::add);
 
             if (personsToDelete.size() == 100) {
-                // Transaktionsgröße 100
+                // Size of transaction is 100
                 personRepository.deleteAll(personsToDelete);
                 geloeschtePersonen += personsToDelete.size();
                 personsToDelete.clear();
@@ -159,7 +159,7 @@ public class PersonRestController {
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
     public ResponseEntity<Person> updatePerson(@RequestBody final Person person) {
 
-        // Konflikte ermitteln
+        // get conflicts
         if (person.getStatus() != Status.INERFASSUNG && person.getStatus() != Status.BEWERBUNG) {
             ermittelnKonflikte(person);
         }
@@ -210,7 +210,7 @@ public class PersonRestController {
     public ResponseEntity<Person> cancelBewerbung(@RequestBody final Person person) {
 
         if (person.getStatus() == Status.INERFASSUNG) {
-            // Person löschen, da Anwender Erfassung abgebrochen hat:
+            // delete person, because inserting was interrupted
             personRepository.deleteInErfassung(person.getId());
         }
 
@@ -226,10 +226,10 @@ public class PersonRestController {
 
         final List<PersonCSVDto> persons;
         if (uuids.isEmpty()) {
-            // Alle Personen eines bestimmtes Status lesen
+            // get persons with specified status
             persons = getAllPersonCSV(status);
         } else {
-            // Personen für bestimmte UUID lesen
+            // get person by UUID
             persons = getPersonCSVbyUUID(uuids);
         }
 

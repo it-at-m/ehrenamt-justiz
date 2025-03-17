@@ -13,13 +13,13 @@ export const enum BEARBEIGUNGS_MODUS {
   DISPLAY_MODUS = "display_modus",
 }
 
-// Allgemeine Konstanten für Tabellen:
+// For fetching table data
 export const enum TABELLEN {
   NO_RESULTS_TEXT = "Liste ist leer",
   LOADING_ITEMS = "Daten werden gelesen",
 }
 
-// Status einer Person:
+// Status of person
 export const enum PERSONENSTATUS {
   STATUS_INERFASSUNG = "INERFASSUNG",
   STATUS_BEWERBUNG = "BEWERBUNG",
@@ -27,6 +27,7 @@ export const enum PERSONENSTATUS {
   STATUS_KONFLIKT = "KONFLIKT",
 }
 
+// For messages
 export const enum STATUS_INDICATORS {
   SUCCESS = "success",
   INFO = "info",

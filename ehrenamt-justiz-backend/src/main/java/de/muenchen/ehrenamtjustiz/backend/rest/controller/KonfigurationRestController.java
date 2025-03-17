@@ -33,7 +33,7 @@ public class KonfigurationRestController {
         if (konfiguration.getId() == null || konfiguration.getId().toString().isEmpty()) {
             konfiguration.setId(UUID.randomUUID());
         }
-        // Konfiguration U P D A T E
+        // konfiguration update
         konfigurationRepository.save(konfiguration);
 
         return new ResponseEntity<>(konfiguration, HttpStatus.OK);

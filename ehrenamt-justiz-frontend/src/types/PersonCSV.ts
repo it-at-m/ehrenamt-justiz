@@ -1,5 +1,5 @@
 export default interface PersonCSV {
-  // Achtung: export-to-csv kennt nur einige wenige Datentypen: string, boolean .. aber z.B. keine Listen
+  // Attention: export-to-csv only recognizes a few data types: string, boolean ... but e.g. no lists
   [key: string]: string;
   id: string;
   familienname: string;

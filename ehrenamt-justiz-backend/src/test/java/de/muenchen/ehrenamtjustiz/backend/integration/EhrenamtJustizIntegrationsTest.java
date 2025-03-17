@@ -108,7 +108,7 @@ class EhrenamtJustizIntegrationsTest {
     @Test
     void test_pruefenNeuePerson_FOUND() {
 
-        // Eine Person anlegen
+        // new person
         final Person person = new Person();
         person.setId(UUID.randomUUID());
         person.setStatus(Status.VORSCHLAG);

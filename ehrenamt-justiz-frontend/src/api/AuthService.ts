@@ -12,7 +12,7 @@ export default class AuthService {
     const userStore = useUserStore();
 
     if (!userStore.getUser || !userStore.getUser.authorities) {
-      //user (noch) nicht geladen
+      // user not yet read from database
       snackbarStore.showMessage({
         level: STATUS_INDICATORS.WARNING,
         message: "Kein User-Objekt. Navigiere zu Startseite.",
