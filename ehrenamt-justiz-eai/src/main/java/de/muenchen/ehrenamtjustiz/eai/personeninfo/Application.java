@@ -1,14 +1,23 @@
-package de.muenchen.ehrenamtjustiz.eai;
+package de.muenchen.ehrenamtjustiz.eai.personeninfo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
-@SpringBootApplication
+/**
+ * SpringBoot-main app
+ *
+ */
+@SpringBootApplication()
 @ConfigurationPropertiesScan
 @SuppressWarnings("PMD.UseUtilityClass")
-public class EhrenamptJustizEAIApplication {
+public class Application {
+    /**
+     * main method to start the EAI
+     *
+     * @param args Applikationsparameter
+     */
     public static void main(final String[] args) {
-        SpringApplication.run(EhrenamptJustizEAIApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 }

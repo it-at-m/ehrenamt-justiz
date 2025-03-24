@@ -6,4 +6,11 @@
     <Match>
         <Bug pattern="EI_EXPOSE_REP2"/> <!-- Rule is ignored because spring uses dependency injection. The classes that are injected will be managed by Spring, meaning they do not need to be immutable. See https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-collaborators.html -->
     </Match>
+    <Match>
+        <Package name="~.*v2.*" /> <!-- No generated classes -->
+    </Match>
+    <Match>
+        <Package name="~.*api.*"
+                 pattern="EI_EXPOSE_REP"/> <!-- api classes -->
+    </Match>
 </FindBugsFilter>

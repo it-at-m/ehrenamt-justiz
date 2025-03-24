@@ -1,0 +1,237 @@
+{
+  "antwortErweitert": {
+    "personErweitert": [
+      {
+        "ordnungsmerkmal": "162015022725",
+        "personstatus": "AKTUELLER_FESTER_EINWOHNER",
+        "geburtsdaten": {
+          "datum": {
+            "datum": "1960-01-01"
+          },
+          "ort": "Berlin"
+        },
+        "geschlecht": "w",
+        "familienstanddaten": {
+          "familienstand": "VH",
+          "datum": "2000-01-01"
+        },
+        "namen": {
+          "vornamen": [
+            {
+              "vorname": "Frau",
+              "rufname": "true"
+            }
+          ],
+          "familienname": {
+            "name": "WIM-GV Dreizehn neu",
+            "unstrukturierteSchreibweise": "WIM-GV Dreizehn neu"
+          }
+        },
+        "religion": "ak",
+        "zuzugsdaten": {
+          "zuzugEu": "2000-01-01",
+          "zuzugOrtsteil": "2000-01-01",
+          "zuzugBund": "2000-01-01",
+          "zuzugLand": "2000-01-01",
+          "zuzugRegierungsbezirk": "2000-01-01",
+          "zuzugKreis": "2000-01-01",
+          "zuzugGemeinde": "2000-01-01",
+          "mitHauptwohnungGemeldetSeit": "2000-01-01"
+        },
+        "wohnungen": [
+          {
+            "@type": "ns2:AktuelleWohnungType",
+            "melderegisterAnschrift": {
+              "gemeindeschluessel": "09162000",
+              "hausnummer": "16",
+              "ort": "München",
+              "postleitzahl": "81829",
+              "stockwerk": "0",
+              "strasse": "Widmannstr.",
+              "sperrvermerk": "false",
+              "strassenschluessel": "5130"
+            },
+            "einzug": "2000-01-01",
+            "meldungEinzug": {
+              "art": "PERSOENLICHE_MELDUNG",
+              "datum": "2017-04-13"
+            },
+            "innerhalb": "true",
+            "belegGebunden": "false",
+            "gefoerdert": "false",
+            "scheinadresse": "false",
+            "nutzungszustand": "EINZIGE_WOHNUNG",
+            "_xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+            "_xsi:type": "ns2:AktuelleWohnungType"
+          },
+          {
+            "@type": "ns2:ZuzugsWohnungType",
+            "melderegisterAnschrift": {
+              "staat": "123"
+            },
+            "auszug": {
+              "datum": "2000-01-01"
+            },
+            "meldungAuszug": {
+              "art": "PERSOENLICHE_MELDUNG",
+              "datum": "2017-04-13"
+            },
+            "innerhalb": "false",
+            "belegGebunden": "false",
+            "gefoerdert": "false",
+            "scheinadresse": "false",
+            "ausFrueherenMeldeverhaeltnissen": "false",
+            "zuzugsWohnungsStatus": "DIREKTE_ZUZUGSWOHNUNG",
+            "vorherigerStatus": "EW",
+            "_xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+            "_xsi:type": "ns2:ZuzugsWohnungType"
+          }
+        ],
+        "partner": {
+          "namen": {
+            "vornamen": [
+              {
+                "vorname": "Mann",
+                "rufname": "true"
+              }
+            ],
+            "familienname": {
+              "name": "WIM-GV Dreizehn neu",
+              "unstrukturierteSchreibweise": "WIM-GV Dreizehn neu"
+            }
+          },
+          "art": "VH",
+          "ordnungsmerkmal": "162015022720",
+          "personstatus": "AKTUELLER_FESTER_EINWOHNER",
+          "geburtsdatum": {
+            "datum": "1960-01-01"
+          },
+          "geschlecht": "m",
+          "anschrift": {
+            "gemeindeschluessel": "09162000",
+            "hausnummer": "25",
+            "ort": "München",
+            "postleitzahl": "81669",
+            "stockwerk": "1",
+            "strasse": "Balanstr.",
+            "sperrvermerk": "false",
+            "strassenschluessel": "400"
+          }
+        },
+        "artStaatsangehoerigkeit": "1",
+        "staatsangehoerigkeiten": [
+          {
+            "schluessel": "000",
+            "text": "deutsch",
+            "nichtEuBuerger": "false",
+            "staatEuMitglied": "true"
+          }
+        ],
+        "__prefix": "ns2"
+      },
+      {
+        "ordnungsmerkmal": "162015039514",
+        "personstatus": "AKTUELLER_FESTER_EINWOHNER",
+        "geburtsdaten": {
+          "datum": {
+            "datum": "1990-09-20"
+          },
+          "ort": "Lagos"
+        },
+        "geschlecht": "m",
+        "familienstanddaten": {
+          "familienstand": "LD"
+        },
+        "namen": {
+          "vornamen": [
+            {
+              "vorname": "Franklin",
+              "rufname": "true"
+            }
+          ],
+          "familienname": {
+            "name": "Wimtest-zwei-ohne-Pass",
+            "unstrukturierteSchreibweise": "Wimtest-zwei-ohne-Pass"
+          }
+        },
+        "zuzugsdaten": {
+          "zuzugSamtgemeinde": "2020-04-09",
+          "zuzugOrtsteil": "2020-04-09",
+          "zuzugBund": "2020-04-09",
+          "zuzugLand": "2020-04-09",
+          "zuzugRegierungsbezirk": "2020-04-09",
+          "zuzugKreis": "2020-04-09",
+          "zuzugGemeinde": "2020-04-09",
+          "mitHauptwohnungGemeldetSeit": "2020-04-09"
+        },
+        "wohnungen": [
+          {
+            "@type": "ns2:AktuelleWohnungType",
+            "melderegisterAnschrift": {
+              "gemeindeschluessel": "09162000",
+              "hausnummer": "0",
+              "ort": "München",
+              "postleitzahl": "80538",
+              "strasse": "Alexandrastr.",
+              "sperrvermerk": "false",
+              "strassenschluessel": "77"
+            },
+            "einzug": "2020-04-09",
+            "meldungEinzug": {
+              "art": "PERSOENLICHE_MELDUNG",
+              "datum": "2020-04-16"
+            },
+            "innerhalb": "true",
+            "belegGebunden": "false",
+            "gefoerdert": "false",
+            "scheinadresse": "false",
+            "nutzungszustand": "EINZIGE_WOHNUNG",
+            "_xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+            "_xsi:type": "ns2:AktuelleWohnungType"
+          },
+          {
+            "@type": "ns2:ZuzugsWohnungType",
+            "melderegisterAnschrift": {
+              "staat": "232"
+            },
+            "auszug": {
+              "datum": "2020-04-09"
+            },
+            "meldungAuszug": {
+              "art": "PERSOENLICHE_MELDUNG",
+              "datum": "2020-04-16"
+            },
+            "innerhalb": "false",
+            "belegGebunden": "false",
+            "gefoerdert": "false",
+            "scheinadresse": "false",
+            "ausFrueherenMeldeverhaeltnissen": "false",
+            "zuzugsWohnungsStatus": "DIREKTE_ZUZUGSWOHNUNG",
+            "vorherigerStatus": "EW",
+            "_xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+            "_xsi:type": "ns2:ZuzugsWohnungType"
+          }
+        ],
+        "passdaten": [
+          {
+            "art": "12",
+            "serienummer": "12345002",
+            "ausstellendeBehoerde": "Lagos Druckerei",
+            "ausstellungsdatum": "2000-01-06",
+            "ablaufdatum": "2010-01-05"
+          }
+        ],
+        "artStaatsangehoerigkeit": "7",
+        "staatsangehoerigkeiten": [
+          {
+            "schluessel": "232",
+            "text": "nigerianisch",
+            "nichtEuBuerger": "false",
+            "staatEuMitglied": "false"
+          }
+        ],
+        "__prefix": "ns2"
+      }
+    ]
+  }
+}

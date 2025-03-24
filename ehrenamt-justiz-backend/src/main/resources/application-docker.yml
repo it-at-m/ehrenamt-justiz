@@ -29,7 +29,7 @@ de:
   muenchen:
     ewo:
       eai:
-        server: http://host.docker.internal:8083
+        server: http://host.docker.internal:8085
         user: testuser
         password: testpw
 

@@ -18,7 +18,7 @@ public final class AuthUtils {
     }
 
     /**
-     * Extracts the user name from the existing Spring Security Context via
+     * Extracts the username from the existing Spring Security Context via
      * {@link SecurityContextHolder}.
      *
      * @return the username or an "unauthenticated" if no {@link Authentication} exists

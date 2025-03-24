@@ -1,5 +1,82 @@
 {"properties": [{
-  "name": "output",
-  "type": "java.lang.String",
-  "description": "A description for 'output'"
-}]}
+    "name": "producer.user",
+    "type": "java.lang.String",
+    "description": "User to authenticate at the resident registration system"
+  },
+  {
+    "name": "producer.password",
+    "type": "java.lang.String",
+    "description": "Password to authenticate at the resident registration system"
+  },
+  {
+    "name": "ewo.eai.url",
+    "type": "java.lang.String",
+    "description": "Technical address (url) for the residents' registration system"
+  },
+  {
+    "name": "api.basicroutebuilder.doProcesstimeLogging",
+    "type": "java.lang.String",
+    "description": "Log outputs for time measurements"
+  },
+  {
+    "name": "api.basicroutebuilder.doInterceptFrom",
+    "type": "java.lang.String",
+    "description": "To activate the Logging-Intercepter"
+  },
+  {
+    "name": "api.basicroutebuilder.doTracing",
+    "type": "java.lang.String",
+    "description": "To activate the Camel Tracer"
+  },
+  {
+    "name": "api.auth.users",
+    "type": "java.lang.String",
+    "description": "Authentication (user, password and roles) on this EAI"
+  },
+  {
+    "name": "api.cxf.producer.uri.personeninfoewosuche",
+    "type": "java.lang.String",
+    "description": "CXF-Bean used for calling the residents' registration system. Used for searching a citizen"
+  },
+  {
+    "name": "api.cxf.producer.uri.personeninfo",
+    "type": "java.lang.String",
+    "description": "CXF-Bean used for calling the residents' registration system. Used for retrieving a specific citizen by the id"
+  },
+  {
+    "name": "api.cxf.producer.timeout",
+    "type": "java.lang.String",
+    "description": "Timeout for the CXF-Bean used for calling the residents' registration system"
+  },
+  {
+    "name": "api.auth.roles.BASIC",
+    "type": "java.lang.String",
+    "description": "Necessary role for calling the residents' registration system"
+  },
+  {
+    "name": "api.auth.roles.ACTUATOR_ROLE",
+    "type": "java.lang.String",
+    "description": "Necessary role for calling Actuator-Service"
+  },
+  {
+    "name": "api.loggingFilter.urlPattern",
+    "type": "java.lang.String",
+    "description": "Pattern used to filter url for calling request- and responselogger"
+  },
+  {
+    "name": "api.loggingFilter.loggerName",
+    "type": "java.lang.String",
+    "description": "Class-name of request- and responselogger"
+  },
+  {
+    "name": "api.loggingFilter.charsetName",
+    "type": "java.lang.String",
+    "description": "Character set of request- and responselogger"
+  },
+  {
+    "name": "service.rest.basepath",
+    "type": "java.lang.String",
+    "description": "The base path for calling this service (EAI)"
+  }
+
+]}

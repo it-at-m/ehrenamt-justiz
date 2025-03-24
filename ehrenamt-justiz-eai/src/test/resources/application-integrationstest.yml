@@ -1,0 +1,30 @@
+api:
+  auth:
+    users:
+      - username: testuser
+        password: "$2a$10$ZeDVtXKRD64q2eMRN2tX3.7Rd71b8c1rJA.IENwxilsOxi5xv75gy"
+        roles:
+          - "BASIC"
+      - username: "actuator"
+        password: "$2a$10$D4vHRojMArByIPUc0W7d8ukl8KTPjZYI3zixVOkDyJwV1zfu4ngJC" #actuator
+        roles:
+          - "ACTUATOR_ROLE"
+
+  cxf:
+    producer:
+      uri:
+        personeninfo: "mock:cxfProducer"
+        personeninfoewosuche: "mock:cxfProducer"
+producer:
+    user: ---
+    password: ---
+ewo:
+  eai:
+    url: http://localhost:8094/personen/2.0/soap/personErweitert
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      

@@ -326,7 +326,7 @@ public class PersonRestController {
 
             final Optional<Person> person = personRepository.findById(uuid);
             if (person.isPresent()) {
-                // Prüfen Geburtsdatum
+                // check birthday
                 String response = EhrenamtJustizUtility.validateGueltigesGeburtsdatum(konfiguration[0], person.get().getGeburtsdatum());
                 if (!response.isEmpty()) {
                     log.info("Person {}, {}: ungültiges Geburtsdatum: {} mit Fehlermeldung {}.", person.get().getVorname(), person.get().getFamilienname(),
@@ -335,7 +335,7 @@ public class PersonRestController {
                     continue;
                 }
 
-                // Prüfen Staatsangehörigkeit
+                // check nationality
                 response = EhrenamtJustizUtility.validateGueltigeStaatsangehoerigkeit(konfiguration[0], person.get().getStaatsangehoerigkeit());
                 if (!response.isEmpty()) {
                     log.info("Person {}, {}: ungültige Staatsangehörigkeit: {} mit Fehlermeldung {}.", person.get().getVorname(),
@@ -344,7 +344,7 @@ public class PersonRestController {
                     continue;
                 }
 
-                // Prüfen Wohnsitz
+                // check residence
                 response = EhrenamtJustizUtility.validateGueltigerWohnsitz(konfiguration[0], person.get().getOrt());
                 if (!response.isEmpty()) {
                     log.info("Person {}, {}: ungültiger Wohnsitz: {} mit Fehlermeldung {}.", person.get().getVorname(), person.get().getFamilienname(),
@@ -376,14 +376,14 @@ public class PersonRestController {
             final Optional<Person> person = personRepository.findById(uuid);
             if (person.isPresent()) {
 
-                // Konflikte ermitteln
+                // get conflicts
                 ermittelnKonflikte(person.get());
 
                 personsAufVorschlagslisteZuSetzen.add(person.get());
             }
 
             if (personsAufVorschlagslisteZuSetzen.size() == 100) {
-                // Transaktionsgröße 100
+                // Size of transaction 100
                 personRepository.saveAll(personsAufVorschlagslisteZuSetzen);
                 aufVorschlagslisteGesetzt += personsAufVorschlagslisteZuSetzen.size();
 
@@ -417,7 +417,7 @@ public class PersonRestController {
             final Optional<Person> person = personRepository.findById(uuid);
             if (person.isPresent()) {
 
-                // Konflikte ermitteln
+                // get conflicts
                 ermittelnKonflikte(person.get());
                 person.get().setStatus(Status.BEWERBUNG);
                 person.get().setNeuervorschlag(false);
@@ -426,7 +426,7 @@ public class PersonRestController {
             }
 
             if (personsAufBewerberlisteZuSetzen.size() == 100) {
-                // Transaktionsgröße 100
+                // Size of transaction 100
                 personRepository.saveAll(personsAufBewerberlisteZuSetzen);
                 aufBewerberlisteGesetzt += personsAufBewerberlisteZuSetzen.size();
 
@@ -447,7 +447,7 @@ public class PersonRestController {
 
     private void ermittelnKonflikte(final Person person) {
 
-        // Konfliktfelder ermitteln und belegen
+        // Get the conflicts
         final List<String> konflikte = ehrenamtJustizService.getKonflikte(person);
 
         person.setKonfliktfeld(konflikte);

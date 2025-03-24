@@ -1,0 +1,963 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="83738bc5-2289-4a62-ac5e-7f252d4f870a" activeEnvironment="Default" name="ejewoouteai" resourceRoot="" soapui-version="5.8.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="8ec02eca-dd2c-44bd-b3b9-477143f00b10" wadlVersion="http://wadl.dev.java.net/2009/02" name="EWOSucheMitOM" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://localhost:8080</con:endpoint></con:endpoints><con:resource name="Api" path="/eairoutes/ewosuchemitom/{om}" id="680f5483-1874-4b94-8217-f06a0d36740f"><con:settings/><con:parameters><con:parameter><con:name>om</con:name><con:value/><con:style>TEMPLATE</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="EWOSucheMitOM" id="0ec71e51-3c14-419f-a0a5-df9c8e67e97a" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>401</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>403</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>500 404 504</con:status><con:params/><con:element xmlns:ns="http://localhost/personeninfo/api/eaiRoutes/eWOSucheMitOM/1">ns:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/plain;charset=ISO-8859-1</con:mediaType><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/html</con:mediaType><con:status>502 503</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/plain</con:mediaType><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="localErgebnis" id="4390ac7c-4297-453c-8cc4-c0e23cb03e24" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8085/personeninfo/api</con:endpoint><con:request/><con:originalUri>http://localhost/personeninfo/api/eaiRoutes/eWOSucheMitOM/1</con:originalUri><con:credentials><con:username>testuser</con:username><con:password>testpw</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="om" value="1" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>om</con:entry></con:parameterOrder></con:request><con:request name="localKeinErgebnis" id="4390ac7c-4297-453c-8cc4-c0e23cb03e24" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8085/personeninfo/api</con:endpoint><con:request/><con:originalUri>http://localhost/personeninfo/api/eaiRoutes/eWOSucheMitOM/1</con:originalUri><con:credentials><con:username>testuser</con:username><con:password>testpw</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="om" value="2" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>om</con:entry></con:parameterOrder></con:request><con:request name="localTimeout" id="4390ac7c-4297-453c-8cc4-c0e23cb03e24" mediaType="application/json" timeout="5000000"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8085/personeninfo/api</con:endpoint><con:request/><con:originalUri>http://localhost/personeninfo/api/eaiRoutes/eWOSucheMitOM/1</con:originalUri><con:credentials><con:username>testuser</con:username><con:password>testpw</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="om" value="4" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>om</con:entry></con:parameterOrder></con:request><con:request name="test_Ergebnis" id="4390ac7c-4297-453c-8cc4-c0e23cb03e24" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://ejewoouteai-test-ejewoouteai.apps.capk.muenchen.de/personeninfo/api</con:endpoint><con:request/><con:originalUri>http://localhost/personeninfo/api/eaiRoutes/eWOSucheMitOM/1</con:originalUri><con:credentials><con:username>testuser</con:username><con:password>testpw</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="om" value="5" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>om</con:entry></con:parameterOrder></con:request><con:request name="dev_Ergebnis" id="4390ac7c-4297-453c-8cc4-c0e23cb03e24" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://ejewoouteai-dev-ejewoouteai.apps.capk.muenchen.de/personeninfo/api</con:endpoint><con:request/><con:originalUri>http://localhost/personeninfo/api/eaiRoutes/eWOSucheMitOM/1</con:originalUri><con:credentials><con:username>testuser</con:username><con:password>testpw</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="om" value="5" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>om</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="bba6a2ff-3fc3-4c63-bb90-dfd9d2acf21e" wadlVersion="http://wadl.dev.java.net/2009/02" name="EWOSuche" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://nbo00320736:8080/</con:endpoint></con:endpoints><con:resource name="EWOSuche" path="/eairoutes/ewosuche" id="4eb8b6cc-63f7-4de0-a521-c15372c4c09b"><con:settings/><con:parameters/><con:method name="EWOSuche" id="4a7d329f-78ba-4104-a53f-dcf8383ce592" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>403</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>403</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>403</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>403</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>403</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:ewos="http://localhost/personeninfo/api/eairoutes/ewosuche">ewos:Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>500 504 404</con:status><con:params/><con:element xmlns:ewos="http://localhost/personeninfo/api/eairoutes/ewosuche">ewos:Fault</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/plain;charset=ISO-8859-1</con:mediaType><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>utf-8</con:mediaType><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>UTF-8</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/html</con:mediaType><con:status>502 504</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/plain</con:mediaType><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="localErgebnis" id="fe1e90c5-b87e-410e-ba2e-dcee3b37bdad" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8085/personeninfo/api</con:endpoint><con:request>{"familienname" : "Huber", "vorname":"Peter", "geburtsdatum":"1980-01-01"}</con:request><con:originalUri>http://localhost/personeninfo/api/eairoutes/ewosuche</con:originalUri><con:credentials><con:username>testuser</con:username><con:password>testpw</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:request><con:request name="localKeinErgebnis" id="fe1e90c5-b87e-410e-ba2e-dcee3b37bdad" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8085/personeninfo/api</con:endpoint><con:request>{"familienname" : "Meier", "vorname":"Peter", "geburtsdatum":"1980-01-01"}</con:request><con:originalUri>http://localhost/personeninfo/api/eairoutes/ewosuche</con:originalUri><con:credentials><con:username>testuser</con:username><con:password>testpw</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:request><con:request name="localFehler" id="fe1e90c5-b87e-410e-ba2e-dcee3b37bdad" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8085/personeninfo/api</con:endpoint><con:request>{"familienname" : "Mueller", "vorname":"Peter", "geburtsdatum":"1980-01-01"}</con:request><con:originalUri>http://localhost/personeninfo/api/eairoutes/ewosuche</con:originalUri><con:credentials><con:username>testuser</con:username><con:password>testpw</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:request><con:request name="localTimeout" id="fe1e90c5-b87e-410e-ba2e-dcee3b37bdad" mediaType="application/json" postQueryString="false" timeout="5000000"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8085/personeninfo/api</con:endpoint><con:request>{"familienname" : "Franklin", "vorname":"Peter", "geburtsdatum":"1980-01-01"}</con:request><con:originalUri>http://localhost/personeninfo/api/eairoutes/ewosuche</con:originalUri><con:credentials><con:username>testuser</con:username><con:password>testpw</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:request><con:request name="localErgebnis_Wimtest-zwei-ohne-Pass" id="fe1e90c5-b87e-410e-ba2e-dcee3b37bdad" mediaType="application/json" postQueryString="false" timeout="500000"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8083/personeninfo/api</con:endpoint><con:request>{"familienname" : "Wimtest-zwei-ohne-Pass", "vorname":"Franklin", "geburtsdatum":"1990-09-20"}</con:request><con:originalUri>http://localhost/personeninfo/api/eairoutes/ewosuche</con:originalUri><con:credentials><con:username>testuser</con:username><con:password>testpw</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:request><con:request name="localErgebnis_König" id="fe1e90c5-b87e-410e-ba2e-dcee3b37bdad" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8083/personeninfo/api</con:endpoint><con:request>{"familienname" : "König", "vorname":"Christopher Manfred", "geburtsdatum":"1940-01-03"}</con:request><con:originalUri>http://localhost/personeninfo/api/eairoutes/ewosuche</con:originalUri><con:credentials><con:username>testuser</con:username><con:password>testpw</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:request><con:request name="localErgebnis_Liebig" id="fe1e90c5-b87e-410e-ba2e-dcee3b37bdad" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8083/personeninfo/api</con:endpoint><con:request>{"familienname" : "Liebig", "vorname":"Ron Zygmunt", "geburtsdatum":"1960-01-03"}</con:request><con:originalUri>http://localhost/personeninfo/api/eairoutes/ewosuche</con:originalUri><con:credentials><con:username>testuser</con:username><con:password>testpw</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:request><con:request name="test_Ergebnis_König" id="fe1e90c5-b87e-410e-ba2e-dcee3b37bdad" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ejewoouteai-test-ejewoouteai.apps.capk.muenchen.de/personeninfo/api</con:endpoint><con:request>{"familienname" : "König", "vorname":"Christopher Manfred", "geburtsdatum":"1940-01-03"}</con:request><con:originalUri>http://localhost/personeninfo/api/eairoutes/ewosuche</con:originalUri><con:credentials><con:username>testuser</con:username><con:password>testpw</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:request><con:request name="dev_Ergebnis_König" id="fe1e90c5-b87e-410e-ba2e-dcee3b37bdad" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ejewoouteai-dev-ejewoouteai.apps.capk.muenchen.de/personeninfo/api</con:endpoint><con:request>{"familienname" : "König", "vorname":"Christopher Manfred", "geburtsdatum":"1940-01-03"}</con:request><con:originalUri>http://localhost/personeninfo/api/eairoutes/ewosuche</con:originalUri><con:credentials><con:username>testuser</con:username><con:password>testpw</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:request><con:request name="dockerErgebnis_König" id="fe1e90c5-b87e-410e-ba2e-dcee3b37bdad" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8083/personeninfo/api</con:endpoint><con:request>{"familienname" : "König", "vorname":"Christopher Manfred", "geburtsdatum":"1940-01-03"}</con:request><con:originalUri>http://localhost/personeninfo/api/eairoutes/ewosuche</con:originalUri><con:credentials><con:username>testuser</con:username><con:password>testpw</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:request><con:request name="dockerErgebnis_Liebig" id="fe1e90c5-b87e-410e-ba2e-dcee3b37bdad" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8083/personeninfo/api</con:endpoint><con:request>{"familienname" : "Liebig", "vorname":"Ron Zygmunt", "geburtsdatum":"1960-01-03"}</con:request><con:originalUri>http://localhost/personeninfo/api/eairoutes/ewosuche</con:originalUri><con:credentials><con:username>testuser</con:username><con:password>testpw</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:WsdlInterface" id="b6effa07-8b78-47cc-bb3d-89131e200b3b" wsaVersion="NONE" name="EwoPersonErweitertServiceSoapBinding" type="wsdl" bindingName="{http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de}EwoPersonErweitertServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/udo.brandes/develop/schoeffenneu/ejewoouteai/ejewoouteai/src/main/resources/wsdl/ewoeai.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/udo.brandes/develop/schoeffenneu/ejewoouteai/ejewoouteai/src/main/resources/wsdl/ewoeai.wsdl"><con:part><con:url>file:/C:/Users/udo.brandes/develop/schoeffenneu/ejewoouteai/ejewoouteai/src/main/resources/wsdl/ewoeai.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="EwoPersonErweitertService" targetNamespace="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://person.model.fachlich.api.ewo.eai.muenchen.de/v2">
+      <xs:import namespace="http://person.model.fachlich.api.ewo.eai.muenchen.de/v2"/>
+      <xs:element name="lesePersonErweitert" type="tns:lesePersonErweitert"/>
+      <xs:element name="lesePersonErweitertResponse" type="tns:lesePersonErweitertResponse"/>
+      <xs:element name="suchePersonErweitert" type="tns:suchePersonErweitert"/>
+      <xs:element name="suchePersonErweitertResponse" type="tns:suchePersonErweitertResponse"/>
+      <xs:complexType name="lesePersonErweitert">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="anfrage">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="benutzer" type="ns1:BenutzerType"/>
+                <xs:element name="om" type="xs:string"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="lesePersonErweitertResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="personErweitert">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="ns1:PersonErweitertType">
+                  <xs:sequence/>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="suchePersonErweitert">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="anfrage">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="benutzer" type="ns1:BenutzerType"/>
+                <xs:element name="suchkriterien" type="ns1:PersonenSuchkriterienErweitertType"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="suchePersonErweitertResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="antwortErweitert">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns1:PersonErweitert"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://person.model.fachlich.api.ewo.eai.muenchen.de/v2" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://person.model.fachlich.api.ewo.eai.muenchen.de/v2">
+      <xs:element name="Anschriften">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="anschriften" nillable="true" type="tns:AnschriftType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="FehlerInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="fehlerId" type="xs:string"/>
+            <xs:element name="fehlertext" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Person">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="tns:PersonType">
+              <xs:sequence/>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="PersonErweitert">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="tns:PersonErweitertType">
+              <xs:sequence/>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="lese.person.anfrage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="benutzer" type="tns:BenutzerType"/>
+            <xs:element name="om" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="suche.person.anfrage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="benutzer" type="tns:BenutzerType"/>
+            <xs:element name="suchkriterien" type="tns:PersonenSuchkriterienType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="suche.person.antwort">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:Person"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="suche.personerweitert.anfrage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="benutzer" type="tns:BenutzerType"/>
+            <xs:element name="suchkriterien" type="tns:PersonenSuchkriterienErweitertType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="suche.personerweitert.antwort">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:PersonErweitert"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="BenutzerType">
+        <xs:sequence>
+          <xs:element name="benutzerId" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PersonErweitertType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractPersonType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="namen" type="tns:NamenType"/>
+              <xs:element minOccurs="0" name="doktorgradNachweis" type="xs:string"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="sperren" nillable="true" type="tns:SperreType"/>
+              <xs:element minOccurs="0" name="religion" type="xs:string"/>
+              <xs:element minOccurs="0" name="wahldaten" type="tns:WahldatenType"/>
+              <xs:element minOccurs="0" name="zuzugsdaten" type="tns:ZuzugdatenType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="wohnungen" nillable="true" type="tns:AbstractWohnungType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="passdaten" nillable="true" type="tns:PassType"/>
+              <xs:element minOccurs="0" name="partner" type="tns:PartnerType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="kinder" nillable="true" type="tns:KindType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="vertreter" nillable="true" type="tns:VertreterType"/>
+              <xs:element minOccurs="0" name="fruehereNamen" type="tns:FruehereNamenType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="waffenrechtlicheErlaubnisErweitert" nillable="true" type="tns:WaffenUndSprengstoffrechtlicheErlaubnisErweitertType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="sprengstoffrechtlicheErlaubnisErweitert" nillable="true" type="tns:WaffenUndSprengstoffrechtlicheErlaubnisErweitertType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="waffenbesitzVerbot" nillable="true" type="tns:WaffenbesitzVerbotType"/>
+              <xs:element minOccurs="0" name="verlustDeutscheStaatsangehoerigkeit" type="xs:date"/>
+              <xs:element minOccurs="0" name="optionsDeutscherDaten" type="tns:OptionsDeutscherType"/>
+              <xs:element minOccurs="0" name="artStaatsangehoerigkeit" type="xs:string"/>
+              <xs:element minOccurs="0" name="frueheresOm" type="xs:string"/>
+              <xs:element minOccurs="0" name="zukuenftigesOm" type="xs:string"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="staatsangehoerigkeiten" nillable="true" type="tns:StaatsangehoerigkeitErweitertType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType abstract="true" name="AbstractPersonType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="auskunftssperre" type="xs:string"/>
+          <xs:element minOccurs="0" name="ordnungsmerkmal" type="xs:string"/>
+          <xs:element minOccurs="0" name="personstatus" type="tns:PersonstatusType"/>
+          <xs:element minOccurs="0" name="geburtsdaten" type="tns:GeburtsdatenType"/>
+          <xs:element minOccurs="0" name="geschlecht" type="xs:string"/>
+          <xs:element minOccurs="0" name="sterbedaten" type="tns:SterbedatenType"/>
+          <xs:element minOccurs="0" name="familienstanddaten" type="tns:FamilienstanddatenType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="NamenType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="vornamen" nillable="true" type="tns:VornameType"/>
+          <xs:element minOccurs="0" name="familienname" type="tns:NachnameType"/>
+          <xs:element minOccurs="0" name="geburtsname" type="tns:NachnameType"/>
+          <xs:element minOccurs="0" name="ehename" type="tns:NachnameType"/>
+          <xs:element minOccurs="0" name="familiennameNachPass" type="tns:NachnameType"/>
+          <xs:element minOccurs="0" name="ordensname" type="xs:string"/>
+          <xs:element minOccurs="0" name="kuenstlername" type="xs:string"/>
+          <xs:element minOccurs="0" name="doktorgrad" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VornameType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="vorname" type="xs:string"/>
+          <xs:element minOccurs="0" name="rufname" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="NachnameType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="namensbestandteil" type="xs:string"/>
+          <xs:element minOccurs="0" name="unstrukturierteSchreibweise" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SperreType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="frist" type="xs:date"/>
+          <xs:element minOccurs="0" name="grund" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="WahldatenType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="wvzEintrag" type="tns:WvzEintragType"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ausschluesse" nillable="true" type="tns:WahlrechtAusschlussType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="WvzEintragType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="gebietskoerperschaft" type="xs:string"/>
+          <xs:element minOccurs="0" name="staat" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="WahlrechtAusschlussType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="grund" type="xs:string"/>
+          <xs:element minOccurs="0" name="behoerde" type="xs:string"/>
+          <xs:element minOccurs="0" name="aktenzeichen" type="xs:string"/>
+          <xs:element minOccurs="0" name="wahlauschlussBis" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ZuzugdatenType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="zuzugEu" type="xs:date"/>
+          <xs:element minOccurs="0" name="zuzugSamtgemeinde" type="xs:date"/>
+          <xs:element minOccurs="0" name="zuzugOrtsteil" type="xs:date"/>
+          <xs:element minOccurs="0" name="zuzugBund" type="xs:date"/>
+          <xs:element minOccurs="0" name="zuzugLand" type="xs:date"/>
+          <xs:element minOccurs="0" name="zuzugRegierungsbezirk" type="xs:date"/>
+          <xs:element minOccurs="0" name="zuzugKreis" type="xs:date"/>
+          <xs:element minOccurs="0" name="zuzugGemeinde" type="xs:date"/>
+          <xs:element minOccurs="0" name="mitHauptwohnungGemeldetSeit" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType abstract="true" name="AbstractWohnungType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="melderegisterAnschrift" type="tns:AnschriftErweitertType"/>
+          <xs:element minOccurs="0" name="einzug" type="xs:date"/>
+          <xs:element minOccurs="0" name="auszug" type="tns:TeilbekanntesDatumType"/>
+          <xs:element minOccurs="0" name="statuswechsel" type="xs:date"/>
+          <xs:element minOccurs="0" name="meldungStatuswechsel" type="tns:MeldungType"/>
+          <xs:element minOccurs="0" name="meldungEinzug" type="tns:MeldungType"/>
+          <xs:element minOccurs="0" name="meldungAuszug" type="tns:MeldungType"/>
+          <xs:element minOccurs="0" name="innerhalb" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="belegGebunden" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="gefoerdert" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="scheinadresse" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AnschriftErweitertType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractAnschriftType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="strassenschluessel" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType abstract="true" name="AbstractAnschriftType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="gemeindeschluessel" type="xs:string"/>
+          <xs:element minOccurs="0" name="hausnummer" type="xs:string"/>
+          <xs:element minOccurs="0" name="buchstabeHausnummer" type="xs:string"/>
+          <xs:element minOccurs="0" name="teilnummerHausnummer" type="xs:string"/>
+          <xs:element minOccurs="0" name="ort" type="xs:string"/>
+          <xs:element minOccurs="0" name="ortsteil" type="xs:string"/>
+          <xs:element minOccurs="0" name="postleitzahl" type="xs:string"/>
+          <xs:element minOccurs="0" name="stockwerk" type="xs:string"/>
+          <xs:element minOccurs="0" name="appartmentnummer" type="xs:string"/>
+          <xs:element minOccurs="0" name="strasse" type="xs:string"/>
+          <xs:element minOccurs="0" name="wohnungsgeber" type="xs:string"/>
+          <xs:element minOccurs="0" name="zusatz" type="xs:string"/>
+          <xs:element minOccurs="0" name="staat" type="xs:string"/>
+          <xs:element minOccurs="0" name="anschriftUnbekannt" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="sperrvermerk" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AnschriftType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractAnschriftType">
+            <xs:sequence/>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="TeilbekanntesDatumType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="jahr" type="xs:string"/>
+          <xs:element minOccurs="0" name="jahrMonat" type="xs:string"/>
+          <xs:element minOccurs="0" name="datum" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MeldungType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="art" type="tns:MeldungArtType"/>
+          <xs:element minOccurs="0" name="datum" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InaktuelleWohnungType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractWohnungType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="nutzungszustand" type="tns:WohnungsNutzungszustandType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="ZuzugsWohnungType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractWohnungType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="ausFrueherenMeldeverhaeltnissen" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="zuzugsWohnungsStatus" type="tns:ZuzugsWohnungsStatusType"/>
+              <xs:element minOccurs="0" name="vorherigerStatus" type="tns:VorherigerWohnungsStatusType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="AktuelleWohnungType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractWohnungType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="nutzungszustand" type="tns:WohnungsNutzungszustandType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="WegzugsWohnungType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractWohnungType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="ausFrueherenMeldeverhaeltnissen" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="wegzugsWohnungsStatus" type="tns:WegzugsWohnungsStatusType"/>
+              <xs:element minOccurs="0" name="kuenftigerStatus" type="tns:KuenftigerWohnungsStatusType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="PassType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="art" type="xs:string"/>
+          <xs:element minOccurs="0" name="serienummer" type="xs:string"/>
+          <xs:element minOccurs="0" name="geschlecht" type="xs:string"/>
+          <xs:element minOccurs="0" name="ausstellendeBehoerde" type="xs:string"/>
+          <xs:element minOccurs="0" name="ausstellungsdatum" type="xs:date"/>
+          <xs:element minOccurs="0" name="ablaufdatum" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PartnerType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="namen" type="tns:NamenType"/>
+          <xs:element minOccurs="0" name="art" type="tns:PartnerschaftArtType"/>
+          <xs:element minOccurs="0" name="ordnungsmerkmal" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="sperren" nillable="true" type="tns:SperreType"/>
+          <xs:element minOccurs="0" name="personstatus" type="tns:PersonstatusType"/>
+          <xs:element minOccurs="0" name="geburtsdatum" type="tns:GeburtsdatumType"/>
+          <xs:element minOccurs="0" name="geschlecht" type="xs:string"/>
+          <xs:element minOccurs="0" name="anschrift" type="tns:AnschriftErweitertType"/>
+          <xs:element minOccurs="0" name="sterbedaten" type="tns:SterbedatenType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GeburtsdatumType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="datum" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SterbedatenType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="datum" type="xs:date"/>
+          <xs:element minOccurs="0" name="ort" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="KindType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="namen" type="tns:NamenType"/>
+          <xs:element minOccurs="0" name="ordnungsmerkmal" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="sperren" nillable="true" type="tns:SperreType"/>
+          <xs:element minOccurs="0" name="personstatus" type="tns:PersonstatusType"/>
+          <xs:element minOccurs="0" name="geburtsdatum" type="tns:GeburtsdatumType"/>
+          <xs:element minOccurs="0" name="sterbedaten" type="tns:SterbedatenType"/>
+          <xs:element minOccurs="0" name="geschlecht" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VertreterType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ordnungsmerkmal" type="xs:string"/>
+          <xs:element minOccurs="0" name="personstatus" type="tns:PersonstatusType"/>
+          <xs:element minOccurs="0" name="namen" type="tns:NamenType"/>
+          <xs:element minOccurs="0" name="art" type="xs:string"/>
+          <xs:element minOccurs="0" name="geburtsdatum" type="tns:GeburtsdatumType"/>
+          <xs:element minOccurs="0" name="geschlecht" type="xs:string"/>
+          <xs:element minOccurs="0" name="sterbedaten" type="tns:SterbedatenType"/>
+          <xs:element minOccurs="0" name="endeVertretung" type="xs:date"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="sperren" nillable="true" type="tns:SperreType"/>
+          <xs:element minOccurs="0" name="anschrift" type="tns:AnschriftErweitertType"/>
+          <xs:element minOccurs="0" name="bezeichnungJuristischePerson" type="xs:string"/>
+          <xs:element name="natuerlichePerson" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="FruehereNamenType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="fruehererFamilienname" nillable="true" type="tns:FruehererFamiliennameType"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="fruehererVorname" nillable="true" type="tns:FruehereVornamenType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="FruehererFamiliennameType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="familienname" type="tns:NachnameType"/>
+          <xs:element minOccurs="0" name="aenderungsdatum" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="FruehereVornamenType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="vorname" nillable="true" type="tns:VornameType"/>
+          <xs:element minOccurs="0" name="aenderungsdatum" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="WaffenUndSprengstoffrechtlicheErlaubnisErweitertType">
+        <xs:complexContent>
+          <xs:extension base="tns:WaffenUndSprengstoffrechtlicheErlaubnisType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="behoerde" type="xs:string"/>
+              <xs:element minOccurs="0" name="aktenzeichen" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="WaffenUndSprengstoffrechtlicheErlaubnisType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractErlaubnisType">
+            <xs:sequence/>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="AbstractErlaubnisType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="angelegtAm" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="WaffenbesitzVerbotType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractErlaubnisType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="behoerde" type="xs:string"/>
+              <xs:element minOccurs="0" name="aktenzeichen" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="OptionsDeutscherType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="befristungBis" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="StaatsangehoerigkeitErweitertType">
+        <xs:complexContent>
+          <xs:extension base="tns:StaatsangehoerigkeitType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="art" type="xs:string"/>
+              <xs:element minOccurs="0" name="nachweisdaten" type="tns:NachweisdatenType"/>
+              <xs:element name="nichtEuBuerger" type="xs:boolean"/>
+              <xs:element name="staatEuMitglied" type="xs:boolean"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="StaatsangehoerigkeitType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="schluessel" type="xs:string"/>
+          <xs:element minOccurs="0" name="text" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="NachweisdatenType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="datum" type="xs:date"/>
+          <xs:element minOccurs="0" name="aktenzeichen" type="xs:string"/>
+          <xs:element minOccurs="0" name="behoerde" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GeburtsdatenType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="datum" type="tns:GeburtsdatumType"/>
+          <xs:element minOccurs="0" name="ort" type="xs:string"/>
+          <xs:element minOccurs="0" name="staat" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="FamilienstanddatenType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="familienstand" type="xs:string"/>
+          <xs:element minOccurs="0" name="datum" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PersonType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractPersonType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="namen" type="tns:NamenType"/>
+              <xs:element minOccurs="0" name="melderegisterAnschrift" type="tns:AnschriftType"/>
+              <xs:element minOccurs="0" name="sprengstoffrechtlicheErlaubnis" type="tns:WaffenUndSprengstoffrechtlicheErlaubnisType"/>
+              <xs:element minOccurs="0" name="waffenrechtlicheErlaubnis" type="tns:WaffenUndSprengstoffrechtlicheErlaubnisType"/>
+              <xs:element minOccurs="0" name="waffenbesitzVerbot" type="tns:WaffenbesitzVerbotType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="staatsangehoerigkeiten" nillable="true" type="tns:StaatsangehoerigkeitType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="PersonenSuchkriterienErweitertType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractSuchkriterienType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="ordnungsmerkmal" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType abstract="true" name="AbstractSuchkriterienType">
+        <xs:sequence>
+          <xs:element name="datensatzstatus" type="tns:DatensatzstatusType"/>
+          <xs:element minOccurs="0" name="familienname" type="xs:string"/>
+          <xs:element minOccurs="0" name="geburtsdatum" type="tns:GeburtsdatumType"/>
+          <xs:element minOccurs="0" name="geschlecht" type="xs:string"/>
+          <xs:element minOccurs="0" name="vorname" type="xs:string"/>
+          <xs:element minOccurs="0" name="buchstabeVon" type="xs:string"/>
+          <xs:element minOccurs="0" name="buchstabeBis" type="xs:string"/>
+          <xs:element minOccurs="0" name="hausnummerVon" type="xs:string"/>
+          <xs:element minOccurs="0" name="hausnummerBis" type="xs:string"/>
+          <xs:element minOccurs="0" name="strassenschluessel" type="xs:string"/>
+          <xs:element minOccurs="0" name="teilnummerVon" type="xs:string"/>
+          <xs:element minOccurs="0" name="teilnummerBis" type="xs:string"/>
+          <xs:element minOccurs="0" name="wohnort" type="xs:string"/>
+          <xs:element minOccurs="0" name="postleitzahl" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PersonenSuchkriterienType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractSuchkriterienType">
+            <xs:sequence/>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:simpleType name="MeldungArtType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="PERSOENLICHE_MELDUNG"/>
+          <xs:enumeration value="MELDUNG_VON_AMTS_WEGEN"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="WohnungsNutzungszustandType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="EINZIGE_WOHNUNG"/>
+          <xs:enumeration value="HAUPTWOHNUNG"/>
+          <xs:enumeration value="NEBENWOHNUNG"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ZuzugsWohnungsStatusType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="DIREKTE_ZUZUGSWOHNUNG"/>
+          <xs:enumeration value="LETZTE_WOHNUNG_IM_INLAND"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="VorherigerWohnungsStatusType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="EW"/>
+          <xs:enumeration value="HW"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="WegzugsWohnungsStatusType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="KUENFTIGE_WOHNUNG"/>
+          <xs:enumeration value="RUECKMELDE_WOHNUNG"/>
+          <xs:enumeration value="WIEDERZUZUGSWOHNUNG_NACH_AUSLAND"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="KuenftigerWohnungsStatusType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="EW"/>
+          <xs:enumeration value="HW"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="PartnerschaftArtType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="VH"/>
+          <xs:enumeration value="LP"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="PersonstatusType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="AKTUELLER_FESTER_EINWOHNER"/>
+          <xs:enumeration value="AKTUELLER_SEEMANN"/>
+          <xs:enumeration value="AKTUELLER_OFW"/>
+          <xs:enumeration value="AKTUELLER_NICHTMELDEPFLICHTIGER_FESTER_EINWOHNER"/>
+          <xs:enumeration value="INAKTUELLER_FESTER_EINWOHNER"/>
+          <xs:enumeration value="INAKTUELLER_NICHTMELDEPFLICHTIGER_FESTER_EINWOHNER"/>
+          <xs:enumeration value="EXTERNE_PERSON"/>
+          <xs:enumeration value="JURISTISCHE_PERSON"/>
+          <xs:enumeration value="KEIN_STATUS"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="DatensatzstatusType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="AKTUELL"/>
+          <xs:enumeration value="INAKTUELL"/>
+          <xs:enumeration value="OHNE_EINSCHRAENKUNG"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="lesePersonErweitert">
+    <wsdl:part element="tns:lesePersonErweitert" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="suchePersonErweitert">
+    <wsdl:part element="tns:suchePersonErweitert" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="lesePersonErweitertResponse">
+    <wsdl:part element="tns:lesePersonErweitertResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="suchePersonErweitertResponse">
+    <wsdl:part element="tns:suchePersonErweitertResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="EwoPersonErweitertServiceInterface">
+    <wsdl:operation name="lesePersonErweitert">
+      <wsdl:input message="tns:lesePersonErweitert" name="lesePersonErweitert"></wsdl:input>
+      <wsdl:output message="tns:lesePersonErweitertResponse" name="lesePersonErweitertResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="suchePersonErweitert">
+      <wsdl:input message="tns:suchePersonErweitert" name="suchePersonErweitert"></wsdl:input>
+      <wsdl:output message="tns:suchePersonErweitertResponse" name="suchePersonErweitertResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EwoPersonErweitertServiceSoapBinding" type="tns:EwoPersonErweitertServiceInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="lesePersonErweitert">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="lesePersonErweitert">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="lesePersonErweitertResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="suchePersonErweitert">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="suchePersonErweitert">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="suchePersonErweitertResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EwoPersonErweitertService">
+    <wsdl:port binding="tns:EwoPersonErweitertServiceSoapBinding" name="EwoPersonServicePort">
+      <soap:address location="http://personen-v2/services/personErweitert"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://nbo00320736:8094/personen/2.0/soap/personErweitert</con:endpoint><con:endpoint>http://personen-v2/services/personErweitert</con:endpoint></con:endpoints><con:operation id="66b48ac8-1635-411a-abc2-af676dd2a30b" isOneWay="false" action="" name="lesePersonErweitert" bindingOperationName="lesePersonErweitert" type="Request-Response" outputName="lesePersonErweitertResponse" inputName="lesePersonErweitert" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="efadc289-3331-426e-80dc-4648688900b1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://personen-v2/services/personErweitert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v2="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <v2:lesePersonErweitert>\r
+         <!--Optional:-->\r
+         <anfrage>\r
+            <benutzer>\r
+               <benutzerId>?</benutzerId>\r
+            </benutzer>\r
+            <om>?</om>\r
+         </anfrage>\r
+      </v2:lesePersonErweitert>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de/EwoPersonErweitertServiceInterface/lesePersonErweitert"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="9fc3e421-b9a2-403d-9a2a-978fe89c3920" isOneWay="false" action="" name="suchePersonErweitert" bindingOperationName="suchePersonErweitert" type="Request-Response" outputName="suchePersonErweitertResponse" inputName="suchePersonErweitert" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e4d702c3-1d33-4ab7-b6e2-e52c73048ea0" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://personen-v2/services/personErweitert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v2="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <v2:suchePersonErweitert>\r
+         <!--Optional:-->\r
+         <anfrage>\r
+            <benutzer>\r
+               <benutzerId>?</benutzerId>\r
+            </benutzer>\r
+            <suchkriterien>\r
+               <datensatzstatus>?</datensatzstatus>\r
+               <!--Optional:-->\r
+               <familienname>?</familienname>\r
+               <!--Optional:-->\r
+               <geburtsdatum>\r
+                  <!--Optional:-->\r
+                  <datum>?</datum>\r
+               </geburtsdatum>\r
+               <!--Optional:-->\r
+               <geschlecht>?</geschlecht>\r
+               <!--Optional:-->\r
+               <vorname>?</vorname>\r
+               <!--Optional:-->\r
+               <buchstabeVon>?</buchstabeVon>\r
+               <!--Optional:-->\r
+               <buchstabeBis>?</buchstabeBis>\r
+               <!--Optional:-->\r
+               <hausnummerVon>?</hausnummerVon>\r
+               <!--Optional:-->\r
+               <hausnummerBis>?</hausnummerBis>\r
+               <!--Optional:-->\r
+               <strassenschluessel>?</strassenschluessel>\r
+               <!--Optional:-->\r
+               <teilnummerVon>?</teilnummerVon>\r
+               <!--Optional:-->\r
+               <teilnummerBis>?</teilnummerBis>\r
+               <!--Optional:-->\r
+               <wohnort>?</wohnort>\r
+               <!--Optional:-->\r
+               <postleitzahl>?</postleitzahl>\r
+               <!--Optional:-->\r
+               <ordnungsmerkmal>?</ordnungsmerkmal>\r
+            </suchkriterien>\r
+         </anfrage>\r
+      </v2:suchePersonErweitert>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de/EwoPersonErweitertServiceInterface/suchePersonErweitert"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService id="6daccd0e-6c10-41f5-a1e8-73ffff6c5df7" port="8094" path="/personen/2.0/soap/personErweitert" host="localhost" name="EwoPersonErweitertServiceSoapBindingMockService" bindToHostOnly="false" docroot=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="lesePersonErweitert" id="7e461416-e4cc-4e7c-b955-8b1bc71cda32" interface="EwoPersonErweitertServiceSoapBinding" operation="lesePersonErweitert"><con:settings/><con:defaultResponse>ResponseErgebnis</con:defaultResponse><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:dispatchPath><![CDATA[log.info("mockRequest: " + mockRequest.requestContent);
+
+if (mockRequest.requestContent.contains("<om>1</om>")) {
+	return "ResponseErgebnis";
+} else if (mockRequest.requestContent.contains("<om>2</om>")) {
+	return "ResponseKeinErgebnis";
+} else if (mockRequest.requestContent.contains("<om>3</om>")) {
+	return "ResponseFehler";
+} else if (mockRequest.requestContent.contains("<om>4</om>")) {
+	Thread.sleep(500000);
+	return "ResponseErgebnis";
+} else {
+	return "ResponseErgebnis";
+}
+
+return "ResponseErgebnis"]]></con:dispatchPath><con:response name="ResponseErgebnis" id="75e7f3e0-e6b7-4c63-92a0-380552e2d014" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<ns3:lesePersonErweitertResponse xmlns:ns2="http://person.model.fachlich.api.ewo.eai.muenchen.de/v2" xmlns:ns3="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de">
+			<personErweitert>
+				<ordnungsmerkmal>162015039514</ordnungsmerkmal>
+				<personstatus>AKTUELLER_FESTER_EINWOHNER</personstatus>
+				<geburtsdaten>
+					<datum>
+						<datum>1990-09-20</datum>
+					</datum>
+					<ort>Lagos</ort>
+				</geburtsdaten>
+				<geschlecht>m</geschlecht>
+				<familienstanddaten>
+					<familienstand>LD</familienstand>
+				</familienstanddaten>
+				<namen>
+					<vornamen>
+						<vorname>Franklin</vorname>
+						<rufname>true</rufname>
+					</vornamen>
+					<familienname>
+						<name>Wimtest-zwei-ohne-Pass</name>
+						<unstrukturierteSchreibweise>Wimtest-zwei-ohne-Pass</unstrukturierteSchreibweise>
+					</familienname>
+				</namen>
+				<zuzugsdaten>
+					<zuzugSamtgemeinde>2020-04-09</zuzugSamtgemeinde>
+					<zuzugOrtsteil>2020-04-09</zuzugOrtsteil>
+					<zuzugBund>2020-04-09</zuzugBund>
+					<zuzugLand>2020-04-09</zuzugLand>
+					<zuzugRegierungsbezirk>2020-04-09</zuzugRegierungsbezirk>
+					<zuzugKreis>2020-04-09</zuzugKreis>
+					<zuzugGemeinde>2020-04-09</zuzugGemeinde>
+					<mitHauptwohnungGemeldetSeit>2020-04-09</mitHauptwohnungGemeldetSeit>
+				</zuzugsdaten>
+				<wohnungen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:AktuelleWohnungType">
+					<melderegisterAnschrift>
+						<gemeindeschluessel>09162000</gemeindeschluessel>
+						<hausnummer>0</hausnummer>
+						<ort>München</ort>
+						<postleitzahl>80538</postleitzahl>
+						<strasse>Alexandrastr.</strasse>
+						<sperrvermerk>false</sperrvermerk>
+						<strassenschluessel>77</strassenschluessel>
+					</melderegisterAnschrift>
+					<einzug>2020-04-09</einzug>
+					<auszug/>
+					<meldungEinzug>
+						<art>PERSOENLICHE_MELDUNG</art>
+						<datum>2020-04-16</datum>
+					</meldungEinzug>
+					<innerhalb>true</innerhalb>
+					<belegGebunden>false</belegGebunden>
+					<gefoerdert>false</gefoerdert>
+					<scheinadresse>false</scheinadresse>
+					<nutzungszustand>EINZIGE_WOHNUNG</nutzungszustand>
+				</wohnungen>
+				<wohnungen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:ZuzugsWohnungType">
+					<melderegisterAnschrift>
+						<staat>232</staat>
+					</melderegisterAnschrift>
+					<auszug>
+						<datum>2020-04-09</datum>
+					</auszug>
+					<meldungAuszug>
+						<art>PERSOENLICHE_MELDUNG</art>
+						<datum>2020-04-16</datum>
+					</meldungAuszug>
+					<innerhalb>false</innerhalb>
+					<belegGebunden>false</belegGebunden>
+					<gefoerdert>false</gefoerdert>
+					<scheinadresse>false</scheinadresse>
+					<ausFrueherenMeldeverhaeltnissen>false</ausFrueherenMeldeverhaeltnissen>
+					<zuzugsWohnungsStatus>DIREKTE_ZUZUGSWOHNUNG</zuzugsWohnungsStatus>
+					<vorherigerStatus>EW</vorherigerStatus>
+				</wohnungen>
+				<passdaten>
+					<art>12</art>
+					<serienummer>12345002</serienummer>
+					<ausstellendeBehoerde>Lagos Druckerei</ausstellendeBehoerde>
+					<ausstellungsdatum>2000-01-06</ausstellungsdatum>
+					<ablaufdatum>2010-01-05</ablaufdatum>
+				</passdaten>
+				<artStaatsangehoerigkeit>7</artStaatsangehoerigkeit>
+				<staatsangehoerigkeiten>
+					<schluessel>232</schluessel>
+					<text>nigerianisch</text>
+					<nichtEuBuerger>false</nichtEuBuerger>
+					<staatEuMitglied>false</staatEuMitglied>
+				</staatsangehoerigkeiten>
+			</personErweitert>
+		</ns3:lesePersonErweitertResponse>
+	</soap:Body>
+</soap:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de/EwoPersonErweitertServiceInterface/lesePersonErweitertResponse"/></con:response><con:response name="ResponseKeinErgebnis" id="75e7f3e0-e6b7-4c63-92a0-380552e2d014" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	&lt;soap:Body>
+		&lt;ns3:lesePersonErweitertResponse xmlns:ns2="http://person.model.fachlich.api.ewo.eai.muenchen.de/v2" xmlns:ns3="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de"/>
+	&lt;/soap:Body>
+&lt;/soap:Envelope></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de/EwoPersonErweitertServiceInterface/lesePersonErweitertResponse"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="suchePersonErweitert" id="3f072edf-bdd1-4e46-8eaa-95d954fc462b" interface="EwoPersonErweitertServiceSoapBinding" operation="suchePersonErweitert"><con:settings/><con:defaultResponse>ResponseErgebnis</con:defaultResponse><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:dispatchPath>log.info("mockRequest: " + mockRequest.requestContent);
+
+
+if (mockRequest.requestContent.contains("Huber")) {
+	return "ResponseErgebnis";
+} else if (mockRequest.requestContent.contains("Meier")) {
+	return "ResponseKeinErgebnis";
+} else if (mockRequest.requestContent.contains("Mueller")) {
+	return "ResponseFehler";
+} else if (mockRequest.requestContent.contains("Franklin")) {
+	Thread.sleep(5000000);
+	return "ResponseErgebnis";
+} else {
+	return "ResponseErgebnis";
+}
+
+return "ResponseErgebnis"</con:dispatchPath><con:response name="ResponseErgebnis" id="995eea5b-9b28-4afb-9bcc-767696a52ec6" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<ns3:suchePersonErweitertResponse xmlns:ns2="http://person.model.fachlich.api.ewo.eai.muenchen.de/v2" xmlns:ns3="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de">
+			<antwortErweitert>
+				<ns2:PersonErweitert>
+					<ordnungsmerkmal>162015039514</ordnungsmerkmal>
+					<personstatus>AKTUELLER_FESTER_EINWOHNER</personstatus>
+					<geburtsdaten>
+						<datum>
+							<datum>1990-09-20</datum>
+						</datum>
+						<ort>Lagos</ort>
+					</geburtsdaten>
+					<geschlecht>m</geschlecht>
+					<familienstanddaten>
+						<familienstand>LD</familienstand>
+					</familienstanddaten>
+					<namen>
+						<vornamen>
+							<vorname>Franklin</vorname>
+							<rufname>true</rufname>
+						</vornamen>
+						<familienname>
+							<name>Wimtest-zwei-ohne-Pass</name>
+							<unstrukturierteSchreibweise>Wimtest-zwei-ohne-Pass</unstrukturierteSchreibweise>
+						</familienname>
+					</namen>
+					<zuzugsdaten>
+						<zuzugSamtgemeinde>2020-04-09</zuzugSamtgemeinde>
+						<zuzugOrtsteil>2020-04-09</zuzugOrtsteil>
+						<zuzugBund>2020-04-09</zuzugBund>
+						<zuzugLand>2020-04-09</zuzugLand>
+						<zuzugRegierungsbezirk>2020-04-09</zuzugRegierungsbezirk>
+						<zuzugKreis>2020-04-09</zuzugKreis>
+						<zuzugGemeinde>2020-04-09</zuzugGemeinde>
+						<mitHauptwohnungGemeldetSeit>2020-04-09</mitHauptwohnungGemeldetSeit>
+					</zuzugsdaten>
+					<wohnungen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:AktuelleWohnungType">
+						<melderegisterAnschrift>
+							<gemeindeschluessel>09162000</gemeindeschluessel>
+							<hausnummer>0</hausnummer>
+							<ort>München</ort>
+							<postleitzahl>80538</postleitzahl>
+							<strasse>Alexandrastr.</strasse>
+							<sperrvermerk>false</sperrvermerk>
+							<strassenschluessel>77</strassenschluessel>
+						</melderegisterAnschrift>
+						<einzug>2020-04-09</einzug>
+						<auszug/>
+						<meldungEinzug>
+							<art>PERSOENLICHE_MELDUNG</art>
+							<datum>2020-04-16</datum>
+						</meldungEinzug>
+						<innerhalb>true</innerhalb>
+						<belegGebunden>false</belegGebunden>
+						<gefoerdert>false</gefoerdert>
+						<scheinadresse>false</scheinadresse>
+						<nutzungszustand>EINZIGE_WOHNUNG</nutzungszustand>
+					</wohnungen>
+					<wohnungen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:ZuzugsWohnungType">
+						<melderegisterAnschrift>
+							<staat>232</staat>
+						</melderegisterAnschrift>
+						<auszug>
+							<datum>2020-04-09</datum>
+						</auszug>
+						<meldungAuszug>
+							<art>PERSOENLICHE_MELDUNG</art>
+							<datum>2020-04-16</datum>
+						</meldungAuszug>
+						<innerhalb>false</innerhalb>
+						<belegGebunden>false</belegGebunden>
+						<gefoerdert>false</gefoerdert>
+						<scheinadresse>false</scheinadresse>
+						<ausFrueherenMeldeverhaeltnissen>false</ausFrueherenMeldeverhaeltnissen>
+						<zuzugsWohnungsStatus>DIREKTE_ZUZUGSWOHNUNG</zuzugsWohnungsStatus>
+						<vorherigerStatus>EW</vorherigerStatus>
+					</wohnungen>
+					<passdaten>
+						<art>12</art>
+						<serienummer>12345002</serienummer>
+						<ausstellendeBehoerde>Lagos Druckerei</ausstellendeBehoerde>
+						<ausstellungsdatum>2000-01-06</ausstellungsdatum>
+						<ablaufdatum>2010-01-05</ablaufdatum>
+					</passdaten>
+					<artStaatsangehoerigkeit>7</artStaatsangehoerigkeit>
+					<staatsangehoerigkeiten>
+						<schluessel>232</schluessel>
+						<text>nigerianisch</text>
+						<nichtEuBuerger>false</nichtEuBuerger>
+						<staatEuMitglied>false</staatEuMitglied>
+					</staatsangehoerigkeiten>
+				</ns2:PersonErweitert>
+			</antwortErweitert>
+		</ns3:suchePersonErweitertResponse>
+	</soap:Body>
+</soap:Envelope>
+]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de/EwoPersonErweitertServiceInterface/suchePersonErweitertResponse"/></con:response><con:response name="ResponseKeinErgebnis" id="995eea5b-9b28-4afb-9bcc-767696a52ec6" httpResponseStatus="500" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<ns3:suchePersonErweitertResponse xmlns:ns2="http://person.model.fachlich.api.ewo.eai.muenchen.de/v2" xmlns:ns3="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de">
+			<antwortErweitert/>
+		</ns3:suchePersonErweitertResponse>
+	</soap:Body>
+</soap:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de/EwoPersonErweitertServiceInterface/suchePersonErweitertResponse"/></con:response><con:response name="ResponseFehler" id="995eea5b-9b28-4afb-9bcc-767696a52ec6" httpResponseStatus="500" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<soap:Fault>
+			<faultcode>soap:Server</faultcode>
+			<faultstring>EWO07F0999: Suchprofil konnte nicht verarbeitet werden</faultstring>
+			<detail>
+				<ns2:FehlerInfo xmlns:ns3="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de" xmlns:ns2="http://person.model.fachlich.api.ewo.eai.muenchen.de/v2">
+					<fehlerId>EWO07F0999</fehlerId>
+					<fehlertext>EWO07F0999: Suchprofil konnte nicht verarbeitet werden</fehlertext>
+				</ns2:FehlerInfo>
+			</detail>
+		</soap:Fault>
+	</soap:Body>
+</soap:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de/EwoPersonErweitertServiceInterface/suchePersonErweitertResponse"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

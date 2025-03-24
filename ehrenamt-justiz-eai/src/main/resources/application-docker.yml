@@ -1,0 +1,24 @@
+server:
+  port: 8085
+api:
+  auth:
+    users:
+      - username: "testuser"
+        password: "$2a$10$7HwPUI9HCm8/ELLjhzoa0e/huajtmGrVNMv7/kXXG377.nHOSngBq" #testpw
+        roles:
+          - "BASIC"
+      - username: "actuator"
+        password: "$2a$10$D4vHRojMArByIPUc0W7d8ukl8KTPjZYI3zixVOkDyJwV1zfu4ngJC" #actuator
+        roles:
+          - "ACTUATOR_ROLE"
+  basicroutebuilder:
+    doTracing: true
+    doProcesstimeLogging: true
+    doInterceptFrom: true
+producer:
+  user: schoeffen
+  password: RojMArByIPUc0W7d8ukl8KTPjZ
+ewo:
+  eai:
+    #    url: http://localhost:8094/personen/2.0/soap/personErweitertc
+    url: https://micro-ewo-apigateway-test-ewo-eai.apps.capk.muenchen.de/personen/2.0/soap/personErweitert

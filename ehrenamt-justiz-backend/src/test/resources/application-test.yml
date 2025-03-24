@@ -13,6 +13,6 @@ de:
   muenchen:
     ewo:
       eai:
-        server: http://localhost:8083
+        server: http://localhost:8085
         user: test
         password: test

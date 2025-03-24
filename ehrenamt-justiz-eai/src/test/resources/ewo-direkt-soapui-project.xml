@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="e632521c-d8ca-4f2d-90eb-c3a5231d128b" activeEnvironment="Default" name="ewoeai" resourceRoot="" soapui-version="5.8.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="4c54c08a-0362-42db-8dae-2f9a9aa86969" wsaVersion="NONE" name="EwoPersonErweitertServiceSoapBinding" type="wsdl" bindingName="{http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de}EwoPersonErweitertServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/udo.brandes/develop/schoeffen-eai/src/main/resources/wsdl/ewoeai.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\Users\udo.brandes\develop\schoeffen-eai\src\main\resources\wsdl\ewoeai.wsdl"><con:part><con:url>file:\C:\Users\udo.brandes\develop\schoeffen-eai\src\main\resources\wsdl\ewoeai.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="EwoPersonErweitertService" targetNamespace="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://person.model.fachlich.api.ewo.eai.muenchen.de/v2">
+      <xs:import namespace="http://person.model.fachlich.api.ewo.eai.muenchen.de/v2"/>
+      <xs:element name="lesePersonErweitert" type="tns:lesePersonErweitert"/>
+      <xs:element name="lesePersonErweitertResponse" type="tns:lesePersonErweitertResponse"/>
+      <xs:element name="suchePersonErweitert" type="tns:suchePersonErweitert"/>
+      <xs:element name="suchePersonErweitertResponse" type="tns:suchePersonErweitertResponse"/>
+      <xs:complexType name="lesePersonErweitert">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="anfrage">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="benutzer" type="ns1:BenutzerType"/>
+                <xs:element name="om" type="xs:string"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="lesePersonErweitertResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="personErweitert">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="ns1:PersonErweitertType">
+                  <xs:sequence/>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="suchePersonErweitert">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="anfrage">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="benutzer" type="ns1:BenutzerType"/>
+                <xs:element name="suchkriterien" type="ns1:PersonenSuchkriterienErweitertType"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="suchePersonErweitertResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="antwortErweitert">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns1:PersonErweitert"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://person.model.fachlich.api.ewo.eai.muenchen.de/v2" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://person.model.fachlich.api.ewo.eai.muenchen.de/v2">
+      <xs:element name="Anschriften">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="anschriften" nillable="true" type="tns:AnschriftType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="FehlerInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="fehlerId" type="xs:string"/>
+            <xs:element name="fehlertext" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Person">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="tns:PersonType">
+              <xs:sequence/>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="PersonErweitert">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="tns:PersonErweitertType">
+              <xs:sequence/>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="lese.person.anfrage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="benutzer" type="tns:BenutzerType"/>
+            <xs:element name="om" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="suche.person.anfrage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="benutzer" type="tns:BenutzerType"/>
+            <xs:element name="suchkriterien" type="tns:PersonenSuchkriterienType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="suche.person.antwort">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:Person"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="suche.personerweitert.anfrage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="benutzer" type="tns:BenutzerType"/>
+            <xs:element name="suchkriterien" type="tns:PersonenSuchkriterienErweitertType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="suche.personerweitert.antwort">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:PersonErweitert"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="BenutzerType">
+        <xs:sequence>
+          <xs:element name="benutzerId" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PersonErweitertType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractPersonType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="namen" type="tns:NamenType"/>
+              <xs:element minOccurs="0" name="doktorgradNachweis" type="xs:string"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="sperren" nillable="true" type="tns:SperreType"/>
+              <xs:element minOccurs="0" name="religion" type="xs:string"/>
+              <xs:element minOccurs="0" name="wahldaten" type="tns:WahldatenType"/>
+              <xs:element minOccurs="0" name="zuzugsdaten" type="tns:ZuzugdatenType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="wohnungen" nillable="true" type="tns:AbstractWohnungType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="passdaten" nillable="true" type="tns:PassType"/>
+              <xs:element minOccurs="0" name="partner" type="tns:PartnerType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="kinder" nillable="true" type="tns:KindType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="vertreter" nillable="true" type="tns:VertreterType"/>
+              <xs:element minOccurs="0" name="fruehereNamen" type="tns:FruehereNamenType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="waffenrechtlicheErlaubnisErweitert" nillable="true" type="tns:WaffenUndSprengstoffrechtlicheErlaubnisErweitertType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="sprengstoffrechtlicheErlaubnisErweitert" nillable="true" type="tns:WaffenUndSprengstoffrechtlicheErlaubnisErweitertType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="waffenbesitzVerbot" nillable="true" type="tns:WaffenbesitzVerbotType"/>
+              <xs:element minOccurs="0" name="verlustDeutscheStaatsangehoerigkeit" type="xs:date"/>
+              <xs:element minOccurs="0" name="optionsDeutscherDaten" type="tns:OptionsDeutscherType"/>
+              <xs:element minOccurs="0" name="artStaatsangehoerigkeit" type="xs:string"/>
+              <xs:element minOccurs="0" name="frueheresOm" type="xs:string"/>
+              <xs:element minOccurs="0" name="zukuenftigesOm" type="xs:string"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="staatsangehoerigkeiten" nillable="true" type="tns:StaatsangehoerigkeitErweitertType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType abstract="true" name="AbstractPersonType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="auskunftssperre" type="xs:string"/>
+          <xs:element minOccurs="0" name="ordnungsmerkmal" type="xs:string"/>
+          <xs:element minOccurs="0" name="personstatus" type="tns:PersonstatusType"/>
+          <xs:element minOccurs="0" name="geburtsdaten" type="tns:GeburtsdatenType"/>
+          <xs:element minOccurs="0" name="geschlecht" type="xs:string"/>
+          <xs:element minOccurs="0" name="sterbedaten" type="tns:SterbedatenType"/>
+          <xs:element minOccurs="0" name="familienstanddaten" type="tns:FamilienstanddatenType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="NamenType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="vornamen" nillable="true" type="tns:VornameType"/>
+          <xs:element minOccurs="0" name="familienname" type="tns:NachnameType"/>
+          <xs:element minOccurs="0" name="geburtsname" type="tns:NachnameType"/>
+          <xs:element minOccurs="0" name="ehename" type="tns:NachnameType"/>
+          <xs:element minOccurs="0" name="familiennameNachPass" type="tns:NachnameType"/>
+          <xs:element minOccurs="0" name="ordensname" type="xs:string"/>
+          <xs:element minOccurs="0" name="kuenstlername" type="xs:string"/>
+          <xs:element minOccurs="0" name="doktorgrad" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VornameType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="vorname" type="xs:string"/>
+          <xs:element minOccurs="0" name="rufname" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="NachnameType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="namensbestandteil" type="xs:string"/>
+          <xs:element minOccurs="0" name="unstrukturierteSchreibweise" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SperreType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="frist" type="xs:date"/>
+          <xs:element minOccurs="0" name="grund" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="WahldatenType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="wvzEintrag" type="tns:WvzEintragType"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ausschluesse" nillable="true" type="tns:WahlrechtAusschlussType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="WvzEintragType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="gebietskoerperschaft" type="xs:string"/>
+          <xs:element minOccurs="0" name="staat" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="WahlrechtAusschlussType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="grund" type="xs:string"/>
+          <xs:element minOccurs="0" name="behoerde" type="xs:string"/>
+          <xs:element minOccurs="0" name="aktenzeichen" type="xs:string"/>
+          <xs:element minOccurs="0" name="wahlauschlussBis" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ZuzugdatenType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="zuzugEu" type="xs:date"/>
+          <xs:element minOccurs="0" name="zuzugSamtgemeinde" type="xs:date"/>
+          <xs:element minOccurs="0" name="zuzugOrtsteil" type="xs:date"/>
+          <xs:element minOccurs="0" name="zuzugBund" type="xs:date"/>
+          <xs:element minOccurs="0" name="zuzugLand" type="xs:date"/>
+          <xs:element minOccurs="0" name="zuzugRegierungsbezirk" type="xs:date"/>
+          <xs:element minOccurs="0" name="zuzugKreis" type="xs:date"/>
+          <xs:element minOccurs="0" name="zuzugGemeinde" type="xs:date"/>
+          <xs:element minOccurs="0" name="mitHauptwohnungGemeldetSeit" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType abstract="true" name="AbstractWohnungType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="melderegisterAnschrift" type="tns:AnschriftErweitertType"/>
+          <xs:element minOccurs="0" name="einzug" type="xs:date"/>
+          <xs:element minOccurs="0" name="auszug" type="tns:TeilbekanntesDatumType"/>
+          <xs:element minOccurs="0" name="statuswechsel" type="xs:date"/>
+          <xs:element minOccurs="0" name="meldungStatuswechsel" type="tns:MeldungType"/>
+          <xs:element minOccurs="0" name="meldungEinzug" type="tns:MeldungType"/>
+          <xs:element minOccurs="0" name="meldungAuszug" type="tns:MeldungType"/>
+          <xs:element minOccurs="0" name="innerhalb" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="belegGebunden" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="gefoerdert" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="scheinadresse" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AnschriftErweitertType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractAnschriftType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="strassenschluessel" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType abstract="true" name="AbstractAnschriftType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="gemeindeschluessel" type="xs:string"/>
+          <xs:element minOccurs="0" name="hausnummer" type="xs:string"/>
+          <xs:element minOccurs="0" name="buchstabeHausnummer" type="xs:string"/>
+          <xs:element minOccurs="0" name="teilnummerHausnummer" type="xs:string"/>
+          <xs:element minOccurs="0" name="ort" type="xs:string"/>
+          <xs:element minOccurs="0" name="ortsteil" type="xs:string"/>
+          <xs:element minOccurs="0" name="postleitzahl" type="xs:string"/>
+          <xs:element minOccurs="0" name="stockwerk" type="xs:string"/>
+          <xs:element minOccurs="0" name="appartmentnummer" type="xs:string"/>
+          <xs:element minOccurs="0" name="strasse" type="xs:string"/>
+          <xs:element minOccurs="0" name="wohnungsgeber" type="xs:string"/>
+          <xs:element minOccurs="0" name="zusatz" type="xs:string"/>
+          <xs:element minOccurs="0" name="staat" type="xs:string"/>
+          <xs:element minOccurs="0" name="anschriftUnbekannt" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="sperrvermerk" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AnschriftType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractAnschriftType">
+            <xs:sequence/>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="TeilbekanntesDatumType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="jahr" type="xs:string"/>
+          <xs:element minOccurs="0" name="jahrMonat" type="xs:string"/>
+          <xs:element minOccurs="0" name="datum" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MeldungType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="art" type="tns:MeldungArtType"/>
+          <xs:element minOccurs="0" name="datum" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InaktuelleWohnungType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractWohnungType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="nutzungszustand" type="tns:WohnungsNutzungszustandType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="ZuzugsWohnungType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractWohnungType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="ausFrueherenMeldeverhaeltnissen" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="zuzugsWohnungsStatus" type="tns:ZuzugsWohnungsStatusType"/>
+              <xs:element minOccurs="0" name="vorherigerStatus" type="tns:VorherigerWohnungsStatusType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="AktuelleWohnungType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractWohnungType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="nutzungszustand" type="tns:WohnungsNutzungszustandType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="WegzugsWohnungType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractWohnungType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="ausFrueherenMeldeverhaeltnissen" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="wegzugsWohnungsStatus" type="tns:WegzugsWohnungsStatusType"/>
+              <xs:element minOccurs="0" name="kuenftigerStatus" type="tns:KuenftigerWohnungsStatusType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="PassType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="art" type="xs:string"/>
+          <xs:element minOccurs="0" name="serienummer" type="xs:string"/>
+          <xs:element minOccurs="0" name="geschlecht" type="xs:string"/>
+          <xs:element minOccurs="0" name="ausstellendeBehoerde" type="xs:string"/>
+          <xs:element minOccurs="0" name="ausstellungsdatum" type="xs:date"/>
+          <xs:element minOccurs="0" name="ablaufdatum" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PartnerType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="namen" type="tns:NamenType"/>
+          <xs:element minOccurs="0" name="art" type="tns:PartnerschaftArtType"/>
+          <xs:element minOccurs="0" name="ordnungsmerkmal" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="sperren" nillable="true" type="tns:SperreType"/>
+          <xs:element minOccurs="0" name="personstatus" type="tns:PersonstatusType"/>
+          <xs:element minOccurs="0" name="geburtsdatum" type="tns:GeburtsdatumType"/>
+          <xs:element minOccurs="0" name="geschlecht" type="xs:string"/>
+          <xs:element minOccurs="0" name="anschrift" type="tns:AnschriftErweitertType"/>
+          <xs:element minOccurs="0" name="sterbedaten" type="tns:SterbedatenType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GeburtsdatumType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="datum" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SterbedatenType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="datum" type="xs:date"/>
+          <xs:element minOccurs="0" name="ort" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="KindType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="namen" type="tns:NamenType"/>
+          <xs:element minOccurs="0" name="ordnungsmerkmal" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="sperren" nillable="true" type="tns:SperreType"/>
+          <xs:element minOccurs="0" name="personstatus" type="tns:PersonstatusType"/>
+          <xs:element minOccurs="0" name="geburtsdatum" type="tns:GeburtsdatumType"/>
+          <xs:element minOccurs="0" name="sterbedaten" type="tns:SterbedatenType"/>
+          <xs:element minOccurs="0" name="geschlecht" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VertreterType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ordnungsmerkmal" type="xs:string"/>
+          <xs:element minOccurs="0" name="personstatus" type="tns:PersonstatusType"/>
+          <xs:element minOccurs="0" name="namen" type="tns:NamenType"/>
+          <xs:element minOccurs="0" name="art" type="xs:string"/>
+          <xs:element minOccurs="0" name="geburtsdatum" type="tns:GeburtsdatumType"/>
+          <xs:element minOccurs="0" name="geschlecht" type="xs:string"/>
+          <xs:element minOccurs="0" name="sterbedaten" type="tns:SterbedatenType"/>
+          <xs:element minOccurs="0" name="endeVertretung" type="xs:date"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="sperren" nillable="true" type="tns:SperreType"/>
+          <xs:element minOccurs="0" name="anschrift" type="tns:AnschriftErweitertType"/>
+          <xs:element minOccurs="0" name="bezeichnungJuristischePerson" type="xs:string"/>
+          <xs:element name="natuerlichePerson" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="FruehereNamenType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="fruehererFamilienname" nillable="true" type="tns:FruehererFamiliennameType"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="fruehererVorname" nillable="true" type="tns:FruehereVornamenType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="FruehererFamiliennameType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="familienname" type="tns:NachnameType"/>
+          <xs:element minOccurs="0" name="aenderungsdatum" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="FruehereVornamenType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="vorname" nillable="true" type="tns:VornameType"/>
+          <xs:element minOccurs="0" name="aenderungsdatum" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="WaffenUndSprengstoffrechtlicheErlaubnisErweitertType">
+        <xs:complexContent>
+          <xs:extension base="tns:WaffenUndSprengstoffrechtlicheErlaubnisType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="behoerde" type="xs:string"/>
+              <xs:element minOccurs="0" name="aktenzeichen" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="WaffenUndSprengstoffrechtlicheErlaubnisType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractErlaubnisType">
+            <xs:sequence/>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="AbstractErlaubnisType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="angelegtAm" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="WaffenbesitzVerbotType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractErlaubnisType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="behoerde" type="xs:string"/>
+              <xs:element minOccurs="0" name="aktenzeichen" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="OptionsDeutscherType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="befristungBis" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="StaatsangehoerigkeitErweitertType">
+        <xs:complexContent>
+          <xs:extension base="tns:StaatsangehoerigkeitType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="art" type="xs:string"/>
+              <xs:element minOccurs="0" name="nachweisdaten" type="tns:NachweisdatenType"/>
+              <xs:element name="nichtEuBuerger" type="xs:boolean"/>
+              <xs:element name="staatEuMitglied" type="xs:boolean"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="StaatsangehoerigkeitType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="schluessel" type="xs:string"/>
+          <xs:element minOccurs="0" name="text" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="NachweisdatenType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="datum" type="xs:date"/>
+          <xs:element minOccurs="0" name="aktenzeichen" type="xs:string"/>
+          <xs:element minOccurs="0" name="behoerde" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GeburtsdatenType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="datum" type="tns:GeburtsdatumType"/>
+          <xs:element minOccurs="0" name="ort" type="xs:string"/>
+          <xs:element minOccurs="0" name="staat" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="FamilienstanddatenType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="familienstand" type="xs:string"/>
+          <xs:element minOccurs="0" name="datum" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PersonType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractPersonType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="namen" type="tns:NamenType"/>
+              <xs:element minOccurs="0" name="melderegisterAnschrift" type="tns:AnschriftType"/>
+              <xs:element minOccurs="0" name="sprengstoffrechtlicheErlaubnis" type="tns:WaffenUndSprengstoffrechtlicheErlaubnisType"/>
+              <xs:element minOccurs="0" name="waffenrechtlicheErlaubnis" type="tns:WaffenUndSprengstoffrechtlicheErlaubnisType"/>
+              <xs:element minOccurs="0" name="waffenbesitzVerbot" type="tns:WaffenbesitzVerbotType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="staatsangehoerigkeiten" nillable="true" type="tns:StaatsangehoerigkeitType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="PersonenSuchkriterienErweitertType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractSuchkriterienType">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="ordnungsmerkmal" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType abstract="true" name="AbstractSuchkriterienType">
+        <xs:sequence>
+          <xs:element name="datensatzstatus" type="tns:DatensatzstatusType"/>
+          <xs:element minOccurs="0" name="familienname" type="xs:string"/>
+          <xs:element minOccurs="0" name="geburtsdatum" type="tns:GeburtsdatumType"/>
+          <xs:element minOccurs="0" name="geschlecht" type="xs:string"/>
+          <xs:element minOccurs="0" name="vorname" type="xs:string"/>
+          <xs:element minOccurs="0" name="buchstabeVon" type="xs:string"/>
+          <xs:element minOccurs="0" name="buchstabeBis" type="xs:string"/>
+          <xs:element minOccurs="0" name="hausnummerVon" type="xs:string"/>
+          <xs:element minOccurs="0" name="hausnummerBis" type="xs:string"/>
+          <xs:element minOccurs="0" name="strassenschluessel" type="xs:string"/>
+          <xs:element minOccurs="0" name="teilnummerVon" type="xs:string"/>
+          <xs:element minOccurs="0" name="teilnummerBis" type="xs:string"/>
+          <xs:element minOccurs="0" name="wohnort" type="xs:string"/>
+          <xs:element minOccurs="0" name="postleitzahl" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PersonenSuchkriterienType">
+        <xs:complexContent>
+          <xs:extension base="tns:AbstractSuchkriterienType">
+            <xs:sequence/>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:simpleType name="MeldungArtType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="PERSOENLICHE_MELDUNG"/>
+          <xs:enumeration value="MELDUNG_VON_AMTS_WEGEN"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="WohnungsNutzungszustandType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="EINZIGE_WOHNUNG"/>
+          <xs:enumeration value="HAUPTWOHNUNG"/>
+          <xs:enumeration value="NEBENWOHNUNG"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ZuzugsWohnungsStatusType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="DIREKTE_ZUZUGSWOHNUNG"/>
+          <xs:enumeration value="LETZTE_WOHNUNG_IM_INLAND"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="VorherigerWohnungsStatusType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="EW"/>
+          <xs:enumeration value="HW"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="WegzugsWohnungsStatusType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="KUENFTIGE_WOHNUNG"/>
+          <xs:enumeration value="RUECKMELDE_WOHNUNG"/>
+          <xs:enumeration value="WIEDERZUZUGSWOHNUNG_NACH_AUSLAND"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="KuenftigerWohnungsStatusType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="EW"/>
+          <xs:enumeration value="HW"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="PartnerschaftArtType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="VH"/>
+          <xs:enumeration value="LP"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="PersonstatusType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="AKTUELLER_FESTER_EINWOHNER"/>
+          <xs:enumeration value="AKTUELLER_SEEMANN"/>
+          <xs:enumeration value="AKTUELLER_OFW"/>
+          <xs:enumeration value="AKTUELLER_NICHTMELDEPFLICHTIGER_FESTER_EINWOHNER"/>
+          <xs:enumeration value="INAKTUELLER_FESTER_EINWOHNER"/>
+          <xs:enumeration value="INAKTUELLER_NICHTMELDEPFLICHTIGER_FESTER_EINWOHNER"/>
+          <xs:enumeration value="EXTERNE_PERSON"/>
+          <xs:enumeration value="JURISTISCHE_PERSON"/>
+          <xs:enumeration value="KEIN_STATUS"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="DatensatzstatusType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="AKTUELL"/>
+          <xs:enumeration value="INAKTUELL"/>
+          <xs:enumeration value="OHNE_EINSCHRAENKUNG"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="lesePersonErweitert">
+    <wsdl:part element="tns:lesePersonErweitert" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="suchePersonErweitert">
+    <wsdl:part element="tns:suchePersonErweitert" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="lesePersonErweitertResponse">
+    <wsdl:part element="tns:lesePersonErweitertResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="suchePersonErweitertResponse">
+    <wsdl:part element="tns:suchePersonErweitertResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="EwoPersonErweitertServiceInterface">
+    <wsdl:operation name="lesePersonErweitert">
+      <wsdl:input message="tns:lesePersonErweitert" name="lesePersonErweitert"></wsdl:input>
+      <wsdl:output message="tns:lesePersonErweitertResponse" name="lesePersonErweitertResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="suchePersonErweitert">
+      <wsdl:input message="tns:suchePersonErweitert" name="suchePersonErweitert"></wsdl:input>
+      <wsdl:output message="tns:suchePersonErweitertResponse" name="suchePersonErweitertResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EwoPersonErweitertServiceSoapBinding" type="tns:EwoPersonErweitertServiceInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="lesePersonErweitert">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="lesePersonErweitert">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="lesePersonErweitertResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="suchePersonErweitert">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="suchePersonErweitert">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="suchePersonErweitertResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EwoPersonErweitertService">
+    <wsdl:port binding="tns:EwoPersonErweitertServiceSoapBinding" name="EwoPersonServicePort">
+      <soap:address location="http://personen-v2/services/personErweitert"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://personen-v2/services/personErweitert</con:endpoint></con:endpoints><con:operation id="6eac8083-69d8-4ec0-b73d-c543d1262154" isOneWay="false" action="" name="lesePersonErweitert" bindingOperationName="lesePersonErweitert" type="Request-Response" outputName="lesePersonErweitertResponse" inputName="lesePersonErweitert" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f36392cf-a8a6-4b2b-ba72-8d8ba6b670e2" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://micro-ewo-apigateway-test-ewo-eai.apps.capk.muenchen.de/personen/2.0/soap/personErweitert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v2="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de">
+   <soapenv:Header><wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><wsse:UsernameToken wsu:Id="UsernameToken-D2C50D68A2DC46884917385918940991"><wsse:Username>schoeffen</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">RojMArByIPUc0W7d8ukl8KTPjZ</wsse:Password><wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">wtlZrfPaBrURV2XXSs4N1g==</wsse:Nonce><wsu:Created>2025-02-03T14:11:34.098Z</wsu:Created></wsse:UsernameToken></wsse:Security></soapenv:Header>
+   <soapenv:Body>
+      <v2:lesePersonErweitert>
+         <!--Optional:-->
+         <anfrage>
+            <benutzer>
+               <benutzerId>5</benutzerId>
+            </benutzer>
+            <om>5</om>
+         </anfrage>
+      </v2:lesePersonErweitert>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>schoeffen</con:username><con:password>RojMArByIPUc0W7d8ukl8KTPjZ</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de/EwoPersonErweitertServiceInterface/lesePersonErweitert"/><con:wsrmConfig version="1.2"/></con:call><con:call id="7de34953-d253-45f6-aa44-26c69c889d90" name="Copy of Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://micro-ewo-apigateway-test-ewo-eai.apps.capk.muenchen.de/personen/2.0/soap/personErweitert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v2="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de">
+   <soapenv:Header><wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><wsse:UsernameToken wsu:Id="UsernameToken-ADF52DCE2E5A691A8817369473525492"><wsse:Username>schoeffen</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">RojMArByIPUc0W7d8ukl8KTPjZ</wsse:Password><wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">NAs0iiJxn4rPbr7yHEzIMQ==</wsse:Nonce><wsu:Created>2025-01-15T13:22:32.548Z</wsu:Created></wsse:UsernameToken></wsse:Security></soapenv:Header>
+   <soapenv:Body>
+      <v2:lesePersonErweitert>
+         <!--Optional:-->
+         <anfrage>
+            <benutzer>
+               <benutzerId>8</benutzerId>
+            </benutzer>
+            <om>8973</om>
+         </anfrage>
+      </v2:lesePersonErweitert>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>schoeffen</con:username><con:password>RojMArByIPUc0W7d8ukl8KTPjZ</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de/EwoPersonErweitertServiceInterface/lesePersonErweitert"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="2009e993-314c-4f8d-ae08-78884dd45200" isOneWay="false" action="" name="suchePersonErweitert" bindingOperationName="suchePersonErweitert" type="Request-Response" outputName="suchePersonErweitertResponse" inputName="suchePersonErweitert" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4c664711-d569-4b92-87c5-7c7ce5a5f8e1" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://micro-ewo-apigateway-test-ewo-eai.apps.capk.muenchen.de/personen/2.0/soap/personErweitert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v2="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de">
+   <soapenv:Header><wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><wsse:UsernameToken wsu:Id="UsernameToken-A56FCDB1CCD38AE2D417340076531761"><wsse:Username>schoeffen</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">RojMArByIPUc0W7d8ukl8KTPjZ</wsse:Password><wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">P6R4dgzuGoQNVBBNMh4nbg==</wsse:Nonce><wsu:Created>2024-12-12T12:47:33.175Z</wsu:Created></wsse:UsernameToken></wsse:Security></soapenv:Header>
+   <soapenv:Body>
+      <v2:suchePersonErweitert>
+         <!--Optional:-->
+         <anfrage>
+            <benutzer>
+               <benutzerId>1</benutzerId>
+            </benutzer>
+            <suchkriterien>
+               <datensatzstatus>AKTUELL</datensatzstatus>
+               <!--Optional:-->
+               <familienname>Wimtest-zwei-ohne-Pass</familienname>
+               <!--Optional:-->
+               <geburtsdatum>
+                  <!--Optional:-->
+                  <datum>1990-09-20</datum>
+               </geburtsdatum>
+               <!--Optional:-->
+               <geschlecht/>
+               <!--Optional:-->
+               <vorname>Franklin</vorname>
+               <!--Optional:-->
+               <buchstabeVon/>
+               <!--Optional:-->
+               <buchstabeBis/>
+               <!--Optional:-->
+               <hausnummerVon/>
+               <!--Optional:-->
+               <hausnummerBis/>
+               <!--Optional:-->
+               <strassenschluessel/>
+               <!--Optional:-->
+               <teilnummerVon/>
+               <!--Optional:-->
+               <teilnummerBis/>
+               <!--Optional:-->
+               <wohnort/>
+               <!--Optional:-->
+               <postleitzahl/>
+               <!--Optional:-->
+               <ordnungsmerkmal/>
+            </suchkriterien>
+         </anfrage>
+      </v2:suchePersonErweitert>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>schoeffen</con:username><con:password>RojMArByIPUc0W7d8ukl8KTPjZ</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de/EwoPersonErweitertServiceInterface/suchePersonErweitert"/><con:wsrmConfig version="1.2"/></con:call><con:call id="777d2d73-9b96-4404-ae03-adc49458b9a2" name="Request_König"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://micro-ewo-apigateway-test-ewo-eai.apps.capk.muenchen.de/personen/2.0/soap/personErweitert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v2="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de">
+   <soapenv:Header><wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><wsse:UsernameToken wsu:Id="UsernameToken-0EEDF2226FAEB88BAF17295002515492"><wsse:Username>schoeffen</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">RojMArByIPUc0W7d8ukl8KTPjZ</wsse:Password><wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">02WYVwesM4ch1x+YjANt2A==</wsse:Nonce><wsu:Created>2024-10-21T08:44:11.548Z</wsu:Created></wsse:UsernameToken></wsse:Security></soapenv:Header>
+   <soapenv:Body>
+      <v2:suchePersonErweitert>
+         <!--Optional:-->
+         <anfrage>
+            <benutzer>
+               <benutzerId>1</benutzerId>
+            </benutzer>
+            <suchkriterien>
+               <datensatzstatus>AKTUELL</datensatzstatus>
+               <!--Optional:-->
+               <familienname>König</familienname>
+               <!--Optional:-->
+               <geburtsdatum>
+                  <!--Optional:-->
+                  <datum>1940-01-03</datum>
+               </geburtsdatum>
+               <!--Optional:-->
+               <geschlecht/>
+               <!--Optional:-->
+               <vorname>Christopher Manfred</vorname>
+               <!--Optional:-->
+               <buchstabeVon/>
+               <!--Optional:-->
+               <buchstabeBis/>
+               <!--Optional:-->
+               <hausnummerVon/>
+               <!--Optional:-->
+               <hausnummerBis/>
+               <!--Optional:-->
+               <strassenschluessel/>
+               <!--Optional:-->
+               <teilnummerVon/>
+               <!--Optional:-->
+               <teilnummerBis/>
+               <!--Optional:-->
+               <wohnort/>
+               <!--Optional:-->
+               <postleitzahl/>
+               <!--Optional:-->
+               <ordnungsmerkmal/>
+            </suchkriterien>
+         </anfrage>
+      </v2:suchePersonErweitert>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>schoeffen</con:username><con:password>RojMArByIPUc0W7d8ukl8KTPjZ</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de/EwoPersonErweitertServiceInterface/suchePersonErweitert"/><con:wsrmConfig version="1.2"/></con:call><con:call id="570781a3-1cec-48bb-b25b-e79e89b0830a" name="Request_Liebig"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://micro-ewo-apigateway-test-ewo-eai.apps.capk.muenchen.de/personen/2.0/soap/personErweitert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v2="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de">
+   <soapenv:Header><wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><wsse:UsernameToken wsu:Id="UsernameToken-0DFA13C2D3258D345D171690210061010"><wsse:Username>schoeffen</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">RojMArByIPUc0W7d8ukl8KTPjZ</wsse:Password><wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">JT/+7+VtLzqFn9C9s8A1pQ==</wsse:Nonce><wsu:Created>2024-05-28T13:15:00.608Z</wsu:Created></wsse:UsernameToken></wsse:Security></soapenv:Header>
+   <soapenv:Body>
+      <v2:suchePersonErweitert>
+         <!--Optional:-->
+         <anfrage>
+            <benutzer>
+               <benutzerId>1</benutzerId>
+            </benutzer>
+            <suchkriterien>
+               <datensatzstatus>AKTUELL</datensatzstatus>
+               <!--Optional:-->
+               <familienname>Liebig</familienname>
+               <!--Optional:-->
+               <geburtsdatum>
+                  <!--Optional:-->
+                  <datum>1960-01-03</datum>
+               </geburtsdatum>
+               <!--Optional:-->
+               <geschlecht/>
+               <!--Optional:-->
+               <vorname>Ron Zygmunt</vorname>
+               <!--Optional:-->
+               <buchstabeVon/>
+               <!--Optional:-->
+               <buchstabeBis/>
+               <!--Optional:-->
+               <hausnummerVon/>
+               <!--Optional:-->
+               <hausnummerBis/>
+               <!--Optional:-->
+               <strassenschluessel/>
+               <!--Optional:-->
+               <teilnummerVon/>
+               <!--Optional:-->
+               <teilnummerBis/>
+               <!--Optional:-->
+               <wohnort/>
+               <!--Optional:-->
+               <postleitzahl/>
+               <!--Optional:-->
+               <ordnungsmerkmal/>
+            </suchkriterien>
+         </anfrage>
+      </v2:suchePersonErweitert>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>schoeffen</con:username><con:password>RojMArByIPUc0W7d8ukl8KTPjZ</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de/EwoPersonErweitertServiceInterface/suchePersonErweitert"/><con:wsrmConfig version="1.2"/></con:call><con:call id="ca226094-52d8-4a85-9d37-1d8c1c194d82" name="RequestWensauer"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://micro-ewo-apigateway-test-ewo-eai.apps.capk.muenchen.de/personen/2.0/soap/personErweitert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v2="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de">
+   <soapenv:Header><wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><wsse:UsernameToken wsu:Id="UsernameToken-7B66E36AD5777CF84717358214699672"><wsse:Username>schoeffen</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">RojMArByIPUc0W7d8ukl8KTPjZ</wsse:Password><wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">+sDdtneVqdD2GZ6hZP8cvA==</wsse:Nonce><wsu:Created>2025-01-02T12:37:49.967Z</wsu:Created></wsse:UsernameToken></wsse:Security></soapenv:Header>
+   <soapenv:Body>
+      <v2:suchePersonErweitert>
+         <!--Optional:-->
+         <anfrage>
+            <benutzer>
+               <benutzerId>1</benutzerId>
+            </benutzer>
+            <suchkriterien>
+               <datensatzstatus>AKTUELL</datensatzstatus>
+               <!--Optional:-->
+               <familienname>Wensauer</familienname>
+               <!--Optional:-->
+               <geburtsdatum>
+                  <!--Optional:-->
+                  <datum>1959-07-04</datum>
+               </geburtsdatum>
+               <!--Optional:-->
+               <geschlecht/>
+               <!--Optional:-->
+               <vorname>Meinrad Otto Georg</vorname>
+               <!--Optional:-->
+               <buchstabeVon/>
+               <!--Optional:-->
+               <buchstabeBis/>
+               <!--Optional:-->
+               <hausnummerVon/>
+               <!--Optional:-->
+               <hausnummerBis/>
+               <!--Optional:-->
+               <strassenschluessel/>
+               <!--Optional:-->
+               <teilnummerVon/>
+               <!--Optional:-->
+               <teilnummerBis/>
+               <!--Optional:-->
+               <wohnort/>
+               <!--Optional:-->
+               <postleitzahl/>
+               <!--Optional:-->
+               <ordnungsmerkmal/>
+            </suchkriterien>
+         </anfrage>
+      </v2:suchePersonErweitert>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>schoeffen</con:username><con:password>RojMArByIPUc0W7d8ukl8KTPjZ</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de/EwoPersonErweitertServiceInterface/suchePersonErweitert"/><con:wsrmConfig version="1.2"/></con:call><con:call id="6fe4f045-4777-4dcc-b478-9b4f5a7c4268" name="Copy of Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://micro-ewo-apigateway-eai-service-test-ewo-eai.muenchen.de:8443/okkommService/1.0/soap/okkommService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v2="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de">
+   <soapenv:Header><wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><wsse:UsernameToken wsu:Id="UsernameToken-8D2664A30D199653F817332973298172"><wsse:Username>schoeffen</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">RojMArByIPUc0W7d8ukl8KTPjZ</wsse:Password><wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">P5LU3IAyHFWSzMIK4pi5vA==</wsse:Nonce><wsu:Created>2024-12-04T07:28:49.817Z</wsu:Created></wsse:UsernameToken></wsse:Security></soapenv:Header>
+   <soapenv:Body>
+      <v2:suchePersonErweitert>
+         <!--Optional:-->
+         <anfrage>
+            <benutzer>
+               <benutzerId>1</benutzerId>
+            </benutzer>
+            <suchkriterien>
+               <datensatzstatus>AKTUELL</datensatzstatus>
+               <!--Optional:-->
+               <familienname>Wimtest-zwei-ohne-Pass</familienname>
+               <!--Optional:-->
+               <geburtsdatum>
+                  <!--Optional:-->
+                  <datum>1990-09-20</datum>
+               </geburtsdatum>
+               <!--Optional:-->
+               <geschlecht/>
+               <!--Optional:-->
+               <vorname>Franklin</vorname>
+               <!--Optional:-->
+               <buchstabeVon/>
+               <!--Optional:-->
+               <buchstabeBis/>
+               <!--Optional:-->
+               <hausnummerVon/>
+               <!--Optional:-->
+               <hausnummerBis/>
+               <!--Optional:-->
+               <strassenschluessel/>
+               <!--Optional:-->
+               <teilnummerVon/>
+               <!--Optional:-->
+               <teilnummerBis/>
+               <!--Optional:-->
+               <wohnort/>
+               <!--Optional:-->
+               <postleitzahl/>
+               <!--Optional:-->
+               <ordnungsmerkmal/>
+            </suchkriterien>
+         </anfrage>
+      </v2:suchePersonErweitert>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>schoeffen</con:username><con:password>RojMArByIPUc0W7d8ukl8KTPjZ</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://v2.person.erweitert.service.fachlich.api.ewo.eai.muenchen.de/EwoPersonErweitertServiceInterface/suchePersonErweitert"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer><con:outgoing mustUnderstand="false"><con:name>Test</con:name><con:entry type="Username" username="schoeffen" password="RojMArByIPUc0W7d8ukl8KTPjZ"><con:configuration><addCreated>true</addCreated><addNonce>true</addNonce><passwordType>PasswordText</passwordType></con:configuration></con:entry></con:outgoing></con:wssContainer><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

@@ -1,40 +1,38 @@
 spring:
-  application:
-    name: @project.artifactId@
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  lifecycle:
+    timeout-per-shutdown-phase: 1m # Graceful shutdown: Zusätzlich kann man eine Zeitverzögerung für das Herunterfahren setzen
 
-server:
-  shutdown: "graceful"
-  error:
-    whitelabel:
-      enabled: false
+api:
+  api:
+    schema-version: @project.version@
+    service-version: @project.version@
+  cxf:
+    producer:
+      uri:
+        personeninfo: "cxf:bean:ewoPersonErweitertServiceEndpointLesePersonErweitert?defaultOperationName=lesePersonErweitert"
+        personeninfoewosuche: "cxf:bean:ewoPersonErweitertServiceEndpointSuchePersonErweitert?defaultOperationName=suchePersonErweitert"
+      timeout: 5000
+  auth:
+    roles:
+      BASIC: getPersoneninfo
+      ACTUATOR_ROLE: ACTUATOR
+  loggingFilter:
+    urlPattern: ${service.rest.basepath}/*
+    buffersize: 1024
+    charsetName: UTF-8
+    loggerName: "de.muenchen.eai.api.personeninfo.filter.RequestResponseLoggingFilter"
 
-management:
-  endpoints:
-    enabled-by-default: false
-    web:
-      exposure:
-        include: health, info, prometheus
-      path-mapping:
-        prometheus: metrics
-  endpoint:
-    health:
-      enabled: true
-      probes:
-        enabled: true
-    info:
-      enabled: true
-    prometheus:
-      enabled: true
-  info:
-    env:
-      enabled: true
-    camel:
-      enabled: false
-  health:
-    livenessstate:
-      enabled: true
-    readinessstate:
-      enabled: true
+camel:
+  servlet:
+    mapping:
+      context-path: ${service.rest.basepath}/*
+
+service:
+  rest:
+    basepath: "/personeninfo/api"
 
 info:
   application:
@@ -45,10 +43,16 @@ info:
     java.version: @java.version@
     camel.version: @camel-spring-boot-dependencies.version@
 
-camel:
-  servlet:
-    mapping:
-      context-path: /api/*
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  context-path: "/actuator"
+  info:
+    env.enabled: true
+    java.enabled: true
+    build.enabled: true
 
-# Custom properties
-output: direct:foo
+server:
+  shutdown: "graceful"

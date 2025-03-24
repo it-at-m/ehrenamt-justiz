@@ -1,7 +1,5 @@
--- (c) LH Muenchen, Ehrenamtjustiz
--- Ersteller: Udo Brandes
---
--- SQL-Skript PostgreSQL-DB (09.08.2022):
+
+-- SQL-Skript PostgreSQL-DB (03/2025):
 -- 1. Schema-Praefix(?)
 -- 2. Table space(?)
 -- 3. owner2tbl
