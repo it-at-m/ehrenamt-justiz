@@ -23,7 +23,7 @@ api:
     urlPattern: ${service.rest.basepath}/*
     buffersize: 1024
     charsetName: UTF-8
-    loggerName: "de.muenchen.eai.api.personeninfo.filter.RequestResponseLoggingFilter"
+    loggerName: "de.muenchen.ehrenamtjustiz.eai.personeninfo.filter.RequestResponseLoggingFilter"
 
 camel:
   servlet:
