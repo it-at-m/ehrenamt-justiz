@@ -157,14 +157,14 @@ public interface PersonRepository extends PagingAndSortingRepository<Person, UUI
 
     @Query(
         "SELECT p FROM Person p " +
-                "where p.status='Vorschlag' and p.neuervorschlag=true and p.konfigurationid=?1"
+                "where p.status='VORSCHLAG' and p.neuervorschlag=true and p.konfigurationid=?1"
     )
     @PreAuthorize(Authorities.HAS_AUTHORITY_READ_EHRENAMTJUSTIZDATEN)
     Person[] getNeueVorschlaege(UUID aktiveKonfiguration);
 
     @Modifying
     @Transactional
-    @Query("update Person p set p.neuervorschlag=false where p.status='Vorschlag' and p.neuervorschlag=true and p.konfigurationid=?1")
+    @Query("update Person p set p.neuervorschlag=false where p.status='VORSCHLAG' and p.neuervorschlag=true and p.konfigurationid=?1")
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
     void alsBenachrichtigtMarkieren(UUID aktiveKonfiguration);
 
