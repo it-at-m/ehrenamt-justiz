@@ -1,9 +1,9 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo.route;
 
 import de.muenchen.ehrenamtjustiz.api.BuergerSucheAnfrage;
-import de.muenchen.ehrenamtjustiz.api.DefaultErrorProjection;
-import de.muenchen.ehrenamtjustiz.api.Fehler;
-import de.muenchen.ehrenamtjustiz.api.Konstanten;
+import de.muenchen.ehrenamtjustiz.eai.personeninfo.exception.DefaultErrorProjection;
+import de.muenchen.ehrenamtjustiz.eai.personeninfo.exception.Fehler;
+import de.muenchen.ehrenamtjustiz.eai.personeninfo.config.Konstanten;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.config.Configuration;
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;

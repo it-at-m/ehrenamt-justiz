@@ -1,4 +1,4 @@
-package de.muenchen.ehrenamtjustiz.api;
+package de.muenchen.ehrenamtjustiz.eai.personeninfo.exception;
 
 @SuppressWarnings("PMD.CyclomaticComplexity")
 public class Fehler {

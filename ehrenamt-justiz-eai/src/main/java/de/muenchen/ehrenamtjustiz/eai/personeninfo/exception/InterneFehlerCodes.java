@@ -1,4 +1,4 @@
-package de.muenchen.ehrenamtjustiz.api;
+package de.muenchen.ehrenamtjustiz.eai.personeninfo.exception;
 
 /**
  * Error codes for errors that can occur during the processing of a request.

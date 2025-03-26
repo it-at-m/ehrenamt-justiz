@@ -1,11 +1,23 @@
 package de.muenchen.ehrenamtjustiz.api;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import de.muenchen.ehrenamtjustiz.konstanten.Konstanten;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.xml.bind.annotation.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Setter
-@Getter
+@XmlRootElement(name = "EWOBuerger")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @SuppressWarnings("PMD.TooManyFields")
 public class EWOBuerger {
 
@@ -19,6 +31,9 @@ public class EWOBuerger {
 
     private String vorname;
 
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonFormat(pattern = Konstanten.DATE_FORMAT)
     private java.time.LocalDate geburtsdatum;
 
     private Geschlecht geschlecht;
@@ -33,7 +48,7 @@ public class EWOBuerger {
 
     private String familienstand;
 
-    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     private java.util.List<String> staatsangehoerigkeit = new java.util.ArrayList<>();
 
     private String wohnungsgeber;
@@ -52,18 +67,21 @@ public class EWOBuerger {
 
     private String zusatz;
 
-    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     private final java.util.List<String> konfliktFelder = new java.util.ArrayList<>();
 
     private String postleitzahl;
 
     private String ort;
 
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonFormat(pattern = Konstanten.DATE_FORMAT)
     private java.time.LocalDate inMuenchenSeit;
 
     private Wohnungsstatus wohnungsstatus;
 
-    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     private java.util.List<String> auskunftssperren = new java.util.ArrayList<>();
 
 }

@@ -80,6 +80,11 @@
 
 
     <dependencies>
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>ehrenamt-justiz-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

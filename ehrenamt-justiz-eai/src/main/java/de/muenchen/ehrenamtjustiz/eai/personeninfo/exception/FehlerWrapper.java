@@ -6,8 +6,6 @@ import java.net.http.HttpTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.muenchen.ehrenamtjustiz.api.Fehler;
-import de.muenchen.ehrenamtjustiz.api.InterneFehlerCodes;
 import org.apache.camel.CamelExecutionException;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;

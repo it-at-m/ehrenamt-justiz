@@ -1,6 +1,6 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo;
 
-import de.muenchen.ehrenamtjustiz.api.Fehler;
+import de.muenchen.ehrenamtjustiz.eai.personeninfo.exception.Fehler;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.exception.FehlerWrapper;
 import org.apache.camel.Exchange;
 import org.apache.camel.impl.DefaultCamelContext;

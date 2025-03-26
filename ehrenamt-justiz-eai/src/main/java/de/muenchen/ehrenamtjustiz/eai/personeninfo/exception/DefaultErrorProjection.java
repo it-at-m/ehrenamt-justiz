@@ -1,7 +1,8 @@
-package de.muenchen.ehrenamtjustiz.api;
+package de.muenchen.ehrenamtjustiz.eai.personeninfo.exception;
 
 import java.util.Date;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@SuppressFBWarnings("EI_EXPOSE_REP")
 public class DefaultErrorProjection {
     private Date timestamp;
 

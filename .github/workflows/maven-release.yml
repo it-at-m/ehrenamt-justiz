@@ -16,6 +16,7 @@ on:
         description: Service-Name
         required: true
         options:
+          - ehrenamt-justiz-api
           - ehrenamt-justiz-backend
           - ehrenamt-justiz-eai
 

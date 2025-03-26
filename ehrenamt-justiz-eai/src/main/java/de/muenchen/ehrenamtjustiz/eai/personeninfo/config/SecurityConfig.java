@@ -1,6 +1,5 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo.config;
 
-import de.muenchen.ehrenamtjustiz.api.Konstanten;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
