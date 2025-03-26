@@ -34,6 +34,7 @@
         <!-- Additional required dependencies -->
         <lombok.version>1.18.36</lombok.version>
         <camel-spring-boot-dependencies.version>4.8.3</camel-spring-boot-dependencies.version>
+        <central-publishing-maven-plugin.version>0.7.0</central-publishing-maven-plugin.version>
 
     </properties>
 
@@ -57,6 +58,22 @@
     </dependencies>
 
     <build>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${maven-release-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonatype.central</groupId>
+                    <artifactId>central-publishing-maven-plugin</artifactId>
+                    <version>${central-publishing-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -188,6 +205,17 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <!-- Central Portal Publishing Plugin -->
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <tokenAuth>true</tokenAuth>
+                    <autoPublish>true</autoPublish>
+                    <deploymentName>${project.groupId}:${project.artifactId}:${project.version}</deploymentName>
+                </configuration>
             </plugin>
         </plugins>
     </build>
