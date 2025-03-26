@@ -81,7 +81,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.example</groupId>
+            <groupId>de.muenchen.ehrenamt-justiz</groupId>
             <artifactId>ehrenamt-justiz-api</artifactId>
             <version>${project.version}</version>
         </dependency>
