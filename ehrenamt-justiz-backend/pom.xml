@@ -83,7 +83,7 @@
         <dependency>
             <groupId>de.muenchen.ehrenamt-justiz</groupId>
             <artifactId>ehrenamt-justiz-api</artifactId>
-            <version>${project.version}</version>
+            <version>0.0.2</version>
         </dependency>
         <!-- Spring Boot -->
         <dependency>
