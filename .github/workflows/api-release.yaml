@@ -1,4 +1,4 @@
-name: release
+name: api-release
 
 on:
   workflow_dispatch:
