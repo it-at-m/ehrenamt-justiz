@@ -8,7 +8,6 @@
     <name>ehrenamt-justiz-api</name>
     <description>API used in EAI and Backend for Ehrenamtjustiz</description>
 
-    <packaging>jar</packaging>
     <url>https://github.com/it-at-m/ehrenamt-justiz</url>
 
     <properties>
@@ -91,7 +90,18 @@
                     </compilerArgs>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
