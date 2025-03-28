@@ -3,68 +3,227 @@
   "policyEnforcementMode": "ENFORCING",
   "resources": [
     {
-      "name": "REFARCH_THEENTITY_READ",
-      "type": "local-backend-service",
+      "name": "READ_EWOBUERGER",
+      "type": "backend-backend-service",
       "scopes": []
     },
     {
-      "name": "REFARCH_THEENTITY_WRITE",
-      "type": "local-backend-service",
+      "name": "WRITE_EWOBUERGER",
+      "type": "backend-backend-service",
       "scopes": []
     },
     {
-      "name": "REFARCH_THEENTITY_DELETE",
-      "type": "local-backend-service",
+      "name": "DELETE_EWOBUERGER",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "READ_EHRENAMTJUSTIZDATEN",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "WRITE_EHRENAMTJUSTIZDATEN",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "DELETE_EHRENAMTJUSTIZDATEN",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "READ_KONFIGURATION",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "WRITE_KONFIGURATION",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "DELETE_KONFIGURATION",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "EWOSUCHE",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "EWOSUCHEMITOM",
+      "type": "backend-backend-service",
+      "scopes": []
+    },
+    {
+      "name": "ONLINEBEWERBEN",
+      "type": "backend-backend-service",
       "scopes": []
     }
   ],
   "policies": [
     {
-      "name": "rolepolicy_writer",
+      "name": "sachbearbeiter",
       "type": "role",
       "logic": "POSITIVE",
       "decisionStrategy": "AFFIRMATIVE",
       "config": {
-        "roles": "[{\"id\":\"local/writer\",\"required\":false}]"
+        "roles": "[{\"id\":\"ej-app/clientrole_sachbearbeiter\",\"required\":false}]"
       }
     },
     {
-      "name": "rolepolicy_reader",
+      "name": "sondersachbearbeiter",
       "type": "role",
       "logic": "POSITIVE",
       "decisionStrategy": "AFFIRMATIVE",
       "config": {
-        "roles": "[{\"id\":\"local/reader\",\"required\":false}]"
+        "roles": "[{\"id\":\"ej-app/clientrole_sondersachbearbeiter\",\"required\":false}]"
       }
     },
     {
-      "name": "permission_REFARCH_THEENTITY_DELETE",
+      "name": "administrator",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "roles": "[{\"id\":\"ej-app/clientrole_admin\",\"required\":false}]"
+      }
+    },
+    {
+      "name": "permission_READ_EWOBUERGER",
       "type": "resource",
       "logic": "POSITIVE",
       "decisionStrategy": "AFFIRMATIVE",
       "config": {
-        "resources": "[\"REFARCH_THEENTITY_DELETE\"]",
-        "applyPolicies": "[\"rolepolicy_writer\"]"
+        "resources": "[\"READ_EWOBUERGER\"]",
+        "applyPolicies": "[\"sachbearbeiter\", \"sondersachbearbeiter\", \"administrator\"]"
       }
     },
     {
-      "name": "permission_REFARCH_THEENTITY_WRITE",
+      "name": "permission_WRITE_EWOBUERGER",
       "type": "resource",
       "logic": "POSITIVE",
       "decisionStrategy": "AFFIRMATIVE",
       "config": {
-        "resources": "[\"REFARCH_THEENTITY_WRITE\"]",
-        "applyPolicies": "[\"rolepolicy_writer\"]"
+        "resources": "[\"WRITE_EWOBUERGER\"]",
+        "applyPolicies": "[\"sachbearbeiter\", \"sondersachbearbeiter\", \"administrator\"]"
       }
     },
     {
-      "name": "permission_REFARCH_THEENTITY_READ",
+      "name": "permission_DELETE_EWOBUERGER",
       "type": "resource",
       "logic": "POSITIVE",
       "decisionStrategy": "AFFIRMATIVE",
       "config": {
-        "resources": "[\"REFARCH_THEENTITY_READ\"]",
-        "applyPolicies": "[\"rolepolicy_writer\",\"rolepolicy_reader\"]"
+        "resources": "[\"DELETE_EWOBUERGER\"]",
+        "applyPolicies": "[\"sondersachbearbeiter\", \"administrator\"]"
+      }
+    },
+    {
+      "name": "permission_READ_EHRENAMTJUSTIZDATEN",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"READ_EHRENAMTJUSTIZDATEN\"]",
+        "applyPolicies": "[\"sachbearbeiter\", \"sondersachbearbeiter\", \"administrator\"]"
+      }
+    },
+    {
+      "name": "permission_WRITE_EHRENAMTJUSTIZDATEN",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"WRITE_EHRENAMTJUSTIZDATEN\"]",
+        "applyPolicies": "[\"sachbearbeiter\", \"sondersachbearbeiter\",  \"administrator\"]"
+      }
+    },
+    {
+      "name": "permission_DELETE_EHRENAMTJUSTIZDATEN",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"DELETE_EHRENAMTJUSTIZDATEN\"]",
+        "applyPolicies": "[\"sondersachbearbeiter\", \"administrator\"]"
+      }
+    },
+    {
+      "name": "permission_DELETE_EHRENAMTJUSTIZDATEN",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"DELETE_EHRENAMTJUSTIZDATEN\"]",
+        "applyPolicies": "[\"sondersachbearbeiter\", \"administrator\"]"
+      }
+    },
+    {
+      "name": "permission_READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE\"]",
+        "applyPolicies": "[\"sondersachbearbeiter\", \"administrator\"]"
+      }
+    },
+    {
+      "name": "permission_READ_KONFIGURATION",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"READ_KONFIGURATION\"]",
+        "applyPolicies": "[\"sachbearbeiter\", \"sondersachbearbeiter\",  \"administrator\"]"
+      }
+    },
+    {
+      "name": "permission_WRITE_KONFIGURATION",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"WRITE_KONFIGURATION\"]",
+        "applyPolicies": "[\"administrator\"]"
+      }
+    },
+    {
+      "name": "permission_DELETE_KONFIGURATION",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"DELETE_KONFIGURATION\"]",
+        "applyPolicies": "[\"administrator\"]"
+      }
+    },
+    {
+      "name": "permission_EWOSUCHE",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"EWOSUCHE\"]",
+        "applyPolicies": "[\"sachbearbeiter\", \"sondersachbearbeiter\", \"administrator\"]"
+      }
+    },
+    {
+      "name": "permission_EWOSUCHEMITOM",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"EWOSUCHEMITOM\"]",
+        "applyPolicies": "[\"sachbearbeiter\", \"sondersachbearbeiter\",  \"administrator\"]"
       }
     }
   ],
