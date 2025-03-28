@@ -40,6 +40,12 @@
             <appender-ref ref="STDOUT" />
         </logger>
 
+        <logger name="org.springframework.security"
+                level="debug"
+                additivity="false">
+            <appender-ref ref="STDOUT" />
+        </logger>
+
         <!-- Logger usage -->
         <root level="info">
             <appender-ref ref="STDOUT" />

@@ -102,9 +102,9 @@ public class RequestResponseLoggingFilter implements Filter {
      */
     private boolean checkForLogging(final HttpServletRequest httpServletRequest) {
         final boolean isLoggingMode = switch (securityProperties.getLoggingMode()) {
-        case LoggingMode.ALL -> true;
-        case LoggingMode.CHANGING -> CHANGING_METHODS.contains(httpServletRequest.getMethod());
-        default -> false;
+            case LoggingMode.ALL -> true;
+            case LoggingMode.CHANGING -> CHANGING_METHODS.contains(httpServletRequest.getMethod());
+            default -> false;
         };
 
         return isLoggingMode && securityProperties.getLoggingIgnoreListAsMatchers().stream().noneMatch(matcher -> matcher.matches(httpServletRequest));

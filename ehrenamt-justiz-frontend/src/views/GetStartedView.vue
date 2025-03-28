@@ -68,7 +68,7 @@
           neue Vorschläge
         </h2>
         <h2>{{ textAnzahlNeueVorschlaege }}</h2>
-        <!--        <v-btn
+        <v-btn
           :disabled="
             !user ||
             !user.authorities.includes(
@@ -77,9 +77,9 @@
           "
           @click="datenHerunterladen"
           >Daten herunterladen
-        </v-btn>-->
-        <v-btn @click="datenHerunterladen">Daten herunterladen </v-btn>
-        <!--        <v-btn
+        </v-btn>
+
+        <v-btn
           :disabled="
             !user ||
             !user.authorities.includes(
@@ -87,9 +87,6 @@
             )
           "
           @click="alsBenachrichtigtMarkierenBestaetigen"
-          >Als benachrichtigt markieren
-        </v-btn>-->
-        <v-btn @click="alsBenachrichtigtMarkierenBestaetigen"
           >Als benachrichtigt markieren
         </v-btn>
       </v-col>
@@ -122,6 +119,7 @@ import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialog
 import { STATUS_INDICATORS } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
+import { useUserStore } from "@/stores/user";
 
 const ehrenamtJustizStatus = ref<EhrenamtJustizStatus | null>(null);
 const textAnzahlBewerbungen = ref();
@@ -135,6 +133,8 @@ const X_UNICODE = 0x00d7;
 const PERSON_UNICODE = 0x1f9cd;
 const yesNoDialogVisible = ref(false);
 const benachrichtigtMarkierenAnimationAktiv = ref(false);
+const userStore = useUserStore();
+const user = userStore.getUser;
 
 onMounted(() => {
   load();
