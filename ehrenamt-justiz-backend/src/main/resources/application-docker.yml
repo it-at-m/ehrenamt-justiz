@@ -38,7 +38,7 @@ de:
 # Define the local keycloak configuration here
 # Deduplication-only property
 sso:
-  url: http://host.docker.internal:8100
+  url: http://kubernetes.docker.internal:8100
   realm: local_realm
   client: ej-app
 
