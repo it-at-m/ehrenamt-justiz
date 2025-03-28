@@ -23,13 +23,13 @@ spring:
           jwk-set-uri: ${sso.url}/auth/realms/${sso.realm}/protocol/openid-connect/certs
           # adds audience verification - https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html#_supplying_audiences
           # requires client to be in audience claim, see https://www.keycloak.org/docs/latest/server_admin/#_audience_resolve
-          audiences:
-            - ${sso.client}
+          # audiences:
+           # - ${sso.client} not active, because of missing audience scope: https://github.com/it-at-m/refarch-templates/blob/main/stack/keycloak/migration/06_local-audience.yml in sso-client.json in ehrenamt-justiz
 
 # Define the local keycloak configuration here
 # Deduplication-only property
 sso:
-  url: http://localhost:8100
+  url: http://kubernetes.docker.internal:8100
   realm: local_realm
   client: ej-app
 
