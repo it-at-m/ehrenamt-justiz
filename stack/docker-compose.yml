@@ -131,5 +131,38 @@ services:
       test: ["CMD-SHELL", "/workspace/health-check"]
     security_opt: *security_settings
 
+  backend:
+    profiles:
+      - backend
+    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "39146:39146"
+    networks:
+      - keycloak
+    healthcheck:
+      <<: *healthcheck
+      test: [ "CMD-SHELL", "curl http://localhost:39146/actuator/health/liveness" ]
+
+  frontend:
+    profiles:
+      - frontend
+    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend
+    ports:
+      - "8081:8080"
+    networks:
+      - keycloak
+
+  eai:
+    profiles:
+      - eai
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai
+    volumes:
+      - ../ehrenamt-justiz-eai/entrypoint.sh:/usr/local/bin/entrypoint.sh:rwx
+    entrypoint: ["/usr/local/bin/entrypoint.sh"]
+    ports:
+      - "8085:8085"
+
 networks:
   keycloak:
