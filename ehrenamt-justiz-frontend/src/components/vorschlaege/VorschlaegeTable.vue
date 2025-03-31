@@ -23,64 +23,48 @@
             class="col"
             cols="2"
           >
-            <!--            <v-btn
-                          :disabled="
-                            !user ||
-                            !user.authorities.includes('DELETE_EHRENAMTJUSTIZDATEN') ||
-                            selectedUUIDs.length == 0
-                          "
-                          color="error"
-                          @click="deleteRequested"
-                          >Löschen</v-btn
-                        >-->
             <v-btn
+              :disabled="
+                !user ||
+                !user.authorities.includes('DELETE_EHRENAMTJUSTIZDATEN') ||
+                selectedUUIDs.length == 0
+              "
               color="error"
               @click="deleteRequested"
-              >Löschen
-            </v-btn>
+              >Löschen</v-btn
+            >
           </v-col>
           <v-col
             class="col"
             cols="3"
           >
-            <!--            <v-btn
-                          :disabled="
-                            !user ||
-                            !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
-                            selectedUUIDs.length == 0
-                          "
-                          color="accent"
-                          :loading="bewerberListeAnimationAktiv"
-                          @click="aufBewerberlisteSetzen"
-                          >Auf Bewerberliste setzen</v-btn
-                        >-->
             <v-btn
+              :disabled="
+                !user ||
+                !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
+                selectedUUIDs.length == 0
+              "
               color="accent"
               :loading="bewerberListeAnimationAktiv"
               @click="aufBewerberlisteSetzen"
-              >Auf Bewerberliste setzen
-            </v-btn>
+              >Auf Bewerberliste setzen</v-btn
+            >
           </v-col>
           <v-col
             class="col"
             cols="3"
           >
-            <!--            <v-btn
-                          :disabled="
-                            !user ||
-                            !user.authorities.includes(
-                              'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
-                            )
-                          "
-                          color="accent"
-                          @click="datenHerunterladen"
-                          >Daten herunterladen</v-btn
-                        >-->
             <v-btn
+              :disabled="
+                !user ||
+                !user.authorities.includes(
+                  'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
+                )
+              "
               color="accent"
               @click="datenHerunterladen"
-              >Daten herunterladen
-            </v-btn>
+              >Daten herunterladen</v-btn
+            >
           </v-col>
         </v-row>
       </v-card-title>
@@ -223,6 +207,7 @@ import YesNoDialog from "@/components/common/YesNoDialog.vue";
 import { BEARBEIGUNGS_MODUS, PERSONENSTATUS, TABELLEN } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
+import { useUserStore } from "@/stores/user";
 
 const headers: ReadonlyHeaders = [
   {
@@ -290,6 +275,8 @@ const loadingAnimationAktiv = ref(false);
 const deleteAnimationAktiv = ref(false);
 const bewerberListeAnimationAktiv = ref(false);
 const yesNoDialogVisible = ref(false);
+const userStore = useUserStore();
+const user = userStore.getUser;
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function loadItems(options: any) {

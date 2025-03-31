@@ -12,9 +12,9 @@ changes:
           config:
             access.token.claim: "true"
             id.token.claim: "true"
-            included.client.audience: "local"
+            included.client.audience: "ej-app"
             included.custom.audience: ""
 
   - assignDefaultClientScope:
-      clientId: local
+      clientId: ej-app
       clientScopeName: local_audience

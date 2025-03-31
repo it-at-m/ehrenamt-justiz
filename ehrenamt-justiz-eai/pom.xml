@@ -26,7 +26,7 @@
         <maven.compiler.release>${java.version}</maven.compiler.release>
 
         <!-- Core Frameworks -->
-        <camel-spring-boot-dependencies.version>4.8.3</camel-spring-boot-dependencies.version>
+        <camel-spring-boot-dependencies.version>4.10.3</camel-spring-boot-dependencies.version>
 
         <!-- Logging -->
         <logstash-logback-encoder.version>8.0</logstash-logback-encoder.version>
@@ -73,7 +73,7 @@
         <dependency>
             <groupId>de.muenchen.ehrenamt-justiz</groupId>
             <artifactId>ehrenamt-justiz-api</artifactId>
-            <version>${project.version}</version>
+            <version>0.0.2</version>
         </dependency>
         <!-- Camel -->
         <dependency>
@@ -187,7 +187,7 @@
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-annotations</artifactId>
-            <version>2.2.28</version>
+            <version>2.2.29</version>
         </dependency>
 
     </dependencies>

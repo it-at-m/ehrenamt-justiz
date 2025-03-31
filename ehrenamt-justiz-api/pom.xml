@@ -3,7 +3,7 @@
 
     <groupId>de.muenchen.ehrenamt-justiz</groupId>
     <artifactId>ehrenamt-justiz-api</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <name>ehrenamt-justiz-api</name>
     <description>API used in EAI and Backend for Ehrenamtjustiz</description>
 
@@ -33,7 +33,7 @@
 
         <!-- Additional required dependencies -->
         <lombok.version>1.18.36</lombok.version>
-        <camel-spring-boot-dependencies.version>4.8.3</camel-spring-boot-dependencies.version>
+        <camel-spring-boot-dependencies.version>4.10.3</camel-spring-boot-dependencies.version>
         <central-publishing-maven-plugin.version>0.7.0</central-publishing-maven-plugin.version>
 
         <!-- Testing -->

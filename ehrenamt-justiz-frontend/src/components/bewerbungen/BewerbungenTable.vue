@@ -23,18 +23,12 @@
             class="col"
             cols="2"
           >
-            <!--            <v-btn
+            <v-btn
               :disabled="
                 !user ||
                 !user.authorities.includes('DELETE_EHRENAMTJUSTIZDATEN') ||
                 selectedUUIDs.length == 0
               "
-              color="error"
-              @click="deleteRequested"
-              >Löschen</v-btn
-            >-->
-            <v-btn
-              :disabled="selectedUUIDs.length == 0"
               color="error"
               @click="deleteRequested"
               >Löschen</v-btn
@@ -44,7 +38,7 @@
             class="col"
             cols="3"
           >
-            <!--            <v-btn
+            <v-btn
               :disabled="
                 !user ||
                 !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
@@ -57,31 +51,19 @@
               :loading="vorschlagsListeAnimationAktiv"
               @click="aufVorschlagslisteSetzen"
               >Auf Vorschlagsliste setzen</v-btn
-            >-->
-            <v-btn
-              :disabled="selectedUUIDs.length == 0"
-              color="accent"
-              :loading="vorschlagsListeAnimationAktiv"
-              @click="aufVorschlagslisteSetzen"
-              >Auf Vorschlagsliste setzen</v-btn
             >
           </v-col>
           <v-col
             class="col"
             cols="3"
           >
-            <!--            <v-btn
+            <v-btn
               :disabled="
                 !user ||
                 !user.authorities.includes(
                   'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
                 )
               "
-              color="accent"
-              @click="datenHerunterladen"
-              >Daten herunterladen</v-btn
-            >-->
-            <v-btn
               color="accent"
               @click="datenHerunterladen"
               >Daten herunterladen</v-btn
@@ -235,6 +217,7 @@ import {
 } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
+import { useUserStore } from "@/stores/user";
 import InvalidePersonenSelect from "@/views/vorschlaege/InvalidePersonenSelect.vue";
 
 const headers: ReadonlyHeaders = [
@@ -305,6 +288,8 @@ const vorschlagsListeAnimationAktiv = ref(false);
 const yesNoDialogVisible = ref(false);
 const invalidePersonenSelectVisible = ref(false);
 const invalidePersonen = ref<PersonenTableData[]>([]);
+const userStore = useUserStore();
+const user = userStore.getUser;
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function loadItems(options: any) {

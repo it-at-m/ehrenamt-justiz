@@ -52,6 +52,7 @@ public class SecurityConfiguration {
                 .oauth2ResourceServer(httpSecurityOAuth2ResourceServerConfigurer -> httpSecurityOAuth2ResourceServerConfigurer
                         .jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(new JwtUserInfoAuthenticationConverter(
                                 new UserInfoAuthoritiesService(securityProperties.getUserInfoUri(), restTemplateBuilder)))));
+
         return http.build();
     }
 

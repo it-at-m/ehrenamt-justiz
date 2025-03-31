@@ -3,10 +3,14 @@ author: Default
 realm: local_realm
 changes:
   - assignRole:
-      user: reader
-      role: reader
-      clientId: local
+      user: nosach
+      role: clientrole_sachbearbeiter
+      clientId: ej-app
   - assignRole:
-      user: writer
-      role: writer
-      clientId: local
+      user: sosach
+      role: clientrole_sondersachbearbeiter
+      clientId: ej-app
+  - assignRole:
+      user: admin
+      role: clientrole_administrator
+      clientId: ej-app
