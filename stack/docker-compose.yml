@@ -163,7 +163,7 @@ services:
     networks:
       - keycloak
 
-  # Zum Staarten der EAI im lokalen Docker muss das Script "entrypoint.sh" unter ./ehrenamt-justiz-eai so erweiitert werden, dass
+  # Zum Starten der EAI im lokalen Docker muss das Script "entrypoint.sh" unter ./ehrenamt-justiz-eai so erweiitert werden, dass
   # die notwendigen Zertifikate eingebunden werden. Siehe Dokumentation dort.
   # Wenn die EAI im Docker-Compose mit gestartet werden soll, dann ist folgende Befehl beim Starten auszuführen:
   # docker-compose --profile=eai up
