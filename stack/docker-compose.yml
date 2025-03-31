@@ -131,6 +131,10 @@ services:
       test: ["CMD-SHELL", "/workspace/health-check"]
     security_opt: *security_settings
 
+  # Wenn das Backend im Docker-Compose mit gestartet werden soll, dann ist folgende Befehl beim Starten auszuführen:
+  # docker-compose --profile=backend up
+  # oder z.B.:
+  # docker-compose --profile=backend --profile=frontend --profile=eai u
   backend:
     profiles:
       - backend
@@ -145,6 +149,11 @@ services:
       <<: *healthcheck
       test: [ "CMD-SHELL", "curl http://localhost:39146/actuator/health/liveness" ]
 
+
+  # Wenn das Frontend im Docker-Compose mit gestartet werden soll, dann ist folgende Befehl beim Starten auszuführen:
+  # docker-compose --profile=frontend up
+  # oder z.B.:
+  # docker-compose --profile=backend --profile=frontend --profile=eai up
   frontend:
     profiles:
       - frontend
@@ -154,6 +163,12 @@ services:
     networks:
       - keycloak
 
+  # Zum Staarten der EAI im lokalen Docker muss das Script "entrypoint.sh" unter ./ehrenamt-justiz-eai so erweiitert werden, dass
+  # die notwendigen Zertifikate eingebunden werden. Siehe Dokumentation dort.
+  # Wenn die EAI im Docker-Compose mit gestartet werden soll, dann ist folgende Befehl beim Starten auszuführen:
+  # docker-compose --profile=eai up
+  # oder z.B.:
+  # docker-compose --profile=backend --profile=frontend --profile=eai up
   eai:
     profiles:
       - eai
