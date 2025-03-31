@@ -1,21 +1,20 @@
 #!/bin/bash
-# Dieses Script wird im Container von Docker ausgeführt und hat folgende Aufgaben:
+# This script is executed in the Docker container and has the following tasks:
+
+
+# - Determine certificates using the curl command and save them under /tmp/..., for example:
+#     e.g. curl -o /tmp/LHM-....pem http://.../LHM-....pem
+#     ATTENTION: The necessary certificates must be added manually before starting this script!
 #
-# - Zertiifikate mit Hilfe des curl-Befehls ermitteln und z.B. unter /tmp/.. speichern
-#     z.B. curl -o /tmp/LHM-....pem http://.../LHM-....pem
-#     ACHTUNG: Die notwendigen Zertifikate müssen vor dem Start dieses Scriptes manuell ergänzt werden!!
+echo "Download certificates"
+
+# - Importing the certificates using the keytool command
+#     e.g. keytool -import -noprompt -keystore /tmp/cacerts-lhm -file /tmp/LHM-....pem -storepass changeit -alias basename--LHM-....pem
+#     ATTENTION: The necessary certificates must be added manually before starting this script!
 #
-# - Importieren der Zertifikate mit Hilfe des keytool-Befehls
-#     z.B. keytool -import -noprompt -keystore /tmp/cacerts-lhm -file /tmp/LHM-....pem -storepass changeit -alias basename--LHM-....pem
-#     ACHTUNG: Die notwendigen Zertifikate müssen vor dem Start dieses Scriptes manuell ergänzt werden!!
-#
-# - Starten der EAI mit dem Profil "docker"
+echo "Keytool: import of certificates"
 
-echo "Zertifikate herunterladen"
-
-
-echo "Keytool: import von Zertifikaten"
-
+# - Starting the EAI with the “docker” profile
+#     ATTENTION: The trustStorePassword has to be changed manually!
 echo "start EAI"
-# ACHTUNG: Password hier ergänzen
-exec java -Dspring.profiles.active=docker -Djavax.net.ssl.trustStore=/tmp/cacerts-lhm -Djavax.net.ssl.trustStorePassword=.... -jar /deployments/application.jar
+exec java -Dspring.profiles.active=docker -Djavax.net.ssl.trustStore=/tmp/cacerts-lhm -Djavax.net.ssl.trustStorePassword=... -jar /deployments/application.jar
