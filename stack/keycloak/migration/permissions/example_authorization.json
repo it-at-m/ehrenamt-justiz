@@ -93,7 +93,7 @@
       "logic": "POSITIVE",
       "decisionStrategy": "AFFIRMATIVE",
       "config": {
-        "roles": "[{\"id\":\"ej-app/clientrole_admin\",\"required\":false}]"
+        "roles": "[{\"id\":\"ej-app/clientrole_administrator\",\"required\":false}]"
       }
     },
     {
