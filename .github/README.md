@@ -51,22 +51,22 @@ The templates are based on [Spring][spring-documentation] and [Vue.js][vuejs-doc
 ## Get Ready to use Ehrenamtjustiz local in Docker Desktop
 
 ### Clone Repository from github
-mkdir ~/develop
+`mkdir ~/develop
 cd ~/develop
-git clone https://github.com/it-at-m/ehrenamt-justiz.git
+git clone https://github.com/it-at-m/ehrenamt-justiz.git`
 
 ### Starting Ehrenamtjustiz in Docker Desktop
-cd ~/develop/ehrenamt-justiz/stack
-docker-compose --profile=backend --profile=frontend --profile=eai up -d
+`cd ~/develop/ehrenamt-justiz/stack
+docker-compose --profile=backend --profile=frontend --profile=eai up -d`
 
 ## Open application in browser
-url: http://localhost:8083
+`url: http://localhost:8083`
 
 User: admin
 Password: admin
 
 ## Stop Ehrenamtjustiz in Docker Desktop
-docker-compose --profile=backend --profile=frontend --profile=eai down
+`docker-compose --profile=backend --profile=frontend --profile=eai down`
 
 ## Contributing
 
