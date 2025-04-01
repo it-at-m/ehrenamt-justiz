@@ -53,6 +53,11 @@ management:
     env.enabled: true
     java.enabled: true
     build.enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
 
 server:
   shutdown: "graceful"

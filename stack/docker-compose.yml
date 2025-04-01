@@ -178,6 +178,9 @@ services:
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
     ports:
       - "8085:8085"
+    healthcheck:
+      <<: *healthcheck
+      test: [ "CMD-SHELL", "curl http://localhost:8085/actuator/health/liveness" ]
 
 networks:
   keycloak:

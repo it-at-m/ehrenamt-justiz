@@ -33,7 +33,9 @@ public class SecurityConfig {
                     authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST,Konstanten.PERSONENINFO_SUB_PATH_EWO_SUCHE+"/**")).hasAuthority("getPersoneninfo");
                     authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET,  Konstanten.API_DOC_SUB_PATH)).permitAll();
                     authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/info")).permitAll();
-                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/health/**")).permitAll();});
+                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/health")).permitAll();
+                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/health/readiness")).permitAll();
+                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/health/liveness")).permitAll();});
         http.csrf(AbstractHttpConfigurer::disable);
         http.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.httpBasic(Customizer.withDefaults());
