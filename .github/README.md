@@ -33,8 +33,8 @@
 
 ## General
 
-It was decided to replace the legacy application “Schöffenverwaltung”, which was used by the District Administration Department until 2024, with a MAKE application based on the it@M reference architecture. The requirement that the specialist procedure can manage both lay judges and administrative judges without a change request will be taken into account. This new application is referred to as “Ehrenamtjustiz”.
-The application Ehrenamtjustiz supports the clerk in the District Administration Department in recording and managing applicants, resolving conflicts in the residents' registration data and drawing up the list of proposals for lay assessors and administrative judges. Citizens can also apply for aldermen online.
+It was decided to replace the legacy application “Schöffenverwaltung”, which was used by the District Administration Department until 2024, with a MAKE application based on the it@M reference architecture. The requirement that the specialist procedure can supports the application for the office of lay judge and honorary judges at the Administrative Court without a change request will be taken into account. This new application is referred to as “Ehrenamtjustiz”.
+The application Ehrenamtjustiz supports the clerk in the District Administration Department in recording and managing applicants, resolving conflicts in the residents' registration data and drawing up the list of proposals for lay judge and honorary judges at the Administrative Court . Citizens can also apply for aldermen online.
 
 Ehrenamtsjustiz based on the RefArch (reference architecture) of it@M.
 
@@ -42,13 +42,16 @@ To learn more about the architecture itself, checkout its [documentation][refarc
 
 The templates are based on [Spring][spring-documentation] and [Vue.js][vuejs-documentation].
 
+
 ## System overview
 
 <p>
-    <img height="800" src="../docs/images/System%20overview_Englisch.png"  alt="System overview"/>
+    <img height="800" src="../docs/images/SystemOverviewEnglish.PNG"  alt="System overview"/>
 </p>
 
+
 ## Get Ready to use Ehrenamtjustiz local in Docker Desktop
+
 
 ### Clone Repository from github
 ```
@@ -56,6 +59,14 @@ mkdir ~/develop
 cd ~/develop   
 git clone https://github.com/it-at-m/ehrenamt-justiz.git
 ```
+
+
+### Manually adjust the source entrypoint.sh for starting the EAI
+This is only necessary for starting the eai!
+Details can be found in the documentation here:
+
+[ehrenamt-justiz/ehrenamt-justiz-eai/entrypoint.sh](https://github.com/it-at-m/ehrenamt-justiz/blob/main/ehrenamt-justiz-eai/entrypoint.sh)
+
 
 ### Starting Ehrenamtjustiz in Docker Desktop
 ```
@@ -68,7 +79,8 @@ These containers are started:
     <img height="800" src="../docs/images/DockerDesktopEhrenamtjustiz.PNG"  alt="Container Docker Desktop"/>
 </p>
 
-## Open application in browser
+
+### Open application in browser
 ```
 url: http://localhost:8083
 ```
@@ -83,8 +95,9 @@ Password: admin
 </p>
 
 
-## Stop Ehrenamtjustiz in Docker Desktop
-`docker-compose --profile=backend --profile=frontend --profile=eai down`
+### Stop Container for Ehrenamtjustiz in Docker Desktop
+`docker-compose --profile=backend --profile=frontend --profile=eai stop`
+
 
 ## Contributing
 
@@ -96,9 +109,11 @@ Don't forget to give the project a star! Thanks again!
 
 More about this in the [CODE_OF_CONDUCT][code-of-conduct] file.
 
+
 ## License
 
 Distributed under the MIT License. See [LICENSE][license] file for more information.
+
 
 ## Contact
 
