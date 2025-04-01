@@ -33,8 +33,8 @@ export function getUser(): Promise<User> {
       u.telephoneNumber = json.telephoneNumber || "";
       u.email = json.email || "";
       u.username = json.username || "";
-      u.family_name = json.family_name || "";
       u.given_name = json.given_name || "";
+      u.family_name = json.family_name || "";
       u.department = json.department || "";
       u.lhmObjectID = json.lhmObjectID || "";
 

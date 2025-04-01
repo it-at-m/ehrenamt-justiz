@@ -15,7 +15,7 @@ changes:
   - addUser:
       name: sosach
       lastName: Sosach
-      firstName: Gabi
+      firstName: Rudi
       enabled: true
       emailVerified: true
       email: reader@reader.com
