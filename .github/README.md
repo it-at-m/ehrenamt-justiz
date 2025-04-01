@@ -62,7 +62,10 @@ git clone https://github.com/it-at-m/ehrenamt-justiz.git
 cd ~/develop/ehrenamt-justiz/stack  
 docker-compose --profile=backend --profile=frontend --profile=eai up -d
 ```
-
+These containers are started:
+<p>
+    <img height="800" src="../docs/images/DockerDesktopEhrenamtjustiz.PNG"  alt="Container Docker Desktop"/>
+</p>
 ## Open application in browser
 ```
 url: http://localhost:8083
