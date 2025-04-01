@@ -42,13 +42,16 @@ To learn more about the architecture itself, checkout its [documentation][refarc
 
 The templates are based on [Spring][spring-documentation] and [Vue.js][vuejs-documentation].
 
+
 ## System overview
 
 <p>
     <img height="800" src="../docs/images/SystemOverviewEnglish.PNG"  alt="System overview"/>
 </p>
 
+
 ## Get Ready to use Ehrenamtjustiz local in Docker Desktop
+
 
 ### Clone Repository from github
 ```
@@ -56,6 +59,7 @@ mkdir ~/develop
 cd ~/develop   
 git clone https://github.com/it-at-m/ehrenamt-justiz.git
 ```
+
 
 ### Manually adjust the source entrypoint.sh for starting the EAI
 This is only necessary for starting the eai!
@@ -75,7 +79,8 @@ These containers are started:
     <img height="800" src="../docs/images/DockerDesktopEhrenamtjustiz.PNG"  alt="Container Docker Desktop"/>
 </p>
 
-## Open application in browser
+
+### Open application in browser
 ```
 url: http://localhost:8083
 ```
@@ -90,8 +95,9 @@ Password: admin
 </p>
 
 
-## Stop Container for Ehrenamtjustiz in Docker Desktop
+### Stop Container for Ehrenamtjustiz in Docker Desktop
 `docker-compose --profile=backend --profile=frontend --profile=eai stop`
+
 
 ## Contributing
 
@@ -103,9 +109,11 @@ Don't forget to give the project a star! Thanks again!
 
 More about this in the [CODE_OF_CONDUCT][code-of-conduct] file.
 
+
 ## License
 
 Distributed under the MIT License. See [LICENSE][license] file for more information.
+
 
 ## Contact
 
