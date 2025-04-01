@@ -48,6 +48,44 @@ The templates are based on [Spring][spring-documentation] and [Vue.js][vuejs-doc
     <img height="800" src="../docs/images/System%20overview_Englisch.png"  alt="System overview"/>
 </p>
 
+## Get Ready to use Ehrenamtjustiz local in Docker Desktop
+
+### Clone Repository from github
+```
+mkdir ~/develop
+cd ~/develop   
+git clone https://github.com/it-at-m/ehrenamt-justiz.git
+```
+
+### Starting Ehrenamtjustiz in Docker Desktop
+```
+cd ~/develop/ehrenamt-justiz/stack  
+docker-compose --profile=backend --profile=frontend --profile=eai up -d
+```
+
+These containers are started:
+<p>
+    <img height="800" src="../docs/images/DockerDesktopEhrenamtjustiz.PNG"  alt="Container Docker Desktop"/>
+</p>
+
+## Open application in browser
+```
+url: http://localhost:8083
+```
+
+```
+User: admin
+Password: admin
+```
+
+<p>
+    <img height="800" src="../docs/images/ApplicationEhrenamtjustiz.PNG"  alt="Container Docker Desktop"/>
+</p>
+
+
+## Stop Ehrenamtjustiz in Docker Desktop
+`docker-compose --profile=backend --profile=frontend --profile=eai down`
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
