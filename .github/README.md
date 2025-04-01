@@ -70,7 +70,9 @@ These containers are started:
 ```
 url: http://localhost:8083
 ```
-
+<p>
+    <img height="800" src="../docs/images/ApplicationEhrenamtjustiz.PNG"  alt="Container Docker Desktop"/>
+</p>
 User: admin
 Password: admin
 
