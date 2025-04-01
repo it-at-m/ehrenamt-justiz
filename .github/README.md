@@ -45,7 +45,7 @@ The templates are based on [Spring][spring-documentation] and [Vue.js][vuejs-doc
 ## System overview
 
 <p>
-    <img height="800" src="../docs/images/System%20overview_Englisch.png"  alt="System overview"/>
+    <img height="800" src="../docs/images/SystemOverviewEnglish.PNG"  alt="System overview"/>
 </p>
 
 ## Get Ready to use Ehrenamtjustiz local in Docker Desktop
