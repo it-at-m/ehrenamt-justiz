@@ -4,8 +4,8 @@ realm: local_realm
 changes:
   - addUser:
       name: nosach
-      lastName: Nachname Normaler Sachbearbeiter
-      firstName: Vorname Normaler Sachbearbeiter
+      lastName: Nosach
+      firstName: Peter
       enabled: true
       emailVerified: true
       email: none@none.com
@@ -14,8 +14,8 @@ changes:
       password: "nosach"
   - addUser:
       name: sosach
-      lastName: Nachname Sondersachbearbeiter
-      firstName: Vorname Sondersachbearbeiter
+      lastName: Sosach
+      firstName: Gabi
       enabled: true
       emailVerified: true
       email: reader@reader.com
@@ -24,8 +24,8 @@ changes:
       password: "sosach"
   - addUser:
       name: admin
-      lastName: Nachname Administrator
-      firstName: Vorname Administrator
+      lastName: Admin
+      firstName: Eva
       enabled: true
       emailVerified: true
       email: writer@writer.com
