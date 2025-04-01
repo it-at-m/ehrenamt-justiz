@@ -73,11 +73,15 @@ These containers are started:
 url: http://localhost:8083
 ```
 
+```
+User: admin
+Password: admin
+```
+
 <p>
     <img height="800" src="../docs/images/ApplicationEhrenamtjustiz.PNG"  alt="Container Docker Desktop"/>
 </p>
-User: admin
-Password: admin
+
 
 ## Stop Ehrenamtjustiz in Docker Desktop
 `docker-compose --profile=backend --profile=frontend --profile=eai down`
