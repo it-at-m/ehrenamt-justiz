@@ -61,7 +61,7 @@ git clone https://github.com/it-at-m/ehrenamt-justiz.git
 This is only necessary for starting the eai!
 Details can be found in the documentation here:
 ```
-ehrenamt-justiz/blob/main/ehrenamt-justiz-eai/entrypoint.sh
+ehrenamt-justiz/ehrenamt-justiz-eai/entrypoint.sh
 ```
 
 ### Starting Ehrenamtjustiz in Docker Desktop
