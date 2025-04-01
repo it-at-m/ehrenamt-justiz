@@ -50,7 +50,7 @@ const snackbarStore = useSnackbarStore();
 
 const konfigurationData = ref<KonfigurationFormData>({
   aktiv: false,
-  ehrenamtjustizart: "Verwaltungsrichter",
+  ehrenamtjustizart: "VERWALTUNGSRICHTER",
   bezeichnung: "",
   amtsperiodevon: "",
   amtsperiodebis: "",
