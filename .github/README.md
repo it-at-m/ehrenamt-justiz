@@ -83,8 +83,8 @@ Password: admin
 </p>
 
 
-## Stop Ehrenamtjustiz in Docker Desktop
-`docker-compose --profile=backend --profile=frontend --profile=eai down`
+## Stop Container for Ehrenamtjustiz in Docker Desktop
+`docker-compose --profile=backend --profile=frontend --profile=eai stop`
 
 ## Contributing
 
