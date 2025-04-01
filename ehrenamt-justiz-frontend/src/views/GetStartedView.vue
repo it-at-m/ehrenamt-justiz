@@ -1,7 +1,12 @@
 <template>
   <v-container>
     <v-row class="text-center">
-      <v-hover v-slot="{ isHovering, props }">
+      <v-hover
+        v-slot="{ isHovering, props }"
+        :disabled="
+          !user || !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN')
+        "
+      >
         <v-col
           v-bind="props"
           :class="isHovering ? 'person-hover-color' : 'person-bewerbung-color'"
@@ -19,7 +24,12 @@
           <h2>{{ textAnzahlBewerbungen }}</h2>
         </v-col>
       </v-hover>
-      <v-hover v-slot="{ isHovering, props }">
+      <v-hover
+        v-slot="{ isHovering, props }"
+        :disabled="
+          !user || !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN')
+        "
+      >
         <v-col
           v-bind="props"
           :class="isHovering ? 'person-hover-color' : 'person-konflikte-color'"
@@ -32,10 +42,15 @@
             }}
             Konflikte
           </h2>
-          <h2>{{ textAnzahlKonflikte }}</h2>
-        </v-col>
+          <h2>{{ textAnzahlKonflikte }}</h2> </v-col
+        >
       </v-hover>
-      <v-hover v-slot="{ isHovering, props }">
+      <v-hover
+        v-slot="{ isHovering, props }"
+        :disabled="
+          !user || !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN')
+        "
+      >
         <v-col
           v-bind="props"
           :class="
