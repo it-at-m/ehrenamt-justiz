@@ -48,6 +48,13 @@ management:
     web:
       exposure:
         include: "*"
+  endpoint:
+    health:
+      access: read_only
+      probes:
+        enabled: true
+    info:
+      access: read_only
   context-path: "/actuator"
   info:
     env.enabled: true
