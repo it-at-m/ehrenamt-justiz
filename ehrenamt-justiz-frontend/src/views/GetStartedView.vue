@@ -42,8 +42,8 @@
             }}
             Konflikte
           </h2>
-          <h2>{{ textAnzahlKonflikte }}</h2> </v-col
-        >
+          <h2>{{ textAnzahlKonflikte }}</h2>
+        </v-col>
       </v-hover>
       <v-hover
         v-slot="{ isHovering, props }"
