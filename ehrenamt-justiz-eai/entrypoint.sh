@@ -18,4 +18,4 @@ echo "Keytool: import of certificates"
 # - Starting the EAI with the “docker” profile
 #     ATTENTION: The trustStorePassword has to be changed manually!
 echo "start EAI"
-exec java -Dspring.profiles.active=docker -Djavax.net.ssl.trustStore=/tmp/cacerts-lhm -Djavax.net.ssl.trustStorePassword=changeit -jar /deployments/application.jar
+exec java -Dspring.profiles.active=docker -Djavax.net.ssl.trustStore=/tmp/cacerts-lhm -Djavax.net.ssl.trustStorePassword=... -jar /deployments/application.jar
