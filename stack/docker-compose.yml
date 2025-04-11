@@ -138,7 +138,7 @@ services:
   backend:
     profiles:
       - backend
-    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend
+    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend@sha256:2e6da537f6738df02b8f756daebac8d27ed97ccdb0b57e31f2ad788f5a7a2207
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
@@ -157,7 +157,7 @@ services:
   frontend:
     profiles:
       - frontend
-    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend
+    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend@sha256:e632f7b4294ce8a7bea6611a065f225cbf2a0536eedf5f22b5c8d8794646daef
     ports:
       - "8081:8080"
     networks:
@@ -172,7 +172,7 @@ services:
   eai:
     profiles:
       - eai
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai@sha256:3171b9f684076a45131a2ca7200cd5b6d6460883c21788f13abbefdab75c3352
     volumes:
       - ../ehrenamt-justiz-eai/entrypoint.sh:/usr/local/bin/entrypoint.sh:rwx
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
