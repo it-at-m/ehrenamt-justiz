@@ -1196,6 +1196,23 @@
           class="col"
           md="5"
         >
+          <v-checkbox
+            v-model="
+              konfliktloesenformdata.person_warbereitstaetigalsvorvorperiode
+            "
+            class="ma-6"
+            density="compact"
+            :label="labelWarBereitsTaetigAlsVorVorPeriode"
+            persistent-placeholder
+            variant="outlined"
+          />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col
+          class="col"
+          md="5"
+        >
           <v-text-field
             v-model="konfliktloesenformdata.person_bewerbungvom"
             density="compact"
@@ -1294,6 +1311,12 @@ const AUSKUNFTSSPERRE = "Auskunftssperre";
 
 const labelWarBereitsTaetigAls = ref(
   "War bereits als " +
+    useGlobalSettingsStore().getKonfiguration?.ehrenamtjustizart +
+    " tätig"
+);
+
+const labelWarBereitsTaetigAlsVorVorPeriode = ref(
+  "War bereits in Vorvorperiode als " +
     useGlobalSettingsStore().getKonfiguration?.ehrenamtjustizart +
     " tätig"
 );

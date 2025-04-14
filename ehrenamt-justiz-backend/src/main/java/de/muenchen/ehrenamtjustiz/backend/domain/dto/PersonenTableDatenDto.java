@@ -1,11 +1,10 @@
 package de.muenchen.ehrenamtjustiz.backend.domain.dto;
 
+import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
-
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 

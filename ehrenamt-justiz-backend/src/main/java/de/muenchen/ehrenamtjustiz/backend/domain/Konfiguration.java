@@ -8,10 +8,9 @@ import de.muenchen.ehrenamtjustiz.backend.common.BaseEntity;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.*;
-
 import java.io.Serial;
 import java.math.BigInteger;
+import lombok.*;
 
 @Entity
 // Definition of getter, setter, ...

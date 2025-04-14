@@ -1,18 +1,17 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo.exception;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 import org.apache.camel.CamelExecutionException;
 import org.apache.camel.Exchange;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.support.DefaultExchange;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class FehlerWrapperTest {
     private FehlerWrapper unitUnderTest;

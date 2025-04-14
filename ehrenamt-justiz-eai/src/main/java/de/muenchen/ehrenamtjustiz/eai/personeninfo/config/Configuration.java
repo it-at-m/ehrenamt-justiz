@@ -4,6 +4,10 @@ import de.muenchen.eai.ewo.api.fachlich.service.erweitert.person.v2.EwoPersonErw
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.callbacks.PasswordCallback;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.filter.RequestResponseLoggingFilter;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.apache.camel.component.cxf.jaxws.CxfEndpoint;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
@@ -12,9 +16,9 @@ import org.apache.wss4j.dom.WSConstants;
 import org.apache.wss4j.dom.handler.WSHandlerConstants;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
@@ -24,11 +28,6 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Config class that configures all additional beans that are not available as components

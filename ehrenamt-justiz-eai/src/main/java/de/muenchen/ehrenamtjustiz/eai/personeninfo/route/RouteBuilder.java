@@ -1,10 +1,11 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo.route;
 
 import de.muenchen.ehrenamtjustiz.api.BuergerSucheAnfrage;
+import de.muenchen.ehrenamtjustiz.eai.personeninfo.config.Configuration;
+import de.muenchen.ehrenamtjustiz.eai.personeninfo.config.Konstanten;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.exception.DefaultErrorProjection;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.exception.Fehler;
-import de.muenchen.ehrenamtjustiz.eai.personeninfo.config.Konstanten;
-import de.muenchen.ehrenamtjustiz.eai.personeninfo.config.Configuration;
+import java.nio.charset.StandardCharsets;
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.model.rest.RestBindingMode;
@@ -15,8 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-
-import java.nio.charset.StandardCharsets;
 
 /**
  * Class used for defining the camel-route.<br>

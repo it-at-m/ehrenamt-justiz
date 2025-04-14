@@ -67,6 +67,7 @@ const konfliktLoesenFormData = ref<KonfliktLoesenFormData>({
   person_onlinebewerbung: "",
   person_neuervorschlag: "",
   person_warbereitstaetigals: "",
+  person_warbereitstaetigalsvorvorperiode: "",
   person_bewerbungvom: "",
   person_konfigurationid: "",
   person_status: "",
@@ -173,6 +174,8 @@ async function loadPerson(): Promise<void> {
         personenDaten.neuervorschlag;
       konfliktLoesenFormData.value.person_warbereitstaetigals =
         personenDaten.warbereitstaetigals;
+      konfliktLoesenFormData.value.person_warbereitstaetigalsvorvorperiode =
+        personenDaten.warbereitstaetigalsvorvorperiode;
       konfliktLoesenFormData.value.person_bewerbungvom =
         personenDaten.bewerbungvom;
       konfliktLoesenFormData.value.person_konfigurationid =
@@ -300,6 +303,8 @@ function save(): void {
     neuervorschlag: konfliktLoesenFormData.value.person_neuervorschlag,
     warbereitstaetigals:
       konfliktLoesenFormData.value.person_warbereitstaetigals,
+    warbereitstaetigalsvorvorperiode:
+      konfliktLoesenFormData.value.person_warbereitstaetigalsvorvorperiode,
     bewerbungvom: konfliktLoesenFormData.value.person_bewerbungvom,
     konfigurationid: konfliktLoesenFormData.value.person_konfigurationid,
     status: konfliktLoesenFormData.value.person_status,

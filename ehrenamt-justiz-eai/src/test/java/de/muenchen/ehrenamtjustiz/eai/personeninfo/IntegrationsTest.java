@@ -1,9 +1,14 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.GsonBuilder;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import de.muenchen.eai.ewo.api.fachlich.model.person.v2.AbstractWohnungType;
 import de.muenchen.eai.ewo.api.fachlich.service.erweitert.person.v2.LesePersonErweitertResponse;
 import de.muenchen.eai.ewo.api.fachlich.service.erweitert.person.v2.SuchePersonErweitertResponse;
@@ -13,6 +18,10 @@ import de.muenchen.ehrenamtjustiz.api.Wohnungsstatus;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.config.Configuration;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.converter.AbstractWohnungTypeconverter;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.converter.XMLGregorianCalendarConverter;
+import java.io.File;
+import java.net.URL;
+import java.util.List;
+import javax.xml.datatype.XMLGregorianCalendar;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -40,16 +49,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.util.MultiValueMap;
-
-import javax.xml.datatype.XMLGregorianCalendar;
-import java.io.File;
-import java.net.URL;
-import static java.nio.charset.StandardCharsets.UTF_8;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)

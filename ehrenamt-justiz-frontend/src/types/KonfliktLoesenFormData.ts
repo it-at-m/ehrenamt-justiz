@@ -34,6 +34,7 @@ export default interface KonfliktLoesenFormData {
   person_onlinebewerbung: string;
   person_neuervorschlag: string;
   person_warbereitstaetigals: string;
+  person_warbereitstaetigalsvorvorperiode: string;
   person_bewerbungvom: string;
   person_konfigurationid: string;
   person_status: string;

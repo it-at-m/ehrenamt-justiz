@@ -2,7 +2,6 @@ package de.muenchen.ehrenamtjustiz.eai.personeninfo.callbacks;
 
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
-
 import org.apache.wss4j.common.ext.WSPasswordCallback;
 
 public class PasswordCallback implements CallbackHandler {

@@ -1,14 +1,13 @@
 package de.muenchen.ehrenamtjustiz.backend.utils;
 
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerDatenDto;
-import lombok.extern.slf4j.Slf4j;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public final class EWOBuergerComparer {

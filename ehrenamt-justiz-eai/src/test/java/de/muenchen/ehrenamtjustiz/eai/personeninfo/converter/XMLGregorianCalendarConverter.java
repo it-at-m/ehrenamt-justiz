@@ -1,11 +1,9 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo.converter;
 
 import com.google.gson.*;
-
+import java.lang.reflect.Type;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
-import java.lang.reflect.Type;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -12,7 +12,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-
 import java.io.Serial;
 import java.util.UUID;
 import lombok.*;
@@ -179,6 +178,9 @@ public class Person extends BaseEntity {
 
     @Column(name = "warbereitstaetigals")
     private boolean warbereitstaetigals = false;
+
+    @Column(name = "warbereitstaetigalsvorvorperiode")
+    private boolean warbereitstaetigalsvorvorperiode = false;
 
     @Column(name = "bewerbungvom")
     @JsonDeserialize(using = LocalDateDeserializer.class)

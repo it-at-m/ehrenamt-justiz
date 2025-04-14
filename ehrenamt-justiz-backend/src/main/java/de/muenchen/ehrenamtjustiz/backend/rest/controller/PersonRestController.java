@@ -10,6 +10,8 @@ import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
 import de.muenchen.ehrenamtjustiz.backend.security.Authorities;
 import de.muenchen.ehrenamtjustiz.backend.service.EhrenamtJustizService;
 import de.muenchen.ehrenamtjustiz.backend.utils.EhrenamtJustizUtility;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -23,9 +25,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.format.DateTimeFormatter;
-import java.util.*;
 
 @RestController
 @AllArgsConstructor
@@ -308,6 +307,7 @@ public class PersonRestController {
                 .onlinebewerbung(person.isOnlinebewerbung() ? JA : NEIN)
                 .neuervorschlag(person.isNeuervorschlag() ? JA : NEIN)
                 .warbereitstaetigals(person.isWarbereitstaetigals() ? JA : NEIN)
+                .warbereitstaetigalsvorvorperiode(person.isWarbereitstaetigalsvorvorperiode() ? JA : NEIN)
                 .bemerkung(person.getBemerkung() == null ? "" : person.getBemerkung())
                 .bewerbungvom(person.getBewerbungvom() == null ? "" : person.getBewerbungvom().format(pattern))
                 .status(person.getStatus() == null ? "" : person.getStatus().toString())

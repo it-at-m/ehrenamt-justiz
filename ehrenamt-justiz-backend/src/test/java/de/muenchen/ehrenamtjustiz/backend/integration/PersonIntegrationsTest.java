@@ -1,5 +1,10 @@
 package de.muenchen.ehrenamtjustiz.backend.integration;
 
+import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
+import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFILE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
 import de.muenchen.ehrenamtjustiz.backend.RestPageImpl;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;
@@ -14,6 +19,9 @@ import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.controller.PersonRestController;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -35,15 +43,6 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
-
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.util.*;
-
-import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
-import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFILE;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Testcontainers
 @Nested
