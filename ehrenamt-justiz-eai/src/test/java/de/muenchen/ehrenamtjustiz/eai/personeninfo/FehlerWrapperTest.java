@@ -1,5 +1,8 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.exception.Fehler;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.exception.FehlerWrapper;
 import org.apache.camel.Exchange;
@@ -7,9 +10,6 @@ import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.support.DefaultExchange;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class FehlerWrapperTest {
     private FehlerWrapper unitUnderTest;

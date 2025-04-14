@@ -1,13 +1,12 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo.config;
 
+import de.muenchen.ehrenamtjustiz.eai.personeninfo.util.Utility;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import de.muenchen.ehrenamtjustiz.eai.personeninfo.util.Utility;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(

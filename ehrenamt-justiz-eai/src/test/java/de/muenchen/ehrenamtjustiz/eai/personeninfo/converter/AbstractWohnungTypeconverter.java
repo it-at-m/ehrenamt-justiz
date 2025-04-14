@@ -2,7 +2,6 @@ package de.muenchen.ehrenamtjustiz.eai.personeninfo.converter;
 
 import com.google.gson.*;
 import de.muenchen.eai.ewo.api.fachlich.model.person.v2.*;
-
 import java.lang.reflect.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

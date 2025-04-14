@@ -1,8 +1,7 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo.exception;
 
-import java.util.Date;
-
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

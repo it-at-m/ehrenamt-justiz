@@ -11,16 +11,15 @@ import de.muenchen.ehrenamtjustiz.api.Geschlecht;
 import de.muenchen.ehrenamtjustiz.api.Wohnungsstatus;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.exception.PersonNotFoundException;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.util.CountryCode;
-import org.apache.camel.Header;
-import org.apache.cxf.message.MessageContentsList;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
-
-import javax.xml.datatype.XMLGregorianCalendar;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
+import javax.xml.datatype.XMLGregorianCalendar;
+import org.apache.camel.Header;
+import org.apache.cxf.message.MessageContentsList;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 
 /**
  * Central mapping class for converting from one data type to another

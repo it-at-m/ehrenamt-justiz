@@ -2,7 +2,6 @@ package de.muenchen.ehrenamtjustiz.eai.personeninfo.util;
 
 import com.google.common.collect.Maps;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.config.User;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;

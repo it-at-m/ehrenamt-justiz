@@ -1,7 +1,10 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo.bean;
 
-import com.google.gson.GsonBuilder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import de.muenchen.eai.ewo.api.fachlich.model.person.v2.AbstractWohnungType;
 import de.muenchen.eai.ewo.api.fachlich.service.erweitert.person.v2.LesePersonErweitertResponse;
 import de.muenchen.eai.ewo.api.fachlich.service.erweitert.person.v2.SuchePersonErweitert;
@@ -12,18 +15,14 @@ import de.muenchen.ehrenamtjustiz.api.Geschlecht;
 import de.muenchen.ehrenamtjustiz.api.Wohnungsstatus;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.converter.AbstractWohnungTypeconverter;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.converter.XMLGregorianCalendarConverter;
-import org.apache.commons.io.FileUtils;
-import org.apache.cxf.message.MessageContentsList;
-import org.junit.jupiter.api.Test;
-
-import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.time.LocalDate;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import javax.xml.datatype.XMLGregorianCalendar;
+import org.apache.commons.io.FileUtils;
+import org.apache.cxf.message.MessageContentsList;
+import org.junit.jupiter.api.Test;
 
 class MappingBeanTest {
     private final MappingBean unitUnderTest = new MappingBean();

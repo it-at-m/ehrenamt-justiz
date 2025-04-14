@@ -5,7 +5,6 @@ import java.net.SocketTimeoutException;
 import java.net.http.HttpTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.camel.CamelExecutionException;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
