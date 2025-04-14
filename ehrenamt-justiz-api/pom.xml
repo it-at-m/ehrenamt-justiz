@@ -21,7 +21,7 @@
         <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
 
         <!-- Linting & Formatting -->
-        <spotless-maven-plugin.version>2.34.0</spotless-maven-plugin.version>
+        <spotless-maven-plugin.version>2.44.4</spotless-maven-plugin.version>
         <itm-java-codeformat.version>1.0.10</itm-java-codeformat.version>
         <pmd-maven-plugin.version>3.26.0</pmd-maven-plugin.version>
         <spotbugs-maven-plugin.version>4.9.3.0</spotbugs-maven-plugin.version>
@@ -32,12 +32,12 @@
         <refarch-tools.version>1.1.0</refarch-tools.version>
 
         <!-- Additional required dependencies -->
-        <lombok.version>1.18.36</lombok.version>
-        <camel-spring-boot-dependencies.version>4.10.3</camel-spring-boot-dependencies.version>
+        <lombok.version>1.18.38</lombok.version>
+        <camel-spring-boot-dependencies.version>4.11.0</camel-spring-boot-dependencies.version>
         <central-publishing-maven-plugin.version>0.7.0</central-publishing-maven-plugin.version>
 
         <!-- Testing -->
-        <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.13</jacoco-maven-plugin.version>
         <argLine /> <!-- Must be empty, definition needed for integration of Jacoco and Surefire via @{argLine} lazy property evaluation -->
 
 
