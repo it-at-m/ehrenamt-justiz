@@ -5,12 +5,11 @@ import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerDatenDto;
 import de.muenchen.ehrenamtjustiz.backend.service.EWOService;
 import de.muenchen.ehrenamtjustiz.backend.service.EhrenamtJustizService;
 import de.muenchen.ehrenamtjustiz.backend.utils.EWOBuergerComparer;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @Slf4j

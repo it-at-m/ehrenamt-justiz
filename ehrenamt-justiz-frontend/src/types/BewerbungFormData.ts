@@ -34,6 +34,7 @@ export default interface BewerbungFormData {
   onlinebewerbung: string;
   neuervorschlag: string;
   warbereitstaetigals: string;
+  warbereitstaetigalsvorvorperiode: string;
   bewerbungvom: string;
   konfigurationid: string;
   status: string;

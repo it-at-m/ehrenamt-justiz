@@ -13,6 +13,8 @@ import de.muenchen.ehrenamtjustiz.backend.security.Authorities;
 import de.muenchen.ehrenamtjustiz.backend.service.EWOService;
 import de.muenchen.ehrenamtjustiz.backend.utils.EhrenamtJustizUtility;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.time.LocalDate;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +25,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @AllArgsConstructor

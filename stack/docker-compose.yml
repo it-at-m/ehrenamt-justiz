@@ -99,8 +99,7 @@ services:
       - SPRING_CLOUD_GATEWAY_ROUTES_1_FILTERS_0=RewritePath=/api/ej-app-backend-service/(?<urlsegments>.*), /$\{urlsegments}
       - SPRING_CLOUD_GATEWAY_ROUTES_2_ID=online
       - SPRING_CLOUD_GATEWAY_ROUTES_2_URI=http://host.docker.internal:8082/
-      - SPRING_CLOUD_GATEWAY_ROUTES_2_PREDICATES_0=Path=/public/**
-      - SPRING_CLOUD_GATEWAY_ROUTES_2_FILTERS_0=RewritePath=/public/(?<urlsegments>.*), /$\{urlsegments}
+      - SPRING_CLOUD_GATEWAY_ROUTES_2_PREDICATES_0=Path=/public/online/**
       - SPRING_CLOUD_GATEWAY_ROUTES_3_ID=frontend
       - SPRING_CLOUD_GATEWAY_ROUTES_3_URI=http://host.docker.internal:8081/
       - SPRING_CLOUD_GATEWAY_ROUTES_3_PREDICATES_0=Path=/**

@@ -1,11 +1,11 @@
 package de.muenchen.ehrenamtjustiz.backend.configuration;
 
+import de.muenchen.ehrenamtjustiz.backend.configuration.nfcconverter.NfcRequestFilter;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
-import de.muenchen.ehrenamtjustiz.backend.configuration.nfcconverter.NfcRequestFilter;
 
 /**
  * <p>

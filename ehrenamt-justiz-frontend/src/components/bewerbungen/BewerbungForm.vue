@@ -530,6 +530,15 @@
                 />
               </v-col>
             </v-row>
+            <v-row>
+              <v-col class="col">
+                <v-checkbox
+                  v-model="bewerbung.warbereitstaetigalsvorvorperiode"
+                  :label="labelWarBereitsTaetigAlsVorVorPeriode"
+                  variant="outlined"
+                />
+              </v-col>
+            </v-row>
           </v-card-text>
         </v-card>
       </v-tabs-window-item>
@@ -645,6 +654,12 @@ const labelWarBereitsTaetigAls = ref(
     " tätig"
 );
 
+const labelWarBereitsTaetigAlsVorVorPeriode = ref(
+  "War bereits in Vorvorperiode als " +
+    useGlobalSettingsStore().getKonfiguration?.ehrenamtjustizart +
+    " tätig"
+);
+
 function isDirty(): boolean {
   // Switching the menu during the new-entry of a person must be prevented, as otherwise
   // an application remains in the status “INERFASSUNG”
@@ -689,6 +704,7 @@ function felderLeeren(): void {
   bewerbung.value.ausgeuebteehrenaemter = "";
   bewerbung.value.neuervorschlag = "";
   bewerbung.value.warbereitstaetigals = "";
+  bewerbung.value.warbereitstaetigalsvorvorperiode = "";
 }
 
 function setFocusAufFehler() {

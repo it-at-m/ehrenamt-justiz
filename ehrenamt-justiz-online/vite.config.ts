@@ -11,6 +11,7 @@ import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 export default defineConfig(({ mode }) => {
   const isDevelopment = mode === "development";
   return {
+    base: "/public/online",
     plugins: [
       vue({
         template: { transformAssetUrls },

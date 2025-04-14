@@ -70,6 +70,7 @@ const bewerbungFormData = ref<BewerbungFormData>({
   onlinebewerbung: "",
   neuervorschlag: "",
   warbereitstaetigals: "",
+  warbereitstaetigalsvorvorperiode: "",
   bewerbungvom: "",
   konfigurationid: "",
   status: "",
@@ -126,6 +127,8 @@ function loadBewerbung(): void {
         onlinebewerbung: person.onlinebewerbung,
         neuervorschlag: person.neuervorschlag,
         warbereitstaetigals: person.warbereitstaetigals,
+        warbereitstaetigalsvorvorperiode:
+          person.warbereitstaetigalsvorvorperiode,
         bewerbungvom: person.bewerbungvom,
         konfigurationid: person.konfigurationid,
         status: person.status,
@@ -183,6 +186,8 @@ function getPerson() {
     onlinebewerbung: bewerbungFormData.value.onlinebewerbung,
     neuervorschlag: bewerbungFormData.value.neuervorschlag,
     warbereitstaetigals: bewerbungFormData.value.warbereitstaetigals,
+    warbereitstaetigalsvorvorperiode:
+      bewerbungFormData.value.warbereitstaetigalsvorvorperiode,
     bewerbungvom: bewerbungFormData.value.bewerbungvom,
     konfigurationid: bewerbungFormData.value.konfigurationid,
     status: bewerbungFormData.value.status,

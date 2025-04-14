@@ -37,6 +37,7 @@ export default interface PersonCSV {
   onlinebewerbung: string;
   neuervorschlag: string;
   warbereitstaetigals: string;
+  warbereitstaetigalsvorvorperiode: string;
   bewerbungvom: string;
   konfigurationid: string;
   status: string;

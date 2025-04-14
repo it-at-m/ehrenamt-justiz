@@ -274,6 +274,13 @@ class EhrenamtJustizServiceClass {
             " tätig?",
         },
         {
+          key: "warbereitstaetigalsvorvorperiode",
+          displayLabel:
+            "War bereits als " +
+            globalSettingsStore.getKonfiguration?.ehrenamtjustizart +
+            " in Vorvorperiode tätig?",
+        },
+        {
           key: "bewerbungvom",
           displayLabel: "Bewerbung vom",
         },

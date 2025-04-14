@@ -80,6 +80,8 @@ public class PersonCSVDto {
 
     private String warbereitstaetigals;
 
+    private String warbereitstaetigalsvorvorperiode;
+
     private String bewerbungvom;
 
     private String status;
