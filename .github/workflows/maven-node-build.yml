@@ -18,7 +18,7 @@ jobs:
           - app-path: ehrenamt-justiz-backend
           - app-path: ehrenamt-justiz-frontend
           - app-path: ehrenamt-justiz-eai
-          - app-path: ehrenamt-justiz-webcomponent
+          - app-path: ehrenamt-justiz-online
 
     steps:
       - uses: it-at-m/lhm_actions/action-templates/actions/action-checkout@7757eb7f3c158d5f7935b08ff581b395a89d39ee # v1.0.6

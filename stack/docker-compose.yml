@@ -87,7 +87,7 @@ services:
     ports:
       - "8083:8080"
     environment:
-      - ALLOWED_ORIGINS_PUBLIC=http://localhost:*
+      - ALLOWED_ORIGINS_PUBLIC=http://localhost:*, http://kubernetes.docker.internal:8100
       - ALLOWED_ORIGINS_CLIENTS=http://localhost:*
       - SPRING_CLOUD_GATEWAY_ROUTES_0_ID=sso
       - SPRING_CLOUD_GATEWAY_ROUTES_0_URI=http://kubernetes.docker.internal:8100/
@@ -97,10 +97,14 @@ services:
       - SPRING_CLOUD_GATEWAY_ROUTES_1_URI=http://host.docker.internal:39146/
       - SPRING_CLOUD_GATEWAY_ROUTES_1_PREDICATES_0=Path=/api/ej-app-backend-service/**
       - SPRING_CLOUD_GATEWAY_ROUTES_1_FILTERS_0=RewritePath=/api/ej-app-backend-service/(?<urlsegments>.*), /$\{urlsegments}
-      - SPRING_CLOUD_GATEWAY_ROUTES_2_ID=frontend
-      - SPRING_CLOUD_GATEWAY_ROUTES_2_URI=http://host.docker.internal:8081/
-      - SPRING_CLOUD_GATEWAY_ROUTES_2_PREDICATES_0=Path=/**
-      - SPRING_PROFILES_ACTIVE=hazelcast-local
+      - SPRING_CLOUD_GATEWAY_ROUTES_2_ID=online
+      - SPRING_CLOUD_GATEWAY_ROUTES_2_URI=http://host.docker.internal:8082/
+      - SPRING_CLOUD_GATEWAY_ROUTES_2_PREDICATES_0=Path=/public/**
+      - SPRING_CLOUD_GATEWAY_ROUTES_2_FILTERS_0=RewritePath=/public/(?<urlsegments>.*), /$\{urlsegments}
+      - SPRING_CLOUD_GATEWAY_ROUTES_3_ID=frontend
+      - SPRING_CLOUD_GATEWAY_ROUTES_3_URI=http://host.docker.internal:8081/
+      - SPRING_CLOUD_GATEWAY_ROUTES_3_PREDICATES_0=Path=/**
+      - SPRING_PROFILES_ACTIVE=test, hazelcast-local
       - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI=http://kubernetes.docker.internal:8100/auth/realms/local_realm
       - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_SSO_ISSUERURI=$${spring.security.oauth2.resourceserver.jwt.issuer-uri}
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_PROVIDER=sso
@@ -160,6 +164,19 @@ services:
     image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend
     ports:
       - "8081:8080"
+    networks:
+      - keycloak
+
+  # If the online app is to be started in the Docker-Compose, the following command must be executed at startup:
+  # docker-compose --profile=online up
+  # oder e.g.:
+  # docker-compose --profile=backend --profile=frontend --profile=online --profile=eai up
+  online:
+    profiles:
+      - online
+    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online
+    ports:
+      - "8082:8080"
     networks:
       - keycloak
 

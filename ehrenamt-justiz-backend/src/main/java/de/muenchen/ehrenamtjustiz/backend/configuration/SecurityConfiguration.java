@@ -45,7 +45,11 @@ public class SecurityConfiguration {
                         // allow access to /actuator/health/readiness for OpenShift Readiness Check
                         AntPathRequestMatcher.antMatcher("/actuator/health/readiness"),
                         // allow access to /actuator/metrics for Prometheus monitoring in OpenShift
-                        AntPathRequestMatcher.antMatcher("/actuator/metrics"))
+                        AntPathRequestMatcher.antMatcher("/actuator/metrics"),
+                        // allow access to /konfiguration/getAktiveKonfiguration
+                        AntPathRequestMatcher.antMatcher("/konfiguration/getAktiveKonfiguration"),
+                        // allow access to /onlinebewerbung/bewerbungspeichern
+                        AntPathRequestMatcher.antMatcher("/onlinebewerbung/bewerbungspeichern"))
                         .permitAll())
                 .authorizeHttpRequests((requests) -> requests.requestMatchers("/**")
                         .authenticated())

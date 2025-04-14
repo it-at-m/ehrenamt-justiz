@@ -155,7 +155,7 @@ export function getHeaders(requestMethod = "GET"): Headers {
  * Get the XSRF-TOKEN
  * @returns {string|string}
  */
-export function _getXSRFToken(): string {
+function _getXSRFToken(): string {
   const help = document.cookie.match(
     "(^|;)\\s*" + "XSRF-TOKEN" + "\\s*=\\s*([^;]+)"
   );

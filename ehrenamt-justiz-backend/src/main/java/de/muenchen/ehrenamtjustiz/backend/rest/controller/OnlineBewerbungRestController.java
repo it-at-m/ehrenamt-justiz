@@ -7,14 +7,12 @@ import de.muenchen.ehrenamtjustiz.backend.domain.dto.OnlineBewerbungDatenDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
-import de.muenchen.ehrenamtjustiz.backend.security.Authorities;
 import de.muenchen.ehrenamtjustiz.backend.service.EWOService;
 import de.muenchen.ehrenamtjustiz.backend.utils.EhrenamtJustizUtility;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +26,6 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@PreAuthorize(Authorities.HAS_AUTHORITY_ONLINEBEWERBEN)
 @Slf4j
 @RequestMapping("/onlinebewerbung")
 @SuppressWarnings("PMD.CommentDefaultAccessModifier")

@@ -59,7 +59,7 @@ body:
         - ehrenamt-justiz-frontend
         - ehrenamt-justiz-backend
         - ehrenamt-justiz-eai
-        - ehrenamt-justiz-webcomponent
+        - ehrenamt-justiz-online
     validations:
       required: false
   - type: input

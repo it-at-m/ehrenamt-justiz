@@ -11,6 +11,11 @@ export default defineConfig((configEnv) =>
       test: {
         environment: "jsdom",
         root: fileURLToPath(new URL("./", import.meta.url)),
+        server: {
+          deps: {
+            inline: ["vuetify"],
+          },
+        },
       },
     })
   )

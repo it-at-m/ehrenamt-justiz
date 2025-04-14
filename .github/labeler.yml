@@ -21,6 +21,6 @@
 "Template: Frontend":
   - changed-files:
       - any-glob-to-any-file: ['ehrenamt-justiz-frontend/**']
-"Template: Webcomponent":
+"Template: Online":
   - changed-files:
-      - any-glob-to-any-file: ['ehrenamt-justiz-webcomponent/**']
+      - any-glob-to-any-file: ['ehrenamt-justiz-online/**']
