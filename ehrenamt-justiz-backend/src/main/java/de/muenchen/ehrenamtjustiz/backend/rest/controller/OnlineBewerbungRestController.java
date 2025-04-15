@@ -90,7 +90,7 @@ public class OnlineBewerbungRestController {
             try {
                 personByOM = personRepository.findByOM(person.getEwoid(), konfiguration[0].getId());
             } catch (HttpClientErrorException | HttpServerErrorException e) {
-                log.error("Fehler beim Aufruf von 'findByOM: {}, {} {}", person.getEwoid(), e, e.getStackTrace());
+                log.error("Fehler beim Aufruf von 'findByOM: {}", person.getEwoid(), e);
                 return ERROR;
             }
 
@@ -103,7 +103,7 @@ public class OnlineBewerbungRestController {
             }
 
         } catch (Exception e) {
-            log.info("Ein Fehler ist aufgetreten. Nachricht:  {} {}", e.getMessage(), e.getStackTrace());
+            log.info("Ein Fehler ist aufgetreten. Nachricht:", e);
             return ERROR;
         }
     }

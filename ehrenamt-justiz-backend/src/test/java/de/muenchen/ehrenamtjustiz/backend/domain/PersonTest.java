@@ -111,6 +111,8 @@ class PersonTest {
         person.setInmuenchenseit(LocalDate.of(2023, 1, 1));
         person.setGeschlecht(Geschlecht.MAENNLICH);
         person.setBewerbungvom(LocalDate.of(2024, 9, 17));
+        person.setWarbereitstaetigals(false);
+        person.setWarbereitstaetigalsvorvorperiode(false);
 
         testEntityId = personRepository.save(person).getId();
 
@@ -184,6 +186,8 @@ class PersonTest {
         person.setInmuenchenseit(LocalDate.of(2000, 1, 9));
         person.setGeschlecht(Geschlecht.WEIBLICH);
         person.setBewerbungvom(LocalDate.of(2024, 9, 16));
+        person.setWarbereitstaetigals(false);
+        person.setWarbereitstaetigalsvorvorperiode(true);
         return person;
     }
 

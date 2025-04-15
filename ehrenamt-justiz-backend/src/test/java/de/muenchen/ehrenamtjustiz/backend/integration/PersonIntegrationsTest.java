@@ -131,6 +131,9 @@ class PersonIntegrationsTest {
         person.setInmuenchenseit(LocalDate.of(2023, 1, 1));
         person.setGeschlecht(Geschlecht.MAENNLICH);
         person.setBewerbungvom(LocalDate.of(2024, 9, 17));
+        person.setWarbereitstaetigals(true);
+        person.setWarbereitstaetigalsvorvorperiode(true);
+
         return person;
     }
 
@@ -171,6 +174,8 @@ class PersonIntegrationsTest {
         assertEquals("01.01.2023", personCSVS.getFirst().getInmuenchenseit());
         assertEquals(Geschlecht.MAENNLICH.toString(), personCSVS.getFirst().getGeschlecht());
         assertEquals("17.09.2024", personCSVS.getFirst().getBewerbungvom());
+        assertEquals("Ja", personCSVS.getFirst().getWarbereitstaetigals());
+        assertEquals("Ja", personCSVS.getFirst().getWarbereitstaetigalsvorvorperiode());
 
     }
 
