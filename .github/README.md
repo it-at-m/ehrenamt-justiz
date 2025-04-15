@@ -86,8 +86,8 @@ url: http://localhost:8083
 ```
 
 ```
-User: admin
-Password: admin
+User: soadmin
+Password: soadmin
 ```
 
 <p>
