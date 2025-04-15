@@ -1,9 +1,9 @@
 # Pull Request
 
 <!-- Links -->
-[documentation-link]: https://refarch-templates.oss.muenchen.de/document.html#writing-the-documentation
-[code-quality-link]: https://refarch-templates.oss.muenchen.de/develop.html#code-quality
+[code-quality-link]: https://refarch.oss.muenchen.de/templates/develop#code-quality
 [refarch-create-issue-link]: https://github.com/it-at-m/refarch/issues/new/choose
+[refarch-create-documentation-issue-link]: https://github.com/it-at-m/refarch/issues/new?template=4-documentation-change.yml
 
 ## Changes
 
@@ -23,7 +23,7 @@ Issue: #XXX
 - [ ] ~~I have read the Contribution Guidelines (TBD)~~
 - [ ] Met all acceptance criteria of the issue
 - [ ] Added meaningful PR title and list of changes in the description
-- [ ] Created / Updated [documentation][documentation-link] (in English)
+- [ ] Opened documentation issue in [refarch repository][refarch-create-documentation-issue-link] (if applicable)
 - [ ] Opened follow-up issue in [refarch repository][refarch-create-issue-link] (if applicable)
 
 ### Code
@@ -32,7 +32,7 @@ Issue: #XXX
 - [ ] Added unit tests
 - [ ] Removed waste on branch (e.g. `console.log`), see [code quality tooling][code-quality-link]
 
-#### Frontend / WebComponent
+#### Frontend / Online
 
 - [ ] Added component tests (if component was changed)
 - [ ] Considered and tested accessibility (if UI change was made)

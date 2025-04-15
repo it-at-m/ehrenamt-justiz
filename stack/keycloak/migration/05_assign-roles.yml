@@ -11,6 +11,6 @@ changes:
       role: clientrole_sondersachbearbeiter
       clientId: ej-app
   - assignRole:
-      user: admin
+      user: soadmin
       role: clientrole_administrator
       clientId: ej-app

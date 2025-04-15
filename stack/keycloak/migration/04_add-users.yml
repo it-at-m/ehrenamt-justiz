@@ -23,12 +23,12 @@ changes:
       name: sosach
       password: "sosach"
   - addUser:
-      name: admin
+      name: soadmin
       lastName: Admin
       firstName: Eva
       enabled: true
       emailVerified: true
       email: writer@writer.com
   - updateUserPassword:
-      name: admin
-      password: "admin"
+      name: soadmin
+      password: "soadmin"
