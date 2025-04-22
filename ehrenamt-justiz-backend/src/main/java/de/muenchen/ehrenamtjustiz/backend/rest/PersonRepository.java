@@ -59,7 +59,7 @@ public interface PersonRepository extends PagingAndSortingRepository<Person, UUI
      * @return the saved {@link Person}.
      */
     @CachePut(value = CACHE, key = "#p0.id")
-    @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
+    @PreAuthorize("permitAll")
     @Transactional
     <S extends Person> S save(S person);
 
@@ -126,7 +126,7 @@ public interface PersonRepository extends PagingAndSortingRepository<Person, UUI
     List<Person> retrieveAll();
 
     @Query("SELECT s FROM Person s WHERE s.ewoid = :om and s.konfigurationid = :aktiveKonfiguration")
-    @PreAuthorize(Authorities.HAS_AUTHORITY_READ_EHRENAMTJUSTIZDATEN)
+    @PreAuthorize("permitAll")
     Person findByOM(@Param("om") String om, @Param("aktiveKonfiguration") UUID aktiveKonfiguration);
 
     @Query(

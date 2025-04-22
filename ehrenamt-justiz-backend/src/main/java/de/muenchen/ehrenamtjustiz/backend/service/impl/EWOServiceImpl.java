@@ -10,7 +10,6 @@ import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
-import de.muenchen.ehrenamtjustiz.backend.security.Authorities;
 import de.muenchen.ehrenamtjustiz.backend.service.EWOService;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.net.MalformedURLException;
@@ -29,7 +28,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
@@ -59,7 +57,6 @@ public class EWOServiceImpl implements EWOService {
     private String basepathewoeai;
 
     @Override
-    @PreAuthorize(Authorities.HAS_AUTHORITY_EWOSUCHEMITOM)
     public EWOBuergerDatenDto ewoSucheMitOM(final String om) {
 
         final MultiValueMap<String, String> headers = new HttpHeaders();
@@ -84,7 +81,6 @@ public class EWOServiceImpl implements EWOService {
     }
 
     @Override
-    @PreAuthorize(Authorities.HAS_AUTHORITY_EWOSUCHE)
     @SuppressFBWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     public List<EWOBuergerDatenDto> ewoSuche(final EWOBuergerSucheDto eWOBuergerSucheDto) {
 

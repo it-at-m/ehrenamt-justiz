@@ -49,14 +49,18 @@ public class SecurityConfiguration {
                         // allow access to /konfiguration/getAktiveKonfiguration
                         AntPathRequestMatcher.antMatcher("/konfiguration/getAktiveKonfiguration"),
                         // allow access to /onlinebewerbung/bewerbungspeichern
-                        AntPathRequestMatcher.antMatcher("/onlinebewerbung/bewerbungspeichern"))
+                        AntPathRequestMatcher.antMatcher("/onlinebewerbung/bewerbungspeichern"),
+                        // allow access to /onlinebewerbung/bewerbungspeichern
+                        AntPathRequestMatcher.antMatcher("/aenderungsservice/aenderungsServicePerson"))
                         .permitAll())
                 .authorizeHttpRequests((requests) -> requests.requestMatchers("/**")
                         .authenticated())
                 .oauth2ResourceServer(httpSecurityOAuth2ResourceServerConfigurer -> httpSecurityOAuth2ResourceServerConfigurer
                         .jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(new JwtUserInfoAuthenticationConverter(
-                                new UserInfoAuthoritiesService(securityProperties.getUserInfoUri(), restTemplateBuilder)))));
-
+                                new UserInfoAuthoritiesService(securityProperties.getUserInfoUri(), restTemplateBuilder)))))
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/konfiguration/getAktiveKonfiguration", "/onlinebewerbung/bewerbungspeichern",
+                                "/aenderungsservice/aenderungsServicePerson"));
         return http.build();
     }
 

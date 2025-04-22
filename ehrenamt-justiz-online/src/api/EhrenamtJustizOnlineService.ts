@@ -44,7 +44,7 @@ const ERROR_MESSAGES: ErrorMessageDefinition[] = [
 
 class EhrenamtJustizOnlineServiceClass {
   public static getBaseUrl(): string {
-    return `${API_BASE}/api/ej-app-backend-service`;
+    return `${API_BASE}/public/backend`;
   }
 
   public getAktiveKonfiguration(): Promise<Konfiguration> {
