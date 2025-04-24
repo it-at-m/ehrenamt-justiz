@@ -23,6 +23,7 @@ body:
         - ehrenamt-justiz-backend
         - ehrenamt-justiz-eai
         - ehrenamt-justiz-online
+        - ehrenamt-justiz-aenderungsservice
     validations:
       required: false
   - type: textarea

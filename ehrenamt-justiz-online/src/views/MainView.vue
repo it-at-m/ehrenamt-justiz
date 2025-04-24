@@ -300,7 +300,7 @@ function speichern(): void {
     }
   } else {
     isSavingAnimation.value = true;
-    EhrenamtJustizOnlineService.bewerbungspeichern({
+    EhrenamtJustizOnlineService.bewerbungSpeichern({
       vorname: onlineBewerbungFormData.value.vorname,
       nachname: onlineBewerbungFormData.value.nachname,
       geburtsdatum: onlineBewerbungFormData.value.geburtsdatum,

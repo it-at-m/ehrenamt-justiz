@@ -43,8 +43,8 @@ public class OnlineBewerbungRestController {
     private final PersonRepository personRepository;
 
     @SuppressWarnings("PMD.CyclomaticComplexity")
-    @PostMapping(value = "/bewerbungspeichern", consumes = { MediaType.APPLICATION_JSON_VALUE })
-    public String bewerbungspeichern(@RequestBody final OnlineBewerbungDatenDto onlineBewerbungDatenDto) {
+    @PostMapping(value = "/bewerbungSpeichern", consumes = { MediaType.APPLICATION_JSON_VALUE })
+    public String bewerbungSpeichern(@RequestBody final OnlineBewerbungDatenDto onlineBewerbungDatenDto) {
 
         final List<String> nullWerte = pruefeNullWerte(onlineBewerbungDatenDto);
         if (!nullWerte.isEmpty()) {

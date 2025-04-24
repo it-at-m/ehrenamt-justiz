@@ -38,7 +38,7 @@ Issue: #XXX
 - [ ] Considered and tested accessibility (if UI change was made)
 - [ ] Checked / Updated Node.js engine requirements in `package.json` (if dependencies were changed)
 
-#### Backend / EAI
+#### Backend / EAI / Aenderungsservice
 
 - [ ] Added integration tests
 - [ ] Updated database migration scripts (if changes to model were made)

@@ -23,7 +23,7 @@ export function getPOSTConfig(body: any): RequestInit {
   return {
     method: requestMethod,
     body: body ? JSON.stringify(body) : undefined,
-    headers: getHeaders(requestMethod),
+    headers: getHeaders(),
     mode: "cors",
     credentials: "same-origin",
     redirect: "manual",
@@ -36,7 +36,7 @@ export function getDELETEConfig(): RequestInit {
   const requestMethod = "DELETE";
   return {
     method: requestMethod,
-    headers: getHeaders(requestMethod),
+    headers: getHeaders(),
     mode: "cors",
     credentials: "same-origin",
     redirect: "manual",
@@ -50,7 +50,7 @@ export function getDELETEConfig(): RequestInit {
 // eslint-disable-next-line
 export function getPUTConfig(body: any): RequestInit {
   const requestMethod = "PUT";
-  const headers = getHeaders(requestMethod);
+  const headers = getHeaders();
 
   if (body.version) {
     headers.append("If-Match", body.version);
@@ -73,7 +73,7 @@ export function getPUTConfig(body: any): RequestInit {
 // eslint-disable-next-line
 export function getPATCHConfig(body: any): RequestInit {
   const requestMethod = "PATCH";
-  const headers = getHeaders(requestMethod);
+  const headers = getHeaders();
 
   if (body.version !== undefined) {
     headers.append("If-Match", body.version);
@@ -138,11 +138,10 @@ export function defaultCatchHandler(
  *  Creates header
  * @returns {Headers}
  */
-export function getHeaders(requestMethod = "GET"): Headers {
-  const headers = new Headers();
-  if (requestMethod !== "GET") {
-    headers.append("Content-Type", "application/json");
-  }
+function getHeaders(): Headers {
+  const headers = new Headers({
+    "Content-Type": "application/json",
+  });
 
   const csrfCookie = _getXSRFToken();
   if (csrfCookie !== "") {
@@ -157,7 +156,7 @@ export function getHeaders(requestMethod = "GET"): Headers {
  */
 function _getXSRFToken(): string {
   const help = document.cookie.match(
-    "(^|;)\\s*" + "XSRF-TOKEN" + "\\s*=\\s*([^;]+)"
+      "(^|;)\\s*" + "XSRF-TOKEN" + "\\s*=\\s*([^;]+)"
   );
   return (help ? help.pop() : "") as string;
 }

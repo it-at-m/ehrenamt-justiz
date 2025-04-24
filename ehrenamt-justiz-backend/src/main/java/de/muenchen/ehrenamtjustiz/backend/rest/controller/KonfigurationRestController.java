@@ -53,7 +53,7 @@ public class KonfigurationRestController {
         }
     }
 
-    @PostMapping(value = "/setactive", consumes = { MediaType.APPLICATION_JSON_VALUE })
+    @PostMapping(value = "/setActive", consumes = { MediaType.APPLICATION_JSON_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_KONFIGURATION)
     @SuppressWarnings("PMD.LinguisticNaming")
     public ResponseEntity<Konfiguration> setActive(@RequestBody final Konfiguration konfiguration) {

@@ -1,0 +1,3 @@
+aenderungsservice:
+  backend:
+    server: http://localhost:39146

@@ -48,10 +48,10 @@ public class SecurityConfiguration {
                         AntPathRequestMatcher.antMatcher("/actuator/metrics"),
                         // allow access to /konfiguration/getAktiveKonfiguration
                         AntPathRequestMatcher.antMatcher("/konfiguration/getAktiveKonfiguration"),
-                        // allow access to /onlinebewerbung/bewerbungspeichern
-                        AntPathRequestMatcher.antMatcher("/onlinebewerbung/bewerbungspeichern"),
-                        // allow access to /onlinebewerbung/bewerbungspeichern
-                        AntPathRequestMatcher.antMatcher("/aenderungsservice/aenderungsServicePerson"))
+                        // allow access to /onlinebewerbung/bewerbungSpeichern
+                        AntPathRequestMatcher.antMatcher("/onlinebewerbung/bewerbungSpeichern"),
+                        // allow access to /onlinebewerbung/aenderungsservicePerson
+                        AntPathRequestMatcher.antMatcher("/aenderungsservice/aenderungsservicePerson"))
                         .permitAll())
                 .authorizeHttpRequests((requests) -> requests.requestMatchers("/**")
                         .authenticated())
@@ -59,8 +59,8 @@ public class SecurityConfiguration {
                         .jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(new JwtUserInfoAuthenticationConverter(
                                 new UserInfoAuthoritiesService(securityProperties.getUserInfoUri(), restTemplateBuilder)))))
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/konfiguration/getAktiveKonfiguration", "/onlinebewerbung/bewerbungspeichern",
-                                "/aenderungsservice/aenderungsServicePerson"));
+                        .ignoringRequestMatchers("/onlinebewerbung/bewerbungSpeichern",
+                                "/aenderungsservice/aenderungsservicePerson"));
         return http.build();
     }
 

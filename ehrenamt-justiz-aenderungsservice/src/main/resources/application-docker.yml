@@ -1,0 +1,18 @@
+server:
+  port: 8086
+spring:
+  kafka:
+    bootstrap-servers: lhm-cluster-kafka-tls-bootstrap-lhmeventbus-k.apps.capk.muenchen.de:443
+    security.protocol: SSL
+    ssl:
+      key-store-password: 4j61rOTDsCpoAutAY9S5
+      trust-store-password: 4j61rOTDsCpoAutAY9S5
+      key-store-location: file:/etc/ssl/kafka-auth-keystore.jks
+      trust-store-location: file:/etc/ssl/truststore.jks
+    client-id: lhm-ewo-eai-schoeffen
+    consumer: #Only insert everything below here if you wish to receive unread messages with the listener when it was inactive. Otherwise, only the messages that were sent during the active time of the listener will be received.
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+
+aenderungsservice:
+  groupId: lhm-ewo-eai-aenderungen-ehrenamt-justiz25
