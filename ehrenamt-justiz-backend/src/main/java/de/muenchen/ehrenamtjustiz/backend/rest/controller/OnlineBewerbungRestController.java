@@ -42,7 +42,7 @@ public class OnlineBewerbungRestController {
     @Autowired
     private final PersonRepository personRepository;
 
-    @SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.NPathComplexity" })
+    @SuppressWarnings({ "PMD.CognitiveComplexity", "PMD.CyclomaticComplexity", "PMD.NPathComplexity" })
     @PostMapping(value = "/bewerbungSpeichern", consumes = { MediaType.APPLICATION_JSON_VALUE })
     public String bewerbungSpeichern(@RequestBody final OnlineBewerbungDatenDto onlineBewerbungDatenDto) {
 
@@ -58,9 +58,10 @@ public class OnlineBewerbungRestController {
         // Hence, does not result in log injection
         if (onlineBewerbungDatenDto.getVorname().matches("^[\\p{L}\\p{M}\\s'-]*$") &&
                 onlineBewerbungDatenDto.getNachname().matches("^[\\p{L}\\p{M}\\s'-]*$")) {
-            log.debug("Online-Bewerbung erhalten! {} | {} | {}", sanitizeForLogging(onlineBewerbungDatenDto.getVorname()),
-                    sanitizeForLogging(onlineBewerbungDatenDto.getNachname()),
-                    onlineBewerbungDatenDto.getGeburtsdatum());
+            log.debug("Online-Bewerbung erhalten! Vorname: '{}' | Nachname: '{}' | Geburtsdatum: '{}'",
+                    truncateIfNeeded(sanitizeForLogging(onlineBewerbungDatenDto.getVorname()), 100),
+                    truncateIfNeeded(sanitizeForLogging(onlineBewerbungDatenDto.getNachname()), 100),
+                    sanitizeForLogging(onlineBewerbungDatenDto.getGeburtsdatum() != null ? onlineBewerbungDatenDto.getGeburtsdatum().toString() : "null"));
         } else {
             log.debug("Online-Bewerbung erhalten!");
         }
@@ -120,8 +121,15 @@ public class OnlineBewerbungRestController {
         if (input == null) {
             return null;
         }
-        // Remove newline and carriage return characters
-        return input.replaceAll("[\\r\\n]", "");
+        // Remove control characters that could affect log formatting or enable injection
+        return input.replaceAll("[\\p{Cntrl}]", "");
+    }
+
+    private String truncateIfNeeded(final String input, final int maxLength) {
+        if (input != null && input.length() > maxLength) {
+            return input.substring(0, maxLength) + "...";
+        }
+        return input;
     }
 
     private static List<String> pruefeNullWerte(final OnlineBewerbungDatenDto onlineBewerbungDatenDto) {

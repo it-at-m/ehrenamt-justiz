@@ -16,10 +16,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Slf4j
 public class AenderungsService {
     @Value("${aenderungsservice.backend.server}")
-    private String serverbackend;
+    private String serverBackend;
 
     @Value("${aenderungsservice.backend.base-path}")
-    private String basepathbackend;
+    private String basePathBackend;
 
     private final RestTemplate restTemplate;
 
@@ -60,8 +60,8 @@ public class AenderungsService {
 
         final RequestEntity<String> request;
         request = new RequestEntity<>(om, HttpMethod.POST, UriComponentsBuilder
-                .fromUriString(serverbackend)
-                .path(basepathbackend + "/aenderungsservice/aenderungsservicePerson")
+                .fromUriString(serverBackend)
+                .path(basePathBackend + "/aenderungsservice/aenderungsservicePerson")
                 .build()
                 .toUri());
 

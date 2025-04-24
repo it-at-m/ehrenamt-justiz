@@ -74,7 +74,8 @@ public class AenderungsServiceRestController {
         try {
             personRepository.save(personByOM);
         } catch (Exception e) {
-            log.error("Fehler beim Speichern der Person mit om {}", om, e);
+            final String sanitizedOm = om.replace("\n", " ").replace("\r", " ");
+            log.error("Fehler beim Speichern der Person mit om {}", sanitizedOm, e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

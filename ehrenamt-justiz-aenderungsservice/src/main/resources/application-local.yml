@@ -13,3 +13,7 @@ spring:
     consumer: #Only insert everything below here if you wish to receive unread messages with the listener when it was inactive. Otherwise, only the messages that were sent during the active time of the listener will be received.
       auto-offset-reset: earliest
       enable-auto-commit: true
+
+aenderungsservice:
+  backend:
+    server: http://localhost:8083
