@@ -56,8 +56,10 @@ public class OnlineBewerbungRestController {
 
         // The regex check here, allows only alphanumeric characters to pass.
         // Hence, does not result in log injection
-        if (onlineBewerbungDatenDto.getVorname().matches("\\w*") && onlineBewerbungDatenDto.getNachname().matches("\\w*")) {
-            log.debug("Online-Bewerbung erhalten! {} | {} | {}", onlineBewerbungDatenDto.getVorname(), onlineBewerbungDatenDto.getNachname(),
+        if (onlineBewerbungDatenDto.getVorname().matches("^[\\p{L}\\p{M}\\s'-]*$") &&
+                onlineBewerbungDatenDto.getNachname().matches("^[\\p{L}\\p{M}\\s'-]*$")) {
+            log.debug("Online-Bewerbung erhalten! {} | {} | {}", sanitizeForLogging(onlineBewerbungDatenDto.getVorname()),
+                    sanitizeForLogging(onlineBewerbungDatenDto.getNachname()),
                     onlineBewerbungDatenDto.getGeburtsdatum());
         } else {
             log.debug("Online-Bewerbung erhalten!");
@@ -112,6 +114,14 @@ public class OnlineBewerbungRestController {
             log.info("Ein Fehler ist aufgetreten. Nachricht:", e);
             return ERROR;
         }
+    }
+
+    private String sanitizeForLogging(final String input) {
+        if (input == null) {
+            return null;
+        }
+        // Remove newline and carriage return characters
+        return input.replaceAll("[\\r\\n]", "");
     }
 
     private static List<String> pruefeNullWerte(final OnlineBewerbungDatenDto onlineBewerbungDatenDto) {

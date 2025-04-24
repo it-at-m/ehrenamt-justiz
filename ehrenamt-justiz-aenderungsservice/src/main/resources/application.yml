@@ -43,5 +43,8 @@ aenderungsservice:
   backend:
     server: http://localhost:8083
     base-path: /public/aenderungsservice
+    connecttimeout: 30000
+    readtimeout: 30000
   topicPattern: lhm-ewo-eai-aenderungen-.*
   groupId: lhm-ewo-eai-aenderungen-ehrenamt-justiz
+

@@ -64,25 +64,31 @@ public class AenderungsServiceRestController {
         }
 
         // get conflicts
-        ermittelnKonflikte(personByOM);
+        final List<String> konflikte = ermittelnKonflikte(personByOM);
 
-        if (!personByOM.getKonfliktfeld().isEmpty()) {
+        if (!konflikte.isEmpty()) {
             personByOM.setStatus(Status.KONFLIKT);
         }
 
         // Person U P D A T E
-        personRepository.save(personByOM);
+        try {
+            personRepository.save(personByOM);
+        } catch (Exception e) {
+            log.error("Fehler beim Speichern der Person mit om {}", om, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    private void ermittelnKonflikte(final Person person) {
+    private List<String> ermittelnKonflikte(final Person person) {
 
         // Get the conflicts
         final List<String> konflikte = ehrenamtJustizService.getKonflikte(person);
 
         person.setKonfliktfeld(konflikte);
 
+        return konflikte;
     }
 
 }

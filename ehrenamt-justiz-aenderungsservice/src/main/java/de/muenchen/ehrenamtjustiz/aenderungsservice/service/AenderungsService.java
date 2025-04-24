@@ -7,6 +7,8 @@ import org.springframework.http.*;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -68,6 +70,12 @@ public class AenderungsService {
             responseEntity = restTemplate.exchange(request, Void.class);
         } catch (HttpClientErrorException e) {
             log.error("Fehler in aenderungsService beim OM {}", om, e);
+            return HttpStatus.INTERNAL_SERVER_ERROR;
+        } catch (ResourceAccessException e) {
+            log.error("Netzwerkfehler in aenderungsService beim OM {}", om, e);
+            return HttpStatus.SERVICE_UNAVAILABLE;
+        } catch (RestClientException e) {
+            log.error("Unerwarteter Fehler in aenderungsService beim OM {}", om, e);
             return HttpStatus.INTERNAL_SERVER_ERROR;
         }
 
