@@ -58,6 +58,11 @@ public class AenderungsService {
             return HttpStatus.BAD_REQUEST;
         }
 
+        if (om.trim().isEmpty()) {
+            log.error("Fehler: Die EWO-ID ist leer");
+            return HttpStatus.BAD_REQUEST;
+        }
+
         final RequestEntity<String> request;
         request = new RequestEntity<>(om, HttpMethod.POST, UriComponentsBuilder
                 .fromUriString(serverBackend)

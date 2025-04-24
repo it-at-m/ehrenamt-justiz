@@ -59,8 +59,8 @@ public class OnlineBewerbungRestController {
         if (onlineBewerbungDatenDto.getVorname().matches("^[\\p{L}\\p{M}\\s'-]*$") &&
                 onlineBewerbungDatenDto.getNachname().matches("^[\\p{L}\\p{M}\\s'-]*$")) {
             log.debug("Online-Bewerbung erhalten! Vorname: '{}' | Nachname: '{}' | Geburtsdatum: '{}'",
-                    truncateIfNeeded(sanitizeForLogging(onlineBewerbungDatenDto.getVorname()), 100),
-                    truncateIfNeeded(sanitizeForLogging(onlineBewerbungDatenDto.getNachname()), 100),
+                    sanitizeForLogging(truncateIfNeeded(onlineBewerbungDatenDto.getVorname(), 100)),
+                    sanitizeForLogging(truncateIfNeeded(onlineBewerbungDatenDto.getNachname(), 100)),
                     sanitizeForLogging(onlineBewerbungDatenDto.getGeburtsdatum() != null ? onlineBewerbungDatenDto.getGeburtsdatum().toString() : "null"));
         } else {
             log.debug("Online-Bewerbung erhalten!");
@@ -121,8 +121,8 @@ public class OnlineBewerbungRestController {
         if (input == null) {
             return null;
         }
-        // Remove control characters that could affect log formatting or enable injection
-        return input.replaceAll("[\\p{Cntrl}]", "");
+        // Remove control characters, newline characters, and other potentially harmful characters
+        return input.replaceAll("[\\p{Cntrl}\n\r]", "");
     }
 
     private String truncateIfNeeded(final String input, final int maxLength) {

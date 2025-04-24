@@ -44,13 +44,9 @@ public class AenderungsServiceRestController {
         try {
             personByOM = personRepository.findByOM(om, konfiguration[0].getId());
         } catch (HttpClientErrorException | HttpServerErrorException e) {
-            // The regex check here, allows only alphanumeric characters to pass.
-            // Hence, does not result in log injection
-            if (om.matches("\\w*")) {
-                log.error("Fehler beim Aufruf von 'aenderungsservicePerson: {}", om, e);
-            } else {
-                log.error("Fehler beim Aufruf von 'aenderungsservicePerson", e);
-            }
+            // Sanitize the input properly to prevent log injection
+            final String sanitizedOm = sanitizeForLogging(om);
+            log.error("Fehler beim Aufruf von 'aenderungsservicePerson: {}", sanitizedOm, e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -83,13 +79,28 @@ public class AenderungsServiceRestController {
     }
 
     private List<String> ermittelnKonflikte(final Person person) {
+        log.debug("Ermittle Konflikte für Person mit ID {}", person.getId());
 
         // Get the conflicts
         final List<String> konflikte = ehrenamtJustizService.getKonflikte(person);
 
         person.setKonfliktfeld(konflikte);
 
+        if (konflikte.isEmpty()) {
+            log.debug("Keine Konflikte gefunden");
+        } else {
+            log.debug("Folgende Konflikte wurden gefunden: {}", String.join(", ", konflikte));
+        }
+
         return konflikte;
+    }
+
+    private String sanitizeForLogging(final String input) {
+        if (input == null) {
+            return null;
+        }
+        // Remove control characters, newline characters, and other potentially harmful characters
+        return input.replaceAll("[\\p{Cntrl}\n\r]", "");
     }
 
 }

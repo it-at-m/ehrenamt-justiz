@@ -13,7 +13,7 @@
     <artifactId>ehrenamt-justiz-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ehrenamt-justiz-backend</name>
-    <description>Backend von Ehrenamtjustiz</description>
+    <description>Backend of Ehrenamtjustiz</description>
     <url>https://github.com/it-at-m/ehrenamt-justiz</url>
 
     <properties>

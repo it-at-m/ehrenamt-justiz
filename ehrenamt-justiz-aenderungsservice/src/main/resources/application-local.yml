@@ -10,7 +10,7 @@ spring:
       key-store-location: classpath:kafka-auth-keystore.jks
       trust-store-location: classpath:truststore.jks
     client-id: lhm-ewo-eai-schoeffen
-    consumer: #Only insert everything below here if you wish to receive unread messages with the listener when it was inactive. Otherwise, only the messages that were sent during the active time of the listener will be received.
+    consumer: # Only insert everything below here if you wish to receive unread messages with the listener when it was inactive. Otherwise, only the messages that were sent during the active time of the listener will be received.
       auto-offset-reset: earliest
       enable-auto-commit: true
 
