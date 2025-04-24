@@ -156,7 +156,7 @@ function getHeaders(): Headers {
  */
 function _getXSRFToken(): string {
   const help = document.cookie.match(
-      "(^|;)\\s*" + "XSRF-TOKEN" + "\\s*=\\s*([^;]+)"
+    "(^|;)\\s*" + "XSRF-TOKEN" + "\\s*=\\s*([^;]+)"
   );
   return (help ? help.pop() : "") as string;
 }

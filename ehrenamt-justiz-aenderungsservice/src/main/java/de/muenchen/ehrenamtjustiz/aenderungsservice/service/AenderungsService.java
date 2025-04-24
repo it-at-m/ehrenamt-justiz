@@ -1,8 +1,5 @@
 package de.muenchen.ehrenamtjustiz.aenderungsservice.service;
 
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +8,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 @Slf4j
@@ -59,12 +57,11 @@ public class AenderungsService {
         }
 
         final RequestEntity<String> request;
-        try {
-            request = new RequestEntity<>(om, HttpMethod.POST, new URL(serverbackend + basepathbackend + "/aenderungsservice/aenderungsservicePerson").toURI());
-        } catch (URISyntaxException | MalformedURLException e) {
-            log.error("Fehler in aenderungsService beim OM {}", om, e);
-            return HttpStatus.INTERNAL_SERVER_ERROR;
-        }
+        request = new RequestEntity<>(om, HttpMethod.POST, UriComponentsBuilder
+                .fromHttpUrl(serverbackend)
+                .path(basepathbackend + "/aenderungsservice/aenderungsservicePerson")
+                .build()
+                .toUri());
 
         final ResponseEntity<Void> responseEntity;
         try {

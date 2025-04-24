@@ -9,9 +9,9 @@
     <relativePath/>
   </parent>
 
-  <groupId>org.example</groupId>
+  <groupId>de.muenchen.ehrenamt-justiz</groupId>
   <artifactId>ehrenamt-justiz-aenderungsservice</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.0.1-SNAPSHOT</version>
 
   <name>ehrenamt-justiz-aenderungsservice</name>
   <description>Aenderungsservice von Ehrenamtjustiz</description>
@@ -53,9 +53,6 @@
 
     <!-- Release -->
     <maven-release-plugin.version>3.1.1</maven-release-plugin.version>
-
-    <!-- Additional required dependencies -->
-    <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version> <!-- Needed to make MapStruct and Lombok work together -->
 
     <!-- Spotless P2 Mirror configuration (e.g. required when using company internal registry -->
     <p2.username /> <!-- must be empty, override via Maven settings.xml if needed -->
