@@ -44,12 +44,22 @@ public class AenderungsServiceRestController {
         try {
             personByOM = personRepository.findByOM(om, konfiguration[0].getId());
         } catch (HttpClientErrorException | HttpServerErrorException e) {
-            log.error("Fehler beim Aufruf von 'aenderungsservicePerson: {}", om, e);
+            // The regex check here, allows only alphanumeric characters to pass.
+            // Hence, does not result in log injection
+            if (om.matches("\\w*")) {
+                log.error("Fehler beim Aufruf von 'aenderungsservicePerson: {}", om, e);
+            } else {
+                log.error("Fehler beim Aufruf von 'aenderungsservicePerson", e);
+            }
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         if (personByOM == null) {
-            log.info("Keine Person für om {} in aenderungsservicePerson: gefunden", om);
+            if (om.matches("\\w*")) {
+                log.info("Keine Person für om {} in aenderungsservicePerson: gefunden", om);
+            } else {
+                log.info("Keine Person aenderungsservicePerson: gefunden");
+            }
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 

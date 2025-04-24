@@ -42,7 +42,7 @@ public class OnlineBewerbungRestController {
     @Autowired
     private final PersonRepository personRepository;
 
-    @SuppressWarnings("PMD.CyclomaticComplexity")
+    @SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.NPathComplexity" })
     @PostMapping(value = "/bewerbungSpeichern", consumes = { MediaType.APPLICATION_JSON_VALUE })
     public String bewerbungSpeichern(@RequestBody final OnlineBewerbungDatenDto onlineBewerbungDatenDto) {
 
@@ -54,8 +54,14 @@ public class OnlineBewerbungRestController {
             return OK;
         }
 
-        log.debug("Online-Bewerbung erhalten! {} | {} | {}", onlineBewerbungDatenDto.getVorname(), onlineBewerbungDatenDto.getNachname(),
-                onlineBewerbungDatenDto.getGeburtsdatum());
+        // The regex check here, allows only alphanumeric characters to pass.
+        // Hence, does not result in log injection
+        if (onlineBewerbungDatenDto.getVorname().matches("\\w*") && onlineBewerbungDatenDto.getNachname().matches("\\w*")) {
+            log.debug("Online-Bewerbung erhalten! {} | {} | {}", onlineBewerbungDatenDto.getVorname(), onlineBewerbungDatenDto.getNachname(),
+                    onlineBewerbungDatenDto.getGeburtsdatum());
+        } else {
+            log.debug("Online-Bewerbung erhalten!");
+        }
 
         // EWO-search
         final List<EWOBuergerDatenDto> eWOBuergerDaten = ewoSuche(onlineBewerbungDatenDto);
