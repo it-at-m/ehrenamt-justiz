@@ -30,7 +30,7 @@ public class AenderungsService {
 
     @KafkaListener(
             topicPattern = "${aenderungsservice.topicPattern}",
-            groupId = "${aenderungsservice.groupId}"
+            groupId = "${aenderungsservice.group-Id}"
     )
     public void consume(final String om) {
         log.debug("Änderungsservice mit EWO-OM aufgerufen: {}", om);
