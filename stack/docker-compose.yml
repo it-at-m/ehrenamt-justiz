@@ -203,6 +203,8 @@ services:
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
     ports:
       - "8085:8085"
+    networks:
+      - keycloak
     healthcheck:
       <<: *healthcheck
       test: [ "CMD-SHELL", "curl http://localhost:8085/actuator/health/liveness" ]
@@ -217,6 +219,8 @@ services:
     image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice:latest
     ports:
       - "8086:8086"
+    networks:
+      - keycloak
     healthcheck:
       <<: *healthcheck
       test: ["CMD-SHELL", "curl http://localhost:8086/actuator/health/liveness"]

@@ -102,7 +102,18 @@ public final class EhrenamtJustizUtility {
         return input.replaceAll("[\\p{Cntrl}\n\r]", "");
     }
 
+    /**
+     * Truncates a string if it exceeds the specified maximum length.
+     *
+     * @param input The string to truncate.
+     * @param maxLength The maximum allowed length.
+     * @return The original string if it's null or shorter than maxLength,
+     *         otherwise the truncated string with an ellipsis appended.
+     */
     public static String truncateIfNeeded(final String input, final int maxLength) {
+        if (maxLength < 0) {
+            throw new IllegalArgumentException("maxLength darf nicht negativ sein!");
+        }
         if (input != null && input.length() > maxLength) {
             return input.substring(0, maxLength) + "...";
         }
