@@ -6,6 +6,9 @@ import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
 import de.muenchen.ehrenamtjustiz.backend.service.EhrenamtJustizService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,9 +41,20 @@ public class AenderungsServiceRestController {
     /**
      * Ermitteln der Konflikte für eine Person und den Status evtl. auf KONFLIKT setzen
      *
-     * @param om EWO OM
-     * @return HTTP status
+     * @param om The person identifier
+     * @return HTTP status indicating success or failure
      */
+    @Operation(
+            summary = "Update person status based on conflicts",
+            description = "Retrieves a person by OM, checks for conflicts, updates status, and saves"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Person updated successfully"),
+                    @ApiResponse(responseCode = "404", description = "Person not found"),
+                    @ApiResponse(responseCode = "500", description = "Internal error during processing")
+            }
+    )
     @PostMapping("/aenderungsservicePerson")
     public ResponseEntity<Void> aenderungsServicePerson(@RequestBody final String om) {
 
