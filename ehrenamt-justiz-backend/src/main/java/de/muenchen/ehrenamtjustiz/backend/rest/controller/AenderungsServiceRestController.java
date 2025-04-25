@@ -35,6 +35,12 @@ public class AenderungsServiceRestController {
     @Autowired
     private final EhrenamtJustizService ehrenamtJustizService;
 
+    /**
+     * Ermitteln der Konflikte für eine Person und den Status evtl. auf KONFLIKT setzen
+     *
+     * @param om EWO OM
+     * @return HTTP status
+     */
     @PostMapping("/aenderungsservicePerson")
     public ResponseEntity<Void> aenderungsServicePerson(@RequestBody final String om) {
 
@@ -44,15 +50,12 @@ public class AenderungsServiceRestController {
         try {
             personByOM = personRepository.findByOM(om, konfiguration[0].getId());
         } catch (HttpClientErrorException | HttpServerErrorException e) {
-            // Sanitize the input properly to prevent log injection
-            final String sanitizedOm = sanitizeForLogging(om);
-            log.error("Fehler beim Aufruf von 'aenderungsservicePerson: {}", sanitizedOm, e);
+            log.error("Fehler beim Aufruf von 'aenderungsservicePerson: {}", om, e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         if (personByOM == null) {
-            final String sanitizedOm = sanitizeForLogging(om);
-            log.info("Keine Person für om {} in aenderungsservicePerson: gefunden", sanitizedOm);
+            log.info("Keine Person für om {} in aenderungsservicePerson: gefunden", om);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -60,6 +63,7 @@ public class AenderungsServiceRestController {
         final List<String> konflikte = ermittelnKonflikte(personByOM);
 
         if (!konflikte.isEmpty()) {
+            log.info("Status auf KONFLIKT setzen für Person mit om {}", om);
             personByOM.setStatus(Status.KONFLIKT);
         }
 
@@ -67,8 +71,7 @@ public class AenderungsServiceRestController {
         try {
             personRepository.save(personByOM);
         } catch (Exception e) {
-            final String sanitizedOm = sanitizeForLogging(om);
-            log.error("Fehler beim Speichern der Person mit om {}", sanitizedOm, e);
+            log.error("Fehler beim Speichern der Person mit om {}", om, e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -90,14 +93,6 @@ public class AenderungsServiceRestController {
         }
 
         return konflikte;
-    }
-
-    private String sanitizeForLogging(final String input) {
-        if (input == null) {
-            return null;
-        }
-        // Remove control characters, newline characters, and other potentially harmful characters
-        return input.replaceAll("[\\p{Cntrl}\n\r]", "");
     }
 
 }

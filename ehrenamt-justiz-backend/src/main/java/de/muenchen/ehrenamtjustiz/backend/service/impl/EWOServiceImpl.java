@@ -75,7 +75,7 @@ public class EWOServiceImpl implements EWOService {
             responseEntity = restTemplate.exchange(request, EWOBuerger.class);
             eWOBuergerDaten = mapToEWOBuerger(responseEntity.getBody());
         } catch (HttpClientErrorException e) {
-            log.error("\"Fehler in ewoSucheMitOM beim OM {}", om, e);
+            log.error("Fehler in ewoSucheMitOM beim OM {}", om, e);
         } catch (ResourceAccessException e) {
             log.error("Netzwerkfehler in ewoSucheMitOM beim OM {}", om, e);
         } catch (RestClientException e) {

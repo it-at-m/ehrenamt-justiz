@@ -88,4 +88,25 @@ public final class EhrenamtJustizUtility {
         return person;
     }
 
+    /**
+     * Sanitizes user input by removing potentially dangerous characters.
+     *
+     * @param input The user-provided input string.
+     * @return A sanitized version of the input string.
+     */
+    public static String sanitizeInput(final String input) {
+        if (input == null) {
+            return null;
+        }
+        // Remove newlines and carriage returns
+        return input.replaceAll("[\\p{Cntrl}\n\r]", "");
+    }
+
+    public static String truncateIfNeeded(final String input, final int maxLength) {
+        if (input != null && input.length() > maxLength) {
+            return input.substring(0, maxLength) + "...";
+        }
+        return input;
+    }
+
 }

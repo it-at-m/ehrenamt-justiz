@@ -1,10 +1,9 @@
 package de.muenchen.ehrenamtjustiz.backend.configuration;
 
-import de.muenchen.ehrenamtjustiz.backend.rest.BasicAuthRestTemplate;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,17 +23,17 @@ public class Configs {
     private String pwEwoEai;
 
     @Bean
-    public RestTemplate restTemplate() {
-        final RestTemplate restTemplate = new BasicAuthRestTemplate(userEwoEai, pwEwoEai);
-        restTemplate.setRequestFactory(clientHttpRequestFactory());
-        return restTemplate;
-    }
+    public RestTemplate restTemplate(final RestTemplateBuilder builder) {
 
-    private ClientHttpRequestFactory clientHttpRequestFactory() {
-        final HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-        factory.setConnectTimeout(connectTimeout);
-        factory.setReadTimeout(readTimeout);
-        return factory;
+        final HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(connectTimeout);
+        requestFactory.setReadTimeout(readTimeout);
+
+        // Erstelle RestTemplate mit Basic Auth
+        return builder
+                .requestFactory(() -> requestFactory)
+                .basicAuthentication(userEwoEai, pwEwoEai)
+                .build();
     }
 
 }

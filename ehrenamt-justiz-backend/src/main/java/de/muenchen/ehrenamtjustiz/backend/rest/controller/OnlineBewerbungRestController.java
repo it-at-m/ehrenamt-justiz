@@ -59,9 +59,10 @@ public class OnlineBewerbungRestController {
         if (onlineBewerbungDatenDto.getVorname().matches("^[\\p{L}\\p{M}\\s'-]*$") &&
                 onlineBewerbungDatenDto.getNachname().matches("^[\\p{L}\\p{M}\\s'-]*$")) {
             log.debug("Online-Bewerbung erhalten! Vorname: '{}' | Nachname: '{}' | Geburtsdatum: '{}'",
-                    sanitizeForLogging(truncateIfNeeded(onlineBewerbungDatenDto.getVorname(), 100)),
-                    sanitizeForLogging(truncateIfNeeded(onlineBewerbungDatenDto.getNachname(), 100)),
-                    sanitizeForLogging(onlineBewerbungDatenDto.getGeburtsdatum() != null ? onlineBewerbungDatenDto.getGeburtsdatum().toString() : "null"));
+                    EhrenamtJustizUtility.sanitizeInput(EhrenamtJustizUtility.truncateIfNeeded(onlineBewerbungDatenDto.getVorname(), 100)),
+                    EhrenamtJustizUtility.sanitizeInput(EhrenamtJustizUtility.truncateIfNeeded(onlineBewerbungDatenDto.getNachname(), 100)),
+                    EhrenamtJustizUtility
+                            .sanitizeInput(onlineBewerbungDatenDto.getGeburtsdatum() != null ? onlineBewerbungDatenDto.getGeburtsdatum().toString() : "null"));
         } else {
             log.debug("Online-Bewerbung erhalten!");
         }
@@ -115,21 +116,6 @@ public class OnlineBewerbungRestController {
             log.info("Ein Fehler ist aufgetreten. Nachricht:", e);
             return ERROR;
         }
-    }
-
-    private String sanitizeForLogging(final String input) {
-        if (input == null) {
-            return null;
-        }
-        // Remove control characters, newline characters, and other potentially harmful characters
-        return input.replaceAll("[\\p{Cntrl}\n\r]", "");
-    }
-
-    private String truncateIfNeeded(final String input, final int maxLength) {
-        if (input != null && input.length() > maxLength) {
-            return input.substring(0, maxLength) + "...";
-        }
-        return input;
     }
 
     private static List<String> pruefeNullWerte(final OnlineBewerbungDatenDto onlineBewerbungDatenDto) {

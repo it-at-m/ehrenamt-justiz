@@ -35,24 +35,22 @@ public class AenderungsService {
     public void consume(final String om) {
         log.debug("Änderungsservice mit EWO-OM aufgerufen: {}", om);
 
-        try {
-            final HttpStatusCode statusCode = aenderungsService(om);
-            if (!statusCode.is2xxSuccessful()) {
-                log.warn("Änderungsservice für OM {} nicht erfolgreich abgeschlossen. Status: {}", om, statusCode);
-            }
-        } catch (Exception e) {
-            log.error("Unbehandelte Exception bei der Verarbeitung von OM {}", om, e);
-        }
+        verarbeitenOM(om);
     }
 
     /**
-     * Call consume manual e.g. by UnitTest
+     * Aufruf consume z.B. durch Unit-Test
      *
      * @param om EWO-OM
      */
     public HttpStatusCode consumeDirect(final String om) {
         log.debug("Änderungsservice mit EWO-OM aufgerufen: {}", om);
 
+        return verarbeitenOM(om);
+
+    }
+
+    private HttpStatusCode verarbeitenOM(final String om) {
         try {
             final HttpStatusCode statusCode = aenderungsService(om);
             if (!statusCode.is2xxSuccessful()) {
@@ -63,7 +61,6 @@ public class AenderungsService {
             log.error("Unbehandelte Exception bei der Verarbeitung von OM {}", om, e);
             return HttpStatus.INTERNAL_SERVER_ERROR;
         }
-
     }
 
     private HttpStatusCode aenderungsService(final String om) {
