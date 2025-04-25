@@ -45,15 +45,15 @@ public class AenderungsServiceRestController {
      * @return HTTP status indicating success or failure
      */
     @Operation(
-            summary = "Update person status based on conflicts",
-            description = "Retrieves a person by OM, checks for conflicts, updates status, and saves"
+            summary = "Update person status auf KONFLIKT, falls Konflikte vorhanden sind",
+            description = "Ermittelt die Konflikte, setzt den KONFLIKT-Status und macht einen Update auf die Tabelle Person"
     )
     @ApiResponses(
-            value = {
-                    @ApiResponse(responseCode = "200", description = "Person updated successfully"),
-                    @ApiResponse(responseCode = "404", description = "Person not found"),
-                    @ApiResponse(responseCode = "500", description = "Internal error during processing")
-            }
+        {
+                @ApiResponse(responseCode = "200", description = "Person updated successfully"),
+                @ApiResponse(responseCode = "404", description = "Person not found"),
+                @ApiResponse(responseCode = "500", description = "Internal error during processing")
+        }
     )
     @PostMapping("/aenderungsservicePerson")
     public ResponseEntity<Void> aenderungsServicePerson(@RequestBody final String om) {
