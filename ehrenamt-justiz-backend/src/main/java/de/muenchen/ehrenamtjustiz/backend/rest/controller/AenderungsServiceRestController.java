@@ -51,11 +51,8 @@ public class AenderungsServiceRestController {
         }
 
         if (personByOM == null) {
-            if (om.matches("\\w*")) {
-                log.info("Keine Person für om {} in aenderungsservicePerson: gefunden", om);
-            } else {
-                log.info("Keine Person aenderungsservicePerson: gefunden");
-            }
+            final String sanitizedOm = sanitizeForLogging(om);
+            log.info("Keine Person für om {} in aenderungsservicePerson: gefunden", sanitizedOm);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -70,7 +67,7 @@ public class AenderungsServiceRestController {
         try {
             personRepository.save(personByOM);
         } catch (Exception e) {
-            final String sanitizedOm = om.replace("\n", " ").replace("\r", " ");
+            final String sanitizedOm = sanitizeForLogging(om);
             log.error("Fehler beim Speichern der Person mit om {}", sanitizedOm, e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

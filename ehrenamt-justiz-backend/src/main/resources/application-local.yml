@@ -38,10 +38,8 @@ security:
   logging-mode: all
 
 # Define eai
-de:
-  muenchen:
-    ewo:
-      eai:
-        server: http://localhost:8085
-        user: testuser
-        password: testpw
+ewo:
+  eai:
+    server: http://localhost:8085
+    user: testuser
+    password: testpw

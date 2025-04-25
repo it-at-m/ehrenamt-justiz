@@ -9,10 +9,8 @@ security:
   requestLogging: all
   userInfoUri: NotNeeded
 
-de:
-  muenchen:
-    ewo:
-      eai:
-        server: http://localhost:8085
-        user: test
-        password: test
+ewo:
+  eai:
+    server: http://localhost:8085
+    user: test
+    password: test

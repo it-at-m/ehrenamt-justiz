@@ -27,13 +27,11 @@ spring:
            - ${sso.client}
 
 # Define eai
-de:
-  muenchen:
-    ewo:
-      eai:
-        server: http://host.docker.internal:8085
-        user: testuser
-        password: testpw
+ewo:
+  eai:
+    server: http://host.docker.internal:8085
+    user: testuser
+    password: testpw
 
 # Define the local keycloak configuration here
 # Deduplication-only property

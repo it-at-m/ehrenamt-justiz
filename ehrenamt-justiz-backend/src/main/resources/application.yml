@@ -56,8 +56,8 @@ info:
     spring-cloud.version: @spring-cloud-dependencies.version@
 
 # Define eai
-de:
-  muenchen:
-    ewo:
-      eai:
-        basepath: /personeninfo/api
+ewo:
+  eai:
+    basepath: /personeninfo/api
+    connecttimeout: 15000
+    readtimeout: 15000

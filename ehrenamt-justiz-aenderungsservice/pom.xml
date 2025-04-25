@@ -9,7 +9,7 @@
     <relativePath/>
   </parent>
 
-  <groupId>de.muenchen.ehrenamt-justiz</groupId>
+  <groupId>de.muenchen-ehrenamt-justiz</groupId>
   <artifactId>ehrenamt-justiz-aenderungsservice</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
@@ -138,11 +138,6 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>

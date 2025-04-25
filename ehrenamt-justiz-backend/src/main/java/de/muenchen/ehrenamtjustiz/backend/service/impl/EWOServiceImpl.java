@@ -12,9 +12,6 @@ import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
 import de.muenchen.ehrenamtjustiz.backend.service.EWOService;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -31,7 +28,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 @Slf4j
@@ -50,10 +50,10 @@ public class EWOServiceImpl implements EWOService {
     @Autowired
     KonfigurationRepository konfigurationRepository;
 
-    @Value("${de.muenchen.ewo.eai.server}")
+    @Value("${ewo.eai.server}")
     private String serverewoeai;
 
-    @Value("${de.muenchen.ewo.eai.basepath:personeninfo/ap}")
+    @Value("${ewo.eai.basepath:personeninfo/ap}")
     private String basepathewoeai;
 
     @Override
@@ -61,19 +61,25 @@ public class EWOServiceImpl implements EWOService {
 
         final MultiValueMap<String, String> headers = new HttpHeaders();
         final RequestEntity<String> request;
-        try {
-            request = new RequestEntity<>(headers, HttpMethod.GET, new URL(serverewoeai + basepathewoeai + "/eairoutes/ewosuchemitom/" + om).toURI());
-        } catch (URISyntaxException | MalformedURLException exception) {
-            throw new RuntimeException(exception);
-        }
+
+        request = new RequestEntity<>(headers, HttpMethod.GET, UriComponentsBuilder
+                .fromUriString(serverewoeai)
+                .path(basepathewoeai + "/eairoutes/ewosuchemitom/" + om)
+                .build()
+                .toUri());
 
         final ResponseEntity<EWOBuerger> responseEntity;
         EWOBuergerDatenDto eWOBuergerDaten = null;
+
         try {
             responseEntity = restTemplate.exchange(request, EWOBuerger.class);
             eWOBuergerDaten = mapToEWOBuerger(responseEntity.getBody());
         } catch (HttpClientErrorException e) {
-            log.warn("Fehler in ewoSucheMitOM mit Fehlercode {} beim OM {}", e.getMessage(), om);
+            log.error("\"Fehler in ewoSucheMitOM beim OM {}", om, e);
+        } catch (ResourceAccessException e) {
+            log.error("Netzwerkfehler in ewoSucheMitOM beim OM {}", om, e);
+        } catch (RestClientException e) {
+            log.error("Unerwarteter Fehler in ewoSucheMitOM beim OM {}", om, e);
         }
 
         return eWOBuergerDaten;
