@@ -2,7 +2,7 @@ name: refarch-stack
 
 services:
   postgres:
-    image: postgres:16.4-alpine3.20@sha256:5660c2cbfea50c7a9127d17dc4e48543eedd3d7a41a595a2dfa572471e37e64c
+    image: postgres:16.8-alpine3.20@sha256:951d0626662c85a25e1ba0a89e64f314a2b99abced2c85b4423506249c2d82b0
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=admin
@@ -42,7 +42,7 @@ services:
     entrypoint: /bin/sh -c "chmod 600 /pgadmin4/pgpass; /entrypoint.sh;" # see https://www.postgresql.org/docs/current/libpq-pgpass.html#LIBPQ-PGPASS (last paragraph)
 
   keycloak:
-    image: keycloak/keycloak:26.2.0@sha256:87758ff2293c78c942c7a1f0df2bc13e0f943fcf0c0d027c12fdfac54a35d93b
+    image: keycloak/keycloak:26.2.1@sha256:9869b88191392727f0be7301e53573cc39c13c9d9b9b08492c97d1ea40366eae
     command:
       - start-dev
     environment:
@@ -129,7 +129,7 @@ services:
     security_opt: *security_settings
 
   appswitcher-server:
-    image: ghcr.io/it-at-m/appswitcher-server:1.2.1@sha256:cde8f669f8d23a5b3235f55319849a2822ed3c8f100bdbed1048cd37b7be6c6b
+    image: ghcr.io/it-at-m/appswitcher-server:1.2.3@sha256:8a6b7f111e003b2885047c73ec04940c358c589fe3c833362093b9a4334480c6
     environment:
       - SPRING_WEB_RESOURCES_STATIC_LOCATIONS=file:/workspace/static
       - THC_PATH=/actuator/health/liveness
@@ -150,7 +150,7 @@ services:
   backend:
     profiles:
       - backend
-    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:latest
+    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:latest@sha256:78b97fa6fb8b152ae17c34cca3f7b64a73c029b1bde8f33867f95be12a977330
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
@@ -169,7 +169,7 @@ services:
   frontend:
     profiles:
       - frontend
-    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:latest
+    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:latest@sha256:9edbcc82b6436b05904b451527df87a258b995ae107f4ec9c6af535fde8ba6fe
     ports:
       - "8081:8080"
     networks:
@@ -182,7 +182,7 @@ services:
   online:
     profiles:
       - online
-    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:latest
+    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:latest@sha256:75d03dc606947a4a3eef04c08dbff5b6eb8f48fa168fa5a9760cd8f2f1eac98a
     ports:
       - "8082:8080"
     networks:
@@ -197,7 +197,7 @@ services:
   eai:
     profiles:
       - eai
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai:latest
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai:latest@sha256:da68552b0e19cce4112cf289314a3877f11260ec7ffeff00d908873166e03943
     volumes:
       - ../ehrenamt-justiz-eai/entrypoint.sh:/usr/local/bin/entrypoint.sh:rwx
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
