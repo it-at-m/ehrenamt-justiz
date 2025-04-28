@@ -12,18 +12,18 @@
   - head-branch: [ '^dep', '-dependency-' ]
 "Type: Security":
   - head-branch: [ '^sec', '-security-' ]
-"Template: Backend":
+"Ehrenamt-Justiz: Backend":
   - changed-files:
     - any-glob-to-any-file: ['ehrenamt-justiz-backend/**']
-"Template: EAI":
+"Ehrenamt-Justiz: EAI":
   - changed-files:
       - any-glob-to-any-file: ['ehrenamt-justiz-eai/**']
-"Template: Frontend":
+"Ehrenamt-Justiz: Frontend":
   - changed-files:
       - any-glob-to-any-file: ['ehrenamt-justiz-frontend/**']
-"Template: Online":
+"Ehrenamt-Justiz: Online":
   - changed-files:
       - any-glob-to-any-file: ['ehrenamt-justiz-online/**']
-"Template: Aenderungsservice":
+"Ehrenamt-Justiz: Aenderungsservice":
   - changed-files:
       - any-glob-to-any-file: ['ehrenamt-justiz-aenderungsservice/**']
