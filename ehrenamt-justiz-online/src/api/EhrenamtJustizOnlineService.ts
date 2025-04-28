@@ -74,12 +74,12 @@ class EhrenamtJustizOnlineServiceClass {
     });
   }
 
-  public async bewerbungspeichern(
+  public async bewerbungSpeichern(
     onlineBewerbungFormData: OnlineBewerbungDaten
   ): Promise<string> {
     return await new Promise<string>((resolve, reject) => {
       fetch(
-        `${EhrenamtJustizOnlineServiceClass.getBaseUrl()}/onlinebewerbung/bewerbungspeichern`,
+        `${EhrenamtJustizOnlineServiceClass.getBaseUrl()}/onlinebewerbung/bewerbungSpeichern`,
         getPOSTConfig(onlineBewerbungFormData)
       )
         .then(async (res) => {

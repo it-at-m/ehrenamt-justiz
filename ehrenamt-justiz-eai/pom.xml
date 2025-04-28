@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <!-- VERSION muss auch in Properties file und application.yml geändert werden-->
     <name>ehrenamt-justiz-eai</name>
-    <description>EAI von Ehrenamtjustiz</description>
+    <description>EAI of Ehrenamtjustiz</description>
     <url>https://github.com/it-at-m/ehrenamt-justiz</url>
 
     <parent>

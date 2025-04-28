@@ -249,7 +249,7 @@ function loadActiveKonfiguration(): void {
     .catch(() => {
       snackbarStore.showMessage({
         message:
-          "Es konnte keine aktive Konfiguration gefunden werden! Bitte nur eine aktive Konfiguration anlegen und dann die Anwenndung neu laden!",
+          "Es konnte keine aktive Konfiguration gefunden werden! Bitte nur eine aktive Konfiguration anlegen und dann die Anwendung neu laden!",
       });
     });
 }

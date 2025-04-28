@@ -34,7 +34,7 @@ class KonfigurationApiServiceClass extends EntityApiService<Konfiguration> {
   public setActive(konfiguration: Konfiguration): Promise<Konfiguration> {
     return new Promise<Konfiguration>((resolve, reject) => {
       fetch(
-        `${this.getBaseUrl()}/konfiguration/setactive`,
+        `${this.getBaseUrl()}/konfiguration/setActive`,
         getPOSTConfig(konfiguration)
       )
         .then((res) => {

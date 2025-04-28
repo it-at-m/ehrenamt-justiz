@@ -136,7 +136,7 @@ class KonfigurationIntegrationsTest {
         konfiguration.setAmtsperiodebis(LocalDate.of(2034, 12, 31));
         konfigurationRepository.save(konfiguration);
 
-        final ResponseEntity<Konfiguration> result = testRestTemplate.postForEntity("/konfiguration/setactive", konfiguration, Konfiguration.class);
+        final ResponseEntity<Konfiguration> result = testRestTemplate.postForEntity("/konfiguration/setActive", konfiguration, Konfiguration.class);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         final Konfiguration konfigurationResult = result.getBody();

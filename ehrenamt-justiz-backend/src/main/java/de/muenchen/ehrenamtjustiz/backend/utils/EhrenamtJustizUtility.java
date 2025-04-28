@@ -88,4 +88,36 @@ public final class EhrenamtJustizUtility {
         return person;
     }
 
+    /**
+     * Sanitizes user input by removing potentially dangerous characters.
+     *
+     * @param input The user-provided input string.
+     * @return A sanitized version of the input string.
+     */
+    public static String sanitizeInput(final String input) {
+        if (input == null) {
+            return null;
+        }
+        // Remove newlines and carriage returns
+        return input.replaceAll("[\\p{Cntrl}\n\r]", "");
+    }
+
+    /**
+     * Truncates a string if it exceeds the specified maximum length.
+     *
+     * @param input The string to truncate.
+     * @param maxLength The maximum allowed length.
+     * @return The original string if it's null or shorter than maxLength,
+     *         otherwise the truncated string with an ellipsis appended.
+     */
+    public static String truncateIfNeeded(final String input, final int maxLength) {
+        if (maxLength < 0) {
+            throw new IllegalArgumentException("maxLength darf nicht negativ sein!");
+        }
+        if (input != null && input.length() > maxLength) {
+            return input.substring(0, maxLength) + "...";
+        }
+        return input;
+    }
+
 }

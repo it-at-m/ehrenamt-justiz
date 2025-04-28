@@ -80,7 +80,7 @@ services:
     security_opt: *security_settings
 
   refarch-gateway:
-    image: ghcr.io/it-at-m/refarch/refarch-gateway:latest
+    image: ghcr.io/it-at-m/refarch/refarch-gateway:1.5.0@sha256:9ebe76275d7aa7863f66e600ed91aa10c538faa183e06c0a6b3ef87fceb88315
     depends_on:
       init-keycloak:
         condition: service_completed_successfully
@@ -101,12 +101,16 @@ services:
       - SPRING_CLOUD_GATEWAY_ROUTES_2_URI=http://host.docker.internal:39146/
       - SPRING_CLOUD_GATEWAY_ROUTES_2_PREDICATES_0=Path=/public/backend/**
       - SPRING_CLOUD_GATEWAY_ROUTES_2_FILTERS_0=RewritePath=/public/backend/(?<urlsegments>.*), /$\{urlsegments}
-      - SPRING_CLOUD_GATEWAY_ROUTES_3_ID=online
-      - SPRING_CLOUD_GATEWAY_ROUTES_3_URI=http://host.docker.internal:8082/
-      - SPRING_CLOUD_GATEWAY_ROUTES_3_PREDICATES_0=Path=/public/online/**
-      - SPRING_CLOUD_GATEWAY_ROUTES_4_ID=frontend
-      - SPRING_CLOUD_GATEWAY_ROUTES_4_URI=http://host.docker.internal:8081/
-      - SPRING_CLOUD_GATEWAY_ROUTES_4_PREDICATES_0=Path=/**
+      - SPRING_CLOUD_GATEWAY_ROUTES_3_ID=backendaenderungsservice
+      - SPRING_CLOUD_GATEWAY_ROUTES_3_URI=http://host.docker.internal:39146/
+      - SPRING_CLOUD_GATEWAY_ROUTES_3_PREDICATES_0=Path=/public/aenderungsservice/**
+      - SPRING_CLOUD_GATEWAY_ROUTES_3_FILTERS_0=RewritePath=/public/aenderungsservice/(?<urlsegments>.*), /$\{urlsegments}
+      - SPRING_CLOUD_GATEWAY_ROUTES_4_ID=online
+      - SPRING_CLOUD_GATEWAY_ROUTES_4_URI=http://host.docker.internal:8082/
+      - SPRING_CLOUD_GATEWAY_ROUTES_4_PREDICATES_0=Path=/public/online/**
+      - SPRING_CLOUD_GATEWAY_ROUTES_5_ID=frontend
+      - SPRING_CLOUD_GATEWAY_ROUTES_5_URI=http://host.docker.internal:8081/
+      - SPRING_CLOUD_GATEWAY_ROUTES_5_PREDICATES_0=Path=/**
       - SPRING_PROFILES_ACTIVE=test, hazelcast-local
       - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI=http://kubernetes.docker.internal:8100/auth/realms/local_realm
       - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_SSO_ISSUERURI=$${spring.security.oauth2.resourceserver.jwt.issuer-uri}
@@ -114,6 +118,7 @@ services:
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_CLIENTID=ej-app
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_CLIENTSECRET=client_secret
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_SCOPE=profile, openid
+      - REFARCH_SECURITY_CSRF_WHITELISTED=/public/aenderungsservice/**
     networks:
       - keycloak
     extra_hosts:
@@ -141,7 +146,7 @@ services:
   # If the backend is to be started in the Docker-Compose, the following command must be executed at startup:
   # docker-compose --profile=backend up
   # oder e.g.:
-  # docker-compose --profile=backend --profile=frontend --profile=eai u
+  # docker-compose --profile=backend --profile=frontend --profile=online --profile=aenderungsservice --profile=eai u
   backend:
     profiles:
       - backend
@@ -160,7 +165,7 @@ services:
   # If the frontend is to be started in the Docker-Compose, the following command must be executed at startup:
   # docker-compose --profile=frontend up
   # oder e.g.:
-  # docker-compose --profile=backend --profile=frontend --profile=eai up
+  # docker-compose --profile=backend --profile=frontend --profile=online --profile=aenderungsservice --profile=eai up
   frontend:
     profiles:
       - frontend
@@ -173,7 +178,7 @@ services:
   # If the online app is to be started in the Docker-Compose, the following command must be executed at startup:
   # docker-compose --profile=online up
   # oder e.g.:
-  # docker-compose --profile=backend --profile=frontend --profile=online --profile=eai up
+  # docker-compose --profile=backend --profile=frontend --profile=online --profile=aenderungsservice --profile=eai up
   online:
     profiles:
       - online
@@ -188,7 +193,7 @@ services:
   # If the EAI is to be started in the Docker-Compose, the following command must be executed at startup:
   # docker-compose --profile=eai up
   # oder e.g.:
-  # docker-compose --profile=backend --profile=frontend --profile=eai up
+  # docker-compose --profile=backend --profile=frontend --profile=online --profile=aenderungsservice --profile=eai up
   eai:
     profiles:
       - eai
@@ -198,9 +203,27 @@ services:
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
     ports:
       - "8085:8085"
+    networks:
+      - keycloak
     healthcheck:
       <<: *healthcheck
       test: [ "CMD-SHELL", "curl http://localhost:8085/actuator/health/liveness" ]
+
+  # If the Änderungsservice is to be started in the Docker-Compose, the following command must be executed at startup:
+  # docker-compose --profile=aenderungsservice up
+  # oder e.g.:
+  # docker-compose --profile=backend --profile=frontend --profile=online --profile=aenderungsservice --profile=eai up
+  aenderungsservice:
+    profiles:
+      - aenderungsservice
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice:latest
+    ports:
+      - "8086:8086"
+    networks:
+      - keycloak
+    healthcheck:
+      <<: *healthcheck
+      test: ["CMD-SHELL", "curl http://localhost:8086/actuator/health/liveness"]
 
 networks:
   keycloak:

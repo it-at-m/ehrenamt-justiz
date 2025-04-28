@@ -97,8 +97,8 @@ export function getHeaders(requestMethod = "GET"): Headers {
  * @returns {string|string}
  */
 function _getXSRFToken(): string {
-  const help = /(^|;)\\s*" + "XSRF-TOKEN" + "\\s*=\\s*([^;]+)/.exec(
-    document.cookie
+  const help = document.cookie.match(
+    "(^|;)\\s*" + "XSRF-TOKEN" + "\\s*=\\s*([^;]+)"
   );
   return (help ? help.pop() : "") as string;
 }

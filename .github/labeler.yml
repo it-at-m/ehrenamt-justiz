@@ -24,3 +24,6 @@
 "Template: Online":
   - changed-files:
       - any-glob-to-any-file: ['ehrenamt-justiz-online/**']
+"Template: Aenderungsservice":
+  - changed-files:
+      - any-glob-to-any-file: ['ehrenamt-justiz-aenderungsservice/**']

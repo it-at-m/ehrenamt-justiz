@@ -18,6 +18,7 @@ on:
         options:
           - ehrenamt-justiz-backend
           - ehrenamt-justiz-eai
+          - ehrenamt-justiz-aenderungsservice
 
 jobs:
   release-maven:

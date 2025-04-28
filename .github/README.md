@@ -71,7 +71,7 @@ Details can be found in the documentation here:
 ### Starting Ehrenamtjustiz in Docker Desktop
 ```
 cd ~/develop/ehrenamt-justiz/stack  
-docker-compose --profile=backend --profile=frontend --profile=eai --profile=online up -d
+docker-compose --profile=backend --profile=frontend --profile=eai --profile=online --profile=aenderungsservice up -d
 ```
 
 These containers are started:
@@ -96,7 +96,7 @@ Password: soadmin
 
 
 ### Stop Container for Ehrenamtjustiz in Docker Desktop
-`docker-compose --profile=backend --profile=frontend --profile=eai --profile online stop`
+`docker-compose --profile=backend --profile=frontend --profile=eai --profile=online --profile=aenderungsservice stop`
 
 
 ## Contributing

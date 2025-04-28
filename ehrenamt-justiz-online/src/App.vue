@@ -14,8 +14,8 @@
         >
           <div>
             "Es konnte keine aktive Konfiguration gefunden werden! Bitte nur
-            eine aktive Konfiguration anlegen und dann die Anwenndung neu laden!
-            Ersache: "
+            eine aktive Konfiguration anlegen und dann die Anwendung neu laden!
+            Ursache: "
             {{ keineAktiveKonfiguration }} ,
           </div>
         </muc-banner>
