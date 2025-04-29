@@ -6,7 +6,6 @@ import de.muenchen.ehrenamtjustiz.backend.domain.dto.mapper.KonfigurationMapper;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.security.Authorities;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import java.util.Map;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
@@ -32,8 +31,7 @@ public class KonfigurationRestController {
 
     @PostMapping(value = "/updateKonfiguration", consumes = { MediaType.APPLICATION_JSON_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_KONFIGURATION)
-    public ResponseEntity<KonfigurationDto> updateKonfiguration(@RequestHeader Map<String, Object> headers,
-            @RequestBody final KonfigurationDto konfigurationDto) {
+    public ResponseEntity<KonfigurationDto> updateKonfiguration(@RequestBody final KonfigurationDto konfigurationDto) {
 
         final Konfiguration konfiguration = konfigurationMapper.model2Entity(konfigurationDto);
 
