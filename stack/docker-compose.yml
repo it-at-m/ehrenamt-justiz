@@ -217,6 +217,14 @@ services:
     profiles:
       - aenderungsservice
     image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice:latest
+    volumes:
+      - ../ehrenamt-justiz-aenderungsservice/src/main/resources/truststore.jks:/etc/ssl/truststore.jks
+      - ../ehrenamt-justiz-aenderungsservice/src/main/resources/kafka-auth-keystore.jks:/etc/ssl/kafka-auth-keystore.jks
+    depends_on:
+      backend:
+        condition: service_healthy
+      eai:
+        condition: service_healthy
     ports:
       - "8086:8086"
     networks:
@@ -225,6 +233,7 @@ services:
       <<: *healthcheck
       test: ["CMD-SHELL", "curl http://localhost:8086/actuator/health/liveness"]
     environment:
+      - SPRING_PROFILES_ACTIVE=docker
       - KEY_STORE_PASSWORD=
       - TRUST_STORE_PASSWORD=
 
