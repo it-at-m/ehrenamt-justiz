@@ -52,8 +52,12 @@ public class EhrenamtJustizRestController {
     @PreAuthorize(Authorities.HAS_AUTHORITY_EWOSUCHE)
     public ResponseEntity<List<EWOBuergerDatenDto>> ewoSuche(@RequestBody final EWOBuergerSucheDto eWOBuergerSuche) {
 
-        log.info("ewoSuche mit Familienname: {}, Vorname: {}, Geburtsdatum: {}", eWOBuergerSuche.getFamilienname(), eWOBuergerSuche.getVorname(),
-                eWOBuergerSuche.getGeburtsdatum());
+        log.info("ewoSuche mit Familienname: {}, Vorname: {}, Geburtsdatum: {}",
+                EhrenamtJustizUtility.sanitizeInput(EhrenamtJustizUtility.truncateIfNeeded(eWOBuergerSuche.getFamilienname(), 100)),
+                EhrenamtJustizUtility.sanitizeInput(EhrenamtJustizUtility.truncateIfNeeded(eWOBuergerSuche.getVorname(), 100)),
+                EhrenamtJustizUtility
+                        .sanitizeInput(eWOBuergerSuche.getGeburtsdatum() != null ? eWOBuergerSuche.getGeburtsdatum().toString() : "null"));
+
         final List<EWOBuergerDatenDto> eWOBuergerDaten;
         try {
             eWOBuergerDaten = eWOService.ewoSuche(eWOBuergerSuche);
@@ -80,8 +84,13 @@ public class EhrenamtJustizRestController {
             log.info("ewoSucheMitOm: NOT_FOUND");
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         } else {
-            log.info("Ergebnis ewoSucheMitOm mit Familienname: {}, Vorname: {}, Geburtsdatum: {}", ewoResponse.getFamilienname(), ewoResponse.getVorname(),
-                    ewoResponse.getGeburtsdatum());
+
+            log.info("Ergebnis ewoSucheMitOm mit Familienname: {}, Vorname: {}, Geburtsdatum: {}",
+                    EhrenamtJustizUtility.sanitizeInput(EhrenamtJustizUtility.truncateIfNeeded(ewoResponse.getFamilienname(), 100)),
+                    EhrenamtJustizUtility.sanitizeInput(EhrenamtJustizUtility.truncateIfNeeded(ewoResponse.getVorname(), 100)),
+                    EhrenamtJustizUtility
+                            .sanitizeInput(ewoResponse.getGeburtsdatum() != null ? ewoResponse.getGeburtsdatum().toString() : "null"));
+
             return new ResponseEntity<>(ewoResponse, HttpStatus.OK);
         }
     }
@@ -151,8 +160,11 @@ public class EhrenamtJustizRestController {
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
     public ResponseEntity<PersonDto> vorbereitenUndSpeichernPerson(@RequestBody final EWOBuergerDatenDto eWOBuergerDaten) {
 
-        log.info("vorbereitenUndSpeichernPerson mit Familienname: {}, Vorname: {}, Geburtsdatum: {}", eWOBuergerDaten.getFamilienname(),
-                eWOBuergerDaten.getVorname(), eWOBuergerDaten.getGeburtsdatum());
+        log.info("vorbereitenUndSpeichernPerson mit Familienname: {}, Vorname: {}, Geburtsdatum: {}",
+                EhrenamtJustizUtility.sanitizeInput(EhrenamtJustizUtility.truncateIfNeeded(eWOBuergerDaten.getFamilienname(), 100)),
+                EhrenamtJustizUtility.sanitizeInput(EhrenamtJustizUtility.truncateIfNeeded(eWOBuergerDaten.getVorname(), 100)),
+                EhrenamtJustizUtility
+                        .sanitizeInput(eWOBuergerDaten.getGeburtsdatum() != null ? eWOBuergerDaten.getGeburtsdatum().toString() : "null"));
 
         final Person person = EhrenamtJustizUtility.getPersonAusEWOBuergerDaten(eWOBuergerDaten);
 
