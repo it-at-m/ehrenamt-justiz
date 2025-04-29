@@ -8,7 +8,7 @@
       />
       <e-w-o-buerger-select
         :model-value="ewoBuergerSelectVisible"
-        :e-w-o-buerger-daten="ewoBuergerSelect"
+        :e-w-o-buerger-data="ewoBuergerSelect"
         @cancel-buerger-select="cancelBuergerSelect"
         @select-buerger="einBuergerAusgewaehlt"
       ></e-w-o-buerger-select>
