@@ -224,6 +224,9 @@ services:
     healthcheck:
       <<: *healthcheck
       test: ["CMD-SHELL", "curl http://localhost:8086/actuator/health/liveness"]
+    environment:
+      - KEY_STORE_PASSWORD=
+      - TRUST_STORE_PASSWORD=
 
 networks:
   keycloak:

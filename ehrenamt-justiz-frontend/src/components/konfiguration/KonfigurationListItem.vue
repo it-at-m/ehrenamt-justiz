@@ -61,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import type Konfiguration from "@/types/Konfiguration";
+import type KonfigurationData from "@/types/KonfigurationData";
 
 import { mdiLightbulbOnOutline } from "@mdi/js";
 import { computed, ref, useAttrs } from "vue";
@@ -82,10 +82,10 @@ import { BEARBEIGUNGS_MODUS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const props = defineProps<{
-  konfiguration: Konfiguration;
+  konfiguration: KonfigurationData;
 }>();
 const emits = defineEmits<{
-  deleted: [p: Konfiguration];
+  deleted: [p: KonfigurationData];
   reloadItems: [];
 }>();
 const snackbarStore = useSnackbarStore();

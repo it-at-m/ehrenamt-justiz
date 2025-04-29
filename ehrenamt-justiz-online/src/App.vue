@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import type Konfiguration from "@/types/Konfiguration";
+import type KonfigurationData from "@/types/KonfigurationData";
 
 import { MucBanner } from "@muenchen/muc-patternlab-vue";
 import customIconsSprite from "@muenchen/muc-patternlab-vue/assets/icons/custom-icons.svg?raw";
@@ -50,7 +50,7 @@ onMounted(() => {
  */
 function loadActiveKonfiguration(): void {
   EhrenamtJustizOnlineService.getAktiveKonfiguration()
-    .then((konfiguration: Konfiguration) => {
+    .then((konfiguration: KonfigurationData) => {
       activeConfigStore.setKonfiguration(konfiguration);
     })
     .catch((reason) => {

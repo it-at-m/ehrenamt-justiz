@@ -1,6 +1,6 @@
 import type PagedEntity from "@/types/base/PagedEntity";
-import type Person from "@/types/Person";
 import type PersonCSV from "@/types/PersonCSV";
+import type PersonData from "@/types/PersonData";
 import type PersonenTableData from "@/types/PersonenTableData";
 
 import EntityApiService from "@/api/EntityApiService";
@@ -12,7 +12,7 @@ interface SortItem {
   order?: boolean | "asc" | "desc";
 }
 
-class PersonenApiServiceClass extends EntityApiService<Person> {
+class PersonenApiServiceClass extends EntityApiService<PersonData> {
   constructor() {
     super("person", "personen");
   }
@@ -80,18 +80,18 @@ class PersonenApiServiceClass extends EntityApiService<Person> {
     });
   }
 
-  public updatePerson(person: Person): Promise<Person> {
+  public updatePerson(person: PersonData): Promise<PersonData> {
     return this.postData(person, "/personen/updatePerson");
   }
 
-  public cancelBewerbung(person: Person): Promise<Person> {
+  public cancelBewerbung(person: PersonData): Promise<PersonData> {
     return this.postData(person, "/personen/cancelBewerbung");
   }
 
   public async validiereAufVorschlagslisteSetzen(
     uuids: string[]
-  ): Promise<Person[]> {
-    return await new Promise<Person[]>((resolve, reject) => {
+  ): Promise<PersonData[]> {
+    return await new Promise<PersonData[]>((resolve, reject) => {
       fetch(
         `${this.getBaseUrl()}/personen/validiereAufVorschlagslisteSetzen`,
         getPOSTConfig(uuids)

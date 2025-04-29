@@ -180,7 +180,7 @@ public class EWOServiceImpl implements EWOService {
         eWOBuergerDaten.setGeburtsort(ewoBuergers.getGeburtsort());
         eWOBuergerDaten.setGeburtsdatum(ewoBuergers.getGeburtsdatum());
         eWOBuergerDaten.setAkademischergrad(ewoBuergers.getAkademischerGrad());
-        eWOBuergerDaten.getStaatsangehoerigkeit().addAll(ewoBuergers.getStaatsangehoerigkeit());
+        eWOBuergerDaten.setStaatsangehoerigkeit(new ArrayList<>(ewoBuergers.getStaatsangehoerigkeit()));
         eWOBuergerDaten.setPostleitzahl(ewoBuergers.getPostleitzahl());
         eWOBuergerDaten.setOrt(ewoBuergers.getOrt());
         eWOBuergerDaten.setStrasse(ewoBuergers.getStrasse());
@@ -203,7 +203,7 @@ public class EWOServiceImpl implements EWOService {
             }
         }
         eWOBuergerDaten.setInmuenchenseit(ewoBuergers.getInMuenchenSeit());
-        eWOBuergerDaten.getKonfliktfeld().addAll(ewoBuergers.getKonfliktFelder());
+        eWOBuergerDaten.setKonfliktfeld(new ArrayList<>(ewoBuergers.getKonfliktFelder()));
 
         // check, if id already exit:
         final Konfiguration[] konfiguration = konfigurationRepository.findByAktiv(true);

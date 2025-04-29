@@ -1,17 +1,17 @@
-import type Konfiguration from "@/types/Konfiguration";
+import type KonfigurationData from "@/types/KonfigurationData";
 
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 
 export const useGlobalSettingsStore = defineStore("globalSetting", () => {
-  const konfiguration = ref<Konfiguration | null>(null);
+  const konfiguration = ref<KonfigurationData | null>(null);
   const onlineHelpDialogComponentVisible = ref(false);
 
-  const getKonfiguration = computed((): Konfiguration | null => {
+  const getKonfiguration = computed((): KonfigurationData | null => {
     return konfiguration.value;
   });
 
-  function setKonfiguration(payload: Konfiguration | null): void {
+  function setKonfiguration(payload: KonfigurationData | null): void {
     konfiguration.value = payload;
   }
 

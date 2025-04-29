@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;
 import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
+import de.muenchen.ehrenamtjustiz.backend.domain.dto.KonfigurationDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import java.math.BigInteger;
@@ -72,20 +73,20 @@ class KonfigurationIntegrationsTest {
     @Test
     void testGetAktiveKonfiguration() {
 
-        final ResponseEntity<Konfiguration> result = testRestTemplate.getForEntity("/konfiguration/getAktiveKonfiguration", Konfiguration.class);
+        final ResponseEntity<KonfigurationDto> result = testRestTemplate.getForEntity("/konfiguration/getAktiveKonfiguration", KonfigurationDto.class);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
-        final Konfiguration konfiguration = result.getBody();
-        assertNotNull(konfiguration.getId());
-        assertTrue(konfiguration.isAktiv());
-        assertNotNull(konfiguration.getEhrenamtjustizart());
-        assertNotNull(konfiguration.getBezeichnung());
-        assertTrue(konfiguration.getAltervon().intValue() > 0);
-        assertTrue(konfiguration.getAlterbis().intValue() > 0);
-        assertNotNull(konfiguration.getStaatsangehoerigkeit());
-        assertNotNull(konfiguration.getWohnsitz());
-        assertNotNull(konfiguration.getAmtsperiodevon());
-        assertNotNull(konfiguration.getAmtsperiodebis());
+        final KonfigurationDto konfigurationDto = result.getBody();
+        assertNotNull(konfigurationDto.getId());
+        assertTrue(konfigurationDto.isAktiv());
+        assertNotNull(konfigurationDto.getEhrenamtjustizart());
+        assertNotNull(konfigurationDto.getBezeichnung());
+        assertTrue(konfigurationDto.getAltervon().intValue() > 0);
+        assertTrue(konfigurationDto.getAlterbis().intValue() > 0);
+        assertNotNull(konfigurationDto.getStaatsangehoerigkeit());
+        assertNotNull(konfigurationDto.getWohnsitz());
+        assertNotNull(konfigurationDto.getAmtsperiodevon());
+        assertNotNull(konfigurationDto.getAmtsperiodebis());
 
     }
 
@@ -136,20 +137,20 @@ class KonfigurationIntegrationsTest {
         konfiguration.setAmtsperiodebis(LocalDate.of(2034, 12, 31));
         konfigurationRepository.save(konfiguration);
 
-        final ResponseEntity<Konfiguration> result = testRestTemplate.postForEntity("/konfiguration/setActive", konfiguration, Konfiguration.class);
+        final ResponseEntity<KonfigurationDto> result = testRestTemplate.postForEntity("/konfiguration/setActive", konfiguration, KonfigurationDto.class);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
-        final Konfiguration konfigurationResult = result.getBody();
-        assertNotNull(konfigurationResult.getId());
-        assertTrue(konfigurationResult.isAktiv());
-        assertNotNull(konfigurationResult.getEhrenamtjustizart());
-        assertNotNull(konfigurationResult.getBezeichnung());
-        assertTrue(konfigurationResult.getAltervon().intValue() > 0);
-        assertTrue(konfigurationResult.getAlterbis().intValue() > 0);
-        assertNotNull(konfigurationResult.getStaatsangehoerigkeit());
-        assertNotNull(konfigurationResult.getWohnsitz());
-        assertNotNull(konfigurationResult.getAmtsperiodevon());
-        assertNotNull(konfigurationResult.getAmtsperiodebis());
+        final KonfigurationDto konfigurationDtoResult = result.getBody();
+        assertNotNull(konfigurationDtoResult.getId());
+        assertTrue(konfigurationDtoResult.isAktiv());
+        assertNotNull(konfigurationDtoResult.getEhrenamtjustizart());
+        assertNotNull(konfigurationDtoResult.getBezeichnung());
+        assertTrue(konfigurationDtoResult.getAltervon().intValue() > 0);
+        assertTrue(konfigurationDtoResult.getAlterbis().intValue() > 0);
+        assertNotNull(konfigurationDtoResult.getStaatsangehoerigkeit());
+        assertNotNull(konfigurationDtoResult.getWohnsitz());
+        assertNotNull(konfigurationDtoResult.getAmtsperiodevon());
+        assertNotNull(konfigurationDtoResult.getAmtsperiodebis());
     }
 
 }

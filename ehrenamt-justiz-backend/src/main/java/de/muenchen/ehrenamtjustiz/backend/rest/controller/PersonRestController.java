@@ -3,7 +3,9 @@ package de.muenchen.ehrenamtjustiz.backend.rest.controller;
 import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
 import de.muenchen.ehrenamtjustiz.backend.domain.Person;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonCSVDto;
+import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonenTableDatenDto;
+import de.muenchen.ehrenamtjustiz.backend.domain.dto.mapper.PersonMapper;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
@@ -50,6 +52,8 @@ public class PersonRestController {
 
     @Autowired
     private final EhrenamtJustizService ehrenamtJustizService;
+    @Autowired
+    private PersonMapper personMapper;
 
     @GetMapping(value = "/findPersonen", produces = { MediaType.APPLICATION_JSON_VALUE })
     Page<PersonenTableDatenDto> findPersonen(@RequestParam(name = "search", defaultValue = "*") final String search,
@@ -156,7 +160,9 @@ public class PersonRestController {
 
     @PostMapping(value = "/updatePerson", consumes = { MediaType.APPLICATION_JSON_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
-    public ResponseEntity<Person> updatePerson(@RequestBody final Person person) {
+    public ResponseEntity<PersonDto> updatePerson(@RequestBody final PersonDto personDto) {
+
+        final Person person = personMapper.model2Entity(personDto);
 
         // get conflicts
         if (person.getStatus() != Status.INERFASSUNG && person.getStatus() != Status.BEWERBUNG) {
@@ -168,8 +174,9 @@ public class PersonRestController {
         }
 
         // Person U P D A T E
-        personRepository.save(person);
+        final Person personResult = personRepository.save(person);
 
+        final PersonDto personDtoResult = personMapper.entity2Model(personResult);
         /*
          * for (int i = 0; i < 1000; i++) {
          * int leftLimit = 97; // letter 'a'
@@ -201,19 +208,19 @@ public class PersonRestController {
          * }
          */
 
-        return new ResponseEntity<>(person, HttpStatus.OK);
+        return new ResponseEntity<>(personDtoResult, HttpStatus.OK);
     }
 
     @PostMapping(value = "/cancelBewerbung", consumes = { MediaType.APPLICATION_JSON_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
-    public ResponseEntity<Person> cancelBewerbung(@RequestBody final Person person) {
+    public ResponseEntity<PersonDto> cancelBewerbung(@RequestBody final PersonDto personDto) {
 
-        if (person.getStatus() == Status.INERFASSUNG) {
+        if (personDto.getStatus() == Status.INERFASSUNG) {
             // delete person, because inserting was interrupted
-            personRepository.deleteInErfassung(person.getId());
+            personRepository.deleteInErfassung(personDto.getId());
         }
 
-        return new ResponseEntity<>(person, HttpStatus.OK);
+        return new ResponseEntity<>(personDto, HttpStatus.OK);
     }
 
     @PostMapping(value = "/lesenPersonenCSV", consumes = { MediaType.APPLICATION_JSON_VALUE })
@@ -317,11 +324,11 @@ public class PersonRestController {
 
     @PostMapping(value = "/validiereAufVorschlagslisteSetzen", consumes = { MediaType.APPLICATION_JSON_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_READ_EHRENAMTJUSTIZDATEN)
-    public ResponseEntity<List<Person>> validiereAufVorschlagslisteSetzen(@RequestBody final UUID[] uuids) {
+    public ResponseEntity<List<PersonDto>> validiereAufVorschlagslisteSetzen(@RequestBody final UUID[] uuids) {
 
         final Konfiguration[] konfiguration = konfigurationRepository.findByAktiv(true);
 
-        final List<Person> personsNotValide = new ArrayList<>();
+        final List<PersonDto> personsNotValide = new ArrayList<>();
         for (final UUID uuid : uuids) {
 
             final Optional<Person> person = personRepository.findById(uuid);
@@ -331,7 +338,8 @@ public class PersonRestController {
                 if (!response.isEmpty()) {
                     log.info("Person {}, {}: ungültiges Geburtsdatum: {} mit Fehlermeldung {}.", person.get().getVorname(), person.get().getFamilienname(),
                             person.get().getGeburtsdatum(), response);
-                    personsNotValide.add(person.get());
+                    final PersonDto personDto = personMapper.entity2Model(person.get());
+                    personsNotValide.add(personDto);
                     continue;
                 }
 
@@ -340,7 +348,8 @@ public class PersonRestController {
                 if (!response.isEmpty()) {
                     log.info("Person {}, {}: ungültige Staatsangehörigkeit: {} mit Fehlermeldung {}.", person.get().getVorname(),
                             person.get().getFamilienname(), person.get().getStaatsangehoerigkeit().toString(), response);
-                    personsNotValide.add(person.get());
+                    final PersonDto personDto = personMapper.entity2Model(person.get());
+                    personsNotValide.add(personDto);
                     continue;
                 }
 
@@ -349,7 +358,8 @@ public class PersonRestController {
                 if (!response.isEmpty()) {
                     log.info("Person {}, {}: ungültiger Wohnsitz: {} mit Fehlermeldung {}.", person.get().getVorname(), person.get().getFamilienname(),
                             person.get().getOrt(), response);
-                    personsNotValide.add(person.get());
+                    final PersonDto personDto = personMapper.entity2Model(person.get());
+                    personsNotValide.add(personDto);
                 }
             }
 
@@ -364,7 +374,7 @@ public class PersonRestController {
     @PostMapping(value = "/aufVorschlagslisteSetzen", consumes = { MediaType.APPLICATION_JSON_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
     @SuppressWarnings("PMD.AvoidLiteralsInIfCondition")
-    public ResponseEntity<List<Person>> aufVorschlagslisteSetzen(@RequestBody final UUID[] uuids) {
+    public ResponseEntity<List<PersonDto>> aufVorschlagslisteSetzen(@RequestBody final UUID[] uuids) {
 
         log.info("aufVorschlagslisteSetzen aufgerufen für {} IDs", uuids.length);
 
@@ -405,7 +415,7 @@ public class PersonRestController {
     @PostMapping(value = "/aufBewerberlisteSetzen", consumes = { MediaType.APPLICATION_JSON_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
     @SuppressWarnings("PMD.AvoidLiteralsInIfCondition")
-    public ResponseEntity<List<Person>> aufBewerberlisteSetzen(@RequestBody final UUID[] uuids) {
+    public ResponseEntity<List<PersonDto>> aufBewerberlisteSetzen(@RequestBody final UUID[] uuids) {
 
         log.info("aufBewerberlisteSetzen aufgerufen für {} IDs", uuids.length);
 

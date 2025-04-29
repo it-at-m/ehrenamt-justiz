@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import de.muenchen.ehrenamtjustiz.konstanten.Konstanten;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.xml.bind.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,7 +47,6 @@ public class EWOBuerger {
 
     private String familienstand;
 
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     private java.util.List<String> staatsangehoerigkeit = new java.util.ArrayList<>();
 
     private String wohnungsgeber;
@@ -67,7 +65,6 @@ public class EWOBuerger {
 
     private String zusatz;
 
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     private final java.util.List<String> konfliktFelder = new java.util.ArrayList<>();
 
     private String postleitzahl;
@@ -81,7 +78,21 @@ public class EWOBuerger {
 
     private Wohnungsstatus wohnungsstatus;
 
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     private java.util.List<String> auskunftssperren = new java.util.ArrayList<>();
+
+    // because of EI_EXPOSE_REP
+    public java.util.List<String> getAuskunftssperren() {
+        return new java.util.ArrayList<>(auskunftssperren);
+    }
+
+    // because of EI_EXPOSE_REP
+    public java.util.List<String> getKonfliktfelder() {
+        return new java.util.ArrayList<>(konfliktFelder);
+    }
+
+    // because of EI_EXPOSE_REP
+    public java.util.List<String> getStaatsangehoerigkeit() {
+        return new java.util.ArrayList<>(staatsangehoerigkeit);
+    }
 
 }

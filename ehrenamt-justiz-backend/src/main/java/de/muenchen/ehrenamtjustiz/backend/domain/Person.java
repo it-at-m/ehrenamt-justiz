@@ -31,7 +31,8 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @SuperBuilder
-@SuppressWarnings("PMD.TooManyFields")
+@SuppressWarnings({ "PMD.TooManyFields", "CPD-START" })
+@SuppressFBWarnings("RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE")
 public class Person extends BaseEntity {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -200,7 +201,6 @@ public class Person extends BaseEntity {
     @CollectionTable(name = "auskunftssperre", joinColumns = { @JoinColumn(name = "personid") })
     @ElementCollection(fetch = FetchType.EAGER)
     @Size(max = 255)
-    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
     private java.util.List<String> auskunftssperre = new java.util.ArrayList<>();
 
     @Column(name = "person_attribut")
@@ -208,7 +208,6 @@ public class Person extends BaseEntity {
     @CollectionTable(name = "konfliktfeld", joinColumns = { @JoinColumn(name = "personid") })
     @ElementCollection(fetch = FetchType.EAGER)
     @Size(max = 255)
-    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
     private java.util.List<String> konfliktfeld = new java.util.ArrayList<>();
 
     @Column(name = "staatsangehoerigkeit_text")
@@ -216,7 +215,21 @@ public class Person extends BaseEntity {
     @CollectionTable(name = "staatsangehoerigkeit", joinColumns = { @JoinColumn(name = "personid") })
     @ElementCollection(fetch = FetchType.EAGER)
     @Size(max = 255)
-    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
     private java.util.List<String> staatsangehoerigkeit = new java.util.ArrayList<>();
+
+    // because of EI_EXPOSE_REP
+    public java.util.List<String> getAuskunftssperre() {
+        return new java.util.ArrayList<>(auskunftssperre);
+    }
+
+    // because of EI_EXPOSE_REP
+    public java.util.List<String> getKonfliktfeld() {
+        return new java.util.ArrayList<>(konfliktfeld);
+    }
+
+    // because of EI_EXPOSE_REP
+    public java.util.List<String> getStaatsangehoerigkeit() {
+        return new java.util.ArrayList<>(staatsangehoerigkeit);
+    }
 
 }

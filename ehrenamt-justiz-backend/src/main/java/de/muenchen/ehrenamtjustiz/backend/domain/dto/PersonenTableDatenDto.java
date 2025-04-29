@@ -14,6 +14,8 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode
 @NoArgsConstructor
 @SuperBuilder
+@SuppressWarnings("CPD-START")
+@SuppressFBWarnings("RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE")
 public class PersonenTableDatenDto {
     private UUID id;
 
@@ -23,10 +25,8 @@ public class PersonenTableDatenDto {
 
     private LocalDate geburtsdatum;
 
-    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
     private List<String> konfliktfeld;
 
-    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
     private List<String> auskunftssperre;
 
     private String derzeitausgeuebterberuf;
@@ -38,5 +38,15 @@ public class PersonenTableDatenDto {
     private String ausgeuebteehrenaemter;
 
     private Status status;
+
+    // because of EI_EXPOSE_REP
+    public List<String> getAuskunftssperre() {
+        return new java.util.ArrayList<>(auskunftssperre);
+    }
+
+    // because of EI_EXPOSE_REP
+    public List<String> getKonfliktfeld() {
+        return new java.util.ArrayList<>(konfliktfeld);
+    }
 
 }

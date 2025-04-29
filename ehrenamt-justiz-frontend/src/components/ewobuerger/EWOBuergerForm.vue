@@ -36,7 +36,7 @@
       <v-row>
         <v-col class="col">
           <v-text-field
-            v-model="ewobuergerdaten.familienname"
+            v-model="ewobuergerdata.familienname"
             :rules="[rules.RULE_REQUIRED]"
             label="Familienname*"
             persistent-placeholder
@@ -49,7 +49,7 @@
       <v-row>
         <v-col class="col">
           <v-text-field
-            v-model="ewobuergerdaten.vorname"
+            v-model="ewobuergerdata.vorname"
             :rules="[rules.RULE_REQUIRED]"
             label="Vorname*"
             persistent-placeholder
@@ -61,11 +61,11 @@
       <v-row>
         <v-col class="col">
           <v-text-field
-            v-model="ewobuergerdaten.geburtsdatum"
+            v-model="ewobuergerdata.geburtsdatum"
             label="Geburtsdatum*"
             persistent-placeholder
             :rules="
-              ewobuergerdaten.validierungdeaktivieren
+              ewobuergerdata.validierungdeaktivieren
                 ? [rules.RULE_REQUIRED]
                 : [rules.RULE_REQUIRED, rules.RULE_GEBURTSDATUM]
             "
@@ -81,7 +81,7 @@
             v-if="
               AuthService.checkAuth('READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE')
             "
-            v-model="ewobuergerdaten.validierungdeaktivieren"
+            v-model="ewobuergerdata.validierungdeaktivieren"
             label="Validierung deaktivieren (Altersprüfung)"
           />
         </v-col>
@@ -145,12 +145,12 @@ function inEWOSuchen(): void {
 }
 
 function felderLeeren(): void {
-  ewobuergerdaten.value.familienname = "";
-  ewobuergerdaten.value.vorname = "";
-  ewobuergerdaten.value.geburtsdatum = "";
+  ewobuergerdata.value.familienname = "";
+  ewobuergerdata.value.vorname = "";
+  ewobuergerdata.value.geburtsdatum = "";
 }
 
-const ewobuergerdaten = computed({
+const ewobuergerdata = computed({
   get: () => props.modelValue,
   set: (v) => emits("update:modelValue", v),
 });
