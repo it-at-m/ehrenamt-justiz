@@ -1,4 +1,4 @@
-export default interface EWOBuergerDaten {
+export default interface EWOBuergerData {
   id: string | undefined;
   familienname: string;
   geburtsname: string;

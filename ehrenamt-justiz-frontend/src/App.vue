@@ -154,7 +154,7 @@
 </template>
 
 <script setup lang="ts">
-import type Konfiguration from "@/types/Konfiguration";
+import type KonfigurationData from "@/types/KonfigurationData";
 
 import { mdiApps, mdiCircle, mdiHelp } from "@mdi/js";
 import { AppSwitcher } from "@muenchen/appswitcher-vue";
@@ -241,10 +241,10 @@ function loadUser(): void {
  */
 function loadActiveKonfiguration(): void {
   KonfigurationApiService.getAktiveKonfiguration()
-    .then((konfiguration: Konfiguration) => {
-      globalSettingsStore.setKonfiguration(konfiguration);
-      ehrenamtjustizart.value = konfiguration.ehrenamtjustizart;
-      bezeichnungApp.value = konfiguration.bezeichnung;
+    .then((konfigurationData: KonfigurationData) => {
+      globalSettingsStore.setKonfiguration(konfigurationData);
+      ehrenamtjustizart.value = konfigurationData.ehrenamtjustizart;
+      bezeichnungApp.value = konfigurationData.bezeichnung;
     })
     .catch(() => {
       snackbarStore.showMessage({

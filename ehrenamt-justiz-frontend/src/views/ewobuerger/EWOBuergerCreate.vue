@@ -8,7 +8,7 @@
       />
       <e-w-o-buerger-select
         :model-value="ewoBuergerSelectVisible"
-        :e-w-o-buerger-daten="ewoBuergerSelect"
+        :e-w-o-buerger-data="ewoBuergerSelect"
         @cancel-buerger-select="cancelBuergerSelect"
         @select-buerger="einBuergerAusgewaehlt"
       ></e-w-o-buerger-select>
@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import type EWOBuergerDaten from "@/types/EWOBuergerDaten";
+import type EWOBuergerData from "@/types/EWOBuergerData";
 import type EWOBuergerSuche from "@/types/EWOBuergerSuche";
 
 import { ref } from "vue";
@@ -39,7 +39,7 @@ const snackbarStore = useSnackbarStore();
 
 const router = useRouter();
 
-const ewoBuergerSelect = ref<EWOBuergerDaten[]>([]);
+const ewoBuergerSelect = ref<EWOBuergerData[]>([]);
 
 const ewoBuergerSelectVisible = ref(false);
 
@@ -80,11 +80,11 @@ async function save() {
               // Prepare person data from EWO und insert data in DB
               EWOBuergerApiService.vorbereitenUndSpeichernPerson(
                 ewoBuergers[0]
-              ).then((person) => {
+              ).then(() => {
                 router.push({
                   name: "bewerbung.edit",
                   params: {
-                    id: person.id ? person.id : "",
+                    id: ewoBuergers[0].id ? ewoBuergers[0].id : "",
                     action: BEARBEIGUNGS_MODUS.EDIT_MODUS,
                   },
                 });
@@ -109,18 +109,18 @@ async function save() {
   }
 }
 
-async function einBuergerAusgewaehlt(ewoBuerger: EWOBuergerDaten) {
+async function einBuergerAusgewaehlt(ewoBuerger: EWOBuergerData) {
   // Check if person alread exist
   await EWOBuergerApiService.pruefenNeuePerson(ewoBuerger).then((person) => {
     if (person == null) {
       ewoBuergerSelectVisible.value = false;
       // Prepare person data from EWO and insert data in DB
       EWOBuergerApiService.vorbereitenUndSpeichernPerson(ewoBuerger).then(
-        (person) => {
+        () => {
           router.push({
             name: "bewerbung.edit",
             params: {
-              id: person.id ? person.id : "",
+              id: ewoBuerger.id ? ewoBuerger.id : "",
               action: BEARBEIGUNGS_MODUS.EDIT_MODUS,
             },
           });

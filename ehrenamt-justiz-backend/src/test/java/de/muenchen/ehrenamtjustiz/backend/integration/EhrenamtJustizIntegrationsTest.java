@@ -9,6 +9,7 @@ import de.muenchen.ehrenamtjustiz.backend.TestConstants;
 import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
 import de.muenchen.ehrenamtjustiz.backend.domain.Person;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerDatenDto;
+import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
@@ -140,7 +141,7 @@ class EhrenamtJustizIntegrationsTest {
 
         final HttpEntity<EWOBuergerDatenDto> request = new HttpEntity<>(eWOBuergerDatenDto, headers);
 
-        final ResponseEntity<String> result = testRestTemplate.postForEntity("/ehrenamtjustiz/pruefenNeuePerson", request, String.class);
+        final ResponseEntity<PersonDto> result = testRestTemplate.postForEntity("/ehrenamtjustiz/pruefenNeuePerson", request, PersonDto.class);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
 
@@ -174,25 +175,25 @@ class EhrenamtJustizIntegrationsTest {
 
         final HttpEntity<EWOBuergerDatenDto> request = new HttpEntity<>(eWOBuergerDatenDto, headers);
 
-        final ResponseEntity<Person> result = testRestTemplate.postForEntity("/ehrenamtjustiz/vorbereitenUndSpeichernPerson", request, Person.class);
+        final ResponseEntity<PersonDto> result = testRestTemplate.postForEntity("/ehrenamtjustiz/vorbereitenUndSpeichernPerson", request, PersonDto.class);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
-        final Person person = result.getBody();
-        assertEquals(eWOBuergerDatenDto.getFamilienname(), person.getFamilienname());
-        assertEquals(eWOBuergerDatenDto.getOrdnungsmerkmal(), person.getEwoid());
-        assertEquals(eWOBuergerDatenDto.getVorname(), person.getVorname());
-        assertEquals(eWOBuergerDatenDto.getGeburtsort(), person.getGeburtsort());
-        assertEquals(eWOBuergerDatenDto.getGeburtsland(), person.getGeburtsland());
-        assertEquals(eWOBuergerDatenDto.getGeburtsdatum(), person.getGeburtsdatum());
-        assertEquals(eWOBuergerDatenDto.getWohnungsstatus(), person.getWohnungsstatus());
-        assertEquals(eWOBuergerDatenDto.getFamilienstand(), person.getFamilienstand());
-        assertEquals(eWOBuergerDatenDto.getPostleitzahl(), person.getPostleitzahl());
-        assertEquals(eWOBuergerDatenDto.getOrt(), person.getOrt());
-        assertEquals(eWOBuergerDatenDto.getStrasse(), person.getStrasse());
-        assertEquals(eWOBuergerDatenDto.getHausnummer(), person.getHausnummer());
-        assertEquals(eWOBuergerDatenDto.getInmuenchenseit(), person.getInmuenchenseit());
-        assertEquals(eWOBuergerDatenDto.getGeschlecht(), person.getGeschlecht());
-        assertEquals(eWOBuergerDatenDto.getStaatsangehoerigkeit(), person.getStaatsangehoerigkeit());
+        final PersonDto personDto = result.getBody();
+        assertEquals(eWOBuergerDatenDto.getFamilienname(), personDto.getFamilienname());
+        assertEquals(eWOBuergerDatenDto.getOrdnungsmerkmal(), personDto.getEwoid());
+        assertEquals(eWOBuergerDatenDto.getVorname(), personDto.getVorname());
+        assertEquals(eWOBuergerDatenDto.getGeburtsort(), personDto.getGeburtsort());
+        assertEquals(eWOBuergerDatenDto.getGeburtsland(), personDto.getGeburtsland());
+        assertEquals(eWOBuergerDatenDto.getGeburtsdatum(), personDto.getGeburtsdatum());
+        assertEquals(eWOBuergerDatenDto.getWohnungsstatus(), personDto.getWohnungsstatus());
+        assertEquals(eWOBuergerDatenDto.getFamilienstand(), personDto.getFamilienstand());
+        assertEquals(eWOBuergerDatenDto.getPostleitzahl(), personDto.getPostleitzahl());
+        assertEquals(eWOBuergerDatenDto.getOrt(), personDto.getOrt());
+        assertEquals(eWOBuergerDatenDto.getStrasse(), personDto.getStrasse());
+        assertEquals(eWOBuergerDatenDto.getHausnummer(), personDto.getHausnummer());
+        assertEquals(eWOBuergerDatenDto.getInmuenchenseit(), personDto.getInmuenchenseit());
+        assertEquals(eWOBuergerDatenDto.getGeschlecht(), personDto.getGeschlecht());
+        assertEquals(eWOBuergerDatenDto.getStaatsangehoerigkeit(), personDto.getStaatsangehoerigkeit());
 
     }
 

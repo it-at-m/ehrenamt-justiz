@@ -1,5 +1,5 @@
-import type Konfiguration from "@/types/Konfiguration";
-import type OnlineBewerbungDaten from "@/types/OnlineBewerbungDaten";
+import type KonfigurationData from "@/types/KonfigurationData";
+import type OnlineBewerbungData from "@/types/OnlineBewerbungData";
 
 import { getGETConfig, getPOSTConfig } from "@/api/FetchUtils";
 import { API_BASE } from "@/Constants";
@@ -47,7 +47,7 @@ class EhrenamtJustizOnlineServiceClass {
     return `${API_BASE}/public/backend`;
   }
 
-  public getAktiveKonfiguration(): Promise<Konfiguration> {
+  public getAktiveKonfiguration(): Promise<KonfigurationData> {
     return new Promise((resolve, reject) => {
       fetch(
         `${EhrenamtJustizOnlineServiceClass.getBaseUrl()}/konfiguration/getAktiveKonfiguration`,
@@ -75,7 +75,7 @@ class EhrenamtJustizOnlineServiceClass {
   }
 
   public async bewerbungSpeichern(
-    onlineBewerbungFormData: OnlineBewerbungDaten
+    onlineBewerbungFormData: OnlineBewerbungData
   ): Promise<string> {
     return await new Promise<string>((resolve, reject) => {
       fetch(

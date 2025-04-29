@@ -11,6 +11,7 @@ import de.muenchen.ehrenamtjustiz.backend.TestConstants;
 import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
 import de.muenchen.ehrenamtjustiz.backend.domain.Person;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonCSVDto;
+import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonenTableDatenDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
@@ -203,7 +204,7 @@ class PersonIntegrationsTest {
         final Person personInErfassung = personRepository.save(person);
 
         // Person with state INERFASSUNG will be deleted:
-        final ResponseEntity<?> result = testRestTemplate.postForEntity("/personen/cancelBewerbung", personInErfassung, Person.class);
+        final ResponseEntity<?> result = testRestTemplate.postForEntity("/personen/cancelBewerbung", personInErfassung, PersonDto.class);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         // Check delete:
@@ -233,7 +234,7 @@ class PersonIntegrationsTest {
 
         final HttpEntity<UUID[]> requestEntity = new HttpEntity<>(uuids);
 
-        final ResponseEntity<List<Person>> result = testRestTemplate.exchange("/personen/validiereAufVorschlagslisteSetzen", HttpMethod.POST, requestEntity,
+        final ResponseEntity<List<PersonDto>> result = testRestTemplate.exchange("/personen/validiereAufVorschlagslisteSetzen", HttpMethod.POST, requestEntity,
                 new ParameterizedTypeReference<>() {
                 });
 
@@ -262,7 +263,7 @@ class PersonIntegrationsTest {
 
         final HttpEntity<UUID[]> requestEntity = new HttpEntity<>(uuids);
 
-        final ResponseEntity<List<Person>> result = testRestTemplate.exchange("/personen/validiereAufVorschlagslisteSetzen", HttpMethod.POST, requestEntity,
+        final ResponseEntity<List<PersonDto>> result = testRestTemplate.exchange("/personen/validiereAufVorschlagslisteSetzen", HttpMethod.POST, requestEntity,
                 new ParameterizedTypeReference<>() {
                 });
 
@@ -291,7 +292,7 @@ class PersonIntegrationsTest {
 
         final HttpEntity<UUID[]> requestEntity = new HttpEntity<>(uuids);
 
-        final ResponseEntity<List<Person>> result = testRestTemplate.exchange("/personen/validiereAufVorschlagslisteSetzen", HttpMethod.POST, requestEntity,
+        final ResponseEntity<List<PersonDto>> result = testRestTemplate.exchange("/personen/validiereAufVorschlagslisteSetzen", HttpMethod.POST, requestEntity,
                 new ParameterizedTypeReference<>() {
                 });
 
@@ -318,7 +319,7 @@ class PersonIntegrationsTest {
 
         final HttpEntity<UUID[]> requestEntity = new HttpEntity<>(uuids);
 
-        final ResponseEntity<List<Person>> result = testRestTemplate.exchange("/personen/validiereAufVorschlagslisteSetzen", HttpMethod.POST, requestEntity,
+        final ResponseEntity<List<PersonDto>> result = testRestTemplate.exchange("/personen/validiereAufVorschlagslisteSetzen", HttpMethod.POST, requestEntity,
                 new ParameterizedTypeReference<>() {
                 });
 
@@ -375,7 +376,7 @@ class PersonIntegrationsTest {
         person.setStatus(Status.INERFASSUNG); // Muss nach update auf Bewerbung gesetzt sein
         personRepository.save(person);
 
-        final ResponseEntity<Person> result = testRestTemplate.postForEntity("/personen/updatePerson", person, Person.class);
+        final ResponseEntity<PersonDto> result = testRestTemplate.postForEntity("/personen/updatePerson", person, PersonDto.class);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
 

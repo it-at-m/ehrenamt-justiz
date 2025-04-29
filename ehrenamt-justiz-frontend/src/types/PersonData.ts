@@ -1,4 +1,4 @@
-export default interface Person {
+export default interface PersonData {
   id: string;
   familienname: string;
   geburtsname: string;

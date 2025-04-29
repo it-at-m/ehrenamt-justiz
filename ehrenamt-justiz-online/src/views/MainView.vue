@@ -243,7 +243,7 @@
 </template>
 
 <script setup lang="ts">
-import type OnlineBewerbungDaten from "@/types/OnlineBewerbungDaten";
+import type OnlineBewerbungData from "@/types/OnlineBewerbungData";
 
 import {
   MucBanner,
@@ -282,7 +282,7 @@ const REGEXP_TELEFON =
 const REGEX_MAIL =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-const onlineBewerbungFormData = ref<OnlineBewerbungDaten>({
+const onlineBewerbungFormData = ref<OnlineBewerbungData>({
   nachname: "",
   vorname: "",
   beruf: "",

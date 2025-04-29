@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import type Konfiguration from "@/types/Konfiguration";
+import type KonfigurationData from "@/types/KonfigurationData";
 
 import { computed, onMounted, ref } from "vue";
 import {
@@ -54,7 +54,7 @@ import { useSnackbarStore } from "@/stores/snackbar";
 
 const snackbarStore = useSnackbarStore();
 
-let configuration = ref<Konfiguration[]>([]);
+let configuration = ref<KonfigurationData[]>([]);
 
 const busy = ref(false);
 
@@ -89,14 +89,14 @@ function loadMore(): void {
     });
 }
 
-function itemDeleted(konfiguration: Konfiguration): void {
+function itemDeleted(konfiguration: KonfigurationData): void {
   configuration.value = configuration.value.filter(
     (p) => p.id != konfiguration.id
   );
 }
 
 function reloadItems(): void {
-  configuration = ref<Konfiguration[]>([]);
+  configuration = ref<KonfigurationData[]>([]);
   currentPage.value = -1;
   loadMore();
 }

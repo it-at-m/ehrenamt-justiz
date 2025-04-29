@@ -1,6 +1,6 @@
-import type EWOBuergerDaten from "@/types/EWOBuergerDaten";
+import type EWOBuergerData from "@/types/EWOBuergerData";
 import type EWOBuergerSuche from "@/types/EWOBuergerSuche";
-import type Person from "@/types/Person";
+import type PersonData from "@/types/PersonData";
 
 import { ApiError } from "@/api/ApiError";
 import EntityApiService from "@/api/EntityApiService";
@@ -8,15 +8,15 @@ import { getGETConfig, getPOSTConfig } from "@/api/FetchUtils";
 import { STATUS_INDICATORS } from "@/Constants.ts";
 import HttpMethod from "@/types/base/HttpMethod";
 
-class EWOBuergerApiServiceClass extends EntityApiService<EWOBuergerDaten> {
+class EWOBuergerApiServiceClass extends EntityApiService<EWOBuergerData> {
   constructor() {
     super("ewobuerger", "ewobuergers");
   }
 
   public async getEwoSuche(
     ewoBuergerSuche: EWOBuergerSuche
-  ): Promise<EWOBuergerDaten[]> {
-    return await new Promise<EWOBuergerDaten[]>((resolve, reject) => {
+  ): Promise<EWOBuergerData[]> {
+    return await new Promise<EWOBuergerData[]>((resolve, reject) => {
       fetch(
         `${this.getBaseUrl()}/ehrenamtjustiz/ewoSuche`,
         getPOSTConfig(ewoBuergerSuche)
@@ -50,8 +50,8 @@ class EWOBuergerApiServiceClass extends EntityApiService<EWOBuergerDaten> {
     });
   }
 
-  public async ewoSucheMitOM(om: string): Promise<EWOBuergerDaten> {
-    return await new Promise<EWOBuergerDaten>((resolve, reject) => {
+  public async ewoSucheMitOM(om: string): Promise<EWOBuergerData> {
+    return await new Promise<EWOBuergerData>((resolve, reject) => {
       fetch(
         `${this.getBaseUrl()}/ehrenamtjustiz/ewoSucheMitOM?om=${om}`,
         getGETConfig()
@@ -74,12 +74,12 @@ class EWOBuergerApiServiceClass extends EntityApiService<EWOBuergerDaten> {
   }
 
   public async pruefenNeuePerson(
-    eWOBuergerDaten: EWOBuergerDaten
-  ): Promise<Person | null> {
-    return await new Promise<Person | null>((resolve, reject) => {
+    eWOBuergerData: EWOBuergerData
+  ): Promise<PersonData | null> {
+    return await new Promise<PersonData | null>((resolve, reject) => {
       fetch(
         `${this.getBaseUrl()}/ehrenamtjustiz/pruefenNeuePerson`,
-        getPOSTConfig(eWOBuergerDaten)
+        getPOSTConfig(eWOBuergerData)
       )
         .then((res) => {
           if (res.status == 404) {
@@ -100,12 +100,12 @@ class EWOBuergerApiServiceClass extends EntityApiService<EWOBuergerDaten> {
   }
 
   public async vorbereitenUndSpeichernPerson(
-    eWOBuergerDaten: EWOBuergerDaten
-  ): Promise<Person> {
-    return await new Promise<Person>((resolve, reject) => {
+    eWOBuergerData: EWOBuergerData
+  ): Promise<PersonData> {
+    return await new Promise<PersonData>((resolve, reject) => {
       fetch(
         `${this.getBaseUrl()}/ehrenamtjustiz/vorbereitenUndSpeichernPerson`,
-        getPOSTConfig(eWOBuergerDaten)
+        getPOSTConfig(eWOBuergerData)
       )
         .then((res) => {
           res

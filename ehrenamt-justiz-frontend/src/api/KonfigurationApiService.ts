@@ -1,18 +1,18 @@
-import type Konfiguration from "@/types/Konfiguration";
+import type KonfigurationData from "@/types/KonfigurationData";
 
 import EntityApiService from "@/api/EntityApiService";
 import { getPOSTConfig } from "@/api/FetchUtils";
 import HttpMethod from "@/types/base/HttpMethod";
 
-class KonfigurationApiServiceClass extends EntityApiService<Konfiguration> {
+class KonfigurationApiServiceClass extends EntityApiService<KonfigurationData> {
   constructor() {
     super("konfiguration", "konfigurationen");
   }
 
   public updateKonfiguration(
-    konfiguration: Konfiguration
-  ): Promise<Konfiguration> {
-    return new Promise<Konfiguration>((resolve, reject) => {
+    konfiguration: KonfigurationData
+  ): Promise<KonfigurationData> {
+    return new Promise<KonfigurationData>((resolve, reject) => {
       fetch(
         `${this.getBaseUrl()}/konfiguration/updateKonfiguration`,
         getPOSTConfig(konfiguration)
@@ -31,8 +31,10 @@ class KonfigurationApiServiceClass extends EntityApiService<Konfiguration> {
     });
   }
 
-  public setActive(konfiguration: Konfiguration): Promise<Konfiguration> {
-    return new Promise<Konfiguration>((resolve, reject) => {
+  public setActive(
+    konfiguration: KonfigurationData
+  ): Promise<KonfigurationData> {
+    return new Promise<KonfigurationData>((resolve, reject) => {
       fetch(
         `${this.getBaseUrl()}/konfiguration/setActive`,
         getPOSTConfig(konfiguration)
@@ -51,7 +53,7 @@ class KonfigurationApiServiceClass extends EntityApiService<Konfiguration> {
     });
   }
 
-  public getAktiveKonfiguration(): Promise<Konfiguration> {
+  public getAktiveKonfiguration(): Promise<KonfigurationData> {
     return this.getData("/konfiguration/getAktiveKonfiguration");
   }
 }

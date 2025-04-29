@@ -1,4 +1,4 @@
-export default interface OnlineBewerbungDaten {
+export default interface OnlineBewerbungData {
   vorname: string;
   nachname: string;
   geburtsdatum: string;

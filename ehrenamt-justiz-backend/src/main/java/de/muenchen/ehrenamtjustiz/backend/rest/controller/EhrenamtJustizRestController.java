@@ -6,6 +6,8 @@ import de.muenchen.ehrenamtjustiz.backend.domain.*;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerDatenDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerSucheDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EhrenamtJustizStatusDto;
+import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonDto;
+import de.muenchen.ehrenamtjustiz.backend.domain.dto.mapper.PersonMapper;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
@@ -15,9 +17,7 @@ import de.muenchen.ehrenamtjustiz.backend.utils.EhrenamtJustizUtility;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.time.LocalDate;
 import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
 @RestController
-@AllArgsConstructor
 @Slf4j
 @RequestMapping("/ehrenamtjustiz")
 @SuppressWarnings("PMD.CommentDefaultAccessModifier")
@@ -35,18 +34,30 @@ public class EhrenamtJustizRestController {
 
     private final PersonRepository personRepository;
 
-    @Autowired
-    KonfigurationRepository konfigurationRepository;
+    private final KonfigurationRepository konfigurationRepository;
 
-    @Autowired
-    EWOService eWOService;
+    private final EWOService eWOService;
+
+    private final PersonMapper personMapper;
+
+    public EhrenamtJustizRestController(final PersonRepository personRepository, final KonfigurationRepository konfigurationRepository,
+            final EWOService eWOService, final PersonMapper personMapper) {
+        this.personRepository = personRepository;
+        this.konfigurationRepository = konfigurationRepository;
+        this.eWOService = eWOService;
+        this.personMapper = personMapper;
+    }
 
     @PostMapping(value = "/ewoSuche", consumes = { MediaType.APPLICATION_JSON_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_EWOSUCHE)
     public ResponseEntity<List<EWOBuergerDatenDto>> ewoSuche(@RequestBody final EWOBuergerSucheDto eWOBuergerSuche) {
 
-        log.info("ewoSuche mit Familienname: {}, Vorname: {}, Geburtsdatum: {}", eWOBuergerSuche.getFamilienname(), eWOBuergerSuche.getVorname(),
-                eWOBuergerSuche.getGeburtsdatum());
+        log.info("ewoSuche mit Familienname: {}, Vorname: {}, Geburtsdatum: {}",
+                EhrenamtJustizUtility.sanitizeInput(EhrenamtJustizUtility.truncateIfNeeded(eWOBuergerSuche.getFamilienname(), 100)),
+                EhrenamtJustizUtility.sanitizeInput(EhrenamtJustizUtility.truncateIfNeeded(eWOBuergerSuche.getVorname(), 100)),
+                EhrenamtJustizUtility
+                        .sanitizeInput(eWOBuergerSuche.getGeburtsdatum() != null ? eWOBuergerSuche.getGeburtsdatum().toString() : "null"));
+
         final List<EWOBuergerDatenDto> eWOBuergerDaten;
         try {
             eWOBuergerDaten = eWOService.ewoSuche(eWOBuergerSuche);
@@ -73,8 +84,13 @@ public class EhrenamtJustizRestController {
             log.info("ewoSucheMitOm: NOT_FOUND");
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         } else {
-            log.info("Ergebnis ewoSucheMitOm mit Familienname: {}, Vorname: {}, Geburtsdatum: {}", ewoResponse.getFamilienname(), ewoResponse.getVorname(),
-                    ewoResponse.getGeburtsdatum());
+
+            log.info("Ergebnis ewoSucheMitOm mit Familienname: {}, Vorname: {}, Geburtsdatum: {}",
+                    EhrenamtJustizUtility.sanitizeInput(EhrenamtJustizUtility.truncateIfNeeded(ewoResponse.getFamilienname(), 100)),
+                    EhrenamtJustizUtility.sanitizeInput(EhrenamtJustizUtility.truncateIfNeeded(ewoResponse.getVorname(), 100)),
+                    EhrenamtJustizUtility
+                            .sanitizeInput(ewoResponse.getGeburtsdatum() != null ? ewoResponse.getGeburtsdatum().toString() : "null"));
+
             return new ResponseEntity<>(ewoResponse, HttpStatus.OK);
         }
     }
@@ -122,7 +138,7 @@ public class EhrenamtJustizRestController {
 
     @PostMapping(value = "/pruefenNeuePerson", consumes = { MediaType.APPLICATION_JSON_VALUE })
     @SuppressFBWarnings("NP_NONNULL_PARAM_VIOLATION")
-    public ResponseEntity<Person> pruefenNeuePerson(@RequestBody final EWOBuergerDatenDto eWOBuergerDaten) {
+    public ResponseEntity<PersonDto> pruefenNeuePerson(@RequestBody final EWOBuergerDatenDto eWOBuergerDaten) {
 
         log.info("pruefenNeuePerson mit EWO-OM: {}", eWOBuergerDaten.getOrdnungsmerkmal());
 
@@ -135,16 +151,20 @@ public class EhrenamtJustizRestController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         } else {
             log.info("pruefenNeuePerson: OK");
-            return new ResponseEntity<>(person, HttpStatus.OK);
+            final PersonDto personDto = personMapper.entity2Model(person);
+            return new ResponseEntity<>(personDto, HttpStatus.OK);
         }
     }
 
     @PostMapping(value = "/vorbereitenUndSpeichernPerson", consumes = { MediaType.APPLICATION_JSON_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
-    public ResponseEntity<Person> vorbereitenUndSpeichernPerson(@RequestBody final EWOBuergerDatenDto eWOBuergerDaten) {
+    public ResponseEntity<PersonDto> vorbereitenUndSpeichernPerson(@RequestBody final EWOBuergerDatenDto eWOBuergerDaten) {
 
-        log.info("vorbereitenUndSpeichernPerson mit Familienname: {}, Vorname: {}, Geburtsdatum: {}", eWOBuergerDaten.getFamilienname(),
-                eWOBuergerDaten.getVorname(), eWOBuergerDaten.getGeburtsdatum());
+        log.info("vorbereitenUndSpeichernPerson mit Familienname: {}, Vorname: {}, Geburtsdatum: {}",
+                EhrenamtJustizUtility.sanitizeInput(EhrenamtJustizUtility.truncateIfNeeded(eWOBuergerDaten.getFamilienname(), 100)),
+                EhrenamtJustizUtility.sanitizeInput(EhrenamtJustizUtility.truncateIfNeeded(eWOBuergerDaten.getVorname(), 100)),
+                EhrenamtJustizUtility
+                        .sanitizeInput(eWOBuergerDaten.getGeburtsdatum() != null ? eWOBuergerDaten.getGeburtsdatum().toString() : "null"));
 
         final Person person = EhrenamtJustizUtility.getPersonAusEWOBuergerDaten(eWOBuergerDaten);
 
@@ -154,9 +174,9 @@ public class EhrenamtJustizRestController {
         }
 
         // SchoeffenGrunddaten insert record
-        personRepository.save(person);
+        final PersonDto personDtoResult = personMapper.entity2Model(personRepository.save(person));
 
-        return new ResponseEntity<>(person, HttpStatus.OK);
+        return new ResponseEntity<>(personDtoResult, HttpStatus.OK);
     }
 
     @GetMapping(value = "/ehrenamtJustizStatus", produces = { MediaType.APPLICATION_JSON_VALUE })

@@ -1,27 +1,22 @@
 package de.muenchen.ehrenamtjustiz.backend.domain.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
+import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.UUID;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.SuperBuilder;
+import lombok.Data;
 
-@Setter
-@Getter
-@ToString(callSuper = true)
-@SuperBuilder
-@NoArgsConstructor
+@Data
 @SuppressWarnings("PMD.TooManyFields")
-public class EWOBuergerDatenDto {
+@SuppressFBWarnings("RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE")
+public class PersonDto {
 
     private UUID id;
+
+    private String ewoid;
+
+    private UUID konfigurationid;
 
     private String familienname;
 
@@ -29,13 +24,9 @@ public class EWOBuergerDatenDto {
 
     private String vorname;
 
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
     private java.time.LocalDate geburtsdatum;
 
     private Geschlecht geschlecht;
-
-    private String ordnungsmerkmal;
 
     private String akademischergrad;
 
@@ -44,10 +35,6 @@ public class EWOBuergerDatenDto {
     private String geburtsland;
 
     private String familienstand;
-
-    private java.util.List<String> staatsangehoerigkeit = new java.util.ArrayList<>();
-
-    private String wohnungsgeber;
 
     private String strasse;
 
@@ -63,19 +50,49 @@ public class EWOBuergerDatenDto {
 
     private String adresszusatz;
 
-    private java.util.List<String> konfliktfeld = new java.util.ArrayList<>();
-
     private String postleitzahl;
 
     private String ort;
 
     private java.time.LocalDate inmuenchenseit;
 
+    private String wohnungsgeber;
+
     private Wohnungsstatus wohnungsstatus;
+
+    private String derzeitausgeuebterberuf;
+
+    private String arbeitgeber;
+
+    private String telefonnummer;
+
+    private String telefongesch;
+
+    private String telefonmobil;
+
+    private String mailadresse;
+
+    private String ausgeuebteehrenaemter;
+
+    private boolean onlinebewerbung = false;
+
+    private boolean neuervorschlag = false;
+
+    private boolean warbereitstaetigals = false;
+
+    private boolean warbereitstaetigalsvorvorperiode = false;
+
+    private java.time.LocalDate bewerbungvom;
+
+    private Status status;
+
+    private String bemerkung;
 
     private java.util.List<String> auskunftssperre = new java.util.ArrayList<>();
 
-    private boolean ewoidbereitserfasst;
+    private java.util.List<String> konfliktfeld = new java.util.ArrayList<>();
+
+    private java.util.List<String> staatsangehoerigkeit = new java.util.ArrayList<>();
 
     // because of EI_EXPOSE_REP
     public java.util.List<String> getAuskunftssperre() {
@@ -91,5 +108,4 @@ public class EWOBuergerDatenDto {
     public java.util.List<String> getStaatsangehoerigkeit() {
         return new java.util.ArrayList<>(staatsangehoerigkeit);
     }
-
 }

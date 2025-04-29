@@ -1,4 +1,4 @@
-export default interface Konfiguration {
+export default interface KonfigurationData {
   id: string | undefined;
   ehrenamtjustizart: string;
   bezeichnung: string;

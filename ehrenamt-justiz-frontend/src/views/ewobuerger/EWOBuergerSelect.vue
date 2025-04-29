@@ -4,7 +4,7 @@
       <v-card-title class="text-h5">Bewerbung erstellen</v-card-title>
       <v-card-text> Bitte wählen Sie den gewünschten Eintrag aus </v-card-text>
       <v-data-table
-        :items="eWOBuergerDaten"
+        :items="eWOBuergerData"
         :headers="headers"
         multi-sort
         class="elevation-1"
@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import type EWOBuergerDaten from "@/types/EWOBuergerDaten";
+import type EWOBuergerData from "@/types/EWOBuergerData";
 
 import { mdiAccountPlus } from "@mdi/js";
 import { computed } from "vue";
@@ -67,7 +67,7 @@ import {
 
 const props = defineProps<{
   modelValue: boolean;
-  eWOBuergerDaten: EWOBuergerDaten[];
+  eWOBuergerData: EWOBuergerData[];
 }>();
 
 type ReadonlyHeaders = VDataTable["$props"]["headers"];
@@ -112,15 +112,15 @@ const headers: ReadonlyHeaders = [
 ];
 const emits = defineEmits<{
   "update:modelValue": [v: boolean];
-  selectBuerger: [v: EWOBuergerDaten];
+  selectBuerger: [v: EWOBuergerData];
   cancelBuergerSelect: [];
 }>();
 const visible = computed({
   get: () => props.modelValue,
   set: (v) => emits("update:modelValue", v),
 });
-function selectBuerger(eWOBuergerDaten: EWOBuergerDaten) {
-  emits("selectBuerger", eWOBuergerDaten);
+function selectBuerger(eWOBuergerData: EWOBuergerData) {
+  emits("selectBuerger", eWOBuergerData);
 }
 function cancelBuergerSelect() {
   emits("cancelBuergerSelect");
