@@ -68,6 +68,22 @@ Details can be found in the documentation here:
 [ehrenamt-justiz/ehrenamt-justiz-eai/entrypoint.sh](https://github.com/it-at-m/ehrenamt-justiz/blob/main/ehrenamt-justiz-eai/entrypoint.sh)
 
 
+### Manual work for starting the change service
+The following must be done to use the Kafka change service
+- Copy kafka-auth-keystore.jks and truststore.jks (Can be found in Keystore for Ehrenamt-Justiz) to folder ~/develop/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice/src/main/resources
+- Manually add the user and password in  ~/develop/ehrenamt-justiz/stack/docker-compose.yml (User and password can be found in Keystore for Ehrenamt-Justiz)
+  ```
+  services:
+    ...
+    aenderungsservice:
+      ...
+      environment:
+      ...
+      - KEY_STORE_PASSWORD=
+      - TRUST_STORE_PASSWORD=
+```
+
+
 ### Starting Ehrenamtjustiz in Docker Desktop
 ```
 cd ~/develop/ehrenamt-justiz/stack  
