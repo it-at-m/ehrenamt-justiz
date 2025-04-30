@@ -81,7 +81,7 @@ The following must be done to use the Kafka change service
       ...
       - KEY_STORE_PASSWORD=
       - TRUST_STORE_PASSWORD=
-```
+  ```
 
 
 ### Starting Ehrenamtjustiz in Docker Desktop
