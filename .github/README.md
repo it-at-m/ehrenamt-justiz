@@ -69,7 +69,7 @@ Details can be found in the documentation here:
 
 
 ### Manual work for starting the change service
-The following must be done to use the Kafka change service
+The following must be done to use the EJ change service (Kafka)
 - Copy kafka-auth-keystore.jks and truststore.jks (Can be found in Keystore for Ehrenamt-Justiz) to folder ~/develop/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice/src/main/resources
 - Manually add the user and password in  ~/develop/ehrenamt-justiz/stack/docker-compose.yml (User and password can be found in Keystore for Ehrenamt-Justiz)
   ```
