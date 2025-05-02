@@ -13,14 +13,14 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 
 @RestController
 @AllArgsConstructor
@@ -28,6 +28,9 @@ import org.springframework.web.client.HttpServerErrorException;
 @RequestMapping("/aenderungsservice")
 @SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public class AenderungsServiceRestController {
+
+    public static final String X_CAUSE = "X-Cause";
+    public static final String BACKEND_ERROR = "BACKEND_ERROR";
 
     @Autowired
     KonfigurationRepository konfigurationRepository;
@@ -58,27 +61,40 @@ public class AenderungsServiceRestController {
     @PostMapping("/aenderungsservicePerson")
     public ResponseEntity<Void> aenderungsServicePerson(@RequestBody final String om) {
 
-        final Konfiguration[] konfiguration = konfigurationRepository.findByAktiv(true);
-
         final Person personByOM;
+
         try {
+            final Konfiguration[] konfiguration = konfigurationRepository.findByAktiv(true);
             personByOM = personRepository.findByOM(om, konfiguration[0].getId());
-        } catch (HttpClientErrorException | HttpServerErrorException e) {
-            log.error("Fehler beim Aufruf von 'aenderungsservicePerson: {}", om, e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            log.error("Fehler beim Lesen der OM {}", om, e);
+            final MultiValueMap<String, String> headers = new HttpHeaders();
+            headers.add(X_CAUSE, BACKEND_ERROR + ": Fehler beim Lesen bei om " + om);
+            return new ResponseEntity<>(headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         if (personByOM == null) {
             log.info("Keine Person für om {} in aenderungsservicePerson: gefunden", om);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            final MultiValueMap<String, String> headers = new HttpHeaders();
+            headers.add(X_CAUSE, BACKEND_ERROR + ": Fehler beim Lesen bei om " + om);
+            return new ResponseEntity<>(headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         // get conflicts
-        final List<String> konflikte = ermittelnKonflikte(personByOM);
+        final List<String> konflikte;
+        try {
+            konflikte = ermittelnKonflikte(personByOM);
 
-        if (!konflikte.isEmpty()) {
-            log.info("Status auf KONFLIKT setzen für Person mit om {}", om);
-            personByOM.setStatus(Status.KONFLIKT);
+            if (!konflikte.isEmpty()) {
+                log.info("Status auf KONFLIKT setzen für Person mit om {}", om);
+                personByOM.setStatus(Status.KONFLIKT);
+            }
+
+        } catch (Exception e) {
+            log.error("Fehler beim Ermitteln der Konflikte bei om {}", om, e);
+            final MultiValueMap<String, String> headers = new HttpHeaders();
+            headers.add(X_CAUSE, BACKEND_ERROR + ": Fehler beim Ermitteln der Konflikte bei om " + om);
+            return new ResponseEntity<>(headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         // Person U P D A T E
@@ -86,7 +102,9 @@ public class AenderungsServiceRestController {
             personRepository.save(personByOM);
         } catch (Exception e) {
             log.error("Fehler beim Speichern der Person mit om {}", om, e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            final MultiValueMap<String, String> headers = new HttpHeaders();
+            headers.add(X_CAUSE, BACKEND_ERROR + ": Fehler beim Update auf Datenbank bei om " + om);
+            return new ResponseEntity<>(headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
