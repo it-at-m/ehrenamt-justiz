@@ -77,7 +77,7 @@ public class AenderungsServiceRestController {
             log.info("Keine Person für om {} in aenderungsservicePerson: gefunden", om);
             final MultiValueMap<String, String> headers = new HttpHeaders();
             headers.add(X_CAUSE, BACKEND_ERROR + ": Fehler beim Lesen bei om " + om);
-            return new ResponseEntity<>(headers, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(headers, HttpStatus.NOT_FOUND);
         }
 
         // get conflicts

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -70,18 +71,41 @@ public class Configs {
                 final Throwable causeOfRuntimeException = cause.getCause();
 
                 if (causeOfRuntimeException instanceof HttpServerErrorException.InternalServerError) {
-
+                    // Vom Backend http 500 internalServerError
                     final Map<String, List<String>> headers = ((HttpServerErrorException.InternalServerError) causeOfRuntimeException).getResponseHeaders();
-                    if (headers != null && headers.containsKey(X_CAUSE)
-                            && Objects.requireNonNull(headers.get(X_CAUSE)).getFirst().startsWith(BACKEND_ERROR)) {
-
-                        // Fehler in der Logik des Backend --> Keine weiteren Versuche (Non blocking entry)
+                    if (checkHeaders(headers, causeOfRuntimeException)) {
+                        // --> Keine weiteren Versuche (Non blocking entry)
                         return null;
                     }
                 }
+                if (causeOfRuntimeException instanceof HttpClientErrorException) {
+                    // Vom Backend http 404 Not Found
+                    final Map<String, List<String>> headers = ((HttpClientErrorException) causeOfRuntimeException).getResponseHeaders();
+                    if (checkHeaders(headers, causeOfRuntimeException)) {
+                        // --> Keine weiteren Versuche (Non blocking entry)
+                        return null;
+                    }
+                }
+            } else if (cause instanceof BadRequestException) {
+                // Im Änderungsservice fehlerhafter Parameter --> Keine weiteren Versuche (Non blocking entry)
+                log.error("Bad request", cause);
+                return null;
             }
+            // Weitere Versuche gemäß Konfiguration in kafkaListenerContainerFactory
             throw exception;
         };
+    }
+
+    private static boolean checkHeaders(final Map<String, List<String>> headers, final Throwable causeOfRuntimeException) {
+        // Header, der im Backend im Fehlerfall gesetzt wurde?
+        if (headers != null && headers.containsKey(X_CAUSE)
+                && Objects.requireNonNull(headers.get(X_CAUSE)).getFirst().startsWith(BACKEND_ERROR)) {
+
+            // Fehler in der Logik des Backend --> Keine weiteren Versuche (Non blocking entry)
+            log.error("Server Fehler", causeOfRuntimeException);
+            return true;
+        }
+        return false;
     }
 
     @Bean
