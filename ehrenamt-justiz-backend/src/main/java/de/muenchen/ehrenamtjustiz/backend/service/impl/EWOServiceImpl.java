@@ -94,12 +94,13 @@ public class EWOServiceImpl implements EWOService {
     }
 
     /**
-      * Ermittelt die EWO-Daten über die EWO-EAI für den AenderungsService.
-      * Im Gegensatz zu  {@link #ewoSucheMitOM}, werden im Fehlerfall  {@link AenderungsServiceException} geworfen
-      *
-      * @param om EWO OM
-      * @return EWO-Daten
-      * @throws AenderungsServiceException If the search operation fails
+     * Ermittelt die EWO-Daten über die EWO-EAI für den AenderungsService.
+     * Im Gegensatz zu {@link #ewoSucheMitOM}, werden im Fehlerfall {@link AenderungsServiceException}
+     * geworfen
+     *
+     * @param om EWO OM
+     * @return EWO-Daten
+     * @throws AenderungsServiceException If the search operation fails
      */
     @Override
     public EWOBuergerDatenDto ewoSucheMitOMAenderungsService(final String om) {
@@ -134,6 +135,7 @@ public class EWOServiceImpl implements EWOService {
 
     /**
      * Sucht EWO-Daten über die EWO-EAI für die Kernanwendung
+     *
      * @param eWOBuergerSucheDto Suchkriterien Nachname, Vorname und Geburtsdatum
      * @return List<EWOBuergerDatenDto>
      */
