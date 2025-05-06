@@ -37,7 +37,7 @@ jobs:
     steps:
       - name: Maven build and release
         id: maven-release-step
-        uses: it-at-m/lhm_actions/action-templates/actions/action-maven-release@b2b49a8b4344e3b5ac90dd1ee9a0c59860c41383 # v1.0.16
+        uses: it-at-m/lhm_actions/action-templates/actions/action-maven-release@035b67c11657dd6cc91612383d052789100054e6 # v1.0.18
         with:
           app-path: ${{ inputs.module }}
           releaseVersion: ${{ inputs.release-version }}
@@ -49,26 +49,10 @@ jobs:
           CENTRAL_USERNAME: ${{ secrets.sonatype_username }}
           CENTRAL_PASSWORD: ${{ secrets.sonatype_password }}
 
-  build-image:
-    if: ${{ inputs.module != 'handler-core' }}
-    needs: release-maven
-    runs-on: ubuntu-latest
-    steps:
-      - name: Build and push image
-        uses: it-at-m/lhm_actions/action-templates/actions/action-build-image@b2b49a8b4344e3b5ac90dd1ee9a0c59860c41383 # v1.0.16
-        with:
-          registry-username: ${{ github.actor }}
-          registry-password: ${{ secrets.GITHUB_TOKEN }}
-          path: "./${{ inputs.module }}"
-          artifact-name: ${{ needs.release-maven.outputs.ARTIFACT_NAME }}
-          image-name: ${{ inputs.module }}
-          image-tags: |
-            type=raw,value=${{ inputs.release-version }}
-            type=raw,value=latest,enable=${{ inputs.tag-latest == true }}
 
   create-github-release:
     if: ${{ !failure() && !cancelled() }}
-    needs: "build-image"
+    needs: "release-maven"
     runs-on: ubuntu-latest
     steps:
       - name: Create GitHub Release
