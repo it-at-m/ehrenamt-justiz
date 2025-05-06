@@ -49,7 +49,6 @@ jobs:
           CENTRAL_USERNAME: ${{ secrets.sonatype_username }}
           CENTRAL_PASSWORD: ${{ secrets.sonatype_password }}
 
-
   create-github-release:
     if: ${{ !failure() && !cancelled() }}
     needs: "release-maven"
