@@ -57,6 +57,12 @@ public class EWOServiceImpl implements EWOService {
     @Value("${ewo.eai.basepath:personeninfo/ap}")
     private String basepathewoeai;
 
+    /**
+     * Ermittelt die EWO-Daten über die EWO-EAI für die Kernanwendung
+     *
+     * @param om EWO OM
+     * @return EWO-Daten
+     */
     @Override
     public EWOBuergerDatenDto ewoSucheMitOM(final String om) {
 
@@ -87,6 +93,14 @@ public class EWOServiceImpl implements EWOService {
 
     }
 
+    /**
+      * Ermittelt die EWO-Daten über die EWO-EAI für den AenderungsService.
+      * Im Gegensatz zu  {@link #ewoSucheMitOM}, werden im Fehlerfall  {@link AenderungsServiceException} geworfen
+      *
+      * @param om EWO OM
+      * @return EWO-Daten
+      * @throws AenderungsServiceException If the search operation fails
+     */
     @Override
     public EWOBuergerDatenDto ewoSucheMitOMAenderungsService(final String om) {
         final MultiValueMap<String, String> headers = new HttpHeaders();
@@ -118,6 +132,11 @@ public class EWOServiceImpl implements EWOService {
         return eWOBuergerDaten;
     }
 
+    /**
+     * Sucht EWO-Daten über die EWO-EAI für die Kernanwendung
+     * @param eWOBuergerSucheDto Suchkriterien Nachname, Vorname und Geburtsdatum
+     * @return List<EWOBuergerDatenDto>
+     */
     @Override
     @SuppressFBWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     public List<EWOBuergerDatenDto> ewoSuche(final EWOBuergerSucheDto eWOBuergerSucheDto) {

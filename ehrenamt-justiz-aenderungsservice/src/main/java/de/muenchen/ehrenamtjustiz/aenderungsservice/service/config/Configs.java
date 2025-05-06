@@ -32,7 +32,7 @@ public class Configs {
     private int initialInterval;
 
     @Value("${aenderungsservice.backend.retry.multiplier}")
-    private int multiplier;
+    private double multiplier;
 
     @Value("${aenderungsservice.backend.retry.maxInterval}")
     private int maxInterval;

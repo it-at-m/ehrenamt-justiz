@@ -48,7 +48,7 @@ class AenderungsServiceTest {
     }
 
     @Test
-    void testAenderungsserviceMitErgebnisHTTP200() throws Exception {
+    void testAenderungsserviceMitErgebnisHTTP200() throws BadRequestException {
 
         // Mock the RestTemplate exchange method
         final ResponseEntity<Void> mockResponse = ResponseEntity.ok(null);
