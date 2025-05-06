@@ -38,7 +38,6 @@ public class Configs {
     private int maxInterval;
 
     @Bean
-    @SuppressWarnings("PMD.DoubleBraceInitialization")
     public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory(
             final ConsumerFactory<String, String> consumerFactory) {
         final ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
