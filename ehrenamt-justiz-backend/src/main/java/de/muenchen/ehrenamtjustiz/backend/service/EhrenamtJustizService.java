@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface EhrenamtJustizService {
     List<String> getKonflikte(Person person);
+
+    List<String> getKonflikteAenderungsService(Person person);
 }

@@ -1,12 +1,12 @@
 package de.muenchen.ehrenamtjustiz.aenderungsservice;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 import de.muenchen.ehrenamtjustiz.aenderungsservice.service.AenderungsService;
+import org.apache.coyote.BadRequestException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -48,7 +48,7 @@ class AenderungsServiceTest {
     }
 
     @Test
-    void testAenderungsserviceMitErgebnisHTTP200() {
+    void testAenderungsserviceMitErgebnisHTTP200() throws BadRequestException {
 
         // Mock the RestTemplate exchange method
         final ResponseEntity<Void> mockResponse = ResponseEntity.ok(null);
@@ -68,11 +68,11 @@ class AenderungsServiceTest {
 
         when(restTemplate.exchange(any(RequestEntity.class), eq(Void.class))).thenThrow(HttpClientErrorException.class);
 
-        // Send EWO-OM
-        final HttpStatusCode httpStatusCode = aenderungsService.consumeDirect("4711");
-
-        verify(restTemplate, times(1)).exchange(any(RequestEntity.class), eq(Void.class));
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), httpStatusCode.value());
+        assertThrows(RuntimeException.class,
+                () -> {
+                    // Send EWO-OM
+                    aenderungsService.consumeDirect("4711");
+                });
 
     }
 
@@ -84,11 +84,13 @@ class AenderungsServiceTest {
 
         when(restTemplate.exchange(any(RequestEntity.class), eq(Void.class))).thenReturn(mockResponse);
 
-        // Send EWO-OM
-        final HttpStatusCode httpStatusCode = aenderungsService.consumeDirect(null);
+        assertThrows(BadRequestException.class,
+                () -> {
+                    // Send EWO-OM
+                    aenderungsService.consumeDirect(null);
+                });
 
         verify(restTemplate, times(0)).exchange(any(RequestEntity.class), eq(Void.class));
-        assertEquals(HttpStatus.BAD_REQUEST.value(), httpStatusCode.value());
 
     }
 

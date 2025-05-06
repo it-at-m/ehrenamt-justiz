@@ -6,6 +6,7 @@ import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
 import de.muenchen.ehrenamtjustiz.backend.service.EhrenamtJustizService;
+import de.muenchen.ehrenamtjustiz.exception.AenderungsServiceException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -19,8 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 
 @RestController
 @AllArgsConstructor
@@ -56,37 +55,46 @@ public class AenderungsServiceRestController {
         }
     )
     @PostMapping("/aenderungsservicePerson")
+    @SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.PreserveStackTrace", "PMD.AvoidRethrowingException" })
     public ResponseEntity<Void> aenderungsServicePerson(@RequestBody final String om) {
 
-        final Konfiguration[] konfiguration = konfigurationRepository.findByAktiv(true);
-
         final Person personByOM;
+
         try {
+            final Konfiguration[] konfiguration = konfigurationRepository.findByAktiv(true);
             personByOM = personRepository.findByOM(om, konfiguration[0].getId());
-        } catch (HttpClientErrorException | HttpServerErrorException e) {
-            log.error("Fehler beim Aufruf von 'aenderungsservicePerson: {}", om, e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            log.error("Fehler beim Lesen der OM {}", om, e);
+            throw new AenderungsServiceException("Fehler beim Lesen bei om", om, false);
         }
 
         if (personByOM == null) {
             log.info("Keine Person für om {} in aenderungsservicePerson: gefunden", om);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new AenderungsServiceException("Fehler beim Lesen der om", om, false);
         }
 
         // get conflicts
-        final List<String> konflikte = ermittelnKonflikte(personByOM);
+        final List<String> konflikte;
+        try {
+            konflikte = ermittelnKonflikte(personByOM);
 
-        if (!konflikte.isEmpty()) {
-            log.info("Status auf KONFLIKT setzen für Person mit om {}", om);
-            personByOM.setStatus(Status.KONFLIKT);
+            if (!konflikte.isEmpty()) {
+                log.info("Status auf KONFLIKT setzen für Person mit om {}", om);
+                personByOM.setStatus(Status.KONFLIKT);
+            }
+
+        } catch (AenderungsServiceException e) {
+            throw e;
+        } catch (Exception e) {
+            log.error("Fehler beim Ermitteln der Konflikte bei om {}", om, e);
+            throw new AenderungsServiceException("Fehler beim Ermitteln der Konflikte", om, true);
         }
-
         // Person U P D A T E
         try {
             personRepository.save(personByOM);
         } catch (Exception e) {
             log.error("Fehler beim Speichern der Person mit om {}", om, e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new AenderungsServiceException("Fehler beim Update auf Datenbank ", om, false);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -96,7 +104,7 @@ public class AenderungsServiceRestController {
         log.debug("Ermittle Konflikte für Person mit ID {}", person.getId());
 
         // Get the conflicts
-        final List<String> konflikte = ehrenamtJustizService.getKonflikte(person);
+        final List<String> konflikte = ehrenamtJustizService.getKonflikteAenderungsService(person);
 
         person.setKonfliktfeld(konflikte);
 

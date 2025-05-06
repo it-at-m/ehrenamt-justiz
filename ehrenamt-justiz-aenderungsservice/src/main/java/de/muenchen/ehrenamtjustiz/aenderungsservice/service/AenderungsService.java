@@ -1,14 +1,20 @@
 package de.muenchen.ehrenamtjustiz.aenderungsservice.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.muenchen.ehrenamtjustiz.exception.AenderungsServiceException;
+import de.muenchen.ehrenamtjustiz.exception.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.ResourceAccessException;
-import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -30,12 +36,17 @@ public class AenderungsService {
 
     @KafkaListener(
             topicPattern = "${aenderungsservice.topicPattern}",
-            groupId = "${aenderungsservice.group-Id}"
+            groupId = "${aenderungsservice.group-Id}",
+            errorHandler = "kafkaListenerErrorHandler"
     )
-    public void consume(final String om) {
+    public void consume(final String om) throws BadRequestException {
         log.debug("Änderungsservice mit EWO-OM aufgerufen: {}", om);
 
-        verarbeitenOM(om);
+        final HttpStatusCode verarbeitenOMResult = verarbeitenOM(om);
+
+        if (!verarbeitenOMResult.is2xxSuccessful()) {
+            throw new RuntimeException("Consumer of KafkaListener mit Http-Code: " + verarbeitenOMResult);
+        }
     }
 
     /**
@@ -43,36 +54,31 @@ public class AenderungsService {
      *
      * @param om EWO-OM
      */
-    public HttpStatusCode consumeDirect(final String om) {
+    public HttpStatusCode consumeDirect(final String om) throws BadRequestException {
         log.debug("Änderungsservice mit EWO-OM aufgerufen: {}", om);
 
         return verarbeitenOM(om);
 
     }
 
-    private HttpStatusCode verarbeitenOM(final String om) {
-        try {
-            final HttpStatusCode statusCode = aenderungsService(om);
-            if (!statusCode.is2xxSuccessful()) {
-                log.warn("Änderungsservice für OM {} nicht erfolgreich abgeschlossen. Status: {}", om, statusCode);
-            }
-            return statusCode;
-        } catch (Exception e) {
-            log.error("Unbehandelte Exception bei der Verarbeitung von OM {}", om, e);
-            return HttpStatus.INTERNAL_SERVER_ERROR;
+    private HttpStatusCode verarbeitenOM(final String om) throws BadRequestException {
+
+        final HttpStatusCode statusCode = aenderungsService(om);
+        if (!statusCode.is2xxSuccessful()) {
+            log.warn("Änderungsservice für OM {} nicht erfolgreich abgeschlossen. Status: {}", om, statusCode);
         }
+        return statusCode;
     }
 
-    private HttpStatusCode aenderungsService(final String om) {
+    @SuppressWarnings("PMD.PreserveStackTrace")
+    private HttpStatusCode aenderungsService(final String om) throws BadRequestException {
 
         if (om == null) {
-            log.error("Fehler: Die EWO-ID ist null");
-            return HttpStatus.BAD_REQUEST;
+            throw new BadRequestException("Fehler: Die EWO-ID ist null");
         }
 
         if (om.trim().isEmpty()) {
-            log.error("Fehler: Die EWO-ID ist leer");
-            return HttpStatus.BAD_REQUEST;
+            throw new BadRequestException("Fehler: Die EWO-ID ist leer");
         }
 
         final RequestEntity<String> request;
@@ -85,15 +91,21 @@ public class AenderungsService {
         final ResponseEntity<Void> responseEntity;
         try {
             responseEntity = restTemplate.exchange(request, Void.class);
-        } catch (HttpClientErrorException e) {
-            log.error("Fehler in aenderungsService beim OM {}", om, e);
-            return HttpStatus.INTERNAL_SERVER_ERROR;
-        } catch (ResourceAccessException e) {
-            log.error("Netzwerkfehler in aenderungsService beim OM {}", om, e);
-            return HttpStatus.SERVICE_UNAVAILABLE;
-        } catch (RestClientException e) {
-            log.error("Unerwarteter Fehler in aenderungsService beim OM {}", om, e);
-            return HttpStatus.INTERNAL_SERVER_ERROR;
+        } catch (RestClientResponseException rcrException) {
+            log.error("Fehler beim Aufruf des Änderungsservice bei OM " + om, rcrException);
+
+            final String errorBody = rcrException.getResponseBodyAsString();
+            final ObjectMapper mapper = new ObjectMapper();
+            final ErrorResponse error;
+            try {
+                error = mapper.readValue(errorBody, ErrorResponse.class);
+            } catch (JsonProcessingException mapperError) {
+                // Kein ResponseError vom Backend vorhanden --> Dann normale RuntimeException
+                throw rcrException;
+            }
+            // ResponseError vom Backend --> Dann AenderungsServiceException
+            throw new AenderungsServiceException("Fehler in aenderungsService beim OM " + om, error.getOm(),
+                    error.isBlockingEntry());
         }
 
         log.debug("Für OM {} wurde der Änderungsservice aufgerufen mit dem http-Code: {}", om, responseEntity.getStatusCode());

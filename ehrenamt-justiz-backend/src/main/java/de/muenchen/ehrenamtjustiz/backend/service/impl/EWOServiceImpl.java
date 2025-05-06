@@ -11,6 +11,7 @@ import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
 import de.muenchen.ehrenamtjustiz.backend.service.EWOService;
+import de.muenchen.ehrenamtjustiz.exception.AenderungsServiceException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 @Slf4j
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
+@SuppressWarnings({ "PMD.CommentDefaultAccessModifier", "PMD.PreserveStackTrace" })
 public class EWOServiceImpl implements EWOService {
 
     @Autowired
@@ -56,6 +57,12 @@ public class EWOServiceImpl implements EWOService {
     @Value("${ewo.eai.basepath:personeninfo/ap}")
     private String basepathewoeai;
 
+    /**
+     * Ermittelt die EWO-Daten über die EWO-EAI für die Kernanwendung
+     *
+     * @param om EWO OM
+     * @return EWO-Daten
+     */
     @Override
     public EWOBuergerDatenDto ewoSucheMitOM(final String om) {
 
@@ -86,6 +93,52 @@ public class EWOServiceImpl implements EWOService {
 
     }
 
+    /**
+     * Ermittelt die EWO-Daten über die EWO-EAI für den AenderungsService.
+     * Im Gegensatz zu {@link #ewoSucheMitOM}, werden im Fehlerfall {@link AenderungsServiceException}
+     * geworfen
+     *
+     * @param om EWO OM
+     * @return EWO-Daten
+     * @throws AenderungsServiceException If the search operation fails
+     */
+    @Override
+    public EWOBuergerDatenDto ewoSucheMitOMAenderungsService(final String om) {
+        final MultiValueMap<String, String> headers = new HttpHeaders();
+        final RequestEntity<String> request;
+
+        request = new RequestEntity<>(headers, HttpMethod.GET, UriComponentsBuilder
+                .fromUriString(serverewoeai)
+                .path(basepathewoeai + "/eairoutes/ewosuchemitom/" + om)
+                .build()
+                .toUri());
+
+        final ResponseEntity<EWOBuerger> responseEntity;
+        final EWOBuergerDatenDto eWOBuergerDaten;
+
+        try {
+            responseEntity = restTemplate.exchange(request, EWOBuerger.class);
+            eWOBuergerDaten = mapToEWOBuerger(responseEntity.getBody());
+        } catch (HttpClientErrorException e) {
+            log.error("Fehler in ewoSucheMitOM beim OM {}", om, e);
+            throw new AenderungsServiceException("Fehler in ewoSucheMitOM", om, true);
+        } catch (ResourceAccessException e) {
+            log.error("Netzwerkfehler in ewoSucheMitOM beim OM {}", om, e);
+            throw new AenderungsServiceException("Netzwerkfehler in ewoSucheMitOM", om, true);
+        } catch (RestClientException e) {
+            log.error("Unerwarteter Fehler in ewoSucheMitOM beim OM {}", om, e);
+            throw new AenderungsServiceException("Unerwarteter Fehler in ewoSucheMitOM", om, true);
+        }
+
+        return eWOBuergerDaten;
+    }
+
+    /**
+     * Sucht EWO-Daten über die EWO-EAI für die Kernanwendung
+     *
+     * @param eWOBuergerSucheDto Suchkriterien Nachname, Vorname und Geburtsdatum
+     * @return List<EWOBuergerDatenDto>
+     */
     @Override
     @SuppressFBWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     public List<EWOBuergerDatenDto> ewoSuche(final EWOBuergerSucheDto eWOBuergerSucheDto) {
