@@ -29,13 +29,13 @@ public class Configs {
     private int maxRetries;
 
     @Value("${aenderungsservice.backend.retry.initialInterval}")
-    private int initialInterval;
+    private long initialInterval;
 
     @Value("${aenderungsservice.backend.retry.multiplier}")
     private double multiplier;
 
     @Value("${aenderungsservice.backend.retry.maxInterval}")
-    private int maxInterval;
+    private long maxInterval;
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory(
