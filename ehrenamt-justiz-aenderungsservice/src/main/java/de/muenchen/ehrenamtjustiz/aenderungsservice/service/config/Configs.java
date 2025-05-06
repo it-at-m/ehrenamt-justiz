@@ -54,7 +54,6 @@ public class Configs {
     }
 
     @Bean
-    @SuppressWarnings("PMD.CognitiveComplexity")
     public KafkaListenerErrorHandler kafkaListenerErrorHandler() {
         return (message, exception) -> {
 
