@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 public interface EWOService {
     EWOBuergerDatenDto ewoSucheMitOM(String om);
 
+    EWOBuergerDatenDto ewoSucheMitOMAenderungsService(String om);
+
     List<EWOBuergerDatenDto> ewoSuche(EWOBuergerSucheDto eWOBuergerSucheDto);
 
     ResponseEntity<String> ewoEaiStatus();

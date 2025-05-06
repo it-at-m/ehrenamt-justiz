@@ -34,7 +34,26 @@ public class EhrenamtJustizServiceImpl implements EhrenamtJustizService {
             return konfliktfelder;
         }
 
-        final EWOBuergerDatenDto ewoBuergerFromperson = EWOBuergerDatenDto.builder()
+        final EWOBuergerDatenDto ewoBuergerFromperson = getEwoBuergerDatenDto(person);
+
+        return EWOBuergerComparer.getConflictFields(ewoBuergerFromperson, ewoBuerger);
+
+    }
+
+    @Override
+    public List<String> getKonflikteAenderungsService(final Person person) {
+        final EWOBuergerDatenDto ewoBuerger = ewoService.ewoSucheMitOMAenderungsService(person.getEwoid());
+
+        if (ewoBuerger == null) {
+            log.info("Person {} führte in EWO zu keinem Treffer.", person.getEwoid());
+            return new ArrayList<>();
+        }
+
+        return EWOBuergerComparer.getConflictFields(getEwoBuergerDatenDto(person), ewoBuerger);
+    }
+
+    private static EWOBuergerDatenDto getEwoBuergerDatenDto(final Person person) {
+        return EWOBuergerDatenDto.builder()
                 .familienname(person.getFamilienname())
                 .geburtsname(person.getGeburtsname())
                 .vorname(person.getVorname())
@@ -60,8 +79,6 @@ public class EhrenamtJustizServiceImpl implements EhrenamtJustizService {
                 .inmuenchenseit(person.getInmuenchenseit())
                 .wohnungsstatus(person.getWohnungsstatus())
                 .auskunftssperre(person.getAuskunftssperre()).build();
-
-        return EWOBuergerComparer.getConflictFields(ewoBuergerFromperson, ewoBuerger);
-
     }
+
 }

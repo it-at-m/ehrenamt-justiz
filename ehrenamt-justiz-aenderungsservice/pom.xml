@@ -105,6 +105,13 @@
       <artifactId>spring-security-oauth2-jose</artifactId>
     </dependency>
 
+    <!-- Api -->
+    <dependency>
+      <groupId>de.muenchen.ehrenamt-justiz</groupId>
+      <artifactId>ehrenamt-justiz-api</artifactId>
+      <version>0.0.3-SNAPSHOT</version>
+    </dependency>
+
     <!-- Kafka -->
     <dependency>
       <groupId>org.springframework.kafka</groupId>

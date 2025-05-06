@@ -1,8 +1,6 @@
 package de.muenchen.ehrenamtjustiz.aenderungsservice.service.config;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import de.muenchen.ehrenamtjustiz.exception.AenderungsServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,8 +19,6 @@ import org.springframework.web.client.*;
 @Configuration
 public class Configs {
 
-    public static final String X_CAUSE = "X-Cause";
-    public static final String BACKEND_ERROR = "BACKEND_ERROR";
     @Value("${aenderungsservice.backend.connecttimeout}")
     private int connectTimeout;
 
@@ -49,14 +45,12 @@ public class Configs {
         factory.setConsumerFactory(consumerFactory);
 
         // Setze einen ExponentialBackOff
-        factory.setCommonErrorHandler(new DefaultErrorHandler(
-                new ExponentialBackOffWithMaxRetries(maxRetries) {
-                    {
-                        setInitialInterval(initialInterval);
-                        setMultiplier(multiplier);
-                        setMaxInterval(maxInterval);
-                    }
-                }));
+        final ExponentialBackOffWithMaxRetries backoff = new ExponentialBackOffWithMaxRetries(maxRetries);
+        backoff.setInitialInterval(initialInterval);
+        backoff.setMultiplier(multiplier);
+        backoff.setMaxInterval(maxInterval);
+        factory.setCommonErrorHandler(new DefaultErrorHandler(backoff));
+
         return factory;
     }
 
@@ -66,26 +60,16 @@ public class Configs {
         return (message, exception) -> {
 
             final Throwable cause = exception.getCause();
-            if (cause instanceof RuntimeException && cause.getCause() != null) {
-
-                final Throwable causeOfRuntimeException = cause.getCause();
-
-                if (causeOfRuntimeException instanceof HttpServerErrorException.InternalServerError) {
-                    // Vom Backend http 500 internalServerError
-                    final Map<String, List<String>> headers = ((HttpServerErrorException.InternalServerError) causeOfRuntimeException).getResponseHeaders();
-                    if (checkHeaders(headers, causeOfRuntimeException)) {
-                        // --> Keine weiteren Versuche (Non blocking entry)
-                        return null;
-                    }
+            if (cause instanceof AenderungsServiceException aenderungsServiceException) {
+                if (aenderungsServiceException.isBlockingEntry()) {
+                    // Vom Backend: Blocking Entry:
+                    // Weitere Versuche gemäß Konfiguration in kafkaListenerContainerFactory
+                    throw exception;
                 }
-                if (causeOfRuntimeException instanceof HttpClientErrorException) {
-                    // Vom Backend http 404 Not Found
-                    final Map<String, List<String>> headers = ((HttpClientErrorException) causeOfRuntimeException).getResponseHeaders();
-                    if (checkHeaders(headers, causeOfRuntimeException)) {
-                        // --> Keine weiteren Versuche (Non blocking entry)
-                        return null;
-                    }
-                }
+                // Vom Backend Error: Kein Blocking Entry:
+                // --> Keine weiteren Versuche (Non blocking entry)
+                return null;
+
             } else if (cause instanceof BadRequestException) {
                 // Im Änderungsservice fehlerhafter Parameter --> Keine weiteren Versuche (Non blocking entry)
                 log.error("Bad request", cause);
@@ -94,18 +78,6 @@ public class Configs {
             // Weitere Versuche gemäß Konfiguration in kafkaListenerContainerFactory
             throw exception;
         };
-    }
-
-    private static boolean checkHeaders(final Map<String, List<String>> headers, final Throwable causeOfRuntimeException) {
-        // Header, der im Backend im Fehlerfall gesetzt wurde?
-        if (headers != null && headers.containsKey(X_CAUSE)
-                && Objects.requireNonNull(headers.get(X_CAUSE)).getFirst().startsWith(BACKEND_ERROR)) {
-
-            // Fehler in der Logik des Backend --> Keine weiteren Versuche (Non blocking entry)
-            log.error("Server Fehler", causeOfRuntimeException);
-            return true;
-        }
-        return false;
     }
 
     @Bean

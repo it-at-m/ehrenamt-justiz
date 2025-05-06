@@ -1,5 +1,9 @@
 package de.muenchen.ehrenamtjustiz.aenderungsservice.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.muenchen.ehrenamtjustiz.exception.AenderungsServiceException;
+import de.muenchen.ehrenamtjustiz.exception.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +14,7 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -65,6 +70,7 @@ public class AenderungsService {
         return statusCode;
     }
 
+    @SuppressWarnings("PMD.PreserveStackTrace")
     private HttpStatusCode aenderungsService(final String om) throws BadRequestException {
 
         if (om == null) {
@@ -85,9 +91,21 @@ public class AenderungsService {
         final ResponseEntity<Void> responseEntity;
         try {
             responseEntity = restTemplate.exchange(request, Void.class);
-        } catch (Exception e) {
-            log.error("Fehler beim Aufruf des Änderungsservice bei OM " + om, e);
-            throw new RuntimeException("Fehler in aenderungsService beim OM " + om, e);
+        } catch (RestClientResponseException rcrException) {
+            log.error("Fehler beim Aufruf des Änderungsservice bei OM " + om, rcrException);
+
+            final String errorBody = rcrException.getResponseBodyAsString();
+            final ObjectMapper mapper = new ObjectMapper();
+            final ErrorResponse error;
+            try {
+                error = mapper.readValue(errorBody, ErrorResponse.class);
+            } catch (JsonProcessingException mapperError) {
+                // Kein ResponseError vom Backend vorhanden --> Dann normale RuntimeException
+                throw rcrException;
+            }
+            // ResponseError vom Backend --> Dann AenderungsServiceException
+            throw new AenderungsServiceException("Fehler in aenderungsService beim OM " + om, error.getOm(),
+                    error.isBlockingEntry());
         }
 
         log.debug("Für OM {} wurde der Änderungsservice aufgerufen mit dem http-Code: {}", om, responseEntity.getStatusCode());

@@ -6,6 +6,7 @@ import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
 import de.muenchen.ehrenamtjustiz.backend.service.EhrenamtJustizService;
+import de.muenchen.ehrenamtjustiz.exception.AenderungsServiceException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -13,10 +14,8 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/aenderungsservice")
 @SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public class AenderungsServiceRestController {
-
-    public static final String X_CAUSE = "X-Cause";
-    public static final String BACKEND_ERROR = "BACKEND_ERROR";
 
     @Autowired
     KonfigurationRepository konfigurationRepository;
@@ -59,6 +55,7 @@ public class AenderungsServiceRestController {
         }
     )
     @PostMapping("/aenderungsservicePerson")
+    @SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.PreserveStackTrace", "PMD.AvoidRethrowingException" })
     public ResponseEntity<Void> aenderungsServicePerson(@RequestBody final String om) {
 
         final Person personByOM;
@@ -68,16 +65,12 @@ public class AenderungsServiceRestController {
             personByOM = personRepository.findByOM(om, konfiguration[0].getId());
         } catch (Exception e) {
             log.error("Fehler beim Lesen der OM {}", om, e);
-            final MultiValueMap<String, String> headers = new HttpHeaders();
-            headers.add(X_CAUSE, BACKEND_ERROR + ": Fehler beim Lesen bei om " + om);
-            return new ResponseEntity<>(headers, HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new AenderungsServiceException("Fehler beim Lesen bei om", om, false);
         }
 
         if (personByOM == null) {
             log.info("Keine Person für om {} in aenderungsservicePerson: gefunden", om);
-            final MultiValueMap<String, String> headers = new HttpHeaders();
-            headers.add(X_CAUSE, BACKEND_ERROR + ": Fehler beim Lesen bei om " + om);
-            return new ResponseEntity<>(headers, HttpStatus.NOT_FOUND);
+            throw new AenderungsServiceException("Fehler beim Lesen der om", om, false);
         }
 
         // get conflicts
@@ -90,21 +83,18 @@ public class AenderungsServiceRestController {
                 personByOM.setStatus(Status.KONFLIKT);
             }
 
+        } catch (AenderungsServiceException e) {
+            throw e;
         } catch (Exception e) {
             log.error("Fehler beim Ermitteln der Konflikte bei om {}", om, e);
-            final MultiValueMap<String, String> headers = new HttpHeaders();
-            headers.add(X_CAUSE, BACKEND_ERROR + ": Fehler beim Ermitteln der Konflikte bei om " + om);
-            return new ResponseEntity<>(headers, HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new AenderungsServiceException("Fehler beim Ermitteln der Konflikte", om, true);
         }
-
         // Person U P D A T E
         try {
             personRepository.save(personByOM);
         } catch (Exception e) {
             log.error("Fehler beim Speichern der Person mit om {}", om, e);
-            final MultiValueMap<String, String> headers = new HttpHeaders();
-            headers.add(X_CAUSE, BACKEND_ERROR + ": Fehler beim Update auf Datenbank bei om " + om);
-            return new ResponseEntity<>(headers, HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new AenderungsServiceException("Fehler beim Update auf Datenbank ", om, false);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -114,7 +104,7 @@ public class AenderungsServiceRestController {
         log.debug("Ermittle Konflikte für Person mit ID {}", person.getId());
 
         // Get the conflicts
-        final List<String> konflikte = ehrenamtJustizService.getKonflikte(person);
+        final List<String> konflikte = ehrenamtJustizService.getKonflikteAenderungsService(person);
 
         person.setKonfliktfeld(konflikte);
 
