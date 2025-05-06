@@ -6,9 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import de.muenchen.ehrenamtjustiz.konstanten.Konstanten;
-import lombok.*;
-
 import java.time.LocalDate;
+import lombok.*;
 
 /**
  * This class represents a BuergerSucheAnfrage
