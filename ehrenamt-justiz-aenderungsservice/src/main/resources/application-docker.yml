@@ -17,5 +17,5 @@ spring:
 aenderungsservice:
   backend:
     server: http://host.docker.internal:8083
-  group-Id: lhm-ewo-eai-aenderungen-ehrenamt-justiz-testDocker0001
+  group-Id: lhm-ewo-eai-aenderungen-ehrenamt-justiz-testDocker0002
   
