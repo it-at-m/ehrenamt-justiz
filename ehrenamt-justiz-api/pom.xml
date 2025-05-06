@@ -3,7 +3,7 @@
 
     <groupId>de.muenchen.ehrenamt-justiz</groupId>
     <artifactId>ehrenamt-justiz-api</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4-SNAPSHOT</version>
     <name>ehrenamt-justiz-api</name>
     <description>API used in EAI and Backend for Ehrenamtjustiz</description>
 
@@ -312,7 +312,7 @@
         <url>https://github.com/it-at-m/ehrenamt-justiz.git</url>
         <connection>scm:git:https://github.com/it-at-m/ehrenamt-justiz.git</connection>
         <developerConnection>scm:git:https://github.com/it-at-m/ehrenamt-justiz.git</developerConnection>
-        <tag>ehrenamt-justiz-api-0.0.3</tag>
+        <tag>HEAD</tag>
     </scm>
     <licenses>
         <license>
