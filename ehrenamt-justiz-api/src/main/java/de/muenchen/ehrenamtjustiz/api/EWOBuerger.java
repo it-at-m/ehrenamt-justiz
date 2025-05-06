@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import de.muenchen.ehrenamtjustiz.konstanten.Konstanten;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.xml.bind.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @SuppressWarnings("PMD.TooManyFields")
+@SuppressFBWarnings("RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE")
 public class EWOBuerger {
 
     private String familienname;
@@ -86,7 +88,7 @@ public class EWOBuerger {
     }
 
     // because of EI_EXPOSE_REP
-    public java.util.List<String> getKonfliktfelder() {
+    public java.util.List<String> getKonfliktFelder() {
         return new java.util.ArrayList<>(konfliktFelder);
     }
 
