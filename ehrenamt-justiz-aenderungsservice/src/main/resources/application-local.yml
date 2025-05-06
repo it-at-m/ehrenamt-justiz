@@ -17,4 +17,4 @@ spring:
 aenderungsservice:
   backend:
     server: http://localhost:8083
-  group-Id: lhm-ewo-eai-aenderungen-ehrenamt-justiz-testostdddd
+  group-Id: lhm-ewo-eai-aenderungen-ehrenamt-justiz
