@@ -3,6 +3,11 @@
 The Residents registration (EWO) offers a job for push notifications that ensures that change notifications are sent smoothly and regularly to Ehrenamt-Jusitz.
 The changes from EWO are transmitted to us via Apcache Kafka queues. The Residents registration change service receives changed personal data and and determines conflicts (Conflicts arise if the applicant data in Ehrenamt-Jusitz is different from the Residents registration data)
 
+Conflicts are dealt with and resolved in the application here:
+<p>
+    <img height="800" src="../docs/images/KonflikteBearbeiten.PNG"  alt="Konflikte bearbeiten und lösen"/>
+</p>
+
 ## Konfiguration of Kafka service
 To retrieve the data from apache kafka service, the following settings must be made:
 
