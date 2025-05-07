@@ -236,6 +236,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
       - KEY_STORE_PASSWORD=
       - TRUST_STORE_PASSWORD=
+      - GROUP_ID=lhm-ewo-eai-aenderungen-ehrenamt-justiz-testDocker0003
 
 networks:
   keycloak:
