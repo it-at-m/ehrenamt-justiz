@@ -150,7 +150,7 @@ services:
   backend:
     profiles:
       - backend
-    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:latest@sha256:78b97fa6fb8b152ae17c34cca3f7b64a73c029b1bde8f33867f95be12a977330
+    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:latest@sha256:dfaa93abd23e751f81a32f59aaeacaea168165eb26929432f42701bd01a6bfed
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
