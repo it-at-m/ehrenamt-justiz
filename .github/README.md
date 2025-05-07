@@ -82,8 +82,16 @@ The following must be done to use the EJ change service (Kafka)
       - KEY_STORE_PASSWORD=
       - TRUST_STORE_PASSWORD=
   ```
-
-
+- Manually set the GROUP_ID (The Group ID identifies a group of consumer instances that jointly consume messages from one or more Kafka topics)  in  ~/develop/ehrenamt-justiz/stack/docker-compose.yml for kafka. 
+  ```
+  services:
+    ...
+    aenderungsservice:
+      ...
+      environment:
+      ...
+        - GROUP_ID=lhm-ewo-eai-aenderungen-ehrenamt-justiz...
+  ```
 ### Starting Ehrenamtjustiz in Docker Desktop
 ```
 cd ~/develop/ehrenamt-justiz/stack  
