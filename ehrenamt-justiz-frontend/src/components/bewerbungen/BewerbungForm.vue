@@ -85,7 +85,10 @@
         value="ewo"
         eager
       >
-        <v-card class="scroll vcard">
+        <v-card
+          class="scroll vcard"
+          disabled
+        >
           <v-card-text>
             <v-row>
               <v-col class="col">
@@ -94,7 +97,6 @@
                   :rules="[rules.RULE_REQUIRED]"
                   label="Vorname*"
                   persistent-placeholder
-                  :disabled="true"
                   density="compact"
                   variant="outlined"
                 />
@@ -105,7 +107,6 @@
                   :rules="[rules.RULE_REQUIRED]"
                   label="Familienname*"
                   persistent-placeholder
-                  :disabled="true"
                   density="compact"
                   variant="outlined"
                 />
@@ -131,7 +132,6 @@
                     "
                     label="Geburtsdatum*"
                     persistent-placeholder
-                    :disabled="true"
                     type="date"
                     density="compact"
                     variant="outlined"
@@ -156,7 +156,6 @@
                     :rules="[rules.RULE_REQUIRED]"
                     label="Geschlecht*"
                     persistent-placeholder
-                    :disabled="true"
                     density="compact"
                     variant="outlined"
                   />
@@ -169,7 +168,6 @@
                     :rules="[rules.RULE_REQUIRED]"
                     label="Ordnungsmerkmal*"
                     persistent-placeholder
-                    :disabled="true"
                     density="compact"
                     variant="outlined"
                   />
@@ -194,7 +192,6 @@
                     :rules="[rules.RULE_REQUIRED]"
                     label="Geburtsort*"
                     persistent-placeholder
-                    :disabled="true"
                     density="compact"
                     variant="outlined"
                   />
@@ -205,7 +202,6 @@
                     :rules="[rules.RULE_REQUIRED]"
                     label="Geburtsland*"
                     persistent-placeholder
-                    :disabled="true"
                     density="compact"
                     variant="outlined"
                   />
@@ -218,7 +214,6 @@
                     :rules="[rules.RULE_REQUIRED]"
                     label="Familienstand*"
                     persistent-placeholder
-                    :disabled="true"
                     density="compact"
                     variant="outlined"
                   />
@@ -235,7 +230,6 @@
                     "
                     label="Staatsangehörigkeit"
                     persistent-placeholder
-                    :disabled="true"
                     density="compact"
                     variant="outlined"
                   />
@@ -272,7 +266,6 @@
                     v-model="bewerbung.ewo_strasse"
                     label="Strasse*"
                     persistent-placeholder
-                    :disabled="true"
                     :rules="[rules.RULE_REQUIRED]"
                     density="compact"
                     variant="outlined"
@@ -283,7 +276,6 @@
                     v-model="bewerbung.ewo_hausnummer"
                     label="Hausnummer*"
                     persistent-placeholder
-                    :disabled="true"
                     :rules="[rules.RULE_REQUIRED]"
                     density="compact"
                     variant="outlined"
@@ -354,7 +346,6 @@
                     v-model="bewerbung.ewo_postleitzahl"
                     label="Postleitzahl*"
                     persistent-placeholder
-                    :disabled="true"
                     :rules="[rules.RULE_REQUIRED]"
                     density="compact"
                     variant="outlined"
@@ -370,7 +361,6 @@
                     "
                     label="Ort*"
                     persistent-placeholder
-                    :disabled="true"
                     density="compact"
                     variant="outlined"
                   />
@@ -382,7 +372,6 @@
                     v-model="bewerbung.ewo_inmuenchenseit"
                     label="In München Wohnhaft seit*"
                     persistent-placeholder
-                    :disabled="true"
                     :rules="[rules.RULE_REQUIRED]"
                     type="date"
                     density="compact"
@@ -397,7 +386,6 @@
                     :items="wohnungsstatus"
                     label="Wohnungsstatus*"
                     persistent-placeholder
-                    :disabled="true"
                     :rules="[rules.RULE_REQUIRED]"
                     density="compact"
                     variant="outlined"

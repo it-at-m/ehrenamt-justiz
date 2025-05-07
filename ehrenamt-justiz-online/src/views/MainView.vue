@@ -10,8 +10,7 @@
         ><div id="headerOnlineBewerbung">
           <h2>
             {{
-              useActiveKonfigurationStore().getKonfiguration
-                ?.ehrenamtjustizart + " Onlinebewerbung"
+              "Schöffen Onlinebewerbung"
             }}
           </h2>
           <logo-l-h-m />
@@ -66,17 +65,8 @@
           <muc-callout type="info">
             <template #content>
               Auf dieser Seite haben Sie die Möglichkeit sich über das unten
-              stehende Formular als
-              {{
-                useActiveKonfigurationStore().getKonfiguration
-                  ?.ehrenamtjustizart
-              }}
-              zu bewerben. Zusätzliche Infos zum Amt und den Aufgaben eines
-              {{
-                useActiveKonfigurationStore().getKonfiguration
-                  ?.ehrenamtjustizart
-              }}
-              finden Sie
+              stehende Formular als Schöffe zu bewerben. Zusätzliche Infos zum Amt und den Aufgaben eines
+              Schöffen finden Sie
               <muc-link
                 label="hier"
                 href="https://stadt.muenchen.de/service/info/hauptabteilung-ii-buergerangelegenheiten/1080614/"
