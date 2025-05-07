@@ -22,19 +22,19 @@ jobs:
           - app-path: ehrenamt-justiz-aenderungsservice
 
     steps:
-      - uses: it-at-m/lhm_actions/action-templates/actions/action-checkout@e76e0bde64af98eb44ccd5b6e048ce5d82f4acc4 # v1.0.13
+      - uses: it-at-m/lhm_actions/action-templates/actions/action-checkout@035b67c11657dd6cc91612383d052789100054e6 # v1.0.18
       - if: ${{ hashFiles(format('./{0}/package.json', matrix.app-path))!=null }}
         id: node
-        uses: it-at-m/lhm_actions/action-templates/actions/action-npm-build@e76e0bde64af98eb44ccd5b6e048ce5d82f4acc4 # v1.0.13
+        uses: it-at-m/lhm_actions/action-templates/actions/action-npm-build@035b67c11657dd6cc91612383d052789100054e6 # v1.0.18
         with:
           app-path: ${{ matrix.app-path }}
       - if: ${{ hashFiles(format('./{0}/pom.xml', matrix.app-path))!=null }}
         id: maven
-        uses: it-at-m/lhm_actions/action-templates/actions/action-maven-build@e76e0bde64af98eb44ccd5b6e048ce5d82f4acc4 # v1.0.13
+        uses: it-at-m/lhm_actions/action-templates/actions/action-maven-build@035b67c11657dd6cc91612383d052789100054e6 # v1.0.18
         with:
           app-path: ${{ matrix.app-path }}
       - if: github.ref == 'refs/heads/main'
-        uses: it-at-m/lhm_actions/action-templates/actions/action-build-image@e76e0bde64af98eb44ccd5b6e048ce5d82f4acc4 # v1.0.13
+        uses: it-at-m/lhm_actions/action-templates/actions/action-build-image@035b67c11657dd6cc91612383d052789100054e6 # v1.0.18
         with:
           path: ${{ matrix.app-path }}
           image-name: ${{ matrix.app-path }}

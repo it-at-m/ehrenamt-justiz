@@ -68,6 +68,22 @@ Details can be found in the documentation here:
 [ehrenamt-justiz/ehrenamt-justiz-eai/entrypoint.sh](https://github.com/it-at-m/ehrenamt-justiz/blob/main/ehrenamt-justiz-eai/entrypoint.sh)
 
 
+### Manual work for starting the EJ change service (under construction)
+The following must be done to use the EJ change service (Kafka)
+- Copy kafka-auth-keystore.jks and truststore.jks (Can be found in Keystore for Ehrenamt-Justiz) to folder ~/develop/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice/src/main/resources
+- Manually add the user and password in  ~/develop/ehrenamt-justiz/stack/docker-compose.yml (User and password can be found in Keystore for Ehrenamt-Justiz)
+  ```
+  services:
+    ...
+    aenderungsservice:
+      ...
+      environment:
+      ...
+      - KEY_STORE_PASSWORD=
+      - TRUST_STORE_PASSWORD=
+  ```
+
+
 ### Starting Ehrenamtjustiz in Docker Desktop
 ```
 cd ~/develop/ehrenamt-justiz/stack  
@@ -80,7 +96,7 @@ These containers are started:
 </p>
 
 
-### Open application in browser
+### Start EJ application in browser
 ```
 url: http://localhost:8083
 ```
@@ -93,6 +109,14 @@ Password: soadmin
 <p>
     <img height="800" src="../docs/images/ApplicationEhrenamtjustiz.PNG"  alt="Container Docker Desktop"/>
 </p>
+
+
+
+### Start online application in browser (under construction)
+```
+url: http://localhost:8083/public/online
+```
+
 
 
 ### Stop Container for Ehrenamtjustiz in Docker Desktop
