@@ -19,10 +19,10 @@ aenderungsservice:
   group-Id: lhm-ewo-eai-aenderungen-ehrenamt-justiz
   ```
 
-| Konfiguration | Description |
-| ------------- | ------------- |
-| topicPattern  | Kafka-Topics. Has to be 'lhm-ewo-eai-aenderungen-.*' |
-| group-Id | Identifies a group of consumer instances that jointly consume messages from one or more Kafka topics. Has to be 'lhm-ewo-eai-aenderungen-ehrenamt-justiz'. Attention: if you change an already used groupid here, the already processed om will be processed again by the change service of Ehrenamt-Justiz. This change can be useful in the test phase of Ehrenamt-Jusitz, but it is not recommended in the production environment |
+| Konfiguration | Description | Default setting |
+| ------------- | ------------- | ------------- |
+| topicPattern  | Kafka-Topics. Has to be 'lhm-ewo-eai-aenderungen-.*' | lhm-ewo-eai-aenderungen-.* |
+| group-Id | Identifies a group of consumer instances that jointly consume messages from one or more Kafka topics. Has to be 'lhm-ewo-eai-aenderungen-ehrenamt-justiz'. Attention: if you change an already used groupid here, the already processed om will be processed again by the change service of Ehrenamt-Justiz. This change can be useful in the test phase of Ehrenamt-Jusitz, but it is not recommended in the production environment | lhm-ewo-eai-aenderungen-ehrenamt-justiz |
 
 The following configurations must be carried out so that the change service can call up the backend
 
@@ -40,15 +40,15 @@ aenderungsservice:
       multiplier: 2.0
       maxInterval: 80000
   ```
-| Konfiguration | Description |
-| ------------- | ------------- |
-| server  | Host server of backend. For example 'http://localhost:8083' |
-| base-path | Has to be '/public/aenderungsservice' |
-| connecttimeout | Timeout when calling the backend. In milliseconds |
-| readtimeout | Readtimeout when calling the backend. In milliseconds |
-| maxRetries | Configuration is used, if blocking entry. Maximum number of calls if, for example, a timeout occurs when calling up the backend |
-| initialInterval | Configuration is used, if blocking entry. Waiting time after the first incorrect call of the backend |
-| multiplier | Configuration is used, if blocking entry. Multiplier for the waiting time after a faulty call of the backend |
-| maxInterval | Configuration is used, if blocking entry. Maximum waiting time  |
+| Konfiguration | Description | Default setting |
+| ------------- | ------------- | ------------- |
+| server  | Host server of backend | 'http://localhost:8083' |
+| base-path | Has to be '/public/aenderungsservice' | /public/aenderungsservice |
+| connecttimeout | Timeout when calling the backend. In milliseconds | 30000 |
+| readtimeout | Readtimeout when calling the backend. In milliseconds | 30000 |
+| maxRetries | Configuration is used, if blocking entry. Maximum number of calls if, for example, a timeout occurs when calling up the backend | 30 |
+| initialInterval | Configuration is used, if blocking entry. Waiting time after the first incorrect call of the backend | 5000 |
+| multiplier | Configuration is used, if blocking entry. Multiplier for the waiting time after a faulty call of the backend | 2.0 |
+| maxInterval | Configuration is used, if blocking entry. Maximum waiting time  | 80000 |
 
 A “blocking entry” in Kafka listener contexts refers to a situation where a consumer (in this case a Kafka listener) is blocked from processing messages and is unable to consume new messages from a Kafka partition until the current processing is complete (For example, timeout when calling the backend or when calling the Residents registration EAI).
