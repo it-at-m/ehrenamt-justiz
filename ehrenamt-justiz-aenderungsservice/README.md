@@ -48,7 +48,7 @@ aenderungsservice:
 | readtimeout | Readtimeout when calling the backend. In milliseconds |
 | maxRetries | Configuration is used, if blocking entry. Maximum number of calls if, for example, a timeout occurs when calling up the backend |
 | initialInterval | Configuration is used, if blocking entry. Waiting time after the first incorrect call of the backend |
-| multiplier | Configuration is used, if blocking entry. Multiplier for the waiting time after the first faulty call of the backend |
+| multiplier | Configuration is used, if blocking entry. Multiplier for the waiting time after a faulty call of the backend |
 | maxInterval | Configuration is used, if blocking entry. Maximum waiting time  |
 
 A “blocking entry” in Kafka listener contexts refers to a situation where a consumer (in this case a Kafka listener) is blocked from processing messages and is unable to consume new messages from a Kafka partition until the current processing is complete (For example, timeout when calling the backend or when calling the Residents registration EAI).
