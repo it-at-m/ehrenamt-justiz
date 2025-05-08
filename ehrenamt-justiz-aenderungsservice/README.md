@@ -22,7 +22,7 @@ aenderungsservice:
 | Konfiguration | Description |
 | ------------- | ------------- |
 | topicPattern  | Kafka-Topics. Has to be 'lhm-ewo-eai-aenderungen-.*' |
-| group-Id | Identifies a group of consumer instances that jointly consume messages from one or more Kafka topics. Has to be 'lhm-ewo-eai-aenderungen-ehrenamt-justiz' |
+| group-Id | Identifies a group of consumer instances that jointly consume messages from one or more Kafka topics. Has to be 'lhm-ewo-eai-aenderungen-ehrenamt-justiz'. Attention: if you change an already used groupid here, the already processed om will be processed again by the change service of Ehrenamt-Justiz. This change can be useful in the test phase of Ehrenamt-Jusitz, but it is not recommended in the production environment |
 
 The following configurations must be carried out so that the change service can call up the backend
 
