@@ -46,7 +46,7 @@ aenderungsservice:
     connecttimeout: 30000
     readtimeout: 30000
     retry:
-      maxRetries: 10
+      maxRetries: 30
       initialInterval: 5000
       multiplier: 2.0
       maxInterval: 80000
