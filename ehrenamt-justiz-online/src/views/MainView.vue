@@ -8,7 +8,7 @@
     >
       <template #headerPrefix
         ><div id="headerOnlineBewerbung">
-          <h2>"Schöffen Onlinebewerbung"</h2>
+          <h2>Schöffen Onlinebewerbung</h2>
           <logo-l-h-m />
         </div>
       </template>
