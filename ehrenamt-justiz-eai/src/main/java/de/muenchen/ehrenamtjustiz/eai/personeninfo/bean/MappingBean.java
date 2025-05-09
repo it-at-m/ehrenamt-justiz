@@ -200,15 +200,15 @@ public class MappingBean {
     }
 
     private static void mapGeschlecht(final PersonErweitertType person, final EWOBuerger response) {
-        if (person.getGeschlecht() != null && person.getGeschlecht().toLowerCase(Locale.getDefault()).startsWith("m")) {
+        if (person.getGeschlecht() != null && person.getGeschlecht().toLowerCase(Locale.GERMAN).startsWith("m")) {
             response.setGeschlecht(Geschlecht.MAENNLICH);
         } else if (person.getGeschlecht() != null &&
-                (person.getGeschlecht().toLowerCase(Locale.getDefault()).startsWith("w") ||
-                        person.getGeschlecht().toLowerCase(Locale.getDefault()).startsWith("f"))) {
+                (person.getGeschlecht().toLowerCase(Locale.GERMAN).startsWith("w") ||
+                        person.getGeschlecht().toLowerCase(Locale.GERMAN).startsWith("f"))) {
                             response.setGeschlecht(Geschlecht.WEIBLICH);
                         } else
             if (person.getGeschlecht() != null &&
-                    person.getGeschlecht().toLowerCase(Locale.getDefault()).startsWith("d")) {
+                    person.getGeschlecht().toLowerCase(Locale.GERMAN).startsWith("d")) {
                         response.setGeschlecht(Geschlecht.DIVERS);
                     } else {
                         response.setGeschlecht(Geschlecht.UNBEKANNT);

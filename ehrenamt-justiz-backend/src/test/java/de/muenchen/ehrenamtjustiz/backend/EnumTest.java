@@ -44,6 +44,7 @@ class EnumTest {
     @Test
     void testStatus() {
 
+        // Test all Status values
         for (final Status status : Status.values()) {
             assertNotNull(status.toReadableString(), READABLE_STRING_FOR + status + SHOULD_NOT_BE_NULL);
         }

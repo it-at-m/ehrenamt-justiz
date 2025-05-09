@@ -7,6 +7,6 @@ public enum Wohnungsstatus {
     NEBENWOHNUNG;
 
     public String toReadableString() {
-        return this.name().substring(0, 1).concat(this.name().substring(1).toLowerCase(Locale.getDefault()));
+        return this.name().substring(0, 1).concat(this.name().substring(1).toLowerCase(Locale.GERMAN));
     }
 }
