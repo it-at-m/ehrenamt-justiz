@@ -282,7 +282,7 @@ public class PersonRestController {
                 .geburtsname(person.getGeburtsname() == null ? "" : person.getGeburtsname())
                 .vorname(person.getVorname() == null ? "" : person.getVorname())
                 .geburtsdatum(person.getGeburtsdatum() == null ? "" : person.getGeburtsdatum().format(pattern))
-                .geschlecht(person.getGeschlecht() == null ? "" : person.getGeschlecht().toString())
+                .geschlecht(person.getGeschlecht() == null ? "" : person.getGeschlecht().toReadableString())
                 .ewoid(person.getEwoid() == null ? "" : person.getEwoid())
                 .akademischergrad(person.getAkademischergrad() == null ? "" : person.getAkademischergrad())
                 .geburtsort(person.getGeburtsort() == null ? "" : person.getGeburtsort())
@@ -302,7 +302,7 @@ public class PersonRestController {
                 .postleitzahl(person.getPostleitzahl() == null ? "" : person.getPostleitzahl())
                 .ort(person.getOrt() == null ? "" : person.getOrt())
                 .inmuenchenseit(person.getInmuenchenseit() == null ? "" : person.getInmuenchenseit().format(pattern))
-                .wohnungsstatus(person.getWohnungsstatus() == null ? "" : person.getWohnungsstatus().toString())
+                .wohnungsstatus(person.getWohnungsstatus() == null ? "" : person.getWohnungsstatus().toReadableString())
                 .auskunftssperre(person.getAuskunftssperre() == null || person.getAuskunftssperre().isEmpty() ? "" : person.getAuskunftssperre().toString())
                 .derzeitausgeuebterberuf(person.getDerzeitausgeuebterberuf() == null ? "" : person.getDerzeitausgeuebterberuf())
                 .arbeitgeber(person.getArbeitgeber() == null ? "" : person.getArbeitgeber())
@@ -317,7 +317,7 @@ public class PersonRestController {
                 .warbereitstaetigalsvorvorperiode(person.isWarbereitstaetigalsvorvorperiode() ? JA : NEIN)
                 .bemerkung(person.getBemerkung() == null ? "" : person.getBemerkung())
                 .bewerbungvom(person.getBewerbungvom() == null ? "" : person.getBewerbungvom().format(pattern))
-                .status(person.getStatus() == null ? "" : person.getStatus().toString())
+                .status(person.getStatus() == null ? "" : person.getStatus().toReadableString())
                 .konfigurationid(person.getKonfigurationid() == null ? "" : person.getKonfigurationid().toString())
                 .build();
     }

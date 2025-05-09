@@ -243,7 +243,11 @@ function loadActiveKonfiguration(): void {
   KonfigurationApiService.getAktiveKonfiguration()
     .then((konfigurationData: KonfigurationData) => {
       globalSettingsStore.setKonfiguration(konfigurationData);
-      ehrenamtjustizart.value = konfigurationData.ehrenamtjustizart;
+      if (konfigurationData.ehrenamtjustizart == "SCHOEFFEN") {
+        ehrenamtjustizart.value = "Schöffen";
+      } else {
+        ehrenamtjustizart.value = "Verwaltungsrichter";
+      }
       bezeichnungApp.value = konfigurationData.bezeichnung;
     })
     .catch(() => {
