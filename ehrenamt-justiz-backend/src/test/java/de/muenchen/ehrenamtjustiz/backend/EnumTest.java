@@ -7,20 +7,18 @@ import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
-@Testcontainers
 class EnumTest {
 
-    public static final String READABLE_STRING_FOR = "Readable string for ";
-    public static final String SHOULD_NOT_BE_NULL = " should not be null";
+    public static final String ERROR_MSG_PREFIX = "Readable string for ";
+    public static final String ERROR_MSG_SUFFIX = " should not be null";
 
     @Test
     void testEhrenamtjustizart() {
 
         // Test all Ehrenamtjustizart values
         for (final Ehrenamtjustizart ehrenamtjustizart : Ehrenamtjustizart.values()) {
-            assertNotNull(ehrenamtjustizart.toReadableString(), READABLE_STRING_FOR + ehrenamtjustizart + SHOULD_NOT_BE_NULL);
+            assertNotNull(ehrenamtjustizart.toReadableString(), ERROR_MSG_PREFIX + ehrenamtjustizart + ERROR_MSG_SUFFIX);
         }
 
         assertEquals("Schöffen", Ehrenamtjustizart.SCHOEFFEN.toReadableString());
@@ -32,7 +30,7 @@ class EnumTest {
 
         // Test all Geschlecht values
         for (final Geschlecht geschlecht : Geschlecht.values()) {
-            assertNotNull(geschlecht.toReadableString(), READABLE_STRING_FOR + geschlecht + SHOULD_NOT_BE_NULL);
+            assertNotNull(geschlecht.toReadableString(), ERROR_MSG_PREFIX + geschlecht + ERROR_MSG_SUFFIX);
         }
 
         assertEquals("Männlich", Geschlecht.MAENNLICH.toReadableString());
@@ -46,7 +44,7 @@ class EnumTest {
 
         // Test all Status values
         for (final Status status : Status.values()) {
-            assertNotNull(status.toReadableString(), READABLE_STRING_FOR + status + SHOULD_NOT_BE_NULL);
+            assertNotNull(status.toReadableString(), ERROR_MSG_PREFIX + status + ERROR_MSG_SUFFIX);
         }
 
         assertEquals("In Erfassung", Status.INERFASSUNG.toReadableString());
@@ -60,7 +58,7 @@ class EnumTest {
 
         // Test all Wohnungsstatus values
         for (final Wohnungsstatus status : Wohnungsstatus.values()) {
-            assertNotNull(status.toReadableString(), READABLE_STRING_FOR + status + SHOULD_NOT_BE_NULL);
+            assertNotNull(status.toReadableString(), ERROR_MSG_PREFIX + status + ERROR_MSG_SUFFIX);
         }
 
         assertEquals("Hauptwohnung", Wohnungsstatus.HAUPTWOHNUNG.toReadableString());
