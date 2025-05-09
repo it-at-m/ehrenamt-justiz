@@ -160,20 +160,20 @@ class PersonIntegrationsTest {
         // check csv data
         assertEquals(uuidKonfiguration.toString(), personCSVS.getFirst().getKonfigurationid());
         assertEquals(uuidPerson.toString(), personCSVS.getFirst().getId());
-        assertEquals(Status.VORSCHLAG.toString(), personCSVS.getFirst().getStatus());
+        assertEquals(Status.VORSCHLAG.toReadableString(), personCSVS.getFirst().getStatus());
         assertEquals("Müller", personCSVS.getFirst().getFamilienname());
         assertEquals("Hans", personCSVS.getFirst().getVorname());
         assertEquals("01.01.1997", personCSVS.getFirst().getGeburtsdatum());
         assertEquals(MUENCHEN, personCSVS.getFirst().getGeburtsort());
         assertEquals("Deutschland", personCSVS.getFirst().getGeburtsland());
-        assertEquals(Wohnungsstatus.HAUPTWOHNUNG.toString(), personCSVS.getFirst().getWohnungsstatus());
+        assertEquals(Wohnungsstatus.HAUPTWOHNUNG.toReadableString(), personCSVS.getFirst().getWohnungsstatus());
         assertEquals("ledig", personCSVS.getFirst().getFamilienstand());
         assertEquals("80634", personCSVS.getFirst().getPostleitzahl());
         assertEquals(MUENCHEN, personCSVS.getFirst().getOrt());
         assertEquals("Ludwigstr.", personCSVS.getFirst().getStrasse());
         assertEquals("7", personCSVS.getFirst().getHausnummer());
         assertEquals("01.01.2023", personCSVS.getFirst().getInmuenchenseit());
-        assertEquals(Geschlecht.MAENNLICH.toString(), personCSVS.getFirst().getGeschlecht());
+        assertEquals(Geschlecht.MAENNLICH.toReadableString(), personCSVS.getFirst().getGeschlecht());
         assertEquals("17.09.2024", personCSVS.getFirst().getBewerbungvom());
         assertEquals("Ja", personCSVS.getFirst().getWarbereitstaetigals());
         assertEquals("Ja", personCSVS.getFirst().getWarbereitstaetigalsvorvorperiode());
