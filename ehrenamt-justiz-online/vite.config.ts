@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
   return {
     base: "/public/online",
     build: {
-      outDir: '/opt/app-root/src/'
+      outDir: "/opt/app-root/src/",
     },
     plugins: [
       vue({
