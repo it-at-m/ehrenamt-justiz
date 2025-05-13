@@ -2,7 +2,7 @@
 FROM registry.access.redhat.com/ubi9/nginx-124:9.5-1745932134@sha256:6465906193329d883dfe2de4077e5618420fa39885107f6dacd87fe00629ef4c
 
 # Copy built online
-COPY dist /opt/app-root/src/public/online
+COPY dist/ /opt/app-root/src/public/online/
 
 # Copy custom nginx configurations
 COPY docker/nginx/*.conf "${NGINX_DEFAULT_CONF_PATH}"
