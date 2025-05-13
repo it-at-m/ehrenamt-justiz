@@ -6,6 +6,8 @@ COPY dist .
 
 # Copy custom nginx configurations
 COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY docker/nginx/default.conf /opt/app-root/etc/nginx.d/default.conf
+
 COPY docker/nginx/compression.conf "${NGINX_DEFAULT_CONF_PATH}"
 COPY docker/nginx/files.conf "${NGINX_DEFAULT_CONF_PATH}"
 COPY docker/nginx/health.conf "${NGINX_DEFAULT_CONF_PATH}"
