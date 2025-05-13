@@ -12,6 +12,9 @@ export default defineConfig(({ mode }) => {
   const isDevelopment = mode === "development";
   return {
     base: "/public/online",
+    build: {
+      outDir: "/opt/app-root/src/",
+    },
     plugins: [
       vue({
         template: { transformAssetUrls },
