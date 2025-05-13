@@ -5,12 +5,7 @@ FROM registry.access.redhat.com/ubi9/nginx-124:9.5-1745932134@sha256:64659061933
 COPY dist .
 
 # Copy custom nginx configurations
-COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY docker/nginx/default.conf /opt/app-root/etc/nginx.d/default.conf
-
-COPY docker/nginx/compression.conf "${NGINX_DEFAULT_CONF_PATH}"
-COPY docker/nginx/files.conf "${NGINX_DEFAULT_CONF_PATH}"
-COPY docker/nginx/health.conf "${NGINX_DEFAULT_CONF_PATH}"
+COPY docker/nginx/*.conf "${NGINX_DEFAULT_CONF_PATH}"
 
 # Start the web server
 CMD nginx -g "daemon off;"
