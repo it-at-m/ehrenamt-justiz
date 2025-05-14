@@ -1,7 +1,7 @@
 <template>
   <link
-      href="https://assets.muenchen.de/mde/1.0.10/css/style.css"
-      rel="stylesheet"
+    href="https://assets.muenchen.de/mde/1.0.10/css/style.css"
+    rel="stylesheet"
   />
   <v-app>
     <div v-html="mucIconsSprite"></div>
