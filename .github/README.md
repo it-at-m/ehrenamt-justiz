@@ -49,6 +49,22 @@ The templates are based on [Spring][spring-documentation] and [Vue.js][vuejs-doc
     <img height="800" src="../docs/images/SystemOverviewEnglish.PNG"  alt="System overview"/>
 </p>
 
+### Built With
+
+The project is built with technologies we use in our projects
+([reference architecture](https://opensource.muenchen.de/publish.html#refarch)):
+
+* [Spring Boot](https://spring.io/projects/spring-boot)
+* [Vue.js](https://vuejs.org/)
+* [Vuetify](https://vuetifyjs.com/)
+* [nginx](https://nginx.org)
+* [PostgreSQL](https://www.postgresql.org)
+* [Flyway](https://github.com/flyway/flyway)
+* [Apache Camel](https://camel.apache.org)
+* [Docker](https://www.docker.com)
+
+
+* https://vuetifyjs.com/
 
 ## Get Ready to use Ehrenamtjustiz local in Docker Desktop
 
