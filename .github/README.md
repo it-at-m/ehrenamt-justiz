@@ -136,9 +136,12 @@ Password: soadmin
 
 ### Start online application in browser (under construction)
 ```
-url: http://localhost:8083/public/online
+url: http://localhost:8083/public/online/
 ```
 
+<p>
+    <img height="800" src="../docs/images/OnlineBewerbungSchoeffen.PNG"  alt="Container Docker Desktop"/>
+</p>
 
 
 ### Stop Container for Ehrenamtjustiz in Docker Desktop
