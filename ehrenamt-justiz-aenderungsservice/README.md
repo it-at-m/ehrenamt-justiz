@@ -6,12 +6,12 @@ The changes from EWO are transmitted to us via Apcache Kafka queues. The Residen
 ## System overview
 
 <p>
-    <img height="800" src="../docs/images/SystemOverviewChangeServiceEnglish.PNG"  alt="Konflikte bearbeiten und lösen"/>
+    <img height="1400" src="../docs/images/SystemOverviewChangeServiceEnglish.PNG"  alt="Konflikte bearbeiten und lösen"/>
 </p>
 
-Conflicts are dealt with and resolved in the application here:
+Conflicts are dealt with and resolved in the coe application:
 <p>
-    <img height="800" src="../docs/images/KonflikteBearbeiten.PNG"  alt="Konflikte bearbeiten und lösen"/>
+    <img height="1400" src="../docs/images/KonflikteBearbeiten.PNG"  alt="Konflikte bearbeiten und lösen"/>
 </p>
 
 ## Konfiguration of Kafka service
