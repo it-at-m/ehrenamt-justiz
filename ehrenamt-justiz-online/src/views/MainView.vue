@@ -72,7 +72,7 @@
           <v-container fluid>
             <v-form
               ref="form"
-              class="form"
+              class="m-form m-form--default"
               @keydown.enter.prevent="speichern"
             >
               <v-row dense>
@@ -82,6 +82,7 @@
                   label="Vorname"
                   :required="true"
                   :error-msg="errorMsgVorname"
+                  max="255"
                 />
               </v-row>
               <v-row dense>
@@ -91,6 +92,7 @@
                   label="Nachname"
                   :required="true"
                   :error-msg="errorMsgNachname"
+                  max="255"
                 />
               </v-row>
               <v-row dense>
@@ -111,6 +113,7 @@
                   label="Beruf"
                   :required="true"
                   :error-msg="errorMsgBeruf"
+                  max="255"
                 />
               </v-row>
               <v-row dense>
@@ -119,6 +122,7 @@
                   placeholder="Telefonnummer"
                   label="Telefonnummer"
                   :error-msg="errorMsgTelefonnummer"
+                  max="255"
                 />
               </v-row>
               <v-row dense>
@@ -128,6 +132,7 @@
                   label="Mail"
                   :required="true"
                   :error-msg="errorMsgMail"
+                  max="150"
                 />
               </v-row>
             </v-form>
@@ -214,8 +219,7 @@
               <br /><br />
               Mit dem Absenden der Bewerbung bestätige ich, die deutsche, oder
               die deutsche und eine weitere Staatsangehörigkeit zu besitzen<br /><br />
-              Mit <span class="red-star"> * </span> markierte Felder sind
-              Pflichtfelder
+              Nicht mit 'optional' markierte Felder sind Pflichtfelder.
             </template>
           </muc-callout>
         </v-container>
