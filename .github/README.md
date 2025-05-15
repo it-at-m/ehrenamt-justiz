@@ -64,8 +64,6 @@ The project is built with technologies we use in our projects
 * [Docker](https://www.docker.com)
 
 
-* https://vuetifyjs.com/
-
 ## Get Ready to use Ehrenamtjustiz local in Docker Desktop
 
 
