@@ -1,10 +1,7 @@
 package de.muenchen.ehrenamtjustiz.aenderungsservice.service.config;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
@@ -15,9 +12,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
  * Configures all endpoints to require authentication via access token.
  * (except the Spring Boot Actuator endpoints)
  */
-@RequiredArgsConstructor
 @Configuration
-@Import(RestTemplateAutoConfiguration.class)
 public class SecurityConfiguration {
 
     @Bean
