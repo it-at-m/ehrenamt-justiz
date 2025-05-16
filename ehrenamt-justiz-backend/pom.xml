@@ -15,6 +15,13 @@
     <name>ehrenamt-justiz-backend</name>
     <description>Backend of Ehrenamtjustiz</description>
     <url>https://github.com/it-at-m/ehrenamt-justiz</url>
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <properties>
         <!-- Compilation -->
@@ -350,7 +357,13 @@
                     </compilerArgs>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.cyclonedx</groupId>
+                <artifactId>cyclonedx-maven-plugin</artifactId>
+                <configuration>
+                    <skipNotDeployed>false</skipNotDeployed>
+                </configuration>
+            </plugin>
             <!-- Testing -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -391,7 +404,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Codeformatter Spotless -->
+            <!-- Linting -->
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>

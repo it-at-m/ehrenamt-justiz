@@ -16,6 +16,13 @@
   <name>ehrenamt-justiz-aenderungsservice</name>
   <description>Change Service for the Ehrenamtjustiz application</description>
   <url>https://github.com/it-at-m/ehrenamt-justiz</url>
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>https://opensource.org/licenses/MIT</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
   <properties>
     <!-- Compilation -->
@@ -266,7 +273,7 @@
         </configuration>
       </plugin>
 
-      <!-- Codeformatter Spotless -->
+      <!-- Linting -->
       <plugin>
         <groupId>com.diffplug.spotless</groupId>
         <artifactId>spotless-maven-plugin</artifactId>
@@ -306,6 +313,13 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.cyclonedx</groupId>
+        <artifactId>cyclonedx-maven-plugin</artifactId>
+        <configuration>
+          <skipNotDeployed>false</skipNotDeployed>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

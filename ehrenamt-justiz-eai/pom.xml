@@ -10,6 +10,13 @@
     <name>ehrenamt-justiz-eai</name>
     <description>EAI of Ehrenamtjustiz</description>
     <url>https://github.com/it-at-m/ehrenamt-justiz</url>
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -259,6 +266,15 @@
                             <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
+                    <showDeprecation>true</showDeprecation>
+                    <failOnWarning>false</failOnWarning>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.cyclonedx</groupId>
+                <artifactId>cyclonedx-maven-plugin</artifactId>
+                <configuration>
+                    <skipNotDeployed>false</skipNotDeployed>
                 </configuration>
             </plugin>
 
@@ -302,7 +318,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Codeformatter Spotless -->
+            <!-- Linting -->
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
