@@ -35,7 +35,10 @@ public class SecurityConfig {
                     authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/info")).permitAll();
                     authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/health")).permitAll();
                     authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/health/readiness")).permitAll();
-                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/health/liveness")).permitAll();});
+                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/health/liveness")).permitAll();
+                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/sbom")).permitAll();
+                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/sbom/application")).permitAll();});
+
         http.csrf(AbstractHttpConfigurer::disable);
         http.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.httpBasic(Customizer.withDefaults());

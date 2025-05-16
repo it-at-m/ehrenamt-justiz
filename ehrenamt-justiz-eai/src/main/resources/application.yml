@@ -45,15 +45,25 @@ info:
 
 management:
   endpoints:
+    access:
+      default: none
     web:
       exposure:
-        include: "*"
+        include:
+          - health
+          - info
+          - prometheus
+          - sbom
+      path-mapping:
+        prometheus: metrics
   endpoint:
     health:
       access: read_only
       probes:
         enabled: true
     info:
+      access: read_only
+    sbom:
       access: read_only
   context-path: "/actuator"
   info:
