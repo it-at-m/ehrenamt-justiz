@@ -22,6 +22,19 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    <scm>
+        <url>https://github.com/it-at-m/ehrenamt-justiz.git</url>
+        <connection>scm:git:https://github.com/it-at-m/ehrenamt-justiz.git</connection>
+        <developerConnection>scm:git:https://github.com/it-at-m/ehrenamt-justiz.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+    <developers>
+        <developer>
+            <organization>it@M</organization>
+            <email>opensource@muenchen.de</email>
+            <url>https://github.com/it-at-m</url>
+        </developer>
+    </developers>
 
     <properties>
         <!-- Compilation -->
@@ -315,12 +328,6 @@
 
     </dependencies>
 
-    <scm>
-        <connection>scm:git:https://github.com/it-at-m/ehrenamt-justiz.git</connection>
-        <developerConnection>scm:git:https://github.com/it-at-m/ehrenamt-justiz.git</developerConnection>
-        <tag>HEAD</tag>
-    </scm>
-
     <build>
         <plugins>
             <plugin>
@@ -360,9 +367,13 @@
             <plugin>
                 <groupId>org.cyclonedx</groupId>
                 <artifactId>cyclonedx-maven-plugin</artifactId>
-                <configuration>
-                    <skipNotDeployed>false</skipNotDeployed>
-                </configuration>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <skipNotDeployed>false</skipNotDeployed>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <!-- Testing -->
             <plugin>
