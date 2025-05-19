@@ -179,7 +179,7 @@ These authorizations are defined in keycloak:
 | EWOSUCHEMITOM  |  ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter",  "clientrole_administrator"] |
 | ONLINEBEWERBEN  |  not used  |
 
-#### These users are only for testing purpose in the applicagtion in docker desktop:
+#### These users are only for testing purpose in docker desktop:
 
 | user | Description | role | password |
 | ------------- | ------------- | ------------- | ------------- |
