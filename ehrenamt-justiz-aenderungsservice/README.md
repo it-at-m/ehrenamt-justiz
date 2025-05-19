@@ -46,7 +46,7 @@ aenderungsservice:
       multiplier: 2.0
       maxInterval: 80000
   ```
-| Konfiguration | Description | Default setting |
+| Configuration | Description | Default setting |
 | ------------- | ------------- | ------------- |
 | server  | Host server of backend | 'http://localhost:8083' |
 | base-path | Has to be '/public/aenderungsservice' | /public/aenderungsservice |
