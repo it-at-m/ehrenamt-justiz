@@ -140,9 +140,8 @@
                 <v-col class="col">
                   <v-text-field
                     v-model="bewerbung.ewo_geburtsname"
-                    label="Geburtsnamme"
+                    label="Geburtsname"
                     persistent-placeholder
-                    :disabled="true"
                     density="compact"
                     variant="outlined"
                   />
@@ -179,7 +178,6 @@
                     v-model="bewerbung.ewo_akademischergrad"
                     label="Akademischer Grad"
                     persistent-placeholder
-                    :disabled="true"
                     density="compact"
                     variant="outlined"
                   />
@@ -242,7 +240,6 @@
                     v-model="bewerbung.ewo_konfliktfeld"
                     label="Konfliktfelder"
                     persistent-placeholder
-                    :disabled="true"
                     density="compact"
                     variant="outlined"
                   />
@@ -254,7 +251,6 @@
                     v-model="bewerbung.ewo_wohnungsgeber"
                     label="Wohnungsgeber (c/o)"
                     persistent-placeholder
-                    :disabled="true"
                     density="compact"
                     variant="outlined"
                   />
@@ -286,7 +282,6 @@
                     v-model="bewerbung.ewo_buchstabehausnummer"
                     label="Buchstabe Hausnummer"
                     persistent-placeholder
-                    :disabled="true"
                     density="compact"
                     variant="outlined"
                   />
@@ -298,7 +293,6 @@
                     v-model="bewerbung.ewo_appartmentnummer"
                     label="Appartment-Nummer"
                     persistent-placeholder
-                    :disabled="true"
                     density="compact"
                     variant="outlined"
                   />
@@ -310,7 +304,6 @@
                     v-model="bewerbung.ewo_stockwerk"
                     label="Stockwerk"
                     persistent-placeholder
-                    :disabled="true"
                     density="compact"
                     variant="outlined"
                   />
@@ -322,7 +315,6 @@
                     v-model="bewerbung.ewo_teilnummerhausnummer"
                     label="Teilnummer Hausnummer"
                     persistent-placeholder
-                    :disabled="true"
                     density="compact"
                     variant="outlined"
                   />
@@ -334,7 +326,6 @@
                     v-model="bewerbung.ewo_adresszusatz"
                     label="Adresszusatz"
                     persistent-placeholder
-                    :disabled="true"
                     density="compact"
                     variant="outlined"
                   />
@@ -454,6 +445,7 @@
                 <v-text-field
                   v-model="bewerbung.telefongesch"
                   label="Telefonnummer (dienstlich)"
+                  persistent-placeholder
                   density="compact"
                   variant="outlined"
                 />
@@ -593,7 +585,7 @@ const active_tab = ref("bewerber");
 const tab1: string[] = [
   "Familienname",
   "Vorname",
-  "Geburtsnamme",
+  "Geburtsname",
   "Geburtsdatum",
   "Geschlecht",
   "Ordnungsmerkmal",
