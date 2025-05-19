@@ -147,6 +147,45 @@ url: http://localhost:8083/public/online/
 ### Stop Container for Ehrenamtjustiz in Docker Desktop
 `docker-compose --profile=backend --profile=frontend --profile=eai --profile=online --profile=aenderungsservice stop`
 
+### User, roles and authorizations
+
+#### Roles
+
+These roles are defined in keycloak:
+
+| Roles | Description |
+| ------------- | ------------- |
+| clientrole_sachbearbeiter  | role with basic rights |
+| clientrole_sondersachbearbeiter | role with extended rights |
+| clientrole_administrator  |  role with administrator rights |
+
+#### Authorizations
+
+These authorizations are defined in keycloak:
+
+| Authorizations | Assigned roles |
+| ------------- | ------------- |
+| READ_EWOBUERGER  | ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter", "clientrole_administrator"] |
+| WRITE_EWOBUERGER | ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter", "clientrole_administrator"] |
+| DELETE_EWOBUERGER  |  ["clientrole_sondersachbearbeiter", "clientrole_administrator"] |
+| READ_EHRENAMTJUSTIZDATEN  |  ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter", "clientrole_administrator"] |
+| WRITE_EHRENAMTJUSTIZDATEN  |  ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter",  "administrator"]  |
+| DELETE_EHRENAMTJUSTIZDATEN  |  ["clientrole_sondersachbearbeiter", "clientrole_administrator"] |
+| READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE  |  ["clientrole_sondersachbearbeiter", "clientrole_administrator"] |
+| READ_KONFIGURATION  |  ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter",  "administrator"]" |
+| WRITE_KONFIGURATION  |  ["clientrole_administrator"] |
+| DELETE_KONFIGURATION  | ["clientrole_administrator"] |
+| EWOSUCHE  | ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter", "clientrole_administrator"]  |
+| EWOSUCHEMITOM  |  ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter",  "clientrole_administrator"] |
+| ONLINEBEWERBEN  |  not used  |
+
+#### These users are only for testing purpose in the applicagtion in docker desktop:
+
+| user | Description | role | password |
+| ------------- | ------------- | ------------- | ------------- |
+| nosach  | normal user with basic rights |  clientrole_sachbearbeiter | nosach |
+| sosach | users with extended rights | clientrole_sondersachbearbeiter | sosach |
+| soadmin  |  administrator rights | clientrole_administrator | soadmin |
 
 ## Contributing
 
