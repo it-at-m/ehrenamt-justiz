@@ -7,10 +7,40 @@ The Residents registration EAI has the task of determining personal data from th
 | ewosuche  | vorname (first name), nachname (surname), geburtsdatum (date of birth) | personal data e.g. adress |
 | ewosuchemitom | OM (id of personal data) | personal data e.g. first name, surname and adress |
 
+Response Data in detail:
 
+| name | datatype | example |
+| ------------- | ------------- | ------------- |
+| familienname | string | König |
+| familiennameZusatz | string | |
+| geburtsname | string | |
+| geburtsnameZusatz | string | |
+| vorname | string | Christopher |
+| geburtsdatum | java.time.LocalDate | 1940-03-10 |
+| geschlecht | enum Geschlecht {MAENNLICH("maennlich"), WEIBLICH("weiblich"), DIVERS("divers"), UNBEKANNT("unbekannt")} | |
+| ordnungsmerkmal | string | 4711 |
+| akademischerGrad | string | |
+| geburtsort | string | München |
+| geburtsland | string | Deutschland |
+| familienstand | string | VH |
+| staatsangehoerigkeit | java.util.List<String> | ["deutsch"] |
+| wohnungsgeber | string | |
+| strasse | string | Ludwigstr. |
+| hausnummer | string  | 13 |
+| appartmentnummer | string | |
+| buchstabeHausnummer | string | |
+| stockwerk | string | |
+| teilnummerHausnummer | string | |
+| zusatz | string | |
+| konfliktFelder  | java.util.List<String>  | ["strasse", "hausnummer"] |
+| postleitzahl | string | 80634 |
+| ort | string | München |
+| inMuenchenSeit | java.time.LocalDate | 1940-03-10 |
+| wohnungsstatus | enum Wohnungsstatus {HAUPTWOHNUNG("hauptwohnung"), NEBENWOHNUNG("nebenwohnuung")} | Hauptwohnung |
 
-The interface is described in detail here in the wsdl: 
-[ewoeai.wsdl](https://github.com/it-at-m/ehrenamt-justiz/blob/main/ehrenamt-justiz-eai/src/main/resources/wsdl/ewoeai.wsdl)
+The API ist definied here:
+
+[API](https://github.com/it-at-m/ehrenamt-justiz/tree/main/ehrenamt-justiz-api/src/main/java/de/muenchen/ehrenamtjustiz/api)
 
 ## Configuration
 
@@ -23,4 +53,10 @@ Configuration of this EAI in application-[profile].yml:
 | producer.password | Password for authentication on residents' registration system |  |
 | api.auth.users.username | User for authentication on this EAI |  |
 | api.auth.users.password | Password for authentication on this EAI |  |
+
+## SoapUI
+
+The EAI can be tested with SoapUI. The xml project to be imported into SoapUI can be found here:
+
+[ehrenamt-justiz-soapui-project.xml](https://github.com/it-at-m/ehrenamt-justiz/blob/main/ehrenamt-justiz-eai/src/test/resources/ehrenamt-justiz-soapui-project.xml)
 
