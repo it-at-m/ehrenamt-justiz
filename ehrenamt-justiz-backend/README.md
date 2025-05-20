@@ -12,10 +12,11 @@ The database schema currently contains 6 tables. The following table lists all t
 | konfiguration            | Configuration values (e.g. term of office from-to)                              |
 | person                   | Personal data (EWO and additional data) for applicants, conflicts and proposals | 
 | staatsangehoerigkeit     | Contains the nationalities of an applicant                                      | 
-| konfliktfeld             |Contains the conflict fields (changes to EWO)                                    | 
-| auskunftssperre          | Table contains the reasons for the conflicts                                    |
+| konfliktfeld             | Contains the conflict fields (changes to EWO)                                    | 
+| auskunftssperre          | This table provides information on information blocks                           |
 | flyway_schema_history    | Technical change history of the database (Flyway)                               |
-### SQL-Befehl 
+
+### SQL-Commands 
 The following SQL command can be used to link all tables for an evaluation, for example:    
 ```
 select p.vorname, p.familienname, k.bezeichnung, s.staatsangehoerigkeit_text, f.person_attribut, a.sperrentyp from ehrju.person p
@@ -25,6 +26,7 @@ left outer join ehrju.konfliktfeld f on f.person_id = p.id
 left outer join ehrju.auskunftssperre a on a.person_id = p.id
 order by p.familienname asc
 ```
+
 ### Changes to the database schema
 Changes to the database schema are made using the Flyway framework (https://www.red-gate.com/products/flyway/).
 Changes to the database schema are made here:
