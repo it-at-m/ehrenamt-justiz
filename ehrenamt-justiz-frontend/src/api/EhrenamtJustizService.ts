@@ -7,7 +7,7 @@ import EntityApiService from "@/api/EntityApiService";
 import { getGETConfig, getPOSTConfig } from "@/api/FetchUtils";
 import { PersonApiService } from "@/api/PersonApiService";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
-import { getEhrenamtjustizart } from "@/tools/Helper";
+import { formattedEhrenamtjustizart  } from "@/tools/Helper";
 import HttpMethod from "@/types/base/HttpMethod";
 
 class EhrenamtJustizServiceClass {
@@ -134,7 +134,7 @@ class EhrenamtJustizServiceClass {
     dateiName: string
   ) {
     const globalSettingsStore = useGlobalSettingsStore();
-    const justiceType = getEhrenamtjustizart(globalSettingsStore.getKonfiguration?.ehrenamtjustizart);
+    const justiceType = formattedEhrenamtjustizart (globalSettingsStore.getKonfiguration?.ehrenamtjustizart);
     const csvConfig = mkConfig({
       fieldSeparator: ";",
       quoteStrings: false,
