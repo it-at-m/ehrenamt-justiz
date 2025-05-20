@@ -5,7 +5,7 @@
 export function getEhrenamtjustizart(
   ehrenamtjustizart: string | undefined
 ): string {
-  if (ehrenamtjustizart == "SCHOEFFEN") {
+  if (ehrenamtjustizart === "SCHOEFFEN") {
     return "Schöffen";
   } else {
     return "Verwaltungsrichter";
