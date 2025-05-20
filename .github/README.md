@@ -147,11 +147,18 @@ url: http://localhost:8083/public/online/
 ### Stop Container for Ehrenamtjustiz in Docker Desktop
 `docker-compose --profile=backend --profile=frontend --profile=eai --profile=online --profile=aenderungsservice stop`
 
-### User, roles and authorizations
+## User, roles and authorizations
 
-#### Roles
+Users, roles and authorizations are defined in this repository for keycloak (dev) and for docker desktop.
 
-These roles are defined in keycloak:
+The definition files for keycloak can be found here:  [keycloak files](https://github.com/it-at-m/ehrenamt-justiz/tree/main/ehrenamt-justiz-backend/sso-config)
+
+### Roles
+
+Roles for docker desktop are defined here:
+[Roles for docker desktop](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/05_assign-roles.yml)
+
+These roles are defined:
 
 | Roles | Description |
 | ------------- | ------------- |
@@ -159,9 +166,12 @@ These roles are defined in keycloak:
 | clientrole_sondersachbearbeiter | role with extended rights |
 | clientrole_administrator  |  role with administrator rights |
 
-#### Authorizations
+### Authorizations
 
-These authorizations are defined in keycloak:
+Authorizations for docker desktop are defined here:
+[Authorizations for docker desktop](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/permissions/example_authorization.json)
+
+These authorizations are defined:
 
 | Authorizations | Assigned roles |
 | ------------- | ------------- |
@@ -179,7 +189,12 @@ These authorizations are defined in keycloak:
 | EWOSUCHEMITOM  |  ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter",  "clientrole_administrator"] |
 | ONLINEBEWERBEN  |  not used  |
 
-#### These users are only for testing purpose in docker desktop:
+### Users
+
+Users for docker desktop are defined here:
+[Users for docker desktop](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/04_add-users.yml)
+
+These users are only for testing purpose in docker desktop:
 
 | user | Description | role | password |
 | ------------- | ------------- | ------------- | ------------- |
