@@ -7,6 +7,7 @@ import EntityApiService from "@/api/EntityApiService";
 import { getGETConfig, getPOSTConfig } from "@/api/FetchUtils";
 import { PersonApiService } from "@/api/PersonApiService";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
+import { getEhrenamtjustizart } from "@/tools/Helper.ts";
 import HttpMethod from "@/types/base/HttpMethod";
 
 class EhrenamtJustizServiceClass {
@@ -268,11 +269,11 @@ class EhrenamtJustizServiceClass {
         },
         {
           key: "warbereitstaetigals",
-          displayLabel: `War bereits als ${globalSettingsStore.getKonfiguration?.ehrenamtjustizart} tätig?`,
+          displayLabel: `War bereits als ${getEhrenamtjustizart(globalSettingsStore.getKonfiguration?.ehrenamtjustizart)} tätig?`,
         },
         {
           key: "warbereitstaetigalsvorvorperiode",
-          displayLabel: `War bereits als ${globalSettingsStore.getKonfiguration?.ehrenamtjustizart} in Vorvorperiode tätig?`,
+          displayLabel: `War bereits als ${getEhrenamtjustizart(globalSettingsStore.getKonfiguration?.ehrenamtjustizart)} in Vorvorperiode tätig?`,
         },
         {
           key: "bewerbungvom",
