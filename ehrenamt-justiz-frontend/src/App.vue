@@ -189,7 +189,7 @@ import { APPSWITCHER_URL, ROUTES_GETSTARTED } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { useUserStore } from "@/stores/user";
-import { formattedEhrenamtjustizart  } from "@/tools/Helper";
+import { formattedEhrenamtjustizart } from "@/tools/Helper";
 import HealthState from "@/types/HealthState";
 import User, { UserLocalDevelopment } from "@/types/User";
 
@@ -244,7 +244,7 @@ function loadActiveKonfiguration(): void {
   KonfigurationApiService.getAktiveKonfiguration()
     .then((konfigurationData: KonfigurationData) => {
       globalSettingsStore.setKonfiguration(konfigurationData);
-      ehrenamtjustizart.value = formattedEhrenamtjustizart (
+      ehrenamtjustizart.value = formattedEhrenamtjustizart(
         konfigurationData.ehrenamtjustizart
       );
       bezeichnungApp.value = konfigurationData.bezeichnung;
