@@ -1,7 +1,7 @@
 ## Database schema
 ### ER-Diagramm
 The following figure shows the ER diagram with all tables and the relationships between them.
-![ER Model](docs/images/DB_ER_Model.png)
+![ER Model](../docs/images/DB_ER_Model.png)
 
 
 ### Tabellen
