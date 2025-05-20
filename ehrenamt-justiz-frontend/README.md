@@ -65,13 +65,13 @@ Screenshots of frontend:
 ## Saving the suggestion list
 
 <p>
-    <img src="../docs/images/EJ_11_VorschlagslisteSpeichern.PNG"  alt="Saving the suggestion list"/>
+    <img src="../docs/images/EJ_12_VorschlagslisteSpeichern.PNG"  alt="Saving the suggestion list"/>
 </p>
 
 ## Suggestion list in csv format
 
 <p>
-    <img src="../docs/images/EJ_12_VorschlagslisteCSV.PNG"  alt="Wuggestion list"/>
+    <img src="../docs/images/EJ_11_VorschlagslisteCSV.PNG"  alt="Wuggestion list"/>
 </p>
 
 ## Marked as notified
