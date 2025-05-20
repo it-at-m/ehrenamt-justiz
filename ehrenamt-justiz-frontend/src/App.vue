@@ -189,7 +189,7 @@ import { APPSWITCHER_URL, ROUTES_GETSTARTED } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { useUserStore } from "@/stores/user";
-import { getEhrenamtjustizart } from "@/tools/Helper.ts";
+import { getEhrenamtjustizart } from "@/tools/Helper";
 import HealthState from "@/types/HealthState";
 import User, { UserLocalDevelopment } from "@/types/User";
 

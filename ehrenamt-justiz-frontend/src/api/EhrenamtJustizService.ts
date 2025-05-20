@@ -7,7 +7,7 @@ import EntityApiService from "@/api/EntityApiService";
 import { getGETConfig, getPOSTConfig } from "@/api/FetchUtils";
 import { PersonApiService } from "@/api/PersonApiService";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
-import { getEhrenamtjustizart } from "@/tools/Helper.ts";
+import { getEhrenamtjustizart } from "@/tools/Helper";
 import HttpMethod from "@/types/base/HttpMethod";
 
 class EhrenamtJustizServiceClass {
