@@ -48,6 +48,7 @@ Configuration of this EAI in application-[profile].yml:
 
 | Configuration | Description | Default setting |
 | ------------- | ------------- | ------------- |
+| spring.port | Port used to run the spring boot application | 8085 |
 | ewo.eai.url | url of residents' registration system | http://.... |
 | producer.user | User for authentication on residents' registration system |  |
 | producer.password | Password for authentication on residents' registration system |  |
