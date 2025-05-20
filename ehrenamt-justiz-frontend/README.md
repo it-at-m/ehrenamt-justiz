@@ -71,7 +71,7 @@ Screenshots of frontend:
 ## Suggestion list in csv format
 
 <p>
-    <img src="../docs/images/EJ_11_VorschlagslisteCSV.PNG"  alt="Wuggestion list"/>
+    <img src="../docs/images/EJ_12_VorschlagslisteCSV.PNG"  alt="Wuggestion list"/>
 </p>
 
 ## Overview of the configurations
