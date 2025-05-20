@@ -74,6 +74,12 @@ Screenshots of frontend:
     <img src="../docs/images/EJ_12_VorschlagslisteCSV.PNG"  alt="Wuggestion list"/>
 </p>
 
+## Marked as notified
+
+<p>
+    <img src="../docs/images/EJ_13_AlsBenachrichtigtMarkieren.PNG"  alt="Marked as notified"/>
+</p>
+
 ## Overview of the configurations
 
 <p>
