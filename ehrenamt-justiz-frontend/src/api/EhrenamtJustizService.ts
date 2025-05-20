@@ -134,7 +134,7 @@ class EhrenamtJustizServiceClass {
     dateiName: string
   ) {
     const globalSettingsStore = useGlobalSettingsStore();
-
+    const justiceType = getEhrenamtjustizart(globalSettingsStore.getKonfiguration?.ehrenamtjustizart);
     const csvConfig = mkConfig({
       fieldSeparator: ";",
       quoteStrings: false,
@@ -269,11 +269,11 @@ class EhrenamtJustizServiceClass {
         },
         {
           key: "warbereitstaetigals",
-          displayLabel: `War bereits als ${getEhrenamtjustizart(globalSettingsStore.getKonfiguration?.ehrenamtjustizart)} tätig?`,
+          displayLabel: `War bereits als ${justiceType} tätig?`,
         },
         {
           key: "warbereitstaetigalsvorvorperiode",
-          displayLabel: `War bereits als ${getEhrenamtjustizart(globalSettingsStore.getKonfiguration?.ehrenamtjustizart)} in Vorvorperiode tätig?`,
+          displayLabel: `War bereits als ${justiceType} in Vorvorperiode tätig?`,
         },
         {
           key: "bewerbungvom",
