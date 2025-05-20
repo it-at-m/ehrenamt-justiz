@@ -157,16 +157,6 @@
       }
     },
     {
-      "name": "permission_DELETE_EHRENAMTJUSTIZDATEN",
-      "type": "resource",
-      "logic": "POSITIVE",
-      "decisionStrategy": "AFFIRMATIVE",
-      "config": {
-        "resources": "[\"DELETE_EHRENAMTJUSTIZDATEN\"]",
-        "applyPolicies": "[\"sondersachbearbeiter\", \"administrator\"]"
-      }
-    },
-    {
       "name": "permission_READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE",
       "type": "resource",
       "logic": "POSITIVE",
