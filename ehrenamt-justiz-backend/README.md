@@ -1,10 +1,10 @@
-## Database schema
-### ER-Diagramm
+# Database schema
+## ER-Diagramm
 The following figure shows the ER diagram with all tables and the relationships between them.
 ![ER Model](../docs/images/DB_ER_Model.png)
 
 
-### Tabellen
+## Tables in Database schema
 The database schema currently contains 6 tables. The following table lists all the DB tables contained in the DB schema with their description.
 
 | Table                    | Description                                                                     | 
@@ -15,7 +15,7 @@ The database schema currently contains 6 tables. The following table lists all t
 | konfliktfeld             |Contains the conflict fields (changes to EWO)                                    | 
 | auskunftssperre          | Table contains the reasons for the conflicts                                    |
 | flyway_schema_history    | Technical change history of the database (Flyway)                               |
-#### SQL-Befehl 
+### SQL-Befehl 
 The following SQL command can be used to link all tables for an evaluation, for example:    
 ```
 select p.vorname, p.familienname, k.bezeichnung, s.staatsangehoerigkeit_text, f.person_attribut, a.sperrentyp from ehrju.person p
