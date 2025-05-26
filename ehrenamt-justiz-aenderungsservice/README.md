@@ -15,7 +15,7 @@ Conflicts are dealt with and resolved in the coe application:
 </p>
 
 ## Configuration of Kafka service
-### Settings
+### Settings in application-[profile].yml
 To retrieve the data from apache kafka service, the following settings must be made:
 
 application-[profile].yml
@@ -39,6 +39,7 @@ aenderungsservice:
   topicPattern: lhm-ewo-eai-aenderungen-.*
   group-Id: lhm-ewo-eai-aenderungen-ehrenamt-justiz
   ```
+Settings in detail:
 
 | Configuration | Description | Default setting | example |
 | ------------- | ------------- | ------------- | ------------- |
