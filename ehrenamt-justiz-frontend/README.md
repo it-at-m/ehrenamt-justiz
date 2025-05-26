@@ -1,5 +1,8 @@
 # Frontend of Ehrenamt-Justiz
 
+## Application in the browser
+If the application is running local in Docker desktop, it can be opened in the browser with the following link: http://localhost:8083
+
 Screenshots of frontend:
 
 ## Welcome
