@@ -1,7 +1,7 @@
 # Residents registration change service  of Ehrenamt-Justiz
 
-The Residents registration (EWO) offers a job for push notifications that ensures that change notifications are sent smoothly and regularly to Ehrenamt-Jusitz.
-The changes from EWO are transmitted to us via Apcache Kafka queues. The Residents registration change service receives changed personal data and and determines conflicts (Conflicts arise if the applicant data in Ehrenamt-Jusitz is different from the Residents registration data)
+The Residents registration service offers a job for push notifications that ensures that change notifications are sent smoothly and regularly to Ehrenamt-Jusitz.
+These changes are transmitted to us via Apcache Kafka queues. The Residents registration change service receives changed personal data and and determines conflicts (Conflicts arise if the applicant data in Ehrenamt-Jusitz is different from the Residents registration data)
 
 ## System overview
 
@@ -64,7 +64,7 @@ If the change service is executed in Docker desktop, the certificates must be sa
 ../ehrenamt-justiz-aenderungsservice/src/main/resources/truststore.jks
 ../ehrenamt-justiz-aenderungsservice/src/main/resources/kafka-auth-keystore.jks
 ```
-It is also necessary to set the spring.kafka.ssl.key-store-password and spring.kafka.ssl.trust-store-password in application-docker.yml
+It is also necessary to set the spring.kafka.ssl.key-store-password and spring.kafka.ssl.trust-store-password in application-docker.yml. The other settings are already defined for docker-desktop so that they can be used with the LHM Munich change service.
 
 ### Call the backend by the change service
 
