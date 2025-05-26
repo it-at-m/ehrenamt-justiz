@@ -7,6 +7,7 @@ import EntityApiService from "@/api/EntityApiService";
 import { getGETConfig, getPOSTConfig } from "@/api/FetchUtils";
 import { PersonApiService } from "@/api/PersonApiService";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
+import { formattedEhrenamtjustizart } from "@/tools/Helper";
 import HttpMethod from "@/types/base/HttpMethod";
 
 class EhrenamtJustizServiceClass {
@@ -133,7 +134,9 @@ class EhrenamtJustizServiceClass {
     dateiName: string
   ) {
     const globalSettingsStore = useGlobalSettingsStore();
-
+    const justiceType = formattedEhrenamtjustizart(
+      globalSettingsStore.getKonfiguration?.ehrenamtjustizart
+    );
     const csvConfig = mkConfig({
       fieldSeparator: ";",
       quoteStrings: false,
@@ -268,11 +271,11 @@ class EhrenamtJustizServiceClass {
         },
         {
           key: "warbereitstaetigals",
-          displayLabel: `War bereits als ${globalSettingsStore.getKonfiguration?.ehrenamtjustizart} tätig?`,
+          displayLabel: `War bereits als ${justiceType} tätig?`,
         },
         {
           key: "warbereitstaetigalsvorvorperiode",
-          displayLabel: `War bereits als ${globalSettingsStore.getKonfiguration?.ehrenamtjustizart} in Vorvorperiode tätig?`,
+          displayLabel: `War bereits als ${justiceType} in Vorvorperiode tätig?`,
         },
         {
           key: "bewerbungvom",
