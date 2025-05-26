@@ -6,31 +6,68 @@ The changes from EWO are transmitted to us via Apcache Kafka queues. The Residen
 ## System overview
 
 <p>
-    <img height="1400" src="../docs/images/SystemOverviewChangeServiceEnglish.PNG"  alt="Konflikte bearbeiten und lösen"/>
+    <img height="1400" src="../docs/images/SystemOverviewChangeServiceEnglish.PNG"  alt="Handling and resolving conflicts"/>
 </p>
 
 Conflicts are dealt with and resolved in the coe application:
 <p>
-    <img height="1400" src="../docs/images/KonflikteBearbeiten.PNG"  alt="Konflikte bearbeiten und lösen"/>
+    <img height="1400" src="../docs/images/KonflikteBearbeiten.PNG"  alt="Handling and resolving conflicts"/>
 </p>
 
-## Konfiguration of Kafka service
+## Configuration of Kafka service
+### Settings
 To retrieve the data from apache kafka service, the following settings must be made:
 
 application-[profile].yml
 ```
+spring:
+  kafka:
+    bootstrap-servers: ...
+    security.protocol: SSL
+    ssl:
+      key-store-password: ...
+      trust-store-password: ...
+      key-store-location: file:/etc/ssl/kafka-auth-keystore.jks
+      trust-store-location: file:/etc/ssl/truststore.jks
+    client-id: lhm-ewo-eai-schoeffen
+    consumer: # Only insert everything below here if you wish to receive unread messages with the listener when it was inactive. Otherwise, only the messages that were sent during the active time of the listener will be received.
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+...
 aenderungsservice:
 ...
   topicPattern: lhm-ewo-eai-aenderungen-.*
   group-Id: lhm-ewo-eai-aenderungen-ehrenamt-justiz
   ```
 
-| Konfiguration | Description | Default setting | example |
+| Configuration | Description | Default setting | example |
 | ------------- | ------------- | ------------- | ------------- |
-| topicPattern  | Kafka-Topics. Has to be 'lhm-ewo-eai-aenderungen-.*' | lhm-ewo-eai-aenderungen-.* | |
-| group-Id | Identifies a group of consumer instances that jointly consume messages from one or more Kafka topics. Has to start with 'lhm-ewo-eai-aenderungen-ehrenamt-justiz'. Attention: if you change an already used groupid here, all already processed om's will be processed again by the change service of Ehrenamt-Justiz. This change can be useful in the test phase of Ehrenamt-Jusitz, but it is not recommended in the production environment | lhm-ewo-eai-aenderungen-ehrenamt-justiz | lhm-ewo-eai-aenderungen-ehrenamt-justiz001 |
+| spring.kafka.bootstrap-server  | hostname:port that address the kafka-broker |  |  |
+| spring.kafka.ssl.security.protocol | https://docs.spring.io/spring-kafka/reference | SSL  |  |
+| spring.kafka.ssl.key-store-password | password for key-store | see keypass |  |
+| spring.kafka.ssl.trust-store-password | password for truststore | see keypass |  |
+| spring.kafka.ssl.key-store-location | location of key-store | file:/etc/ssl/kafka-auth-keystore.jks |  |
+| spring.kafka.ssl.trust-store-location | location of trust-store | file:/etc/ssl/truststore.jks |  |
+| spring.kafka.client-id | https://docs.spring.io/spring-kafka/reference | lhm-ewo-eai-schoeffen |  |
+| spring.kafka.consumer.auto-offset-reset | https://docs.spring.io/spring-kafka/reference | earliest |  |
+| spring.kafka.consumer.enable-auto-commit | https://docs.spring.io/spring-kafka/reference | true |  |
+| aenderungsservice.topicPattern  | Kafka-Topics. Has to be 'lhm-ewo-eai-aenderungen-.*' | lhm-ewo-eai-aenderungen-.* | |
+| aenderungsservice.group-Id | Identifies a group of consumer instances that jointly consume messages from one or more Kafka topics. Has to start with 'lhm-ewo-eai-aenderungen-ehrenamt-justiz'. Attention: if you change an already used groupid here, all already processed om's will be processed again by the change service of Ehrenamt-Justiz. This change can be useful in the test phase of Ehrenamt-Jusitz, but it is not recommended in the production environment | lhm-ewo-eai-aenderungen-ehrenamt-justiz | lhm-ewo-eai-aenderungen-ehrenamt-justiz001 |
 
-The following configurations must be carried out so that the change service can call up the backend
+### Certificates
+Certificates are required to use the kafka service
+The current certificates and passwords are stored in KeePass: kafka-auth-keystore.jks and truststore.jks
+
+If the change service is executed in Docker desktop, the certificates must be saved here relative to the “stack” directory:
+```
+../ehrenamt-justiz-aenderungsservice/src/main/resources/truststore.jks
+../ehrenamt-justiz-aenderungsservice/src/main/resources/kafka-auth-keystore.jks
+```
+It is also necessary to set the spring.kafka.ssl.key-store-password and spring.kafka.ssl.trust-store-password in application-docker.yml
+
+### Call the backend by the change service
+
+The following configurations must be carried out so that the change service can call up the backend service
 
 application-[profile].yml
 ```
@@ -58,3 +95,4 @@ aenderungsservice:
 | maxInterval | Configuration is used, if blocking entry. Maximum waiting time  | 80000 |
 
 A “blocking entry” in Kafka listener contexts refers to a situation where a consumer (in this case a Kafka listener) is blocked from processing messages and is unable to consume new messages from a Kafka partition until the current processing is complete (For example, timeout when calling the backend or when calling the Residents registration EAI).
+
