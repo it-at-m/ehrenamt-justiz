@@ -210,6 +210,8 @@ onMounted(() => {
   loadUser();
   healthCheckTimer();
   loadActiveKonfiguration();
+  // display drawer at once
+  toggleDrawer();
 });
 
 /**

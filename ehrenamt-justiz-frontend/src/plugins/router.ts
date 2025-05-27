@@ -39,13 +39,13 @@ const routes = [
     meta: { authority: "READ_EHRENAMTJUSTIZDATEN" },
   },
   {
-    path: "/bewerbung/:id:action",
+    path: "/bewerbung/:id/:action",
     name: "bewerbung.edit",
     component: BewerbungEdit,
     meta: { authority: "WRITE_EHRENAMTJUSTIZDATEN" },
   },
   {
-    path: "/bewerbung/:id:action",
+    path: "/bewerbung/:id/:action",
     name: "bewerbung.display",
     component: BewerbungEdit,
     meta: { authority: "READ_EHRENAMTJUSTIZDATEN" },
@@ -81,13 +81,13 @@ const routes = [
     meta: { authority: "WRITE_KONFIGURATION" },
   },
   {
-    path: "/configuration/:id:action",
+    path: "/configuration/:id/:action",
     name: "konfiguration.edit",
     component: KonfigurationEdit,
     meta: { authority: "WRITE_KONFIGURATION" },
   },
   {
-    path: "/configuration/:id:action",
+    path: "/configuration/:id/:action",
     name: "konfiguration.display",
     component: KonfigurationEdit,
     meta: { authority: "READ_KONFIGURATION" },
