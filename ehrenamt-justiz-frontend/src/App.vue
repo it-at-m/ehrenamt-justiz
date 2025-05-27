@@ -144,7 +144,7 @@
     <v-main>
       <v-container fluid>
         <v-progress-circular
-          v-if="!isConfigLoaded()"
+          v-if="!isConfigLoaded"
           indeterminate
         ></v-progress-circular>
         <router-view
@@ -213,9 +213,9 @@ const ehrenamtjustizart = ref("");
 const gatewayStatus = ref("DOWN");
 const backendStatus = ref("DOWN");
 const eaiStatus = ref("DOWN");
-const isConfigLoaded = () => {
+const isConfigLoaded = computed(() => {
   return userStore.getUser && globalSettingsStore.getKonfiguration;
-};
+});
 
 onMounted(() => {
   loadUser();
