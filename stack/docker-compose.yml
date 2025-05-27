@@ -1,4 +1,4 @@
-name: refarch-stack
+name: ehrenamtjustiz
 
 services:
   postgres:
