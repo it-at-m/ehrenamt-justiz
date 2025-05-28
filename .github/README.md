@@ -123,6 +123,10 @@ These containers are started:
 url: http://localhost:8083
 ```
 
+<p>
+    <img height="800" src="../docs/images/ApplicationEhrenamtjustiz.PNG"  alt="Container Docker Desktop"/>
+</p>
+
 #### Users
 
 These users are only for testing purpose in docker desktop:
@@ -132,11 +136,6 @@ These users are only for testing purpose in docker desktop:
 | nosach  | normal user with basic rights |  clientrole_sachbearbeiter | nosach |
 | sosach | users with extended rights | clientrole_sondersachbearbeiter | sosach |
 | soadmin  |  administrator rights | clientrole_administrator | soadmin |
-
-<p>
-    <img height="800" src="../docs/images/ApplicationEhrenamtjustiz.PNG"  alt="Container Docker Desktop"/>
-</p>
-
 
 
 ### Start online application in browser
