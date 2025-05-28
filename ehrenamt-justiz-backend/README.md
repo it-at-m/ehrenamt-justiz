@@ -64,3 +64,53 @@ The following table shows the most important configurations of the backend (appl
 | spring.datasource.url | url, port and schema of database | jdbc:postgresql://host.docker.internal:5432/postgres?currentSchema=ej |
 | spring.datasource.username | Username for connecting to database |  |
 | spring.datasource.password | Password for connecting to database |  |
+
+## User, roles and authorizations
+
+Users, roles and authorizations are defined in this repository for keycloak (dev) and for docker desktop.
+
+The definition files for keycloak can be found here:  [keycloak files](https://github.com/it-at-m/ehrenamt-justiz/tree/main/ehrenamt-justiz-backend/sso-config)
+
+### Roles
+
+Roles for docker desktop are defined here:
+[Roles for docker desktop](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/05_assign-roles.yml)
+
+These roles are defined:
+
+| Roles | Description |
+| ------------- | ------------- |
+| clientrole_sachbearbeiter  | role with basic rights |
+| clientrole_sondersachbearbeiter | role with extended rights |
+| clientrole_administrator  |  role with administrator rights |
+
+### Authorizations
+
+Authorizations for docker desktop are defined here:
+[Authorizations for docker desktop](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/permissions/example_authorization.json)
+
+These authorizations are defined:
+
+| Authorizations | Assigned roles |
+| ------------- | ------------- |
+| READ_EWOBUERGER  | ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter", "clientrole_administrator"] |
+| WRITE_EWOBUERGER | ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter", "clientrole_administrator"] |
+| DELETE_EWOBUERGER  |  ["clientrole_sondersachbearbeiter", "clientrole_administrator"] |
+| READ_EHRENAMTJUSTIZDATEN  |  ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter", "clientrole_administrator"] |
+| WRITE_EHRENAMTJUSTIZDATEN  |  ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter",  "administrator"]  |
+| DELETE_EHRENAMTJUSTIZDATEN  |  ["clientrole_sondersachbearbeiter", "clientrole_administrator"] |
+| READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE  |  ["clientrole_sondersachbearbeiter", "clientrole_administrator"] |
+| READ_KONFIGURATION  |  ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter",  "administrator"]" |
+| WRITE_KONFIGURATION  |  ["clientrole_administrator"] |
+| DELETE_KONFIGURATION  | ["clientrole_administrator"] |
+| EWOSUCHE  | ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter", "clientrole_administrator"]  |
+| EWOSUCHEMITOM  |  ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter",  "clientrole_administrator"] |
+| ONLINEBEWERBEN  |  not used  |
+
+### Users
+
+Users for docker desktop are defined here:
+[Users for docker desktop](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/04_add-users.yml)
+
+These users are only for testing purpose in docker desktop:
+
