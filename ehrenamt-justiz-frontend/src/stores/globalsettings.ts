@@ -5,6 +5,7 @@ import { computed, ref } from "vue";
 
 export const useGlobalSettingsStore = defineStore("globalSetting", () => {
   const konfiguration = ref<KonfigurationData | null>(null);
+  const konfigurationLoadingAttempt = ref(false);
   const onlineHelpDialogComponentVisible = ref(false);
 
   const getKonfiguration = computed((): KonfigurationData | null => {
@@ -15,17 +16,26 @@ export const useGlobalSettingsStore = defineStore("globalSetting", () => {
     konfiguration.value = payload;
   }
 
+  function setKonfigurationLoadingAttempt(newValue: boolean): void {
+    konfigurationLoadingAttempt.value = newValue;
+  }
+  function isKonfigurationLoadingAttempt() {
+    return konfigurationLoadingAttempt.value;
+  }
+
   function setOnlineHelpDialogComponentVisible(newValue: boolean): void {
     onlineHelpDialogComponentVisible.value = newValue;
   }
-  function getOnlineHelpDialogComponentVisible() {
+  function isOnlineHelpDialogComponentVisible() {
     return onlineHelpDialogComponentVisible.value;
   }
 
   return {
     getKonfiguration,
     setKonfiguration,
+    setKonfigurationLoadingAttempt,
+    isKonfigurationLoadingAttempt: isKonfigurationLoadingAttempt,
     setOnlineHelpDialogComponentVisible,
-    getOnlineHelpDialogComponentVisible,
+    isOnlineHelpDialogComponentVisible: isOnlineHelpDialogComponentVisible,
   };
 });

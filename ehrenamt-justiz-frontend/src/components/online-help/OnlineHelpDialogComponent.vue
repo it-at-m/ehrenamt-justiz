@@ -43,7 +43,7 @@ const props = defineProps<{
 }>();
 
 const visible = computed(() => {
-  return useGlobalSettingsStore().getOnlineHelpDialogComponentVisible();
+  return useGlobalSettingsStore().isOnlineHelpDialogComponentVisible();
 });
 
 function closeOnlineHelp(): void {

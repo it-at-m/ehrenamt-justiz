@@ -214,7 +214,9 @@ const gatewayStatus = ref("DOWN");
 const backendStatus = ref("DOWN");
 const eaiStatus = ref("DOWN");
 const isConfigLoaded = computed(() => {
-  return userStore.getUser && globalSettingsStore.getKonfiguration;
+  return (
+    userStore.getUser && globalSettingsStore.isKonfigurationLoadingAttempt()
+  );
 });
 
 onMounted(() => {
@@ -261,12 +263,14 @@ function loadActiveKonfiguration(): void {
         konfigurationData.ehrenamtjustizart
       );
       bezeichnungApp.value = konfigurationData.bezeichnung;
+      globalSettingsStore.setKonfigurationLoadingAttempt(true);
     })
     .catch(() => {
       snackbarStore.showMessage({
         message:
           "Es konnte keine aktive Konfiguration gefunden werden! Bitte nur eine aktive Konfiguration anlegen und dann die Anwendung neu laden!",
       });
+      globalSettingsStore.setKonfigurationLoadingAttempt(true);
     });
 }
 
