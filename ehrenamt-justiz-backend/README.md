@@ -71,10 +71,31 @@ Users, roles and authorizations are defined in this repository for keycloak (dev
 
 The definition files for keycloak can be found here:  [keycloak files](https://github.com/it-at-m/ehrenamt-justiz/tree/main/ehrenamt-justiz-backend/sso-config)
 
+### Users
+
+Users for docker desktop are defined here:
+[Users for docker desktop](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/04_add-users.yml)
+
+These users are only for testing purpose in docker desktop.
+
 ### Roles
 
-Roles for docker desktop are defined here:
+Roles are assigned to user for docker desktop here:
 [Roles for docker desktop](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/05_assign-roles.yml)
+
+These assignments are defined:
+
+| User | Role |
+| ------------- | ------------- |
+| nosach  |clientrole_sachbearbeiter |
+| sosach | clientrole_sondersachbearbeiter |
+| soadmin  |  clientrole_administrator |
+
+
+### Authorizations
+
+Authorizations and roles for docker desktop are defined here:
+[Authorizations for docker desktop](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/permissions/example_authorization.json)
 
 These roles are defined:
 
@@ -83,11 +104,6 @@ These roles are defined:
 | clientrole_sachbearbeiter  | role with basic rights |
 | clientrole_sondersachbearbeiter | role with extended rights |
 | clientrole_administrator  |  role with administrator rights |
-
-### Authorizations
-
-Authorizations for docker desktop are defined here:
-[Authorizations for docker desktop](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/permissions/example_authorization.json)
 
 These authorizations are defined:
 
@@ -106,11 +122,4 @@ These authorizations are defined:
 | EWOSUCHE  | ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter", "clientrole_administrator"]  |
 | EWOSUCHEMITOM  |  ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter",  "clientrole_administrator"] |
 | ONLINEBEWERBEN  |  not used  |
-
-### Users
-
-Users for docker desktop are defined here:
-[Users for docker desktop](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/04_add-users.yml)
-
-These users are only for testing purpose in docker desktop:
 
