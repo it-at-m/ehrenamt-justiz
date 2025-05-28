@@ -24,6 +24,12 @@ Screenshots of frontend:
     <img src="../docs/images/EJ_03_BewerbungErstellen.PNG"  alt="Create applicant"/>
 </p>
 
+## Confirm applicant with invalid data
+
+<p>
+    <img src="../docs/images/EJ_03_01_BewerbungErstellenInvalideDatensaetze.PNG"  alt="Confirm applicant with invalid data"/>
+</p>
+
 ## Selection of a person if several search results were found
 
 <p>
