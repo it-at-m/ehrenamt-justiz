@@ -76,7 +76,14 @@ The definition files for keycloak can be found here:  [keycloak files](https://g
 Users for docker desktop are defined here:
 [Users for docker desktop](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/04_add-users.yml)
 
-These users are only for testing purpose in docker desktop.
+These users are only for testing purpose in docker desktop:
+
+| user | Description | role | password |
+| ------------- | ------------- | ------------- | ------------- |
+| nosach  | normal user with basic rights |  clientrole_sachbearbeiter | nosach |
+| sosach | users with extended rights | clientrole_sondersachbearbeiter | sosach |
+| soadmin  |  administrator rights | clientrole_administrator | soadmin |
+
 
 ### Roles
 
