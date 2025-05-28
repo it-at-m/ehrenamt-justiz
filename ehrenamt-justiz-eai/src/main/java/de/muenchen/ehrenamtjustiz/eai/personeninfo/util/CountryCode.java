@@ -923,8 +923,8 @@ public enum CountryCode {
      * @return The country name.
      */
     public String getName() {
-        final Locale l = new Locale("", getAlpha2());
-        return l.getDisplayCountry(Locale.GERMAN);
+        final Locale locale = Locale.of("", getAlpha2());
+        return locale.getDisplayCountry(Locale.GERMAN);
     }
 
     /**

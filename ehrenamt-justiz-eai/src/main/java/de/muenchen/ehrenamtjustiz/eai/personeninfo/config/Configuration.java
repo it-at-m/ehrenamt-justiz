@@ -26,6 +26,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -93,7 +94,7 @@ public class Configuration {
     @Bean
     @ConditionalOnBean({ ConfiguredWebSecProperties.class })
     public UserDetailsService userDetailsService(final WebSecProperties webSecProperties) {
-        final UserDetailsService userDetailsService = new UserDetailsService();
+        final UserDetailsServiceImpl userDetailsService = new UserDetailsServiceImpl();
         userDetailsService.setWebSecProperties(webSecProperties);
         return userDetailsService;
     }
@@ -105,8 +106,8 @@ public class Configuration {
     }
 
     @Bean
-    @ConditionalOnBean({ org.springframework.security.core.userdetails.UserDetailsService.class })
-    public AuthenticationProvider authenticationProvider(final org.springframework.security.core.userdetails.UserDetailsService userDetailsService,
+    @ConditionalOnBean({ UserDetailsService.class })
+    public AuthenticationProvider authenticationProvider(final UserDetailsService userDetailsService,
             final PasswordEncoder passwordEncoder) {
         final DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);

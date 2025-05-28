@@ -18,7 +18,7 @@ api:
 
 producer:
   user: schoeffen
-  password: RojMArByIPUc0W7d8ukl8KTPjZ
+  password:
 ewo:
   eai:
     url: http://localhost:8094/personen/2.0/soap/personErweitertc

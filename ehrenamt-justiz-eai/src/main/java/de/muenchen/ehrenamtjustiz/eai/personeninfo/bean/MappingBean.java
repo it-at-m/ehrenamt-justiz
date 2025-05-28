@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-@SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.NPathComplexity", "PMD.LambdaCanBeMethodReference", "PMD.CouplingBetweenObjects" })
+@SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.NPathComplexity", "PMD.LambdaCanBeMethodReference", "PMD.CouplingBetweenObjects", "PMD.GodClass" })
 public class MappingBean {
 
     public LesePersonErweitert.Anfrage toEWOLesen(@Header("om") final String om) {
@@ -84,7 +84,7 @@ public class MappingBean {
 
             if (sucheErgebnis.getFirst() instanceof SuchePersonErweitertResponse.AntwortErweitert) {
 
-                final SuchePersonErweitertResponse.AntwortErweitert antwortErweitert = (SuchePersonErweitertResponse.AntwortErweitert) sucheErgebnis.get(0);
+                final SuchePersonErweitertResponse.AntwortErweitert antwortErweitert = (SuchePersonErweitertResponse.AntwortErweitert) sucheErgebnis.getFirst();
                 final List<PersonErweitert> personenErweitert = antwortErweitert.getPersonErweitert();
                 if (personenErweitert.isEmpty()) {
                     throw new PersonNotFoundException(null, "Kein Ergebnis für Suchanfrage");
@@ -130,8 +130,14 @@ public class MappingBean {
             response.setGeburtsort(geburtsdaten.getOrt());
             response.setGeburtsdatum(geburtsdaten.getDatum() == null ? null : LocalDate.parse(geburtsdaten.getDatum().getDatum(), DateTimeFormatter.ISO_DATE));
             final String geburtsland = geburtsdaten.getStaat();
-            if (geburtsland != null && CountryCode.getByCode(Integer.parseInt(geburtsland)) != null) {
-                response.setGeburtsland(CountryCode.getByCode(Integer.parseInt(geburtsland)).getName());
+
+            if (geburtsland != null) {
+                try {
+                    final CountryCode countryCode = CountryCode.getByCode(Integer.parseInt(geburtsland));
+                    response.setGeburtsland(countryCode != null ? countryCode.getName() : CountryCode.DE.getName());
+                } catch (NumberFormatException e) {
+                    response.setGeburtsland(CountryCode.DE.getName());
+                }
             } else {
                 response.setGeburtsland(CountryCode.DE.getName());
             }

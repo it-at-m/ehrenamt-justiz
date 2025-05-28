@@ -19,7 +19,6 @@ import de.muenchen.ehrenamtjustiz.eai.personeninfo.config.Configuration;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.converter.AbstractWohnungTypeconverter;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.converter.XMLGregorianCalendarConverter;
 import java.io.File;
-import java.net.URL;
 import java.util.List;
 import javax.xml.datatype.XMLGregorianCalendar;
 import org.apache.camel.EndpointInject;
@@ -49,6 +48,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -108,8 +108,13 @@ class IntegrationsTest {
         LOG.info("port > {}", serverport);
         final MultiValueMap<String, String> headers = new HttpHeaders();
         headers.add("Authorization", "Basic dGVzdHVzZXI6dGVzdHB3");
-        final RequestEntity<String> request = new RequestEntity<>(headers, HttpMethod.GET,
-                new URL("http://localhost:" + serverport + basePath + "/eairoutes/ewosuchemitom/162015039514").toURI());
+
+        final RequestEntity<String> request = new RequestEntity<>(headers, HttpMethod.GET, UriComponentsBuilder
+                .fromUriString("http://localhost:" + serverport)
+                .path(basePath + "/eairoutes/ewosuchemitom/162015039514")
+                .build()
+                .toUri());
+
         final ResponseEntity<String> result = testRestTemplate.exchange(request, String.class);
         LOG.info("result-Status > {}", result.getStatusCode());
         LOG.info("result > {}", result.getBody());
@@ -173,8 +178,13 @@ class IntegrationsTest {
 
         final String requestBody = Files.contentOf(new File("src/test/resources/testnachrichten/EWOSucheRequest.json"), UTF_8);
         final MultiValueMap<String, String> headers = new HttpHeaders();
-        final RequestEntity<String> request = new RequestEntity<>(requestBody, headers, HttpMethod.POST,
-                new URL("http://localhost:" + serverport + basePath + "/eairoutes/ewosuche").toURI());
+
+        final RequestEntity<String> request = new RequestEntity<>(requestBody, headers, HttpMethod.POST, UriComponentsBuilder
+                .fromUriString("http://localhost:" + serverport)
+                .path(basePath + "/eairoutes/ewosuche")
+                .build()
+                .toUri());
+
         final TestRestTemplate template = testRestTemplate.withBasicAuth("testuser", "testpw");
 
         final ResponseEntity<String> result = template.exchange(request, String.class);
@@ -242,12 +252,17 @@ class IntegrationsTest {
     }
 
     @Test
-    void test_invalidCredentialsSucheMitOM() throws Exception {
+    void test_invalidCredentialsSucheMitOM() {
         LOG.info("port > {}", serverport);
         final MultiValueMap<String, String> headers = new HttpHeaders();
         headers.add("Authorization", "Basic wrongCredentials");
-        final RequestEntity<String> request = new RequestEntity<>(headers, HttpMethod.GET,
-                new URL("http://localhost:" + serverport + basePath + "/eairoutes/ewosuchemitom/162015039514").toURI());
+
+        final RequestEntity<String> request = new RequestEntity<>(headers, HttpMethod.GET, UriComponentsBuilder
+                .fromUriString("http://localhost:" + serverport)
+                .path(basePath + "/eairoutes/ewosuchemitom/162015039514")
+                .build()
+                .toUri());
+
         final ResponseEntity<String> result = testRestTemplate.exchange(request, String.class);
         LOG.info("result-Status > {}", result.getStatusCode());
         LOG.info("result > {}", result.getBody());
@@ -256,12 +271,17 @@ class IntegrationsTest {
     }
 
     @Test
-    void test_invalidCredentialsSuche() throws Exception {
+    void test_invalidCredentialsSuche() {
         LOG.info("port > {}", serverport);
         final String requestBody = Files.contentOf(new File("src/test/resources/testnachrichten/EWOSucheRequest.json"), UTF_8);
         final MultiValueMap<String, String> headers = new HttpHeaders();
-        final RequestEntity<String> request = new RequestEntity<>(requestBody, headers, HttpMethod.POST,
-                new URL("http://localhost:" + serverport + basePath + "/eairoutes/ewosuche").toURI());
+
+        final RequestEntity<String> request = new RequestEntity<>(requestBody, headers, HttpMethod.POST, UriComponentsBuilder
+                .fromUriString("http://localhost:" + serverport)
+                .path(basePath + "/eairoutes/ewosuche")
+                .build()
+                .toUri());
+
         final TestRestTemplate template = testRestTemplate.withBasicAuth("falscherUser", "falschesPassword");
 
         final ResponseEntity<String> result = template.exchange(request, String.class);
@@ -272,12 +292,17 @@ class IntegrationsTest {
     }
 
     @Test
-    void test_wrongPathSucheMitOM() throws Exception {
+    void test_wrongPathSucheMitOM() {
         LOG.info("port > {}", serverport);
         final MultiValueMap<String, String> headers = new HttpHeaders();
         headers.add("Authorization", "Basic dGVzdHVzZXI6dGVzdHB3");
-        final RequestEntity<String> request = new RequestEntity<>(headers, HttpMethod.GET,
-                new URL("http://localhost:" + serverport + basePath + "/eairoutes/wrongpath/162015039514").toURI());
+
+        final RequestEntity<String> request = new RequestEntity<>(headers, HttpMethod.GET, UriComponentsBuilder
+                .fromUriString("http://localhost:" + serverport)
+                .path(basePath + "/eairoutes/wrongpath/162015039514")
+                .build()
+                .toUri());
+
         final ResponseEntity<String> result = testRestTemplate.exchange(request, String.class);
         LOG.info("result-Status > {}", result.getStatusCode());
         LOG.info("result > {}", result.getBody());
@@ -286,12 +311,17 @@ class IntegrationsTest {
     }
 
     @Test
-    void test_wrongPathSuche() throws Exception {
+    void test_wrongPathSuche() {
         LOG.info("port > {}", serverport);
         final String requestBody = Files.contentOf(new File("src/test/resources/testnachrichten/EWOSucheRequest.json"), UTF_8);
         final MultiValueMap<String, String> headers = new HttpHeaders();
-        final RequestEntity<String> request = new RequestEntity<>(requestBody, headers, HttpMethod.POST,
-                new URL("http://localhost:" + serverport + basePath + "/wrongpath/ewosuche").toURI());
+
+        final RequestEntity<String> request = new RequestEntity<>(requestBody, headers, HttpMethod.POST, UriComponentsBuilder
+                .fromUriString("http://localhost:" + serverport)
+                .path(basePath + "/wrongpath/ewosuche")
+                .build()
+                .toUri());
+
         final TestRestTemplate template = testRestTemplate.withBasicAuth("testuser", "testpw");
 
         final ResponseEntity<String> result = template.exchange(request, String.class);
@@ -326,8 +356,13 @@ class IntegrationsTest {
         LOG.info("port > {}", serverport);
         final MultiValueMap<String, String> headers = new HttpHeaders();
         headers.add("Authorization", "Basic dGVzdHVzZXI6dGVzdHB3");
-        final RequestEntity<String> request = new RequestEntity<>(headers, HttpMethod.GET,
-                new URL("http://localhost:" + serverport + basePath + "/eairoutes/ewosuchemitom/162015039514").toURI());
+
+        final RequestEntity<String> request = new RequestEntity<>(headers, HttpMethod.GET, UriComponentsBuilder
+                .fromUriString("http://localhost:" + serverport)
+                .path(basePath + "/eairoutes/ewosuchemitom/162015039514")
+                .build()
+                .toUri());
+
         final ResponseEntity<String> result = testRestTemplate.exchange(request, String.class);
         LOG.info("result-Status > {}", result.getStatusCode());
         LOG.info("result > {}", result.getBody());
@@ -362,8 +397,13 @@ class IntegrationsTest {
 
         final String requestBody = Files.contentOf(new File("src/test/resources/testnachrichten/EWOSucheRequest.json"), UTF_8);
         final MultiValueMap<String, String> headers = new HttpHeaders();
-        final RequestEntity<String> request = new RequestEntity<>(requestBody, headers, HttpMethod.POST,
-                new URL("http://localhost:" + serverport + basePath + "/eairoutes/ewosuche").toURI());
+
+        final RequestEntity<String> request = new RequestEntity<>(requestBody, headers, HttpMethod.POST, UriComponentsBuilder
+                .fromUriString("http://localhost:" + serverport)
+                .path(basePath + "/eairoutes/ewosuche")
+                .build()
+                .toUri());
+
         final TestRestTemplate template = testRestTemplate.withBasicAuth("testuser", "testpw");
 
         final ResponseEntity<String> result = template.exchange(request, String.class);
@@ -375,12 +415,17 @@ class IntegrationsTest {
     }
 
     @Test
-    void test_apiDocsIsDelivered() throws Exception {
+    void test_apiDocsIsDelivered() {
 
         LOG.info("port > {}", serverport);
         final MultiValueMap<String, String> headers = new HttpHeaders();
-        final RequestEntity<String> request = new RequestEntity<>(headers, HttpMethod.GET,
-                new URL("http://localhost:" + serverport + basePath + "/api-doc").toURI());
+
+        final RequestEntity<String> request = new RequestEntity<>(headers, HttpMethod.GET, UriComponentsBuilder
+                .fromUriString("http://localhost:" + serverport)
+                .path(basePath + "/api-doc")
+                .build()
+                .toUri());
+
         final ResponseEntity<String> result = testRestTemplate.exchange(request, String.class);
         LOG.info("result-Status > {}", result.getStatusCode());
         LOG.info("result > {}", result.getBody());
@@ -390,11 +435,16 @@ class IntegrationsTest {
     }
 
     @Test
-    void test_infoEndpointOhneBenutzerErreichbar() throws Exception {
+    void test_infoEndpointOhneBenutzerErreichbar() {
         LOG.info("port > {}", serverport);
         final MultiValueMap<String, String> headers = new HttpHeaders();
-        final RequestEntity<String> request = new RequestEntity<>(headers, HttpMethod.GET,
-                new URL("http://localhost:" + serverport + "/actuator/info").toURI());
+
+        final RequestEntity<String> request = new RequestEntity<>(headers, HttpMethod.GET, UriComponentsBuilder
+                .fromUriString("http://localhost:" + serverport)
+                .path("/actuator/info")
+                .build()
+                .toUri());
+
         final ResponseEntity<String> result = testRestTemplate.exchange(request, String.class);
         LOG.info("result-Status > {}", result.getStatusCode());
         LOG.info("result > {}", result.getBody());
@@ -402,16 +452,21 @@ class IntegrationsTest {
         assertTrue(result.getBody().contains("\"description\":"));
         assertTrue(result.getBody().contains("\"version\":"));
         assertTrue(result.getBody().contains("\"name\":"));
-        assertEquals(200, result.getStatusCodeValue());
+        assertEquals(200, result.getStatusCode().value());
     }
 
     @Test
-    void test_infoEndpointMitBenutzerErreichbar() throws Exception {
+    void test_infoEndpointMitBenutzerErreichbar() {
         LOG.info("port > {}", serverport);
         final MultiValueMap<String, String> headers = new HttpHeaders();
         headers.add("Authorization", "Basic YWN0dWF0b3I6YWN0dWF0b3I=");
-        final RequestEntity<String> request = new RequestEntity<>(headers, HttpMethod.GET,
-                new URL("http://localhost:" + serverport + "/actuator/info").toURI());
+
+        final RequestEntity<String> request = new RequestEntity<>(headers, HttpMethod.GET, UriComponentsBuilder
+                .fromUriString("http://localhost:" + serverport)
+                .path("/actuator/info")
+                .build()
+                .toUri());
+
         final ResponseEntity<String> result = testRestTemplate.exchange(request, String.class);
         LOG.info("result-Status > {}", result.getStatusCode());
         LOG.info("result > {}", result.getBody());
@@ -419,7 +474,7 @@ class IntegrationsTest {
         assertTrue(result.getBody().contains("\"description\":"));
         assertTrue(result.getBody().contains("\"version\":"));
         assertTrue(result.getBody().contains("\"name\":"));
-        assertEquals(200, result.getStatusCodeValue());
+        assertEquals(200, result.getStatusCode().value());
     }
 
 }
