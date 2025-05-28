@@ -143,7 +143,14 @@
     </v-navigation-drawer>
     <v-main>
       <v-container fluid>
-        <router-view v-slot="{ Component }">
+        <v-progress-circular
+          v-if="!isConfigLoaded"
+          indeterminate
+        ></v-progress-circular>
+        <router-view
+          v-slot="{ Component }"
+          v-else
+        >
           <v-fade-transition mode="out-in">
             <component :is="Component" />
           </v-fade-transition>
@@ -174,6 +181,7 @@ import {
   VListItemTitle,
   VMain,
   VNavigationDrawer,
+  VProgressCircular,
   VRow,
   VToolbarTitle,
   VTooltip,
@@ -205,11 +213,16 @@ const ehrenamtjustizart = ref("");
 const gatewayStatus = ref("DOWN");
 const backendStatus = ref("DOWN");
 const eaiStatus = ref("DOWN");
+const isConfigLoaded = computed(() => {
+  return userStore.getUser && globalSettingsStore.getKonfiguration;
+});
 
 onMounted(() => {
   loadUser();
   healthCheckTimer();
   loadActiveKonfiguration();
+  // display drawer at once
+  toggleDrawer();
 });
 
 /**

@@ -58,7 +58,7 @@ watch(
       setTimeout(() => {
         show.value = true;
         snackbarStore.show = false;
-      }, timeout.value);
+      }, 100);
     }
   }
 );
