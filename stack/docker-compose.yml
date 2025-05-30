@@ -209,6 +209,7 @@ services:
       <<: *healthcheck
       test: [ "CMD-SHELL", "curl http://localhost:8085/actuator/health/liveness" ]
     environment:
+      - PRODUCER_USER=
       - PRODUCER_PASSWORD=
 
   # If the Änderungsservice is to be started in the Docker-Compose, the following command must be executed at startup:
