@@ -4,6 +4,7 @@ import de.muenchen.eai.ewo.api.fachlich.service.erweitert.person.v2.EwoPersonErw
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.callbacks.PasswordCallback;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.filter.RequestResponseLoggingFilter;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import jakarta.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,6 +48,19 @@ public class Configuration {
 
     @Value("${ewo.eai.url}")
     private String ewoeaiurl;
+
+    @PostConstruct
+    public void validate() {
+        if (StringUtils.isEmpty(ewoeaiuser)) {
+            throw new IllegalStateException("Missing required property in application[profile].yml: producer.user");
+        }
+        if (StringUtils.isEmpty(ewoeaipassword)) {
+            throw new IllegalStateException("Missing required property in application[profile].yml: producer.password");
+        }
+        if (StringUtils.isEmpty(ewoeaiurl)) {
+            throw new IllegalStateException("Missing required property in application[profile].yml: ewo.eai.url");
+        }
+    }
 
     @Bean
     public CxfEndpoint ewoPersonErweitertServiceEndpointLesePersonErweitert() {
