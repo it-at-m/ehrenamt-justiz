@@ -46,18 +46,30 @@ The API ist definied here:
 
 Configuration of this EAI in application-[profile].yml:
 
-| Configuration | Description | Default setting |
-| ------------- | ------------- | ------------- |
-| spring.port | Port used to run the spring boot application | 8085 |
-| ewo.eai.url | url of residents' registration system | http://.... |
-| producer.user | User for authentication on residents' registration system |  |
-| producer.password | Password for authentication on residents' registration system. In a docker desktop environment, this password must be defined in docker-compose.yml in the environment variable “PRODUCER_PASSWORD”.|  |
-| api.auth.users.username | User for authentication on this EAI |  |
-| api.auth.users.password | Password for authentication on this EAI |  |
+| Configuration | Description                                                                                                                                                                                          | Default setting |
+| ------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ------------- |
+| spring.port | Port used to run the spring boot application                                                                                                                                                         | 8085 |
+| ewo.eai.url | url of residents' registration system                                                                                                                                                                | http://.... |
+| producer.user | User for authentication on residents' registration system.  In a docker desktop environment, this user must be defined in docker-compose.yml in the environment variable “PRODUCER_USER”.            |  |
+| producer.password | Password for authentication on residents' registration system. In a docker desktop environment, this password must be defined in docker-compose.yml in the environment variable “PRODUCER_PASSWORD”. |  |
+| api.auth.users.username | User for authentication on this EAI                                                                                                                                                                  |  |
+| api.auth.users.password | Password for authentication on this EAI                                                                                                                                                              |  |
 
 ## SoapUI
 
 The EAI can be tested with SoapUI. The xml project to be imported into SoapUI can be found here:
 
 [ehrenamt-justiz-soapui-project.xml](https://github.com/it-at-m/ehrenamt-justiz/blob/main/ehrenamt-justiz-eai/src/test/resources/ehrenamt-justiz-soapui-project.xml)
+
+Example of an EAI call in docker desktop with the parameters first name, last name and date of birth:
+
+<p>
+    <img src="../docs/images/SoapUI_ewosuche_docker.PNG"  alt="Online application"/>
+</p>
+
+Example of an EAI call in docker desktop with the parameter om:
+
+<p>
+    <img src="../docs/images/SoapUI_ewosuchemitom_docker.PNG"  alt="Online application"/>
+</p>
 
