@@ -75,12 +75,22 @@ git clone https://github.com/it-at-m/ehrenamt-justiz.git
 ```
 
 
-### Manually adjust the source entrypoint.sh for starting the EAI
-This is only necessary for starting the eai!
+### Manual adaption for starting the EAI
+
+#### Manually adjust the source entrypoint.sh
+
 Details can be found in the documentation here:
 
 [ehrenamt-justiz/ehrenamt-justiz-eai/entrypoint.sh](https://github.com/it-at-m/ehrenamt-justiz/blob/main/ehrenamt-justiz-eai/entrypoint.sh)
 
+#### Manually adjust the user and password in docker-compose.yml for calling the EAI:
+```
+  eai:
+   ...
+    environment:
+      - PRODUCER_USER=
+      - PRODUCER_PASSWORD=
+```
 
 ### Manual work for starting the EJ change service 
 The following must be done to use the EJ change service (Kafka)
