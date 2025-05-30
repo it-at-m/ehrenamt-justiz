@@ -4,7 +4,7 @@ The Residents registration EAI has the task of determining personal data from th
 
 | Requestname | Params | Response |
 | ------------- | ------------- | ------------- |
-| ewosuche  | vorname (first name), nachname (surname), geburtsdatum (date of birth) | personal data e.g. adress |
+| ewosuche  | vorname (first name), nachname (surname), geburtsdatum (date of birth) | personal data e.g. first name, surname and adress |
 | ewosuchemitom | OM (id of personal data) | personal data e.g. first name, surname and adress |
 
 Response Data in detail:
