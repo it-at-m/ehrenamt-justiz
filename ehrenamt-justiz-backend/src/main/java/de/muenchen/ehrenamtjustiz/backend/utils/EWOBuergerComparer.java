@@ -64,14 +64,15 @@ public final class EWOBuergerComparer {
                     }
 
                 } else if (!getter.invoke(currentBuerger).equals(getter.invoke(newBuerger))
-                        && (!"".equals(getter.invoke(currentBuerger)) || getter.invoke(newBuerger) != null)) {
+                        && (getter.invoke(currentBuerger) != null && !((String) getter.invoke(currentBuerger)).isEmpty()
+                                || getter.invoke(newBuerger) != null)) {
 
-                            log.info(buergerNameLog + "Konflikt im Feld: " + fieldName + " | Aktuell: <" + getter.invoke(currentBuerger)
-                                    + "> | EWO: <"
-                                    + getter.invoke(newBuerger) + ">");
+                                    log.info(buergerNameLog + "Konflikt im Feld: " + fieldName + " | Aktuell: <" + getter.invoke(currentBuerger)
+                                            + "> | EWO: <"
+                                            + getter.invoke(newBuerger) + ">");
 
-                            conflictingFields.add(fieldName);
-                        }
+                                    conflictingFields.add(fieldName);
+                                }
             } else if (getter.invoke(newBuerger) != null) {
                 log.info(buergerNameLog + "Konflikt im Feld: " + fieldName);
                 conflictingFields.add(fieldName);

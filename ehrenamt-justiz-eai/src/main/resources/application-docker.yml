@@ -16,8 +16,8 @@ api:
     doProcesstimeLogging: true
     doInterceptFrom: true
 producer:
-  user: schoeffen
-  password: RojMArByIPUc0W7d8ukl8KTPjZ
+  user: ${PRODUCER_USER}
+  password: ${PRODUCER_PASSWORD}
 ewo:
   eai:
     #    url: http://localhost:8094/personen/2.0/soap/personErweitertc

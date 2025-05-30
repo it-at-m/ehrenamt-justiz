@@ -15,7 +15,7 @@ public class ReplaceOldBodyStrategy implements AggregationStrategy {
         final Message newMessage = this.getMessageContainingBody(newExchange);
         final Exception exOccured = this.getException(newExchange);
         if (exOccured != null) {
-            this.handleException(oldExchange, newExchange, exOccured);
+            this.handleException(oldExchange, exOccured);
         } else {
             oldMessage.setBody(newMessage.getBody());
         }
@@ -28,7 +28,7 @@ public class ReplaceOldBodyStrategy implements AggregationStrategy {
         return ex != null ? ex : exchange.getProperty("CamelExceptionCaught", Exception.class);
     }
 
-    protected void handleException(final Exchange oldExchange, final Exchange newExchange, final Exception exception) {
+    protected void handleException(final Exchange oldExchange, final Exception exception) {
         LOG.info("Es wurde ein Fehler uebernommen", exception);
         oldExchange.setException(exception);
     }

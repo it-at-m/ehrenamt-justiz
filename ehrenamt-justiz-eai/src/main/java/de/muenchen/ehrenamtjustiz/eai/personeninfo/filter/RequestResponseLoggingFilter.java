@@ -131,7 +131,7 @@ public class RequestResponseLoggingFilter implements Filter {
         this.bufferSize = bufferSize;
     }
 
-    private class TeeServletOutputStream extends ServletOutputStream {
+    private static class TeeServletOutputStream extends ServletOutputStream {
         private final TeeOutputStream targetStream;
 
         public TeeServletOutputStream(final OutputStream one, final OutputStream two) {
@@ -169,7 +169,7 @@ public class RequestResponseLoggingFilter implements Filter {
 
     @SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
     @SuppressWarnings("PMD.AssignmentInOperand")
-    public class RequestWrapper extends HttpServletRequestWrapper {
+    public static class RequestWrapper extends HttpServletRequestWrapper {
         private final String body;
 
         public RequestWrapper(final HttpServletRequest request) throws IOException {
@@ -249,7 +249,7 @@ public class RequestResponseLoggingFilter implements Filter {
         public ServletOutputStream getOutputStream() throws IOException {
             if (this.tee == null) {
                 this.bos = new ByteArrayOutputStream();
-                this.tee = RequestResponseLoggingFilter.this.new TeeServletOutputStream(this.original.getOutputStream(), this.bos);
+                this.tee = new TeeServletOutputStream(this.original.getOutputStream(), this.bos);
             }
 
             return this.tee;

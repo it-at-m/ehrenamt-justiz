@@ -14,13 +14,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * Class is used to load user data (user, password, roles). Used for authentication
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
-    private static final Logger LOG = LoggerFactory.getLogger(UserDetailsService.class);
+public class UserDetailsServiceImpl implements org.springframework.security.core.userdetails.UserDetailsService {
+    private static final Logger LOG = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
     private WebSecProperties webSecProperties = new DefaultWebSecProperties();
 
     @SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.AvoidCatchingNPE" })
     @Override
-    @SuppressFBWarnings({ "DCN_NULLPOINTER_EXCEPTION", "NM_SAME_SIMPLE_NAME_AS_INTERFACE" })
+    @SuppressFBWarnings("DCN_NULLPOINTER_EXCEPTION")
     public UserDetails loadUserByUsername(final String username) {
         final User user;
 
@@ -40,7 +40,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 
             try {
                 auths = user.getRoles().stream().map((role) -> this.webSecProperties.getRoles().get(role)).flatMap(Collection::stream).distinct()
-                        .map(authorities -> new SimpleGrantedAuthority(authorities.toString())).collect(Collectors.toList());
+                        .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
             } catch (NullPointerException npe) {
                 LOG.warn("Benutzer {} hat keine Rollen", username);
                 throw new UsernameNotFoundException("Benutzer " + username + " ist unvollständig konfiguriert - Rollen fehlen", npe);

@@ -4,6 +4,7 @@ import de.muenchen.eai.ewo.api.fachlich.service.erweitert.person.v2.EwoPersonErw
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.callbacks.PasswordCallback;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.filter.RequestResponseLoggingFilter;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import jakarta.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -46,6 +48,19 @@ public class Configuration {
 
     @Value("${ewo.eai.url}")
     private String ewoeaiurl;
+
+    @PostConstruct
+    public void validate() {
+        if (StringUtils.isEmpty(ewoeaiuser)) {
+            throw new IllegalStateException("Missing required property in application[profile].yml: producer.user");
+        }
+        if (StringUtils.isEmpty(ewoeaipassword)) {
+            throw new IllegalStateException("Missing required property in application[profile].yml: producer.password");
+        }
+        if (StringUtils.isEmpty(ewoeaiurl)) {
+            throw new IllegalStateException("Missing required property in application[profile].yml: ewo.eai.url");
+        }
+    }
 
     @Bean
     public CxfEndpoint ewoPersonErweitertServiceEndpointLesePersonErweitert() {
@@ -93,7 +108,7 @@ public class Configuration {
     @Bean
     @ConditionalOnBean({ ConfiguredWebSecProperties.class })
     public UserDetailsService userDetailsService(final WebSecProperties webSecProperties) {
-        final UserDetailsService userDetailsService = new UserDetailsService();
+        final UserDetailsServiceImpl userDetailsService = new UserDetailsServiceImpl();
         userDetailsService.setWebSecProperties(webSecProperties);
         return userDetailsService;
     }
@@ -105,8 +120,8 @@ public class Configuration {
     }
 
     @Bean
-    @ConditionalOnBean({ org.springframework.security.core.userdetails.UserDetailsService.class })
-    public AuthenticationProvider authenticationProvider(final org.springframework.security.core.userdetails.UserDetailsService userDetailsService,
+    @ConditionalOnBean({ UserDetailsService.class })
+    public AuthenticationProvider authenticationProvider(final UserDetailsService userDetailsService,
             final PasswordEncoder passwordEncoder) {
         final DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
