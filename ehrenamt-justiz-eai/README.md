@@ -63,13 +63,9 @@ The EAI can be tested with SoapUI. The xml project to be imported into SoapUI ca
 
 Example of an EAI call in docker desktop with the parameters first name, last name and date of birth:
 
-<p>
-    <img src="../docs/images/SoapUI_ewosuche_docker.PNG"  alt="Online application"/>
-</p>
+![SoapUI ewosuche Docker example](../docs/images/SoapUI_ewosuche_docker.PNG)
 
 Example of an EAI call in docker desktop with the parameter om:
 
-<p>
-    <img src="../docs/images/SoapUI_ewosuchemitom_docker.PNG"  alt="Online application"/>
-</p>
+![SoapUI ewosuchemitom Docker example](../docs/images/SoapUI_ewosuchemitom_docker.PNG)
 
