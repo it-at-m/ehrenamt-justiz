@@ -92,7 +92,7 @@
                   label="Nachname"
                   :required="true"
                   :error-msg="errorMsgNachname"
-                  max="255"
+                  max="300"
                 />
               </v-row>
               <v-row dense>
