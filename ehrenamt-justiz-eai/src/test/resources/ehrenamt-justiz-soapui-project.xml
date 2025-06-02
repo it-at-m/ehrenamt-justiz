@@ -753,7 +753,6 @@ return "ResponseErgebnis"]]></con:dispatchPath><con:response name="ResponseErgeb
 					</vornamen>
 					<familienname>
 						<name>Wimtest-zwei-ohne-Pass</name>
-						<unstrukturierteSchreibweise>Wimtest-zwei-ohne-Pass</unstrukturierteSchreibweise>
 					</familienname>
 				</namen>
 				<zuzugsdaten>
@@ -868,7 +867,6 @@ return "ResponseErgebnis"</con:dispatchPath><con:response name="ResponseErgebnis
 						</vornamen>
 						<familienname>
 							<name>Wimtest-zwei-ohne-Pass</name>
-							<unstrukturierteSchreibweise>Wimtest-zwei-ohne-Pass</unstrukturierteSchreibweise>
 						</familienname>
 					</namen>
 					<zuzugsdaten>

@@ -116,13 +116,11 @@ public class MappingBean {
 
             response.setFamilienname(
                     (namen.getFamilienname() == null) ? null
-                            : (null == namen.getFamilienname().getUnstrukturierteSchreibweise()) ? namen.getFamilienname().getName()
-                                    : namen.getFamilienname().getUnstrukturierteSchreibweise());
+                            : namen.getFamilienname().getName());
 
             response.setGeburtsname(
                     (namen.getGeburtsname() == null) ? null
-                            : (null == namen.getGeburtsname().getUnstrukturierteSchreibweise()) ? namen.getGeburtsname().getName()
-                                    : namen.getGeburtsname().getUnstrukturierteSchreibweise());
+                            : namen.getGeburtsname().getName());
 
         }
         final GeburtsdatenType geburtsdaten = person.getGeburtsdaten();

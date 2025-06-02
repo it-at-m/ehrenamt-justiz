@@ -3,8 +3,7 @@
     ref="form"
     class="form"
     :disabled="bewerbung.action == BEARBEIGUNGS_MODUS.DISPLAY_MODUS"
-    @submit="speichern"
-    @keydown.enter.prevent="speichern"
+    @keydown.enter.exact.prevent="speichern"
   >
     <v-row>
       <v-col
@@ -401,6 +400,7 @@
                   v-model="bewerbung.derzeitausgeuebterberuf"
                   label="Derzeitiger Beruf"
                   persistent-placeholder
+                  maxlength="255"
                   density="compact"
                   variant="outlined"
                   autofocus
@@ -413,6 +413,7 @@
                   v-model="bewerbung.arbeitgeber"
                   label="Arbeitgeber"
                   persistent-placeholder
+                  maxlength="255"
                   density="compact"
                   variant="outlined"
                 />
@@ -420,12 +421,17 @@
             </v-row>
             <v-row>
               <v-col class="col">
-                <v-text-field
+                <v-textarea
                   v-model="bewerbung.ausgeuebteehrenaemter"
                   label="Ausgeübte Ehrenämter"
                   persistent-placeholder
+                  maxlength="4000"
                   density="compact"
                   variant="outlined"
+                  clearable
+                  rows="2"
+                  auto-grow
+                  @keydown.ctrl.enter.prevent="handleKeydown"
                 />
               </v-col>
             </v-row>
@@ -435,6 +441,7 @@
                   v-model="bewerbung.telefonnummer"
                   label="Telefonnummer (privat)"
                   persistent-placeholder
+                  maxlength="255"
                   density="compact"
                   variant="outlined"
                 />
@@ -446,6 +453,7 @@
                   v-model="bewerbung.telefongesch"
                   label="Telefonnummer (dienstlich)"
                   persistent-placeholder
+                  maxlength="255"
                   density="compact"
                   variant="outlined"
                 />
@@ -457,6 +465,7 @@
                   v-model="bewerbung.telefonmobil"
                   label="Telefonnummer (mobil)"
                   persistent-placeholder
+                  maxlength="255"
                   density="compact"
                   variant="outlined"
                 />
@@ -469,6 +478,7 @@
                   :rules="[rules.RULE_MAIL]"
                   label="Mailadresse"
                   persistent-placeholder
+                  maxlength="150"
                   type="mail"
                   density="compact"
                   variant="outlined"
@@ -535,7 +545,7 @@
 <script setup lang="ts">
 import type BewerbungFormData from "@/types/BewerbungFormData";
 
-import { computed, ref } from "vue";
+import { computed, nextTick, ref } from "vue";
 import {
   VBtn,
   VCard,
@@ -721,6 +731,21 @@ function setFocusAufFehler() {
       break;
     }
   }
+}
+
+function handleKeydown(e: KeyboardEvent): void {
+  const textarea = e.target as HTMLTextAreaElement;
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+  const value = bewerbung.value.ausgeuebteehrenaemter || "";
+
+  bewerbung.value.ausgeuebteehrenaemter =
+    value.substring(0, start) + "\n" + value.substring(end);
+
+  // Use nextTick to ensure DOM update before setting cursor position
+  nextTick(() => {
+    textarea.selectionStart = textarea.selectionEnd = start + 1;
+  });
 }
 
 const bewerbung = computed({

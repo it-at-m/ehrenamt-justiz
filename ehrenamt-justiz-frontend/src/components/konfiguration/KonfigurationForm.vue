@@ -55,7 +55,7 @@
             v-model="konfiguration.bezeichnung"
             label="Bezeichnung"
             persistent-placeholder
-            :maxlength="255"
+            maxlength="255"
             density="compact"
             variant="outlined"
           />
@@ -136,7 +136,7 @@
             :rules="[rules.RULE_REQUIRED]"
             label="Wohnsitz*"
             persistent-placeholder
-            :maxlength="255"
+            maxlength="255"
             density="compact"
             variant="outlined"
           />
