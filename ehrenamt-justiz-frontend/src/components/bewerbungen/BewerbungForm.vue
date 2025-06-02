@@ -545,7 +545,7 @@
 <script setup lang="ts">
 import type BewerbungFormData from "@/types/BewerbungFormData";
 
-import { computed, ref } from "vue";
+import { computed, nextTick, ref } from "vue";
 import {
   VBtn,
   VCard,
@@ -733,16 +733,19 @@ function setFocusAufFehler() {
   }
 }
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-function handleKeydown(e: any): void {
-  // line break at actual position:
-  const textarea = e.target;
+function handleKeydown(e: KeyboardEvent): void {
+  const textarea = e.target as HTMLTextAreaElement;
   const start = textarea.selectionStart;
   const end = textarea.selectionEnd;
-  const value = textarea.value;
-  textarea.value = value.substring(0, start) + "\n" + value.substring(end);
-  textarea.selectionStart = textarea.selectionEnd = start + 1;
-  bewerbung.value.ausgeuebteehrenaemter = textarea.value;
+  const value = bewerbung.value.ausgeuebteehrenaemter || "";
+
+  bewerbung.value.ausgeuebteehrenaemter =
+    value.substring(0, start) + "\n" + value.substring(end);
+
+  // Use nextTick to ensure DOM update before setting cursor position
+  nextTick(() => {
+    textarea.selectionStart = textarea.selectionEnd = start + 1;
+  });
 }
 
 const bewerbung = computed({
