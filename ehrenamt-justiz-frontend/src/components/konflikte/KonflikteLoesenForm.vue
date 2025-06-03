@@ -1249,7 +1249,7 @@
 import type KonfliktLoesenFormData from "@/types/KonfliktLoesenFormData";
 
 import { mdiTransferLeft } from "@mdi/js";
-import {computed, onMounted, ref} from "vue";
+import { computed, onMounted, ref } from "vue";
 import {
   VBtn,
   VCheckbox,
@@ -1308,13 +1308,17 @@ const ORT = "Ort";
 const INMUENCHENSEIT = "Inmuenchenseit";
 const WOHNUNGSSTATUS = "Wohnungsstatus";
 const AUSKUNFTSSPERRE = "Auskunftssperre";
-const KEINEEWODATEN = "Keine EWO-Daten gefunden. Evtl. verstorben oder verzogen?";
+const KEINEEWODATEN =
+  "Keine EWO-Daten gefunden. Evtl. verstorben oder verzogen?";
 
 onMounted(() => {
   if (isKonflikt(KEINEEWODATEN)) {
     snackbarStore.showMessage({
       level: STATUS_INDICATORS.WARNING,
-      message: "Vorhandener Konflikt: " + KEINEEWODATEN + " Konflikt lösen durch 'Alle übernehmen' und 'Speichern'",
+      message:
+        "Vorhandener Konflikt: " +
+        KEINEEWODATEN +
+        " Konflikt lösen durch 'Alle übernehmen' und 'Speichern'",
       show: true,
     });
   }
