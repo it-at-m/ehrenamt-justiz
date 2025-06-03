@@ -1249,7 +1249,7 @@
 import type KonfliktLoesenFormData from "@/types/KonfliktLoesenFormData";
 
 import { mdiTransferLeft } from "@mdi/js";
-import { computed, ref } from "vue";
+import {computed, onMounted, ref} from "vue";
 import {
   VBtn,
   VCheckbox,
@@ -1308,6 +1308,17 @@ const ORT = "Ort";
 const INMUENCHENSEIT = "Inmuenchenseit";
 const WOHNUNGSSTATUS = "Wohnungsstatus";
 const AUSKUNFTSSPERRE = "Auskunftssperre";
+const KEINEEWODATEN = "Keine EWO-Daten gefunden. Evtl. verstorben oder verzogen?";
+
+onMounted(() => {
+  if (isKonflikt(KEINEEWODATEN)) {
+    snackbarStore.showMessage({
+      level: STATUS_INDICATORS.WARNING,
+      message: "Vorhandener Konflikt: " + KEINEEWODATEN + " Konflikt lösen durch 'Alle übernehmen' und 'Speichern'",
+      show: true,
+    });
+  }
+});
 
 const labelWarBereitsTaetigAls = ref(
   "War bereits als " +
@@ -1393,6 +1404,7 @@ function alleUebernehmen(): void {
   konfliktLoesenInMuenchenseit();
   konfliktLoesenWohnungsstatus();
   konfliktLoesenAuskunftssperren();
+  konfliktLoesenKeineEwoDaten();
 }
 
 // Resolve single conflict
@@ -1562,6 +1574,11 @@ function konfliktLoesenAuskunftssperren() {
   konfliktloesenformdata.value["person_auskunftssperre"] =
     konfliktloesenformdata.value["ewo_auskunftssperre"];
   removeKonflikt(AUSKUNFTSSPERRE);
+}
+
+function konfliktLoesenKeineEwoDaten() {
+  if (!isKonflikt(KEINEEWODATEN)) return;
+  removeKonflikt(KEINEEWODATEN);
 }
 
 function konflikteVorhanden(): boolean {
