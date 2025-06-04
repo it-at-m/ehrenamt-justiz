@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
-@Nested
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(
         classes = { EhrenamtJustizApplication.class },
@@ -83,11 +81,11 @@ class EhrenamtJustizServiceTest {
     @Test
     void testKonfliktEwoBuergerDatenLeer() {
 
+        final EWOBuergerDatenDto emptyEwoBuergerDatenDto = EWOBuergerDatenDto.builder().build();
+
+        when(ewoService.ewoSucheMitOM(any(String.class))).thenReturn(emptyEwoBuergerDatenDto);
+
         final Person person = getBewerberDaten();
-
-        final EWOBuergerDatenDto ewoBuergerDatenDto = EWOBuergerDatenDto.builder().build();
-
-        when(ewoService.ewoSucheMitOM(any(String.class))).thenReturn(ewoBuergerDatenDto);
 
         final List<String> konflikte = ehrenamtJustizService.getKonflikte(person);
 
@@ -100,15 +98,14 @@ class EhrenamtJustizServiceTest {
     @Test
     void testKonfliktBewerberDatenLeer() {
 
-        Person person = getBewerberDaten();
-
+        final Person person = getBewerberDaten();
         final EWOBuergerDatenDto ewoBuergerDatenDto = EhrenamtJustizUtility.getEwoBuergerDatenDto(person);
-
-        person = Person.builder().build();
 
         when(ewoService.ewoSucheMitOM(null)).thenReturn(ewoBuergerDatenDto);
 
-        final List<String> konflikte = ehrenamtJustizService.getKonflikte(person);
+        final Person emptyPerson = Person.builder().build();
+
+        final List<String> konflikte = ehrenamtJustizService.getKonflikte(emptyPerson);
 
         assertEquals(ANZAHL_KONFLIKTE, konflikte.size());
 
@@ -131,30 +128,17 @@ class EhrenamtJustizServiceTest {
     }
 
     private static void checkKonfliktFelder(final List<String> konflikte) {
-        assertTrue(konflikte.contains("Ordnungsmerkmal"));
-        assertTrue(konflikte.contains("Vorname"));
-        assertTrue(konflikte.contains("Familienname"));
-        assertTrue(konflikte.contains("Geburtsname"));
-        assertTrue(konflikte.contains("Geburtsdatum"));
-        assertTrue(konflikte.contains("Geschlecht"));
-        assertTrue(konflikte.contains("Familienstand"));
-        assertTrue(konflikte.contains("Geburtsland"));
-        assertTrue(konflikte.contains("Geburtsort"));
-        assertTrue(konflikte.contains("Staatsangehoerigkeit"));
-        assertTrue(konflikte.contains("Akademischergrad"));
-        assertTrue(konflikte.contains("Postleitzahl"));
-        assertTrue(konflikte.contains("Ort"));
-        assertTrue(konflikte.contains("Strasse"));
-        assertTrue(konflikte.contains("Hausnummer"));
-        assertTrue(konflikte.contains("Buchstabehausnummer"));
-        assertTrue(konflikte.contains("Wohnungsstatus"));
-        assertTrue(konflikte.contains("Appartmentnummer"));
-        assertTrue(konflikte.contains("Teilnummerhausnummer"));
-        assertTrue(konflikte.contains("Stockwerk"));
-        assertTrue(konflikte.contains("Adresszusatz"));
-        assertTrue(konflikte.contains("Wohnungsgeber"));
-        assertTrue(konflikte.contains("Inmuenchenseit"));
-        assertTrue(konflikte.contains("Auskunftssperre"));
+        final List<String> expectedConflictFields = List.of(
+                "Ordnungsmerkmal", "Vorname", "Familienname", "Geburtsname",
+                "Geburtsdatum", "Geschlecht", "Familienstand", "Geburtsland",
+                "Geburtsort", "Staatsangehoerigkeit", "Akademischergrad",
+                "Postleitzahl", "Ort", "Strasse", "Hausnummer",
+                "Buchstabehausnummer", "Wohnungsstatus", "Appartmentnummer",
+                "Teilnummerhausnummer", "Stockwerk", "Adresszusatz",
+                "Wohnungsgeber", "Inmuenchenseit", "Auskunftssperre");
+
+        expectedConflictFields.forEach(field -> assertTrue(konflikte.contains(field),
+                "Expected conflict field '" + field + "' not found in conflicts"));
     }
 
     private static Person getBewerberDaten() {
