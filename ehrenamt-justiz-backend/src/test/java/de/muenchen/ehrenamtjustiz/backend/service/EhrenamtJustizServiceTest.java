@@ -14,7 +14,7 @@ import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerDatenDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
-import de.muenchen.ehrenamtjustiz.backend.service.impl.EhrenamtJustizServiceImpl;
+import de.muenchen.ehrenamtjustiz.backend.utils.EhrenamtJustizUtility;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -67,10 +67,10 @@ class EhrenamtJustizServiceTest {
 
     @Test
     void testNoKonflikte() {
-        // Mock the RestTemplate exchange method
+
         final Person person = getBewerberDaten();
 
-        final EWOBuergerDatenDto ewoBuergerDatenDto = EhrenamtJustizServiceImpl.getEwoBuergerDatenDto(person);
+        final EWOBuergerDatenDto ewoBuergerDatenDto = EhrenamtJustizUtility.getEwoBuergerDatenDto(person);
 
         when(ewoService.ewoSucheMitOM(any(String.class))).thenReturn(ewoBuergerDatenDto);
 
@@ -82,7 +82,7 @@ class EhrenamtJustizServiceTest {
 
     @Test
     void testKonfliktEwoBuergerDatenLeer() {
-        // Mock the RestTemplate exchange method
+
         final Person person = getBewerberDaten();
 
         final EWOBuergerDatenDto ewoBuergerDatenDto = EWOBuergerDatenDto.builder().build();
@@ -97,10 +97,10 @@ class EhrenamtJustizServiceTest {
 
     @Test
     void testKonfliktBewerberDatenLeer() {
-        // Mock the RestTemplate exchange method
+
         Person person = getBewerberDaten();
 
-        final EWOBuergerDatenDto ewoBuergerDatenDto = EhrenamtJustizServiceImpl.getEwoBuergerDatenDto(person);
+        final EWOBuergerDatenDto ewoBuergerDatenDto = EhrenamtJustizUtility.getEwoBuergerDatenDto(person);
 
         person = Person.builder().build();
 
@@ -109,6 +109,20 @@ class EhrenamtJustizServiceTest {
         final List<String> konflikte = ehrenamtJustizService.getKonflikte(person);
 
         assertEquals(24, konflikte.size());
+
+    }
+
+    @Test
+    void testKonflikteEwoServiceLiefertKeineDaten() {
+
+        final Person person = getBewerberDaten();
+
+        when(ewoService.ewoSucheMitOM(any(String.class))).thenReturn(null);
+
+        final List<String> konflikte = ehrenamtJustizService.getKonflikte(person);
+
+        assertEquals(1, konflikte.size());
+        assertEquals(EhrenamtJustizUtility.ERROR_NO_HITS, konflikte.getFirst());
 
     }
 
