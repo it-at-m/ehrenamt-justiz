@@ -2,8 +2,7 @@ package de.muenchen.ehrenamtjustiz.backend.service;
 
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFILE;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -50,6 +49,7 @@ class EhrenamtJustizServiceTest {
     @SuppressWarnings("unused")
     private static final PostgreSQLContainer<?> POSTGRE_SQL_CONTAINER = new PostgreSQLContainer<>(
             DockerImageName.parse(TestConstants.TESTCONTAINERS_POSTGRES_IMAGE));
+    public static final int ANZAHL_KONFLIKTE = 24;
 
     @Autowired
     private EhrenamtJustizService ehrenamtJustizService;
@@ -91,7 +91,9 @@ class EhrenamtJustizServiceTest {
 
         final List<String> konflikte = ehrenamtJustizService.getKonflikte(person);
 
-        assertEquals(24, konflikte.size());
+        assertEquals(ANZAHL_KONFLIKTE, konflikte.size());
+
+        checkKonfliktFelder(konflikte);
 
     }
 
@@ -108,7 +110,9 @@ class EhrenamtJustizServiceTest {
 
         final List<String> konflikte = ehrenamtJustizService.getKonflikte(person);
 
-        assertEquals(24, konflikte.size());
+        assertEquals(ANZAHL_KONFLIKTE, konflikte.size());
+
+        checkKonfliktFelder(konflikte);
 
     }
 
@@ -124,6 +128,33 @@ class EhrenamtJustizServiceTest {
         assertEquals(1, konflikte.size());
         assertEquals(EhrenamtJustizUtility.ERROR_NO_HITS, konflikte.getFirst());
 
+    }
+
+    private static void checkKonfliktFelder(final List<String> konflikte) {
+        assertTrue(konflikte.contains("Ordnungsmerkmal"));
+        assertTrue(konflikte.contains("Vorname"));
+        assertTrue(konflikte.contains("Familienname"));
+        assertTrue(konflikte.contains("Geburtsname"));
+        assertTrue(konflikte.contains("Geburtsdatum"));
+        assertTrue(konflikte.contains("Geschlecht"));
+        assertTrue(konflikte.contains("Familienstand"));
+        assertTrue(konflikte.contains("Geburtsland"));
+        assertTrue(konflikte.contains("Geburtsort"));
+        assertTrue(konflikte.contains("Staatsangehoerigkeit"));
+        assertTrue(konflikte.contains("Akademischergrad"));
+        assertTrue(konflikte.contains("Postleitzahl"));
+        assertTrue(konflikte.contains("Ort"));
+        assertTrue(konflikte.contains("Strasse"));
+        assertTrue(konflikte.contains("Hausnummer"));
+        assertTrue(konflikte.contains("Buchstabehausnummer"));
+        assertTrue(konflikte.contains("Wohnungsstatus"));
+        assertTrue(konflikte.contains("Appartmentnummer"));
+        assertTrue(konflikte.contains("Teilnummerhausnummer"));
+        assertTrue(konflikte.contains("Stockwerk"));
+        assertTrue(konflikte.contains("Adresszusatz"));
+        assertTrue(konflikte.contains("Wohnungsgeber"));
+        assertTrue(konflikte.contains("Inmuenchenseit"));
+        assertTrue(konflikte.contains("Auskunftssperre"));
     }
 
     private static Person getBewerberDaten() {
