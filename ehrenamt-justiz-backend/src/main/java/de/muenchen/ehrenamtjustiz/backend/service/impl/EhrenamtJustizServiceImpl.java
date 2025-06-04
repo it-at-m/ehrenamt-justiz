@@ -52,7 +52,7 @@ public class EhrenamtJustizServiceImpl implements EhrenamtJustizService {
         return EWOBuergerComparer.getConflictFields(getEwoBuergerDatenDto(person), ewoBuerger);
     }
 
-    private static EWOBuergerDatenDto getEwoBuergerDatenDto(final Person person) {
+    public static EWOBuergerDatenDto getEwoBuergerDatenDto(final Person person) {
         return EWOBuergerDatenDto.builder()
                 .familienname(person.getFamilienname())
                 .geburtsname(person.getGeburtsname())
