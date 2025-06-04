@@ -225,6 +225,7 @@ async function loadPerson(): Promise<void> {
             eWOBuerger.wohnungsstatus;
           konfliktLoesenFormData.value.ewo_auskunftssperre =
             eWOBuerger.auskunftssperre;
+          isLoading.value = false;
         })
         .catch(() => {
           snackbarStore.showMessage({
@@ -245,7 +246,6 @@ async function loadPerson(): Promise<void> {
             },
           });
         });
-      isLoading.value = false;
     })
     .catch((err) => {
       snackbarStore.showMessage(err);
