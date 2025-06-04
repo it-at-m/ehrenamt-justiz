@@ -18,8 +18,6 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -180,8 +178,8 @@ class EhrenamtJustizServiceTest {
                 .bewerbungvom(LocalDate.now())
                 .status(Status.VORSCHLAG)
                 .bemerkung("-")
-                .staatsangehoerigkeit(Stream.of("deutsch", "englisch").collect(Collectors.toList()))
-                .auskunftssperre(Stream.of("S").collect(Collectors.toList()))
+                .staatsangehoerigkeit(List.of("deutsch", "englisch"))
+                .auskunftssperre(List.of("S"))
                 .konfliktfeld(Collections.emptyList()).build();
     }
 
