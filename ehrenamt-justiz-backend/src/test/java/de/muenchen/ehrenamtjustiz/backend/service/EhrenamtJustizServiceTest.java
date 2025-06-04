@@ -125,6 +125,69 @@ class EhrenamtJustizServiceTest {
 
     }
 
+    @Test
+    void testAenderungsserviceNoKonflikte() {
+
+        final Person person = getBewerberDaten();
+
+        final EWOBuergerDatenDto ewoBuergerDatenDto = EhrenamtJustizUtility.getEwoBuergerDatenDto(person);
+
+        when(ewoService.ewoSucheMitOMAenderungsService(any(String.class))).thenReturn(ewoBuergerDatenDto);
+
+        final List<String> konflikte = ehrenamtJustizService.getKonflikteAenderungsService(person);
+
+        assertEquals(0, konflikte.size());
+
+    }
+
+    @Test
+    void testAenderungsserviceKonfliktEwoBuergerDatenLeer() {
+
+        final EWOBuergerDatenDto emptyEwoBuergerDatenDto = EWOBuergerDatenDto.builder().build();
+
+        when(ewoService.ewoSucheMitOMAenderungsService(any(String.class))).thenReturn(emptyEwoBuergerDatenDto);
+
+        final Person person = getBewerberDaten();
+
+        final List<String> konflikte = ehrenamtJustizService.getKonflikteAenderungsService(person);
+
+        assertEquals(ANZAHL_KONFLIKTE, konflikte.size());
+
+        checkKonfliktFelder(konflikte);
+
+    }
+
+    @Test
+    void testAenderungsserviceKonfliktBewerberDatenLeer() {
+
+        final Person person = getBewerberDaten();
+        final EWOBuergerDatenDto ewoBuergerDatenDto = EhrenamtJustizUtility.getEwoBuergerDatenDto(person);
+
+        when(ewoService.ewoSucheMitOMAenderungsService(null)).thenReturn(ewoBuergerDatenDto);
+
+        final Person emptyPerson = Person.builder().build();
+
+        final List<String> konflikte = ehrenamtJustizService.getKonflikteAenderungsService(emptyPerson);
+
+        assertEquals(ANZAHL_KONFLIKTE, konflikte.size());
+
+        checkKonfliktFelder(konflikte);
+
+    }
+
+    @Test
+    void testAenderungsserviceKonflikteEwoServiceLiefertKeineDaten() {
+
+        final Person person = getBewerberDaten();
+
+        when(ewoService.ewoSucheMitOMAenderungsService(any(String.class))).thenReturn(null);
+
+        final List<String> konflikte = ehrenamtJustizService.getKonflikteAenderungsService(person);
+
+        assertEquals(0, konflikte.size());
+
+    }
+
     private static void checkKonfliktFelder(final List<String> konflikte) {
         final List<String> expectedConflictFields = List.of(
                 "Ordnungsmerkmal", "Vorname", "Familienname", "Geburtsname",
