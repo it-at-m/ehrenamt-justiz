@@ -14,6 +14,10 @@ public final class EhrenamtJustizUtility {
 
     public static final String ERROR_NO_HITS = "Keine EWO-Daten gefunden. Evtl. verstorben oder verzogen?";
 
+    public static final String STATUS_UP = "UP";
+
+    public static final String STATUS_DOWN = "DOWN";
+
     private EhrenamtJustizUtility() {
 
     }

@@ -17,6 +17,7 @@ import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerSucheDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.service.impl.EWOServiceImpl;
+import de.muenchen.ehrenamtjustiz.backend.utils.EhrenamtJustizUtility;
 import de.muenchen.ehrenamtjustiz.exception.AenderungsServiceException;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -202,6 +203,49 @@ class EWOServiceTest {
                 .thenThrow(new RestClientException("Unexpected error"));
 
         assertThrows(AenderungsServiceException.class, () -> ewoService.ewoSucheMitOMAenderungsService("1"));
+    }
+
+    @Test
+    void testEwoEaiStatus_Success() {
+
+        final ResponseEntity<Void> responseEntity = ResponseEntity.ok(null);
+
+        when(restTemplate.getForEntity(any(String.class), eq(Void.class)))
+                .thenReturn(responseEntity);
+
+        final ResponseEntity<String> status = ewoService.ewoEaiStatus();
+
+        assertEquals(HttpStatus.OK, status.getStatusCode());
+        assertEquals(EhrenamtJustizUtility.STATUS_UP, status.getBody());
+
+    }
+
+    @Test
+    void testEwoEaiStatus_Timeout() {
+
+        final ResponseEntity<Void> responseEntity = ResponseEntity.status(HttpStatus.REQUEST_TIMEOUT).body(null);
+
+        when(restTemplate.getForEntity(any(String.class), eq(Void.class)))
+                .thenReturn(responseEntity);
+
+        final ResponseEntity<String> status = ewoService.ewoEaiStatus();
+
+        assertEquals(HttpStatus.REQUEST_TIMEOUT, status.getStatusCode());
+        assertEquals(EhrenamtJustizUtility.STATUS_DOWN, status.getBody());
+
+    }
+
+    @Test
+    void testEwoEaiStatus_Exception() {
+
+        when(restTemplate.getForEntity(any(String.class), eq(Void.class)))
+                .thenThrow(new RestClientException("Unexpected error"));
+
+        final ResponseEntity<String> status = ewoService.ewoEaiStatus();
+
+        assertEquals(HttpStatus.OK, status.getStatusCode());
+        assertEquals(EhrenamtJustizUtility.STATUS_DOWN, status.getBody());
+
     }
 
     private static @NotNull
