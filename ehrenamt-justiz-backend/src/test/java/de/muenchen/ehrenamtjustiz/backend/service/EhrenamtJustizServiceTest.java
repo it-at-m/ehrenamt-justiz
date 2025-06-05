@@ -54,7 +54,7 @@ class EhrenamtJustizServiceTest {
     private EWOService ewoService;
 
     @Test
-    void test_ValidEhrenamtJustizService() {
+    void testValidEhrenamtJustizService() {
 
         assertNotNull(ehrenamtJustizService);
         assertNotNull(ewoService);
@@ -77,7 +77,7 @@ class EhrenamtJustizServiceTest {
     }
 
     @Test
-    void test_KonfliktEwoBuergerDatenLeer() {
+    void testKonfliktEwoBuergerDatenLeer() {
 
         final EWOBuergerDatenDto emptyEwoBuergerDatenDto = EWOBuergerDatenDto.builder().build();
 
@@ -94,7 +94,7 @@ class EhrenamtJustizServiceTest {
     }
 
     @Test
-    void test_KonfliktBewerberDatenLeer() {
+    void testKonfliktBewerberDatenLeer() {
 
         final Person person = getBewerberDaten();
         final EWOBuergerDatenDto ewoBuergerDatenDto = EhrenamtJustizUtility.getEwoBuergerDatenDto(person);
@@ -112,7 +112,7 @@ class EhrenamtJustizServiceTest {
     }
 
     @Test
-    void test_KonflikteEwoServiceLiefertKeineDaten() {
+    void testKonflikteEwoServiceLiefertKeineDaten() {
 
         final Person person = getBewerberDaten();
 
@@ -126,7 +126,7 @@ class EhrenamtJustizServiceTest {
     }
 
     @Test
-    void test_Aenderungsservice_NoKonflikte() {
+    void testAenderungsservice_NoKonflikte() {
 
         final Person person = getBewerberDaten();
 
@@ -141,7 +141,7 @@ class EhrenamtJustizServiceTest {
     }
 
     @Test
-    void test_Aenderungsservice_KonfliktEwoBuergerDatenLeer() {
+    void testAenderungsservice_KonfliktEwoBuergerDatenLeer() {
 
         final EWOBuergerDatenDto emptyEwoBuergerDatenDto = EWOBuergerDatenDto.builder().build();
 
@@ -158,7 +158,7 @@ class EhrenamtJustizServiceTest {
     }
 
     @Test
-    void test_Aenderungsservice_KonfliktBewerberDatenLeer() {
+    void testAenderungsservice_KonfliktBewerberDatenLeer() {
 
         final Person person = getBewerberDaten();
         final EWOBuergerDatenDto ewoBuergerDatenDto = EhrenamtJustizUtility.getEwoBuergerDatenDto(person);
@@ -176,7 +176,7 @@ class EhrenamtJustizServiceTest {
     }
 
     @Test
-    void test_Aenderungsservice_KonflikteEwoServiceLiefertKeineDaten() {
+    void testAenderungsservice_KonflikteEwoServiceLiefertKeineDaten() {
 
         final Person person = getBewerberDaten();
 

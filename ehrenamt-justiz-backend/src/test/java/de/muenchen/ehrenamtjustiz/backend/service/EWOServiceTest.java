@@ -13,6 +13,7 @@ import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;
 import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerDatenDto;
+import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerSucheDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.service.impl.EWOServiceImpl;
@@ -21,15 +22,14 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -69,23 +69,12 @@ class EWOServiceTest {
     @BeforeEach
     void setUp() {
 
-        // insert new configuration
-        final Konfiguration konfiguration = new Konfiguration();
-        konfiguration.setId(UUID.randomUUID());
-        konfiguration.setAktiv(true);
-        konfiguration.setEhrenamtjustizart(Ehrenamtjustizart.VERWALTUNGSRICHTER);
-        konfiguration.setBezeichnung("Verwaltungsrichter");
-        konfiguration.setAltervon(BigInteger.valueOf(25));
-        konfiguration.setAlterbis(BigInteger.valueOf(120));
-        konfiguration.setStaatsangehoerigkeit("deutsch");
-        konfiguration.setWohnsitz("München");
-        konfiguration.setAmtsperiodevon(LocalDate.of(2030, 1, 1));
-        konfiguration.setAmtsperiodebis(LocalDate.of(2034, 12, 31));
-        konfigurationRepository.save(konfiguration);
+        // insert new active configuration
+        konfigurationRepository.save(createKonfiguration());
     }
 
     @Test
-    void test_EWOService() {
+    void testEWOService() {
 
         assertNotNull(restTemplate);
         assertNotNull(ewoService);
@@ -109,7 +98,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEwoSucheMitOM_ClientError() {
+    void testEwoSucheMitOM_HttpClientErrorException() {
 
         when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
                 .thenThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST));
@@ -120,7 +109,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEwoSucheMitOM_NetworkError() {
+    void testEwoSucheMitOM_ResourceAccessException() {
 
         when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
                 .thenThrow(new ResourceAccessException("Network error"));
@@ -131,7 +120,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEwoSucheMitOM_OtherError() {
+    void testEwoSucheMitOM_RestClientException() {
 
         when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
                 .thenThrow(new RestClientException("Unexpected error"));
@@ -139,6 +128,37 @@ class EWOServiceTest {
         final EWOBuergerDatenDto actualDto = ewoService.ewoSucheMitOM("1");
 
         assertNull(actualDto);
+    }
+
+    @Test
+    void testEwoSuche_Success() {
+
+        final EWOBuerger expectedEWOBuerger = getEwoBuerger();
+
+        final EWOBuerger[] expectedEWOBuergers = { expectedEWOBuerger };
+
+        final ResponseEntity<EWOBuerger[]> responseEntity = ResponseEntity.ok(expectedEWOBuergers);
+        when(restTemplate.exchange(any(String.class), any(HttpMethod.class), any(HttpEntity.class), eq(EWOBuerger[].class)))
+                .thenReturn(responseEntity);
+
+        final EWOBuergerSucheDto eWOBuergerSucheDto = getEWOBuergerSucheDto();
+
+        final List<EWOBuergerDatenDto> eWOBuergerDatenDto = ewoService.ewoSuche(eWOBuergerSucheDto);
+
+        assertEWOResponse(expectedEWOBuerger, eWOBuergerDatenDto.getFirst());
+
+    }
+
+    @Test
+    void testEwoSuche_HttpClientErrorException() {
+
+        when(restTemplate.exchange(any(String.class), any(HttpMethod.class), any(HttpEntity.class), eq(EWOBuerger[].class)))
+                .thenThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST));
+
+        final EWOBuergerSucheDto eWOBuergerSucheDto = getEWOBuergerSucheDto();
+
+        assertThrows(HttpClientErrorException.class, () -> ewoService.ewoSuche(eWOBuergerSucheDto));
+
     }
 
     @Test
@@ -182,6 +202,22 @@ class EWOServiceTest {
                 .thenThrow(new RestClientException("Unexpected error"));
 
         assertThrows(AenderungsServiceException.class, () -> ewoService.ewoSucheMitOMAenderungsService("1"));
+    }
+
+    private static @NotNull
+    Konfiguration createKonfiguration() {
+        final Konfiguration konfiguration = new Konfiguration();
+        konfiguration.setId(UUID.randomUUID());
+        konfiguration.setAktiv(true);
+        konfiguration.setEhrenamtjustizart(Ehrenamtjustizart.VERWALTUNGSRICHTER);
+        konfiguration.setBezeichnung("Verwaltungsrichter");
+        konfiguration.setAltervon(BigInteger.valueOf(25));
+        konfiguration.setAlterbis(BigInteger.valueOf(120));
+        konfiguration.setStaatsangehoerigkeit("deutsch");
+        konfiguration.setWohnsitz("München");
+        konfiguration.setAmtsperiodevon(LocalDate.of(2030, 1, 1));
+        konfiguration.setAmtsperiodebis(LocalDate.of(2034, 12, 31));
+        return konfiguration;
     }
 
     private static void assertEWOResponse(final EWOBuerger expectedEWOBuerger, final EWOBuergerDatenDto actualDto) {
@@ -237,5 +273,12 @@ class EWOServiceTest {
                 .wohnungsstatus(Wohnungsstatus.HAUPTWOHNUNG)
                 .staatsangehoerigkeit(List.of("deutsch", "englisch"))
                 .auskunftssperren(List.of("S")).build();
+    }
+
+    private static EWOBuergerSucheDto getEWOBuergerSucheDto() {
+        return EWOBuergerSucheDto.builder()
+                .vorname("Peter")
+                .familienname("Huber")
+                .geburtsdatum(LocalDate.of(1960, 1, 1)).build();
     }
 }
