@@ -11,19 +11,15 @@ import de.muenchen.ehrenamtjustiz.api.Geschlecht;
 import de.muenchen.ehrenamtjustiz.api.Wohnungsstatus;
 import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;
-import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerDatenDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerSucheDto;
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.service.impl.EWOServiceImpl;
 import de.muenchen.ehrenamtjustiz.backend.utils.EhrenamtJustizUtility;
+import de.muenchen.ehrenamtjustiz.backend.utils.Helper;
 import de.muenchen.ehrenamtjustiz.exception.AenderungsServiceException;
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -71,7 +67,7 @@ class EWOServiceTest {
     void setUp() {
 
         // insert new active configuration
-        konfigurationRepository.save(createKonfiguration());
+        konfigurationRepository.save(Helper.createKonfiguration());
     }
 
     @Test
@@ -246,22 +242,6 @@ class EWOServiceTest {
         assertEquals(HttpStatus.OK, status.getStatusCode());
         assertEquals(EhrenamtJustizUtility.STATUS_DOWN, status.getBody());
 
-    }
-
-    private static @NotNull
-    Konfiguration createKonfiguration() {
-        final Konfiguration konfiguration = new Konfiguration();
-        konfiguration.setId(UUID.randomUUID());
-        konfiguration.setAktiv(true);
-        konfiguration.setEhrenamtjustizart(Ehrenamtjustizart.VERWALTUNGSRICHTER);
-        konfiguration.setBezeichnung("Verwaltungsrichter");
-        konfiguration.setAltervon(BigInteger.valueOf(25));
-        konfiguration.setAlterbis(BigInteger.valueOf(120));
-        konfiguration.setStaatsangehoerigkeit("deutsch");
-        konfiguration.setWohnsitz("München");
-        konfiguration.setAmtsperiodevon(LocalDate.of(2030, 1, 1));
-        konfiguration.setAmtsperiodebis(LocalDate.of(2034, 12, 31));
-        return konfiguration;
     }
 
     private static void assertEWOResponse(final EWOBuerger expectedEWOBuerger, final EWOBuergerDatenDto actualDto) {
