@@ -72,7 +72,7 @@ The project is built with technologies we use in our projects
 mkdir ~/develop
 cd ~/develop   
 git clone https://github.com/it-at-m/ehrenamt-justiz.git
-cd ehrenamt-justizz
+cd ehrenamt-justiz
 ```
 
 
