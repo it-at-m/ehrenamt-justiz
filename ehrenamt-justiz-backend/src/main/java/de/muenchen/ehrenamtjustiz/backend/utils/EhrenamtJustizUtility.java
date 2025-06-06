@@ -12,6 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public final class EhrenamtJustizUtility {
 
+    public static final String ERROR_NO_HITS = "Keine EWO-Daten gefunden. Evtl. verstorben oder verzogen?";
+
+    public static final String STATUS_UP = "UP";
+
+    public static final String STATUS_DOWN = "DOWN";
+
     private EhrenamtJustizUtility() {
 
     }
@@ -86,6 +92,35 @@ public final class EhrenamtJustizUtility {
         person.setBewerbungvom(LocalDate.now());
 
         return person;
+    }
+
+    public static EWOBuergerDatenDto getEwoBuergerDatenDto(final Person person) {
+        return EWOBuergerDatenDto.builder()
+                .familienname(person.getFamilienname())
+                .geburtsname(person.getGeburtsname())
+                .vorname(person.getVorname())
+                .geburtsdatum(person.getGeburtsdatum())
+                .geschlecht(person.getGeschlecht())
+                .ordnungsmerkmal(person.getEwoid())
+                .akademischergrad(person.getAkademischergrad())
+                .geburtsort(person.getGeburtsort())
+                .geburtsland(person.getGeburtsland())
+                .familienstand(person.getFamilienstand())
+                .staatsangehoerigkeit(person.getStaatsangehoerigkeit())
+                .wohnungsgeber(person.getWohnungsgeber())
+                .strasse(person.getStrasse())
+                .hausnummer(person.getHausnummer())
+                .appartmentnummer(person.getAppartmentnummer())
+                .buchstabehausnummer(person.getBuchstabehausnummer())
+                .stockwerk(person.getStockwerk())
+                .teilnummerhausnummer(person.getTeilnummerhausnummer())
+                .adresszusatz(person.getAdresszusatz())
+                .konfliktfeld(person.getKonfliktfeld())
+                .postleitzahl(person.getPostleitzahl())
+                .ort(person.getOrt())
+                .inmuenchenseit(person.getInmuenchenseit())
+                .wohnungsstatus(person.getWohnungsstatus())
+                .auskunftssperre(person.getAuskunftssperre()).build();
     }
 
     /**

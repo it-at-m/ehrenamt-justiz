@@ -1,6 +1,7 @@
 package de.muenchen.ehrenamtjustiz.backend.domain.dto;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 /*
  * This file will be overwritten on every change of the model!
@@ -17,6 +18,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString(callSuper = true)
+@SuperBuilder
 @EqualsAndHashCode()
 @NoArgsConstructor
 public class EWOBuergerSucheDto {

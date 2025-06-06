@@ -96,7 +96,6 @@ public class AenderungsServiceRestController {
             log.error("Fehler beim Speichern der Person mit om {}", om, e);
             throw new AenderungsServiceException("Fehler beim Update auf Datenbank ", om, false);
         }
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
