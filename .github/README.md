@@ -148,6 +148,18 @@ These users are only for testing purpose in docker desktop:
 | sosach | users with extended rights | clientrole_sondersachbearbeiter | sosach |
 | soadmin  |  administrator rights | clientrole_administrator | soadmin |
 
+#### Active Configuration
+After starting the application for the first time, an active configuration must first be created. All data is saved under this configuration.
+
+##### Create configuration
+<p>
+    <img height="800" src="../docs/images/AktiveKonfigurationAnlegen.PNG"  alt="Container Docker Desktop"/>
+</p>
+
+##### Activate configuration
+<p>
+    <img height="800" src="../docs/images/KonfigurationAktivieren.PNG"  alt="Container Docker Desktop"/>
+</p>
 
 ### Start online application in browser
 ```
