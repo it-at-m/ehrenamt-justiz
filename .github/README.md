@@ -158,7 +158,7 @@ After starting the application for the first time, an active configuration must 
 
 ##### Activate configuration
 <p>
-    <img height="800" src="../docs/images/KonfigurationAktivieren.PNG"  alt="Container Docker Desktop"/>
+    <img height="500" src="../docs/images/KonfigurationAktivieren.PNG"  alt="Container Docker Desktop"/>
 </p>
 
 ### Start online application in browser
