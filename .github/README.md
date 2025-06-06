@@ -72,18 +72,19 @@ The project is built with technologies we use in our projects
 mkdir ~/develop
 cd ~/develop   
 git clone https://github.com/it-at-m/ehrenamt-justiz.git
+cd ehrenamt-justizz
 ```
 
 
 ### Manual adaption for starting the EAI
 
-#### Manually adjust the source entrypoint.sh
+#### Manually adjust the source entrypoint.sh (~/develop\ehrenamt-justiz\ehrenamt-justiz-eai\entrypoint.sh)
 
 Details can be found in the documentation here:
 
 [ehrenamt-justiz/ehrenamt-justiz-eai/entrypoint.sh](https://github.com/it-at-m/ehrenamt-justiz/blob/main/ehrenamt-justiz-eai/entrypoint.sh)
 
-#### Manually adjust the user and password in docker-compose.yml for calling the EAI:
+#### Manually adjust the user and password in docker-compose.yml (~\develop\ehrenamt-justiz\stack\docker-compose.yml) for calling the EAI:
 ```
   eai:
    ...
