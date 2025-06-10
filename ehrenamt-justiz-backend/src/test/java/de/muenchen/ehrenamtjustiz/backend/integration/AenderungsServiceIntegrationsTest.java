@@ -2,6 +2,7 @@ package de.muenchen.ehrenamtjustiz.backend.integration;
 
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFILE;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -125,7 +126,8 @@ class AenderungsServiceIntegrationsTest {
                 .andExpect(jsonPath("$[0]").value("Familienname"))
                 .andExpect(jsonPath("$[1]").value("Vorname"))
                 .andExpect(jsonPath("$[2]").value("Geburtsdatum"))
-                .andExpect(jsonPath("$[3]").value("Geschlecht"));
+                .andExpect(jsonPath("$[3]").value("Geschlecht"))
+                .andExpect(jsonPath("$", hasSize(4)));
 
     }
 
