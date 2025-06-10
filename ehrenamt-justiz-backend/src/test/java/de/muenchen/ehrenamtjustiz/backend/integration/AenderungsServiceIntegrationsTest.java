@@ -3,6 +3,7 @@ package de.muenchen.ehrenamtjustiz.backend.integration;
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFILE;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -24,8 +25,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -62,6 +65,7 @@ class AenderungsServiceIntegrationsTest {
 
     public static final String MUENCHEN = "München";
     public static final String TEST_OM = "4711";
+    public static final String TEST_INVALID_OM = "4712";
 
     @Autowired
     private KonfigurationRepository konfigurationRepository;
@@ -77,16 +81,24 @@ class AenderungsServiceIntegrationsTest {
 
     private UUID personId;
 
+    private UUID activeConfigurationId;
+
     @BeforeEach
     void setUp() {
 
         // insert new active configuration
         final Konfiguration konfiguration = konfigurationRepository.save(Helper.createKonfiguration());
+        activeConfigurationId = konfiguration.getId();
 
         final Person person = createPerson(konfiguration);
         personRepository.save(person);
-
         personId = person.getId();
+    }
+
+    @AfterEach
+    void tearDown() {
+        personRepository.deleteById(personId);
+        konfigurationRepository.deleteById(activeConfigurationId);
     }
 
     @Test
@@ -101,7 +113,7 @@ class AenderungsServiceIntegrationsTest {
     }
 
     @Test
-    void testAenderungsservicePersonOhneKonflikt() throws Exception {
+    void testAenderungsservicePerson_OhneKonflikt() throws Exception {
 
         Mockito.when(ehrenamtJustizService.getKonflikteAenderungsService(any(Person.class)))
                 .thenReturn(new ArrayList<>(List.of()));
@@ -114,7 +126,7 @@ class AenderungsServiceIntegrationsTest {
     }
 
     @Test
-    void testAenderungsservicePersonMitKonflikten() throws Exception {
+    void testAenderungsservicePerson_MitKonflikten() throws Exception {
 
         Mockito.when(ehrenamtJustizService.getKonflikteAenderungsService(any(Person.class)))
                 .thenReturn(new ArrayList<>(Arrays.asList("Familienname", "Vorname", "Geburtsdatum", "Geschlecht")));
@@ -129,6 +141,14 @@ class AenderungsServiceIntegrationsTest {
                 .andExpect(jsonPath("$[3]").value("Geschlecht"))
                 .andExpect(jsonPath("$", hasSize(4)));
 
+        final Optional<Person> person = personRepository.findById(personId);
+        assertEquals(Status.KONFLIKT, person.get().getStatus());
+        assertEquals(4, person.get().getKonfliktfeld().size());
+        assertEquals("Familienname", person.get().getKonfliktfeld().get(0));
+        assertEquals("Vorname", person.get().getKonfliktfeld().get(1));
+        assertEquals("Geburtsdatum", person.get().getKonfliktfeld().get(2));
+        assertEquals("Geschlecht", person.get().getKonfliktfeld().get(3));
+
     }
 
     @Test
@@ -140,6 +160,30 @@ class AenderungsServiceIntegrationsTest {
         mockMvc.perform(post("/aenderungsservice/aenderungsservicePerson")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(TEST_OM))
+                .andExpect(status().is4xxClientError());
+
+    }
+
+    @Test
+    void testAenderungsservicePerson_InvalidOM() throws Exception {
+
+        mockMvc.perform(post("/aenderungsservice/aenderungsservicePerson")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(TEST_INVALID_OM))
+                .andExpect(status().is4xxClientError());
+
+    }
+
+    @Test
+    void testAenderungsservicePerson_NoActiveConfiguration() throws Exception {
+
+        final Konfiguration konfiguration = konfigurationRepository.findById(activeConfigurationId).get();
+        konfiguration.setAktiv(false);
+        konfigurationRepository.save(konfiguration);
+
+        mockMvc.perform(post("/aenderungsservice/aenderungsservicePerson")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(TEST_OM))
                 .andExpect(status().is4xxClientError());
 
     }
