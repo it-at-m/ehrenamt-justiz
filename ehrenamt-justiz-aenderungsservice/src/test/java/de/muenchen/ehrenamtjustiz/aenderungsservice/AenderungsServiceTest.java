@@ -6,12 +6,14 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 import de.muenchen.ehrenamtjustiz.aenderungsservice.service.AenderungsService;
+import java.util.List;
 import org.apache.coyote.BadRequestException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.RequestEntity;
@@ -51,14 +53,16 @@ class AenderungsServiceTest {
     void testAenderungsserviceMitErgebnisHTTP200() throws BadRequestException {
 
         // Mock the RestTemplate exchange method
-        final ResponseEntity<Void> mockResponse = ResponseEntity.ok(null);
+        final ResponseEntity<List<String>> mockResponse = ResponseEntity.ok(List.of());
 
-        when(restTemplate.exchange(any(RequestEntity.class), eq(Void.class))).thenReturn(mockResponse);
+        when(restTemplate.exchange(any(RequestEntity.class), eq(new ParameterizedTypeReference<List<String>>() {
+        }))).thenReturn(mockResponse);
 
         // Send EWO-OM
         final HttpStatusCode httpStatusCode = aenderungsService.consumeDirect("4711");
 
-        verify(restTemplate, times(1)).exchange(any(RequestEntity.class), eq(Void.class));
+        verify(restTemplate, times(1)).exchange(any(RequestEntity.class), eq(new ParameterizedTypeReference<List<String>>() {
+        }));
         assertEquals(HttpStatus.OK.value(), httpStatusCode.value());
 
     }
@@ -66,7 +70,8 @@ class AenderungsServiceTest {
     @Test
     void testAenderungsserviceMitHttpClientErrorException() {
 
-        when(restTemplate.exchange(any(RequestEntity.class), eq(Void.class))).thenThrow(HttpClientErrorException.class);
+        when(restTemplate.exchange(any(RequestEntity.class), eq(new ParameterizedTypeReference<List<String>>() {
+        }))).thenThrow(HttpClientErrorException.class);
 
         assertThrows(RuntimeException.class,
                 () -> {
@@ -80,9 +85,10 @@ class AenderungsServiceTest {
     void testAenderungsserviceOMisNull() {
 
         // Mock the RestTemplate exchange method
-        final ResponseEntity<Void> mockResponse = ResponseEntity.ok(null);
+        final ResponseEntity<List<String>> mockResponse = ResponseEntity.ok(null);
 
-        when(restTemplate.exchange(any(RequestEntity.class), eq(Void.class))).thenReturn(mockResponse);
+        when(restTemplate.exchange(any(RequestEntity.class), eq(new ParameterizedTypeReference<List<String>>() {
+        }))).thenReturn(mockResponse);
 
         assertThrows(BadRequestException.class,
                 () -> {

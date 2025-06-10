@@ -20,7 +20,10 @@ import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
 import de.muenchen.ehrenamtjustiz.backend.service.EhrenamtJustizService;
 import de.muenchen.ehrenamtjustiz.backend.utils.Helper;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,6 +60,7 @@ class AenderungsServiceIntegrationsTest {
             DockerImageName.parse(TestConstants.TESTCONTAINERS_POSTGRES_IMAGE));
 
     public static final String MUENCHEN = "München";
+    public static final String TEST_OM = "4711";
 
     @Autowired
     private KonfigurationRepository konfigurationRepository;
@@ -103,7 +107,7 @@ class AenderungsServiceIntegrationsTest {
 
         mockMvc.perform(post("/aenderungsservice/aenderungsservicePerson")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("4711"))
+                .content(TEST_OM))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isEmpty());
     }
@@ -116,7 +120,7 @@ class AenderungsServiceIntegrationsTest {
 
         mockMvc.perform(post("/aenderungsservice/aenderungsservicePerson")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("4711"))
+                .content(TEST_OM))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0]").value("Familienname"))
                 .andExpect(jsonPath("$[1]").value("Vorname"))
@@ -133,7 +137,7 @@ class AenderungsServiceIntegrationsTest {
 
         mockMvc.perform(post("/aenderungsservice/aenderungsservicePerson")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("4711"))
+                .content(TEST_OM))
                 .andExpect(status().is4xxClientError());
 
     }
@@ -144,7 +148,7 @@ class AenderungsServiceIntegrationsTest {
         final Person person = new Person();
         person.setId(UUID.randomUUID());
         person.setStatus(Status.VORSCHLAG);
-        person.setEwoid("4711");
+        person.setEwoid(TEST_OM);
         person.setFamilienname("Müller");
         person.setVorname("Hans");
         person.setGeburtsort(MUENCHEN);

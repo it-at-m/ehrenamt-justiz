@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.RequestEntity;
@@ -89,9 +90,10 @@ public class AenderungsService {
                 .build()
                 .toUri());
 
-        final ResponseEntity<List> responseEntity;
+        final ResponseEntity<List<String>> responseEntity;
         try {
-            responseEntity = restTemplate.exchange(request, List.class);
+            responseEntity = restTemplate.exchange(request, new ParameterizedTypeReference<>() {
+            });
         } catch (RestClientResponseException rcrException) {
             log.error("Fehler beim Aufruf des Änderungsservice bei OM " + om, rcrException);
 
