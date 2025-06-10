@@ -56,7 +56,7 @@ public class AenderungsServiceRestController {
     )
     @PostMapping("/aenderungsservicePerson")
     @SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.PreserveStackTrace", "PMD.AvoidRethrowingException" })
-    public ResponseEntity<Void> aenderungsServicePerson(@RequestBody final String om) {
+    public ResponseEntity<List<String>> aenderungsServicePerson(@RequestBody final String om) {
 
         final Person personByOM;
 
@@ -96,7 +96,7 @@ public class AenderungsServiceRestController {
             log.error("Fehler beim Speichern der Person mit om {}", om, e);
             throw new AenderungsServiceException("Fehler beim Update auf Datenbank ", om, false);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(konflikte, HttpStatus.OK);
     }
 
     private List<String> ermittelnKonflikte(final Person person) {

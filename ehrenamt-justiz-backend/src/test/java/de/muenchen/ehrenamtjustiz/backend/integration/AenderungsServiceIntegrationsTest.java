@@ -5,6 +5,7 @@ import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFI
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
@@ -95,25 +96,32 @@ class AenderungsServiceIntegrationsTest {
     }
 
     @Test
-    void testAenderungsservicePerson() throws Exception {
+    void testAenderungsservicePersonOhneKonflikt() throws Exception {
 
         Mockito.when(ehrenamtJustizService.getKonflikteAenderungsService(any(Person.class)))
-                .thenReturn(new ArrayList<>(Arrays.asList("Familienname", "Vorname")));
+                .thenReturn(new ArrayList<>(List.of()));
 
         mockMvc.perform(post("/aenderungsservice/aenderungsservicePerson")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("4711"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isEmpty());
+    }
 
-        /*
-         *
-         * The following program code does not work because the change to the Person table in the service
-         * class is executed but is not available in the test class when you read it here:
-         * final Optional<Person> person = personRepository.findById(personId);
-         *
-         * assertEquals(Status.KONFLIKT, person.get().getStatus());
-         * assertEquals(2, person.get().getKonfliktfeld().size());
-         */
+    @Test
+    void testAenderungsservicePersonMitKonflikten() throws Exception {
+
+        Mockito.when(ehrenamtJustizService.getKonflikteAenderungsService(any(Person.class)))
+                .thenReturn(new ArrayList<>(Arrays.asList("Familienname", "Vorname", "Geburtsdatum", "Geschlecht")));
+
+        mockMvc.perform(post("/aenderungsservice/aenderungsservicePerson")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("4711"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0]").value("Familienname"))
+                .andExpect(jsonPath("$[1]").value("Vorname"))
+                .andExpect(jsonPath("$[2]").value("Geburtsdatum"))
+                .andExpect(jsonPath("$[3]").value("Geschlecht"));
 
     }
 
