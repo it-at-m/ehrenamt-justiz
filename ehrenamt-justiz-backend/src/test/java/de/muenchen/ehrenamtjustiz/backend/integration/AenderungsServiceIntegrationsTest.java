@@ -199,7 +199,7 @@ class AenderungsServiceIntegrationsTest {
         person.setVorname("Hans");
         person.setGeburtsort(MUENCHEN);
         person.setGeburtsland("Deutschland");
-        person.setGeburtsdatum(LocalDate.of(1897, 1, 1)); // Ungültig
+        person.setGeburtsdatum(LocalDate.of(1980, 1, 1));
         person.setKonfigurationid(konfiguration.getId());
         person.setWohnungsstatus(Wohnungsstatus.HAUPTWOHNUNG);
         person.setFamilienstand("VH");
