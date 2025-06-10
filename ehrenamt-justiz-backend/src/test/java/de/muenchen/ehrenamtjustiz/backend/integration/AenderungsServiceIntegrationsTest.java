@@ -168,8 +168,8 @@ class AenderungsServiceIntegrationsTest {
     void testAenderungsservicePerson_InvalidOM() throws Exception {
 
         mockMvc.perform(post("/aenderungsservice/aenderungsservicePerson")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(TEST_INVALID_OM))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(TEST_INVALID_OM))
                 .andExpect(status().is4xxClientError());
 
     }
@@ -182,8 +182,8 @@ class AenderungsServiceIntegrationsTest {
         konfigurationRepository.save(konfiguration);
 
         mockMvc.perform(post("/aenderungsservice/aenderungsservicePerson")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(TEST_OM))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(TEST_OM))
                 .andExpect(status().is4xxClientError());
 
     }
