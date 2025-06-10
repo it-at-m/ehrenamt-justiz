@@ -37,7 +37,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.http.*;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -66,6 +66,7 @@ class AenderungsServiceIntegrationsTest {
     public static final String MUENCHEN = "München";
     public static final String TEST_OM = "4711";
     public static final String TEST_INVALID_OM = "4712";
+    public static final String URI_AENDERUNGSSERVICE = "/aenderungsservice/aenderungsservicePerson";
 
     @Autowired
     private KonfigurationRepository konfigurationRepository;
@@ -118,7 +119,7 @@ class AenderungsServiceIntegrationsTest {
         Mockito.when(ehrenamtJustizService.getKonflikteAenderungsService(any(Person.class)))
                 .thenReturn(new ArrayList<>(List.of()));
 
-        mockMvc.perform(post("/aenderungsservice/aenderungsservicePerson")
+        mockMvc.perform(post(URI_AENDERUNGSSERVICE)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(TEST_OM))
                 .andExpect(status().isOk())
@@ -131,7 +132,7 @@ class AenderungsServiceIntegrationsTest {
         Mockito.when(ehrenamtJustizService.getKonflikteAenderungsService(any(Person.class)))
                 .thenReturn(new ArrayList<>(Arrays.asList("Familienname", "Vorname", "Geburtsdatum", "Geschlecht")));
 
-        mockMvc.perform(post("/aenderungsservice/aenderungsservicePerson")
+        mockMvc.perform(post(URI_AENDERUNGSSERVICE)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(TEST_OM))
                 .andExpect(status().isOk())
@@ -157,7 +158,7 @@ class AenderungsServiceIntegrationsTest {
         Mockito.when(ehrenamtJustizService.getKonflikteAenderungsService(any(Person.class)))
                 .thenThrow(new RestClientException("Unexpected error"));
 
-        mockMvc.perform(post("/aenderungsservice/aenderungsservicePerson")
+        mockMvc.perform(post(URI_AENDERUNGSSERVICE)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(TEST_OM))
                 .andExpect(status().is4xxClientError());
@@ -167,7 +168,7 @@ class AenderungsServiceIntegrationsTest {
     @Test
     void testAenderungsservicePerson_InvalidOM() throws Exception {
 
-        mockMvc.perform(post("/aenderungsservice/aenderungsservicePerson")
+        mockMvc.perform(post(URI_AENDERUNGSSERVICE)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(TEST_INVALID_OM))
                 .andExpect(status().is4xxClientError());
@@ -181,7 +182,7 @@ class AenderungsServiceIntegrationsTest {
         konfiguration.setAktiv(false);
         konfigurationRepository.save(konfiguration);
 
-        mockMvc.perform(post("/aenderungsservice/aenderungsservicePerson")
+        mockMvc.perform(post(URI_AENDERUNGSSERVICE)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(TEST_OM))
                 .andExpect(status().is4xxClientError());
