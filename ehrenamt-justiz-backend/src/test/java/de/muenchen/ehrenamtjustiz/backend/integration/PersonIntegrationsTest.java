@@ -85,6 +85,7 @@ class PersonIntegrationsTest {
 
     @BeforeEach
     void before() {
+        personRepository.deleteAll();
         konfigurationRepository.deleteAll();
 
         // insert new configuration

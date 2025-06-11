@@ -67,6 +67,7 @@ class EhrenamtJustizIntegrationsTest {
 
     @BeforeEach
     void before() {
+        personRepository.deleteAll();
         konfigurationRepository.deleteAll();
 
         final Konfiguration konfiguration = konfigurationRepository.save(new KonfigurationTestDataBuilder().build());

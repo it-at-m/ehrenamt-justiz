@@ -83,6 +83,8 @@ class AenderungsServiceIntegrationsTest {
 
     @BeforeEach
     void setUp() {
+        personRepository.deleteAll();
+        konfigurationRepository.deleteAll();
 
         // insert new active configuration
         final Konfiguration konfiguration = konfigurationRepository.save(new KonfigurationTestDataBuilder().build());
