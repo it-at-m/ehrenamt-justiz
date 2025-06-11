@@ -15,8 +15,8 @@ import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerDatenDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerSucheDto;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.service.impl.EWOServiceImpl;
+import de.muenchen.ehrenamtjustiz.backend.testdata.KonfigurationTestDataBuilder;
 import de.muenchen.ehrenamtjustiz.backend.utils.EhrenamtJustizUtility;
-import de.muenchen.ehrenamtjustiz.backend.utils.Helper;
 import de.muenchen.ehrenamtjustiz.exception.AenderungsServiceException;
 import java.time.LocalDate;
 import java.util.List;
@@ -67,7 +67,7 @@ class EWOServiceTest {
     void setUp() {
 
         // insert new active configuration
-        konfigurationRepository.save(Helper.createKonfiguration());
+        konfigurationRepository.save(new KonfigurationTestDataBuilder().build());
     }
 
     @Test

@@ -14,14 +14,12 @@ import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;
 import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
 import de.muenchen.ehrenamtjustiz.backend.domain.Person;
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
 import de.muenchen.ehrenamtjustiz.backend.service.EhrenamtJustizService;
-import de.muenchen.ehrenamtjustiz.backend.utils.Helper;
-import java.time.LocalDate;
+import de.muenchen.ehrenamtjustiz.backend.testdata.KonfigurationTestDataBuilder;
+import de.muenchen.ehrenamtjustiz.backend.testdata.PersonTestDataBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -63,7 +61,6 @@ class AenderungsServiceIntegrationsTest {
     private static final PostgreSQLContainer<?> POSTGRE_SQL_CONTAINER = new PostgreSQLContainer<>(
             DockerImageName.parse(TestConstants.TESTCONTAINERS_POSTGRES_IMAGE));
 
-    public static final String MUENCHEN = "München";
     public static final String TEST_OM = "4711";
     public static final String TEST_INVALID_OM = "4712";
     public static final String URI_AENDERUNGSSERVICE = "/aenderungsservice/aenderungsservicePerson";
@@ -88,7 +85,7 @@ class AenderungsServiceIntegrationsTest {
     void setUp() {
 
         // insert new active configuration
-        final Konfiguration konfiguration = konfigurationRepository.save(Helper.createKonfiguration());
+        final Konfiguration konfiguration = konfigurationRepository.save(new KonfigurationTestDataBuilder().build());
         activeConfigurationId = konfiguration.getId();
 
         final Person person = createPerson(konfiguration);
@@ -192,29 +189,6 @@ class AenderungsServiceIntegrationsTest {
     private static @NotNull
     Person createPerson(final Konfiguration konfiguration) {
         // new person
-        final Person person = new Person();
-        person.setId(UUID.randomUUID());
-        person.setStatus(Status.VORSCHLAG);
-        person.setEwoid(TEST_OM);
-        person.setFamilienname("Müller");
-        person.setVorname("Hans");
-        person.setGeburtsort(MUENCHEN);
-        person.setGeburtsland("Deutschland");
-        person.setGeburtsdatum(LocalDate.of(1980, 1, 1));
-        person.setKonfigurationid(konfiguration.getId());
-        person.setWohnungsstatus(Wohnungsstatus.HAUPTWOHNUNG);
-        person.setFamilienstand("VH");
-        person.setPostleitzahl("80634");
-        person.setOrt(MUENCHEN); // gültig
-        person.setStrasse("Ludwigstr.");
-        person.setHausnummer("7");
-        person.setInmuenchenseit(LocalDate.of(2023, 1, 1));
-        person.setGeschlecht(Geschlecht.MAENNLICH);
-        person.setBewerbungvom(LocalDate.of(2024, 9, 17));
-        final List<String> sa = new ArrayList<>();
-        sa.add("englisch");
-        sa.add("deutsch");
-        person.setStaatsangehoerigkeit(sa); // gültig
-        return person;
+        return new PersonTestDataBuilder().withKonfigurationid(konfiguration.getId()).build();
     }
 }

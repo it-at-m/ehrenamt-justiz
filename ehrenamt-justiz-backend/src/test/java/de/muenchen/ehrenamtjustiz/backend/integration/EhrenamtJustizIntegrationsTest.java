@@ -10,13 +10,12 @@ import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
 import de.muenchen.ehrenamtjustiz.backend.domain.Person;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerDatenDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonDto;
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
-import java.math.BigInteger;
+import de.muenchen.ehrenamtjustiz.backend.testdata.KonfigurationTestDataBuilder;
+import de.muenchen.ehrenamtjustiz.backend.testdata.PersonTestDataBuilder;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,19 +69,8 @@ class EhrenamtJustizIntegrationsTest {
     void before() {
         konfigurationRepository.deleteAll();
 
-        final Konfiguration konfiguration = new Konfiguration();
-        konfiguration.setId(UUID.randomUUID());
-        konfiguration.setAktiv(true);
-        konfiguration.setEhrenamtjustizart(Ehrenamtjustizart.VERWALTUNGSRICHTER);
-        konfiguration.setBezeichnung("Test");
-        konfiguration.setAltervon(BigInteger.valueOf(18));
-        konfiguration.setAlterbis(BigInteger.valueOf(100));
-        konfiguration.setStaatsangehoerigkeit("deutsch");
-        konfiguration.setWohnsitz(MUENCHEN);
-        konfiguration.setAmtsperiodevon(LocalDate.of(2025, 1, 1));
-        konfiguration.setAmtsperiodebis(LocalDate.of(2029, 12, 31));
+        final Konfiguration konfiguration = new KonfigurationTestDataBuilder().build();
         konfigurationRepository.save(konfiguration);
-
         uuidKonfiguration = konfiguration.getId();
     }
 
@@ -109,29 +97,7 @@ class EhrenamtJustizIntegrationsTest {
     void test_pruefenNeuePerson_FOUND() {
 
         // new person
-        final Person person = new Person();
-        person.setId(UUID.randomUUID());
-        person.setStatus(Status.VORSCHLAG);
-        person.setEwoid("4711");
-        person.setFamilienname("Müller");
-        person.setVorname("Hans");
-        person.setGeburtsort(MUENCHEN);
-        person.setGeburtsland("Deutschland");
-        person.setGeburtsdatum(LocalDate.of(1897, 1, 1)); // Ungültig
-        person.setKonfigurationid(uuidKonfiguration);
-        person.setWohnungsstatus(Wohnungsstatus.HAUPTWOHNUNG);
-        person.setFamilienstand("ledig");
-        person.setPostleitzahl("80634");
-        person.setOrt(MUENCHEN); // gültig
-        person.setStrasse("Ludwigstr.");
-        person.setHausnummer("7");
-        person.setInmuenchenseit(LocalDate.of(2023, 1, 1));
-        person.setGeschlecht(Geschlecht.MAENNLICH);
-        person.setBewerbungvom(LocalDate.of(2024, 9, 17));
-        final List<String> sa = new ArrayList<>();
-        sa.add("englisch");
-        sa.add("deutsch");
-        person.setStaatsangehoerigkeit(sa); // gültig
+        final Person person = new PersonTestDataBuilder().withKonfigurationid(uuidKonfiguration).build();
         personRepository.save(person);
 
         final var headers = new HttpHeaders(); //NOPMD
@@ -161,7 +127,7 @@ class EhrenamtJustizIntegrationsTest {
         eWOBuergerDatenDto.setGeburtsland("Deutschland");
         eWOBuergerDatenDto.setGeburtsdatum(LocalDate.of(1897, 1, 1)); // Ungültig
         eWOBuergerDatenDto.setWohnungsstatus(Wohnungsstatus.HAUPTWOHNUNG);
-        eWOBuergerDatenDto.setFamilienstand("ledig");
+        eWOBuergerDatenDto.setFamilienstand("VH");
         eWOBuergerDatenDto.setPostleitzahl("80634");
         eWOBuergerDatenDto.setOrt(MUENCHEN); // gültig
         eWOBuergerDatenDto.setStrasse("Ludwigstr.");

@@ -10,14 +10,9 @@ import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;
 import de.muenchen.ehrenamtjustiz.backend.domain.Person;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerDatenDto;
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
+import de.muenchen.ehrenamtjustiz.backend.testdata.PersonTestDataBuilder;
 import de.muenchen.ehrenamtjustiz.backend.utils.EhrenamtJustizUtility;
-import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -203,47 +198,10 @@ class EhrenamtJustizServiceTest {
     }
 
     private static Person getBewerberDaten() {
-        return Person.builder()
-                .id(UUID.randomUUID())
-                .ewoid("1")
-                .konfigurationid(UUID.randomUUID())
-                .familienname("Huber")
-                .geburtsname("Müller")
-                .vorname("Peter")
-                .geburtsdatum(LocalDate.of(1960, 1, 1))
-                .geschlecht(Geschlecht.MAENNLICH)
-                .akademischergrad("Dr.")
-                .geburtsort("München")
-                .geburtsland("Deutschland")
-                .familienstand("LD")
-                .strasse("Ludwigstr.")
-                .hausnummer("1")
-                .appartmentnummer("7")
-                .buchstabehausnummer("A")
-                .stockwerk("5")
-                .teilnummerhausnummer("1")
-                .adresszusatz("-")
-                .postleitzahl("80634")
-                .ort("München")
-                .inmuenchenseit(LocalDate.of(2000, 1, 1))
-                .wohnungsgeber("Fam. Bauer")
-                .wohnungsstatus(Wohnungsstatus.HAUPTWOHNUNG)
-                .derzeitausgeuebterberuf("Lehrer")
-                .arbeitgeber("LHM München").telefonnummer("089-3084544")
-                .telefongesch("089-233-30584")
-                .telefonmobil("0151-308543544")
-                .mailadresse("peter.huber@gmx.de")
-                .ausgeuebteehrenaemter("-")
-                .onlinebewerbung(false)
-                .neuervorschlag(false)
-                .warbereitstaetigals(false)
-                .warbereitstaetigalsvorvorperiode(false)
-                .bewerbungvom(LocalDate.now())
-                .status(Status.VORSCHLAG)
-                .bemerkung("-")
-                .staatsangehoerigkeit(List.of("deutsch", "englisch"))
-                .auskunftssperre(List.of("S"))
-                .konfliktfeld(Collections.emptyList()).build();
+        return new PersonTestDataBuilder().withGeburtsname("Meyer").withAkademischergrad("Dr.").withAppartmentnummer("7").withBuchstabehausnummer("A")
+                .withStockwerk("1")
+                .withTeilnummerhausnummer("1").withAdresszusatz("--").withWohnungsgeber("Fam. Bauer").withAuskunftssperre(List.of("S")).build();
+
     }
 
 }
