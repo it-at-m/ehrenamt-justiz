@@ -69,8 +69,7 @@ class EhrenamtJustizIntegrationsTest {
     void before() {
         konfigurationRepository.deleteAll();
 
-        final Konfiguration konfiguration = new KonfigurationTestDataBuilder().build();
-        konfigurationRepository.save(konfiguration);
+        final Konfiguration konfiguration = konfigurationRepository.save(new KonfigurationTestDataBuilder().build());
         uuidKonfiguration = konfiguration.getId();
     }
 
