@@ -38,6 +38,11 @@ public class PersonTestDataBuilder {
         person.setStaatsangehoerigkeit(Arrays.asList("englisch", "deutsch"));
     }
 
+    public PersonTestDataBuilder withEwoid(final String ewoid) {
+        person.setEwoid(ewoid);
+        return this;
+    }
+
     public PersonTestDataBuilder withKonfigurationid(final UUID konfigurationid) {
         person.setKonfigurationid(konfigurationid);
         return this;
