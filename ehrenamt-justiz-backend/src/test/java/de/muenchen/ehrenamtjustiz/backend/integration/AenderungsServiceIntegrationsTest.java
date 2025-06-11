@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -95,12 +94,6 @@ class AenderungsServiceIntegrationsTest {
         personId = person.getId();
     }
 
-    @AfterEach
-    void tearDown() {
-        personRepository.deleteById(personId);
-        konfigurationRepository.deleteById(activeConfigurationId);
-    }
-
     @Test
     void testEWOService() {
 
@@ -119,7 +112,7 @@ class AenderungsServiceIntegrationsTest {
                 .thenReturn(new ArrayList<>(List.of()));
 
         mockMvc.perform(post(URI_AENDERUNGSSERVICE)
-                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.TEXT_PLAIN)
                 .content(TEST_OM))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isEmpty());
@@ -132,7 +125,7 @@ class AenderungsServiceIntegrationsTest {
                 .thenReturn(new ArrayList<>(Arrays.asList("Familienname", "Vorname", "Geburtsdatum", "Geschlecht")));
 
         mockMvc.perform(post(URI_AENDERUNGSSERVICE)
-                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.TEXT_PLAIN)
                 .content(TEST_OM))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0]").value("Familienname"))
@@ -158,7 +151,7 @@ class AenderungsServiceIntegrationsTest {
                 .thenThrow(new RestClientException("Unexpected error"));
 
         mockMvc.perform(post(URI_AENDERUNGSSERVICE)
-                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.TEXT_PLAIN)
                 .content(TEST_OM))
                 .andExpect(status().is4xxClientError());
 
@@ -168,7 +161,7 @@ class AenderungsServiceIntegrationsTest {
     void testAenderungsservicePerson_InvalidOM() throws Exception {
 
         mockMvc.perform(post(URI_AENDERUNGSSERVICE)
-                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.TEXT_PLAIN)
                 .content(TEST_INVALID_OM))
                 .andExpect(status().is4xxClientError());
 
@@ -182,7 +175,7 @@ class AenderungsServiceIntegrationsTest {
         konfigurationRepository.save(konfiguration);
 
         mockMvc.perform(post(URI_AENDERUNGSSERVICE)
-                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.TEXT_PLAIN)
                 .content(TEST_OM))
                 .andExpect(status().is4xxClientError());
 
