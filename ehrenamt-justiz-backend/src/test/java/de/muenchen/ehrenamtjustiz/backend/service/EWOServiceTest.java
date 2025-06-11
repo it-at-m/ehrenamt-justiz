@@ -54,6 +54,37 @@ class EWOServiceTest {
     private static final PostgreSQLContainer<?> POSTGRE_SQL_CONTAINER = new PostgreSQLContainer<>(
             DockerImageName.parse(TestConstants.TESTCONTAINERS_POSTGRES_IMAGE));
 
+    private static final EWOBuerger EWO_BUERGER = EWOBuerger.builder()
+            .ordnungsmerkmal("1")
+            .familienname("Huber")
+            .geburtsname("Müller")
+            .vorname("Peter")
+            .geburtsdatum(LocalDate.of(1960, 1, 1))
+            .geschlecht(Geschlecht.MAENNLICH)
+            .akademischerGrad("Dr.")
+            .geburtsort("München")
+            .geburtsland("Deutschland")
+            .familienstand("LD")
+            .strasse("Ludwigstr.")
+            .hausnummer("1")
+            .appartmentnummer("7")
+            .buchstabeHausnummer("a")
+            .stockwerk("5")
+            .teilnummerHausnummer("1")
+            .zusatz("-")
+            .postleitzahl("80634")
+            .ort("München")
+            .inMuenchenSeit(LocalDate.of(2000, 1, 1))
+            .wohnungsgeber("Fam. Bauer")
+            .wohnungsstatus(Wohnungsstatus.HAUPTWOHNUNG)
+            .staatsangehoerigkeit(List.of("deutsch", "englisch"))
+            .auskunftssperren(List.of("S")).build();
+
+    private static final EWOBuergerSucheDto EWO_BUERGER_SUCHE_DTO = EWOBuergerSucheDto.builder()
+            .vorname("Peter")
+            .familienname("Huber")
+            .geburtsdatum(LocalDate.of(1960, 1, 1)).build();
+
     @MockitoBean
     private RestTemplate restTemplate;
 
@@ -82,7 +113,7 @@ class EWOServiceTest {
     @Test
     void testEwoSucheMitOM_Success() {
 
-        final EWOBuerger expectedEWOBuerger = getEwoBuerger();
+        final EWOBuerger expectedEWOBuerger = EWO_BUERGER;
 
         final ResponseEntity<EWOBuerger> responseEntity = ResponseEntity.ok(expectedEWOBuerger);
         when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
@@ -130,17 +161,15 @@ class EWOServiceTest {
     @Test
     void testEwoSuche_Success() {
 
-        final EWOBuerger expectedEWOBuerger = getEwoBuerger();
+        final EWOBuerger expectedEWOBuerger = EWO_BUERGER;
 
         final EWOBuerger[] expectedEWOBuergers = { expectedEWOBuerger };
 
         final ResponseEntity<EWOBuerger[]> responseEntity = ResponseEntity.ok(expectedEWOBuergers);
-        when(restTemplate.exchange(any(String.class), any(HttpMethod.class), any(HttpEntity.class), eq(EWOBuerger[].class)))
+        when(restTemplate.exchange(anyString(), any(HttpMethod.class), any(HttpEntity.class), eq(EWOBuerger[].class)))
                 .thenReturn(responseEntity);
 
-        final EWOBuergerSucheDto eWOBuergerSucheDto = getEWOBuergerSucheDto();
-
-        final List<EWOBuergerDatenDto> eWOBuergerDatenDto = ewoService.ewoSuche(eWOBuergerSucheDto);
+        final List<EWOBuergerDatenDto> eWOBuergerDatenDto = ewoService.ewoSuche(EWO_BUERGER_SUCHE_DTO);
 
         assertEWOResponse(expectedEWOBuerger, eWOBuergerDatenDto.getFirst());
 
@@ -149,19 +178,17 @@ class EWOServiceTest {
     @Test
     void testEwoSuche_HttpClientErrorException() {
 
-        when(restTemplate.exchange(any(String.class), any(HttpMethod.class), any(HttpEntity.class), eq(EWOBuerger[].class)))
+        when(restTemplate.exchange(anyString(), any(HttpMethod.class), any(HttpEntity.class), eq(EWOBuerger[].class)))
                 .thenThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST));
 
-        final EWOBuergerSucheDto eWOBuergerSucheDto = getEWOBuergerSucheDto();
-
-        assertThrows(HttpClientErrorException.class, () -> ewoService.ewoSuche(eWOBuergerSucheDto));
+        assertThrows(HttpClientErrorException.class, () -> ewoService.ewoSuche(EWO_BUERGER_SUCHE_DTO));
 
     }
 
     @Test
     void testEwoSucheMitOMAenderungsService_Success() {
 
-        final EWOBuerger expectedEWOBuerger = getEwoBuerger();
+        final EWOBuerger expectedEWOBuerger = EWO_BUERGER;
 
         final ResponseEntity<EWOBuerger> responseEntity = ResponseEntity.ok(expectedEWOBuerger);
         when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
@@ -206,7 +233,7 @@ class EWOServiceTest {
 
         final ResponseEntity<Void> responseEntity = ResponseEntity.ok(null);
 
-        when(restTemplate.getForEntity(any(String.class), eq(Void.class)))
+        when(restTemplate.getForEntity(anyString(), eq(Void.class)))
                 .thenReturn(responseEntity);
 
         final ResponseEntity<String> status = ewoService.ewoEaiStatus();
@@ -221,7 +248,7 @@ class EWOServiceTest {
 
         final ResponseEntity<Void> responseEntity = ResponseEntity.status(HttpStatus.REQUEST_TIMEOUT).body(null);
 
-        when(restTemplate.getForEntity(any(String.class), eq(Void.class)))
+        when(restTemplate.getForEntity(anyString(), eq(Void.class)))
                 .thenReturn(responseEntity);
 
         final ResponseEntity<String> status = ewoService.ewoEaiStatus();
@@ -234,7 +261,7 @@ class EWOServiceTest {
     @Test
     void testEwoEaiStatus_Exception() {
 
-        when(restTemplate.getForEntity(any(String.class), eq(Void.class)))
+        when(restTemplate.getForEntity(anyString(), eq(Void.class)))
                 .thenThrow(new RestClientException("Unexpected error"));
 
         final ResponseEntity<String> status = ewoService.ewoEaiStatus();
@@ -271,38 +298,4 @@ class EWOServiceTest {
         assertEquals(expectedEWOBuerger.getAuskunftssperren(), actualDto.getAuskunftssperre());
     }
 
-    private static EWOBuerger getEwoBuerger() {
-        return EWOBuerger.builder()
-                .ordnungsmerkmal("1")
-                .familienname("Huber")
-                .geburtsname("Müller")
-                .vorname("Peter")
-                .geburtsdatum(LocalDate.of(1960, 1, 1))
-                .geschlecht(Geschlecht.MAENNLICH)
-                .akademischerGrad("Dr.")
-                .geburtsort("München")
-                .geburtsland("Deutschland")
-                .familienstand("LD")
-                .strasse("Ludwigstr.")
-                .hausnummer("1")
-                .appartmentnummer("7")
-                .buchstabeHausnummer("a")
-                .stockwerk("5")
-                .teilnummerHausnummer("1")
-                .zusatz("-")
-                .postleitzahl("80634")
-                .ort("München")
-                .inMuenchenSeit(LocalDate.of(2000, 1, 1))
-                .wohnungsgeber("Fam. Bauer")
-                .wohnungsstatus(Wohnungsstatus.HAUPTWOHNUNG)
-                .staatsangehoerigkeit(List.of("deutsch", "englisch"))
-                .auskunftssperren(List.of("S")).build();
-    }
-
-    private static EWOBuergerSucheDto getEWOBuergerSucheDto() {
-        return EWOBuergerSucheDto.builder()
-                .vorname("Peter")
-                .familienname("Huber")
-                .geburtsdatum(LocalDate.of(1960, 1, 1)).build();
-    }
 }

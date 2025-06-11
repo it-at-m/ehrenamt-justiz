@@ -13,7 +13,7 @@ public class PersonTestDataBuilder {
 
     public static final String MUENCHEN = "München";
 
-    final private Person person = new Person();
+    private final Person person = new Person();
 
     public PersonTestDataBuilder() {
 

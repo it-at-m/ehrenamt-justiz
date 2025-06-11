@@ -3,7 +3,8 @@ package de.muenchen.ehrenamtjustiz.backend.service;
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFILE;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.when;
 
 import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
@@ -63,7 +64,7 @@ class EhrenamtJustizServiceTest {
 
         final EWOBuergerDatenDto ewoBuergerDatenDto = EhrenamtJustizUtility.getEwoBuergerDatenDto(person);
 
-        when(ewoService.ewoSucheMitOM(any(String.class))).thenReturn(ewoBuergerDatenDto);
+        when(ewoService.ewoSucheMitOM(anyString())).thenReturn(ewoBuergerDatenDto);
 
         final List<String> konflikte = ehrenamtJustizService.getKonflikte(person);
 
@@ -76,7 +77,7 @@ class EhrenamtJustizServiceTest {
 
         final EWOBuergerDatenDto emptyEwoBuergerDatenDto = EWOBuergerDatenDto.builder().build();
 
-        when(ewoService.ewoSucheMitOM(any(String.class))).thenReturn(emptyEwoBuergerDatenDto);
+        when(ewoService.ewoSucheMitOM(anyString())).thenReturn(emptyEwoBuergerDatenDto);
 
         final Person person = getBewerberDaten();
 
@@ -94,7 +95,7 @@ class EhrenamtJustizServiceTest {
         final Person person = getBewerberDaten();
         final EWOBuergerDatenDto ewoBuergerDatenDto = EhrenamtJustizUtility.getEwoBuergerDatenDto(person);
 
-        when(ewoService.ewoSucheMitOM(null)).thenReturn(ewoBuergerDatenDto);
+        when(ewoService.ewoSucheMitOM(isNull())).thenReturn(ewoBuergerDatenDto);
 
         final Person emptyPerson = Person.builder().build();
 
@@ -111,7 +112,7 @@ class EhrenamtJustizServiceTest {
 
         final Person person = getBewerberDaten();
 
-        when(ewoService.ewoSucheMitOM(any(String.class))).thenReturn(null);
+        when(ewoService.ewoSucheMitOM(anyString())).thenReturn(null);
 
         final List<String> konflikte = ehrenamtJustizService.getKonflikte(person);
 
@@ -127,7 +128,7 @@ class EhrenamtJustizServiceTest {
 
         final EWOBuergerDatenDto ewoBuergerDatenDto = EhrenamtJustizUtility.getEwoBuergerDatenDto(person);
 
-        when(ewoService.ewoSucheMitOMAenderungsService(any(String.class))).thenReturn(ewoBuergerDatenDto);
+        when(ewoService.ewoSucheMitOMAenderungsService(anyString())).thenReturn(ewoBuergerDatenDto);
 
         final List<String> konflikte = ehrenamtJustizService.getKonflikteAenderungsService(person);
 
@@ -140,7 +141,7 @@ class EhrenamtJustizServiceTest {
 
         final EWOBuergerDatenDto emptyEwoBuergerDatenDto = EWOBuergerDatenDto.builder().build();
 
-        when(ewoService.ewoSucheMitOMAenderungsService(any(String.class))).thenReturn(emptyEwoBuergerDatenDto);
+        when(ewoService.ewoSucheMitOMAenderungsService(anyString())).thenReturn(emptyEwoBuergerDatenDto);
 
         final Person person = getBewerberDaten();
 
@@ -158,7 +159,7 @@ class EhrenamtJustizServiceTest {
         final Person person = getBewerberDaten();
         final EWOBuergerDatenDto ewoBuergerDatenDto = EhrenamtJustizUtility.getEwoBuergerDatenDto(person);
 
-        when(ewoService.ewoSucheMitOMAenderungsService(null)).thenReturn(ewoBuergerDatenDto);
+        when(ewoService.ewoSucheMitOMAenderungsService(isNull())).thenReturn(ewoBuergerDatenDto);
 
         final Person emptyPerson = Person.builder().build();
 
@@ -175,7 +176,7 @@ class EhrenamtJustizServiceTest {
 
         final Person person = getBewerberDaten();
 
-        when(ewoService.ewoSucheMitOMAenderungsService(any(String.class))).thenReturn(null);
+        when(ewoService.ewoSucheMitOMAenderungsService(anyString())).thenReturn(null);
 
         final List<String> konflikte = ehrenamtJustizService.getKonflikteAenderungsService(person);
 
