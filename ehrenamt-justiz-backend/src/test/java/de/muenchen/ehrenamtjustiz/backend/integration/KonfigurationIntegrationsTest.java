@@ -8,11 +8,8 @@ import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;
 import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.KonfigurationDto;
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.util.UUID;
+import de.muenchen.ehrenamtjustiz.backend.testdata.KonfigurationTestDataBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -40,7 +37,6 @@ import org.testcontainers.utility.DockerImageName;
 @ActiveProfiles(profiles = { SPRING_TEST_PROFILE, SPRING_NO_SECURITY_PROFILE })
 class KonfigurationIntegrationsTest {
 
-    public static final String MUENCHEN = "München";
     @Autowired
     public KonfigurationRepository konfigurationRepository;
     @Autowired
@@ -56,18 +52,7 @@ class KonfigurationIntegrationsTest {
     public void before() {
         konfigurationRepository.deleteAll();
 
-        final Konfiguration konfiguration = new Konfiguration();
-        konfiguration.setId(UUID.randomUUID());
-        konfiguration.setAktiv(true);
-        konfiguration.setEhrenamtjustizart(Ehrenamtjustizart.SCHOEFFEN);
-        konfiguration.setBezeichnung("Schöffen");
-        konfiguration.setAltervon(BigInteger.valueOf(25));
-        konfiguration.setAlterbis(BigInteger.valueOf(120));
-        konfiguration.setStaatsangehoerigkeit("deutsch");
-        konfiguration.setWohnsitz(MUENCHEN);
-        konfiguration.setAmtsperiodevon(LocalDate.of(2030, 4, 1));
-        konfiguration.setAmtsperiodebis(LocalDate.of(2035, 3, 31));
-        konfigurationRepository.save(konfiguration);
+        konfigurationRepository.save(new KonfigurationTestDataBuilder().build());
     }
 
     @Test
@@ -93,17 +78,7 @@ class KonfigurationIntegrationsTest {
     @Test
     void testUpdateKonfiguration() {
 
-        final Konfiguration konfiguration = new Konfiguration();
-        konfiguration.setId(UUID.randomUUID());
-        konfiguration.setAktiv(false);
-        konfiguration.setEhrenamtjustizart(Ehrenamtjustizart.SCHOEFFEN);
-        konfiguration.setBezeichnung("Test");
-        konfiguration.setAltervon(BigInteger.valueOf(25));
-        konfiguration.setAlterbis(BigInteger.valueOf(120));
-        konfiguration.setStaatsangehoerigkeit("deutsch");
-        konfiguration.setWohnsitz(MUENCHEN);
-        konfiguration.setAmtsperiodevon(LocalDate.of(2029, 1, 1));
-        konfiguration.setAmtsperiodebis(LocalDate.of(2033, 12, 31));
+        final Konfiguration konfiguration = new KonfigurationTestDataBuilder().withAktiv(false).build();
 
         final ResponseEntity<Konfiguration> result = testRestTemplate.postForEntity("/konfiguration/updateKonfiguration", konfiguration, Konfiguration.class);
 
@@ -124,17 +99,7 @@ class KonfigurationIntegrationsTest {
     @Test
     void testSetActive() {
 
-        final Konfiguration konfiguration = new Konfiguration();
-        konfiguration.setId(UUID.randomUUID());
-        konfiguration.setAktiv(false);
-        konfiguration.setEhrenamtjustizart(Ehrenamtjustizart.VERWALTUNGSRICHTER);
-        konfiguration.setBezeichnung("Verwaltungsrichter");
-        konfiguration.setAltervon(BigInteger.valueOf(25));
-        konfiguration.setAlterbis(BigInteger.valueOf(120));
-        konfiguration.setStaatsangehoerigkeit("deutsch");
-        konfiguration.setWohnsitz(MUENCHEN);
-        konfiguration.setAmtsperiodevon(LocalDate.of(2030, 1, 1));
-        konfiguration.setAmtsperiodebis(LocalDate.of(2034, 12, 31));
+        final Konfiguration konfiguration = new KonfigurationTestDataBuilder().withAktiv(false).build();
         konfigurationRepository.save(konfiguration);
 
         final ResponseEntity<KonfigurationDto> result = testRestTemplate.postForEntity("/konfiguration/setActive", konfiguration, KonfigurationDto.class);

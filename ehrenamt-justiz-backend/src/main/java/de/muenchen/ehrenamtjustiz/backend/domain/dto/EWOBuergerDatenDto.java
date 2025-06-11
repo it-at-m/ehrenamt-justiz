@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
+import java.util.Collections;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -79,16 +80,25 @@ public class EWOBuergerDatenDto {
 
     // because of EI_EXPOSE_REP
     public java.util.List<String> getAuskunftssperre() {
+        if (auskunftssperre == null) {
+            return Collections.emptyList();
+        }
         return new java.util.ArrayList<>(auskunftssperre);
     }
 
     // because of EI_EXPOSE_REP
     public java.util.List<String> getKonfliktfeld() {
+        if (konfliktfeld == null) {
+            return Collections.emptyList();
+        }
         return new java.util.ArrayList<>(konfliktfeld);
     }
 
     // because of EI_EXPOSE_REP
     public java.util.List<String> getStaatsangehoerigkeit() {
+        if (staatsangehoerigkeit == null) {
+            return Collections.emptyList();
+        }
         return new java.util.ArrayList<>(staatsangehoerigkeit);
     }
 

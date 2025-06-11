@@ -7,11 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;
 import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
-import java.math.BigInteger;
+import de.muenchen.ehrenamtjustiz.backend.testdata.KonfigurationTestDataBuilder;
 import java.net.URI;
-import java.time.LocalDate;
 import java.util.UUID;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
@@ -62,17 +60,7 @@ class UnicodeConfigurationTest {
     @Test
     void testForNfcNormalization() {
         // Persist entity with decomposed string.
-        final Konfiguration konfiguration = new Konfiguration();
-        konfiguration.setId(UUID.randomUUID());
-        konfiguration.setAktiv(true);
-        konfiguration.setEhrenamtjustizart(Ehrenamtjustizart.VERWALTUNGSRICHTER);
-        konfiguration.setBezeichnung(TEXT_ATTRIBUTE_DECOMPOSED);
-        konfiguration.setAltervon(BigInteger.valueOf(18));
-        konfiguration.setAlterbis(BigInteger.valueOf(75));
-        konfiguration.setStaatsangehoerigkeit("deutsch");
-        konfiguration.setWohnsitz("München");
-        konfiguration.setAmtsperiodevon(LocalDate.of(2025, 1, 1));
-        konfiguration.setAmtsperiodebis(LocalDate.of(2029, 12, 31));
+        final Konfiguration konfiguration = new KonfigurationTestDataBuilder().withBezeichnung(TEXT_ATTRIBUTE_DECOMPOSED).build();
 
         assertEquals(TEXT_ATTRIBUTE_DECOMPOSED.length(), konfiguration.getBezeichnung().length());
         final TestConstants.KonfigurationDto response = testRestTemplate

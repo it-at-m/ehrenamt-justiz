@@ -15,12 +15,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
-import java.math.BigInteger;
-import java.time.LocalDate;
+import de.muenchen.ehrenamtjustiz.backend.testdata.KonfigurationTestDataBuilder;
 import java.util.UUID;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -62,18 +59,7 @@ class KonfigurationTest {
 
     @BeforeEach
     public void setUp() {
-        final Konfiguration konfiguration = new Konfiguration();
-        konfiguration.setId(UUID.randomUUID());
-        konfiguration.setAktiv(true);
-        konfiguration.setEhrenamtjustizart(Ehrenamtjustizart.VERWALTUNGSRICHTER);
-        konfiguration.setBezeichnung("Verwaltungsrichter 2025 - 2029");
-        konfiguration.setAltervon(BigInteger.valueOf(25));
-        konfiguration.setAlterbis(BigInteger.valueOf(120));
-        konfiguration.setStaatsangehoerigkeit("deutsch");
-        konfiguration.setWohnsitz("München");
-        konfiguration.setAmtsperiodevon(LocalDate.of(2030, 4, 1));
-        konfiguration.setAmtsperiodebis(LocalDate.of(2035, 3, 31));
-        testEntityId = konfigurationRepository.save(konfiguration).getId();
+        testEntityId = konfigurationRepository.save(new KonfigurationTestDataBuilder().build()).getId();
     }
 
     @AfterEach
@@ -111,7 +97,7 @@ class KonfigurationTest {
     class SaveEntity {
         @Test
         void givenEntity_thenEntityIsSaved() throws Exception {
-            final Konfiguration requestDTO = getKonfiguration();
+            final Konfiguration requestDTO = new KonfigurationTestDataBuilder().build();
             final String requestBody = objectMapper.writeValueAsString(requestDTO);
 
             mockMvc.perform(post("/konfigurationen")
@@ -121,27 +107,11 @@ class KonfigurationTest {
         }
     }
 
-    private static @NotNull
-    Konfiguration getKonfiguration() {
-        final Konfiguration konfiguration = new Konfiguration();
-        konfiguration.setId(UUID.randomUUID());
-        konfiguration.setAktiv(true);
-        konfiguration.setEhrenamtjustizart(Ehrenamtjustizart.SCHOEFFEN);
-        konfiguration.setBezeichnung("Schöffen 2029 - 2033");
-        konfiguration.setAltervon(BigInteger.valueOf(18));
-        konfiguration.setAlterbis(BigInteger.valueOf(75));
-        konfiguration.setStaatsangehoerigkeit("deutsch");
-        konfiguration.setWohnsitz("München");
-        konfiguration.setAmtsperiodevon(LocalDate.of(2029, 1, 1));
-        konfiguration.setAmtsperiodebis(LocalDate.of(2033, 12, 31));
-        return konfiguration;
-    }
-
     @Nested
     class UpdateEntity {
         @Test
         void givenEntity_thenEntityIsUpdated() throws Exception {
-            final Konfiguration requestDTO = getKonfiguration();
+            final Konfiguration requestDTO = new KonfigurationTestDataBuilder().build();
             final String requestBody = objectMapper.writeValueAsString(requestDTO);
 
             mockMvc.perform(put("/konfigurationen/{theEntityId}", testEntityId)

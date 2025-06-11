@@ -15,14 +15,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
-import java.math.BigInteger;
-import java.time.LocalDate;
+import de.muenchen.ehrenamtjustiz.backend.testdata.KonfigurationTestDataBuilder;
+import de.muenchen.ehrenamtjustiz.backend.testdata.PersonTestDataBuilder;
 import java.util.UUID;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
@@ -47,7 +43,6 @@ import org.testcontainers.utility.DockerImageName;
 @ActiveProfiles(profiles = { SPRING_TEST_PROFILE, SPRING_NO_SECURITY_PROFILE })
 class PersonTest {
 
-    public static final String MUENCHEN = "München";
     @Autowired
     private MockMvc mockMvc;
 
@@ -73,46 +68,13 @@ class PersonTest {
     @BeforeEach
     public void setUp() {
         // new configuration
-        final Konfiguration konfiguration = new Konfiguration();
-        konfiguration.setId(UUID.randomUUID());
-        konfiguration.setAktiv(true);
-        konfiguration.setEhrenamtjustizart(Ehrenamtjustizart.VERWALTUNGSRICHTER);
-        konfiguration.setBezeichnung("Verwaltungsrichter");
-        konfiguration.setAltervon(BigInteger.valueOf(25));
-        konfiguration.setAlterbis(BigInteger.valueOf(120));
-        konfiguration.setStaatsangehoerigkeit("deutsch");
-        konfiguration.setWohnsitz(MUENCHEN);
-        konfiguration.setAmtsperiodevon(LocalDate.of(2030, 4, 1));
-        konfiguration.setAmtsperiodebis(LocalDate.of(2035, 3, 31));
-        konfigurationRepository.save(konfiguration);
-
+        final Konfiguration konfiguration = konfigurationRepository.save(new KonfigurationTestDataBuilder().build());
         konfigurationId = konfiguration.getId();
 
         final Konfiguration persistedKonfiguration = konfigurationRepository.findById(konfiguration.getId()).orElse(null);
 
         // insert test-person
-        final Person person = new Person();
-        person.setId(UUID.randomUUID());
-        person.setStatus(Status.VORSCHLAG);
-        person.setNeuervorschlag(true);
-        person.setEwoid("4711");
-        person.setFamilienname("Müller");
-        person.setVorname("Hans");
-        person.setGeburtsort(MUENCHEN);
-        person.setGeburtsland("Deutschland");
-        person.setGeburtsdatum(LocalDate.of(1997, 1, 1));
-        person.setKonfigurationid(persistedKonfiguration.getId());
-        person.setWohnungsstatus(Wohnungsstatus.HAUPTWOHNUNG);
-        person.setFamilienstand("ledig");
-        person.setPostleitzahl("80634");
-        person.setOrt(MUENCHEN);
-        person.setStrasse("Ludwigstr.");
-        person.setHausnummer("7");
-        person.setInmuenchenseit(LocalDate.of(2023, 1, 1));
-        person.setGeschlecht(Geschlecht.MAENNLICH);
-        person.setBewerbungvom(LocalDate.of(2024, 9, 17));
-        person.setWarbereitstaetigals(false);
-        person.setWarbereitstaetigalsvorvorperiode(false);
+        final Person person = new PersonTestDataBuilder().withKonfigurationid(persistedKonfiguration.getId()).build();
 
         testEntityId = personRepository.save(person).getId();
 
@@ -166,29 +128,7 @@ class PersonTest {
 
     private static @NotNull
     Person getPerson() {
-        final Person person = new Person();
-        person.setId(UUID.randomUUID());
-        person.setStatus(Status.VORSCHLAG);
-        person.setNeuervorschlag(true);
-        person.setEwoid("4711");
-        person.setFamilienname("Müller");
-        person.setVorname("Anna");
-        person.setGeburtsort(MUENCHEN);
-        person.setGeburtsland("Deutschland");
-        person.setGeburtsdatum(LocalDate.of(1997, 1, 1));
-        person.setKonfigurationid(konfigurationId);
-        person.setWohnungsstatus(Wohnungsstatus.HAUPTWOHNUNG);
-        person.setFamilienstand("ledig");
-        person.setPostleitzahl("80634");
-        person.setOrt(MUENCHEN);
-        person.setStrasse("Leopoldstr.");
-        person.setHausnummer("232");
-        person.setInmuenchenseit(LocalDate.of(2000, 1, 9));
-        person.setGeschlecht(Geschlecht.WEIBLICH);
-        person.setBewerbungvom(LocalDate.of(2024, 9, 16));
-        person.setWarbereitstaetigals(false);
-        person.setWarbereitstaetigalsvorvorperiode(true);
-        return person;
+        return new PersonTestDataBuilder().withKonfigurationid(konfigurationId).build();
     }
 
     @Nested
