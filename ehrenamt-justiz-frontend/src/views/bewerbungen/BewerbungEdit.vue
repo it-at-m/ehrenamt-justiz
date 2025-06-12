@@ -12,11 +12,7 @@
       @cancel="cancel"
     />
     <online-help-dialog-component
-      component="Hier haben Sie die Möglichkeit, die Daten eines Bewerbers zu bearbeiten und zu speichern.
-
-Es stehen zwei Registerkarten zur Verfügung: In der Registerkarte 'Aus EWO' finden Sie die beim Bewerber gespeicherten Daten aus dem Einwohnermeldewesen. In der Registerkarte 'Bewerber Zusatzangaben' können Sie die zusätzlichen Informationen des Bewerbers eingeben.
-
-Bitte beachten Sie, dass die Daten eines Bewerbers nur gespeichert werden können, wenn Alter, Wohnort und Staatsangehörigkeit mit der Standardkonfiguration übereinstimmen. Falls Sie diese Prüfung vorübergehend ausschalten möchten, aktivieren Sie bitte die Checkbox 'Validierung deaktivieren', bevor Sie die Daten speichern."
+      :component="t('views.applicant.edit.onlinehelp')"
     />
   </v-container>
 </template>
@@ -25,6 +21,7 @@ Bitte beachten Sie, dass die Daten eines Bewerbers nur gespeichert werden könne
 import type BewerbungFormData from "@/types/BewerbungFormData";
 
 import { onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import { VContainer, VProgressLinear } from "vuetify/components";
 
@@ -37,6 +34,7 @@ import { useSnackbarStore } from "@/stores/snackbar";
 const route = useRoute();
 const router = useRouter();
 const snackbarStore = useSnackbarStore();
+const { t } = useI18n();
 
 const bewerbungFormData = ref<BewerbungFormData>({
   ewo_familienname: "",

@@ -14,11 +14,7 @@
       ></e-w-o-buerger-select>
     </v-card>
     <online-help-dialog-component
-      component="Willkommen zur Erfassung eines neuen Bewerbers! Um einen neuen Bewerber anzulegen, benötigen wir den Familiennamen, den Vornamen und das Geburtsdatum.
-
-Bitte beachten Sie, dass ein Bewerber nur erfasst werden kann, wenn er im Einwohnermeldewesen vorhanden ist. Für den Familiennamen und Vornamen genügt es, die ersten drei Buchstaben einzugeben (mit einem '*' am Ende).
-
-Sollten mehr als eine Person identifiziert werden, erhalten Sie eine Übersicht, in der die entsprechenden Personen angezeigt werden. Dort können Sie die gewünschte Person auswählen."
+      :component="t('views.applicant.create.onlinehelp')"
     />
   </v-container>
 </template>
@@ -28,6 +24,7 @@ import type EWOBuergerData from "@/types/EWOBuergerData";
 import type EWOBuergerSuche from "@/types/EWOBuergerSuche";
 
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VCard, VContainer } from "vuetify/components";
 
@@ -42,6 +39,8 @@ import EWOBuergerSelect from "@/views/ewobuerger/EWOBuergerSelect.vue";
 const snackbarStore = useSnackbarStore();
 
 const router = useRouter();
+
+const { t } = useI18n();
 
 const ewoBuergerSelect = ref<EWOBuergerData[]>([]);
 

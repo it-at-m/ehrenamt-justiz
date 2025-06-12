@@ -115,7 +115,7 @@
       @yes="alsBenachrichtigtMarkierenYes"
     />
     <online-help-dialog-component
-      component="Hier finden Sie eine Übersicht über alle Bewerbungen, Konflikte und Vorschläge. Wenn neue Bewerber erfasst wurden, haben Sachbearbeiter, je nach Berechtigung, die Möglichkeit, die Daten zu exportieren oder diese als benachrichtigt zu markieren."
+      :component="t('views.getstarted.onlinehelp')"
     />
   </v-container>
 </template>
@@ -124,6 +124,7 @@
 import type EhrenamtJustizStatus from "@/types/EhrenamtJustizStatus";
 
 import { onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VBtn, VCol, VContainer, VHover, VRow } from "vuetify/components";
 
@@ -150,6 +151,7 @@ const yesNoDialogVisible = ref(false);
 const benachrichtigtMarkierenAnimationAktiv = ref(false);
 const userStore = useUserStore();
 const user = userStore.getUser;
+const { t } = useI18n();
 
 onMounted(() => {
   load();

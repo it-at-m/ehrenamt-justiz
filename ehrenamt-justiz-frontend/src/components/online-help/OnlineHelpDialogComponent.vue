@@ -43,7 +43,10 @@ import {
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 
 const formattedLines = computed(() => {
-  return props.component.split("\n");
+  return props.component
+    .split(/\r?\n/)
+    .map((l) => l.trim())
+    .filter(Boolean);
 });
 
 const props = defineProps<{

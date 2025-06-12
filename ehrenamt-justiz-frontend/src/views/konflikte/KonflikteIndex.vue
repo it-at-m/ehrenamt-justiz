@@ -5,16 +5,19 @@
       <konflikte-table />
     </v-card>
     <online-help-dialog-component
-      component="Hier erhalten Sie einen Überblick über die Bewerber für Schöffen oder ehrenamtliche Richter, die Konflikte aufweisen. Je nach Ihren Berechtigungen haben Sie die Möglichkeit, die Konfliktbearbeitung zu starten oder einen Bewerber zu löschen."
+      :component="t('views.conflicts.index.onlinehelp')"
     />
   </v-container>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
 import { VCard, VCardTitle, VContainer } from "vuetify/components";
 
 import KonflikteTable from "@/components/konflikte/KonflikteTable.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
+
+const { t } = useI18n();
 </script>
 
 <style scoped>

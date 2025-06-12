@@ -5,18 +5,19 @@
       <bewerbungen-table />
     </v-card>
     <online-help-dialog-component
-      component="In dieser Ansicht finden Sie alle Bewerber, die entweder über den Menüpunkt 'Bewerbung erstellen' oder über die Online-Anwendung im Internet erfasst wurden.
-
-Je nach Ihren Berechtigungen können Sie hier folgende Aktionen durchführen: die Daten eines Bewerbers ändern, anzeigen oder löschen. Darüber hinaus haben Sie die Möglichkeit, Bewerber für die weitere Bearbeitung auf die Vorschlagsliste zu setzen oder sie als CSV-Datei zu speichern."
+      :component="t('views.applicant.index.onlinehelp')"
     />
   </v-container>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
 import { VCard, VCardTitle, VContainer } from "vuetify/components";
 
 import BewerbungenTable from "@/components/bewerbungen/BewerbungenTable.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
+
+const { t } = useI18n();
 </script>
 <style scoped>
 @media (min-width: 1280px) {

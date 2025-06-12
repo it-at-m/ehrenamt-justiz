@@ -5,16 +5,19 @@
       <vorschlaege-table />
     </v-card>
     <online-help-dialog-component
-      component="Hier finden Sie die Vorschläge für Schöffen oder ehrenamtliche Richter am Verwaltungsgericht. Je nach Ihren Berechtigungen können Sie hier folgende Aktionen durchführen: Die vorgeschlagenen Bewerber ändern, anzeigen oder löschen. Darüber hinaus haben Sie die Möglichkeit, einen Vorschlag auf die Bewerberliste zu setzen oder sie als CSV-Datei zu speichern."
+      :component="t('views.proposal.index.onlinehelp')"
     />
   </v-container>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
 import { VCard, VCardTitle, VContainer } from "vuetify/components";
 
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
 import VorschlaegeTable from "@/components/vorschlaege/VorschlaegeTable.vue";
+
+const { t } = useI18n();
 </script>
 <style scoped>
 @media (min-width: 1280px) {

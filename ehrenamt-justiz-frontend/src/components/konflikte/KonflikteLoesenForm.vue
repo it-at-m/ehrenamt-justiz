@@ -1241,11 +1241,7 @@
     </div>
   </v-form>
   <online-help-dialog-component
-    component="Hier haben Sie die Möglichkeit, Konflikte bei einem Bewerber zu beheben. Im linken Bereich sehen Sie die aktuellen Daten aus dem Einwohnermeldewesen, während im rechten Bereich die abweichenden Bewerberdaten (Konflikte) angezeigt werden.
-
-Um die Konflikte zu lösen, übernehmen Sie einfach die aktuellen Daten aus dem Einwohnermeldewesen und speichern Sie diese. Einzelne Konflikte können behoben werden, indem Sie auf den roten Button (mit dem Pfeil nach links) klicken.
-
-Wenn Sie alle Konflikte auf einmal lösen möchten, nutzen Sie den Button 'Alle Übernehmen'. Bitte beachten Sie, dass der Speicher-Button erst aktiv wird, nachdem alle Konflikte gelöst wurden."
+    :component="t('components.conflicts.resolve.onlinehelp')"
   />
 </template>
 
@@ -1254,6 +1250,7 @@ import type KonfliktLoesenFormData from "@/types/KonfliktLoesenFormData";
 
 import { mdiTransferLeft } from "@mdi/js";
 import { computed, onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import {
   VBtn,
   VCheckbox,
@@ -1314,6 +1311,7 @@ const WOHNUNGSSTATUS = "Wohnungsstatus";
 const AUSKUNFTSSPERRE = "Auskunftssperre";
 const KEINEEWODATEN =
   "Keine EWO-Daten gefunden. Evtl. verstorben oder verzogen?";
+const { t } = useI18n();
 
 onMounted(() => {
   if (isKonflikt(KEINEEWODATEN)) {
