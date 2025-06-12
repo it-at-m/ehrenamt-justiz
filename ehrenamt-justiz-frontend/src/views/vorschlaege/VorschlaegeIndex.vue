@@ -5,7 +5,7 @@
       <vorschlaege-table />
     </v-card>
     <online-help-dialog-component
-      component="Das ist die Onlinehilfe für die Übersicht der Vorschläge (Under Construction)"
+      component="Hier finden Sie die Vorschläge für Schöffen oder ehrenamtliche Richter am Verwaltungsgericht. Je nach Ihren Berechtigungen können Sie hier folgende Aktionen durchführen: Die vorgeschlagenen Bewerber ändern, anzeigen oder löschen. Darüber hinaus haben Sie die Möglichkeit, einen Vorschlag auf die Bewerberliste zu setzen oder sie als CSV-Datei zu speichern."
     />
   </v-container>
 </template>

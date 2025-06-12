@@ -12,7 +12,11 @@
       @cancel="cancel"
     />
     <online-help-dialog-component
-      component="Das ist die Onlinehilfe für die Bearbeitung eines Bewerbers (Under Construction)"
+      component="Hier haben Sie die Möglichkeit, die Daten eines Bewerbers zu bearbeiten und zu speichern.
+
+Es stehen zwei Registerkarten zur Verfügung: In der Registerkarte 'Aus EWO' finden Sie die beim Bewerber gespeicherten Daten aus dem Einwohnermeldewesen. In der Registerkarte 'Bewerber Zusatzangaben' können Sie die zusätzlichen Informationen des Bewerbers eingeben.
+
+Bitte beachten Sie, dass die Daten eines Bewerbers nur gespeichert werden können, wenn Alter, Wohnort und Staatsangehörigkeit mit der Standardkonfiguration übereinstimmen. Falls Sie diese Prüfung vorübergehend ausschalten möchten, aktivieren Sie bitte die Checkbox 'Validierung deaktivieren', bevor Sie die Daten speichern."
     />
   </v-container>
 </template>

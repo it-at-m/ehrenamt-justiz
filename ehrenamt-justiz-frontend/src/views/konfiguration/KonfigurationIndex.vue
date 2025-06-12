@@ -22,7 +22,7 @@
       <konfiguration-list />
     </v-card>
     <online-help-dialog-component
-      component="Das ist die Onlinehilfe für die Übersicht der Konfigurationen (Under Construction)"
+      component="Hier sehen sie die Übersicht der bereits erfassten Konfigurationen! Um Bewerbungen für Schöffen oder ehrenamtliche Verwaltungsrichter verwalten zu können, ist es erforderlich, eine Konfiguration zu erfassen und zu aktivieren. Die Bewerber werden dann unter dieser aktiven Konfiguration gespeichert. Eine aktive Konfiguration wird farblich hervorgehoben."
     />
   </v-container>
 </template>

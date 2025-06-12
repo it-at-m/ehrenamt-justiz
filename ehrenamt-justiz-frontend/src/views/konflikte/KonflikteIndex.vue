@@ -5,7 +5,7 @@
       <konflikte-table />
     </v-card>
     <online-help-dialog-component
-      component="Das ist die Onlinehilfe für die Übersicht der Konflikte (Under Construction)"
+      component="Hier erhalten Sie einen Überblick über die Bewerber für Schöffen oder ehrenamtliche Richter, die Konflikte aufweisen. Je nach Ihren Berechtigungen haben Sie die Möglichkeit, die Konfliktbearbeitung zu starten oder einen Bewerber zu löschen."
     />
   </v-container>
 </template>

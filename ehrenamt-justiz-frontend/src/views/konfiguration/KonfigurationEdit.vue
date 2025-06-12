@@ -26,7 +26,7 @@
       </template>
     </v-card>
     <online-help-dialog-component
-      component="Das ist die Onlinehilfe für die Bearbeitung einer Konfiguration (Under Construction)"
+      component="Hier kann die aktuell selektierte Konfiguration bearbeitet werden. Eine Änderung der Konfiguration führt nicht zu einer automatischen Prüfung der bestehenden Bewerbungs- oder Vorschlagsliste."
     />
   </v-container>
 </template>

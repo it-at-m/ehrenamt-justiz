@@ -5,7 +5,9 @@
       <bewerbungen-table />
     </v-card>
     <online-help-dialog-component
-      component="Das ist die Onlinehilfe für die Übersicht der Bewerber  (Under Construction)"
+      component="In dieser Ansicht finden Sie alle Bewerber, die entweder über den Menüpunkt 'Bewerbung erstellen' oder über die Online-Anwendung im Internet erfasst wurden.
+
+Je nach Ihren Berechtigungen können Sie hier folgende Aktionen durchführen: die Daten eines Bewerbers ändern, anzeigen oder löschen. Darüber hinaus haben Sie die Möglichkeit, Bewerber für die weitere Bearbeitung auf die Vorschlagsliste zu setzen oder sie als CSV-Datei zu speichern."
     />
   </v-container>
 </template>

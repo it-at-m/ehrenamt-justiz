@@ -14,7 +14,7 @@
       />
     </v-card>
     <online-help-dialog-component
-      component="Das ist die Onlinehilfe für die Erfassung einer Konfiguration (Under Construction)"
+      component="Hier können Sie eine neue Konfiguration für die Verwaltung von Schöffen oder ehrenamtliche Richter erfassen. Nach der Erfassung einer Konfiguration muss auch eine Konfiguration aktiviert werden. Die Bewerber werden dann unter dieser aktiven Konfiguration gespeichert."
     />
   </v-container>
 </template>

@@ -14,7 +14,11 @@
       ></e-w-o-buerger-select>
     </v-card>
     <online-help-dialog-component
-      component="Das ist die Onlinehilfe für das Erfassen der Bewerber (Under Construction)"
+      component="Willkommen zur Erfassung eines neuen Bewerbers! Um einen neuen Bewerber anzulegen, benötigen wir den Familiennamen, den Vornamen und das Geburtsdatum.
+
+Bitte beachten Sie, dass ein Bewerber nur erfasst werden kann, wenn er im Einwohnermeldewesen vorhanden ist. Für den Familiennamen und Vornamen genügt es, die ersten drei Buchstaben einzugeben (mit einem '*' am Ende).
+
+Sollten mehr als eine Person identifiziert werden, erhalten Sie eine Übersicht, in der die entsprechenden Personen angezeigt werden. Dort können Sie die gewünschte Person auswählen."
     />
   </v-container>
 </template>
