@@ -1241,7 +1241,7 @@
     </div>
   </v-form>
   <online-help-dialog-component
-    :component="t('components.conflicts.resolve.onlinehelp')"
+    component="components.conflicts.resolve.onlinehelp"
   />
 </template>
 
@@ -1250,7 +1250,6 @@ import type KonfliktLoesenFormData from "@/types/KonfliktLoesenFormData";
 
 import { mdiTransferLeft } from "@mdi/js";
 import { computed, onMounted, ref } from "vue";
-import { useI18n } from "vue-i18n";
 import {
   VBtn,
   VCheckbox,
@@ -1311,7 +1310,6 @@ const WOHNUNGSSTATUS = "Wohnungsstatus";
 const AUSKUNFTSSPERRE = "Auskunftssperre";
 const KEINEEWODATEN =
   "Keine EWO-Daten gefunden. Evtl. verstorben oder verzogen?";
-const { t } = useI18n();
 
 onMounted(() => {
   if (isKonflikt(KEINEEWODATEN)) {

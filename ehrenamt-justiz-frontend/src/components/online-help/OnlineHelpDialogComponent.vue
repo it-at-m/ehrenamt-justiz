@@ -16,12 +16,7 @@
     </v-toolbar>
     <v-card flat>
       <v-card-text>
-        <p
-          v-for="(line, index) in formattedLines"
-          :key="index"
-        >
-          {{ line }}
-        </p>
+        {{ t(props.component) }}
       </v-card-text>
     </v-card>
   </v-dialog>
@@ -30,6 +25,7 @@
 <script setup lang="ts">
 import { mdiClose } from "@mdi/js";
 import { computed } from "vue";
+import { useI18n } from "vue-i18n";
 import {
   VCard,
   VCardText,
@@ -42,16 +38,11 @@ import {
 
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 
-const formattedLines = computed(() => {
-  return props.component
-    .split(/\r?\n/)
-    .map((l) => l.trim())
-    .filter(Boolean);
-});
-
 const props = defineProps<{
   component: string;
 }>();
+
+const { t } = useI18n();
 
 const visible = computed(() => {
   return useGlobalSettingsStore().isOnlineHelpDialogComponentVisible();

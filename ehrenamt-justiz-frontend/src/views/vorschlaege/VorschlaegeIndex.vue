@@ -4,20 +4,15 @@
       <v-card-title>Vorschläge anzeigen</v-card-title>
       <vorschlaege-table />
     </v-card>
-    <online-help-dialog-component
-      :component="t('views.proposal.index.onlinehelp')"
-    />
+    <online-help-dialog-component component="views.proposal.index.onlinehelp" />
   </v-container>
 </template>
 
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
 import { VCard, VCardTitle, VContainer } from "vuetify/components";
 
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
 import VorschlaegeTable from "@/components/vorschlaege/VorschlaegeTable.vue";
-
-const { t } = useI18n();
 </script>
 <style scoped>
 @media (min-width: 1280px) {

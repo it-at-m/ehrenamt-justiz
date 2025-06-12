@@ -114,9 +114,7 @@
       @no="alsBenachrichtigtMarkierenNo"
       @yes="alsBenachrichtigtMarkierenYes"
     />
-    <online-help-dialog-component
-      :component="t('views.getstarted.onlinehelp')"
-    />
+    <online-help-dialog-component component="views.getstarted.onlinehelp" />
   </v-container>
 </template>
 
@@ -124,7 +122,6 @@
 import type EhrenamtJustizStatus from "@/types/EhrenamtJustizStatus";
 
 import { onMounted, ref } from "vue";
-import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VBtn, VCol, VContainer, VHover, VRow } from "vuetify/components";
 
@@ -151,7 +148,6 @@ const yesNoDialogVisible = ref(false);
 const benachrichtigtMarkierenAnimationAktiv = ref(false);
 const userStore = useUserStore();
 const user = userStore.getUser;
-const { t } = useI18n();
 
 onMounted(() => {
   load();

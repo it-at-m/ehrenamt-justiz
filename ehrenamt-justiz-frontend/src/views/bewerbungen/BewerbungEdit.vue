@@ -11,9 +11,7 @@
       @save="save"
       @cancel="cancel"
     />
-    <online-help-dialog-component
-      :component="t('views.applicant.edit.onlinehelp')"
-    />
+    <online-help-dialog-component component="views.applicant.edit.onlinehelp" />
   </v-container>
 </template>
 
@@ -21,7 +19,6 @@
 import type BewerbungFormData from "@/types/BewerbungFormData";
 
 import { onMounted, ref } from "vue";
-import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import { VContainer, VProgressLinear } from "vuetify/components";
 
@@ -34,7 +31,6 @@ import { useSnackbarStore } from "@/stores/snackbar";
 const route = useRoute();
 const router = useRouter();
 const snackbarStore = useSnackbarStore();
-const { t } = useI18n();
 
 const bewerbungFormData = ref<BewerbungFormData>({
   ewo_familienname: "",
