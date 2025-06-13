@@ -19,7 +19,7 @@
                 ? ehrenamtJustizStatus.anzahlBewerbungen
                 : "?"
             }}
-            {{ t("views.GetStartedView.applicants") }}
+            {{ t("views.getStartedView.applicants") }}
           </h2>
           <h2>{{ textAnzahlBewerbungen }}</h2>
         </v-col>
@@ -40,7 +40,7 @@
             {{
               ehrenamtJustizStatus ? ehrenamtJustizStatus.anzahlKonflikte : "?"
             }}
-            {{ t("views.GetStartedView.conflicts") }}
+            {{ t("views.getStartedView.conflicts") }}
           </h2>
           <h2>{{ textAnzahlKonflikte }}</h2>
         </v-col>
@@ -65,7 +65,7 @@
                 ? ehrenamtJustizStatus.anzahlVorschlaege
                 : "?"
             }}
-            {{ t("views.GetStartedView.proposals") }}
+            {{ t("views.getStartedView.proposals") }}
           </h2>
           <h2>{{ textAnzahlVorschlaege }}</h2>
         </v-col>
@@ -80,7 +80,7 @@
               ? ehrenamtJustizStatus.anzahlVorschlaegeNeu
               : "?"
           }}
-          {{ t("views.GetStartedView.newproposals") }}
+          {{ t("views.getStartedView.newproposals") }}
         </h2>
         <h2>{{ textAnzahlNeueVorschlaege }}</h2>
         <v-btn
@@ -91,7 +91,7 @@
             )
           "
           @click="datenHerunterladen"
-          >{{ t("views.GetStartedView.buttons.savedata") }}
+          >{{ t("views.getStartedView.buttons.savedata") }}
         </v-btn>
 
         <v-btn
@@ -102,7 +102,7 @@
             )
           "
           @click="alsBenachrichtigtMarkierenBestaetigen"
-          >{{ t("views.GetStartedView.buttons.markasnotified") }}
+          >{{ t("views.getStartedView.buttons.markasnotified") }}
         </v-btn>
       </v-col>
     </v-row>
@@ -115,7 +115,7 @@
       @yes="alsBenachrichtigtMarkierenYes"
     />
     <online-help-dialog-component
-      :helptext="t('views.GetStartedView.onlinehelp')"
+      :helptext="t('views.getStartedView.onlinehelp')"
     />
   </v-container>
 </template>

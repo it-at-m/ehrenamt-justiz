@@ -12,7 +12,7 @@
       @cancel="cancel"
     />
     <online-help-dialog-component
-      :helptext="t('views.BewerbungEdit.onlinehelp')"
+      :helptext="t('views.bewerbungEdit.onlinehelp')"
     />
   </v-container>
 </template>

@@ -21,7 +21,7 @@
                       :icon="mdiCircle"
                   /></span>
                 </template>
-                <span>{{ t("App.state.gateway") }}</span>
+                <span>{{ t("app.state.gateway") }}</span>
               </v-tooltip>
               <v-tooltip location="top">
                 <template #activator="{ props }">
@@ -34,7 +34,7 @@
                       :icon="mdiCircle"
                   /></span>
                 </template>
-                <span>{{ t("App.state.backend") }}</span>
+                <span>{{ t("app.state.backend") }}</span>
               </v-tooltip>
               <v-tooltip location="top">
                 <template #activator="{ props }">
@@ -47,9 +47,9 @@
                       :icon="mdiCircle"
                   /></span>
                 </template>
-                <span>{{ t("App.state.eai") }}</span>
+                <span>{{ t("app.state.eai") }}</span>
               </v-tooltip>
-              <span class="text-white">{{ t("App.head") }}</span>
+              <span class="text-white">{{ t("app.head") }}</span>
               <span class="text-secondary">{{ ehrenamtjustizart }}</span>
             </v-toolbar-title>
           </router-link>
@@ -76,7 +76,7 @@
                   :icon="mdiHelp"
               /></span>
             </template>
-            <span>{{ t("App.onlinehelp") }}</span>
+            <span>{{ t("app.onlinehelp") }}</span>
           </v-tooltip>
           <app-switcher
             v-if="appswitcherBaseUrl"
@@ -91,7 +91,7 @@
       <v-list>
         <v-list-item :to="{ name: ROUTES_GETSTARTED }">
           <v-list-item-title>{{
-            t("App.navigation.getstarted")
+            t("app.navigation.getstarted")
           }}</v-list-item-title>
         </v-list-item>
         <v-list-item
@@ -104,7 +104,7 @@
           "
         >
           <v-list-item-title>{{
-            t("App.navigation.createapplicant")
+            t("app.navigation.createapplicant")
           }}</v-list-item-title>
         </v-list-item>
         <v-list-item
@@ -117,7 +117,7 @@
           "
         >
           <v-list-item-title>{{
-            t("App.navigation.listapplicants")
+            t("app.navigation.listapplicants")
           }}</v-list-item-title>
         </v-list-item>
         <v-list-item
@@ -130,7 +130,7 @@
           "
         >
           <v-list-item-title>{{
-            t("App.navigation.conflicts")
+            t("app.navigation.conflicts")
           }}</v-list-item-title>
         </v-list-item>
         <v-list-item
@@ -140,7 +140,7 @@
           "
         >
           <v-list-item-title>{{
-            t("App.navigation.proposals")
+            t("app.navigation.proposals")
           }}</v-list-item-title>
         </v-list-item>
         <v-list-item
@@ -148,7 +148,7 @@
           :disabled="!user || !user.authorities.includes('READ_KONFIGURATION')"
         >
           <v-list-item-title>{{
-            t("App.navigation.configurations")
+            t("app.navigation.configurations")
           }}</v-list-item-title>
         </v-list-item>
       </v-list>

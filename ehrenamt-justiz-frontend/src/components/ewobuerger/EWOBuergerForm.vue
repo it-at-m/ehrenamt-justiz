@@ -12,7 +12,7 @@
           class="text-left"
           cols="3"
         >
-          <div class="text-h5">{{ t("components.EWOBuergerForm.header") }}</div>
+          <div class="text-h5">{{ t("components.eWOBuergerForm.header") }}</div>
         </v-col>
         <v-col
           class="text-right"
@@ -22,14 +22,14 @@
             color="accent"
             @click="felderLeeren"
           >
-            {{ t("components.EWOBuergerForm.buttons.clearfields") }}
+            {{ t("components.eWOBuergerForm.buttons.clearfields") }}
           </v-btn>
           <v-btn
             color="green"
             :loading="isAnimation"
             @click="inEWOSuchen"
           >
-            {{ t("components.EWOBuergerForm.buttons.findewo") }}
+            {{ t("components.eWOBuergerForm.buttons.findewo") }}
           </v-btn>
         </v-col>
       </v-row>
@@ -38,7 +38,7 @@
           <v-text-field
             v-model="ewobuergerdata.familienname"
             :rules="[rules.RULE_REQUIRED]"
-            :label="t('components.EWOBuergerForm.surname')"
+            :label="t('components.eWOBuergerForm.surname')"
             persistent-placeholder
             density="compact"
             variant="outlined"
@@ -51,7 +51,7 @@
           <v-text-field
             v-model="ewobuergerdata.vorname"
             :rules="[rules.RULE_REQUIRED]"
-            :label="t('components.EWOBuergerForm.givenname')"
+            :label="t('components.eWOBuergerForm.givenname')"
             persistent-placeholder
             density="compact"
             variant="outlined"
@@ -62,7 +62,7 @@
         <v-col class="col">
           <v-text-field
             v-model="ewobuergerdata.geburtsdatum"
-            :label="t('components.EWOBuergerForm.dateofbirth')"
+            :label="t('components.eWOBuergerForm.dateofbirth')"
             persistent-placeholder
             :rules="
               ewobuergerdata.validierungdeaktivieren
@@ -82,14 +82,14 @@
               AuthService.checkAuth('READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE')
             "
             v-model="ewobuergerdata.validierungdeaktivieren"
-            :label="t('components.EWOBuergerForm.dactivatevalidation')"
+            :label="t('components.eWOBuergerForm.dactivatevalidation')"
           />
         </v-col>
       </v-row>
       <v-row>
         <v-col>
           <p>
-            {{ t("components.EWOBuergerForm.hint") }}
+            {{ t("components.eWOBuergerForm.hint") }}
           </p>
         </v-col>
       </v-row>

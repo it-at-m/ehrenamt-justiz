@@ -10,7 +10,7 @@
             <v-text-field
               v-model="search"
               prepend-inner-icon="mdi-magnify"
-              :label="t('components.BewerbungenTable.search')"
+              :label="t('components.bewerbungenTable.search')"
               single-line
               hide-details
               select-strategy="all"
@@ -31,7 +31,7 @@
               "
               color="error"
               @click="deleteRequested"
-              >{{ t("components.BewerbungenTable.buttons.delete") }}</v-btn
+              >{{ t("components.bewerbungenTable.buttons.delete") }}</v-btn
             >
           </v-col>
           <v-col
@@ -51,7 +51,7 @@
               :loading="vorschlagsListeAnimationAktiv"
               @click="aufVorschlagslisteSetzen"
               >{{
-                t("components.BewerbungenTable.buttons.addtolistproposal")
+                t("components.bewerbungenTable.buttons.addtolistproposal")
               }}</v-btn
             >
           </v-col>
@@ -68,7 +68,7 @@
               "
               color="accent"
               @click="datenHerunterladen"
-              >{{ t("components.BewerbungenTable.buttons.savedata") }}</v-btn
+              >{{ t("components.bewerbungenTable.buttons.savedata") }}</v-btn
             >
           </v-col>
         </v-row>
@@ -81,7 +81,7 @@
         :items-length="totalItems"
         show-select
         :items-per-page-text="
-          t('components.BewerbungenTable.table.itemsperpagetext')
+          t('components.bewerbungenTable.table.itemsperpagetext')
         "
         :row-props="getRowProps"
         :loading="loadingAnimationAktiv"
@@ -117,7 +117,7 @@
               /></span>
             </template>
             <span>{{
-              t("components.BewerbungenTable.table.actions.change")
+              t("components.bewerbungenTable.table.actions.change")
             }}</span>
           </v-tooltip>
           <v-tooltip location="bottom">
@@ -130,7 +130,7 @@
               /></span>
             </template>
             <span>{{
-              t("components.BewerbungenTable.table.actions.display")
+              t("components.bewerbungenTable.table.actions.display")
             }}</span>
           </v-tooltip>
         </template>
@@ -171,12 +171,12 @@
     <yes-no-dialog
       v-model="yesNoDialogVisible"
       :dialogtitle="
-        t('components.BewerbungenTable.table.addtolistproposal.dialogtitle')
+        t('components.bewerbungenTable.table.addtolistproposal.dialogtitle')
       "
       :dialogtext="
-        t('components.BewerbungenTable.table.addtolistproposal.dialogtext1') +
+        t('components.bewerbungenTable.table.addtolistproposal.dialogtext1') +
         selectedUUIDs.length +
-        t('components.BewerbungenTable.table.addtolistproposal.dialogtext2')
+        t('components.bewerbungenTable.table.addtolistproposal.dialogtext2')
       "
       :is-animation="vorschlagsListeAnimationAktiv"
       @no="abbruchAufVorschlagslisteSetzen"
@@ -188,7 +188,7 @@
     :is-animation="deleteAnimationAktiv"
     :descriptor-string="
       selectedUUIDs.length +
-      t('components.BewerbungenTable.table.delete.dialogtext')
+      t('components.bewerbungenTable.table.delete.dialogtext')
     "
     :type-string="2"
     @delete="deleteConfirmed"
@@ -237,49 +237,49 @@ import InvalidePersonenSelect from "@/views/vorschlaege/InvalidePersonenSelect.v
 const { t } = useI18n();
 const headers: ReadonlyHeaders = [
   {
-    title: t("components.BewerbungenTable.table.surname"),
+    title: t("components.bewerbungenTable.table.surname"),
     value: "familienname",
     align: "start",
     sortable: true,
   },
   {
-    title: t("components.BewerbungenTable.table.givenname"),
+    title: t("components.bewerbungenTable.table.givenname"),
     value: "vorname",
     align: "start",
     sortable: true,
   },
   {
-    title: t("components.BewerbungenTable.table.dateofbirth"),
+    title: t("components.bewerbungenTable.table.dateofbirth"),
     value: "geburtsdatum",
     align: "end",
     sortable: true,
   },
   {
-    title: t("components.BewerbungenTable.table.currentprofession"),
+    title: t("components.bewerbungenTable.table.currentprofession"),
     value: "derzeitausgeuebterberuf",
     align: "start",
     sortable: true,
   },
   {
-    title: t("components.BewerbungenTable.table.employer"),
+    title: t("components.bewerbungenTable.table.employer"),
     value: "arbeitgeber",
     align: "start",
     sortable: true,
   },
   {
-    title: t("components.BewerbungenTable.table.mail"),
+    title: t("components.bewerbungenTable.table.mail"),
     value: "mailadresse",
     align: "start",
     sortable: true,
   },
   {
-    title: t("components.BewerbungenTable.table.honorypositions"),
+    title: t("components.bewerbungenTable.table.honorypositions"),
     value: "ausgeuebteehrenaemter",
     align: "start",
     sortable: true,
   },
   {
-    title: t("components.BewerbungenTable.table.actions.header"),
+    title: t("components.bewerbungenTable.table.actions.header"),
     value: "actions",
     align: "start",
     sortable: false,
@@ -416,7 +416,7 @@ async function aufVorschlagslisteSetzen(): Promise<void> {
         snackbarStore.showMessage({
           level: STATUS_INDICATORS.ERROR,
           message: t(
-            "components.BewerbungenTable.table.addtolistproposal.message"
+            "components.bewerbungenTable.table.addtolistproposal.message"
           ),
         });
       }

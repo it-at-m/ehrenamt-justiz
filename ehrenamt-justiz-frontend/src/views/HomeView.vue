@@ -9,11 +9,11 @@
         />
       </v-col>
       <online-help-dialog-component
-        :helptext="t('views.HomeView.onlinehelp')"
+        :helptext="t('views.homeView.onlinehelp')"
       />
       <v-col class="mb-4">
         <h1 class="text-h3 font-weight-bold mb-3">
-          {{ t("views.HomeView.welcome") }}
+          {{ t("views.homeView.welcome") }}
         </h1>
       </v-col>
     </v-row>

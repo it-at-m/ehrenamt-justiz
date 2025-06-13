@@ -5,7 +5,7 @@
       <vorschlaege-table />
     </v-card>
     <online-help-dialog-component
-      :helptext="t('views.VorschlaegeIndex.onlinehelp')"
+      :helptext="t('views.vorschlaegeIndex.onlinehelp')"
     />
   </v-container>
 </template>
