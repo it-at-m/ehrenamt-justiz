@@ -9,7 +9,7 @@
         />
       </v-col>
       <online-help-dialog-component
-        :component="t('views.homeview.onlinehelp')"
+        :helptext="t('views.homeview.onlinehelp')"
       />
       <v-col class="mb-4">
         <h1 class="text-h3 font-weight-bold mb-3">

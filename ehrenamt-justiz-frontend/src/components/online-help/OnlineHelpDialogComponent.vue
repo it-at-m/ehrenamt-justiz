@@ -43,14 +43,14 @@ import {
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 
 const formattedLines = computed(() => {
-  return props.component
+  return props.helptext
     .split(/\r?\n/)
     .map((l) => l.trim())
     .filter(Boolean);
 });
 
 const props = defineProps<{
-  component: string;
+  helptext: string;
 }>();
 
 const visible = computed(() => {

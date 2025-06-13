@@ -5,7 +5,7 @@
       <bewerbungen-table />
     </v-card>
     <online-help-dialog-component
-      :component="t('views.applicant.index.onlinehelp')"
+      :helptext="t('views.applicant.index.onlinehelp')"
     />
   </v-container>
 </template>

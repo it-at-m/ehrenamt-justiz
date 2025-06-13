@@ -22,7 +22,7 @@
       <konfiguration-list />
     </v-card>
     <online-help-dialog-component
-      :component="t('views.configuration.index.onlinehelp')"
+      :helptext="t('views.configuration.index.onlinehelp')"
     />
   </v-container>
 </template>
