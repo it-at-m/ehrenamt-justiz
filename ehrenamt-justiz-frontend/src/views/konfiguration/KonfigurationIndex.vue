@@ -22,12 +22,13 @@
       <konfiguration-list />
     </v-card>
     <online-help-dialog-component
-      component="views.configuration.index.onlinehelp"
+      :component="t('views.configuration.index.onlinehelp')"
     />
   </v-container>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
 import {
   VBtn,
   VCard,
@@ -40,4 +41,6 @@ import {
 import AuthService from "@/api/AuthService";
 import KonfigurationList from "@/components/konfiguration/KonfigurationList.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
+
+const { t } = useI18n();
 </script>

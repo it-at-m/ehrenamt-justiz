@@ -14,7 +14,7 @@
       />
     </v-card>
     <online-help-dialog-component
-      component="views.configuration.create.onlinehelp"
+      :component="t('views.configuration.create.onlinehelp')"
     />
   </v-container>
 </template>
@@ -23,6 +23,7 @@
 import type KonfigurationFormData from "@/types/KonfigurationFormData";
 
 import { reactive, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VCard, VContainer } from "vuetify/components";
 
@@ -35,6 +36,7 @@ import { useSnackbarStore } from "@/stores/snackbar";
 
 const snackbarStore = useSnackbarStore();
 const router = useRouter();
+const { t } = useI18n();
 
 const konfigurationData: KonfigurationFormData = reactive({
   aktiv: false,

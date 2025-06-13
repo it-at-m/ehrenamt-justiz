@@ -14,7 +14,7 @@
       ></e-w-o-buerger-select>
     </v-card>
     <online-help-dialog-component
-      component="views.applicant.create.onlinehelp"
+      :component="t('views.applicant.create.onlinehelp')"
     />
   </v-container>
 </template>
@@ -24,6 +24,7 @@ import type EWOBuergerData from "@/types/EWOBuergerData";
 import type EWOBuergerSuche from "@/types/EWOBuergerSuche";
 
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VCard, VContainer } from "vuetify/components";
 
@@ -38,6 +39,8 @@ import EWOBuergerSelect from "@/views/ewobuerger/EWOBuergerSelect.vue";
 const snackbarStore = useSnackbarStore();
 
 const router = useRouter();
+
+const { t } = useI18n();
 
 const ewoBuergerSelect = ref<EWOBuergerData[]>([]);
 

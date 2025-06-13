@@ -5,16 +5,19 @@
       <konflikte-table />
     </v-card>
     <online-help-dialog-component
-      component="views.conflicts.index.onlinehelp"
+      :component="t('views.conflicts.index.onlinehelp')"
     />
   </v-container>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
 import { VCard, VCardTitle, VContainer } from "vuetify/components";
 
 import KonflikteTable from "@/components/konflikte/KonflikteTable.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
+
+const { t } = useI18n();
 </script>
 
 <style scoped>

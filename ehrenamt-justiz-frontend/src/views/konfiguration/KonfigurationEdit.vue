@@ -26,7 +26,7 @@
       </template>
     </v-card>
     <online-help-dialog-component
-      component="views.configuration.edit.onlinehelp"
+      :component="t('views.configuration.edit.onlinehelp')"
     />
   </v-container>
 </template>
@@ -35,6 +35,7 @@
 import type KonfigurationFormData from "@/types/KonfigurationFormData";
 
 import { onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";
@@ -47,6 +48,7 @@ import { useSnackbarStore } from "@/stores/snackbar";
 const route = useRoute();
 const router = useRouter();
 const snackbarStore = useSnackbarStore();
+const { t } = useI18n();
 
 const konfigurationData = ref<KonfigurationFormData>({
   aktiv: false,
