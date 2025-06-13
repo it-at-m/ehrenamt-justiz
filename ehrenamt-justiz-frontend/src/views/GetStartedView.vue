@@ -19,7 +19,7 @@
                 ? ehrenamtJustizStatus.anzahlBewerbungen
                 : "?"
             }}
-            Bewerbungen
+            {{ t("views.GetStartedView.applicants") }}
           </h2>
           <h2>{{ textAnzahlBewerbungen }}</h2>
         </v-col>
@@ -40,7 +40,7 @@
             {{
               ehrenamtJustizStatus ? ehrenamtJustizStatus.anzahlKonflikte : "?"
             }}
-            Konflikte
+            {{ t("views.GetStartedView.conflicts") }}
           </h2>
           <h2>{{ textAnzahlKonflikte }}</h2>
         </v-col>
@@ -65,7 +65,7 @@
                 ? ehrenamtJustizStatus.anzahlVorschlaege
                 : "?"
             }}
-            Vorschläge
+            {{ t("views.GetStartedView.proposals") }}
           </h2>
           <h2>{{ textAnzahlVorschlaege }}</h2>
         </v-col>
@@ -80,7 +80,7 @@
               ? ehrenamtJustizStatus.anzahlVorschlaegeNeu
               : "?"
           }}
-          neue Vorschläge
+          {{ t("views.GetStartedView.newproposals") }}
         </h2>
         <h2>{{ textAnzahlNeueVorschlaege }}</h2>
         <v-btn
@@ -91,7 +91,7 @@
             )
           "
           @click="datenHerunterladen"
-          >Daten herunterladen
+          >{{ t("views.GetStartedView.buttons.savedata") }}
         </v-btn>
 
         <v-btn
@@ -102,7 +102,7 @@
             )
           "
           @click="alsBenachrichtigtMarkierenBestaetigen"
-          >Als benachrichtigt markieren
+          >{{ t("views.GetStartedView.buttons.markasnotified") }}
         </v-btn>
       </v-col>
     </v-row>
@@ -115,7 +115,7 @@
       @yes="alsBenachrichtigtMarkierenYes"
     />
     <online-help-dialog-component
-      :helptext="t('views.getstarted.onlinehelp')"
+      :helptext="t('views.GetStartedView.onlinehelp')"
     />
   </v-container>
 </template>

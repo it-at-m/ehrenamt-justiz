@@ -14,7 +14,7 @@
       ></e-w-o-buerger-select>
     </v-card>
     <online-help-dialog-component
-      :helptext="t('views.applicant.create.onlinehelp')"
+      :helptext="t('views.EWOBuergerCreate.onlinehelp')"
     />
   </v-container>
 </template>

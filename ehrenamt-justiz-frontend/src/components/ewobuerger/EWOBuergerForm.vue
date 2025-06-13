@@ -12,7 +12,7 @@
           class="text-left"
           cols="3"
         >
-          <div class="text-h5">Bewerbung erstellen</div>
+          <div class="text-h5">{{ t("components.EWOBuergerForm.header") }}</div>
         </v-col>
         <v-col
           class="text-right"
@@ -22,14 +22,14 @@
             color="accent"
             @click="felderLeeren"
           >
-            Felder leeren
+            {{ t("components.EWOBuergerForm.buttons.clearfields") }}
           </v-btn>
           <v-btn
             color="green"
             :loading="isAnimation"
             @click="inEWOSuchen"
           >
-            In EWO suchen
+            {{ t("components.EWOBuergerForm.buttons.findewo") }}
           </v-btn>
         </v-col>
       </v-row>
@@ -38,7 +38,7 @@
           <v-text-field
             v-model="ewobuergerdata.familienname"
             :rules="[rules.RULE_REQUIRED]"
-            label="Familienname*"
+            :label="t('components.EWOBuergerForm.surname')"
             persistent-placeholder
             density="compact"
             variant="outlined"
@@ -51,7 +51,7 @@
           <v-text-field
             v-model="ewobuergerdata.vorname"
             :rules="[rules.RULE_REQUIRED]"
-            label="Vorname*"
+            :label="t('components.EWOBuergerForm.givenname')"
             persistent-placeholder
             density="compact"
             variant="outlined"
@@ -62,7 +62,7 @@
         <v-col class="col">
           <v-text-field
             v-model="ewobuergerdata.geburtsdatum"
-            label="Geburtsdatum*"
+            :label="t('components.EWOBuergerForm.dateofbirth')"
             persistent-placeholder
             :rules="
               ewobuergerdata.validierungdeaktivieren
@@ -82,15 +82,14 @@
               AuthService.checkAuth('READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE')
             "
             v-model="ewobuergerdata.validierungdeaktivieren"
-            label="Validierung deaktivieren (Altersprüfung)"
+            :label="t('components.EWOBuergerForm.dactivatevalidation')"
           />
         </v-col>
       </v-row>
       <v-row>
         <v-col>
           <p>
-            Alle mit Sternchen* gekennzeichneten Felder sind Pflichtfelder.
-            Wildcard '*' mit mindestens 3 führenden Zeichen.
+            {{ t("components.EWOBuergerForm.hint") }}
           </p>
         </v-col>
       </v-row>
@@ -102,6 +101,7 @@
 import type EWOBuergerSuche from "@/types/EWOBuergerSuche";
 
 import { computed, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import {
   VBtn,
   VCheckbox,
@@ -129,6 +129,8 @@ const snackbarStore = useSnackbarStore();
 const form = ref();
 
 const formValid = ref(false);
+
+const { t } = useI18n();
 
 function inEWOSuchen(): void {
   form.value?.validate().then((validation: { valid: boolean }) => {

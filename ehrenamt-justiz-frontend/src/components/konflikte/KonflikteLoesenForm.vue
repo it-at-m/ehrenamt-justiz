@@ -1241,7 +1241,7 @@
     </div>
   </v-form>
   <online-help-dialog-component
-    :helptext="t('components.conflicts.resolve.onlinehelp')"
+    :helptext="t('components.KonflikteLoesenForm.onlinehelp')"
   />
 </template>
 

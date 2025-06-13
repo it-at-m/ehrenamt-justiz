@@ -5,7 +5,7 @@
       <konflikte-table />
     </v-card>
     <online-help-dialog-component
-      :helptext="t('views.conflicts.index.onlinehelp')"
+      :helptext="t('views.KonflikteIndex.onlinehelp')"
     />
   </v-container>
 </template>

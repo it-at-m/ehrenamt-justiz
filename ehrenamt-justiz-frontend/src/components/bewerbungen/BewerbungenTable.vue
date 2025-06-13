@@ -10,7 +10,7 @@
             <v-text-field
               v-model="search"
               prepend-inner-icon="mdi-magnify"
-              label="Suche"
+              :label="t('components.BewerbungenTable.search')"
               single-line
               hide-details
               select-strategy="all"
@@ -31,7 +31,7 @@
               "
               color="error"
               @click="deleteRequested"
-              >Löschen</v-btn
+              >{{ t("components.BewerbungenTable.buttons.delete") }}</v-btn
             >
           </v-col>
           <v-col
@@ -50,7 +50,9 @@
               color="accent"
               :loading="vorschlagsListeAnimationAktiv"
               @click="aufVorschlagslisteSetzen"
-              >Auf Vorschlagsliste setzen</v-btn
+              >{{
+                t("components.BewerbungenTable.buttons.addtolistproposal")
+              }}</v-btn
             >
           </v-col>
           <v-col
@@ -66,7 +68,7 @@
               "
               color="accent"
               @click="datenHerunterladen"
-              >Daten herunterladen</v-btn
+              >{{ t("components.BewerbungenTable.buttons.savedata") }}</v-btn
             >
           </v-col>
         </v-row>
@@ -78,7 +80,9 @@
         :items="personenTableData"
         :items-length="totalItems"
         show-select
-        items-per-page-text="Bewerber je Seite"
+        :items-per-page-text="
+          t('components.BewerbungenTable.table.itemsperpagetext')
+        "
         :row-props="getRowProps"
         :loading="loadingAnimationAktiv"
         :multi-sort="true"
@@ -112,7 +116,9 @@
                   :icon="mdiPencil"
               /></span>
             </template>
-            <span>Bewerber ändern</span>
+            <span>{{
+              t("components.BewerbungenTable.table.actions.change")
+            }}</span>
           </v-tooltip>
           <v-tooltip location="bottom">
             <template #activator="{ props }">
@@ -123,7 +129,9 @@
                   :icon="mdiEye"
               /></span>
             </template>
-            <span>Bewerber anzeigen</span>
+            <span>{{
+              t("components.BewerbungenTable.table.actions.display")
+            }}</span>
           </v-tooltip>
         </template>
         <template
@@ -162,11 +170,13 @@
     </v-card>
     <yes-no-dialog
       v-model="yesNoDialogVisible"
-      dialogtitle="Auf Vorschlagsliste setzen"
+      :dialogtitle="
+        t('components.BewerbungenTable.table.addtolistproposal.dialogtitle')
+      "
       :dialogtext="
-        'Bestätigen Sie die Übernahme von ' +
+        t('components.BewerbungenTable.table.addtolistproposal.dialogtext1') +
         selectedUUIDs.length +
-        ' Bewerbung(en) in die Vorschlagsliste'
+        t('components.BewerbungenTable.table.addtolistproposal.dialogtext2')
       "
       :is-animation="vorschlagsListeAnimationAktiv"
       @no="abbruchAufVorschlagslisteSetzen"
@@ -176,7 +186,10 @@
   <delete-dialog
     v-model="deleteDialogVisible"
     :is-animation="deleteAnimationAktiv"
-    :descriptor-string="selectedUUIDs.length + ' Bewerber'"
+    :descriptor-string="
+      selectedUUIDs.length +
+      t('components.BewerbungenTable.table.delete.dialogtext')
+    "
     :type-string="2"
     @delete="deleteConfirmed"
     @cancel="deleteCanceled"
@@ -188,6 +201,7 @@ import type PersonenTableData from "@/types/PersonenTableData";
 
 import { mdiEye, mdiPencil } from "@mdi/js";
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import {
   VBtn,
@@ -220,51 +234,52 @@ import { useSnackbarStore } from "@/stores/snackbar";
 import { useUserStore } from "@/stores/user";
 import InvalidePersonenSelect from "@/views/vorschlaege/InvalidePersonenSelect.vue";
 
+const { t } = useI18n();
 const headers: ReadonlyHeaders = [
   {
-    title: "Familienname",
+    title: t("components.BewerbungenTable.table.surname"),
     value: "familienname",
     align: "start",
     sortable: true,
   },
   {
-    title: "Vorname",
+    title: t("components.BewerbungenTable.table.givenname"),
     value: "vorname",
     align: "start",
     sortable: true,
   },
   {
-    title: "Geburtsdatum",
+    title: t("components.BewerbungenTable.table.dateofbirth"),
     value: "geburtsdatum",
     align: "end",
     sortable: true,
   },
   {
-    title: "Derzeitiger Beruf",
+    title: t("components.BewerbungenTable.table.currentprofession"),
     value: "derzeitausgeuebterberuf",
     align: "start",
     sortable: true,
   },
   {
-    title: "Arbeitgeber",
+    title: t("components.BewerbungenTable.table.employer"),
     value: "arbeitgeber",
     align: "start",
     sortable: true,
   },
   {
-    title: "Mailadresse",
+    title: t("components.BewerbungenTable.table.mail"),
     value: "mailadresse",
     align: "start",
     sortable: true,
   },
   {
-    title: "Ausgeübte Ehrenämter",
+    title: t("components.BewerbungenTable.table.honorypositions"),
     value: "ausgeuebteehrenaemter",
     align: "start",
     sortable: true,
   },
   {
-    title: "Aktionen",
+    title: t("components.BewerbungenTable.table.actions.header"),
     value: "actions",
     align: "start",
     sortable: false,
@@ -290,7 +305,6 @@ const invalidePersonenSelectVisible = ref(false);
 const invalidePersonen = ref<PersonenTableData[]>([]);
 const userStore = useUserStore();
 const user = userStore.getUser;
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function loadItems(options: any) {
   itemsSort.value = options.sortBy;
@@ -401,8 +415,9 @@ async function aufVorschlagslisteSetzen(): Promise<void> {
         // No authorization: Error:
         snackbarStore.showMessage({
           level: STATUS_INDICATORS.ERROR,
-          message:
-            "Die Auswahl enthält invalide Personen. Bitte wenden Sie sich an einen Sondersachbearbeiter, der diese Validierung umgehen kann.",
+          message: t(
+            "components.BewerbungenTable.table.addtolistproposal.message"
+          ),
         });
       }
     })

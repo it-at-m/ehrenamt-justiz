@@ -14,7 +14,7 @@
       />
     </v-card>
     <online-help-dialog-component
-      :helptext="t('views.configuration.create.onlinehelp')"
+      :helptext="t('views.KonfigurationCreate.onlinehelp')"
     />
   </v-container>
 </template>

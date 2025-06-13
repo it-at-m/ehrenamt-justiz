@@ -21,7 +21,7 @@
                       :icon="mdiCircle"
                   /></span>
                 </template>
-                <span>Status Gateway</span>
+                <span>{{ t("App.state.gateway") }}</span>
               </v-tooltip>
               <v-tooltip location="top">
                 <template #activator="{ props }">
@@ -34,7 +34,7 @@
                       :icon="mdiCircle"
                   /></span>
                 </template>
-                <span>Status Backend</span>
+                <span>{{ t("App.state.backend") }}</span>
               </v-tooltip>
               <v-tooltip location="top">
                 <template #activator="{ props }">
@@ -47,9 +47,9 @@
                       :icon="mdiCircle"
                   /></span>
                 </template>
-                <span>Status EWO-EAI</span>
+                <span>{{ t("App.state.eai") }}</span>
               </v-tooltip>
-              <span class="text-white"> KVR-</span>
+              <span class="text-white">{{ t("App.head") }}</span>
               <span class="text-secondary">{{ ehrenamtjustizart }}</span>
             </v-toolbar-title>
           </router-link>
@@ -76,7 +76,7 @@
                   :icon="mdiHelp"
               /></span>
             </template>
-            <span>Online-Hilfe</span>
+            <span>{{ t("App.onlinehelp") }}</span>
           </v-tooltip>
           <app-switcher
             v-if="appswitcherBaseUrl"
@@ -90,7 +90,9 @@
     <v-navigation-drawer v-model="drawer">
       <v-list>
         <v-list-item :to="{ name: ROUTES_GETSTARTED }">
-          <v-list-item-title>Get started</v-list-item-title>
+          <v-list-item-title>{{
+            t("App.navigation.getstarted")
+          }}</v-list-item-title>
         </v-list-item>
         <v-list-item
           :to="{ name: 'bewerbung.create' }"
@@ -101,7 +103,9 @@
             !globalSettingsStore.getKonfiguration
           "
         >
-          <v-list-item-title>Bewerbung erstellen</v-list-item-title>
+          <v-list-item-title>{{
+            t("App.navigation.createapplicant")
+          }}</v-list-item-title>
         </v-list-item>
         <v-list-item
           :to="{ name: 'bewerbung.index' }"
@@ -112,7 +116,9 @@
             !globalSettingsStore.getKonfiguration
           "
         >
-          <v-list-item-title>Bewerbungen</v-list-item-title>
+          <v-list-item-title>{{
+            t("App.navigation.listapplicants")
+          }}</v-list-item-title>
         </v-list-item>
         <v-list-item
           :to="{ name: 'konflikte.index' }"
@@ -123,7 +129,9 @@
             !globalSettingsStore.getKonfiguration
           "
         >
-          <v-list-item-title>Konflikte</v-list-item-title>
+          <v-list-item-title>{{
+            t("App.navigation.conflicts")
+          }}</v-list-item-title>
         </v-list-item>
         <v-list-item
           :to="{ name: 'vorschlaege.index' }"
@@ -131,13 +139,17 @@
             !user || !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN')
           "
         >
-          <v-list-item-title>Vorschläge</v-list-item-title>
+          <v-list-item-title>{{
+            t("App.navigation.proposals")
+          }}</v-list-item-title>
         </v-list-item>
         <v-list-item
           :to="{ name: 'konfiguration.index' }"
           :disabled="!user || !user.authorities.includes('READ_KONFIGURATION')"
         >
-          <v-list-item-title>Konfiguration</v-list-item-title>
+          <v-list-item-title>{{
+            t("App.navigation.configurations")
+          }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -167,6 +179,7 @@ import { mdiApps, mdiCircle, mdiHelp } from "@mdi/js";
 import { AppSwitcher } from "@muenchen/appswitcher-vue";
 import { useToggle } from "@vueuse/core";
 import { computed, onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import {
   VApp,
   VAppBar,
@@ -218,6 +231,7 @@ const isConfigLoaded = computed(() => {
     userStore.getUser && globalSettingsStore.isKonfigurationLoadingAttempt()
   );
 });
+const { t } = useI18n();
 
 onMounted(() => {
   loadUser();
