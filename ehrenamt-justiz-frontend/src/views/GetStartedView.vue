@@ -19,7 +19,7 @@
                 ? ehrenamtJustizStatus.anzahlBewerbungen
                 : "?"
             }}
-            Bewerbungen
+            {{ t("views.getStartedView.applicants") }}
           </h2>
           <h2>{{ textAnzahlBewerbungen }}</h2>
         </v-col>
@@ -40,7 +40,7 @@
             {{
               ehrenamtJustizStatus ? ehrenamtJustizStatus.anzahlKonflikte : "?"
             }}
-            Konflikte
+            {{ t("views.getStartedView.conflicts") }}
           </h2>
           <h2>{{ textAnzahlKonflikte }}</h2>
         </v-col>
@@ -65,7 +65,7 @@
                 ? ehrenamtJustizStatus.anzahlVorschlaege
                 : "?"
             }}
-            Vorschläge
+            {{ t("views.getStartedView.proposals") }}
           </h2>
           <h2>{{ textAnzahlVorschlaege }}</h2>
         </v-col>
@@ -80,7 +80,7 @@
               ? ehrenamtJustizStatus.anzahlVorschlaegeNeu
               : "?"
           }}
-          neue Vorschläge
+          {{ t("views.getStartedView.newproposals") }}
         </h2>
         <h2>{{ textAnzahlNeueVorschlaege }}</h2>
         <v-btn
@@ -91,7 +91,7 @@
             )
           "
           @click="datenHerunterladen"
-          >Daten herunterladen
+          >{{ t("views.getStartedView.buttons.savedata") }}
         </v-btn>
 
         <v-btn
@@ -102,7 +102,7 @@
             )
           "
           @click="alsBenachrichtigtMarkierenBestaetigen"
-          >Als benachrichtigt markieren
+          >{{ t("views.getStartedView.buttons.markasnotified") }}
         </v-btn>
       </v-col>
     </v-row>
@@ -115,7 +115,7 @@
       @yes="alsBenachrichtigtMarkierenYes"
     />
     <online-help-dialog-component
-      component="Das ist die Onlinehilfe für den Starter (Under Construction)."
+      :helptext="t('views.getStartedView.onlinehelp')"
     />
   </v-container>
 </template>
@@ -124,6 +124,7 @@
 import type EhrenamtJustizStatus from "@/types/EhrenamtJustizStatus";
 
 import { onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VBtn, VCol, VContainer, VHover, VRow } from "vuetify/components";
 
@@ -150,6 +151,7 @@ const yesNoDialogVisible = ref(false);
 const benachrichtigtMarkierenAnimationAktiv = ref(false);
 const userStore = useUserStore();
 const user = userStore.getUser;
+const { t } = useI18n();
 
 onMounted(() => {
   load();

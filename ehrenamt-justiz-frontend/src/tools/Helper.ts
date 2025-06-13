@@ -9,6 +9,6 @@ export function formattedEhrenamtjustizart(
   if (ehrenamtjustizart === "SCHOEFFEN") {
     return "Schöffen";
   } else {
-    return "Verwaltungsrichter";
+    return "Ehrenamtliche Verwaltungsrichter";
   }
 }
