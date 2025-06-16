@@ -10,13 +10,17 @@
           class="text-h5"
           style="margin-bottom: 1em"
         >
-          Konfiguration
+          {{ t("views.konfigurationEdit.header") }}
           {{
             konfigurationData.action == BEARBEIGUNGS_MODUS.EDIT_MODUS
-              ? "bearbeiten"
-              : "anzeigen"
+              ? t("views.konfigurationEdit.bearbeiten")
+              : t("views.konfigurationEdit.anzeigen")
           }}
-          ({{ konfigurationData.aktiv ? "Aktiv" : "Inaktiv" }})
+          {{
+            konfigurationData.aktiv
+              ? t("views.konfigurationEdit.aktiv")
+              : t("views.konfigurationEdit.inAktiv")
+          }}
         </h1>
         <konfiguration-form
           v-model="konfigurationData"

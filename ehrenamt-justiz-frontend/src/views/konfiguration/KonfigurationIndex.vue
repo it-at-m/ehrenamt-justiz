@@ -3,7 +3,9 @@
     <v-card flat>
       <v-card-title>
         <v-row>
-          <v-col class="text-left"> Konfigurationen </v-col>
+          <v-col class="text-left">
+            {{ t("views.konfigurationIndex.header") }}
+          </v-col>
 
           <v-col class="text-right">
             <v-btn
@@ -14,7 +16,7 @@
               color="accent"
               :to="{ path: '/configuration/create' }"
             >
-              Neue Konfiguration
+              {{ t("views.konfigurationIndex.createKonfiguration") }}
             </v-btn>
           </v-col>
         </v-row>

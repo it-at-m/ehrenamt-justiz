@@ -10,7 +10,7 @@
             <v-text-field
               v-model="search"
               prepend-inner-icon="mdi-magnify"
-              :label="t('components.bewerbungenTable.search')"
+              :label="t('components.bewerbungenTable.suche')"
               single-line
               hide-details
               select-strategy="all"
@@ -31,7 +31,7 @@
               "
               color="error"
               @click="deleteRequested"
-              >{{ t("components.bewerbungenTable.buttons.delete") }}</v-btn
+              >{{ t("components.bewerbungenTable.buttons.loeschen") }}</v-btn
             >
           </v-col>
           <v-col
@@ -51,7 +51,7 @@
               :loading="vorschlagsListeAnimationAktiv"
               @click="aufVorschlagslisteSetzen"
               >{{
-                t("components.bewerbungenTable.buttons.addtolistproposal")
+                t("components.bewerbungenTable.buttons.zurVorschlagsliste")
               }}</v-btn
             >
           </v-col>
@@ -68,7 +68,9 @@
               "
               color="accent"
               @click="datenHerunterladen"
-              >{{ t("components.bewerbungenTable.buttons.savedata") }}</v-btn
+              >{{
+                t("components.bewerbungenTable.buttons.datenHerunterladen")
+              }}</v-btn
             >
           </v-col>
         </v-row>
@@ -117,7 +119,7 @@
               /></span>
             </template>
             <span>{{
-              t("components.bewerbungenTable.table.actions.change")
+              t("components.bewerbungenTable.table.actions.bewerberAendern")
             }}</span>
           </v-tooltip>
           <v-tooltip location="bottom">
@@ -130,7 +132,7 @@
               /></span>
             </template>
             <span>{{
-              t("components.bewerbungenTable.table.actions.display")
+              t("components.bewerbungenTable.table.actions.bewerberAnzeigen")
             }}</span>
           </v-tooltip>
         </template>
@@ -237,43 +239,43 @@ import InvalidePersonenSelect from "@/views/vorschlaege/InvalidePersonenSelect.v
 const { t } = useI18n();
 const headers: ReadonlyHeaders = [
   {
-    title: t("components.bewerbungenTable.table.surname"),
+    title: t("components.bewerbungenTable.table.familienname"),
     value: "familienname",
     align: "start",
     sortable: true,
   },
   {
-    title: t("components.bewerbungenTable.table.givenname"),
+    title: t("components.bewerbungenTable.table.vorname"),
     value: "vorname",
     align: "start",
     sortable: true,
   },
   {
-    title: t("components.bewerbungenTable.table.dateofbirth"),
+    title: t("components.bewerbungenTable.table.geburtsdatum"),
     value: "geburtsdatum",
     align: "end",
     sortable: true,
   },
   {
-    title: t("components.bewerbungenTable.table.currentprofession"),
+    title: t("components.bewerbungenTable.table.derzeitigerBeruf"),
     value: "derzeitausgeuebterberuf",
     align: "start",
     sortable: true,
   },
   {
-    title: t("components.bewerbungenTable.table.employer"),
+    title: t("components.bewerbungenTable.table.arbeitgeber"),
     value: "arbeitgeber",
     align: "start",
     sortable: true,
   },
   {
-    title: t("components.bewerbungenTable.table.mail"),
+    title: t("components.bewerbungenTable.table.mailadresse"),
     value: "mailadresse",
     align: "start",
     sortable: true,
   },
   {
-    title: t("components.bewerbungenTable.table.honorypositions"),
+    title: t("components.bewerbungenTable.table.ausgeuebteEhrenaemter"),
     value: "ausgeuebteehrenaemter",
     align: "start",
     sortable: true,

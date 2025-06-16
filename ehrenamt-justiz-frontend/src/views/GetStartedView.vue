@@ -19,7 +19,7 @@
                 ? ehrenamtJustizStatus.anzahlBewerbungen
                 : "?"
             }}
-            {{ t("views.getStartedView.applicants") }}
+            {{ t("views.getStartedView.bewerbungen") }}
           </h2>
           <h2>{{ textAnzahlBewerbungen }}</h2>
         </v-col>
@@ -40,7 +40,7 @@
             {{
               ehrenamtJustizStatus ? ehrenamtJustizStatus.anzahlKonflikte : "?"
             }}
-            {{ t("views.getStartedView.conflicts") }}
+            {{ t("views.getStartedView.konflikte") }}
           </h2>
           <h2>{{ textAnzahlKonflikte }}</h2>
         </v-col>
@@ -65,7 +65,7 @@
                 ? ehrenamtJustizStatus.anzahlVorschlaege
                 : "?"
             }}
-            {{ t("views.getStartedView.proposals") }}
+            {{ t("views.getStartedView.vorschlaege") }}
           </h2>
           <h2>{{ textAnzahlVorschlaege }}</h2>
         </v-col>
@@ -80,7 +80,7 @@
               ? ehrenamtJustizStatus.anzahlVorschlaegeNeu
               : "?"
           }}
-          {{ t("views.getStartedView.newproposals") }}
+          {{ t("views.getStartedView.neueVorschlaege") }}
         </h2>
         <h2>{{ textAnzahlNeueVorschlaege }}</h2>
         <v-btn
@@ -91,7 +91,7 @@
             )
           "
           @click="datenHerunterladen"
-          >{{ t("views.getStartedView.buttons.savedata") }}
+          >{{ t("views.getStartedView.buttons.datenHerunterladen") }}
         </v-btn>
 
         <v-btn
@@ -102,14 +102,14 @@
             )
           "
           @click="alsBenachrichtigtMarkierenBestaetigen"
-          >{{ t("views.getStartedView.buttons.markasnotified") }}
+          >{{ t("views.getStartedView.buttons.alsBenachrichtigtMarkieren") }}
         </v-btn>
       </v-col>
     </v-row>
     <yes-no-dialog
       v-model="yesNoDialogVisible"
-      dialogtitle="Als benachrichtigt markieren"
-      dialogtext="Möchten Sie wirklich alle neuen Vorschläge als benachrichtigt markieren? Wenn Sie diese Aktion durchführen werden alle neuen Vorschläge als Benachrichtigt markiert. Ein erneutes Exportieren der Daten ist nur durch manuelles Selektieren möglich. Dies kann nicht Rückgängig gemacht werden."
+      :dialogtitle="t('views.getStartedView.yesNoDialog.dialogtitle')"
+      :dialogtext="t('views.getStartedView.yesNoDialog.dialogtext')"
       :is-animation="benachrichtigtMarkierenAnimationAktiv"
       @no="alsBenachrichtigtMarkierenNo"
       @yes="alsBenachrichtigtMarkierenYes"

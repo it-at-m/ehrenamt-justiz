@@ -19,13 +19,16 @@
 
     <v-list-item v-if="allPagesLoaded">
       <div class="text--secondary d-flex justify-center">
-        {{ totalElements }} Einträge insgesamt
+        {{ totalElements }}
+        {{ t("components.konfigurationList.eintraegeInsgesamt") }}
       </div>
     </v-list-item>
     <template
       v-if="!busy && (configuration === undefined || configuration.length < 1)"
     >
-      <v-list-subheader>Keine Konfiguration vorhanden</v-list-subheader>
+      <v-list-subheader>{{
+        t("components.konfigurationList.keineKonfigurationVorhanden")
+      }}</v-list-subheader>
     </template>
     <template v-if="busy">
       <v-progress-linear
@@ -40,6 +43,7 @@
 import type KonfigurationData from "@/types/KonfigurationData";
 
 import { computed, onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import {
   VDivider,
   VList,
@@ -63,7 +67,7 @@ const currentPage = ref(-1);
 const totalPages = ref(Number.MAX_VALUE);
 
 const totalElements = ref<number | null>(null);
-
+const { t } = useI18n();
 onMounted(() => {
   loadMore();
 });

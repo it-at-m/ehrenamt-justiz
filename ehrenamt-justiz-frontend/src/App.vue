@@ -91,7 +91,7 @@
       <v-list>
         <v-list-item :to="{ name: ROUTES_GETSTARTED }">
           <v-list-item-title>{{
-            t("app.navigation.getstarted")
+            t("app.navigation.getStarted")
           }}</v-list-item-title>
         </v-list-item>
         <v-list-item
@@ -104,7 +104,7 @@
           "
         >
           <v-list-item-title>{{
-            t("app.navigation.createapplicant")
+            t("app.navigation.bewerbungErstellen")
           }}</v-list-item-title>
         </v-list-item>
         <v-list-item
@@ -117,7 +117,7 @@
           "
         >
           <v-list-item-title>{{
-            t("app.navigation.listapplicants")
+            t("app.navigation.bewerbungen")
           }}</v-list-item-title>
         </v-list-item>
         <v-list-item
@@ -130,7 +130,7 @@
           "
         >
           <v-list-item-title>{{
-            t("app.navigation.conflicts")
+            t("app.navigation.konflikte")
           }}</v-list-item-title>
         </v-list-item>
         <v-list-item
@@ -140,7 +140,7 @@
           "
         >
           <v-list-item-title>{{
-            t("app.navigation.proposals")
+            t("app.navigation.vorschlaege")
           }}</v-list-item-title>
         </v-list-item>
         <v-list-item
@@ -148,7 +148,7 @@
           :disabled="!user || !user.authorities.includes('READ_KONFIGURATION')"
         >
           <v-list-item-title>{{
-            t("app.navigation.configurations")
+            t("app.navigation.konfigurationen")
           }}</v-list-item-title>
         </v-list-item>
       </v-list>

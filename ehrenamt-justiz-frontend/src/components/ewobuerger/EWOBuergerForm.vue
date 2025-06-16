@@ -22,14 +22,14 @@
             color="accent"
             @click="felderLeeren"
           >
-            {{ t("components.eWOBuergerForm.buttons.clearfields") }}
+            {{ t("components.eWOBuergerForm.buttons.felderLeeren") }}
           </v-btn>
           <v-btn
             color="green"
             :loading="isAnimation"
             @click="inEWOSuchen"
           >
-            {{ t("components.eWOBuergerForm.buttons.findewo") }}
+            {{ t("components.eWOBuergerForm.buttons.inEWOSuchen") }}
           </v-btn>
         </v-col>
       </v-row>
@@ -38,7 +38,7 @@
           <v-text-field
             v-model="ewobuergerdata.familienname"
             :rules="[rules.RULE_REQUIRED]"
-            :label="t('components.eWOBuergerForm.surname')"
+            :label="t('components.eWOBuergerForm.familienname')"
             persistent-placeholder
             density="compact"
             variant="outlined"
@@ -51,7 +51,7 @@
           <v-text-field
             v-model="ewobuergerdata.vorname"
             :rules="[rules.RULE_REQUIRED]"
-            :label="t('components.eWOBuergerForm.givenname')"
+            :label="t('components.eWOBuergerForm.vorname')"
             persistent-placeholder
             density="compact"
             variant="outlined"
@@ -62,7 +62,7 @@
         <v-col class="col">
           <v-text-field
             v-model="ewobuergerdata.geburtsdatum"
-            :label="t('components.eWOBuergerForm.dateofbirth')"
+            :label="t('components.eWOBuergerForm.geburtsdatum')"
             persistent-placeholder
             :rules="
               ewobuergerdata.validierungdeaktivieren
@@ -82,7 +82,7 @@
               AuthService.checkAuth('READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE')
             "
             v-model="ewobuergerdata.validierungdeaktivieren"
-            :label="t('components.eWOBuergerForm.dactivatevalidation')"
+            :label="t('components.eWOBuergerForm.validierungdeaktivieren')"
           />
         </v-col>
       </v-row>

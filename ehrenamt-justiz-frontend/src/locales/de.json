@@ -1,12 +1,12 @@
 {
   "app": {
     "navigation": {
-      "getstarted": "Get started",
-      "createapplicant": "Bewerbung erstellen",
-      "listapplicants": "Bewerbungen",
-      "conflicts": "Konflikte",
-      "proposals": "Vorschläge",
-      "configurations": "Konfigurationen"
+      "getStarted": "Get started",
+      "bewerbungErstellen": "Bewerbung erstellen",
+      "bewerbungen": "Bewerbungen",
+      "konflikte": "Konflikte",
+      "vorschlaege": "Vorschläge",
+      "konfigurationen": "Konfigurationen"
     },
     "state": {
       "gateway": "Status Gateway",
@@ -19,13 +19,17 @@
   "views": {
     "getStartedView": {
       "onlinehelp": "Hier finden Sie eine Übersicht über alle Bewerbungen, Konflikte und Vorschläge. Wenn neue Bewerber erfasst wurden, haben Sachbearbeiter, je nach Berechtigung, die Möglichkeit, die Daten zu exportieren oder diese als benachrichtigt zu markieren.",
-      "applicants": "Bewerbungen",
-      "conflicts": "Konflikte",
-      "proposals": "Vorschläge",
-      "newproposals": "Neue Vorschläge",
+      "bewerbungen": "Bewerbungen",
+      "konflikte": "Konflikte",
+      "vorschlaege": "Vorschläge",
+      "neueVorschlaege": "Neue Vorschläge",
       "buttons": {
-        "savedata": "Daten herunterladen",
-        "markasnotified": "Als benachrichtigt markieren"
+        "datenHerunterladen": "Daten herunterladen",
+        "alsBenachrichtigtMarkieren": "Als benachrichtigt markieren"
+      },
+      "yesNoDialog": {
+        "dialogtitle": "Als benachrichtigt markieren",
+        "dialogtext": "Möchten Sie wirklich alle neuen Vorschläge als benachrichtigt markieren? Wenn Sie diese Aktion durchführen werden alle neuen Vorschläge als Benachrichtigt markiert. Ein erneutes Exportieren der Daten ist nur durch manuelles Selektieren möglich. Dies kann nicht Rückgängig gemacht werden."
       }
     },
     "homeView": {
@@ -33,13 +37,21 @@
       "onlinehelp": "Willkommen bei der Anwendung, in der Sie Schöffen und ehrenamtliche Richter verwalten können.\nDie Anwendung besteht aus folgenden Bereichen:\n-------------------------------------------------------------------------------------------------------------------------------------------------------\nIm oberen Bereich:\n- 3 horizontale Linien: Menü links auf- und zuklappen\n- Ampel (rot oder grün) zeigt an, ob Gateway, Backend und EWO-EAI aktiv sind. Die Anwendung ist erst dann vollständig verfügbar wenn alle drei Ampeln grün anzeigen\n- Art der Ehrenamt-Justiz aus der aktiven Konfiguration: Schöffen oder ehrenamtliche Verwaltungsrichter\n- Bezeichnung aus der aktiven Konfiguration\n- Name des angemeldeten Users\n- ? um Onlinehilfe für das jeweilige Unterprogramm zu öffnen\n- App-Switcher um weitere Anwendungen zu starten\n-------------------------------------------------------------------------------------------------------------------------------------------------------\nIm linken Bereich:\n- Menü um Unterprogramme zu öffnen\n-------------------------------------------------------------------------------------------------------------------------------------------------------\nIm mittleren Bereich:\n- Bereich für die Unterprogramme, die über das Menü geöffnet werden können\n-------------------------------------------------------------------------------------------------------------------------------------------------------"
     },
     "konfigurationEdit": {
-      "onlinehelp": "Hier kann die aktuell selektierte Konfiguration bearbeitet werden. Eine Änderung der Konfiguration führt nicht zu einer automatischen Prüfung der bestehenden Bewerbungs- oder Vorschlagsliste."
+      "onlinehelp": "Hier kann die aktuell selektierte Konfiguration bearbeitet werden. Eine Änderung der Konfiguration führt nicht zu einer automatischen Prüfung der bestehenden Bewerbungs- oder Vorschlagsliste.",
+      "header": "Konfiguration",
+      "aktiv": "aktiv",
+      "inAktiv": "inaktiv",
+      "bearbeiten": "bearbeiten",
+      "anzeigen": "anzeigen"
     },
     "konfigurationCreate": {
-      "onlinehelp": "Hier können Sie eine neue Konfiguration für die Verwaltung von Schöffen oder ehrenamtliche Richter erfassen. Nach der Erfassung einer Konfiguration muss auch eine Konfiguration aktiviert werden. Die Bewerber werden dann unter dieser aktiven Konfiguration gespeichert."
+      "onlinehelp": "Hier können Sie eine neue Konfiguration für die Verwaltung von Schöffen oder ehrenamtliche Richter erfassen. Nach der Erfassung einer Konfiguration muss auch eine Konfiguration aktiviert werden. Die Bewerber werden dann unter dieser aktiven Konfiguration gespeichert.",
+      "header": "Konfiguration erstellen"
     },
     "konfigurationIndex": {
-      "onlinehelp": "Hier sehen Sie die Übersicht der bereits erfassten Konfigurationen! Um Bewerbungen für Schöffen oder ehrenamtliche Verwaltungsrichter verwalten zu können, ist es erforderlich, eine Konfiguration zu erfassen und zu aktivieren. Die Bewerber werden dann unter dieser aktiven Konfiguration gespeichert. Eine aktive Konfiguration wird farblich hervorgehoben."
+      "onlinehelp": "Hier sehen Sie die Übersicht der bereits erfassten Konfigurationen! Um Bewerbungen für Schöffen oder ehrenamtliche Verwaltungsrichter verwalten zu können, ist es erforderlich, eine Konfiguration zu erfassen und zu aktivieren. Die Bewerber werden dann unter dieser aktiven Konfiguration gespeichert. Eine aktive Konfiguration wird farblich hervorgehoben.",
+      "header": "Konfigurationen",
+      "createKonfiguration": "Neue Konfiguration"
     },
     "eWOBuergerCreate": {
       "onlinehelp": "Willkommen zur Erfassung eines neuen Bewerbers! Um einen neuen Bewerber anzulegen, benötigen wir den Familiennamen, den Vornamen und das Geburtsdatum.\n\nBitte beachten Sie, dass ein Bewerber nur erfasst werden kann, wenn er im Einwohnermeldewesen vorhanden ist. Für den Familiennamen und Vornamen genügt es, die ersten drei Buchstaben einzugeben (mit einem '*' am Ende).\n\nSollten mehr als eine Person identifiziert werden, erhalten Sie eine Übersicht, in der die entsprechenden Personen angezeigt werden. Dort können Sie die gewünschte Person auswählen."
@@ -59,32 +71,85 @@
     }
   },
   "components": {
+    "deleteDialog": {
+      "title": "Löschen?",
+      "text1": "Soll(en)",
+      "text2": "wirklich gelöscht werden?",
+      "text3": " Sollen die Daten wirklich gelöscht werden?",
+      "buttons": {
+        "abbrechen": "Abbrechen",
+        "loeschen": "Löschen"
+      }
+    },
+    "listItemActions": {
+      "anzeigen": "Anzeigen",
+      "bearbeiten": "Bearbeiten",
+      "loeschen": "Löschen"
+    },
+    "konfigurationList": {
+      "eintraegeInsgesamt": "Einträge insgesamt",
+      "keineKonfigurationVorhanden": "Keine Konfiguration vorhanden"
+    },
+    "konfigurationListItem": {
+      "title": {
+        "amtsperiode": "/ Amtsperiode: ",
+        "aktiv": " / Aktiv: "
+      },
+      "subTitle": {
+        "staatsangehoerigkeit": "Staatsangehörigkeit: ",
+        "wohnsitz": " / Wohnsitz: ",
+        "alterVon": " / Alter von: ",
+        "alterBis": " bis "
+      },
+      "tooltip": {
+        "aktivSetzen": "Aktiv setzen"
+      }
+    },
+    "konfigurationForm": {
+      "hint": "Alle mit Sternchen* gekennzeichneten Felder sind Pflichtfelder",
+      "artEhrenamtJusitz": "Art Ehrenamtjusitz*",
+      "bezeichnung": "Bezeichnung",
+      "amtsperiodeVon": "Amtsperiode Von*",
+      "amtsperiodeBis": "Amtsperiode Bis*",
+      "mindestalter": "Mindestalter*",
+      "hoechstalter": "Höchstalter*",
+      "staatsangehoerigkeit": "Staatsangehörigkeit*",
+      "wohnsitz": "Wohnsitz*",
+      "messages": {
+        "fehler": "Das Formular ist nicht richtig ausgefüllt"
+      },
+      "buttons": {
+        "abbrechen": "Abbrechen",
+        "felderLeeren": "Felder leeren",
+        "speichern": "Speichern"
+      }
+    },
     "eWOBuergerForm": {
       "header": "Bewerbung erstellen",
-      "surname": "Familienname*",
-      "givenname": "Vorname*",
-      "dateofbirth": "Geburtsdatum*",
-      "dactivatevalidation": "Validierung deaktivieren (Altersprüfung)",
+      "familienname": "Familienname*",
+      "vorname": "Vorname*",
+      "geburtsdatum": "Geburtsdatum*",
+      "validierungdeaktivieren": "Validierung deaktivieren (Altersprüfung)",
       "hint": "Alle mit Sternchen* gekennzeichneten Felder sind Pflichtfelder. Wildcard '*' mit mindestens 3 führenden Zeichen.",
       "buttons": {
-        "clearfields": "Felder leeren",
-        "findewo": "In EWO suchen"
+        "felderLeeren": "Felder leeren",
+        "inEWOSuchen": "In EWO suchen"
       }
     },
     "bewerbungenTable": {
-      "search": "Suche",
+      "suche": "Suche",
       "table": {
-        "surname": "Familienname",
-        "givenname": "Vorname",
-        "dateofbirth": "Geburtsdatum",
-        "currentprofession": "Derzeitiger Beruf",
-        "employer": "Arbeitgeber",
-        "mail": "Mailadresse",
-        "honorypositions": "Ausgeübte Ehrenämter",
+        "familienname": "Familienname",
+        "vorname": "Vorname",
+        "geburtsdatum": "Geburtsdatum",
+        "derzeitigerBeruf": "Derzeitiger Beruf",
+        "arbeitgeber": "Arbeitgeber",
+        "mailadresse": "Mailadresse",
+        "ausgeuebteEhrenaemter": "Ausgeübte Ehrenämter",
         "actions": {
           "header": "Aktionen",
-          "change": "Bewerber ändern",
-          "display": "Bewerber anzeigen"
+          "bewerberAendern": "Bewerber ändern",
+          "bewerberAnzeigen": "Bewerber anzeigen"
         },
         "addtolistproposal": {
           "dialogtitle": "Auf Vorschlagsliste setzen",
@@ -98,9 +163,9 @@
         "itemsperpagetext": "Bewerber je Seite"
       },
       "buttons": {
-        "delete": "Löschen",
-        "addtolistproposal": "Zur Vorschlagsliste",
-        "savedata": "Daten herunterladen"
+        "loeschen": "Löschen",
+        "zurVorschlagsliste": "Zur Vorschlagsliste",
+        "datenHerunterladen": "Daten herunterladen"
       }
     },
     "konflikteLoesenForm": {

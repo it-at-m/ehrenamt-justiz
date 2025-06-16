@@ -5,7 +5,7 @@
         class="text-h5"
         style="margin-bottom: 1em"
       >
-        Konfiguration erstellen
+        {{ t("views.konfigurationCreate.header") }}
       </h1>
       <konfiguration-form
         v-model="konfigurationData"

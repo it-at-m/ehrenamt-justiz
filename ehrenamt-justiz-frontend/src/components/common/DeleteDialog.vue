@@ -5,14 +5,16 @@
     max-width="290"
   >
     <v-card>
-      <v-card-title class="text-h5"> Löschen? </v-card-title>
+      <v-card-title class="text-h5">
+        {{ t("components.deleteDialog.title") }}
+      </v-card-title>
       <v-card-text v-if="descriptorString">
-        Soll(en)
+        {{ t("components.deleteDialog.text1") }}
         <span class="font-weight-bold">{{ descriptorString }}</span>
-        wirklich gelöscht werden?
+        {{ t("components.deleteDialog.text2") }}
       </v-card-text>
       <v-card-text v-else>
-        Sollen die Daten wirklich gelöscht werden?
+        {{ t("components.deleteDialog.text3") }}
       </v-card-text>
       <v-card-actions>
         <v-spacer />
@@ -20,7 +22,7 @@
           variant="text"
           @click="cancel"
         >
-          Abbrechen
+          {{ t("components.deleteDialog.buttons.abbrechen") }}
         </v-btn>
         <v-btn
           color="error"
@@ -28,7 +30,7 @@
           :loading="isAnimation"
           @click="deleteItem"
         >
-          Löschen
+          {{ t("components.deleteDialog.buttons.loeschen") }}
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -36,6 +38,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
 import {
   VBtn,
   VCard,
@@ -56,6 +59,8 @@ const emits = defineEmits<{
   cancel: [];
   delete: [];
 }>();
+
+const { t } = useI18n();
 
 function cancel(): void {
   emits("cancel");
