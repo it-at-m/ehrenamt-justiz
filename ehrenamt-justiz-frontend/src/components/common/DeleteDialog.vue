@@ -9,12 +9,10 @@
         {{ t("components.deleteDialog.title") }}
       </v-card-title>
       <v-card-text v-if="descriptorString">
-        {{ t("components.deleteDialog.text1") }}
-        <span class="font-weight-bold">{{ descriptorString }}</span>
-        {{ t("components.deleteDialog.text2") }}
+        {{ t("components.deleteDialog.text", { descriptor: descriptorString }) }}
       </v-card-text>
       <v-card-text v-else>
-        {{ t("components.deleteDialog.text3") }}
+        {{ t("components.deleteDialog.text2") }}
       </v-card-text>
       <v-card-actions>
         <v-spacer />

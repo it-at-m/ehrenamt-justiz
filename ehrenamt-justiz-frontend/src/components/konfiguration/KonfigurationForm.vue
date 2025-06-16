@@ -41,8 +41,8 @@
         <v-col class="col">
           <v-select
             v-model="konfiguration.ehrenamtjustizart"
-            :items="ehrenamtJusitzArt"
-            :label="t('components.konfigurationForm.artEhrenamtJusitz')"
+            :items="ehrenamtJustizArt"
+            :label="t('components.konfigurationForm.artEhrenamtJustiz')"
             persistent-placeholder
             :rules="[rules.RULE_REQUIRED]"
             density="compact"
@@ -184,7 +184,7 @@ const form = ref<(typeof myV3App & { validate: () => void }) | null>(null);
 
 const formValid = ref(false);
 
-const ehrenamtJusitzArt: string[] = ["VERWALTUNGSRICHTER", "SCHOEFFEN"];
+const ehrenamtjustizart: string[] = ["VERWALTUNGSRICHTER", "SCHOEFFEN"];
 const { t } = useI18n();
 
 function felderLeeren(): void {

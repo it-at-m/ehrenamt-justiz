@@ -73,9 +73,8 @@
   "components": {
     "deleteDialog": {
       "title": "Löschen?",
-      "text1": "Soll(en)",
-      "text2": "wirklich gelöscht werden?",
-      "text3": " Sollen die Daten wirklich gelöscht werden?",
+      "text": "Soll(en) {descriptor} wirklich gelöscht werden?",
+      "text2": " Sollen die Daten wirklich gelöscht werden?",
       "buttons": {
         "abbrechen": "Abbrechen",
         "loeschen": "Löschen"
@@ -87,7 +86,7 @@
       "loeschen": "Löschen"
     },
     "konfigurationList": {
-      "eintraegeInsgesamt": "Einträge insgesamt",
+      "eintraegeInsgesamt": "{total} Einträge insgesamt",
       "keineKonfigurationVorhanden": "Keine Konfiguration vorhanden"
     },
     "konfigurationListItem": {
@@ -107,7 +106,7 @@
     },
     "konfigurationForm": {
       "hint": "Alle mit Sternchen* gekennzeichneten Felder sind Pflichtfelder",
-      "artEhrenamtJusitz": "Art Ehrenamtjusitz*",
+      "artEhrenamtJustiz": "Art Ehrenamtjustiz*",
       "bezeichnung": "Bezeichnung",
       "amtsperiodeVon": "Amtsperiode Von*",
       "amtsperiodeBis": "Amtsperiode Bis*",
