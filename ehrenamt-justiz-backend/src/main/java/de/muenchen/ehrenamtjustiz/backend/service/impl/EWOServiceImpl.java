@@ -11,6 +11,7 @@ import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
 import de.muenchen.ehrenamtjustiz.backend.service.EWOService;
+import de.muenchen.ehrenamtjustiz.backend.utils.EhrenamtJustizUtility;
 import de.muenchen.ehrenamtjustiz.exception.AenderungsServiceException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.ArrayList;
@@ -41,9 +42,6 @@ public class EWOServiceImpl implements EWOService {
 
     @Autowired
     private RestTemplate restTemplate;
-
-    private static final String STATUS_UP = "UP";
-    private static final String STATUS_DOWN = "DOWN";
 
     @Autowired
     PersonRepository personRepository;
@@ -182,11 +180,11 @@ public class EWOServiceImpl implements EWOService {
 
         try {
             final ResponseEntity<Void> responseEntity = restTemplate.getForEntity(serverewoeai + "/actuator/health", Void.class);
-            return new ResponseEntity<>(responseEntity.getStatusCode() == HttpStatus.OK ? STATUS_UP : STATUS_DOWN,
+            return new ResponseEntity<>(responseEntity.getStatusCode() == HttpStatus.OK ? EhrenamtJustizUtility.STATUS_UP : EhrenamtJustizUtility.STATUS_DOWN,
                     responseEntity.getStatusCode());
         } catch (RuntimeException ex) {
             log.error(ex.getMessage());
-            return new ResponseEntity<>(STATUS_DOWN, HttpStatus.OK);
+            return new ResponseEntity<>(EhrenamtJustizUtility.STATUS_DOWN, HttpStatus.OK);
         }
 
     }
