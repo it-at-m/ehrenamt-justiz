@@ -39,7 +39,7 @@
         :items-length="totalItems"
         show-select
         :items-per-page-text="
-          t('components.bewerbungenTable.table.itemsperpagetext')
+          t('components.konflikteTable.table.itemsperpagetext')
         "
         :row-props="getRowProps"
         :loading="loadingAnimationAktiv"
