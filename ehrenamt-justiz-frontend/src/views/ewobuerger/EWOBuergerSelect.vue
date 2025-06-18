@@ -1,8 +1,10 @@
 <template>
   <v-dialog v-model="visible">
     <v-card>
-      <v-card-title class="text-h5">Bewerbung erstellen</v-card-title>
-      <v-card-text> Bitte wählen Sie den gewünschten Eintrag aus </v-card-text>
+      <v-card-title class="text-h5">{{
+        t("views.eWOBuergerSelect.title")
+      }}</v-card-title>
+      <v-card-text>{{ t("views.eWOBuergerSelect.text") }}</v-card-text>
       <v-data-table
         :items="eWOBuergerData"
         :headers="headers"
@@ -21,16 +23,18 @@
                     :icon="mdiAccountPlus"
                   />
                 </template>
-                <span>Auswählen und übernehmen</span>
+                <span>{{
+                  t("views.eWOBuergerSelect.table.actions.tooltip")
+                }}</span>
               </v-tooltip>
             </td>
             <td>{{ item.familienname }}</td>
             <td>{{ item.vorname }}</td>
             <td>{{ new Date(item.geburtsdatum).toLocaleDateString() }}</td>
             <td>
-              {{ item.auskunftssperre.length > 0 ? "Auskunftssperre" : "" }}
+              {{ item.auskunftssperre.length > 0 ? t("views.eWOBuergerSelect.table.auskunftssperre.content") : "" }}
             </td>
-            <td>{{ item.ewoidbereitserfasst ? "Ja" : "Nein" }}</td>
+            <td>{{ item.ewoidbereitserfasst ? t("views.eWOBuergerSelect.table.bereitsErfasst.contentYes")  :  t("views.eWOBuergerSelect.table.bereitsErfasst.contentNo")  }}</td>
           </tr>
         </template>
       </v-data-table>
@@ -40,7 +44,7 @@
           variant="outlined"
           @click="cancelBuergerSelect"
         >
-          Abbrechen
+          {{ t("views.eWOBuergerSelect.buttons.abbrechen") }}
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -52,6 +56,7 @@ import type EWOBuergerData from "@/types/EWOBuergerData";
 
 import { mdiAccountPlus } from "@mdi/js";
 import { computed } from "vue";
+import { useI18n } from "vue-i18n";
 import {
   VBtn,
   VCard,
@@ -71,40 +76,40 @@ const props = defineProps<{
 }>();
 
 type ReadonlyHeaders = VDataTable["$props"]["headers"];
-
+const { t } = useI18n();
 const headers: ReadonlyHeaders = [
   {
-    title: "Auswählen",
+    title: t("views.eWOBuergerSelect.table.actions.title"),
     value: "actions",
     align: "start",
     sortable: false,
   },
   {
-    title: "Familienname",
+    title: t("views.eWOBuergerSelect.table.familienname"),
     value: "familienname",
     align: "start",
     sortable: true,
   },
   {
-    title: "Vorname",
+    title: t("views.eWOBuergerSelect.table.vorname"),
     value: "vorname",
     align: "start",
     sortable: true,
   },
   {
-    title: "Geburtsdatum",
+    title: t("views.eWOBuergerSelect.table.geburtsdatum"),
     value: "geburtsdatum",
     align: "start",
     sortable: true,
   },
   {
-    title: "Auskunftssperre",
+    title: t("views.eWOBuergerSelect.table.auskunftssperre.title"),
     value: "auskunftsssperre",
     align: "start",
     sortable: true,
   },
   {
-    title: "Bereits erfasst",
+    title: t("views.eWOBuergerSelect.table.bereitsErfasst.title"),
     value: "ewoidbereitserfasst",
     align: "start",
     sortable: true,
