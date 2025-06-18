@@ -8,11 +8,11 @@ import de.muenchen.ehrenamtjustiz.backend.common.BaseEntity;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serial;
+import java.util.Collections;
 import java.util.UUID;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -32,7 +32,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 @SuppressWarnings({ "PMD.TooManyFields", "CPD-START" })
-@SuppressFBWarnings("RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE")
 public class Person extends BaseEntity {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -219,16 +218,25 @@ public class Person extends BaseEntity {
 
     // because of EI_EXPOSE_REP
     public java.util.List<String> getAuskunftssperre() {
+        if (auskunftssperre == null) {
+            return Collections.emptyList();
+        }
         return new java.util.ArrayList<>(auskunftssperre);
     }
 
     // because of EI_EXPOSE_REP
     public java.util.List<String> getKonfliktfeld() {
+        if (konfliktfeld == null) {
+            return Collections.emptyList();
+        }
         return new java.util.ArrayList<>(konfliktfeld);
     }
 
     // because of EI_EXPOSE_REP
     public java.util.List<String> getStaatsangehoerigkeit() {
+        if (staatsangehoerigkeit == null) {
+            return Collections.emptyList();
+        }
         return new java.util.ArrayList<>(staatsangehoerigkeit);
     }
 
