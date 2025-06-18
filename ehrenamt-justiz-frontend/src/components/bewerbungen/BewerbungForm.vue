@@ -600,16 +600,8 @@
   </v-form>
   <yes-no-dialog
     v-model="saveLeaveDialog"
-    :dialogtitle="
-                    t(
-                      'components.bewerbungForm.saveLeaveDialog.dialogtitle'
-                    )
-                  "
-    :dialogtext="
-                    t(
-                      'components.bewerbungForm.saveLeaveDialog.dialogtext'
-                    )
-                  "
+    :dialogtitle="t('components.bewerbungForm.saveLeaveDialog.dialogtitle')"
+    :dialogtext="t('components.bewerbungForm.saveLeaveDialog.dialogtext')"
     @no="abbruch"
     @yes="cancel"
   />
@@ -669,30 +661,30 @@ const active_tab = ref("bewerber");
 const { t } = useI18n();
 
 const tab1: string[] = [
-  t('components.bewerbungForm.tabEwo.familienname'),
-  t('components.bewerbungForm.tabEwo.vorname'),
-  t('components.bewerbungForm.tabEwo.geburtsname'),
-  t('components.bewerbungForm.tabEwo.geburtsdatum'),
-  t('components.bewerbungForm.tabEwo.geschlecht'),
-  t('components.bewerbungForm.tabEwo.ordnungsmerkmal'),
-  t('components.bewerbungForm.tabEwo.akademischerGrad'),
-  t('components.bewerbungForm.tabEwo.geburtsOrt'),
-  t('components.bewerbungForm.tabEwo.geburtsLand'),
-  t('components.bewerbungForm.tabEwo.familienStand'),
-  t('components.bewerbungForm.tabEwo.staatsangehoerigkeit'),
-  t('components.bewerbungForm.tabEwo.konfliktfelder'),
-  t('components.bewerbungForm.tabEwo.wohnungsgeber'),
-  t('components.bewerbungForm.tabEwo.strasse'),
-  t('components.bewerbungForm.tabEwo.hausnummer'),
-  t('components.bewerbungForm.tabEwo.appartmentNummer'),
-  t('components.bewerbungForm.tabEwo.buchstabeHausnummer'),
-  t('components.bewerbungForm.tabEwo.stockwerk'),
-  t('components.bewerbungForm.tabEwo.teilnummerHausnummer'),
-  t('components.bewerbungForm.tabEwo.adressZusatz'),
-  t('components.bewerbungForm.tabEwo.postleitzahl'),
-  t('components.bewerbungForm.tabEwo.ort'),
-  t('components.bewerbungForm.tabEwo.inMuenchenWohnhaftSeit'),
-  t('components.bewerbungForm.tabEwo.wohnungsstatus'),
+  t("components.bewerbungForm.tabEwo.familienname"),
+  t("components.bewerbungForm.tabEwo.vorname"),
+  t("components.bewerbungForm.tabEwo.geburtsname"),
+  t("components.bewerbungForm.tabEwo.geburtsdatum"),
+  t("components.bewerbungForm.tabEwo.geschlecht"),
+  t("components.bewerbungForm.tabEwo.ordnungsmerkmal"),
+  t("components.bewerbungForm.tabEwo.akademischerGrad"),
+  t("components.bewerbungForm.tabEwo.geburtsOrt"),
+  t("components.bewerbungForm.tabEwo.geburtsLand"),
+  t("components.bewerbungForm.tabEwo.familienStand"),
+  t("components.bewerbungForm.tabEwo.staatsangehoerigkeit"),
+  t("components.bewerbungForm.tabEwo.konfliktfelder"),
+  t("components.bewerbungForm.tabEwo.wohnungsgeber"),
+  t("components.bewerbungForm.tabEwo.strasse"),
+  t("components.bewerbungForm.tabEwo.hausnummer"),
+  t("components.bewerbungForm.tabEwo.appartmentNummer"),
+  t("components.bewerbungForm.tabEwo.buchstabeHausnummer"),
+  t("components.bewerbungForm.tabEwo.stockwerk"),
+  t("components.bewerbungForm.tabEwo.teilnummerHausnummer"),
+  t("components.bewerbungForm.tabEwo.adressZusatz"),
+  t("components.bewerbungForm.tabEwo.postleitzahl"),
+  t("components.bewerbungForm.tabEwo.ort"),
+  t("components.bewerbungForm.tabEwo.inMuenchenWohnhaftSeit"),
+  t("components.bewerbungForm.tabEwo.wohnungsstatus"),
 ];
 
 const statuswerte: string[] = [
