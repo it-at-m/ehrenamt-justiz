@@ -168,7 +168,7 @@
         "geburtsdatum": "Geburtsdatum",
         "derzeitigerBeruf": "Derzeitiger Beruf",
         "arbeitgeber": "Arbeitgeber",
-        "mailadresse": "Mailadresse",
+        "mailAdresse": "Mailadresse",
         "ausgeuebteEhrenaemter": "Ausgeübte Ehrenämter",
         "actions": {
           "header": "Aktionen",

@@ -269,7 +269,7 @@ const headers: ReadonlyHeaders = [
     sortable: true,
   },
   {
-    title: t("components.bewerbungenTable.table.mailadresse"),
+    title: t("components.bewerbungenTable.table.mailAdresse"),
     value: "mailadresse",
     align: "start",
     sortable: true,
