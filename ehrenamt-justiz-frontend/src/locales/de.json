@@ -212,7 +212,7 @@
         "wohnungsstatus": "Wohnungsstatus"
       },
       "tabBewerberZusatzangaben": {
-        "derfzeitigerBeruf": "Derzeitiger Beruf",
+        "derzeitigerBeruf": "Derzeitiger Beruf",
         "arbeitgeber": "Arbeitgeber",
         "ausgeuebteEhrenaemter": "Ausgeübte Ehrenämter",
         "telefonnummerPrivat": "Telefonnummer (privat)",
@@ -229,7 +229,7 @@
         "dialogtext": "Erfassung der Bewerbung fortsetzen?"
       },
       "speichern": {
-        "errorMessage": "Die Eingabe ist fehlerhat!"
+        "errorMessage": "Die Eingabe ist fehlerhaft!"
       }
     },
     "konflikteLoesenForm": {

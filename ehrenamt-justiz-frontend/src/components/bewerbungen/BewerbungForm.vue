@@ -70,7 +70,7 @@
           "
           v-model="bewerbung.validierungdeaktivieren"
           :label="t('components.bewerbungForm.header.validierungDeaktivieren')"
-          :onchange="validieren"
+          @change="validieren"
         />
       </v-col>
     </v-row>
@@ -419,7 +419,7 @@
                   v-model="bewerbung.derzeitausgeuebterberuf"
                   :label="
                     t(
-                      'components.bewerbungForm.tabBewerberZusatzangaben.derfzeitigerBeruf'
+                      'components.bewerbungForm.tabBewerberZusatzangaben.derzeitigerBeruf'
                     )
                   "
                   persistent-placeholder
