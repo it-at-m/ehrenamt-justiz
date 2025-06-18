@@ -9,7 +9,9 @@
         {{ t("components.deleteDialog.title") }}
       </v-card-title>
       <v-card-text v-if="descriptorString">
-        {{ t("components.deleteDialog.text", { descriptor: descriptorString }) }}
+        {{
+          t("components.deleteDialog.text", { descriptor: descriptorString })
+        }}
       </v-card-text>
       <v-card-text v-else>
         {{ t("components.deleteDialog.textNoDescriptor") }}

@@ -19,7 +19,11 @@
 
     <v-list-item v-if="allPagesLoaded">
       <div class="text--secondary d-flex justify-center">
-        {{ t("components.konfigurationList.eintraegeInsgesamt", { total: totalElements }) }}
+        {{
+          t("components.konfigurationList.eintraegeInsgesamt", {
+            total: totalElements,
+          })
+        }}
       </div>
     </v-list-item>
     <template

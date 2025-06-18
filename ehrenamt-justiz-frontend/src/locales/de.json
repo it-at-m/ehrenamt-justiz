@@ -167,6 +167,71 @@
         "datenHerunterladen": "Daten herunterladen"
       }
     },
+    "bewerbungForm": {
+      "header": {
+        "vorschlag": "Vorschlag",
+        "bewerbung": "Bewerbung",
+        "bearbeiten": "bearbeiten",
+        "anzeigen": "anzeigen",
+        "auskunftssperre": "Auskunftssperre",
+        "validierungDeaktivieren": "Validierung deaktivieren (Alter, Wohnort und Staatsangehörigkeit)"
+      },
+      "buttons": {
+        "abbrechen": "Abbrechen",
+        "felderLeeren": "Felder leeren",
+        "speichern": "Speichern"
+      },
+      "tabs": {
+        "ausEwo": "Aus EWO",
+        "bewerberZusatzangaben": "Bewerber Zusatzangaben"
+      },
+      "tabEwo": {
+        "vorname": "Vorname",
+        "familienname": "Familienname",
+        "geburtsdatum": "Geburtsdatum",
+        "geburtsname": "Geburtsname",
+        "geschlecht": "Geschlecht",
+        "ordnungsmerkmal": "Ordnungsmerkmal",
+        "akademischerGrad": "Akademischer Grad",
+        "geburtsOrt": "Geburtsort",
+        "geburtsLand": "Geburtsland",
+        "familienStand": "Familienstand",
+        "staatsangehoerigkeit": "Staatsangehörigkeit",
+        "konfliktfelder": "Konfliktfelder",
+        "wohnungsgeber": "Wohnungsgeber (c/o)",
+        "strasse": "Straße",
+        "hausnummer": "Hausnummer",
+        "buchstabeHausnummer": "Buchstabe Hausnummer",
+        "appartmentNummer": "Appartment-Nummer",
+        "stockwerk": "Stockwerk",
+        "teilnummerHausnummer": "Teilnummer Hausnummer",
+        "adressZusatz": "Adresszusatz",
+        "postleitzahl": "Postleitzahl",
+        "ort": "Ort",
+        "inMuenchenWohnhaftSeit": "In München wohnhaft seit",
+        "wohnungsstatus": "Wohnungsstatus"
+      },
+      "tabBewerberZusatzangaben": {
+        "derfzeitigerBeruf": "Derzeitiger Beruf",
+        "arbeitgeber": "Arbeitgeber",
+        "ausgeuebteEhrenaemter": "Ausgeübte Ehrenämter",
+        "telefonnummerPrivat": "Telefonnummer (privat)",
+        "telefonnummerDienstlich": "Telefonnummer (dienstlich)",
+        "telefonnummerMobil": "Telefonnummer (mobil)",
+        "mailAdresse": "Mailadresse",
+        "bewerbungVom": "Bewerbung vom*",
+        "status": "Status*",
+        "warBereitsAlsVerwaltungsrichterTaetig": "War bereits als {artEhrenamtJustiz} tätig",
+        "warBereitsInVorperiodeAlsVerwaltungsrichterTaetig": "War bereits in Vorperiode als {artEhrenamtJustiz} tätig"
+      },
+      "saveLeaveDialog": {
+        "dialogtitle": "Sie erfassen gerade eine neue Bewerbung",
+        "dialogtext": "Erfassung der Bewerbung fortsetzen?"
+      },
+      "speichern": {
+        "errorMessage": "Die Eingabe ist fehlerhat!"
+      }
+    },
     "konflikteLoesenForm": {
       "onlinehelp": "Hier haben Sie die Möglichkeit, Konflikte bei einem Bewerber zu beheben. Im linken Bereich sehen Sie die aktuellen Daten aus dem Einwohnermeldewesen, während im rechten Bereich die abweichenden Bewerberdaten (Konflikte) angezeigt werden.\n\nUm die Konflikte zu lösen, übernehmen Sie einfach die aktuellen Daten aus dem Einwohnermeldewesen und speichern Sie diese. Einzelne Konflikte können behoben werden, indem Sie auf den roten Button (mit dem Pfeil nach links) klicken.\n\nWenn Sie alle Konflikte auf einmal lösen möchten, nutzen Sie den Button 'Alle Übernehmen'. Bitte beachten Sie, dass der Speicher-Button erst aktiv wird, nachdem alle Konflikte gelöst wurden."
     }

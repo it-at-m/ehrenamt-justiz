@@ -14,13 +14,13 @@
         <div class="text-h5">
           {{
             bewerbung.status == PERSONENSTATUS.STATUS_VORSCHLAG
-              ? "Vorschlag"
-              : "Bewerbung"
+              ? t("components.bewerbungForm.header.vorschlag")
+              : t("components.bewerbungForm.header.bewerbung")
           }}
           {{
             bewerbung.action == BEARBEIGUNGS_MODUS.EDIT_MODUS
-              ? "bearbeiten"
-              : "anzeigen"
+              ? t("components.bewerbungForm.header.bearbeiten")
+              : t("components.bewerbungForm.header.anzeigen")
           }}
         </div>
       </v-col>
@@ -29,7 +29,7 @@
           v-if="bewerbung.ewo_auskunftssperre.length > 0"
           class="text-h5 auskunftssperre"
         >
-          Auskunftssperre
+          {{ t("components.bewerbungForm.header.auskunftssperre") }}
         </div>
       </v-col>
       <v-col
@@ -42,14 +42,14 @@
           class="ml-auto"
           @click="abbruch"
         >
-          Abbrechen
+          {{ t("components.bewerbungForm.buttons.abbrechen") }}
         </v-btn>
         <v-btn
           v-if="bewerbung.action == BEARBEIGUNGS_MODUS.EDIT_MODUS"
           color="accent"
           @click="felderLeeren"
         >
-          Felder leeren
+          {{ t("components.bewerbungForm.buttons.felderLeeren") }}
         </v-btn>
         <v-btn
           v-if="bewerbung.action == BEARBEIGUNGS_MODUS.EDIT_MODUS"
@@ -57,7 +57,7 @@
           :loading="isAnimation"
           @click="speichern"
         >
-          Speichern
+          {{ t("components.bewerbungForm.buttons.speichern") }}
         </v-btn>
       </v-col>
     </v-row>
@@ -69,14 +69,16 @@
             AuthService.checkAuth('READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE')
           "
           v-model="bewerbung.validierungdeaktivieren"
-          label="Validierung deaktivieren (Alter, Wohnort und Staatsangehörigkeit)"
+          :label="t('components.bewerbungForm.header.validierungDeaktivieren')"
           :onchange="validieren"
         />
       </v-col>
     </v-row>
     <v-tabs v-model="active_tab">
-      <v-tab value="ewo"> Aus EWO</v-tab>
-      <v-tab value="bewerber"> Bewerber Zusatzangaben</v-tab>
+      <v-tab value="ewo">{{ t("components.bewerbungForm.tabs.ausEwo") }}</v-tab>
+      <v-tab value="bewerber">{{
+        t("components.bewerbungForm.tabs.bewerberZusatzangaben")
+      }}</v-tab>
     </v-tabs>
     <v-tabs-window v-model="active_tab">
       <v-tabs-window-item
@@ -95,7 +97,7 @@
                 <v-text-field
                   v-model="bewerbung.ewo_vorname"
                   :rules="[rules.RULE_REQUIRED]"
-                  label="Vorname*"
+                  :label="t('components.bewerbungForm.tabEwo.vorname')"
                   persistent-placeholder
                   density="compact"
                   variant="outlined"
@@ -105,7 +107,7 @@
                 <v-text-field
                   v-model="bewerbung.ewo_familienname"
                   :rules="[rules.RULE_REQUIRED]"
-                  label="Familienname*"
+                  :label="t('components.bewerbungForm.tabEwo.familienname')"
                   persistent-placeholder
                   density="compact"
                   variant="outlined"
@@ -130,7 +132,7 @@
                         ? [rules.RULE_REQUIRED]
                         : [rules.RULE_REQUIRED, rules.RULE_GEBURTSDATUM]
                     "
-                    label="Geburtsdatum*"
+                    :label="t('components.bewerbungForm.tabEwo.geburtsdatum')"
                     persistent-placeholder
                     type="date"
                     density="compact"
@@ -140,7 +142,7 @@
                 <v-col class="col">
                   <v-text-field
                     v-model="bewerbung.ewo_geburtsname"
-                    label="Geburtsname"
+                    :label="t('components.bewerbungForm.tabEwo.geburtsname')"
                     persistent-placeholder
                     density="compact"
                     variant="outlined"
@@ -153,7 +155,7 @@
                     v-model="bewerbung.ewo_geschlecht"
                     :items="geschlechtswerte"
                     :rules="[rules.RULE_REQUIRED]"
-                    label="Geschlecht*"
+                    :label="t('components.bewerbungForm.tabEwo.geschlecht')"
                     persistent-placeholder
                     density="compact"
                     variant="outlined"
@@ -165,7 +167,9 @@
                   <v-text-field
                     v-model="bewerbung.ewoid"
                     :rules="[rules.RULE_REQUIRED]"
-                    label="Ordnungsmerkmal*"
+                    :label="
+                      t('components.bewerbungForm.tabEwo.ordnungsmerkmal')
+                    "
                     persistent-placeholder
                     density="compact"
                     variant="outlined"
@@ -176,7 +180,9 @@
                 <v-col class="col">
                   <v-text-field
                     v-model="bewerbung.ewo_akademischergrad"
-                    label="Akademischer Grad"
+                    :label="
+                      t('components.bewerbungForm.tabEwo.akademischerGrad')
+                    "
                     persistent-placeholder
                     density="compact"
                     variant="outlined"
@@ -188,7 +194,7 @@
                   <v-text-field
                     v-model="bewerbung.ewo_geburtsort"
                     :rules="[rules.RULE_REQUIRED]"
-                    label="Geburtsort*"
+                    :label="t('components.bewerbungForm.tabEwo.geburtsOrt')"
                     persistent-placeholder
                     density="compact"
                     variant="outlined"
@@ -198,7 +204,7 @@
                   <v-text-field
                     v-model="bewerbung.ewo_geburtsland"
                     :rules="[rules.RULE_REQUIRED]"
-                    label="Geburtsland*"
+                    :label="t('components.bewerbungForm.tabEwo.geburtsLand')"
                     persistent-placeholder
                     density="compact"
                     variant="outlined"
@@ -210,7 +216,7 @@
                   <v-text-field
                     v-model="bewerbung.ewo_familienstand"
                     :rules="[rules.RULE_REQUIRED]"
-                    label="Familienstand*"
+                    :label="t('components.bewerbungForm.tabEwo.familienStand')"
                     persistent-placeholder
                     density="compact"
                     variant="outlined"
@@ -226,7 +232,9 @@
                         ? []
                         : [rules.RULE_STAATSANGEHOERIGKEIT]
                     "
-                    label="Staatsangehörigkeit"
+                    :label="
+                      t('components.bewerbungForm.tabEwo.staatsangehoerigkeit')
+                    "
                     persistent-placeholder
                     density="compact"
                     variant="outlined"
@@ -238,7 +246,7 @@
                   <v-textarea
                     v-if="bewerbung.status != PERSONENSTATUS.STATUS_INERFASSUNG"
                     v-model="bewerbung.ewo_konfliktfeld"
-                    label="Konfliktfelder"
+                    :label="t('components.bewerbungForm.tabEwo.konfliktfelder')"
                     persistent-placeholder
                     density="compact"
                     variant="outlined"
@@ -249,7 +257,7 @@
                 <v-col class="col">
                   <v-text-field
                     v-model="bewerbung.ewo_wohnungsgeber"
-                    label="Wohnungsgeber (c/o)"
+                    :label="t('components.bewerbungForm.tabEwo.wohnungsgeber')"
                     persistent-placeholder
                     density="compact"
                     variant="outlined"
@@ -260,7 +268,7 @@
                 <v-col class="col">
                   <v-text-field
                     v-model="bewerbung.ewo_strasse"
-                    label="Strasse*"
+                    :label="t('components.bewerbungForm.tabEwo.strasse')"
                     persistent-placeholder
                     :rules="[rules.RULE_REQUIRED]"
                     density="compact"
@@ -270,7 +278,7 @@
                 <v-col class="col">
                   <v-text-field
                     v-model="bewerbung.ewo_hausnummer"
-                    label="Hausnummer*"
+                    :label="t('components.bewerbungForm.tabEwo.hausnummer')"
                     persistent-placeholder
                     :rules="[rules.RULE_REQUIRED]"
                     density="compact"
@@ -280,7 +288,9 @@
                 <v-col class="col">
                   <v-text-field
                     v-model="bewerbung.ewo_buchstabehausnummer"
-                    label="Buchstabe Hausnummer"
+                    :label="
+                      t('components.bewerbungForm.tabEwo.buchstabeHausnummer')
+                    "
                     persistent-placeholder
                     density="compact"
                     variant="outlined"
@@ -291,7 +301,9 @@
                 <v-col class="col">
                   <v-text-field
                     v-model="bewerbung.ewo_appartmentnummer"
-                    label="Appartment-Nummer"
+                    :label="
+                      t('components.bewerbungForm.tabEwo.appartmentNummer')
+                    "
                     persistent-placeholder
                     density="compact"
                     variant="outlined"
@@ -302,7 +314,7 @@
                 <v-col class="col">
                   <v-text-field
                     v-model="bewerbung.ewo_stockwerk"
-                    label="Stockwerk"
+                    :label="t('components.bewerbungForm.tabEwo.stockwerk')"
                     persistent-placeholder
                     density="compact"
                     variant="outlined"
@@ -313,7 +325,9 @@
                 <v-col class="col">
                   <v-text-field
                     v-model="bewerbung.ewo_teilnummerhausnummer"
-                    label="Teilnummer Hausnummer"
+                    :label="
+                      t('components.bewerbungForm.tabEwo.teilnummerHausnummer')
+                    "
                     persistent-placeholder
                     density="compact"
                     variant="outlined"
@@ -324,7 +338,7 @@
                 <v-col class="col">
                   <v-text-field
                     v-model="bewerbung.ewo_adresszusatz"
-                    label="Adresszusatz"
+                    :label="t('components.bewerbungForm.tabEwo.adressZusatz')"
                     persistent-placeholder
                     density="compact"
                     variant="outlined"
@@ -335,7 +349,7 @@
                 <v-col class="col">
                   <v-text-field
                     v-model="bewerbung.ewo_postleitzahl"
-                    label="Postleitzahl*"
+                    :label="t('components.bewerbungForm.tabEwo.postleitzahl')"
                     persistent-placeholder
                     :rules="[rules.RULE_REQUIRED]"
                     density="compact"
@@ -350,7 +364,7 @@
                         ? [rules.RULE_REQUIRED]
                         : [rules.RULE_REQUIRED, rules.RULE_WOHNSITZ]
                     "
-                    label="Ort*"
+                    :label="t('components.bewerbungForm.tabEwo.ort')"
                     persistent-placeholder
                     density="compact"
                     variant="outlined"
@@ -361,7 +375,11 @@
                 <v-col class="col">
                   <v-text-field
                     v-model="bewerbung.ewo_inmuenchenseit"
-                    label="In München Wohnhaft seit*"
+                    :label="
+                      t(
+                        'components.bewerbungForm.tabEwo.inMuenchenWohnhaftSeit'
+                      )
+                    "
                     persistent-placeholder
                     :rules="[rules.RULE_REQUIRED]"
                     type="date"
@@ -375,7 +393,7 @@
                   <v-select
                     v-model="bewerbung.ewo_wohnungsstatus"
                     :items="wohnungsstatus"
-                    label="Wohnungsstatus*"
+                    :label="t('components.bewerbungForm.tabEwo.wohnungsstatus')"
                     persistent-placeholder
                     :rules="[rules.RULE_REQUIRED]"
                     density="compact"
@@ -399,7 +417,11 @@
               <v-col class="col">
                 <v-text-field
                   v-model="bewerbung.derzeitausgeuebterberuf"
-                  label="Derzeitiger Beruf"
+                  :label="
+                    t(
+                      'components.bewerbungForm.tabBewerberZusatzangaben.derfzeitigerBeruf'
+                    )
+                  "
                   persistent-placeholder
                   density="compact"
                   variant="outlined"
@@ -411,7 +433,11 @@
               <v-col class="col">
                 <v-text-field
                   v-model="bewerbung.arbeitgeber"
-                  label="Arbeitgeber"
+                  :label="
+                    t(
+                      'components.bewerbungForm.tabBewerberZusatzangaben.arbeitgeber'
+                    )
+                  "
                   persistent-placeholder
                   density="compact"
                   variant="outlined"
@@ -422,7 +448,11 @@
               <v-col class="col">
                 <v-text-field
                   v-model="bewerbung.ausgeuebteehrenaemter"
-                  label="Ausgeübte Ehrenämter"
+                  :label="
+                    t(
+                      'components.bewerbungForm.tabBewerberZusatzangaben.ausgeuebteEhrenaemter'
+                    )
+                  "
                   persistent-placeholder
                   density="compact"
                   variant="outlined"
@@ -433,7 +463,11 @@
               <v-col class="col">
                 <v-text-field
                   v-model="bewerbung.telefonnummer"
-                  label="Telefonnummer (privat)"
+                  :label="
+                    t(
+                      'components.bewerbungForm.tabBewerberZusatzangaben.telefonnummerPrivat'
+                    )
+                  "
                   persistent-placeholder
                   density="compact"
                   variant="outlined"
@@ -444,7 +478,11 @@
               <v-col class="col">
                 <v-text-field
                   v-model="bewerbung.telefongesch"
-                  label="Telefonnummer (dienstlich)"
+                  :label="
+                    t(
+                      'components.bewerbungForm.tabBewerberZusatzangaben.telefonnummerDienstlich'
+                    )
+                  "
                   persistent-placeholder
                   density="compact"
                   variant="outlined"
@@ -455,7 +493,11 @@
               <v-col class="col">
                 <v-text-field
                   v-model="bewerbung.telefonmobil"
-                  label="Telefonnummer (mobil)"
+                  :label="
+                    t(
+                      'components.bewerbungForm.tabBewerberZusatzangaben.telefonnummerMobil'
+                    )
+                  "
                   persistent-placeholder
                   density="compact"
                   variant="outlined"
@@ -467,7 +509,11 @@
                 <v-text-field
                   v-model="bewerbung.mailadresse"
                   :rules="[rules.RULE_MAIL]"
-                  label="Mailadresse"
+                  :label="
+                    t(
+                      'components.bewerbungForm.tabBewerberZusatzangaben.mailAdresse'
+                    )
+                  "
                   persistent-placeholder
                   type="mail"
                   density="compact"
@@ -479,7 +525,11 @@
               <v-col class="col">
                 <v-text-field
                   v-model="bewerbung.bewerbungvom"
-                  label="Bewerbung vom*"
+                  :label="
+                    t(
+                      'components.bewerbungForm.tabBewerberZusatzangaben.bewerbungVom'
+                    )
+                  "
                   persistent-placeholder
                   :rules="[rules.RULE_REQUIRED]"
                   type="date"
@@ -493,7 +543,11 @@
                 <v-select
                   v-model="bewerbung.status"
                   :items="statuswerte"
-                  label="Status*"
+                  :label="
+                    t(
+                      'components.bewerbungForm.tabBewerberZusatzangaben.status'
+                    )
+                  "
                   persistent-placeholder
                   :rules="[rules.RULE_REQUIRED]"
                   density="compact"
@@ -505,7 +559,17 @@
               <v-col class="col">
                 <v-checkbox
                   v-model="bewerbung.warbereitstaetigals"
-                  :label="labelWarBereitsTaetigAls"
+                  :label="
+                    t(
+                      'components.bewerbungForm.tabBewerberZusatzangaben.warBereitsAlsVerwaltungsrichterTaetig',
+                      {
+                        artEhrenamtJustiz: formattedEhrenamtjustizart(
+                          useGlobalSettingsStore().getKonfiguration
+                            ?.ehrenamtjustizart
+                        ),
+                      }
+                    )
+                  "
                   variant="outlined"
                 />
               </v-col>
@@ -514,7 +578,17 @@
               <v-col class="col">
                 <v-checkbox
                   v-model="bewerbung.warbereitstaetigalsvorvorperiode"
-                  :label="labelWarBereitsTaetigAlsVorVorPeriode"
+                  :label="
+                    t(
+                      'components.bewerbungForm.tabBewerberZusatzangaben.warBereitsInVorperiodeAlsVerwaltungsrichterTaetig',
+                      {
+                        artEhrenamtJustiz: formattedEhrenamtjustizart(
+                          useGlobalSettingsStore().getKonfiguration
+                            ?.ehrenamtjustizart
+                        ),
+                      }
+                    )
+                  "
                   variant="outlined"
                 />
               </v-col>
@@ -526,8 +600,16 @@
   </v-form>
   <yes-no-dialog
     v-model="saveLeaveDialog"
-    dialogtitle="Es wird gerade eine neue Bewerbung erfasst"
-    dialogtext="Erfassung der Bewerbung fortsetzen?"
+    :dialogtitle="
+                    t(
+                      'components.bewerbungForm.saveLeaveDialog.dialogtitle'
+                    )
+                  "
+    :dialogtext="
+                    t(
+                      'components.bewerbungForm.saveLeaveDialog.dialogtext'
+                    )
+                  "
     @no="abbruch"
     @yes="cancel"
   />
@@ -536,6 +618,7 @@
 import type BewerbungFormData from "@/types/BewerbungFormData";
 
 import { computed, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import {
   VBtn,
   VCard,
@@ -565,6 +648,7 @@ import {
 } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
+import { formattedEhrenamtjustizart } from "@/tools/Helper";
 
 const props = defineProps<{
   modelValue: BewerbungFormData;
@@ -582,31 +666,33 @@ const form = ref();
 
 const active_tab = ref("bewerber");
 
+const { t } = useI18n();
+
 const tab1: string[] = [
-  "Familienname",
-  "Vorname",
-  "Geburtsname",
-  "Geburtsdatum",
-  "Geschlecht",
-  "Ordnungsmerkmal",
-  "Akademischer Grad",
-  "Geburtsort",
-  "Geburtsland",
-  "Familienstand",
-  "Staatsangehörigkeit",
-  "Konfliktfelder",
-  "Wohnungsgeber (c/o)",
-  "Strasse",
-  "Hausnummer",
-  "Appartment-Nummer",
-  "Buchstabe Hausnummer",
-  "Stockwerk",
-  "Teilnummer Hausnummer",
-  "Adresszusatz",
-  "Postleitzahl",
-  "Ort",
-  "In München Wohnhaft seit",
-  "Wohnungsstatus",
+  t('components.bewerbungForm.tabEwo.familienname'),
+  t('components.bewerbungForm.tabEwo.vorname'),
+  t('components.bewerbungForm.tabEwo.geburtsname'),
+  t('components.bewerbungForm.tabEwo.geburtsdatum'),
+  t('components.bewerbungForm.tabEwo.geschlecht'),
+  t('components.bewerbungForm.tabEwo.ordnungsmerkmal'),
+  t('components.bewerbungForm.tabEwo.akademischerGrad'),
+  t('components.bewerbungForm.tabEwo.geburtsOrt'),
+  t('components.bewerbungForm.tabEwo.geburtsLand'),
+  t('components.bewerbungForm.tabEwo.familienStand'),
+  t('components.bewerbungForm.tabEwo.staatsangehoerigkeit'),
+  t('components.bewerbungForm.tabEwo.konfliktfelder'),
+  t('components.bewerbungForm.tabEwo.wohnungsgeber'),
+  t('components.bewerbungForm.tabEwo.strasse'),
+  t('components.bewerbungForm.tabEwo.hausnummer'),
+  t('components.bewerbungForm.tabEwo.appartmentNummer'),
+  t('components.bewerbungForm.tabEwo.buchstabeHausnummer'),
+  t('components.bewerbungForm.tabEwo.stockwerk'),
+  t('components.bewerbungForm.tabEwo.teilnummerHausnummer'),
+  t('components.bewerbungForm.tabEwo.adressZusatz'),
+  t('components.bewerbungForm.tabEwo.postleitzahl'),
+  t('components.bewerbungForm.tabEwo.ort'),
+  t('components.bewerbungForm.tabEwo.inMuenchenWohnhaftSeit'),
+  t('components.bewerbungForm.tabEwo.wohnungsstatus'),
 ];
 
 const statuswerte: string[] = [
@@ -628,17 +714,6 @@ const abbruchOderSpeichern = ref(false);
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const { cancel, leave, saveLeaveDialog } = useSaveLeave(isDirty);
 /* eslint-enable @typescript-eslint/no-unused-vars */
-const labelWarBereitsTaetigAls = ref(
-  "War bereits als " +
-    useGlobalSettingsStore().getKonfiguration?.ehrenamtjustizart +
-    " tätig"
-);
-
-const labelWarBereitsTaetigAlsVorVorPeriode = ref(
-  "War bereits in Vorvorperiode als " +
-    useGlobalSettingsStore().getKonfiguration?.ehrenamtjustizart +
-    " tätig"
-);
 
 function isDirty(): boolean {
   // Switching the menu during the new-entry of a person must be prevented, as otherwise
@@ -662,8 +737,8 @@ function speichern(): void {
   form.value?.validate().then((validation: { valid: boolean }) => {
     if (!validation.valid) {
       snackbarStore.showMessage({
-        level: STATUS_INDICATORS.WARNING,
-        message: "Das Formular ist nicht richtig ausgefüllt.",
+        level: STATUS_INDICATORS.ERROR,
+        message: t("components.bewerbungForm.speichern.errorMessage"),
         show: true,
       });
       setFocusAufFehler();
