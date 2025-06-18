@@ -24,7 +24,7 @@
       <konfiguration-list />
     </v-card>
     <online-help-dialog-component
-      :helptext="t('views.konfigurationIndex.onlinehelp')"
+      :helptext="t('views.konfigurationIndex.onlineHelp')"
     />
   </v-container>
 </template>

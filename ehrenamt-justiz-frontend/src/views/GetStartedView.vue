@@ -115,7 +115,7 @@
       @yes="alsBenachrichtigtMarkierenYes"
     />
     <online-help-dialog-component
-      :helptext="t('views.getStartedView.onlinehelp')"
+      :helptext="t('views.getStartedView.onlineHelp')"
     />
   </v-container>
 </template>

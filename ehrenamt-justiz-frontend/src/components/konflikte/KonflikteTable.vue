@@ -10,7 +10,7 @@
             <v-text-field
               v-model="search"
               prepend-inner-icon="mdi-magnify"
-              label="Suche"
+              :label="t('components.konflikteTable.suche')"
               single-line
               hide-details
               select-strategy="all"
@@ -23,20 +23,10 @@
             class="col"
             cols="2"
           >
-            <!--            <v-btn
-              :disabled="
-                !user ||
-                !user.authorities.includes('DELETE_EHRENAMTJUSTIZDATEN') ||
-                selectedUUIDs.length == 0
-              "
-              color="error"
-              @click="deleteRequested"
-              >Löschen</v-btn
-            >-->
             <v-btn
               color="error"
               @click="deleteRequested"
-              >Löschen</v-btn
+              >{{ t("components.konflikteTable.buttons.loeschen") }}</v-btn
             >
           </v-col>
         </v-row>
@@ -48,7 +38,9 @@
         :items="personenTableData"
         :items-length="totalItems"
         show-select
-        items-per-page-text="Bewerber je Seite"
+        :items-per-page-text="
+          t('components.bewerbungenTable.table.itemsperpagetext')
+        "
         :row-props="getRowProps"
         :loading="loadingAnimationAktiv"
         :multi-sort="true"
@@ -58,7 +50,10 @@
           <delete-dialog
             v-model="deleteDialogVisible"
             :is-animation="deleteAnimationAktiv"
-            :descriptor-string="selectedUUIDs.length + ' Konflikt'"
+            :descriptor-string="
+              selectedUUIDs.length +
+              t('components.konflikteTable.table.delete.dialogtext')
+            "
             :type-string="2"
             @delete="deleteConfirmed"
             @cancel="deleteCanceled"
@@ -106,7 +101,9 @@
                 :icon="mdiPencil"
               />
             </template>
-            <span>Konflikte lösen</span>
+            <span>{{
+              t("components.konflikteTable.table.actions.konflikteLoesen")
+            }}</span>
           </v-tooltip>
         </template>
         <template
@@ -142,6 +139,7 @@ import type PersonenTableData from "@/types/PersonenTableData";
 
 import { mdiPencil } from "@mdi/js";
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import {
   VBtn,
@@ -164,57 +162,58 @@ import DeleteDialog from "@/components/common/DeleteDialog.vue";
 import { PERSONENSTATUS, TABELLEN } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
+const { t } = useI18n();
 const headers: ReadonlyHeaders = [
   {
-    title: "Familienname",
+    title: t("components.konflikteTable.table.familienname"),
     value: "familienname",
     align: "start",
     sortable: true,
   },
   {
-    title: "Vorname",
+    title: t("components.konflikteTable.table.vorname"),
     value: "vorname",
     align: "start",
     sortable: true,
   },
   {
-    title: "Geburtsdatum",
+    title: t("components.konflikteTable.table.geburtsdatum"),
     value: "geburtsdatum",
     align: "end",
     sortable: true,
   },
   {
-    title: "Derzeitiger Beruf",
+    title: t("components.konflikteTable.table.derzeitigerBeruf"),
     value: "derzeitausgeuebterberuf",
     align: "start",
     sortable: true,
   },
   {
-    title: "Arbeitgeber",
+    title: t("components.konflikteTable.table.arbeitgeber"),
     value: "arbeitgeber",
     align: "start",
     sortable: true,
   },
   {
-    title: "Mailadresse",
+    title: t("components.konflikteTable.table.mailAdresse"),
     value: "mailadresse",
     align: "start",
     sortable: true,
   },
   {
-    title: "Ausgeübte Ehrenämter",
+    title: t("components.konflikteTable.table.ausgeuebteEhrenaemter"),
     value: "ausgeuebteehrenaemter",
     align: "start",
     sortable: true,
   },
   {
-    title: "Konflikte",
+    title: t("components.konflikteTable.table.konflikte"),
     value: "konfliktfeld",
     align: "start",
     sortable: false,
   },
   {
-    title: "Aktionen",
+    title: t("components.konflikteTable.table.actions.header"),
     value: "actions",
     align: "start",
     sortable: false,

@@ -76,7 +76,7 @@
                   :icon="mdiHelp"
               /></span>
             </template>
-            <span>{{ t("app.onlinehelp") }}</span>
+            <span>{{ t("app.onlineHelp") }}</span>
           </v-tooltip>
           <app-switcher
             v-if="appswitcherBaseUrl"

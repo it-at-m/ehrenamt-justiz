@@ -14,7 +14,7 @@
       ></e-w-o-buerger-select>
     </v-card>
     <online-help-dialog-component
-      :helptext="t('views.eWOBuergerCreate.onlinehelp')"
+      :helptext="t('views.eWOBuergerCreate.onlineHelp')"
     />
   </v-container>
 </template>
@@ -68,7 +68,7 @@ async function save() {
         // No citizen found
         snackbarStore.showMessage({
           level: STATUS_INDICATORS.WARNING,
-          message: "Keine Person im Einwohnermeldewesen gefunden!",
+          message: t("views.eWOBuergerCreate.keinePersonGefundenMessage"),
           show: true,
         });
       } else if (ewoBuergers.length > 1) {
@@ -95,7 +95,10 @@ async function save() {
             } else {
               snackbarStore.showMessage({
                 level: STATUS_INDICATORS.ERROR,
-                message: `Ein Bürger mit dem Ordnungsmerkmal ${ewoBuergers[0].ordnungsmerkmal} ist bereits als ${person.status} im System vorhanden`,
+                message: t("views.eWOBuergerCreate.bereitsVorhandenMessage", {
+                  ordnungsmerkmal: ewoBuergers[0].ordnungsmerkmal,
+                  status: person.status,
+                }),
               });
             }
           }
@@ -132,7 +135,10 @@ async function einBuergerAusgewaehlt(ewoBuerger: EWOBuergerData) {
     } else {
       snackbarStore.showMessage({
         level: STATUS_INDICATORS.ERROR,
-        message: `Ein Bürger mit dem Ordnungsmerkmal ${ewoBuerger.ordnungsmerkmal} ist bereits als ${person.status} im System vorhanden`,
+        message: t("views.eWOBuergerCreate.bereitsVorhandenMessage", {
+          ordnungsmerkmal: ewoBuerger.ordnungsmerkmal,
+          status: person.status,
+        }),
       });
     }
   });

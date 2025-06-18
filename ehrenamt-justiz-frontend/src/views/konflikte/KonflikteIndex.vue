@@ -1,11 +1,11 @@
 <template>
   <v-container>
     <v-card flat>
-      <v-card-title>Konflikte anzeigen</v-card-title>
+      <v-card-title>{{ t("views.konflikteIndex.title") }}</v-card-title>
       <konflikte-table />
     </v-card>
     <online-help-dialog-component
-      :helptext="t('views.konflikteIndex.onlinehelp')"
+      :helptext="t('views.konflikteIndex.onlineHelp')"
     />
   </v-container>
 </template>

@@ -13,12 +13,12 @@
       "backend": "Status Backend",
       "eai": "Status EWO-EAI"
     },
-    "onlinehelp": "Online-Hilfe",
+    "onlineHelp": "Online-Hilfe",
     "head": " KVR-"
   },
   "views": {
     "getStartedView": {
-      "onlinehelp": "Hier finden Sie eine Übersicht über alle Bewerbungen, Konflikte und Vorschläge. Wenn neue Bewerber erfasst wurden, haben Sachbearbeiter, je nach Berechtigung, die Möglichkeit, die Daten zu exportieren oder diese als benachrichtigt zu markieren.",
+      "onlineHelp": "Hier finden Sie eine Übersicht über alle Bewerbungen, Konflikte und Vorschläge. Wenn neue Bewerber erfasst wurden, haben Sachbearbeiter, je nach Berechtigung, die Möglichkeit, die Daten zu exportieren oder diese als benachrichtigt zu markieren.",
       "bewerbungen": "Bewerbungen",
       "konflikte": "Konflikte",
       "vorschlaege": "Vorschläge",
@@ -34,10 +34,10 @@
     },
     "homeView": {
       "welcome": "Willkommen bei Ehrenamt-Justiz",
-      "onlinehelp": "Willkommen bei der Anwendung, in der Sie Schöffen und ehrenamtliche Richter verwalten können.\nDie Anwendung besteht aus folgenden Bereichen:\n-------------------------------------------------------------------------------------------------------------------------------------------------------\nIm oberen Bereich:\n- 3 horizontale Linien: Menü links auf- und zuklappen\n- Ampel (rot oder grün) zeigt an, ob Gateway, Backend und EWO-EAI aktiv sind. Die Anwendung ist erst dann vollständig verfügbar wenn alle drei Ampeln grün anzeigen\n- Art der Ehrenamt-Justiz aus der aktiven Konfiguration: Schöffen oder ehrenamtliche Verwaltungsrichter\n- Bezeichnung aus der aktiven Konfiguration\n- Name des angemeldeten Users\n- ? um Onlinehilfe für das jeweilige Unterprogramm zu öffnen\n- App-Switcher um weitere Anwendungen zu starten\n-------------------------------------------------------------------------------------------------------------------------------------------------------\nIm linken Bereich:\n- Menü um Unterprogramme zu öffnen\n-------------------------------------------------------------------------------------------------------------------------------------------------------\nIm mittleren Bereich:\n- Bereich für die Unterprogramme, die über das Menü geöffnet werden können\n-------------------------------------------------------------------------------------------------------------------------------------------------------"
+      "onlineHelp": "Willkommen bei der Anwendung, in der Sie Schöffen und ehrenamtliche Richter verwalten können.\nDie Anwendung besteht aus folgenden Bereichen:\n-------------------------------------------------------------------------------------------------------------------------------------------------------\nIm oberen Bereich:\n- 3 horizontale Linien: Menü links auf- und zuklappen\n- Ampel (rot oder grün) zeigt an, ob Gateway, Backend und EWO-EAI aktiv sind. Die Anwendung ist erst dann vollständig verfügbar wenn alle drei Ampeln grün anzeigen\n- Art der Ehrenamt-Justiz aus der aktiven Konfiguration: Schöffen oder ehrenamtliche Verwaltungsrichter\n- Bezeichnung aus der aktiven Konfiguration\n- Name des angemeldeten Users\n- ? um Onlinehilfe für das jeweilige Unterprogramm zu öffnen\n- App-Switcher um weitere Anwendungen zu starten\n-------------------------------------------------------------------------------------------------------------------------------------------------------\nIm linken Bereich:\n- Menü um Unterprogramme zu öffnen\n-------------------------------------------------------------------------------------------------------------------------------------------------------\nIm mittleren Bereich:\n- Bereich für die Unterprogramme, die über das Menü geöffnet werden können\n-------------------------------------------------------------------------------------------------------------------------------------------------------"
     },
     "konfigurationEdit": {
-      "onlinehelp": "Hier kann die aktuell selektierte Konfiguration bearbeitet werden. Eine Änderung der Konfiguration führt nicht zu einer automatischen Prüfung der bestehenden Bewerbungs- oder Vorschlagsliste.",
+      "onlineHelp": "Hier kann die aktuell selektierte Konfiguration bearbeitet werden. Eine Änderung der Konfiguration führt nicht zu einer automatischen Prüfung der bestehenden Bewerbungs- oder Vorschlagsliste.",
       "header": "Konfiguration",
       "aktiv": "aktiv",
       "inAktiv": "inaktiv",
@@ -45,29 +45,32 @@
       "anzeigen": "anzeigen"
     },
     "konfigurationCreate": {
-      "onlinehelp": "Hier können Sie eine neue Konfiguration für die Verwaltung von Schöffen oder ehrenamtliche Richter erfassen. Nach der Erfassung einer Konfiguration muss auch eine Konfiguration aktiviert werden. Die Bewerber werden dann unter dieser aktiven Konfiguration gespeichert.",
+      "onlineHelp": "Hier können Sie eine neue Konfiguration für die Verwaltung von Schöffen oder ehrenamtliche Richter erfassen. Nach der Erfassung einer Konfiguration muss auch eine Konfiguration aktiviert werden. Die Bewerber werden dann unter dieser aktiven Konfiguration gespeichert.",
       "header": "Konfiguration erstellen"
     },
     "konfigurationIndex": {
-      "onlinehelp": "Hier sehen Sie die Übersicht der bereits erfassten Konfigurationen! Um Bewerbungen für Schöffen oder ehrenamtliche Verwaltungsrichter verwalten zu können, ist es erforderlich, eine Konfiguration zu erfassen und zu aktivieren. Die Bewerber werden dann unter dieser aktiven Konfiguration gespeichert. Eine aktive Konfiguration wird farblich hervorgehoben.",
+      "onlineHelp": "Hier sehen Sie die Übersicht der bereits erfassten Konfigurationen! Um Bewerbungen für Schöffen oder ehrenamtliche Verwaltungsrichter verwalten zu können, ist es erforderlich, eine Konfiguration zu erfassen und zu aktivieren. Die Bewerber werden dann unter dieser aktiven Konfiguration gespeichert. Eine aktive Konfiguration wird farblich hervorgehoben.",
       "header": "Konfigurationen",
       "createKonfiguration": "Neue Konfiguration"
     },
     "eWOBuergerCreate": {
-      "onlinehelp": "Willkommen zur Erfassung eines neuen Bewerbers! Um einen neuen Bewerber anzulegen, benötigen wir den Familiennamen, den Vornamen und das Geburtsdatum.\n\nBitte beachten Sie, dass ein Bewerber nur erfasst werden kann, wenn er im Einwohnermeldewesen vorhanden ist. Für den Familiennamen und Vornamen genügt es, die ersten drei Buchstaben einzugeben (mit einem '*' am Ende).\n\nSollten mehr als eine Person identifiziert werden, erhalten Sie eine Übersicht, in der die entsprechenden Personen angezeigt werden. Dort können Sie die gewünschte Person auswählen."
+      "onlineHelp": "Willkommen zur Erfassung eines neuen Bewerbers! Um einen neuen Bewerber anzulegen, benötigen wir den Familiennamen, den Vornamen und das Geburtsdatum.\n\nBitte beachten Sie, dass ein Bewerber nur erfasst werden kann, wenn er im Einwohnermeldewesen vorhanden ist. Für den Familiennamen und Vornamen genügt es, die ersten drei Buchstaben einzugeben (mit einem '*' am Ende).\n\nSollten mehr als eine Person identifiziert werden, erhalten Sie eine Übersicht, in der die entsprechenden Personen angezeigt werden. Dort können Sie die gewünschte Person auswählen.",
+      "bereitsVorhandenMessage": "Ein Bürger mit dem Ordnungsmerkmal {ordnungsmerkmal} ist bereits als {status} im System vorhanden!",
+      "keinePersonGefundenMessage": "Keine Person im Einwohnermeldewesen gefunden!"
     },
     "bewerbungenIndex": {
-      "onlinehelp": "In dieser Ansicht finden Sie alle Bewerber, die entweder über den Menüpunkt 'Bewerbung erstellen' oder über die Online-Anwendung im Internet erfasst wurden.\n\nJe nach Ihren Berechtigungen können Sie hier folgende Aktionen durchführen: die Daten eines Bewerbers ändern, anzeigen oder löschen. Darüber hinaus haben Sie die Möglichkeit, Bewerber für die weitere Bearbeitung auf die Vorschlagsliste zu setzen oder sie als CSV-Datei zu speichern.",
+      "onlineHelp": "In dieser Ansicht finden Sie alle Bewerber, die entweder über den Menüpunkt 'Bewerbung erstellen' oder über die Online-Anwendung im Internet erfasst wurden.\n\nJe nach Ihren Berechtigungen können Sie hier folgende Aktionen durchführen: die Daten eines Bewerbers ändern, anzeigen oder löschen. Darüber hinaus haben Sie die Möglichkeit, Bewerber für die weitere Bearbeitung auf die Vorschlagsliste zu setzen oder sie als CSV-Datei zu speichern.",
       "title": "Bewerbungsliste anzeigen"
     },
     "bewerbungEdit": {
-      "onlinehelp": "Hier haben Sie die Möglichkeit, die Daten eines Bewerbers zu bearbeiten und zu speichern.\n\nEs stehen zwei Registerkarten zur Verfügung: In der Registerkarte 'Aus EWO' finden Sie die beim Bewerber gespeicherten Daten aus dem Einwohnermeldewesen. In der Registerkarte 'Bewerber Zusatzangaben' können Sie die zusätzlichen Informationen des Bewerbers eingeben.\n\nBitte beachten Sie, dass die Daten eines Bewerbers nur gespeichert werden können, wenn Alter, Wohnort und Staatsangehörigkeit mit der Standardkonfiguration übereinstimmen. Falls Sie diese Prüfung vorübergehend ausschalten möchten, aktivieren Sie bitte die Checkbox 'Validierung deaktivieren', bevor Sie die Daten speichern."
+      "onlineHelp": "Hier haben Sie die Möglichkeit, die Daten eines Bewerbers zu bearbeiten und zu speichern.\n\nEs stehen zwei Registerkarten zur Verfügung: In der Registerkarte 'Aus EWO' finden Sie die beim Bewerber gespeicherten Daten aus dem Einwohnermeldewesen. In der Registerkarte 'Bewerber Zusatzangaben' können Sie die zusätzlichen Informationen des Bewerbers eingeben.\n\nBitte beachten Sie, dass die Daten eines Bewerbers nur gespeichert werden können, wenn Alter, Wohnort und Staatsangehörigkeit mit der Standardkonfiguration übereinstimmen. Falls Sie diese Prüfung vorübergehend ausschalten möchten, aktivieren Sie bitte die Checkbox 'Validierung deaktivieren', bevor Sie die Daten speichern."
     },
     "vorschlaegeIndex": {
-      "onlinehelp": "Hier finden Sie die Vorschläge für Schöffen oder ehrenamtliche Richter am Verwaltungsgericht. Je nach Ihren Berechtigungen können Sie hier folgende Aktionen durchführen: Die vorgeschlagenen Bewerber ändern, anzeigen oder löschen. Darüber hinaus haben Sie die Möglichkeit, einen Vorschlag auf die Bewerberliste zu setzen oder sie als CSV-Datei zu speichern."
+      "onlineHelp": "Hier finden Sie die Vorschläge für Schöffen oder ehrenamtliche Richter am Verwaltungsgericht. Je nach Ihren Berechtigungen können Sie hier folgende Aktionen durchführen: Die vorgeschlagenen Bewerber ändern, anzeigen oder löschen. Darüber hinaus haben Sie die Möglichkeit, einen Vorschlag auf die Bewerberliste zu setzen oder sie als CSV-Datei zu speichern."
     },
     "konflikteIndex": {
-      "onlinehelp": "Hier erhalten Sie einen Überblick über die Bewerber für Schöffen oder ehrenamtliche Richter, die Konflikte aufweisen. Je nach Ihren Berechtigungen haben Sie die Möglichkeit, die Konfliktbearbeitung zu starten oder einen Bewerber zu löschen."
+      "onlineHelp": "Hier erhalten Sie einen Überblick über die Bewerber für Schöffen oder ehrenamtliche Richter, die Konflikte aufweisen. Je nach Ihren Berechtigungen haben Sie die Möglichkeit, die Konfliktbearbeitung zu starten oder einen Bewerber zu löschen.",
+      "title": "Konflikte anzeigen"
     },
     "eWOBuergerSelect": {
       "title": "Bewerbung erstellen",
@@ -257,8 +260,32 @@
         "errorMessage": "Die Eingabe ist fehlerhaft!"
       }
     },
+    "konflikteTable": {
+      "suche": "Suche",
+      "table": {
+        "familienname": "Familienname",
+        "vorname": "Vorname",
+        "geburtsdatum": "Geburtsdatum",
+        "derzeitigerBeruf": "Derzeitiger Beruf",
+        "arbeitgeber": "Arbeitgeber",
+        "mailAdresse": "Mailadresse",
+        "ausgeuebteEhrenaemter": "Ausgeübte Ehrenämter",
+        "konflikte": "Konflikte",
+        "actions": {
+          "header": "Aktionen",
+          "konflikteLoesen": "Konflikte lösen"
+        },
+        "delete": {
+          "dialogtext": " Konflikte"
+        },
+        "itemsperpagetext": "Konflikte je Seite"
+      },
+      "buttons": {
+        "loeschen": "Löschen"
+      }
+    },
     "konflikteLoesenForm": {
-      "onlinehelp": "Hier haben Sie die Möglichkeit, Konflikte bei einem Bewerber zu beheben. Im linken Bereich sehen Sie die aktuellen Daten aus dem Einwohnermeldewesen, während im rechten Bereich die abweichenden Bewerberdaten (Konflikte) angezeigt werden.\n\nUm die Konflikte zu lösen, übernehmen Sie einfach die aktuellen Daten aus dem Einwohnermeldewesen und speichern Sie diese. Einzelne Konflikte können behoben werden, indem Sie auf den roten Button (mit dem Pfeil nach links) klicken.\n\nWenn Sie alle Konflikte auf einmal lösen möchten, nutzen Sie den Button 'Alle Übernehmen'. Bitte beachten Sie, dass der Speicher-Button erst aktiv wird, nachdem alle Konflikte gelöst wurden."
+      "onlineHelp": "Hier haben Sie die Möglichkeit, Konflikte bei einem Bewerber zu beheben. Im linken Bereich sehen Sie die aktuellen Daten aus dem Einwohnermeldewesen, während im rechten Bereich die abweichenden Bewerberdaten (Konflikte) angezeigt werden.\n\nUm die Konflikte zu lösen, übernehmen Sie einfach die aktuellen Daten aus dem Einwohnermeldewesen und speichern Sie diese. Einzelne Konflikte können behoben werden, indem Sie auf den roten Button (mit dem Pfeil nach links) klicken.\n\nWenn Sie alle Konflikte auf einmal lösen möchten, nutzen Sie den Button 'Alle Übernehmen'. Bitte beachten Sie, dass der Speicher-Button erst aktiv wird, nachdem alle Konflikte gelöst wurden."
     }
   }
 }

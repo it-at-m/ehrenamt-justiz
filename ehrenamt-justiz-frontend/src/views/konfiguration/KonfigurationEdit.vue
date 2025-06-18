@@ -30,7 +30,7 @@
       </template>
     </v-card>
     <online-help-dialog-component
-      :helptext="t('views.konfigurationEdit.onlinehelp')"
+      :helptext="t('views.konfigurationEdit.onlineHelp')"
     />
   </v-container>
 </template>
