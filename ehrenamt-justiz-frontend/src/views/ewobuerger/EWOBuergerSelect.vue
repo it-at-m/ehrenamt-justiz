@@ -114,7 +114,7 @@ const headers: ReadonlyHeaders = [
   },
   {
     title: t("views.eWOBuergerSelect.table.auskunftssperre.title"),
-    value: "auskunftsssperre",
+    value: "auskunftssperre",
     align: "start",
     sortable: true,
   },
