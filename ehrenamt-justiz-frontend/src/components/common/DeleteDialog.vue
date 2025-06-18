@@ -12,7 +12,7 @@
         {{ t("components.deleteDialog.text", { descriptor: descriptorString }) }}
       </v-card-text>
       <v-card-text v-else>
-        {{ t("components.deleteDialog.text2") }}
+        {{ t("components.deleteDialog.textNoDescriptor") }}
       </v-card-text>
       <v-card-actions>
         <v-spacer />

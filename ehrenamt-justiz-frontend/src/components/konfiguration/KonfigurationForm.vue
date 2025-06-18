@@ -184,7 +184,7 @@ const form = ref<(typeof myV3App & { validate: () => void }) | null>(null);
 
 const formValid = ref(false);
 
-const ehrenamtjustizart: string[] = ["VERWALTUNGSRICHTER", "SCHOEFFEN"];
+const ehrenamtJustizArt: string[] = ["VERWALTUNGSRICHTER", "SCHOEFFEN"];
 const { t } = useI18n();
 
 function felderLeeren(): void {

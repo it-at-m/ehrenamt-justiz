@@ -74,7 +74,7 @@
     "deleteDialog": {
       "title": "Löschen?",
       "text": "Soll(en) {descriptor} wirklich gelöscht werden?",
-      "text2": " Sollen die Daten wirklich gelöscht werden?",
+      "textNoDescriptor": "Sollen die Daten wirklich gelöscht werden?",
       "buttons": {
         "abbrechen": "Abbrechen",
         "loeschen": "Löschen"
