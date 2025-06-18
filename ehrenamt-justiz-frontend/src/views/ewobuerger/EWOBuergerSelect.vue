@@ -32,9 +32,19 @@
             <td>{{ item.vorname }}</td>
             <td>{{ new Date(item.geburtsdatum).toLocaleDateString() }}</td>
             <td>
-              {{ item.auskunftssperre.length > 0 ? t("views.eWOBuergerSelect.table.auskunftssperre.content") : "" }}
+              {{
+                item.auskunftssperre.length > 0
+                  ? t("views.eWOBuergerSelect.table.auskunftssperre.content")
+                  : ""
+              }}
             </td>
-            <td>{{ item.ewoidbereitserfasst ? t("views.eWOBuergerSelect.table.bereitsErfasst.contentYes")  :  t("views.eWOBuergerSelect.table.bereitsErfasst.contentNo")  }}</td>
+            <td>
+              {{
+                item.ewoidbereitserfasst
+                  ? t("views.eWOBuergerSelect.table.bereitsErfasst.contentYes")
+                  : t("views.eWOBuergerSelect.table.bereitsErfasst.contentNo")
+              }}
+            </td>
           </tr>
         </template>
       </v-data-table>
