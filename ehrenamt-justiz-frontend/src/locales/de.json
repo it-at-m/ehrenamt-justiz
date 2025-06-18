@@ -68,6 +68,31 @@
     },
     "konflikteIndex": {
       "onlinehelp": "Hier erhalten Sie einen Überblick über die Bewerber für Schöffen oder ehrenamtliche Richter, die Konflikte aufweisen. Je nach Ihren Berechtigungen haben Sie die Möglichkeit, die Konfliktbearbeitung zu starten oder einen Bewerber zu löschen."
+    },
+    "eWOBuergerSelect": {
+      "title": "Bewerbung erstellen",
+      "text": "Bitte wählen Sie den gewünschten Eintrag aus",
+      "buttons": {
+        "abbrechen": "Abbrechen"
+      },
+      "table": {
+        "actions": {
+          "title": "Auswählen",
+          "tooltip": "Auswählen und übernehmen"
+        },
+        "familienname": "Familienname",
+        "vorname": "Vorname",
+        "geburtsdatum": "Geburtsdatum",
+        "auskunftssperre": {
+          "title": "Auskunftssperre",
+          "content": "Auskunftssperre"
+        },
+        "bereitsErfasst": {
+          "title": "Bereits erfasst",
+          "contentYes": "Ja",
+          "contentNo": "Nein"
+        }
+      }
     }
   },
   "components": {
