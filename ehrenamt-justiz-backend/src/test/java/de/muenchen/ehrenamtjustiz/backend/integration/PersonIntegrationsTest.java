@@ -13,14 +13,14 @@ import de.muenchen.ehrenamtjustiz.backend.domain.Person;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonCSVDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonenTableDatenDto;
-import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.controller.PersonRestController;
-import java.math.BigInteger;
+import de.muenchen.ehrenamtjustiz.backend.testdata.KonfigurationTestDataBuilder;
+import de.muenchen.ehrenamtjustiz.backend.testdata.PersonTestDataBuilder;
 import java.time.LocalDate;
 import java.util.*;
 import org.jetbrains.annotations.NotNull;
@@ -85,22 +85,11 @@ class PersonIntegrationsTest {
 
     @BeforeEach
     void before() {
+        personRepository.deleteAll();
         konfigurationRepository.deleteAll();
 
         // insert new configuration
-        final Konfiguration konfiguration = new Konfiguration();
-        konfiguration.setId(UUID.randomUUID());
-        konfiguration.setAktiv(true);
-        konfiguration.setEhrenamtjustizart(Ehrenamtjustizart.VERWALTUNGSRICHTER);
-        konfiguration.setBezeichnung("Verwaltungsrichter");
-        konfiguration.setAltervon(BigInteger.valueOf(25));
-        konfiguration.setAlterbis(BigInteger.valueOf(120));
-        konfiguration.setStaatsangehoerigkeit(DEUTSCH);
-        konfiguration.setWohnsitz(MUENCHEN);
-        konfiguration.setAmtsperiodevon(LocalDate.of(2030, 1, 1));
-        konfiguration.setAmtsperiodebis(LocalDate.of(2034, 12, 31));
-        konfigurationRepository.save(konfiguration);
-
+        final Konfiguration konfiguration = konfigurationRepository.save(new KonfigurationTestDataBuilder().build());
         uuidKonfiguration = konfiguration.getId();
 
         // insert person
@@ -112,30 +101,7 @@ class PersonIntegrationsTest {
 
     private static @NotNull
     Person initPerson() {
-        final Person person = new Person();
-        person.setId(UUID.randomUUID());
-        person.setStatus(Status.VORSCHLAG);
-        person.setNeuervorschlag(true);
-        person.setEwoid("4711");
-        person.setFamilienname("Müller");
-        person.setVorname("Hans");
-        person.setGeburtsort(MUENCHEN);
-        person.setGeburtsland("Deutschland");
-        person.setGeburtsdatum(LocalDate.of(1997, 1, 1));
-        person.setKonfigurationid(uuidKonfiguration);
-        person.setWohnungsstatus(Wohnungsstatus.HAUPTWOHNUNG);
-        person.setFamilienstand("ledig");
-        person.setPostleitzahl("80634");
-        person.setOrt(MUENCHEN);
-        person.setStrasse("Ludwigstr.");
-        person.setHausnummer("7");
-        person.setInmuenchenseit(LocalDate.of(2023, 1, 1));
-        person.setGeschlecht(Geschlecht.MAENNLICH);
-        person.setBewerbungvom(LocalDate.of(2024, 9, 17));
-        person.setWarbereitstaetigals(true);
-        person.setWarbereitstaetigalsvorvorperiode(true);
-
-        return person;
+        return new PersonTestDataBuilder().withKonfigurationid(uuidKonfiguration).build();
     }
 
     @Test
@@ -163,11 +129,11 @@ class PersonIntegrationsTest {
         assertEquals(Status.VORSCHLAG.toReadableString(), personCSVS.getFirst().getStatus());
         assertEquals("Müller", personCSVS.getFirst().getFamilienname());
         assertEquals("Hans", personCSVS.getFirst().getVorname());
-        assertEquals("01.01.1997", personCSVS.getFirst().getGeburtsdatum());
+        assertEquals("01.01.1980", personCSVS.getFirst().getGeburtsdatum());
         assertEquals(MUENCHEN, personCSVS.getFirst().getGeburtsort());
         assertEquals("Deutschland", personCSVS.getFirst().getGeburtsland());
         assertEquals(Wohnungsstatus.HAUPTWOHNUNG.toReadableString(), personCSVS.getFirst().getWohnungsstatus());
-        assertEquals("ledig", personCSVS.getFirst().getFamilienstand());
+        assertEquals("VH", personCSVS.getFirst().getFamilienstand());
         assertEquals("80634", personCSVS.getFirst().getPostleitzahl());
         assertEquals(MUENCHEN, personCSVS.getFirst().getOrt());
         assertEquals("Ludwigstr.", personCSVS.getFirst().getStrasse());
@@ -175,8 +141,8 @@ class PersonIntegrationsTest {
         assertEquals("01.01.2023", personCSVS.getFirst().getInmuenchenseit());
         assertEquals(Geschlecht.MAENNLICH.toReadableString(), personCSVS.getFirst().getGeschlecht());
         assertEquals("17.09.2024", personCSVS.getFirst().getBewerbungvom());
-        assertEquals("Ja", personCSVS.getFirst().getWarbereitstaetigals());
-        assertEquals("Ja", personCSVS.getFirst().getWarbereitstaetigalsvorvorperiode());
+        assertEquals("Nein", personCSVS.getFirst().getWarbereitstaetigals());
+        assertEquals("Nein", personCSVS.getFirst().getWarbereitstaetigalsvorvorperiode());
 
     }
 

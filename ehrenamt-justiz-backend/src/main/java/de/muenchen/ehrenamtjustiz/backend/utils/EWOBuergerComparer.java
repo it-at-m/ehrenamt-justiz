@@ -1,8 +1,11 @@
 package de.muenchen.ehrenamtjustiz.backend.utils;
 
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerDatenDto;
+import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
+import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -47,32 +50,39 @@ public final class EWOBuergerComparer {
         return conflictingFields;
     }
 
-    @SuppressWarnings("PMD.CyclomaticComplexity")
+    @SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.CognitiveComplexity" })
     private static void compareBuerger(final EWOBuergerDatenDto currentBuerger, final EWOBuergerDatenDto newBuerger, final Method getter,
             final String buergerNameLog, final String fieldName,
             final List<String> conflictingFields) {
+
         try {
             if (getter.invoke(currentBuerger) != null) {
                 if ("getAuskunftssperre".equals(getter.getName()) || "getStaatsangehoerigkeit".equals(getter.getName())) {
 
                     if (!isArrayListEqual(currentBuerger, newBuerger, getter)) {
-                        log.info(buergerNameLog + "Konflikt im Feld: " + fieldName + " | Aktuell: <" + getter.invoke(currentBuerger)
-                                + "> | EWO: <"
-                                + getter.invoke(newBuerger) + ">");
-
-                        conflictingFields.add(fieldName);
+                        konfliktErmittelt(currentBuerger, newBuerger, getter, buergerNameLog, fieldName, conflictingFields);
                     }
 
                 } else if (!getter.invoke(currentBuerger).equals(getter.invoke(newBuerger))
-                        && (getter.invoke(currentBuerger) != null && !((String) getter.invoke(currentBuerger)).isEmpty()
-                                || getter.invoke(newBuerger) != null)) {
+                        && (getter.invoke(currentBuerger) != null)) {
+                            if (getter.getReturnType() == LocalDate.class) {
+                                if (!((LocalDate) getter.invoke(currentBuerger)).toString().isEmpty()
+                                        || getter.invoke(newBuerger) != null) {
 
-                                    log.info(buergerNameLog + "Konflikt im Feld: " + fieldName + " | Aktuell: <" + getter.invoke(currentBuerger)
-                                            + "> | EWO: <"
-                                            + getter.invoke(newBuerger) + ">");
-
-                                    conflictingFields.add(fieldName);
+                                    konfliktErmittelt(currentBuerger, newBuerger, getter, buergerNameLog, fieldName, conflictingFields);
                                 }
+                            } else if (getter.getReturnType() == Wohnungsstatus.class || getter.getReturnType() == Geschlecht.class) {
+                                if (!getter.invoke(currentBuerger).toString().isEmpty()
+                                        || getter.invoke(newBuerger) != null) {
+
+                                    konfliktErmittelt(currentBuerger, newBuerger, getter, buergerNameLog, fieldName, conflictingFields);
+                                }
+                            } else if (!((String) getter.invoke(currentBuerger)).isEmpty()
+                                    || getter.invoke(newBuerger) != null) {
+
+                                        konfliktErmittelt(currentBuerger, newBuerger, getter, buergerNameLog, fieldName, conflictingFields);
+                                    }
+                        }
             } else if (getter.invoke(newBuerger) != null) {
                 log.info(buergerNameLog + "Konflikt im Feld: " + fieldName);
                 conflictingFields.add(fieldName);
@@ -80,6 +90,17 @@ public final class EWOBuergerComparer {
         } catch (IllegalAccessException | InvocationTargetException e) {
             log.error("Exception bei Konfliktermittlung: {}", e.toString());
         }
+    }
+
+    private static void konfliktErmittelt(final EWOBuergerDatenDto currentBuerger, final EWOBuergerDatenDto newBuerger, final Method getter,
+            final String buergerNameLog, final String fieldName, final List<String> conflictingFields)
+            throws IllegalAccessException, InvocationTargetException {
+
+        log.info(buergerNameLog + "Konflikt im Feld: " + fieldName + " | Aktuell: <" + getter.invoke(currentBuerger)
+                + "> | EWO: <"
+                + getter.invoke(newBuerger) + ">");
+
+        conflictingFields.add(fieldName);
     }
 
     private static boolean isArrayListEqual(final EWOBuergerDatenDto currentBuerger, final EWOBuergerDatenDto newBuerger, final Method getter)
