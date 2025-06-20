@@ -49,7 +49,7 @@
       "header": "Konfiguration erstellen"
     },
     "konfigurationIndex": {
-      "onlineHelp": "Hier sehen Sie die Übersicht der bereits erfassten Konfigurationen! Um Bewerbungen für Schöffen oder ehrenamtliche Verwaltungsrichter verwalten zu können, ist es erforderlich, eine Konfiguration zu erfassen und zu aktivieren. Die Bewerber werden dann unter dieser aktiven Konfiguration gespeichert. Eine aktive Konfiguration wird farblich hervorgehoben.",
+      "onlineHelp": "Hier sehen Sie die Übersicht der bereits erfassten Konfigurationen. Um Bewerbungen für Schöffen oder ehrenamtliche Verwaltungsrichter verwalten zu können, ist es erforderlich, eine Konfiguration zu erfassen und zu aktivieren. Die Bewerber werden dann unter dieser aktiven Konfiguration gespeichert. Eine aktive Konfiguration wird farblich hervorgehoben.",
       "header": "Konfigurationen",
       "createKonfiguration": "Neue Konfiguration"
     },
@@ -185,7 +185,7 @@
           "message": "Die Auswahl enthält invalide Personen. Bitte wenden Sie sich an einen Sondersachbearbeiter, der diese Validierung umgehen kann."
         },
         "delete": {
-          "dialogtext": " Bewerber"
+          "dialogtext": "{count} Bewerber"
         },
         "itemsperpagetext": "Bewerber je Seite"
       },
@@ -276,7 +276,7 @@
           "konflikteLoesen": "Konflikte lösen"
         },
         "delete": {
-          "dialogtext": " Konflikte"
+          "dialogtext": "{count} Konflikte"
         },
         "itemsperpagetext": "Konflikte je Seite"
       },

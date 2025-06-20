@@ -182,7 +182,7 @@
 import type PersonenTableData from "@/types/PersonenTableData";
 
 import { mdiEye, mdiPencil } from "@mdi/js";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import {
   VBtn,
@@ -209,7 +209,7 @@ import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { useUserStore } from "@/stores/user";
 
-const headers: ReadonlyHeaders = [
+const headers: ReadonlyHeaders = computed(() => [
   {
     title: "Familienname",
     value: "familienname",
@@ -258,7 +258,7 @@ const headers: ReadonlyHeaders = [
     align: "start",
     sortable: false,
   },
-];
+]) as unknown as ReadonlyHeaders;
 const snackbarStore = useSnackbarStore();
 const router = useRouter();
 const personenTableData = ref<PersonenTableData[]>([]);

@@ -57,7 +57,7 @@ const props = defineProps<{
 
 type ReadonlyHeaders = VDataTable["$props"]["headers"];
 
-const headers: ReadonlyHeaders = [
+const headers: ReadonlyHeaders = computed(() => [
   {
     title: "Familienname",
     value: "familienname",
@@ -76,7 +76,7 @@ const headers: ReadonlyHeaders = [
     align: "start",
     sortable: true,
   },
-];
+]) as unknown as ReadonlyHeaders;
 const emits = defineEmits<{
   "update:modelValue": [v: boolean];
   invalidePersonenSelect: [];

@@ -87,7 +87,7 @@ const props = defineProps<{
 
 type ReadonlyHeaders = VDataTable["$props"]["headers"];
 const { t } = useI18n();
-const headers: ReadonlyHeaders = [
+const headers: ReadonlyHeaders = computed(() => [
   {
     title: t("views.eWOBuergerSelect.table.actions.title"),
     value: "actions",
@@ -124,7 +124,7 @@ const headers: ReadonlyHeaders = [
     align: "start",
     sortable: true,
   },
-];
+]) as unknown as ReadonlyHeaders;
 const emits = defineEmits<{
   "update:modelValue": [v: boolean];
   selectBuerger: [v: EWOBuergerData];

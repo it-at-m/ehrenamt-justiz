@@ -51,8 +51,9 @@
             v-model="deleteDialogVisible"
             :is-animation="deleteAnimationAktiv"
             :descriptor-string="
-              selectedUUIDs.length +
-              t('components.konflikteTable.table.delete.dialogtext')
+              t('components.konflikteTable.table.delete.dialogtext', {
+                count: selectedUUIDs.length,
+              })
             "
             :type-string="2"
             @delete="deleteConfirmed"
@@ -138,7 +139,7 @@
 import type PersonenTableData from "@/types/PersonenTableData";
 
 import { mdiPencil } from "@mdi/js";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import {
@@ -163,7 +164,7 @@ import { PERSONENSTATUS, TABELLEN } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const { t } = useI18n();
-const headers: ReadonlyHeaders = [
+const headers: ReadonlyHeaders = computed(() => [
   {
     title: t("components.konflikteTable.table.familienname"),
     value: "familienname",
@@ -218,7 +219,7 @@ const headers: ReadonlyHeaders = [
     align: "start",
     sortable: false,
   },
-];
+]) as unknown as ReadonlyHeaders;
 
 const snackbarStore = useSnackbarStore();
 const router = useRouter();
