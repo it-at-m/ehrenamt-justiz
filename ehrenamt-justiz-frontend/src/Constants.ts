@@ -13,11 +13,7 @@ export const enum BEARBEIGUNGS_MODUS {
   DISPLAY_MODUS = "display_modus",
 }
 
-// For fetching table data
-export const enum TABELLEN {
-  NO_RESULTS_TEXT = "Liste ist leer",
-  LOADING_ITEMS = "Daten werden gelesen",
-}
+export const WOHNUNGSSTATUS_ARTEN: string[] = ["Hauptwohnung", "Nebenwohnung"];
 
 // Status of person
 export const enum PERSONENSTATUS {

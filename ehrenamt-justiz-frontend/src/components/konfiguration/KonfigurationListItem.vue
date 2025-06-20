@@ -11,7 +11,9 @@
           AuthService.checkAuth('WRITE_KONFIGURATION')
         "
       >
-        <v-tooltip text="Aktiv setzen">
+        <v-tooltip
+          :text="t('components.konfigurationListItem.tooltip.aktivSetzen')"
+        >
           <template #activator="{ props }">
             <span v-bind="props">
               <v-btn
@@ -65,6 +67,7 @@ import type KonfigurationData from "@/types/KonfigurationData";
 
 import { mdiLightbulbOnOutline } from "@mdi/js";
 import { computed, ref, useAttrs } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import {
   VBtn,
@@ -99,23 +102,24 @@ const title = computed(
   () =>
     ` ${props.konfiguration.ehrenamtjustizart} / ${
       props.konfiguration.bezeichnung
-    } / Amtsperiode: ${new Date(
+    } ${t("components.konfigurationListItem.title.amtsperiode")} ${new Date(
       props.konfiguration.amtsperiodevon
     ).toLocaleDateString()} - ${new Date(
       props.konfiguration.amtsperiodebis
-    ).toLocaleDateString()} / Aktiv: ${props.konfiguration.aktiv}`
+    ).toLocaleDateString()} ${t("components.konfigurationListItem.title.aktiv")} ${props.konfiguration.aktiv}`
 );
 const subtitle = computed(
   () =>
-    "Staatsangehörigkeit: " +
+    t("components.konfigurationListItem.subTitle.staatsangehoerigkeit") +
     props.konfiguration.staatsangehoerigkeit +
-    " / Wohnsitz: " +
+    t("components.konfigurationListItem.subTitle.wohnsitz") +
     props.konfiguration.wohnsitz +
-    " / Alter von: " +
+    t("components.konfigurationListItem.subTitle.alterVon") +
     props.konfiguration.altervon +
-    " bis " +
+    t("components.konfigurationListItem.subTitle.alterBis") +
     props.konfiguration.alterbis
 );
+const { t } = useI18n();
 
 function displayKonfiguration() {
   router.push({

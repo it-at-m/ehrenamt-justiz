@@ -25,7 +25,7 @@
               class="mr-2"
               :icon="mdiEye"
             />
-            <span>Anzeigen</span>
+            <span>{{ t("components.listItemActions.anzeigen") }}</span>
           </v-list-item-title>
         </v-list-item>
         <v-list-item
@@ -37,7 +37,7 @@
               class="mr-2"
               :icon="mdiPencil"
             />
-            <span>Bearbeiten</span>
+            <span>{{ t("components.listItemActions.bearbeiten") }}</span>
           </v-list-item-title>
         </v-list-item>
         <v-list-item
@@ -49,7 +49,7 @@
               class="mr-2"
               :icon="mdiDelete"
             />
-            <span>Löschen</span>
+            <span>{{ t("components.listItemActions.loeschen") }}</span>
           </v-list-item-title>
         </v-list-item>
       </v-list>
@@ -59,6 +59,7 @@
 
 <script setup lang="ts">
 import { mdiDelete, mdiDotsVertical, mdiEye, mdiPencil } from "@mdi/js";
+import { useI18n } from "vue-i18n";
 import {
   VBtn,
   VIcon,
@@ -88,6 +89,8 @@ const emits = defineEmits<{
   delete: [];
   open: [];
 }>();
+
+const { t } = useI18n();
 
 function edit(): void {
   emits("edit");
