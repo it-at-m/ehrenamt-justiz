@@ -154,10 +154,10 @@
           ></v-checkbox-btn>
         </template>
         <template #no-data>
-          {{ TABELLEN.NO_RESULTS_TEXT }}
+          {{ t("general.listeIstLeer") }}
         </template>
         <template #loading>
-          {{ TABELLEN.LOADING_ITEMS }}
+          {{ t("general.datenWerdenGeladen") }}
         </template>
       </v-data-table-server>
     </v-card>
@@ -183,6 +183,7 @@ import type PersonenTableData from "@/types/PersonenTableData";
 
 import { mdiEye, mdiPencil } from "@mdi/js";
 import { computed, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import {
   VBtn,
@@ -204,11 +205,12 @@ import { EhrenamtJustizService } from "@/api/EhrenamtJustizService";
 import { PersonApiService } from "@/api/PersonApiService";
 import DeleteDialog from "@/components/common/DeleteDialog.vue";
 import YesNoDialog from "@/components/common/YesNoDialog.vue";
-import { BEARBEIGUNGS_MODUS, PERSONENSTATUS, TABELLEN } from "@/Constants.ts";
+import { BEARBEIGUNGS_MODUS, PERSONENSTATUS } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { useUserStore } from "@/stores/user";
 
+const { t } = useI18n();
 const headers: ReadonlyHeaders = computed(() => [
   {
     title: "Familienname",

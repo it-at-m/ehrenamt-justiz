@@ -392,7 +392,7 @@
                 <v-col class="col">
                   <v-select
                     v-model="bewerbung.ewo_wohnungsstatus"
-                    :items="wohnungsstatus"
+                    :items="WOHNUNGSSTATUS_ARTEN"
                     :label="t('components.bewerbungForm.tabEwo.wohnungsstatus')"
                     persistent-placeholder
                     :rules="[rules.RULE_REQUIRED]"
@@ -637,6 +637,7 @@ import {
   BEARBEIGUNGS_MODUS,
   PERSONENSTATUS,
   STATUS_INDICATORS,
+  WOHNUNGSSTATUS_ARTEN,
 } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
@@ -699,8 +700,6 @@ const geschlechtswerte: string[] = [
   "divers",
   "unbekannt",
 ];
-
-const wohnungsstatus: string[] = ["Hauptwohnung", "Nebenwohnung"];
 
 const abbruchOderSpeichern = ref(false);
 /* eslint-disable @typescript-eslint/no-unused-vars */

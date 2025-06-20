@@ -125,10 +125,10 @@
           ></v-checkbox-btn>
         </template>
         <template #no-data>
-          {{ TABELLEN.NO_RESULTS_TEXT }}
+          {{ t("general.listeIstLeer") }}
         </template>
         <template #loading>
-          {{ TABELLEN.LOADING_ITEMS }}
+          {{ t("general.datenWerdenGeladen") }}
         </template>
       </v-data-table-server>
     </v-card>
@@ -160,7 +160,7 @@ import {
 import AuthService from "@/api/AuthService";
 import { PersonApiService } from "@/api/PersonApiService";
 import DeleteDialog from "@/components/common/DeleteDialog.vue";
-import { PERSONENSTATUS, TABELLEN } from "@/Constants";
+import { PERSONENSTATUS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const { t } = useI18n();

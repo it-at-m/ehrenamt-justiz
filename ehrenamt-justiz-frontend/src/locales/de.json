@@ -1,4 +1,8 @@
 {
+  "general": {
+    "listeIstLeer": "Liste ist leer",
+    "datenWerdenGeladen": "Daten werden gelesen"
+  },
   "app": {
     "navigation": {
       "getStarted": "Get started",
@@ -64,6 +68,11 @@
     },
     "bewerbungEdit": {
       "onlineHelp": "Hier haben Sie die Möglichkeit, die Daten eines Bewerbers zu bearbeiten und zu speichern.\n\nEs stehen zwei Registerkarten zur Verfügung: In der Registerkarte 'Aus EWO' finden Sie die beim Bewerber gespeicherten Daten aus dem Einwohnermeldewesen. In der Registerkarte 'Bewerber Zusatzangaben' können Sie die zusätzlichen Informationen des Bewerbers eingeben.\n\nBitte beachten Sie, dass die Daten eines Bewerbers nur gespeichert werden können, wenn Alter, Wohnort und Staatsangehörigkeit mit der Standardkonfiguration übereinstimmen. Falls Sie diese Prüfung vorübergehend ausschalten möchten, aktivieren Sie bitte die Checkbox 'Validierung deaktivieren', bevor Sie die Daten speichern."
+    },
+    "konflikteLoesenEdit": {
+      "messages": {
+        "fuerOMKeineEwoDaten": "Für die Person {vorname} {familienname} mit OM {om} wurden keine Daten in EWO gefunden, Womöglich ist diese verzogen oder verstorben. Bitte prüfen Sie dies im Einwohnermeldesystem."
+      }
     },
     "vorschlaegeIndex": {
       "onlineHelp": "Hier finden Sie die Vorschläge für Schöffen oder ehrenamtliche Richter am Verwaltungsgericht. Je nach Ihren Berechtigungen können Sie hier folgende Aktionen durchführen: Die vorgeschlagenen Bewerber ändern, anzeigen oder löschen. Darüber hinaus haben Sie die Möglichkeit, einen Vorschlag auf die Bewerberliste zu setzen oder sie als CSV-Datei zu speichern."
@@ -285,7 +294,61 @@
       }
     },
     "konflikteLoesenForm": {
-      "onlineHelp": "Hier haben Sie die Möglichkeit, Konflikte bei einem Bewerber zu beheben. Im linken Bereich sehen Sie die aktuellen Daten aus dem Einwohnermeldewesen, während im rechten Bereich die abweichenden Bewerberdaten (Konflikte) angezeigt werden.\n\nUm die Konflikte zu lösen, übernehmen Sie einfach die aktuellen Daten aus dem Einwohnermeldewesen und speichern Sie diese. Einzelne Konflikte können behoben werden, indem Sie auf den roten Button (mit dem Pfeil nach links) klicken.\n\nWenn Sie alle Konflikte auf einmal lösen möchten, nutzen Sie den Button 'Alle Übernehmen'. Bitte beachten Sie, dass der Speicher-Button erst aktiv wird, nachdem alle Konflikte gelöst wurden."
+      "onlineHelp": "Hier haben Sie die Möglichkeit, Konflikte bei einem Bewerber zu beheben. Im linken Bereich sehen Sie die aktuellen Daten aus dem Einwohnermeldewesen, während im rechten Bereich die abweichenden Bewerberdaten (Konflikte) angezeigt werden.\n\nUm die Konflikte zu lösen, übernehmen Sie einfach die aktuellen Daten aus dem Einwohnermeldewesen und speichern Sie diese. Einzelne Konflikte können behoben werden, indem Sie auf den roten Button (mit dem Pfeil nach links) klicken.\n\nWenn Sie alle Konflikte auf einmal lösen möchten, nutzen Sie den Button 'Alle Übernehmen'. Bitte beachten Sie, dass der Speicher-Button erst aktiv wird, nachdem alle Konflikte gelöst wurden.",
+      "header": {
+        "konflikteLoesen": "Konflikte lösen",
+        "auskunftssperre": "Auskunftssperre",
+        "aktuelleDaten": "Aktuelle Daten",
+        "neueDatenAusEWO": "Neue Daten aus EWO"
+      },
+      "buttons": {
+        "abbrechen": "Abbrechen",
+        "alleUebernehmen": "Alle übernehmen",
+        "speichern": "Speichern"
+      },
+      "form": {
+        "familienname": "Familienname",
+        "geburtsname": "Geburtsname",
+        "vorname": "Vorname",
+        "geburtsdatum": "Geburtsdatum",
+        "geschlecht": "Geschlecht",
+        "ordnungsmerkmal": "Ordnungsmerkmal",
+        "akademischerGrad": "Akademischer Grad",
+        "geburtsOrt": "Geburtsort",
+        "geburtsLand": "Geburtsland",
+        "familienStand": "Familienstand",
+        "staatsangehoerigkeit": "Staatsangehörigkeit",
+        "wohnungsgeber": "Wohnungsgeber (c/o)",
+        "strasse": "Straße",
+        "hausnummer": "Hausnummer",
+        "appartmentNummer": "Appartment-Nummer",
+        "buchstabeHausnummer": "Buchstabe Hausnummer",
+        "stockwerk": "Stockwerk",
+        "teilnummerHausnummer": "Teilnummer Hausnummer",
+        "adressZusatz": "Adresszusatz",
+        "postleitzahl": "Postleitzahl",
+        "ort": "Ort",
+        "inMuenchenWohnhaftSeit": "In München wohnhaft seit",
+        "wohnungsstatus": "Wohnungsstatus",
+        "auskunftsSperre": "Auskunftssperre",
+        "derzeitigerBeruf": "Derzeitiger Beruf",
+        "arbeitgeber": "Arbeitgeber",
+        "telefonnummerPrivat": "Telefonnummer (privat)",
+        "telefonnummerDienstlich": "Telefonnummer (dienstlich)",
+        "telefonnummerMobil": "Telefonnummer (mobil)",
+        "mailAdresse": "Mailadresse",
+        "ausgeuebteEhrenaemter": "Ausgeübte Ehrenämter",
+        "onlineBewerbung": "Onlinebewerbung",
+        "neuerVorschlag": "Neuer Vorschlag",
+        "warBereitsAlsVerwaltungsrichterTaetig": "War bereits als {artEhrenamtJustiz} tätig",
+        "warBereitsInVorperiodeAlsVerwaltungsrichterTaetig": "War bereits in Vorperiode als {artEhrenamtJustiz} tätig",
+        "bewerbungVom": "Bewerbung vom",
+        "status": "Status",
+        "messages": {
+          "keineEWODaten": "Vorhandener Konflikt: 'Keine EWO-Daten gefunden. Evtl. verstorben oder verzogen?' Konflikt lösen durch 'Alle übernehmen' und 'Speichern'",
+          "fehlerhafteEingabe": "Die Eingabe ist fehlerhaft!"
+        }
+      }
     }
   }
 }

@@ -16,7 +16,7 @@
           class="text-h5"
           style="margin-bottom: 1em"
         >
-          Konflikte lösen
+          {{ t("components.konflikteLoesenForm.header.konflikteLoesen") }}
         </div>
       </v-col>
       <v-col md="3">
@@ -24,7 +24,7 @@
           v-if="konfliktloesenformdata.person_auskunftssperre.length > 0"
           class="text-h5 auskunftssperre"
         >
-          Auskunftssperre
+          {{ t("components.konflikteLoesenForm.header.auskunftssperre") }}
         </div>
       </v-col>
       <v-col
@@ -36,7 +36,7 @@
           color="accent"
           @click="alleUebernehmen"
         >
-          Alle übernehmen
+          {{ t("components.konflikteLoesenForm.buttons.alleUebernehmen") }}
         </v-btn>
         <v-btn
           :to="{ name: 'konflikte.index' }"
@@ -44,7 +44,7 @@
           exact
           variant="text"
         >
-          Abbrechen
+          {{ t("components.konflikteLoesenForm.buttons.abbrechen") }}
         </v-btn>
         <v-btn
           :disabled="konflikteVorhanden()"
@@ -52,7 +52,7 @@
           color="green"
           @click="speichern"
         >
-          Speichern
+          {{ t("components.konflikteLoesenForm.buttons.speichern") }}
         </v-btn>
       </v-col>
     </v-row>
@@ -61,14 +61,18 @@
         class="col"
         md="6"
       >
-        <v-label class="text-h6">Aktuelle Daten</v-label>
+        <v-label class="text-h6">{{
+          t("components.konflikteLoesenForm.header.aktuelleDaten")
+        }}</v-label>
       </v-col>
 
       <v-col
         class="col"
         md="5"
       >
-        <v-label class="text-h6">Neue Daten aus EWO</v-label>
+        <v-label class="text-h6">{{
+          t("components.konflikteLoesenForm.header.neueDatenAusEWO")
+        }}</v-label>
       </v-col>
     </v-row>
     <div
@@ -85,7 +89,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_familienname"
             density="compact"
-            :label="FAMILIENNAME"
+            :label="t('components.konflikteLoesenForm.form.familienname')"
             persistent-placeholder
             variant="outlined"
           />
@@ -111,7 +115,7 @@
             v-if="isKonfliktOriginal(FAMILIENNAME)"
             v-model="konfliktloesenformdata.ewo_familienname"
             density="compact"
-            :label="FAMILIENNAME"
+            :label="t('components.konflikteLoesenForm.form.familienname')"
             persistent-placeholder
             variant="outlined"
           />
@@ -125,7 +129,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_geburtsname"
             density="compact"
-            :label="GEBURTSNAME"
+            :label="t('components.konflikteLoesenForm.form.geburtsname')"
             persistent-placeholder
             variant="outlined"
           />
@@ -151,7 +155,7 @@
             v-if="isKonfliktOriginal(GEBURTSNAME)"
             v-model="konfliktloesenformdata.ewo_geburtsname"
             density="compact"
-            :label="GEBURTSNAME"
+            :label="t('components.konflikteLoesenForm.form.geburtsname')"
             persistent-placeholder
             variant="outlined"
           />
@@ -165,7 +169,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_vorname"
             density="compact"
-            :label="VORNAME"
+            :label="t('components.konflikteLoesenForm.form.vorname')"
             persistent-placeholder
             variant="outlined"
           />
@@ -191,7 +195,7 @@
             v-if="isKonfliktOriginal(VORNAME)"
             v-model="konfliktloesenformdata.ewo_vorname"
             density="compact"
-            :label="VORNAME"
+            :label="t('components.konflikteLoesenForm.form.vorname')"
             persistent-placeholder
             variant="outlined"
           />
@@ -205,7 +209,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_geburtsdatum"
             density="compact"
-            :label="GEBURTSDATUM"
+            :label="t('components.konflikteLoesenForm.form.geburtsdatum')"
             persistent-placeholder
             type="date"
             variant="outlined"
@@ -232,7 +236,7 @@
             v-if="isKonfliktOriginal(GEBURTSDATUM)"
             v-model="konfliktloesenformdata.ewo_geburtsdatum"
             density="compact"
-            :label="GEBURTSDATUM"
+            :label="t('components.konflikteLoesenForm.form.geburtsdatum')"
             persistent-placeholder
             type="date"
             variant="outlined"
@@ -248,7 +252,7 @@
             v-model="konfliktloesenformdata.person_geschlecht"
             :items="BewerbungForm.geschlechtswerte"
             density="compact"
-            :label="GESCHLECHT"
+            :label="t('components.konflikteLoesenForm.form.geschlecht')"
             persistent-placeholder
             variant="outlined"
           />
@@ -275,7 +279,7 @@
             v-model="konfliktloesenformdata.ewo_geschlecht"
             :items="BewerbungForm.geschlechtswerte"
             density="compact"
-            :label="GESCHLECHT"
+            :label="t('components.konflikteLoesenForm.form.geschlecht')"
             persistent-placeholder
             variant="outlined"
           />
@@ -289,7 +293,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_ewoid"
             density="compact"
-            :label="ORDNUNGSMERKMAL"
+            :label="t('components.konflikteLoesenForm.form.ordnungsmerkmal')"
             persistent-placeholder
             variant="outlined"
           />
@@ -315,7 +319,7 @@
             v-if="isKonfliktOriginal(ORDNUNGSMERKMAL)"
             v-model="konfliktloesenformdata.ewo_ewoid"
             density="compact"
-            :label="ORDNUNGSMERKMAL"
+            :label="t('components.konflikteLoesenForm.form.ordnungsmerkmal')"
             persistent-placeholder
             variant="outlined"
           />
@@ -329,7 +333,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_akademischergrad"
             density="compact"
-            :label="AKADEMISCHERGRAD"
+            :label="t('components.konflikteLoesenForm.form.akademischerGrad')"
             persistent-placeholder
             variant="outlined"
           />
@@ -355,7 +359,7 @@
             v-if="isKonfliktOriginal(AKADEMISCHERGRAD)"
             v-model="konfliktloesenformdata.ewo_akademischergrad"
             density="compact"
-            :label="AKADEMISCHERGRAD"
+            :label="t('components.konflikteLoesenForm.form.akademischerGrad')"
             persistent-placeholder
             variant="outlined"
           />
@@ -369,7 +373,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_geburtsort"
             density="compact"
-            :label="GEBURTSORT"
+            :label="t('components.konflikteLoesenForm.form.geburtsOrt')"
             persistent-placeholder
             variant="outlined"
           />
@@ -395,7 +399,7 @@
             v-if="isKonfliktOriginal(GEBURTSORT)"
             v-model="konfliktloesenformdata.ewo_geburtsort"
             density="compact"
-            :label="GEBURTSORT"
+            :label="t('components.konflikteLoesenForm.form.geburtsOrt')"
             persistent-placeholder
             variant="outlined"
           />
@@ -409,7 +413,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_geburtsland"
             density="compact"
-            :label="GEBURTSLAND"
+            :label="t('components.konflikteLoesenForm.form.geburtsLand')"
             persistent-placeholder
             variant="outlined"
           />
@@ -435,7 +439,7 @@
             v-if="isKonfliktOriginal(GEBURTSLAND)"
             v-model="konfliktloesenformdata.ewo_geburtsland"
             density="compact"
-            :label="GEBURTSLAND"
+            :label="t('components.konflikteLoesenForm.form.geburtsLand')"
             persistent-placeholder
             variant="outlined"
           />
@@ -449,7 +453,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_familienstand"
             density="compact"
-            :label="FAMILIENSTAND"
+            :label="t('components.konflikteLoesenForm.form.familienStand')"
             persistent-placeholder
             variant="outlined"
           />
@@ -475,7 +479,7 @@
             v-if="isKonfliktOriginal(FAMILIENSTAND)"
             v-model="konfliktloesenformdata.ewo_familienstand"
             density="compact"
-            :label="FAMILIENSTAND"
+            :label="t('components.konflikteLoesenForm.form.familienStand')"
             persistent-placeholder
             variant="outlined"
           />
@@ -489,7 +493,9 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_staatsangehoerigkeit"
             density="compact"
-            :label="STAATSANGEHOERIGKEIT"
+            :label="
+              t('components.konflikteLoesenForm.form.staatsangehoerigkeit')
+            "
             persistent-placeholder
             variant="outlined"
           />
@@ -515,7 +521,9 @@
             v-if="isKonfliktOriginal(STAATSANGEHOERIGKEIT)"
             v-model="konfliktloesenformdata.ewo_staatsangehoerigkeit"
             density="compact"
-            :label="STAATSANGEHOERIGKEIT"
+            :label="
+              t('components.konflikteLoesenForm.form.staatsangehoerigkeit')
+            "
             persistent-placeholder
             variant="outlined"
           />
@@ -529,7 +537,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_wohnungsgeber"
             density="compact"
-            :label="WOHNUNGSGEBER"
+            :label="t('components.konflikteLoesenForm.form.wohnungsgeber')"
             persistent-placeholder
             variant="outlined"
           />
@@ -555,7 +563,7 @@
             v-if="isKonfliktOriginal(WOHNUNGSGEBER)"
             v-model="konfliktloesenformdata.ewo_wohnungsgeber"
             density="compact"
-            :label="WOHNUNGSGEBER"
+            :label="t('components.konflikteLoesenForm.form.wohnungsgeber')"
             persistent-placeholder
             variant="outlined"
           />
@@ -569,7 +577,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_strasse"
             density="compact"
-            :label="STRASSE"
+            :label="t('components.konflikteLoesenForm.form.strasse')"
             persistent-placeholder
             variant="outlined"
           />
@@ -595,7 +603,7 @@
             v-if="isKonfliktOriginal(STRASSE)"
             v-model="konfliktloesenformdata.ewo_strasse"
             density="compact"
-            :label="STRASSE"
+            :label="t('components.konflikteLoesenForm.form.strasse')"
             persistent-placeholder
             variant="outlined"
           />
@@ -609,7 +617,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_hausnummer"
             density="compact"
-            :label="HAUSNUMMER"
+            :label="t('components.konflikteLoesenForm.form.hausnummer')"
             persistent-placeholder
             variant="outlined"
           />
@@ -635,7 +643,7 @@
             v-if="isKonfliktOriginal(HAUSNUMMER)"
             v-model="konfliktloesenformdata.ewo_hausnummer"
             density="compact"
-            :label="HAUSNUMMER"
+            :label="t('components.konflikteLoesenForm.form.hausnummer')"
             persistent-placeholder
             variant="outlined"
           />
@@ -649,7 +657,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_appartmentnummer"
             density="compact"
-            :label="APPARTMENTNUMMER"
+            :label="t('components.konflikteLoesenForm.form.appartmentNummer')"
             persistent-placeholder
             variant="outlined"
           />
@@ -675,7 +683,7 @@
             v-if="isKonfliktOriginal(APPARTMENTNUMMER)"
             v-model="konfliktloesenformdata.ewo_appartmentnummer"
             density="compact"
-            :label="APPARTMENTNUMMER"
+            :label="t('components.konflikteLoesenForm.form.appartmentNummer')"
             persistent-placeholder
             variant="outlined"
           />
@@ -689,7 +697,9 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_buchstabehausnummer"
             density="compact"
-            :label="BUCHSTABEHAUSNUMMER"
+            :label="
+              t('components.konflikteLoesenForm.form.buchstabeHausnummer')
+            "
             persistent-placeholder
             variant="outlined"
           />
@@ -715,7 +725,9 @@
             v-if="isKonfliktOriginal(BUCHSTABEHAUSNUMMER)"
             v-model="konfliktloesenformdata.ewo_buchstabehausnummer"
             density="compact"
-            :label="BUCHSTABEHAUSNUMMER"
+            :label="
+              t('components.konflikteLoesenForm.form.buchstabeHausnummer')
+            "
             persistent-placeholder
             variant="outlined"
           />
@@ -729,7 +741,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_stockwerk"
             density="compact"
-            :label="STOCKWERK"
+            :label="t('components.konflikteLoesenForm.form.stockwerk')"
             persistent-placeholder
             variant="outlined"
           />
@@ -755,7 +767,7 @@
             v-if="isKonfliktOriginal(STOCKWERK)"
             v-model="konfliktloesenformdata.ewo_stockwerk"
             density="compact"
-            :label="STOCKWERK"
+            :label="t('components.konflikteLoesenForm.form.stockwerk')"
             persistent-placeholder
             variant="outlined"
           />
@@ -769,7 +781,9 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_teilnummerhausnummer"
             density="compact"
-            :label="TEILNUMMERHAUSNUMMER"
+            :label="
+              t('components.konflikteLoesenForm.form.teilnummerHausnummer')
+            "
             persistent-placeholder
             variant="outlined"
           />
@@ -795,7 +809,9 @@
             v-if="isKonfliktOriginal(TEILNUMMERHAUSNUMMER)"
             v-model="konfliktloesenformdata.ewo_teilnummerhausnummer"
             density="compact"
-            :label="TEILNUMMERHAUSNUMMER"
+            :label="
+              t('components.konflikteLoesenForm.form.teilnummerHausnummer')
+            "
             persistent-placeholder
             variant="outlined"
           />
@@ -809,7 +825,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_adresszusatz"
             density="compact"
-            :label="ADRESSZUSATZ"
+            :label="t('components.konflikteLoesenForm.form.adressZusatz')"
             persistent-placeholder
             variant="outlined"
           />
@@ -835,7 +851,7 @@
             v-if="isKonfliktOriginal(ADRESSZUSATZ)"
             v-model="konfliktloesenformdata.ewo_adresszusatz"
             density="compact"
-            :label="ADRESSZUSATZ"
+            :label="t('components.konflikteLoesenForm.form.adressZusatz')"
             persistent-placeholder
             variant="outlined"
           />
@@ -849,7 +865,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_postleitzahl"
             density="compact"
-            :label="POSTLEITZAHL"
+            :label="t('components.konflikteLoesenForm.form.postleitzahl')"
             persistent-placeholder
             variant="outlined"
           />
@@ -875,7 +891,7 @@
             v-if="isKonfliktOriginal(POSTLEITZAHL)"
             v-model="konfliktloesenformdata.ewo_postleitzahl"
             density="compact"
-            :label="POSTLEITZAHL"
+            :label="t('components.konflikteLoesenForm.form.postleitzahl')"
             persistent-placeholder
             variant="outlined"
           />
@@ -889,7 +905,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_ort"
             density="compact"
-            :label="ORT"
+            :label="t('components.konflikteLoesenForm.form.ort')"
             persistent-placeholder
             variant="outlined"
           />
@@ -915,7 +931,7 @@
             v-if="isKonfliktOriginal(ORT)"
             v-model="konfliktloesenformdata.ewo_ort"
             density="compact"
-            :label="ORT"
+            :label="t('components.konflikteLoesenForm.form.ort')"
             persistent-placeholder
             variant="outlined"
           />
@@ -929,7 +945,9 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_inmuenchenseit"
             density="compact"
-            label="In Muenchen seit"
+            :label="
+              t('components.konflikteLoesenForm.form.inMuenchenWohnhaftSeit')
+            "
             persistent-placeholder
             type="date"
             variant="outlined"
@@ -956,7 +974,9 @@
             v-if="isKonfliktOriginal(INMUENCHENSEIT)"
             v-model="konfliktloesenformdata.ewo_inmuenchenseit"
             density="compact"
-            label="In Muenchen seit"
+            :label="
+              t('components.konflikteLoesenForm.form.inMuenchenWohnhaftSeit')
+            "
             persistent-placeholder
             type="date"
             variant="outlined"
@@ -970,9 +990,9 @@
         >
           <v-select
             v-model="konfliktloesenformdata.person_wohnungsstatus"
-            :items="wohnungsstatus"
+            :items="WOHNUNGSSTATUS_ARTEN"
             density="compact"
-            :label="WOHNUNGSSTATUS"
+            :label="t('components.konflikteLoesenForm.form.wohnungsstatus')"
             persistent-placeholder
             variant="outlined"
           />
@@ -997,9 +1017,9 @@
           <v-select
             v-if="isKonfliktOriginal(WOHNUNGSSTATUS)"
             v-model="konfliktloesenformdata.ewo_wohnungsstatus"
-            :items="wohnungsstatus"
+            :items="WOHNUNGSSTATUS_ARTEN"
             density="compact"
-            :label="WOHNUNGSSTATUS"
+            :label="t('components.konflikteLoesenForm.form.wohnungsstatus')"
             persistent-placeholder
             variant="outlined"
           />
@@ -1013,7 +1033,7 @@
           <v-textarea
             v-model="konfliktloesenformdata.person_auskunftssperre"
             density="compact"
-            :label="AUSKUNFTSSPERRE"
+            :label="t('components.konflikteLoesenForm.form.auskunftsSperre')"
             persistent-placeholder
             no-resize
             rows="2"
@@ -1041,7 +1061,7 @@
             v-if="isKonfliktOriginal(AUSKUNFTSSPERRE)"
             v-model="konfliktloesenformdata.ewo_auskunftssperre"
             density="compact"
-            :label="AUSKUNFTSSPERRE"
+            :label="t('components.konflikteLoesenForm.form.auskunftsSperre')"
             persistent-placeholder
             no-resize
             rows="2"
@@ -1057,7 +1077,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_derzeitausgeuebterberuf"
             density="compact"
-            label="Derzeitiger Beruf"
+            :label="t('components.konflikteLoesenForm.form.derzeitigerBeruf')"
             persistent-placeholder
             variant="outlined"
           />
@@ -1071,7 +1091,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_arbeitgeber"
             density="compact"
-            label="Arbeitgeber"
+            :label="t('components.konflikteLoesenForm.form.arbeitgeber')"
             persistent-placeholder
             variant="outlined"
           />
@@ -1085,7 +1105,9 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_telefonnummer"
             density="compact"
-            label="Telefonnummer (privat)"
+            :label="
+              t('components.konflikteLoesenForm.form.telefonnummerPrivat')
+            "
             persistent-placeholder
             variant="outlined"
           />
@@ -1099,7 +1121,9 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_telefongesch"
             density="compact"
-            label="Telefonnummer (dienstlich)"
+            :label="
+              t('components.konflikteLoesenForm.form.telefonnummerDienstlich')
+            "
             persistent-placeholder
             variant="outlined"
           />
@@ -1113,7 +1137,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_telefonmobil"
             density="compact"
-            label="Telefonnummer (mobil)"
+            :label="t('components.konflikteLoesenForm.form.telefonnummerMobil')"
             persistent-placeholder
             variant="outlined"
           />
@@ -1127,7 +1151,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_mailadresse"
             density="compact"
-            label="Mailadresse"
+            :label="t('components.konflikteLoesenForm.form.mailAdresse')"
             persistent-placeholder
             type="mail"
             variant="outlined"
@@ -1142,7 +1166,9 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_ausgeuebteehrenaemter"
             density="compact"
-            label="Ausgeübte Ehrenämter"
+            :label="
+              t('components.konflikteLoesenForm.form.ausgeuebteEhrenaemter')
+            "
             persistent-placeholder
             variant="outlined"
           />
@@ -1156,7 +1182,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_onlinebewerbung"
             density="compact"
-            label="Online Bewerbung?"
+            :label="t('components.konflikteLoesenForm.form.onlineBewerbung')"
             persistent-placeholder
             variant="outlined"
           />
@@ -1170,7 +1196,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_neuervorschlag"
             density="compact"
-            label="Neuer Vorschlag?"
+            :label="t('components.konflikteLoesenForm.form.neuerVorschlag')"
             persistent-placeholder
             variant="outlined"
           />
@@ -1185,7 +1211,16 @@
             v-model="konfliktloesenformdata.person_warbereitstaetigals"
             class="ma-6"
             density="compact"
-            :label="labelWarBereitsTaetigAls"
+            :label="
+              t(
+                'components.konflikteLoesenForm.form.warBereitsAlsVerwaltungsrichterTaetig',
+                {
+                  artEhrenamtJustiz: formattedEhrenamtjustizart(
+                    useGlobalSettingsStore().getKonfiguration?.ehrenamtjustizart
+                  ),
+                }
+              )
+            "
             persistent-placeholder
             variant="outlined"
           />
@@ -1202,7 +1237,16 @@
             "
             class="ma-6"
             density="compact"
-            :label="labelWarBereitsTaetigAlsVorVorPeriode"
+            :label="
+              t(
+                'components.konflikteLoesenForm.form.warBereitsInVorperiodeAlsVerwaltungsrichterTaetig',
+                {
+                  artEhrenamtJustiz: formattedEhrenamtjustizart(
+                    useGlobalSettingsStore().getKonfiguration?.ehrenamtjustizart
+                  ),
+                }
+              )
+            "
             persistent-placeholder
             variant="outlined"
           />
@@ -1216,7 +1260,7 @@
           <v-text-field
             v-model="konfliktloesenformdata.person_bewerbungvom"
             density="compact"
-            label="Bewerbung vom"
+            :label="t('components.konflikteLoesenForm.form.bewerbungVom')"
             persistent-placeholder
             type="date"
             variant="outlined"
@@ -1232,7 +1276,7 @@
             v-model="konfliktloesenformdata.person_status"
             :items="BewerbungForm.statuswerte"
             density="compact"
-            label="Status"
+            :label="t('components.konflikteLoesenForm.form.status')"
             persistent-placeholder
             variant="outlined"
           />
@@ -1266,9 +1310,10 @@ import {
 
 import BewerbungForm from "@/components/bewerbungen/BewerbungForm.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
-import { STATUS_INDICATORS } from "@/Constants.ts";
+import { STATUS_INDICATORS, WOHNUNGSSTATUS_ARTEN } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
+import { formattedEhrenamtjustizart } from "@/tools/Helper.ts";
 
 const props = defineProps<{
   modelValue: KonfliktLoesenFormData;
@@ -1282,8 +1327,6 @@ const snackbarStore = useSnackbarStore();
 const form = ref();
 
 const formValid = ref(false);
-
-const wohnungsstatus: string[] = ["Hauptwohnung", "Nebenwohnung"];
 
 const FAMILIENNAME = "Familienname";
 const GEBURTSNAME = "Geburtsname";
@@ -1310,33 +1353,18 @@ const INMUENCHENSEIT = "Inmuenchenseit";
 const WOHNUNGSSTATUS = "Wohnungsstatus";
 const AUSKUNFTSSPERRE = "Auskunftssperre";
 const KEINEEWODATEN =
-  "Keine EWO-Daten gefunden. Evtl. verstorben oder verzogen?";
+  "Keine EWO-Daten gefunden. Evtl. verstorben oder verzogen?"; // Don't modify this text!!!
 const { t } = useI18n();
 
 onMounted(() => {
   if (isKonflikt(KEINEEWODATEN)) {
     snackbarStore.showMessage({
       level: STATUS_INDICATORS.WARNING,
-      message:
-        "Vorhandener Konflikt: " +
-        KEINEEWODATEN +
-        " Konflikt lösen durch 'Alle übernehmen' und 'Speichern'",
+      message: t("components.konflikteLoesenForm.form.messages.keineEWODaten"),
       show: true,
     });
   }
 });
-
-const labelWarBereitsTaetigAls = ref(
-  "War bereits als " +
-    useGlobalSettingsStore().getKonfiguration?.ehrenamtjustizart +
-    " tätig"
-);
-
-const labelWarBereitsTaetigAlsVorVorPeriode = ref(
-  "War bereits in Vorvorperiode als " +
-    useGlobalSettingsStore().getKonfiguration?.ehrenamtjustizart +
-    " tätig"
-);
 
 const konfliktloesenformdata = computed({
   get: () => props.modelValue,
@@ -1355,7 +1383,9 @@ function speichern(): void {
     if (!validation.valid) {
       snackbarStore.showMessage({
         level: STATUS_INDICATORS.WARNING,
-        message: "Das Formular ist nicht richtig ausgefüllt.",
+        message: t(
+          "components.konflikteLoesenForm.form.messages.fehlerhafteEingabe"
+        ),
         show: true,
       });
     } else {

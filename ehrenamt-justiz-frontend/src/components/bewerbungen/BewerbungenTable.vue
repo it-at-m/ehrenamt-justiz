@@ -154,10 +154,10 @@
           ></v-checkbox-btn>
         </template>
         <template #no-data>
-          {{ TABELLEN.NO_RESULTS_TEXT }}
+          {{ t("general.listeIstLeer") }}
         </template>
         <template #loading>
-          {{ TABELLEN.LOADING_ITEMS }}
+          {{ t("general.datenWerdenGeladen") }}
         </template>
       </v-data-table-server>
       <invalide-personen-select
@@ -230,7 +230,6 @@ import {
   BEARBEIGUNGS_MODUS,
   PERSONENSTATUS,
   STATUS_INDICATORS,
-  TABELLEN,
 } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
