@@ -23,7 +23,7 @@ const { t } = useI18n();
 <style scoped>
 @media (min-width: 1280px) {
   .v-container {
-    max-width: 2000px; /* Überschrieben, damit die Konflikte-Table nicht winzig angzeigt wird und der Platz im Container ausgenutzt wird */
+    max-width: 2000px; /* Overwritten so that the conflict table is not displayed in a tiny size and the space in the container is used */
   }
 }
 </style>

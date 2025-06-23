@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card flat>
-      <v-card-title>Vorschläge anzeigen</v-card-title>
+      <v-card-title>{{ t("views.vorschlaegeIndex.title") }}</v-card-title>
       <vorschlaege-table />
     </v-card>
     <online-help-dialog-component
@@ -22,7 +22,7 @@ const { t } = useI18n();
 <style scoped>
 @media (min-width: 1280px) {
   .v-container {
-    max-width: 2000px; /* Überschrieben, damit die Bewerber-Table nicht winzig angzeigt wird und der Platz im Container ausgenutzt wird */
+    max-width: 2000px; /* Overwritten so that the conflict table is not displayed in a tiny size and the space in the container is used */
   }
 }
 </style>

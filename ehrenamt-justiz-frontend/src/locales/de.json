@@ -73,13 +73,28 @@
     "bewerbungEdit": {
       "onlineHelp": "Hier haben Sie die Möglichkeit, die Daten eines Bewerbers zu bearbeiten und zu speichern.\n\nEs stehen zwei Registerkarten zur Verfügung: In der Registerkarte 'Aus EWO' finden Sie die beim Bewerber gespeicherten Daten aus dem Einwohnermeldewesen. In der Registerkarte 'Bewerber Zusatzangaben' können Sie die zusätzlichen Informationen des Bewerbers eingeben.\n\nBitte beachten Sie, dass die Daten eines Bewerbers nur gespeichert werden können, wenn Alter, Wohnort und Staatsangehörigkeit mit der Standardkonfiguration übereinstimmen. Falls Sie diese Prüfung vorübergehend ausschalten möchten, aktivieren Sie bitte die Checkbox 'Validierung deaktivieren', bevor Sie die Daten speichern."
     },
+    "invalidePersonenSelect": {
+      "title": "Invalide Datensätze",
+      "text": "Folgende Datensätze entsprechen nicht den Vorgaben gemäß der aktiven Konfiguration",
+      "table": {
+        "itemsPerPageText": "Bewerber je Seite",
+        "familienname": "Familienname",
+        "vorname": "Vorname",
+        "geburtsdatum": "Geburtsdatum"
+      },
+      "buttons": {
+        "abbrechen": "Abbrechen",
+        "validierungUmgehen": "Validierung umgehen"
+      }
+    },
     "konflikteLoesenEdit": {
       "messages": {
         "fuerOMKeineEwoDaten": "Für die Person {vorname} {familienname} mit OM {om} wurden keine Daten in EWO gefunden, Womöglich ist diese verzogen oder verstorben. Bitte prüfen Sie dies im Einwohnermeldesystem."
       }
     },
     "vorschlaegeIndex": {
-      "onlineHelp": "Hier finden Sie die Vorschläge für Schöffen oder ehrenamtliche Richter am Verwaltungsgericht. Je nach Ihren Berechtigungen können Sie hier folgende Aktionen durchführen: Die vorgeschlagenen Bewerber ändern, anzeigen oder löschen. Darüber hinaus haben Sie die Möglichkeit, einen Vorschlag auf die Bewerberliste zu setzen oder sie als CSV-Datei zu speichern."
+      "onlineHelp": "Hier finden Sie die Vorschläge für Schöffen oder ehrenamtliche Richter am Verwaltungsgericht. Je nach Ihren Berechtigungen können Sie hier folgende Aktionen durchführen: Die vorgeschlagenen Bewerber ändern, anzeigen oder löschen. Darüber hinaus haben Sie die Möglichkeit, einen Vorschlag auf die Bewerberliste zu setzen oder sie als CSV-Datei zu speichern.",
+      "title": "Vorschläge anzeigen"
     },
     "konflikteIndex": {
       "onlineHelp": "Hier erhalten Sie einen Überblick über die Bewerber für Schöffen oder ehrenamtliche Richter, die Konflikte aufweisen. Je nach Ihren Berechtigungen haben Sie die Möglichkeit, die Konfliktbearbeitung zu starten oder einen Bewerber zu löschen.",
