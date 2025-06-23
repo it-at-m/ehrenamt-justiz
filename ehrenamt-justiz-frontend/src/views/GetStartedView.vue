@@ -15,11 +15,12 @@
         >
           <h2>
             {{
-              ehrenamtJustizStatus
-                ? ehrenamtJustizStatus.anzahlBewerbungen
-                : "?"
+              t("views.getStartedView.bewerbungen", {
+                count: ehrenamtJustizStatus
+                  ? ehrenamtJustizStatus.anzahlBewerbungen
+                  : "0",
+              })
             }}
-            {{ t("views.getStartedView.bewerbungen") }}
           </h2>
           <h2>{{ textAnzahlBewerbungen }}</h2>
         </v-col>
@@ -38,9 +39,12 @@
         >
           <h2>
             {{
-              ehrenamtJustizStatus ? ehrenamtJustizStatus.anzahlKonflikte : "?"
+              t("views.getStartedView.konflikte", {
+                count: ehrenamtJustizStatus
+                  ? ehrenamtJustizStatus.anzahlKonflikte
+                  : "0",
+              })
             }}
-            {{ t("views.getStartedView.konflikte") }}
           </h2>
           <h2>{{ textAnzahlKonflikte }}</h2>
         </v-col>
@@ -61,11 +65,12 @@
         >
           <h2>
             {{
-              ehrenamtJustizStatus
-                ? ehrenamtJustizStatus.anzahlVorschlaege
-                : "?"
+              t("views.getStartedView.vorschlaege", {
+                count: ehrenamtJustizStatus
+                  ? ehrenamtJustizStatus.anzahlVorschlaege
+                  : "0",
+              })
             }}
-            {{ t("views.getStartedView.vorschlaege") }}
           </h2>
           <h2>{{ textAnzahlVorschlaege }}</h2>
         </v-col>
@@ -76,11 +81,12 @@
       >
         <h2>
           {{
-            ehrenamtJustizStatus
-              ? ehrenamtJustizStatus.anzahlVorschlaegeNeu
-              : "?"
+            t("views.getStartedView.neueVorschlaege", {
+              count: ehrenamtJustizStatus
+                ? ehrenamtJustizStatus.anzahlVorschlaegeNeu
+                : "0",
+            })
           }}
-          {{ t("views.getStartedView.neueVorschlaege") }}
         </h2>
         <h2>{{ textAnzahlNeueVorschlaege }}</h2>
         <v-btn
@@ -214,6 +220,7 @@ function datenHerunterladen() {
     .then((neueVorschlaege) => {
       const globalSettingsStore = useGlobalSettingsStore();
       EhrenamtJustizService.convertToCSVFileByPersonCSV(
+        t,
         neueVorschlaege,
         globalSettingsStore.getKonfiguration?.ehrenamtjustizart +
           "_NEUE_VORSCHLAEGE_"

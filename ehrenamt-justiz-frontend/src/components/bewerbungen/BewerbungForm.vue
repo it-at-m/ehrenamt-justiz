@@ -564,6 +564,7 @@
                       'components.bewerbungForm.tabBewerberZusatzangaben.warBereitsAlsVerwaltungsrichterTaetig',
                       {
                         artEhrenamtJustiz: formattedEhrenamtjustizart(
+                          t,
                           useGlobalSettingsStore().getKonfiguration
                             ?.ehrenamtjustizart
                         ),
@@ -583,6 +584,7 @@
                       'components.bewerbungForm.tabBewerberZusatzangaben.warBereitsInVorperiodeAlsVerwaltungsrichterTaetig',
                       {
                         artEhrenamtJustiz: formattedEhrenamtjustizart(
+                          t,
                           useGlobalSettingsStore().getKonfiguration
                             ?.ehrenamtjustizart
                         ),

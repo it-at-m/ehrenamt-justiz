@@ -10,7 +10,7 @@
             <v-text-field
               v-model="search"
               prepend-inner-icon="mdi-magnify"
-              label="Suche"
+              :label="t('components.vorschlaegeTable.suche')"
               single-line
               hide-details
               select-strategy="all"
@@ -31,7 +31,7 @@
               "
               color="error"
               @click="deleteRequested"
-              >Löschen</v-btn
+              >{{ t("components.vorschlaegeTable.buttons.loeschen") }}</v-btn
             >
           </v-col>
           <v-col
@@ -47,7 +47,11 @@
               color="accent"
               :loading="bewerberListeAnimationAktiv"
               @click="aufBewerberlisteSetzen"
-              >Auf Bewerberliste setzen</v-btn
+              >{{
+                t(
+                  "components.vorschlaegeTable.buttons.aufBewerbungsListeSetzen"
+                )
+              }}</v-btn
             >
           </v-col>
           <v-col
@@ -63,7 +67,9 @@
               "
               color="accent"
               @click="datenHerunterladen"
-              >Daten herunterladen</v-btn
+              >{{
+                t("components.vorschlaegeTable.buttons.datenHerunterladen")
+              }}</v-btn
             >
           </v-col>
         </v-row>
@@ -75,7 +81,9 @@
         :items="personenTableData"
         :items-length="totalItems"
         show-select
-        items-per-page-text="Vorschläge je Seite"
+        :items-per-page-text="
+          t('components.vorschlaegeTable.table.itemsperpagetext')
+        "
         :row-props="getRowProps"
         :loading="loadingAnimationAktiv"
         :multi-sort="true"
@@ -85,7 +93,11 @@
           <delete-dialog
             v-model="deleteDialogVisible"
             :is-animation="deleteAnimationAktiv"
-            :descriptor-string="selectedUUIDs.length + ' Vorschläge'"
+            :descriptor-string="
+              t('components.vorschlaegeTable.table.delete.dialogtext', {
+                count: selectedUUIDs.length,
+              })
+            "
             :type-string="2"
             @delete="deleteConfirmed"
             @cancel="deleteCanceled"
@@ -119,7 +131,9 @@
                   :icon="mdiPencil"
               /></span>
             </template>
-            <span>Bewerber ändern</span>
+            <span>{{
+              t("components.vorschlaegeTable.table.actions.bewerberAendern")
+            }}</span>
           </v-tooltip>
           <v-tooltip
             v-if="AuthService.checkAuth('READ_EHRENAMTJUSTIZDATEN')"
@@ -133,7 +147,9 @@
                   :icon="mdiEye"
               /></span>
             </template>
-            <span>Bewerber anzeigen</span>
+            <span>{{
+              t("components.vorschlaegeTable.table.actions.bewerberAnzeigen")
+            }}</span>
           </v-tooltip>
         </template>
         <template
@@ -163,13 +179,16 @@
     </v-card>
     <yes-no-dialog
       v-model="yesNoDialogVisible"
-      dialogtitle="Auf Bewerbungsliste setzen"
+      :dialogtitle="
+        t(
+          'components.vorschlaegeTable.table.aufBewerberlisteSetzen.dialogtitle'
+        )
+      "
       :dialogtext="
-        'Bestätigen Sie die Übernahme von ' +
-        selectedUUIDs.length +
-        ' ' +
-        (selectedUUIDs.length == 1 ? 'Vorschlag' : 'Vorschlägen') +
-        ' in die Bewerbungsliste'
+        t(
+          'components.vorschlaegeTable.table.aufBewerberlisteSetzen.dialogtext',
+          { count: selectedUUIDs.length }
+        )
       "
       :is-animation="bewerberListeAnimationAktiv"
       @no="abbruchAufBewerbungslisteSetzen"
@@ -213,49 +232,49 @@ import { useUserStore } from "@/stores/user";
 const { t } = useI18n();
 const headers: ReadonlyHeaders = computed(() => [
   {
-    title: "Familienname",
+    title: t("components.vorschlaegeTable.table.familienname"),
     value: "familienname",
     align: "start",
     sortable: true,
   },
   {
-    title: "Vorname",
+    title: t("components.vorschlaegeTable.table.vorname"),
     value: "vorname",
     align: "start",
     sortable: true,
   },
   {
-    title: "Geburtsdatum",
+    title: t("components.vorschlaegeTable.table.geburtsdatum"),
     value: "geburtsdatum",
     align: "end",
     sortable: true,
   },
   {
-    title: "Derzeitiger Beruf",
+    title: t("components.vorschlaegeTable.table.derzeitigerBeruf"),
     value: "derzeitausgeuebterberuf",
     align: "start",
     sortable: true,
   },
   {
-    title: "Arbeitgeber",
+    title: t("components.vorschlaegeTable.table.arbeitgeber"),
     value: "arbeitgeber",
     align: "start",
     sortable: true,
   },
   {
-    title: "Mailadresse",
+    title: t("components.vorschlaegeTable.table.mailAdresse"),
     value: "mailadresse",
     align: "start",
     sortable: true,
   },
   {
-    title: "Ausgeübte Ehrenämter",
+    title: t("components.vorschlaegeTable.table.ausgeuebteEhrenaemter"),
     value: "ausgeuebteehrenaemter",
     align: "start",
     sortable: true,
   },
   {
-    title: "Aktionen",
+    title: t("components.vorschlaegeTable.table.actions.header"),
     value: "actions",
     align: "start",
     sortable: false,
@@ -426,6 +445,7 @@ function datenHerunterladen() {
     PERSONENSTATUS.STATUS_VORSCHLAG +
     "_";
   EhrenamtJustizService.convertToCSVFile(
+    t,
     selectedUUIDs.value,
     dateiname,
     PERSONENSTATUS.STATUS_VORSCHLAG

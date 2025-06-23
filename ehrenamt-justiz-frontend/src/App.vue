@@ -214,6 +214,7 @@ import { formattedEhrenamtjustizart } from "@/tools/Helper";
 import HealthState from "@/types/HealthState";
 import User, { UserLocalDevelopment } from "@/types/User";
 
+const { t } = useI18n();
 const appswitcherBaseUrl = APPSWITCHER_URL;
 const globalSettingsStore = useGlobalSettingsStore();
 const snackbarStore = useSnackbarStore();
@@ -221,7 +222,7 @@ const userStore = useUserStore();
 const [drawer, toggleDrawer] = useToggle();
 const userinfo = ref<string>("");
 const user = computed(() => userStore.getUser);
-const bezeichnungApp = ref("Aktive Konfiguration fehlt");
+const bezeichnungApp = ref(t("app.aktiveKonfigurationFehlt"));
 const ehrenamtjustizart = ref("");
 const gatewayStatus = ref("DOWN");
 const backendStatus = ref("DOWN");
@@ -231,7 +232,6 @@ const isConfigLoaded = computed(() => {
     userStore.getUser && globalSettingsStore.isKonfigurationLoadingAttempt()
   );
 });
-const { t } = useI18n();
 
 onMounted(() => {
   loadUser();
@@ -274,6 +274,7 @@ function loadActiveKonfiguration(): void {
     .then((konfigurationData: KonfigurationData) => {
       globalSettingsStore.setKonfiguration(konfigurationData);
       ehrenamtjustizart.value = formattedEhrenamtjustizart(
+        t,
         konfigurationData.ehrenamtjustizart
       );
       bezeichnungApp.value = konfigurationData.bezeichnung;
@@ -281,8 +282,7 @@ function loadActiveKonfiguration(): void {
     })
     .catch(() => {
       snackbarStore.showMessage({
-        message:
-          "Es konnte keine aktive Konfiguration gefunden werden! Bitte nur eine aktive Konfiguration anlegen und dann die Anwendung neu laden!",
+        message: t("app.keineAktiveKonfiguration"),
       });
       globalSettingsStore.setKonfigurationLoadingAttempt(true);
     });

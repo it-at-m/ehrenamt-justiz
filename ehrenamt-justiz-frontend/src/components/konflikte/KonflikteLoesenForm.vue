@@ -1216,6 +1216,7 @@
                 'components.konflikteLoesenForm.form.warBereitsAlsVerwaltungsrichterTaetig',
                 {
                   artEhrenamtJustiz: formattedEhrenamtjustizart(
+                    t,
                     useGlobalSettingsStore().getKonfiguration?.ehrenamtjustizart
                   ),
                 }
@@ -1242,6 +1243,7 @@
                 'components.konflikteLoesenForm.form.warBereitsInVorperiodeAlsVerwaltungsrichterTaetig',
                 {
                   artEhrenamtJustiz: formattedEhrenamtjustizart(
+                    t,
                     useGlobalSettingsStore().getKonfiguration?.ehrenamtjustizart
                   ),
                 }

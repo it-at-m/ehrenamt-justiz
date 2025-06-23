@@ -173,12 +173,15 @@
     <yes-no-dialog
       v-model="yesNoDialogVisible"
       :dialogtitle="
-        t('components.bewerbungenTable.table.addtolistproposal.dialogtitle')
+        t(
+          'components.bewerbungenTable.table.aufVorschlagslisteSetzen.dialogtitle'
+        )
       "
       :dialogtext="
-        t('components.bewerbungenTable.table.addtolistproposal.dialogtext1') +
-        selectedUUIDs.length +
-        t('components.bewerbungenTable.table.addtolistproposal.dialogtext2')
+        t(
+          'components.bewerbungenTable.table.aufVorschlagslisteSetzen.dialogtext',
+          { count: selectedUUIDs.length }
+        )
       "
       :is-animation="vorschlagsListeAnimationAktiv"
       @no="abbruchAufVorschlagslisteSetzen"
@@ -418,7 +421,7 @@ async function aufVorschlagslisteSetzen(): Promise<void> {
         snackbarStore.showMessage({
           level: STATUS_INDICATORS.ERROR,
           message: t(
-            "components.bewerbungenTable.table.addtolistproposal.message"
+            "components.bewerbungenTable.table.aufVorschlagslisteSetzen.message"
           ),
         });
       }
@@ -496,6 +499,7 @@ function datenHerunterladen() {
     PERSONENSTATUS.STATUS_BEWERBUNG +
     "_";
   EhrenamtJustizService.convertToCSVFile(
+    t,
     selectedUUIDs.value,
     dateiname,
     PERSONENSTATUS.STATUS_BEWERBUNG

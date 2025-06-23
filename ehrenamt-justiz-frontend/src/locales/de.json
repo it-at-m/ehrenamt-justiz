@@ -1,5 +1,7 @@
 {
   "general": {
+    "schoeffen": "Schöffen",
+    "ehrenamtlicheVerwaltungsrichter": "Ehrenamtliche Verwaltungsrichter",
     "listeIstLeer": "Liste ist leer",
     "datenWerdenGeladen": "Daten werden gelesen"
   },
@@ -18,15 +20,17 @@
       "eai": "Status EWO-EAI"
     },
     "onlineHelp": "Online-Hilfe",
-    "head": " KVR-"
+    "head": " KVR-",
+    "aktiveKonfigurationFehlt": "Aktive Konfiguration fehlt",
+    "keineAktiveKonfiguration": "Es konnte keine aktive Konfiguration gefunden werden! Bitte nur eine aktive Konfiguration anlegen und dann die Anwendung neu laden!"
   },
   "views": {
     "getStartedView": {
       "onlineHelp": "Hier finden Sie eine Übersicht über alle Bewerbungen, Konflikte und Vorschläge. Wenn neue Bewerber erfasst wurden, haben Sachbearbeiter, je nach Berechtigung, die Möglichkeit, die Daten zu exportieren oder diese als benachrichtigt zu markieren.",
-      "bewerbungen": "Bewerbungen",
-      "konflikte": "Konflikte",
-      "vorschlaege": "Vorschläge",
-      "neueVorschlaege": "Neue Vorschläge",
+      "bewerbungen": "{count} Bewerbung | {count} Bewerbungen",
+      "konflikte": "{count} Konflikt | {count} Konflikte",
+      "vorschlaege": "{count} Vorschlag | {count} Vorschläge",
+      "neueVorschlaege": "{count} neuer Vorschlag | {count} neue Vorschläge",
       "buttons": {
         "datenHerunterladen": "Daten herunterladen",
         "alsBenachrichtigtMarkieren": "Als benachrichtigt markieren"
@@ -187,10 +191,9 @@
           "bewerberAendern": "Bewerber ändern",
           "bewerberAnzeigen": "Bewerber anzeigen"
         },
-        "addtolistproposal": {
+        "aufVorschlagslisteSetzen": {
           "dialogtitle": "Auf Vorschlagsliste setzen",
-          "dialogtext1": "Bestätigen Sie die Übernahme von ",
-          "dialogtext2": " Bewerbung(en) in die Vorschlagsliste",
+          "dialogtext": "Bestätigen Sie die Übernahme in die Vorschlagsliste von {count} Bewerbung | Bestätigen Sie die Übernahme in die Vorschlagsliste von {count} Bewerbungen",
           "message": "Die Auswahl enthält invalide Personen. Bitte wenden Sie sich an einen Sondersachbearbeiter, der diese Validierung umgehen kann."
         },
         "delete": {
@@ -348,6 +351,36 @@
           "keineEWODaten": "Vorhandener Konflikt: 'Keine EWO-Daten gefunden. Evtl. verstorben oder verzogen?' Konflikt lösen durch 'Alle übernehmen' und 'Speichern'",
           "fehlerhafteEingabe": "Die Eingabe ist fehlerhaft!"
         }
+      }
+    },
+    "vorschlaegeTable": {
+      "suche": "Suche",
+      "table": {
+        "familienname": "Familienname",
+        "vorname": "Vorname",
+        "geburtsdatum": "Geburtsdatum",
+        "derzeitigerBeruf": "Derzeitiger Beruf",
+        "arbeitgeber": "Arbeitgeber",
+        "mailAdresse": "Mailadresse",
+        "ausgeuebteEhrenaemter": "Ausgeübte Ehrenämter",
+        "actions": {
+          "header": "Aktionen",
+          "bewerberAendern": "Bewerber ändern",
+          "bewerberAnzeigen": "Bewerber anzeigen"
+        },
+        "aufBewerberlisteSetzen": {
+          "dialogtitle": "Auf Bewerberliste setzen",
+          "dialogtext": "Bestätigen Sie die Übernahme in die Bewerberliste von {count} Vorschlag | Bestätigen Sie die Übernahme in die Bewerberliste von {count} Vorschlägen "
+        },
+        "delete": {
+          "dialogtext": "{count} Vorschlag | {count} Vorschläge"
+        },
+        "itemsperpagetext": "Vorschläge je Seite"
+      },
+      "buttons": {
+        "loeschen": "Löschen",
+        "aufBewerbungsListeSetzen": "Auf Bewerberliste setzen",
+        "datenHerunterladen": "Daten herunterladen"
       }
     }
   }

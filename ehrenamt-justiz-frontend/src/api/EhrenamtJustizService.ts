@@ -111,30 +111,38 @@ class EhrenamtJustizServiceClass {
   }
 
   public async convertToCSVFile(
+    t: (key: string) => string,
     selectedUUIDs: string[],
     dateiName: string,
     status: string
   ) {
     await PersonApiService.lesenPersonenCSV(selectedUUIDs, status).then(
       (personenCSV) => {
-        EhrenamtJustizServiceClass.convertToCSVFile(personenCSV, dateiName);
+        EhrenamtJustizServiceClass.convertToCSVFile(t, personenCSV, dateiName);
       }
     );
   }
 
   public async convertToCSVFileByPersonCSV(
+    t: (key: string) => string,
     personenCSV: PersonCSV[],
     dateiName: string
   ) {
-    await EhrenamtJustizServiceClass.convertToCSVFile(personenCSV, dateiName);
+    await EhrenamtJustizServiceClass.convertToCSVFile(
+      t,
+      personenCSV,
+      dateiName
+    );
   }
 
   private static async convertToCSVFile(
+    t: (key: string) => string,
     personenCSV: PersonCSV[],
     dateiName: string
   ) {
     const globalSettingsStore = useGlobalSettingsStore();
     const justiceType = formattedEhrenamtjustizart(
+      t,
       globalSettingsStore.getKonfiguration?.ehrenamtjustizart
     );
     const csvConfig = mkConfig({
