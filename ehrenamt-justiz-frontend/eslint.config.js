@@ -42,6 +42,7 @@ export default defineConfigWithVueTs(
           src: "./src",
           extensions: [".ts", ".vue"],
           ignores: [
+            // These keys are used dynamically in Helper.ts and cannot be detected by static analysis:
             "general.schoeffen",
             "general.ehrenamtlicheVerwaltungsrichter",
           ],
