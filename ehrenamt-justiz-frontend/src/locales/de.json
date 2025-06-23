@@ -5,6 +5,12 @@
     "listeIstLeer": "Liste ist leer",
     "datenWerdenGeladen": "Daten werden geladen"
   },
+  "composables": {
+    "saveLeave": {
+      "title": "Ungespeicherte Änderungen",
+      "text": "Es sind ungespeicherte Änderungen vorhanden. Wollen Sie die Seite verlassen?"
+    }
+  },
   "app": {
     "navigation": {
       "getStarted": "Get started",

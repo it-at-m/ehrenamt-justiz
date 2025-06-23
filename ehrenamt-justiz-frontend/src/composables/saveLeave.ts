@@ -9,15 +9,14 @@
  * The user's decision can be executed by calling `leave()` or `cancel()`.
  */
 import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
-
+import { useI18n } from "vue-i18n";
 import { ref } from "vue";
 import { onBeforeRouteLeave } from "vue-router";
 
 export function useSaveLeave(isDirty: () => boolean) {
-  const saveLeaveDialogTitle = ref("Ungespeicherte Änderungen");
-  const saveLeaveDialogText = ref(
-    "Es sind ungespeicherte Änderungen vorhanden. Wollen Sie die Seite verlassen?"
-  );
+  const { t } = useI18n();
+  const saveLeaveDialogTitle = ref(t("composables.saveLeave.title"));
+  const saveLeaveDialogText = ref(t("composables.saveLeave.text"));
   const saveLeaveDialog = ref(false);
   const isSave = ref(false);
 
