@@ -9,8 +9,9 @@
  * The user's decision can be executed by calling `leave()` or `cancel()`.
  */
 import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
-import { useI18n } from "vue-i18n";
+
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { onBeforeRouteLeave } from "vue-router";
 
 export function useSaveLeave(isDirty: () => boolean) {
