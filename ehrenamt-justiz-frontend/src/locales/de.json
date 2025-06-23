@@ -1,9 +1,9 @@
 {
   "general": {
-    "schoeffen": "Schöffen",
-    "ehrenamtlicheVerwaltungsrichter": "Ehrenamtliche Verwaltungsrichter",
+    "schoeffen": "Schöffe | Schöffen",
+    "ehrenamtlicheVerwaltungsrichter": "Ehrenamtlicher Verwaltungsrichter | Ehrenamtliche Verwaltungsrichter",
     "listeIstLeer": "Liste ist leer",
-    "datenWerdenGeladen": "Daten werden gelesen"
+    "datenWerdenGeladen": "Daten werden geladen"
   },
   "app": {
     "navigation": {
@@ -142,7 +142,7 @@
       "loeschen": "Löschen"
     },
     "konfigurationList": {
-      "eintraegeInsgesamt": "{total} Einträge insgesamt",
+      "eintraegeInsgesamt": "{count} Eintrag insgesamt | {count} Einträge insgesamt",
       "keineKonfigurationVorhanden": "Keine Konfiguration vorhanden"
     },
     "konfigurationListItem": {
@@ -303,7 +303,7 @@
           "konflikteLoesen": "Konflikte lösen"
         },
         "delete": {
-          "dialogtext": "{count} Konflikte"
+          "dialogtext": "{count} Konflikt | {count} Konflikte "
         },
         "itemsperpagetext": "Konflikte je Seite"
       },

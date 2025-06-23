@@ -566,7 +566,8 @@
                         artEhrenamtJustiz: formattedEhrenamtjustizart(
                           t,
                           useGlobalSettingsStore().getKonfiguration
-                            ?.ehrenamtjustizart
+                            ?.ehrenamtjustizart,
+                          1
                         ),
                       }
                     )
@@ -586,7 +587,8 @@
                         artEhrenamtJustiz: formattedEhrenamtjustizart(
                           t,
                           useGlobalSettingsStore().getKonfiguration
-                            ?.ehrenamtjustizart
+                            ?.ehrenamtjustizart,
+                          1
                         ),
                       }
                     )

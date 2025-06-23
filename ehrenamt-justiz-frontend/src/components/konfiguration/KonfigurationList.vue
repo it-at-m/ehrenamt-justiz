@@ -21,7 +21,7 @@
       <div class="text--secondary d-flex justify-center">
         {{
           t("components.konfigurationList.eintraegeInsgesamt", {
-            total: totalElements,
+            count: totalElements,
           })
         }}
       </div>

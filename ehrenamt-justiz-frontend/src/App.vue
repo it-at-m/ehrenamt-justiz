@@ -275,7 +275,8 @@ function loadActiveKonfiguration(): void {
       globalSettingsStore.setKonfiguration(konfigurationData);
       ehrenamtjustizart.value = formattedEhrenamtjustizart(
         t,
-        konfigurationData.ehrenamtjustizart
+        konfigurationData.ehrenamtjustizart,
+        2
       );
       bezeichnungApp.value = konfigurationData.bezeichnung;
       globalSettingsStore.setKonfigurationLoadingAttempt(true);

@@ -143,7 +143,8 @@ class EhrenamtJustizServiceClass {
     const globalSettingsStore = useGlobalSettingsStore();
     const justiceType = formattedEhrenamtjustizart(
       t,
-      globalSettingsStore.getKonfiguration?.ehrenamtjustizart
+      globalSettingsStore.getKonfiguration?.ehrenamtjustizart,
+      1
     );
     const csvConfig = mkConfig({
       fieldSeparator: ";",
