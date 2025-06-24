@@ -82,7 +82,7 @@
               AuthService.checkAuth('READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE')
             "
             v-model="ewobuergerdata.validierungdeaktivieren"
-            :label="t('components.eWOBuergerForm.validierungdeaktivieren')"
+            :label="t('components.eWOBuergerForm.validierungDeaktivieren')"
           />
         </v-col>
       </v-row>

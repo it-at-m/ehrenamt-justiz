@@ -14,7 +14,7 @@ export const enum BEARBEIGUNGS_MODUS {
 }
 
 // don't use i18n here, because of fixed values:
-export const WOHNUNGSSTATUS_ARTEN: string[] = ["HAUPTWOHNUNG", "NEBENWOHNUNG"];
+export const WOHNUNGSSTATUS_ARTEN = ["HAUPTWOHNUNG", "NEBENWOHNUNG"] as const;
 
 // Status of person
 export const enum PERSONENSTATUS {

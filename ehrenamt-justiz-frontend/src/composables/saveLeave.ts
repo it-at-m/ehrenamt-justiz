@@ -10,14 +10,14 @@
  */
 import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
 
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { onBeforeRouteLeave } from "vue-router";
 
 export function useSaveLeave(isDirty: () => boolean) {
   const { t } = useI18n();
-  const saveLeaveDialogTitle = ref(t("composables.saveLeave.title"));
-  const saveLeaveDialogText = ref(t("composables.saveLeave.text"));
+  const saveLeaveDialogTitle = computed(() => t("composables.saveLeave.title"));
+  const saveLeaveDialogText = computed(() => t("composables.saveLeave.text"));
   const saveLeaveDialog = ref(false);
   const isSave = ref(false);
 

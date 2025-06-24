@@ -190,7 +190,7 @@
       "familienname": "Familienname*",
       "vorname": "Vorname*",
       "geburtsdatum": "Geburtsdatum*",
-      "validierungdeaktivieren": "Validierung deaktivieren (Altersprüfung)",
+      "validierungDeaktivieren": "Validierung deaktivieren (Altersprüfung)",
       "hint": "Alle mit Sternchen* gekennzeichneten Felder sind Pflichtfelder. Wildcard '*' mit mindestens 3 führenden Zeichen.",
       "buttons": {
         "felderLeeren": "Felder leeren",
