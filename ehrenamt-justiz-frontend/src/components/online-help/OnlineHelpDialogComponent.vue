@@ -7,7 +7,7 @@
     @keydown.enter.prevent="closeOnlineHelp()"
   >
     <v-toolbar>
-      <v-toolbar-title>Online-Hilfe</v-toolbar-title>
+      <v-toolbar-title>{{ t("components.onlineHelpDialogComponent.onlineHilfe") }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-icon
         @click="closeOnlineHelp()"
@@ -39,7 +39,7 @@ import {
   VToolbar,
   VToolbarTitle,
 } from "vuetify/components";
-
+import { useI18n } from "vue-i18n";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 
 const formattedLines = computed(() => {
@@ -49,6 +49,7 @@ const formattedLines = computed(() => {
     .filter(Boolean);
 });
 
+const { t } = useI18n();
 const props = defineProps<{
   helptext: string;
 }>();

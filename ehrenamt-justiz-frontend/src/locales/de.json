@@ -133,6 +133,10 @@
     }
   },
   "components": {
+    "onlineHelpDialogComponent":
+    {
+      "onlineHilfe": "Online-Hilfe"
+    },
     "deleteDialog": {
       "title": "Löschen?",
       "text": "Soll(en) {descriptor} wirklich gelöscht werden?",
