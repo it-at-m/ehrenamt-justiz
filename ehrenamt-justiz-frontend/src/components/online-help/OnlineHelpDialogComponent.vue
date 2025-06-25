@@ -7,7 +7,9 @@
     @keydown.enter.prevent="closeOnlineHelp()"
   >
     <v-toolbar>
-      <v-toolbar-title>{{ t("components.onlineHelpDialogComponent.onlineHilfe") }}</v-toolbar-title>
+      <v-toolbar-title>{{
+        t("components.onlineHelpDialogComponent.onlineHilfe")
+      }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-icon
         @click="closeOnlineHelp()"
@@ -30,6 +32,7 @@
 <script setup lang="ts">
 import { mdiClose } from "@mdi/js";
 import { computed } from "vue";
+import { useI18n } from "vue-i18n";
 import {
   VCard,
   VCardText,
@@ -39,7 +42,7 @@ import {
   VToolbar,
   VToolbarTitle,
 } from "vuetify/components";
-import { useI18n } from "vue-i18n";
+
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 
 const formattedLines = computed(() => {
