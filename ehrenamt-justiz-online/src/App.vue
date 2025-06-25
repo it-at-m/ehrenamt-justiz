@@ -9,14 +9,15 @@
       >
         <muc-banner
           v-if="keineAktiveKonfiguration"
-          title="Keine aktive Konfiguration"
+          :title="t('app.keineAktiveKonfiguration.title')"
           type="emergency"
         >
           <div>
-            "Es konnte keine aktive Konfiguration gefunden werden! Bitte nur
-            eine aktive Konfiguration anlegen und dann die Anwendung neu laden!
-            Ursache: "
-            {{ keineAktiveKonfiguration }} ,
+            {{
+              t("app.keineAktiveKonfiguration.text", {
+                cause: keineAktiveKonfiguration,
+              })
+            }}
           </div>
         </muc-banner>
         <main-view />
@@ -32,12 +33,17 @@ import { MucBanner } from "@muenchen/muc-patternlab-vue";
 import customIconsSprite from "@muenchen/muc-patternlab-vue/assets/icons/custom-icons.svg?raw";
 import mucIconsSprite from "@muenchen/muc-patternlab-vue/assets/icons/muc-icons.svg?raw";
 import { onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { VApp, VContainer, VMain } from "vuetify/components";
 
-import { EhrenamtJustizOnlineService } from "@/api/EhrenamtJustizOnlineService";
+import { EhrenamtJustizOnlineServiceClass } from "@/api/EhrenamtJustizOnlineService";
 import { useActiveKonfigurationStore } from "@/stores/activeconfig";
 import MainView from "@/views/MainView.vue";
 
+const { t } = useI18n();
+const ehrenamtJustizOnlineService = ref(
+  new EhrenamtJustizOnlineServiceClass(t)
+);
 const activeConfigStore = useActiveKonfigurationStore();
 const keineAktiveKonfiguration = ref("");
 
@@ -49,7 +55,8 @@ onMounted(() => {
  * Lädt aktive Konfiguration vom Backend und setzt diese im Store.
  */
 function loadActiveKonfiguration(): void {
-  EhrenamtJustizOnlineService.getAktiveKonfiguration()
+  ehrenamtJustizOnlineService.value
+    .getAktiveKonfiguration()
     .then((konfiguration: KonfigurationData) => {
       activeConfigStore.setKonfiguration(konfiguration);
     })

@@ -1,0 +1,92 @@
+{
+  "app": {
+    "keineAktiveKonfiguration": {
+      "title": "Keine aktive Konfiguration",
+      "text": "Es konnte keine aktive Konfiguration gefunden werden! Bitte nur eine aktive Konfiguration anlegen und dann die Anwendung neu laden! Ursache: {cause}"
+    }
+  },
+  "mainView": {
+    "header": "Schöffen Onlinebewerbung",
+    "hinweise": {
+      "ok": {
+        "title": "Erfolgreich übertragen",
+        "text": "Die Bewerbung wurde erfolgreich übertragen. Sie erhalten von uns eine Nachricht, sobald Ihre Angaben überprüft wurden."
+      },
+      "error": {
+        "text": "Bei der Übertragung der Bewerbung ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Angaben und setzen sich ggf. mit dem Bürgerbüro während der Öffnungszeiten unter Telefon 089/233-44443 in Verbindung."
+      },
+      "toManyRequests": {
+        "text": "Sie haben zu viele Fehlversuche produziert. Bitte versuchen Sie es zu einem späteren Zeitpunkt erneut."
+      },
+      "eingabeFehler": {
+        "text": "Das Formular ist nicht richtig ausgefüllt."
+      },
+      "technischerFehler": {
+        "text": "Technischer Fehler: { cause }"
+      }
+    },
+    "info": "Auf dieser Seite haben Sie die Möglichkeit sich über das unten stehende Formular als Schöffe zu bewerben. Zusätzliche Infos zum Amt und den Aufgaben eines Schöffen finden Sie",
+    "form": {
+      "vorname": {
+        "label": "Vorname",
+        "pflichtfeld": "Vorname ist ein Pflichtfeld!",
+        "maxLaenge": "Vorname darf maximal 255 Zeichen lang sein!"
+      },
+      "nachname": {
+        "label": "Nachname",
+        "pflichtfeld": "Nachname ist ein Pflichtfeld!",
+        "maxLaenge": "Nachname darf maximal 255 Zeichen lang sein!"
+      },
+      "geburtsdatum": {
+        "label": "Geburtsdatum",
+        "pflichtfeld": "Geburtsdatum ist ein Pflichtfeld!",
+        "invalide": "Das Alter muss zwischen {altervon} und {alterbis} Jahren liegen."
+      },
+      "beruf": {
+        "label": "Beruf",
+        "pflichtfeld": "Beruf ist ein Pflichtfeld!",
+        "maxLaenge": "Beruf darf maximal 255 Zeichen lang sein!"
+      },
+      "telefonnummer": {
+        "label": "Telefonnummer",
+        "invalide": "Valide Telefonnummer eingeben!"
+      },
+      "mail": {
+        "label": "Mail",
+        "placeholder": "Mail-Adresse",
+        "pflichtfeld": "Mail ist ein Pflichtfeld!",
+        "invalide": "Valide Mail eingeben!"
+      }
+    },
+    "buttons": {
+      "bewerben": "Bewerben",
+      "leeren": "Leeren"
+    },
+    "datenschutzErklaerung": {
+      "header": "Datenschutzerklärung",
+      "content1": "Bewerbung für das Schöffenamt",
+      "content2": "Die personenbezogenen Daten, die Sie im Rahmen Ihrer Bewerbung für das Schöffenamt an uns übermitteln, werden nur zum Zwecke der Bewerbung als Schöffin, bzw. Schöffe gespeichert. Rechtsgrundlage für die Verarbeitung ist das Gerichtsverfassungsgesetz, insbesondere § 36 bis § 38 GVG. Die Daten erheben wir nur im notwendigen Umfang.",
+      "content3": "Ihre Daten werden verschlüsselt an das Kreisverwaltungsreferat, Hauptabteilung II, Einwohnerwesen – Bürgerbüro, Abteilung II/212 Auskünfte/Sperren der Landeshauptstadt München übermittelt. Ihre Daten werden geprüft und - bei erfolgter Aufnahme in die Vorschlagsliste und Zustimmung des Stadtrates der Landeshauptstadt München - an das für die Wahl der Schöffinnen bzw. Schöffen zuständige Amtsgericht München weitergegeben.",
+      "content4": "Die Daten werden für die Dauer einer Schöffenperiode beim Kreisverwaltungsreferat der Landeshauptstadt München aufbewahrt und anschließend gelöscht.",
+      "content5": "Durch Ihre weitere Nutzung erklären Sie sich damit einverstanden.",
+      "content6": "Bitte beachten Sie auch die",
+      "content7": "im Impressum der Landeshauptstadt München.",
+      "content8": "Mit dem Absenden der Bewerbung bestätige ich, die deutsche, oder die deutsche und eine weitere Staatsangehörigkeit zu besitzen.",
+      "content9": "Nicht mit 'optional' markierte Felder sind Pflichtfelder.",
+      "links": {
+        "datenschutz": "Hinweise zum Datenschutz",
+        "elektronischeKommunikation": "Weitere Informationen zur elektronischen Kommunikation finden sie hier"
+      }
+    }
+  },
+  "ehrenamtJustizOnlineService": {
+    "fehlermeldungen": {
+      "default": "Ein unbekannter Fehler ist aufgetreten, bitte den Administrator informieren.",
+      "http404": "Dieser Datensatz wurde nicht gefunden.",
+      "http409": "Dieser Datensatz kann nicht gelöscht werden, da er von anderen Teilen des Programms noch benötigt wird.",
+      "http500": "Interner Serverfehler. Es können keine Daten ermittelt werden.",
+      "fehlerBeiMethodeGetAktiveKonfiguration": "Fehler beim Aufruf der Methode 'GetAktiveKonfiguration'",
+      "fehlerBeiMethodeBewerbungSpeichern": "Fehler beim Aufruf der Methode 'BewerbungSpeichern'"
+    }
+  }
+}

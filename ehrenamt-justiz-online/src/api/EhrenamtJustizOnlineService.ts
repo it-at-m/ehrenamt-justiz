@@ -6,8 +6,7 @@ import { API_BASE } from "@/Constants";
 import HttpMethod from "@/types/base/HttpMethod";
 import { ApiError, Levels } from "./error";
 
-const DEFAULT_ERROR_MESSAGE =
-  "Ein unbekannter Fehler ist aufgetreten, bitte den Administrator informieren.";
+let t: (key: string) => string;
 
 const ALL_HTTP_METHODS = [
   HttpMethod.GET,
@@ -23,26 +22,31 @@ interface ErrorMessageDefinition {
   message: string;
 }
 
-const ERROR_MESSAGES: ErrorMessageDefinition[] = [
-  {
-    methods: ALL_HTTP_METHODS,
-    statusCode: 404,
-    message: "Dieser Datensatz wurde nicht gefunden.",
-  },
-  {
-    methods: [HttpMethod.DELETE],
-    statusCode: 409,
-    message:
-      "Dieser Datensatz kann nicht gelöscht werden, da er von anderen Teilen des Programms noch benötigt wird.",
-  },
-  {
-    methods: [HttpMethod.POST],
-    statusCode: 500,
-    message: "Interner Serverfehler. Es können keine Daten ermittelt werden.",
-  },
-];
+export class EhrenamtJustizOnlineServiceClass {
+  constructor(tc: (key: string) => string) {
+    t = tc;
+  }
 
-class EhrenamtJustizOnlineServiceClass {
+  private static ERROR_MESSAGES: (
+    t: (key: string) => string
+  ) => ErrorMessageDefinition[] = (t) => [
+    {
+      methods: ALL_HTTP_METHODS,
+      statusCode: 404,
+      message: t("ehrenamtJustizOnlineService.fehlermeldungen.http404"),
+    },
+    {
+      methods: [HttpMethod.DELETE],
+      statusCode: 409,
+      message: t("ehrenamtJustizOnlineService.fehlermeldungen.http409"),
+    },
+    {
+      methods: [HttpMethod.POST],
+      statusCode: 500,
+      message: t("ehrenamtJustizOnlineService.fehlermeldungen.http500"),
+    },
+  ];
+
   public static getBaseUrl(): string {
     return `${API_BASE}/public/backend`;
   }
@@ -62,7 +66,13 @@ class EhrenamtJustizOnlineServiceClass {
                 HttpMethod.GET,
                 res
               );
-              reject(new Error("Fehler bei getAktiveKonfiguration"));
+              reject(
+                new Error(
+                  t(
+                    "ehrenamtJustizOnlineService.fehlermeldungen.fehlerBeiMethodeGetAktiveKonfiguration"
+                  )
+                )
+              );
             })
             .catch((reason) =>
               reject(EhrenamtJustizOnlineServiceClass.handleError(reason))
@@ -92,7 +102,13 @@ class EhrenamtJustizOnlineServiceClass {
             HttpMethod.POST,
             res
           );
-          reject(new Error("Fehler bei bewerbungSpeichern"));
+          reject(
+            new Error(
+              t(
+                "ehrenamtJustizOnlineService.fehlermeldungen.fehlerBeiMethodeBewerbungSpeichern"
+              )
+            )
+          );
         })
         .catch((reason) =>
           reject(EhrenamtJustizOnlineServiceClass.handleError(reason))
@@ -104,30 +120,28 @@ class EhrenamtJustizOnlineServiceClass {
     httpMethod: HttpMethod,
     res: Response
   ): void {
-    for (const errorMessage of ERROR_MESSAGES) {
+    for (const errorMessage of EhrenamtJustizOnlineServiceClass.ERROR_MESSAGES(
+      t
+    )) {
       if (
         errorMessage.methods.includes(httpMethod) &&
         res.status == errorMessage.statusCode
       )
-        throw new ApiError({
-          level: Levels.ERROR,
-          message: errorMessage.message,
-        });
+        throw new ApiError(Levels.ERROR, errorMessage.message);
     }
-    throw new ApiError({
-      level: Levels.ERROR,
-      message: `${DEFAULT_ERROR_MESSAGE} - HTTP Status Code: ${res.status}`,
-    });
+    throw new ApiError(
+      Levels.ERROR,
+      `${t("ehrenamtJustizOnlineService.fehlermeldungen.default")} - HTTP Status Code: ${res.status}`
+    );
   }
 
   public static handleError(err: ApiError): Error {
     if (err.level !== undefined)
       // check for already existing ApiError
       return err;
-    return new ApiError({
-      message: DEFAULT_ERROR_MESSAGE,
-    });
+    return new ApiError(
+      Levels.ERROR,
+      t("ehrenamtJustizOnlineService.fehlermeldungen.default")
+    );
   }
 }
-export const EhrenamtJustizOnlineService =
-  new EhrenamtJustizOnlineServiceClass();
