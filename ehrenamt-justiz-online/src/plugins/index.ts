@@ -5,5 +5,5 @@ import pinia from "./pinia";
 import vuetify from "./vuetify";
 
 export function registerPlugins(app: App) {
-  app.use(vuetify).use(pinia).use(i18n);
+  app.use(i18n).use(vuetify).use(pinia);
 }
