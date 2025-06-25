@@ -1,5 +1,5 @@
 /**
- * Liefert eine default GET-Config für fetch
+ * Returns a default GET-Config for fetch
  */
 export function getGETConfig(): RequestInit {
   const requestMethod = "GET";
@@ -12,8 +12,8 @@ export function getGETConfig(): RequestInit {
 }
 
 /**
- * Liefert eine default POST-Config für fetch
- * @param body Optional zu übertragender Body
+ * Returns a default POST-Config for fetch
+ * @param body Optional body to be transferred
  */
 // eslint-disable-next-line
 export function getPOSTConfig(body: any): RequestInit {
@@ -29,7 +29,7 @@ export function getPOSTConfig(body: any): RequestInit {
 }
 
 /**
- *  Baut den Header fuer den Request auf
+ *  Builds the header for the request
  * @returns {Headers}
  */
 export function getHeaders(requestMethod = "GET"): Headers {
@@ -45,7 +45,7 @@ export function getHeaders(requestMethod = "GET"): Headers {
 }
 
 /**
- * Liefert den XSRF-TOKEN zurück.
+ * Returns the XSRF-TOKEN.
  * @returns {string|string}
  */
 function _getXSRFToken(): string {

@@ -42,7 +42,7 @@ export default defineConfigWithVueTs(
           src: "./src",
           extensions: [".ts", ".vue"],
           ignores: [
-            // These keys are used in EhrenamtJustizOnlineService.ts and cannot be detected by static analysis:
+            // These keys are used in EhrenamtJustizOnlineService.ts dynamically and cannot be detected by static analysis:
             "ehrenamtJustizOnlineService.fehlermeldungen.default",
             "ehrenamtJustizOnlineService.fehlermeldungen.http404",
             "ehrenamtJustizOnlineService.fehlermeldungen.http409",

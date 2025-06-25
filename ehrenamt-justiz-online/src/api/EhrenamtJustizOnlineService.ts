@@ -23,8 +23,8 @@ interface ErrorMessageDefinition {
 }
 
 export class EhrenamtJustizOnlineServiceClass {
-  constructor(tc: (key: string) => string) {
-    t = tc;
+  constructor(messageTranslation: (key: string) => string) {
+    t = messageTranslation;
   }
 
   private static ERROR_MESSAGES: (
@@ -51,6 +51,10 @@ export class EhrenamtJustizOnlineServiceClass {
     return `${API_BASE}/public/backend`;
   }
 
+  /**
+   * Determines the active configuration
+   * @returns Promise<KonfigurationData>
+   */
   public getAktiveKonfiguration(): Promise<KonfigurationData> {
     return new Promise((resolve, reject) => {
       fetch(
@@ -84,6 +88,11 @@ export class EhrenamtJustizOnlineServiceClass {
     });
   }
 
+  /**
+   * Saves an online application in the database
+   * @returns Promise<KonfigurationData>
+   * @param onlineBewerbungFormData
+   */
   public async bewerbungSpeichern(
     onlineBewerbungFormData: OnlineBewerbungData
   ): Promise<string> {
@@ -116,6 +125,12 @@ export class EhrenamtJustizOnlineServiceClass {
     });
   }
 
+  /**
+   * Handles errors such as http 500
+   * @returns void
+   * @param httpMethod
+   * @param res
+   */
   public static handleWrongResponse(
     httpMethod: HttpMethod,
     res: Response
@@ -135,6 +150,11 @@ export class EhrenamtJustizOnlineServiceClass {
     );
   }
 
+  /**
+   * Handles errors
+   * @returns Error
+   * @param err
+   */
   public static handleError(err: ApiError): Error {
     if (err.level !== undefined)
       // check for already existing ApiError

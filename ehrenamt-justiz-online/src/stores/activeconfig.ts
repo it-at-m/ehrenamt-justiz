@@ -7,6 +7,9 @@ export interface ActiveKonfigurationState {
   konfiguration: KonfigurationData | null;
 }
 
+/**
+ * activeconfig is a store in which the active configuration is saved. The active configuration is defined in the core application.
+ */
 export const useActiveKonfigurationStore = defineStore("activeconfig", () => {
   const konfiguration = ref<KonfigurationData | null>(null);
 
