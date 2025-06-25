@@ -36,7 +36,21 @@ export default defineConfigWithVueTs(
       "@intlify/vue-i18n/no-duplicate-keys-in-locale": ["error"],
       "@intlify/vue-i18n/no-missing-keys-in-other-locales": ["error"],
       "@intlify/vue-i18n/no-unknown-locale": ["error"],
-      "@intlify/vue-i18n/no-unused-keys": ["error"],
+      "@intlify/vue-i18n/no-unused-keys": ["error",
+        {
+          src: "./src",
+          extensions: [".ts", ".vue"],
+          ignores: [
+            // These keys are used in EhrenamtJustizOnlineService.ts and cannot be detected by static analysis:
+            "ehrenamtJustizOnlineService.fehlermeldungen.default",
+            "ehrenamtJustizOnlineService.fehlermeldungen.http404",
+            "ehrenamtJustizOnlineService.fehlermeldungen.http409",
+            "ehrenamtJustizOnlineService.fehlermeldungen.http500",
+            "ehrenamtJustizOnlineService.fehlermeldungen.fehlerBeiMethodeGetAktiveKonfiguration",
+            "ehrenamtJustizOnlineService.fehlermeldungen.fehlerBeiMethodeBewerbungSpeichern",
+          ],
+        },
+      ],
     },
     settings: {
       "vue-i18n": {
