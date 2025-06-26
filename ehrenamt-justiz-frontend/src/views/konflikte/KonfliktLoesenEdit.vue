@@ -18,6 +18,7 @@
 import type KonfliktLoesenFormData from "@/types/KonfliktLoesenFormData";
 
 import { onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import { VContainer, VProgressLinear } from "vuetify/components";
 
@@ -30,7 +31,7 @@ import { useSnackbarStore } from "@/stores/snackbar";
 const route = useRoute();
 const router = useRouter();
 const snackbarStore = useSnackbarStore();
-
+const { t } = useI18n();
 const konfliktLoesenFormData = ref<KonfliktLoesenFormData>({
   person_familienname: "",
   person_geburtsname: "",
@@ -229,14 +230,14 @@ async function loadPerson(): Promise<void> {
         })
         .catch(() => {
           snackbarStore.showMessage({
-            message:
-              "Für die Person " +
-              personenDaten.vorname +
-              " " +
-              personenDaten.familienname +
-              " mit OM " +
-              personenDaten.ewoid +
-              " wurden keine Daten in EWO gefunden, Womöglich ist diese verzogen oder verstorben. Bitte prüfen Sie dies im Einwohnermeldesystem.",
+            message: t(
+              "views.konflikteLoesenEdit.messages.fuerOMKeineEwoDaten",
+              {
+                vorname: personenDaten.vorname,
+                familienname: personenDaten.familienname,
+                om: personenDaten.ewoid,
+              }
+            ),
             level: STATUS_INDICATORS.ERROR,
           });
           router.push({

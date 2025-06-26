@@ -9,7 +9,7 @@
     >
       <v-row>
         <v-col>
-          <p>Alle mit Sternchen* gekennzeichneten Felder sind Pflichtfelder.</p>
+          <p>{{ t("components.konfigurationForm.hint") }}</p>
         </v-col>
         <v-col class="text-right">
           <v-btn
@@ -18,14 +18,14 @@
             :to="{ name: 'konfiguration.index' }"
             class="ml-auto"
           >
-            Abbrechen
+            {{ t("components.konfigurationForm.buttons.abbrechen") }}
           </v-btn>
           <v-btn
             v-if="konfiguration.action == BEARBEIGUNGS_MODUS.EDIT_MODUS"
             color="accent"
             @click="felderLeeren"
           >
-            Felder leeren
+            {{ t("components.konfigurationForm.buttons.felderLeeren") }}
           </v-btn>
           <v-btn
             v-if="konfiguration.action == BEARBEIGUNGS_MODUS.EDIT_MODUS"
@@ -33,7 +33,7 @@
             :loading="isAnimation"
             @click="speichern"
           >
-            Speichern
+            {{ t("components.konfigurationForm.buttons.speichern") }}
           </v-btn>
         </v-col>
       </v-row>
@@ -41,8 +41,8 @@
         <v-col class="col">
           <v-select
             v-model="konfiguration.ehrenamtjustizart"
-            :items="ehrenamtJusitzArt"
-            label="Art Ehrenamtjusitz*"
+            :items="ehrenamtJustizArt"
+            :label="t('components.konfigurationForm.artEhrenamtJustiz')"
             persistent-placeholder
             :rules="[rules.RULE_REQUIRED]"
             density="compact"
@@ -53,7 +53,7 @@
         <v-col class="col">
           <v-text-field
             v-model="konfiguration.bezeichnung"
-            label="Bezeichnung"
+            :label="t('components.konfigurationForm.bezeichnung')"
             persistent-placeholder
             maxlength="255"
             density="compact"
@@ -69,7 +69,7 @@
           <v-text-field
             v-model="konfiguration.amtsperiodevon"
             :rules="[rules.RULE_REQUIRED]"
-            label="Amtsperiode Von*"
+            :label="t('components.konfigurationForm.amtsperiodeVon')"
             persistent-placeholder
             type="date"
             density="compact"
@@ -83,7 +83,7 @@
           <v-text-field
             v-model="konfiguration.amtsperiodebis"
             :rules="[rules.RULE_REQUIRED]"
-            label="Amtsperiode Bis*"
+            :label="t('components.konfigurationForm.amtsperiodeBis')"
             persistent-placeholder
             type="date"
             density="compact"
@@ -98,7 +98,8 @@
         >
           <v-text-field
             v-model="konfiguration.altervon"
-            label="Mindestalter"
+            :rules="[rules.RULE_REQUIRED]"
+            :label="t('components.konfigurationForm.mindestalter')"
             persistent-placeholder
             density="compact"
             variant="outlined"
@@ -110,7 +111,8 @@
         >
           <v-text-field
             v-model="konfiguration.alterbis"
-            label="Höchstalter"
+            :rules="[rules.RULE_REQUIRED]"
+            :label="t('components.konfigurationForm.hoechstalter')"
             persistent-placeholder
             density="compact"
             variant="outlined"
@@ -122,7 +124,7 @@
           <v-text-field
             v-model="konfiguration.staatsangehoerigkeit"
             :rules="[rules.RULE_REQUIRED]"
-            label="Staatsangehörigkeit*"
+            :label="t('components.konfigurationForm.staatsangehoerigkeit')"
             persistent-placeholder
             density="compact"
             variant="outlined"
@@ -134,7 +136,7 @@
           <v-text-field
             v-model="konfiguration.wohnsitz"
             :rules="[rules.RULE_REQUIRED]"
-            label="Wohnsitz*"
+            :label="t('components.konfigurationForm.wohnsitz')"
             persistent-placeholder
             maxlength="255"
             density="compact"
@@ -150,6 +152,7 @@
 import type KonfigurationFormData from "@/types/KonfigurationFormData";
 
 import { computed, createApp, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import {
   VBtn,
   VCol,
@@ -181,7 +184,8 @@ const form = ref<(typeof myV3App & { validate: () => void }) | null>(null);
 
 const formValid = ref(false);
 
-const ehrenamtJusitzArt: string[] = ["VERWALTUNGSRICHTER", "SCHOEFFEN"];
+const ehrenamtJustizArt: string[] = ["VERWALTUNGSRICHTER", "SCHOEFFEN"];
+const { t } = useI18n();
 
 function felderLeeren(): void {
   konfiguration.value.ehrenamtjustizart = "";
@@ -198,8 +202,8 @@ function speichern(): void {
   form.value?.validate();
   if (!formValid.value) {
     snackbarStore.showMessage({
-      level: STATUS_INDICATORS.WARNING,
-      message: "Das Formular ist nicht richtig ausgefüllt.",
+      level: STATUS_INDICATORS.ERROR,
+      message: t("components.konfigurationForm.messages.fehler"),
       show: true,
     });
     return;

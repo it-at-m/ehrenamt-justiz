@@ -8,7 +8,7 @@
     >
       <template #headerPrefix
         ><div id="headerOnlineBewerbung">
-          <h2>Schöffen Onlinebewerbung</h2>
+          <h2>{{ t("mainView.header") }}</h2>
           <logo-l-h-m />
         </div>
       </template>
@@ -16,12 +16,11 @@
         <div ref="hinweise">
           <muc-banner
             v-if="bewerbunggespeichertergebbnis == 'OK'"
-            title="Erfolgreich übertragen"
+            :title="t('mainView.hinweise.ok.title')"
             type="success"
           >
             <div>
-              Die Bewerbung wurde erfolgreich übertragen. Sie erhalten von uns
-              eine Nachricht, sobald Ihre Angaben überprüft wurden.
+              {{ t("mainView.hinweise.ok.text") }}
             </div>
           </muc-banner>
           <muc-banner
@@ -29,10 +28,7 @@
             type="emergency"
           >
             <div>
-              Bei der Übertragung der Bewerbung ist ein Fehler aufgetreten.
-              Bitte überprüfen Sie Ihre Angaben und setzen sich ggf. mit dem
-              Bürgerbüro während der Öffnungszeiten unter Telefon 089/233-44443
-              in Verbindung.
+              {{ t("mainView.hinweise.error.text") }}
             </div>
           </muc-banner>
           <muc-banner
@@ -40,29 +36,32 @@
             type="emergency"
           >
             <div>
-              Sie haben zu viele Fehlversuche produziert. Bitte versuchen Sie es
-              zu einem späteren Zeitpunkt erneut.
+              {{ t("mainView.hinweise.toManyRequests.text") }}
             </div>
           </muc-banner>
           <muc-banner
             v-if="bewerbunggespeichertergebbnis == 'EINGABEFEHLER'"
             type="emergency"
           >
-            <div>Das Formular ist nicht richtig ausgefüllt.</div>
+            <div>{{ t("mainView.hinweise.eingabeFehler.text") }}</div>
           </muc-banner>
           <muc-banner
             v-if="technischerfehler != ''"
             type="emergency"
           >
-            <div>Technischer Fehler: {{ technischerfehler }}</div>
+            <div>
+              {{
+                t("mainView.hinweise.technischerFehler.text", {
+                  cause: technischerfehler,
+                })
+              }}
+            </div>
           </muc-banner>
         </div>
         <v-container class="v-card-main-container">
           <muc-callout type="info">
             <template #content>
-              Auf dieser Seite haben Sie die Möglichkeit sich über das unten
-              stehende Formular als Schöffe zu bewerben. Zusätzliche Infos zum
-              Amt und den Aufgaben eines Schöffen finden Sie
+              {{ t("mainView.info") }}
               <muc-link
                 label="hier"
                 href="https://stadt.muenchen.de/service/info/hauptabteilung-ii-buergerangelegenheiten/1080614/"
@@ -78,8 +77,8 @@
               <v-row dense>
                 <muc-input
                   v-model="onlineBewerbungFormData.vorname"
-                  placeholder="Vorname"
-                  label="Vorname"
+                  :placeholder="t('mainView.form.vorname.label')"
+                  :label="t('mainView.form.vorname.label')"
                   :required="true"
                   :error-msg="errorMsgVorname"
                   max="255"
@@ -88,8 +87,8 @@
               <v-row dense>
                 <muc-input
                   v-model="onlineBewerbungFormData.nachname"
-                  placeholder="Nachname"
-                  label="Nachname"
+                  :placeholder="t('mainView.form.nachname.label')"
+                  :label="t('mainView.form.nachname.label')"
                   :required="true"
                   :error-msg="errorMsgNachname"
                   max="300"
@@ -98,8 +97,8 @@
               <v-row dense>
                 <muc-input
                   v-model="onlineBewerbungFormData.geburtsdatum"
-                  placeholder="Geburtsdatum"
-                  label="Geburtsdatum"
+                  :placeholder="t('mainView.form.geburtsdatum.label')"
+                  :label="t('mainView.form.geburtsdatum.label')"
                   :required="true"
                   type="date"
                   :error-msg="errorMsgGeburtsdatum"
@@ -109,8 +108,8 @@
               <v-row dense>
                 <muc-input
                   v-model="onlineBewerbungFormData.beruf"
-                  placeholder="Beruf"
-                  label="Beruf"
+                  :placeholder="t('mainView.form.beruf.label')"
+                  :label="t('mainView.form.beruf.label')"
                   :required="true"
                   :error-msg="errorMsgBeruf"
                   max="255"
@@ -119,8 +118,8 @@
               <v-row dense>
                 <muc-input
                   v-model="onlineBewerbungFormData.telefonnummer"
-                  placeholder="Telefonnummer"
-                  label="Telefonnummer"
+                  :placeholder="t('mainView.form.telefonnummer.label')"
+                  :label="t('mainView.form.telefonnummer.label')"
                   :error-msg="errorMsgTelefonnummer"
                   max="255"
                 />
@@ -128,8 +127,8 @@
               <v-row dense>
                 <muc-input
                   v-model="onlineBewerbungFormData.mail"
-                  placeholder="Mail-Adresse"
-                  label="Mail"
+                  :placeholder="t('mainView.form.mail.placeholder')"
+                  :label="t('mainView.form.mail.label')"
                   :required="true"
                   :error-msg="errorMsgMail"
                   max="150"
@@ -149,7 +148,8 @@
               <muc-button
                 variant="primary"
                 @click="speichern()"
-                >bewerben
+              >
+                {{ t("mainView.buttons.bewerben") }}
                 <svg class="m-button__icon">
                   <use xlink:href="#icon-floppy"></use>
                 </svg>
@@ -165,7 +165,7 @@
               <muc-button
                 variant="secondary"
                 @click="clearInputs()"
-                >leeren
+                >{{ t("mainView.buttons.leeren") }}
                 <svg class="m-button__icon">
                   <use xlink:href="#icon-close"></use>
                 </svg>
@@ -185,41 +185,39 @@
             </v-col>
           </v-row>
           <muc-callout type="info">
-            <template #header>Datenschutzerklärung</template>
+            <template #header>{{
+              t("mainView.datenschutzErklaerung.header")
+            }}</template>
             <template #content>
-              Bewerbung für das Schöffenamt<br /><br />
-              Die personenbezogenen Daten, die Sie im Rahmen Ihrer Bewerbung für
-              das Schöffenamt an uns übermitteln, werden nur zum Zwecke der
-              Bewerbung als Schöffin, bzw. Schöffe gespeichert. Rechtsgrundlage
-              für die Verarbeitung ist das Gerichtsverfassungsgesetz,
-              insbesondere § 36 bis § 38 GVG. Die Daten erheben wir nur im
-              notwendigen Umfang.<br /><br />
-              Ihre Daten werden verschlüsselt an das Kreisverwaltungsreferat,
-              Hauptabteilung II, Einwohnerwesen – Bürgerbüro, Abteilung II/212
-              Auskünfte/Sperren der Landeshauptstadt München übermittelt. Ihre
-              Daten werden geprüft und - bei erfolgter Aufnahme in die
-              Vorschlagsliste und Zustimmung des Stadtrates der Landeshauptstadt
-              München - an das für die Wahl der Schöffinnen bzw. Schöffen
-              zuständige Amtsgericht München weitergegeben.<br />
-              Die Daten werden für die Dauer einer Schöffenperiode beim
-              Kreisverwaltungsreferat der Landeshauptstadt München aufbewahrt
-              und anschließend gelöscht.<br />
-              Durch Ihre weitere Nutzung erklären Sie sich damit
-              einverstanden.<br /><br />
-              Bitte beachten Sie auch die
+              {{ t("mainView.datenschutzErklaerung.content1") }}
+              <br /><br />
+              {{ t("mainView.datenschutzErklaerung.content2") }}
+              <br /><br />
+              {{ t("mainView.datenschutzErklaerung.content3") }}
+              <br />
+              {{ t("mainView.datenschutzErklaerung.content4") }}
+              <br />
+              {{ t("mainView.datenschutzErklaerung.content5") }}
+              <br /><br />
+              {{ t("mainView.datenschutzErklaerung.content6") }}
               <muc-link
-                label="Hinweise zum Datenschutz"
+                :label="t('mainView.datenschutzErklaerung.links.datenschutz')"
                 href="https://stadt.muenchen.de/infos/impressum-datenschutz.html#datenschutz"
               />
-              im Impressum der Landeshauptstadt München.<br /><br />
+              {{ t("mainView.datenschutzErklaerung.content7") }}
+              <br /><br />
               <muc-link
-                label="Weitere Informationen zur elektronischen Kommunikation finden sie hier"
+                :label="
+                  t(
+                    'mainView.datenschutzErklaerung.links.elektronischeKommunikation'
+                  )
+                "
                 href="https://stadt.muenchen.de/infos/elektronische-kommunikation.html"
               />
               <br /><br />
-              Mit dem Absenden der Bewerbung bestätige ich, die deutsche, oder
-              die deutsche und eine weitere Staatsangehörigkeit zu besitzen<br /><br />
-              Nicht mit 'optional' markierte Felder sind Pflichtfelder.
+              {{ t("mainView.datenschutzErklaerung.content8") }}
+              <br /><br />
+              {{ t("mainView.datenschutzErklaerung.content9") }}
             </template>
           </muc-callout>
         </v-container>
@@ -248,14 +246,17 @@ import {
 } from "@muenchen/muc-patternlab-vue";
 import moment from "moment/moment";
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { VCol, VContainer, VForm, VRow } from "vuetify/components";
 
-import { EhrenamtJustizOnlineService } from "@/api/EhrenamtJustizOnlineService";
+import { EhrenamtJustizOnlineServiceClass } from "@/api/EhrenamtJustizOnlineService";
 import LogoLHM from "@/components/LogoLHM.vue";
 import MuenchenBanner from "@/components/MuenchenBanner.vue";
 import { useActiveKonfigurationStore } from "@/stores/activeconfig";
 
 const form = ref();
+const { t } = useI18n();
+const ehrenamtJustizOnlineService = new EhrenamtJustizOnlineServiceClass(t);
 const hinweise = ref<HTMLInputElement | null>(null);
 const isSavingAnimation = ref(false);
 const bewerbunggespeichertergebbnis = ref("");
@@ -290,14 +291,15 @@ function speichern(): void {
     }
   } else {
     isSavingAnimation.value = true;
-    EhrenamtJustizOnlineService.bewerbungSpeichern({
-      vorname: onlineBewerbungFormData.value.vorname,
-      nachname: onlineBewerbungFormData.value.nachname,
-      geburtsdatum: onlineBewerbungFormData.value.geburtsdatum,
-      telefonnummer: onlineBewerbungFormData.value.telefonnummer,
-      beruf: onlineBewerbungFormData.value.beruf,
-      mail: onlineBewerbungFormData.value.mail,
-    })
+    ehrenamtJustizOnlineService
+      .bewerbungSpeichern({
+        vorname: onlineBewerbungFormData.value.vorname,
+        nachname: onlineBewerbungFormData.value.nachname,
+        geburtsdatum: onlineBewerbungFormData.value.geburtsdatum,
+        telefonnummer: onlineBewerbungFormData.value.telefonnummer,
+        beruf: onlineBewerbungFormData.value.beruf,
+        mail: onlineBewerbungFormData.value.mail,
+      })
       .then((bewerbunggespeichert) => {
         bewerbunggespeichertergebbnis.value = bewerbunggespeichert;
         technischerfehler.value = "";
@@ -337,10 +339,10 @@ function validateVorname(isValid: boolean) {
   // Vorname ist ein Pflichtfeld
   errorMsgVorname.value = "";
   if (!onlineBewerbungFormData.value.vorname) {
-    errorMsgVorname.value = "Vorname ist ein Pflichtfeld!";
+    errorMsgVorname.value = t("mainView.form.vorname.pflichtfeld");
     isValid = false;
   } else if (onlineBewerbungFormData.value.vorname.length > 255) {
-    errorMsgVorname.value = "Vorname darf maximal 255 Zeichen lang sein!";
+    errorMsgVorname.value = t("mainView.form.vorname.maxLaenge");
     isValid = false;
   }
   return isValid;
@@ -350,10 +352,10 @@ function validateNachname(isValid: boolean) {
   // Nachname ist ein Pflichtfeld
   errorMsgNachname.value = "";
   if (!onlineBewerbungFormData.value.nachname) {
-    errorMsgNachname.value = "Nachname ist ein Pflichtfeld!";
+    errorMsgNachname.value = t("mainView.form.nachname.pflichtfeld");
     isValid = false;
   } else if (onlineBewerbungFormData.value.nachname.length > 300) {
-    errorMsgNachname.value = "Nachname darf maximal 300 Zeichen lang sein!";
+    errorMsgNachname.value = t("mainView.form.nachname.maxLaenge");
     isValid = false;
   }
   return isValid;
@@ -363,7 +365,7 @@ function validateGeburtsdatum(isValid: boolean) {
   // Geburtsdatum ist ein Pflichtfeld und Alter prüfen
   errorMsgGeburtsdatum.value = "";
   if (!onlineBewerbungFormData.value.geburtsdatum) {
-    errorMsgGeburtsdatum.value = "Geburtsdatum ist ein Pflichtfeld!";
+    errorMsgGeburtsdatum.value = t("mainView.form.geburtsdatum.pflichtfeld");
     isValid = false;
   } else {
     const alter = moment(
@@ -374,12 +376,10 @@ function validateGeburtsdatum(isValid: boolean) {
     const alterbis = useActiveKonfigurationStore().getKonfiguration?.alterbis;
     if ((alterbis && alter > alterbis) || (altervon && alter < altervon)) {
       isValid = false;
-      errorMsgGeburtsdatum.value =
-        "Das Alter muss zwischen " +
-        altervon +
-        " und " +
-        alterbis +
-        " Jahren liegen.";
+      errorMsgGeburtsdatum.value = t("mainView.form.geburtsdatum.invalide", {
+        altervon: altervon,
+        alterbis: alterbis,
+      });
     }
   }
   return isValid;
@@ -389,10 +389,10 @@ function validateBeruf(isValid: boolean) {
   // Beruf ist ein Pflichtfeld
   errorMsgBeruf.value = "";
   if (!onlineBewerbungFormData.value.beruf) {
-    errorMsgBeruf.value = "Beruf ist ein Pflichtfeld!";
+    errorMsgBeruf.value = t("mainView.form.beruf.pflichtfeld");
     isValid = false;
   } else if (onlineBewerbungFormData.value.beruf.length > 255) {
-    errorMsgBeruf.value = "Beruf darf maximal 255 Zeichen lang sein!";
+    errorMsgBeruf.value = t("mainView.form.beruf.maxLaenge");
     isValid = false;
   }
   return isValid;
@@ -406,7 +406,7 @@ function validateTelefonnummer(isValid: boolean) {
     onlineBewerbungFormData.value.telefonnummer &&
     !REGEXP_TELEFON.test(onlineBewerbungFormData.value.telefonnummer)
   ) {
-    errorMsgTelefonnummer.value = "Valide Telefonnummer eingeben!";
+    errorMsgTelefonnummer.value = t("mainView.form.telefonnummer.invalide");
     isValid = false;
   }
   return isValid;
@@ -416,10 +416,10 @@ function validateMail(isValid: boolean) {
   // Mail ist ein Pflichtfeld und Format prüfen
   errorMsgMail.value = "";
   if (!onlineBewerbungFormData.value.mail) {
-    errorMsgMail.value = "Mail ist ein Pflichtfeld!";
+    errorMsgMail.value = t("mainView.form.mail.pflichtfeld");
     isValid = false;
   } else if (!REGEX_MAIL.test(onlineBewerbungFormData.value.mail)) {
-    errorMsgMail.value = "Valide Mail eingeben!";
+    errorMsgMail.value = t("mainView.form.mail.invalide");
     isValid = false;
   }
   return isValid;

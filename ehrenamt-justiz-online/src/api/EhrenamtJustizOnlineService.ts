@@ -6,9 +6,6 @@ import { API_BASE } from "@/Constants";
 import HttpMethod from "@/types/base/HttpMethod";
 import { ApiError, Levels } from "./error";
 
-const DEFAULT_ERROR_MESSAGE =
-  "Ein unbekannter Fehler ist aufgetreten, bitte den Administrator informieren.";
-
 const ALL_HTTP_METHODS = [
   HttpMethod.GET,
   HttpMethod.POST,
@@ -23,30 +20,41 @@ interface ErrorMessageDefinition {
   message: string;
 }
 
-const ERROR_MESSAGES: ErrorMessageDefinition[] = [
-  {
-    methods: ALL_HTTP_METHODS,
-    statusCode: 404,
-    message: "Dieser Datensatz wurde nicht gefunden.",
-  },
-  {
-    methods: [HttpMethod.DELETE],
-    statusCode: 409,
-    message:
-      "Dieser Datensatz kann nicht gelöscht werden, da er von anderen Teilen des Programms noch benötigt wird.",
-  },
-  {
-    methods: [HttpMethod.POST],
-    statusCode: 500,
-    message: "Interner Serverfehler. Es können keine Daten ermittelt werden.",
-  },
-];
+export class EhrenamtJustizOnlineServiceClass {
+  private t: (key: string) => string;
 
-class EhrenamtJustizOnlineServiceClass {
+  constructor(t: (key: string) => string) {
+    this.t = t;
+  }
+
+  private getErrorMessages(): ErrorMessageDefinition[] {
+    return [
+      {
+        methods: ALL_HTTP_METHODS,
+        statusCode: 404,
+        message: this.t("ehrenamtJustizOnlineService.fehlermeldungen.http404"),
+      },
+      {
+        methods: [HttpMethod.DELETE],
+        statusCode: 409,
+        message: this.t("ehrenamtJustizOnlineService.fehlermeldungen.http409"),
+      },
+      {
+        methods: [HttpMethod.POST],
+        statusCode: 500,
+        message: this.t("ehrenamtJustizOnlineService.fehlermeldungen.http500"),
+      },
+    ];
+  }
+
   public static getBaseUrl(): string {
     return `${API_BASE}/public/backend`;
   }
 
+  /**
+   * Determines the active configuration
+   * @returns Promise<KonfigurationData>
+   */
   public getAktiveKonfiguration(): Promise<KonfigurationData> {
     return new Promise((resolve, reject) => {
       fetch(
@@ -58,22 +66,27 @@ class EhrenamtJustizOnlineServiceClass {
             .json()
             .then((createdInstance) => {
               if (res.ok) return resolve(createdInstance);
-              EhrenamtJustizOnlineServiceClass.handleWrongResponse(
-                HttpMethod.GET,
-                res
+              this.handleWrongResponse(HttpMethod.GET, res);
+              reject(
+                new ApiError(
+                  Levels.ERROR,
+                  this.t(
+                    "ehrenamtJustizOnlineService.fehlermeldungen.fehlerBeiMethodeGetAktiveKonfiguration"
+                  )
+                )
               );
-              reject(new Error("Fehler bei getAktiveKonfiguration"));
             })
-            .catch((reason) =>
-              reject(EhrenamtJustizOnlineServiceClass.handleError(reason))
-            );
+            .catch((reason) => reject(this.handleError(reason)));
         })
-        .catch((reason) =>
-          reject(EhrenamtJustizOnlineServiceClass.handleError(reason))
-        );
+        .catch((reason) => reject(this.handleError(reason)));
     });
   }
 
+  /**
+   * Saves an online application in the database
+   * @returns Promise<KonfigurationData>
+   * @param onlineBewerbungFormData
+   */
   public async bewerbungSpeichern(
     onlineBewerbungFormData: OnlineBewerbungData
   ): Promise<string> {
@@ -88,46 +101,52 @@ class EhrenamtJustizOnlineServiceClass {
               resolve(createdInstance);
             });
           }
-          EhrenamtJustizOnlineServiceClass.handleWrongResponse(
-            HttpMethod.POST,
-            res
+          this.handleWrongResponse(HttpMethod.POST, res);
+          reject(
+            new ApiError(
+              Levels.ERROR,
+              this.t(
+                "ehrenamtJustizOnlineService.fehlermeldungen.fehlerBeiMethodeBewerbungSpeichern"
+              )
+            )
           );
-          reject(new Error("Fehler bei bewerbungSpeichern"));
         })
-        .catch((reason) =>
-          reject(EhrenamtJustizOnlineServiceClass.handleError(reason))
-        );
+        .catch((reason) => reject(this.handleError(reason)));
     });
   }
 
-  public static handleWrongResponse(
-    httpMethod: HttpMethod,
-    res: Response
-  ): void {
-    for (const errorMessage of ERROR_MESSAGES) {
+  /**
+   * Handles errors such as http 500
+   * @returns void
+   * @param httpMethod
+   * @param res
+   */
+  public handleWrongResponse(httpMethod: HttpMethod, res: Response): void {
+    for (const errorMessage of this.getErrorMessages()) {
       if (
         errorMessage.methods.includes(httpMethod) &&
         res.status == errorMessage.statusCode
       )
-        throw new ApiError({
-          level: Levels.ERROR,
-          message: errorMessage.message,
-        });
+        throw new ApiError(Levels.ERROR, errorMessage.message);
     }
-    throw new ApiError({
-      level: Levels.ERROR,
-      message: `${DEFAULT_ERROR_MESSAGE} - HTTP Status Code: ${res.status}`,
-    });
+    throw new ApiError(
+      Levels.ERROR,
+      `${this.t("ehrenamtJustizOnlineService.fehlermeldungen.default")} - HTTP Status Code: ${res.status}`
+    );
   }
 
-  public static handleError(err: ApiError): Error {
+  /**
+   * Handles errors
+   * @returns Error
+   * @param err
+   */
+  public handleError(err: ApiError): Error {
     if (err.level !== undefined)
       // check for already existing ApiError
       return err;
-    return new ApiError({
-      message: DEFAULT_ERROR_MESSAGE,
-    });
+    return new ApiError(
+      Levels.ERROR,
+      this.t("ehrenamtJustizOnlineService.fehlermeldungen.default")
+    );
   }
 }
-export const EhrenamtJustizOnlineService =
-  new EhrenamtJustizOnlineServiceClass();

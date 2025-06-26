@@ -1,3 +1,8 @@
+/**
+ * Interface for the data collected in the online application form.
+ *
+ * @interface OnlineBewerbungData
+ */
 export default interface OnlineBewerbungData {
   vorname: string;
   nachname: string;

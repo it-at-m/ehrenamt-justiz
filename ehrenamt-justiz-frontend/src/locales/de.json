@@ -1,0 +1,411 @@
+{
+  "general": {
+    "schoeffen": "Schöffe | Schöffen",
+    "ehrenamtlicheVerwaltungsrichter": "Ehrenamtlicher Verwaltungsrichter | Ehrenamtliche Verwaltungsrichter",
+    "listeIstLeer": "Liste ist leer",
+    "datenWerdenGeladen": "Daten werden geladen"
+  },
+  "composables": {
+    "saveLeave": {
+      "title": "Ungespeicherte Änderungen",
+      "text": "Es sind ungespeicherte Änderungen vorhanden. Wollen Sie die Seite verlassen?"
+    }
+  },
+  "app": {
+    "navigation": {
+      "getStarted": "Get started",
+      "bewerbungErstellen": "Bewerbung erstellen",
+      "bewerbungen": "Bewerbungen",
+      "konflikte": "Konflikte",
+      "vorschlaege": "Vorschläge",
+      "konfigurationen": "Konfigurationen"
+    },
+    "state": {
+      "gateway": "Status Gateway",
+      "backend": "Status Backend",
+      "eai": "Status EWO-EAI"
+    },
+    "onlineHelp": "Online-Hilfe",
+    "head": " KVR-",
+    "aktiveKonfigurationFehlt": "Aktive Konfiguration fehlt",
+    "keineAktiveKonfiguration": "Es konnte keine aktive Konfiguration gefunden werden! Bitte nur eine aktive Konfiguration anlegen und dann die Anwendung neu laden!"
+  },
+  "views": {
+    "getStartedView": {
+      "onlineHelp": "Hier finden Sie eine Übersicht über alle Bewerbungen, Konflikte und Vorschläge. Wenn neue Bewerber erfasst wurden, haben Sachbearbeiter, je nach Berechtigung, die Möglichkeit, die Daten zu exportieren oder diese als benachrichtigt zu markieren.",
+      "bewerbungen": "{count} Bewerbung | {count} Bewerbungen",
+      "konflikte": "{count} Konflikt | {count} Konflikte",
+      "vorschlaege": "{count} Vorschlag | {count} Vorschläge",
+      "neueVorschlaege": "{count} neuer Vorschlag | {count} neue Vorschläge",
+      "buttons": {
+        "datenHerunterladen": "Daten herunterladen",
+        "alsBenachrichtigtMarkieren": "Als benachrichtigt markieren"
+      },
+      "yesNoDialog": {
+        "dialogtitle": "Als benachrichtigt markieren",
+        "dialogtext": "Möchten Sie wirklich alle neuen Vorschläge als benachrichtigt markieren? Wenn Sie diese Aktion durchführen werden alle neuen Vorschläge als Benachrichtigt markiert. Ein erneutes Exportieren der Daten ist nur durch manuelles Selektieren möglich. Dies kann nicht Rückgängig gemacht werden."
+      }
+    },
+    "homeView": {
+      "welcome": "Willkommen bei Ehrenamt-Justiz",
+      "onlineHelp": "Willkommen bei der Anwendung, in der Sie Schöffen und ehrenamtliche Richter verwalten können.\nDie Anwendung besteht aus folgenden Bereichen:\n-------------------------------------------------------------------------------------------------------------------------------------------------------\nIm oberen Bereich:\n- 3 horizontale Linien: Menü links auf- und zuklappen\n- Ampel (rot oder grün) zeigt an, ob Gateway, Backend und EWO-EAI aktiv sind. Die Anwendung ist erst dann vollständig verfügbar wenn alle drei Ampeln grün anzeigen\n- Art der Ehrenamt-Justiz aus der aktiven Konfiguration: Schöffen oder ehrenamtliche Verwaltungsrichter\n- Bezeichnung aus der aktiven Konfiguration\n- Name des angemeldeten Users\n- ? um Onlinehilfe für das jeweilige Unterprogramm zu öffnen\n- App-Switcher um weitere Anwendungen zu starten\n-------------------------------------------------------------------------------------------------------------------------------------------------------\nIm linken Bereich:\n- Menü um Unterprogramme zu öffnen\n-------------------------------------------------------------------------------------------------------------------------------------------------------\nIm mittleren Bereich:\n- Bereich für die Unterprogramme, die über das Menü geöffnet werden können\n-------------------------------------------------------------------------------------------------------------------------------------------------------"
+    },
+    "konfigurationEdit": {
+      "onlineHelp": "Hier kann die aktuell selektierte Konfiguration bearbeitet werden. Eine Änderung der Konfiguration führt nicht zu einer automatischen Prüfung der bestehenden Bewerbungs- oder Vorschlagsliste.",
+      "header": "Konfiguration",
+      "aktiv": "aktiv",
+      "inAktiv": "inaktiv",
+      "bearbeiten": "bearbeiten",
+      "anzeigen": "anzeigen"
+    },
+    "konfigurationCreate": {
+      "onlineHelp": "Hier können Sie eine neue Konfiguration für die Verwaltung von Schöffen oder ehrenamtliche Richter erfassen. Nach der Erfassung einer Konfiguration muss auch eine Konfiguration aktiviert werden. Die Bewerber werden dann unter dieser aktiven Konfiguration gespeichert.",
+      "header": "Konfiguration erstellen"
+    },
+    "konfigurationIndex": {
+      "onlineHelp": "Hier sehen Sie die Übersicht der bereits erfassten Konfigurationen. Um Bewerbungen für Schöffen oder ehrenamtliche Verwaltungsrichter verwalten zu können, ist es erforderlich, eine Konfiguration zu erfassen und zu aktivieren. Die Bewerber werden dann unter dieser aktiven Konfiguration gespeichert. Eine aktive Konfiguration wird farblich hervorgehoben.",
+      "header": "Konfigurationen",
+      "createKonfiguration": "Neue Konfiguration"
+    },
+    "eWOBuergerCreate": {
+      "onlineHelp": "Willkommen zur Erfassung eines neuen Bewerbers! Um einen neuen Bewerber anzulegen, benötigen wir den Familiennamen, den Vornamen und das Geburtsdatum.\n\nBitte beachten Sie, dass ein Bewerber nur erfasst werden kann, wenn er im Einwohnermeldewesen vorhanden ist. Für den Familiennamen und Vornamen genügt es, die ersten drei Buchstaben einzugeben (mit einem '*' am Ende).\n\nSollten mehr als eine Person identifiziert werden, erhalten Sie eine Übersicht, in der die entsprechenden Personen angezeigt werden. Dort können Sie die gewünschte Person auswählen.",
+      "bereitsVorhandenMessage": "Ein Bürger mit dem Ordnungsmerkmal {ordnungsmerkmal} ist bereits als {status} im System vorhanden!",
+      "keinePersonGefundenMessage": "Keine Person im Einwohnermeldewesen gefunden!"
+    },
+    "bewerbungenIndex": {
+      "onlineHelp": "In dieser Ansicht finden Sie alle Bewerber, die entweder über den Menüpunkt 'Bewerbung erstellen' oder über die Online-Anwendung im Internet erfasst wurden.\n\nJe nach Ihren Berechtigungen können Sie hier folgende Aktionen durchführen: die Daten eines Bewerbers ändern, anzeigen oder löschen. Darüber hinaus haben Sie die Möglichkeit, Bewerber für die weitere Bearbeitung auf die Vorschlagsliste zu setzen oder sie als CSV-Datei zu speichern.",
+      "title": "Bewerbungsliste anzeigen"
+    },
+    "bewerbungEdit": {
+      "onlineHelp": "Hier haben Sie die Möglichkeit, die Daten eines Bewerbers zu bearbeiten und zu speichern.\n\nEs stehen zwei Registerkarten zur Verfügung: In der Registerkarte 'Aus EWO' finden Sie die beim Bewerber gespeicherten Daten aus dem Einwohnermeldewesen. In der Registerkarte 'Bewerber Zusatzangaben' können Sie die zusätzlichen Informationen des Bewerbers eingeben.\n\nBitte beachten Sie, dass die Daten eines Bewerbers nur gespeichert werden können, wenn Alter, Wohnort und Staatsangehörigkeit mit der Standardkonfiguration übereinstimmen. Falls Sie diese Prüfung vorübergehend ausschalten möchten, aktivieren Sie bitte die Checkbox 'Validierung deaktivieren', bevor Sie die Daten speichern."
+    },
+    "invalidePersonenSelect": {
+      "title": "Invalide Datensätze",
+      "text": "Folgende Datensätze entsprechen nicht den Vorgaben gemäß der aktiven Konfiguration",
+      "table": {
+        "itemsPerPageText": "Bewerber je Seite",
+        "familienname": "Familienname",
+        "vorname": "Vorname",
+        "geburtsdatum": "Geburtsdatum"
+      },
+      "buttons": {
+        "abbrechen": "Abbrechen",
+        "validierungUmgehen": "Validierung umgehen"
+      }
+    },
+    "konflikteLoesenEdit": {
+      "messages": {
+        "fuerOMKeineEwoDaten": "Für die Person {vorname} {familienname} mit OM {om} wurden keine Daten in EWO gefunden, Womöglich ist diese verzogen oder verstorben. Bitte prüfen Sie dies im Einwohnermeldesystem."
+      }
+    },
+    "vorschlaegeIndex": {
+      "onlineHelp": "Hier finden Sie die Vorschläge für Schöffen oder ehrenamtliche Richter am Verwaltungsgericht. Je nach Ihren Berechtigungen können Sie hier folgende Aktionen durchführen: Die vorgeschlagenen Bewerber ändern, anzeigen oder löschen. Darüber hinaus haben Sie die Möglichkeit, einen Vorschlag auf die Bewerberliste zu setzen oder sie als CSV-Datei zu speichern.",
+      "title": "Vorschläge anzeigen"
+    },
+    "konflikteIndex": {
+      "onlineHelp": "Hier erhalten Sie einen Überblick über die Bewerber für Schöffen oder ehrenamtliche Richter, die Konflikte aufweisen. Je nach Ihren Berechtigungen haben Sie die Möglichkeit, die Konfliktbearbeitung zu starten oder einen Bewerber zu löschen.",
+      "title": "Konflikte anzeigen"
+    },
+    "eWOBuergerSelect": {
+      "title": "Bewerbung erstellen",
+      "text": "Bitte wählen Sie den gewünschten Eintrag aus",
+      "buttons": {
+        "abbrechen": "Abbrechen"
+      },
+      "table": {
+        "actions": {
+          "title": "Auswählen",
+          "tooltip": "Auswählen und übernehmen"
+        },
+        "familienname": "Familienname",
+        "vorname": "Vorname",
+        "geburtsdatum": "Geburtsdatum",
+        "auskunftssperre": {
+          "title": "Auskunftssperre",
+          "content": "Auskunftssperre"
+        },
+        "bereitsErfasst": {
+          "title": "Bereits erfasst",
+          "contentYes": "Ja",
+          "contentNo": "Nein"
+        }
+      }
+    }
+  },
+  "components": {
+    "onlineHelpDialogComponent": {
+      "onlineHilfe": "Online-Hilfe"
+    },
+    "deleteDialog": {
+      "title": "Löschen?",
+      "text": "Soll(en) {descriptor} wirklich gelöscht werden?",
+      "textNoDescriptor": "Sollen die Daten wirklich gelöscht werden?",
+      "buttons": {
+        "abbrechen": "Abbrechen",
+        "loeschen": "Löschen"
+      }
+    },
+    "listItemActions": {
+      "anzeigen": "Anzeigen",
+      "bearbeiten": "Bearbeiten",
+      "loeschen": "Löschen"
+    },
+    "konfigurationList": {
+      "eintraegeInsgesamt": "{count} Eintrag insgesamt | {count} Einträge insgesamt",
+      "keineKonfigurationVorhanden": "Keine Konfiguration vorhanden"
+    },
+    "konfigurationListItem": {
+      "title": {
+        "amtsperiode": "/ Amtsperiode: ",
+        "aktiv": " / Aktiv: "
+      },
+      "subTitle": {
+        "staatsangehoerigkeit": "Staatsangehörigkeit: ",
+        "wohnsitz": " / Wohnsitz: ",
+        "alterVon": " / Alter von: ",
+        "alterBis": " bis "
+      },
+      "tooltip": {
+        "aktivSetzen": "Aktiv setzen"
+      }
+    },
+    "konfigurationForm": {
+      "hint": "Alle mit Sternchen* gekennzeichneten Felder sind Pflichtfelder",
+      "artEhrenamtJustiz": "Art Ehrenamtjustiz*",
+      "bezeichnung": "Bezeichnung",
+      "amtsperiodeVon": "Amtsperiode Von*",
+      "amtsperiodeBis": "Amtsperiode Bis*",
+      "mindestalter": "Mindestalter*",
+      "hoechstalter": "Höchstalter*",
+      "staatsangehoerigkeit": "Staatsangehörigkeit*",
+      "wohnsitz": "Wohnsitz*",
+      "messages": {
+        "fehler": "Das Formular ist nicht richtig ausgefüllt"
+      },
+      "buttons": {
+        "abbrechen": "Abbrechen",
+        "felderLeeren": "Felder leeren",
+        "speichern": "Speichern"
+      }
+    },
+    "eWOBuergerForm": {
+      "header": "Bewerbung erstellen",
+      "familienname": "Familienname*",
+      "vorname": "Vorname*",
+      "geburtsdatum": "Geburtsdatum*",
+      "validierungDeaktivieren": "Validierung deaktivieren (Altersprüfung)",
+      "hint": "Alle mit Sternchen* gekennzeichneten Felder sind Pflichtfelder. Wildcard '*' mit mindestens 3 führenden Zeichen.",
+      "buttons": {
+        "felderLeeren": "Felder leeren",
+        "inEWOSuchen": "In EWO suchen"
+      }
+    },
+    "bewerbungenTable": {
+      "suche": "Suche",
+      "table": {
+        "familienname": "Familienname",
+        "vorname": "Vorname",
+        "geburtsdatum": "Geburtsdatum",
+        "derzeitigerBeruf": "Derzeitiger Beruf",
+        "arbeitgeber": "Arbeitgeber",
+        "mailAdresse": "Mailadresse",
+        "ausgeuebteEhrenaemter": "Ausgeübte Ehrenämter",
+        "actions": {
+          "header": "Aktionen",
+          "bewerberAendern": "Bewerber ändern",
+          "bewerberAnzeigen": "Bewerber anzeigen"
+        },
+        "aufVorschlagslisteSetzen": {
+          "dialogtitle": "Auf Vorschlagsliste setzen",
+          "dialogtext": "Bestätigen Sie die Übernahme in die Vorschlagsliste von {count} Bewerbung | Bestätigen Sie die Übernahme in die Vorschlagsliste von {count} Bewerbungen",
+          "message": "Die Auswahl enthält invalide Personen. Bitte wenden Sie sich an einen Sondersachbearbeiter, der diese Validierung umgehen kann."
+        },
+        "delete": {
+          "dialogtext": "{count} Bewerber"
+        },
+        "itemsperpagetext": "Bewerber je Seite"
+      },
+      "buttons": {
+        "loeschen": "Löschen",
+        "zurVorschlagsliste": "Auf Vorschlagsliste setzen",
+        "datenHerunterladen": "Daten herunterladen"
+      }
+    },
+    "bewerbungForm": {
+      "header": {
+        "vorschlag": "Vorschlag",
+        "bewerbung": "Bewerbung",
+        "bearbeiten": "bearbeiten",
+        "anzeigen": "anzeigen",
+        "auskunftssperre": "Auskunftssperre",
+        "validierungDeaktivieren": "Validierung deaktivieren (Alter, Wohnort und Staatsangehörigkeit)"
+      },
+      "buttons": {
+        "abbrechen": "Abbrechen",
+        "felderLeeren": "Felder leeren",
+        "speichern": "Speichern"
+      },
+      "tabs": {
+        "ausEwo": "Aus EWO",
+        "bewerberZusatzangaben": "Bewerber Zusatzangaben"
+      },
+      "tabEwo": {
+        "vorname": "Vorname",
+        "familienname": "Familienname",
+        "geburtsdatum": "Geburtsdatum",
+        "geburtsname": "Geburtsname",
+        "geschlecht": "Geschlecht",
+        "ordnungsmerkmal": "Ordnungsmerkmal",
+        "akademischerGrad": "Akademischer Grad",
+        "geburtsOrt": "Geburtsort",
+        "geburtsLand": "Geburtsland",
+        "familienStand": "Familienstand",
+        "staatsangehoerigkeit": "Staatsangehörigkeit",
+        "konfliktfelder": "Konfliktfelder",
+        "wohnungsgeber": "Wohnungsgeber (c/o)",
+        "strasse": "Straße",
+        "hausnummer": "Hausnummer",
+        "buchstabeHausnummer": "Buchstabe Hausnummer",
+        "appartmentNummer": "Appartment-Nummer",
+        "stockwerk": "Stockwerk",
+        "teilnummerHausnummer": "Teilnummer Hausnummer",
+        "adressZusatz": "Adresszusatz",
+        "postleitzahl": "Postleitzahl",
+        "ort": "Ort",
+        "inMuenchenWohnhaftSeit": "In München wohnhaft seit",
+        "wohnungsstatus": "Wohnungsstatus"
+      },
+      "tabBewerberZusatzangaben": {
+        "derzeitigerBeruf": "Derzeitiger Beruf",
+        "arbeitgeber": "Arbeitgeber",
+        "ausgeuebteEhrenaemter": "Ausgeübte Ehrenämter",
+        "telefonnummerPrivat": "Telefonnummer (privat)",
+        "telefonnummerDienstlich": "Telefonnummer (dienstlich)",
+        "telefonnummerMobil": "Telefonnummer (mobil)",
+        "mailAdresse": "Mailadresse",
+        "bewerbungVom": "Bewerbung vom*",
+        "status": "Status*",
+        "warBereitsAlsVerwaltungsrichterTaetig": "War bereits als {artEhrenamtJustiz} tätig",
+        "warBereitsInVorperiodeAlsVerwaltungsrichterTaetig": "War bereits in Vorperiode als {artEhrenamtJustiz} tätig"
+      },
+      "saveLeaveDialog": {
+        "dialogtitle": "Sie erfassen gerade eine neue Bewerbung",
+        "dialogtext": "Erfassung der Bewerbung fortsetzen?"
+      },
+      "speichern": {
+        "errorMessage": "Die Eingabe ist fehlerhaft!"
+      }
+    },
+    "konflikteTable": {
+      "suche": "Suche",
+      "table": {
+        "familienname": "Familienname",
+        "vorname": "Vorname",
+        "geburtsdatum": "Geburtsdatum",
+        "derzeitigerBeruf": "Derzeitiger Beruf",
+        "arbeitgeber": "Arbeitgeber",
+        "mailAdresse": "Mailadresse",
+        "ausgeuebteEhrenaemter": "Ausgeübte Ehrenämter",
+        "konflikte": "Konflikte",
+        "actions": {
+          "header": "Aktionen",
+          "konflikteLoesen": "Konflikte lösen"
+        },
+        "delete": {
+          "dialogtext": "{count} Konflikt | {count} Konflikte "
+        },
+        "itemsperpagetext": "Konflikte je Seite"
+      },
+      "buttons": {
+        "loeschen": "Löschen"
+      }
+    },
+    "konflikteLoesenForm": {
+      "onlineHelp": "Hier haben Sie die Möglichkeit, Konflikte bei einem Bewerber zu beheben. Im linken Bereich sehen Sie die aktuellen Daten aus dem Einwohnermeldewesen, während im rechten Bereich die abweichenden Bewerberdaten (Konflikte) angezeigt werden.\n\nUm die Konflikte zu lösen, übernehmen Sie einfach die aktuellen Daten aus dem Einwohnermeldewesen und speichern Sie diese. Einzelne Konflikte können behoben werden, indem Sie auf den roten Button (mit dem Pfeil nach links) klicken.\n\nWenn Sie alle Konflikte auf einmal lösen möchten, nutzen Sie den Button 'Alle Übernehmen'. Bitte beachten Sie, dass der Speicher-Button erst aktiv wird, nachdem alle Konflikte gelöst wurden.",
+      "header": {
+        "konflikteLoesen": "Konflikte lösen",
+        "auskunftssperre": "Auskunftssperre",
+        "aktuelleDaten": "Aktuelle Daten",
+        "neueDatenAusEWO": "Neue Daten aus EWO"
+      },
+      "buttons": {
+        "abbrechen": "Abbrechen",
+        "alleUebernehmen": "Alle übernehmen",
+        "speichern": "Speichern"
+      },
+      "form": {
+        "familienname": "Familienname",
+        "geburtsname": "Geburtsname",
+        "vorname": "Vorname",
+        "geburtsdatum": "Geburtsdatum",
+        "geschlecht": "Geschlecht",
+        "ordnungsmerkmal": "Ordnungsmerkmal",
+        "akademischerGrad": "Akademischer Grad",
+        "geburtsOrt": "Geburtsort",
+        "geburtsLand": "Geburtsland",
+        "familienStand": "Familienstand",
+        "staatsangehoerigkeit": "Staatsangehörigkeit",
+        "wohnungsgeber": "Wohnungsgeber (c/o)",
+        "strasse": "Straße",
+        "hausnummer": "Hausnummer",
+        "appartmentNummer": "Appartment-Nummer",
+        "buchstabeHausnummer": "Buchstabe Hausnummer",
+        "stockwerk": "Stockwerk",
+        "teilnummerHausnummer": "Teilnummer Hausnummer",
+        "adressZusatz": "Adresszusatz",
+        "postleitzahl": "Postleitzahl",
+        "ort": "Ort",
+        "inMuenchenWohnhaftSeit": "In München wohnhaft seit",
+        "wohnungsstatus": "Wohnungsstatus",
+        "auskunftsSperre": "Auskunftssperre",
+        "derzeitigerBeruf": "Derzeitiger Beruf",
+        "arbeitgeber": "Arbeitgeber",
+        "telefonnummerPrivat": "Telefonnummer (privat)",
+        "telefonnummerDienstlich": "Telefonnummer (dienstlich)",
+        "telefonnummerMobil": "Telefonnummer (mobil)",
+        "mailAdresse": "Mailadresse",
+        "ausgeuebteEhrenaemter": "Ausgeübte Ehrenämter",
+        "onlineBewerbung": "Onlinebewerbung",
+        "neuerVorschlag": "Neuer Vorschlag",
+        "warBereitsAlsVerwaltungsrichterTaetig": "War bereits als {artEhrenamtJustiz} tätig",
+        "warBereitsInVorperiodeAlsVerwaltungsrichterTaetig": "War bereits in Vorperiode als {artEhrenamtJustiz} tätig",
+        "bewerbungVom": "Bewerbung vom",
+        "status": "Status",
+        "messages": {
+          "keineEWODaten": "Vorhandener Konflikt: 'Keine EWO-Daten gefunden. Evtl. verstorben oder verzogen?' Konflikt lösen durch 'Alle übernehmen' und 'Speichern'",
+          "fehlerhafteEingabe": "Die Eingabe ist fehlerhaft!"
+        }
+      }
+    },
+    "vorschlaegeTable": {
+      "suche": "Suche",
+      "table": {
+        "familienname": "Familienname",
+        "vorname": "Vorname",
+        "geburtsdatum": "Geburtsdatum",
+        "derzeitigerBeruf": "Derzeitiger Beruf",
+        "arbeitgeber": "Arbeitgeber",
+        "mailAdresse": "Mailadresse",
+        "ausgeuebteEhrenaemter": "Ausgeübte Ehrenämter",
+        "actions": {
+          "header": "Aktionen",
+          "bewerberAendern": "Bewerber ändern",
+          "bewerberAnzeigen": "Bewerber anzeigen"
+        },
+        "aufBewerberlisteSetzen": {
+          "dialogtitle": "Auf Bewerberliste setzen",
+          "dialogtext": "Bestätigen Sie die Übernahme in die Bewerberliste von {count} Vorschlag | Bestätigen Sie die Übernahme in die Bewerberliste von {count} Vorschlägen "
+        },
+        "delete": {
+          "dialogtext": "{count} Vorschlag | {count} Vorschläge"
+        },
+        "itemsperpagetext": "Vorschläge je Seite"
+      },
+      "buttons": {
+        "loeschen": "Löschen",
+        "aufBewerbungsListeSetzen": "Auf Bewerberliste setzen",
+        "datenHerunterladen": "Daten herunterladen"
+      }
+    }
+  }
+}
