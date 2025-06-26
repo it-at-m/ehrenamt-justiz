@@ -357,7 +357,7 @@ function validateNachname(isValid: boolean) {
     errorMsgNachname.value = t("mainView.form.nachname.pflichtfeld");
     isValid = false;
   } else if (onlineBewerbungFormData.value.nachname.length > 300) {
-   errorMsgNachname.value = t("mainView.form.nachname.maxLaenge");
+    errorMsgNachname.value = t("mainView.form.nachname.maxLaenge");
     isValid = false;
   }
   return isValid;
