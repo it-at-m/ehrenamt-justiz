@@ -92,7 +92,7 @@
                   label="Nachname"
                   :required="true"
                   :error-msg="errorMsgNachname"
-                  max="255"
+                  max="300"
                 />
               </v-row>
               <v-row dense>
@@ -352,8 +352,8 @@ function validateNachname(isValid: boolean) {
   if (!onlineBewerbungFormData.value.nachname) {
     errorMsgNachname.value = "Nachname ist ein Pflichtfeld!";
     isValid = false;
-  } else if (onlineBewerbungFormData.value.nachname.length > 255) {
-    errorMsgNachname.value = "Nachname darf maximal 255 Zeichen lang sein!";
+  } else if (onlineBewerbungFormData.value.nachname.length > 300) {
+    errorMsgNachname.value = "Nachname darf maximal 300 Zeichen lang sein!";
     isValid = false;
   }
   return isValid;

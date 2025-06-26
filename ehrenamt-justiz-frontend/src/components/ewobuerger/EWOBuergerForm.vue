@@ -43,6 +43,7 @@
             density="compact"
             variant="outlined"
             autofocus
+            maxlength="300"
           />
         </v-col>
       </v-row>
@@ -55,6 +56,7 @@
             persistent-placeholder
             density="compact"
             variant="outlined"
+            maxlength="255"
           />
         </v-col>
       </v-row>
