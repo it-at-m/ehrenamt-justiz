@@ -1,5 +1,9 @@
 # Frontend of Ehrenamt-Justiz
 
+## Language support 
+
+Language support with vue-i18n: The German language constants are stored here: src/locales/de.json
+
 ## Application in the browser
 
 If the application is running local in Docker desktop, it can be opened in the browser with the following link: http://localhost:8083
