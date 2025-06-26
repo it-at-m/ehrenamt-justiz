@@ -55,7 +55,7 @@
             v-model="konfiguration.bezeichnung"
             :label="t('components.konfigurationForm.bezeichnung')"
             persistent-placeholder
-            :maxlength="255"
+            maxlength="255"
             density="compact"
             variant="outlined"
           />
@@ -138,7 +138,7 @@
             :rules="[rules.RULE_REQUIRED]"
             :label="t('components.konfigurationForm.wohnsitz')"
             persistent-placeholder
-            :maxlength="255"
+            maxlength="255"
             density="compact"
             variant="outlined"
           />

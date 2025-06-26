@@ -91,7 +91,7 @@
                   :label="t('mainView.form.nachname.label')"
                   :required="true"
                   :error-msg="errorMsgNachname"
-                  max="255"
+                  max="300"
                 />
               </v-row>
               <v-row dense>
@@ -356,8 +356,8 @@ function validateNachname(isValid: boolean) {
   if (!onlineBewerbungFormData.value.nachname) {
     errorMsgNachname.value = t("mainView.form.nachname.pflichtfeld");
     isValid = false;
-  } else if (onlineBewerbungFormData.value.nachname.length > 255) {
-    errorMsgNachname.value = t("mainView.form.nachname.maxLaenge");
+  } else if (onlineBewerbungFormData.value.nachname.length > 300) {
+   errorMsgNachname.value = t("mainView.form.nachname.maxLaenge");
     isValid = false;
   }
   return isValid;
