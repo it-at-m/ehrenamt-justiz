@@ -1,6 +1,6 @@
 # Frontend of Ehrenamt-Justiz
 
-## Language support 
+## Language support
 
 Language support with vue-i18n: The German language constants are stored here: src/locales/de.json
 
