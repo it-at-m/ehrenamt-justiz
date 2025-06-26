@@ -256,9 +256,7 @@ import { useActiveKonfigurationStore } from "@/stores/activeconfig";
 
 const form = ref();
 const { t } = useI18n();
-const ehrenamtJustizOnlineService = ref(
-  new EhrenamtJustizOnlineServiceClass(t)
-);
+const ehrenamtJustizOnlineService = new EhrenamtJustizOnlineServiceClass(t);
 const hinweise = ref<HTMLInputElement | null>(null);
 const isSavingAnimation = ref(false);
 const bewerbunggespeichertergebbnis = ref("");
@@ -293,7 +291,7 @@ function speichern(): void {
     }
   } else {
     isSavingAnimation.value = true;
-    ehrenamtJustizOnlineService.value
+    ehrenamtJustizOnlineService
       .bewerbungSpeichern({
         vorname: onlineBewerbungFormData.value.vorname,
         nachname: onlineBewerbungFormData.value.nachname,

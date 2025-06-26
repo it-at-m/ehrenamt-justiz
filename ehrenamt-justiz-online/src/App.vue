@@ -41,9 +41,7 @@ import { useActiveKonfigurationStore } from "@/stores/activeconfig";
 import MainView from "@/views/MainView.vue";
 
 const { t } = useI18n();
-const ehrenamtJustizOnlineService = ref(
-  new EhrenamtJustizOnlineServiceClass(t)
-);
+const ehrenamtJustizOnlineService = new EhrenamtJustizOnlineServiceClass(t);
 const activeConfigStore = useActiveKonfigurationStore();
 const keineAktiveKonfiguration = ref("");
 
@@ -52,10 +50,10 @@ onMounted(() => {
 });
 
 /**
- * Lädt aktive Konfiguration vom Backend und setzt diese im Store.
+ * Loads active configuration from the backend and sets it in the store.
  */
 function loadActiveKonfiguration(): void {
-  ehrenamtJustizOnlineService.value
+  ehrenamtJustizOnlineService
     .getAktiveKonfiguration()
     .then((konfiguration: KonfigurationData) => {
       activeConfigStore.setKonfiguration(konfiguration);
