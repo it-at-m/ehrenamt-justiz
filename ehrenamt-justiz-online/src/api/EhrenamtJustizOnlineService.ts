@@ -6,8 +6,6 @@ import { API_BASE } from "@/Constants";
 import HttpMethod from "@/types/base/HttpMethod";
 import { ApiError, Levels } from "./error";
 
-let t: (key: string) => string;
-
 const ALL_HTTP_METHODS = [
   HttpMethod.GET,
   HttpMethod.POST,
@@ -23,29 +21,31 @@ interface ErrorMessageDefinition {
 }
 
 export class EhrenamtJustizOnlineServiceClass {
-  constructor(messageTranslation: (key: string) => string) {
-    t = messageTranslation;
+  private t: (key: string) => string;
+
+  constructor(t: (key: string) => string) {
+    this.t = t;
   }
 
-  private static ERROR_MESSAGES: (
-    t: (key: string) => string
-  ) => ErrorMessageDefinition[] = (t) => [
-    {
-      methods: ALL_HTTP_METHODS,
-      statusCode: 404,
-      message: t("ehrenamtJustizOnlineService.fehlermeldungen.http404"),
-    },
-    {
-      methods: [HttpMethod.DELETE],
-      statusCode: 409,
-      message: t("ehrenamtJustizOnlineService.fehlermeldungen.http409"),
-    },
-    {
-      methods: [HttpMethod.POST],
-      statusCode: 500,
-      message: t("ehrenamtJustizOnlineService.fehlermeldungen.http500"),
-    },
-  ];
+  private getErrorMessages(): ErrorMessageDefinition[] {
+    return [
+      {
+        methods: ALL_HTTP_METHODS,
+        statusCode: 404,
+        message: this.t("ehrenamtJustizOnlineService.fehlermeldungen.http404"),
+      },
+      {
+        methods: [HttpMethod.DELETE],
+        statusCode: 409,
+        message: this.t("ehrenamtJustizOnlineService.fehlermeldungen.http409"),
+      },
+      {
+        methods: [HttpMethod.POST],
+        statusCode: 500,
+        message: this.t("ehrenamtJustizOnlineService.fehlermeldungen.http500"),
+      },
+    ];
+  }
 
   public static getBaseUrl(): string {
     return `${API_BASE}/public/backend`;
@@ -66,25 +66,19 @@ export class EhrenamtJustizOnlineServiceClass {
             .json()
             .then((createdInstance) => {
               if (res.ok) return resolve(createdInstance);
-              EhrenamtJustizOnlineServiceClass.handleWrongResponse(
-                HttpMethod.GET,
-                res
-              );
+              this.handleWrongResponse(HttpMethod.GET, res);
               reject(
-                new Error(
-                  t(
+                new ApiError(
+                  Levels.ERROR,
+                  this.t(
                     "ehrenamtJustizOnlineService.fehlermeldungen.fehlerBeiMethodeGetAktiveKonfiguration"
                   )
                 )
               );
             })
-            .catch((reason) =>
-              reject(EhrenamtJustizOnlineServiceClass.handleError(reason))
-            );
+            .catch((reason) => reject(this.handleError(reason)));
         })
-        .catch((reason) =>
-          reject(EhrenamtJustizOnlineServiceClass.handleError(reason))
-        );
+        .catch((reason) => reject(this.handleError(reason)));
     });
   }
 
@@ -107,21 +101,17 @@ export class EhrenamtJustizOnlineServiceClass {
               resolve(createdInstance);
             });
           }
-          EhrenamtJustizOnlineServiceClass.handleWrongResponse(
-            HttpMethod.POST,
-            res
-          );
+          this.handleWrongResponse(HttpMethod.POST, res);
           reject(
-            new Error(
-              t(
+            new ApiError(
+              Levels.ERROR,
+              this.t(
                 "ehrenamtJustizOnlineService.fehlermeldungen.fehlerBeiMethodeBewerbungSpeichern"
               )
             )
           );
         })
-        .catch((reason) =>
-          reject(EhrenamtJustizOnlineServiceClass.handleError(reason))
-        );
+        .catch((reason) => reject(this.handleError(reason)));
     });
   }
 
@@ -131,13 +121,8 @@ export class EhrenamtJustizOnlineServiceClass {
    * @param httpMethod
    * @param res
    */
-  public static handleWrongResponse(
-    httpMethod: HttpMethod,
-    res: Response
-  ): void {
-    for (const errorMessage of EhrenamtJustizOnlineServiceClass.ERROR_MESSAGES(
-      t
-    )) {
+  public handleWrongResponse(httpMethod: HttpMethod, res: Response): void {
+    for (const errorMessage of this.getErrorMessages()) {
       if (
         errorMessage.methods.includes(httpMethod) &&
         res.status == errorMessage.statusCode
@@ -146,7 +131,7 @@ export class EhrenamtJustizOnlineServiceClass {
     }
     throw new ApiError(
       Levels.ERROR,
-      `${t("ehrenamtJustizOnlineService.fehlermeldungen.default")} - HTTP Status Code: ${res.status}`
+      `${this.t("ehrenamtJustizOnlineService.fehlermeldungen.default")} - HTTP Status Code: ${res.status}`
     );
   }
 
@@ -155,13 +140,13 @@ export class EhrenamtJustizOnlineServiceClass {
    * @returns Error
    * @param err
    */
-  public static handleError(err: ApiError): Error {
+  public handleError(err: ApiError): Error {
     if (err.level !== undefined)
       // check for already existing ApiError
       return err;
     return new ApiError(
       Levels.ERROR,
-      t("ehrenamtJustizOnlineService.fehlermeldungen.default")
+      this.t("ehrenamtJustizOnlineService.fehlermeldungen.default")
     );
   }
 }

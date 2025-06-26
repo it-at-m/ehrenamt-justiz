@@ -1,5 +1,5 @@
 /**
- * ConfigurationData is a structure that holds the data of the active configuration
+ * KonfigurationData is a structure that holds the data of the active configuration
  */
 export default interface KonfigurationData {
   id: string | undefined;
