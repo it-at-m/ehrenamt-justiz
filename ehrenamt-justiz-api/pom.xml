@@ -34,7 +34,7 @@
         <!-- Additional required dependencies -->
         <lombok.version>1.18.38</lombok.version>
         <camel-spring-boot-dependencies.version>4.11.0</camel-spring-boot-dependencies.version>
-        <central-publishing-maven-plugin.version>0.7.0</central-publishing-maven-plugin.version>
+        <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
 
         <!-- Testing -->
         <jacoco-maven-plugin.version>0.8.13</jacoco-maven-plugin.version>
