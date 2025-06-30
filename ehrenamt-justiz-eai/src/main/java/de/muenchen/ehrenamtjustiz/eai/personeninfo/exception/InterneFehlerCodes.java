@@ -4,7 +4,6 @@ package de.muenchen.ehrenamtjustiz.eai.personeninfo.exception;
  * Error codes for errors that can occur during the processing of a request.
  *
  */
-@SuppressWarnings("PMD.DataClass")
 public final class InterneFehlerCodes {
     /**
      * Die Antwort des angeschlossenen Systems erfolgte nicht erhalb der erwarteten Zeit

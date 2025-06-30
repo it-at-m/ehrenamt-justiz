@@ -39,7 +39,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
@@ -54,7 +53,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ContextConfiguration()
 @ActiveProfiles(profiles = "integrationstest")
-@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.NcssCount", "PMD.DataClass", "CPD-START" })
+@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.NcssCount", "CPD-START" })
 class IntegrationsTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(IntegrationsTest.class);
@@ -71,9 +70,6 @@ class IntegrationsTest {
     /* default */
     @EndpointInject("mock:cxfProducer")
     MockEndpoint cxfProducer;
-
-    @Autowired
-    private ConfigurableApplicationContext ctx;
 
     @Autowired
     public ObjectMapper objectMapper;

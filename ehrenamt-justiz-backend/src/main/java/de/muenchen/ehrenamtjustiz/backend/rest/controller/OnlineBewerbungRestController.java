@@ -42,7 +42,7 @@ public class OnlineBewerbungRestController {
     @Autowired
     private final PersonRepository personRepository;
 
-    @SuppressWarnings({ "PMD.CognitiveComplexity", "PMD.CyclomaticComplexity", "PMD.NPathComplexity" })
+    @SuppressWarnings({ "PMD.CognitiveComplexity", "PMD.CyclomaticComplexity" })
     @PostMapping(value = "/bewerbungSpeichern", consumes = { MediaType.APPLICATION_JSON_VALUE })
     public String bewerbungSpeichern(@RequestBody final OnlineBewerbungDatenDto onlineBewerbungDatenDto) {
 
