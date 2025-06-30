@@ -8,10 +8,12 @@
           height="200"
         />
       </v-col>
-
+      <online-help-dialog-component
+        :helptext="t('views.homeView.onlineHelp')"
+      />
       <v-col class="mb-4">
         <h1 class="text-h3 font-weight-bold mb-3">
-          Willkommen bei Ehrenamtjustiz
+          {{ t("views.homeView.welcome") }}
         </h1>
       </v-col>
     </v-row>
@@ -19,7 +21,12 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
 import { VCol, VContainer, VImg, VRow } from "vuetify/components";
+
+import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
+
+const { t } = useI18n();
 </script>
 
 <style scoped>

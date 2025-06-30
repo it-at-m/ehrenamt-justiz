@@ -7,26 +7,33 @@
     @keydown.enter.prevent="closeOnlineHelp()"
   >
     <v-toolbar>
-      <v-toolbar-title>Online-Hilfe</v-toolbar-title>
+      <v-toolbar-title>{{
+        t("components.onlineHelpDialogComponent.onlineHilfe")
+      }}</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn
-        icon=""
+      <v-icon
         @click="closeOnlineHelp()"
-        ><v-icon>mdi-close</v-icon></v-btn
-      >
+        :icon="mdiClose"
+      />
     </v-toolbar>
     <v-card flat>
       <v-card-text>
-        {{ props.component }}
+        <p
+          v-for="(line, index) in formattedLines"
+          :key="index"
+        >
+          {{ line }}
+        </p>
       </v-card-text>
     </v-card>
   </v-dialog>
 </template>
 
 <script setup lang="ts">
+import { mdiClose } from "@mdi/js";
 import { computed } from "vue";
+import { useI18n } from "vue-i18n";
 import {
-  VBtn,
   VCard,
   VCardText,
   VDialog,
@@ -38,8 +45,16 @@ import {
 
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 
+const formattedLines = computed(() => {
+  return props.helptext
+    .split(/\r?\n/)
+    .map((l) => l.trim())
+    .filter(Boolean);
+});
+
+const { t } = useI18n();
 const props = defineProps<{
-  component: string;
+  helptext: string;
 }>();
 
 const visible = computed(() => {

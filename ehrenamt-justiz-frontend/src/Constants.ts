@@ -13,11 +13,8 @@ export const enum BEARBEIGUNGS_MODUS {
   DISPLAY_MODUS = "display_modus",
 }
 
-// For fetching table data
-export const enum TABELLEN {
-  NO_RESULTS_TEXT = "Liste ist leer",
-  LOADING_ITEMS = "Daten werden gelesen",
-}
+// don't use i18n here, because of fixed values:
+export const WOHNUNGSSTATUS_ARTEN = ["HAUPTWOHNUNG", "NEBENWOHNUNG"];
 
 // Status of person
 export const enum PERSONENSTATUS {

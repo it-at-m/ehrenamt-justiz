@@ -15,11 +15,12 @@
         >
           <h2>
             {{
-              ehrenamtJustizStatus
-                ? ehrenamtJustizStatus.anzahlBewerbungen
-                : "?"
+              t("views.getStartedView.bewerbungen", {
+                count: ehrenamtJustizStatus
+                  ? ehrenamtJustizStatus.anzahlBewerbungen
+                  : "0",
+              })
             }}
-            Bewerbungen
           </h2>
           <h2>{{ textAnzahlBewerbungen }}</h2>
         </v-col>
@@ -38,9 +39,12 @@
         >
           <h2>
             {{
-              ehrenamtJustizStatus ? ehrenamtJustizStatus.anzahlKonflikte : "?"
+              t("views.getStartedView.konflikte", {
+                count: ehrenamtJustizStatus
+                  ? ehrenamtJustizStatus.anzahlKonflikte
+                  : "0",
+              })
             }}
-            Konflikte
           </h2>
           <h2>{{ textAnzahlKonflikte }}</h2>
         </v-col>
@@ -61,11 +65,12 @@
         >
           <h2>
             {{
-              ehrenamtJustizStatus
-                ? ehrenamtJustizStatus.anzahlVorschlaege
-                : "?"
+              t("views.getStartedView.vorschlaege", {
+                count: ehrenamtJustizStatus
+                  ? ehrenamtJustizStatus.anzahlVorschlaege
+                  : "0",
+              })
             }}
-            Vorschläge
           </h2>
           <h2>{{ textAnzahlVorschlaege }}</h2>
         </v-col>
@@ -76,11 +81,12 @@
       >
         <h2>
           {{
-            ehrenamtJustizStatus
-              ? ehrenamtJustizStatus.anzahlVorschlaegeNeu
-              : "?"
+            t("views.getStartedView.neueVorschlaege", {
+              count: ehrenamtJustizStatus
+                ? ehrenamtJustizStatus.anzahlVorschlaegeNeu
+                : "0",
+            })
           }}
-          neue Vorschläge
         </h2>
         <h2>{{ textAnzahlNeueVorschlaege }}</h2>
         <v-btn
@@ -91,7 +97,7 @@
             )
           "
           @click="datenHerunterladen"
-          >Daten herunterladen
+          >{{ t("views.getStartedView.buttons.datenHerunterladen") }}
         </v-btn>
 
         <v-btn
@@ -102,20 +108,20 @@
             )
           "
           @click="alsBenachrichtigtMarkierenBestaetigen"
-          >Als benachrichtigt markieren
+          >{{ t("views.getStartedView.buttons.alsBenachrichtigtMarkieren") }}
         </v-btn>
       </v-col>
     </v-row>
     <yes-no-dialog
       v-model="yesNoDialogVisible"
-      dialogtitle="Als benachrichtigt markieren"
-      dialogtext="Möchten Sie wirklich alle neuen Vorschläge als benachrichtigt markieren? Wenn Sie diese Aktion durchführen werden alle neuen Vorschläge als Benachrichtigt markiert. Ein erneutes Exportieren der Daten ist nur durch manuelles Selektieren möglich. Dies kann nicht Rückgängig gemacht werden."
+      :dialogtitle="t('views.getStartedView.yesNoDialog.dialogtitle')"
+      :dialogtext="t('views.getStartedView.yesNoDialog.dialogtext')"
       :is-animation="benachrichtigtMarkierenAnimationAktiv"
       @no="alsBenachrichtigtMarkierenNo"
       @yes="alsBenachrichtigtMarkierenYes"
     />
     <online-help-dialog-component
-      component="Das ist die Onlinehilfe für den Starter (Under Construction)."
+      :helptext="t('views.getStartedView.onlineHelp')"
     />
   </v-container>
 </template>
@@ -124,6 +130,7 @@
 import type EhrenamtJustizStatus from "@/types/EhrenamtJustizStatus";
 
 import { onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VBtn, VCol, VContainer, VHover, VRow } from "vuetify/components";
 
@@ -150,6 +157,7 @@ const yesNoDialogVisible = ref(false);
 const benachrichtigtMarkierenAnimationAktiv = ref(false);
 const userStore = useUserStore();
 const user = userStore.getUser;
+const { t } = useI18n();
 
 onMounted(() => {
   load();
@@ -212,6 +220,7 @@ function datenHerunterladen() {
     .then((neueVorschlaege) => {
       const globalSettingsStore = useGlobalSettingsStore();
       EhrenamtJustizService.convertToCSVFileByPersonCSV(
+        t,
         neueVorschlaege,
         globalSettingsStore.getKonfiguration?.ehrenamtjustizart +
           "_NEUE_VORSCHLAEGE_"

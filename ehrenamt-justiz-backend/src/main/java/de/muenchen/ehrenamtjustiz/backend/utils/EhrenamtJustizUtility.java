@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public final class EhrenamtJustizUtility {
 
+    // Don't modify this text:
     public static final String ERROR_NO_HITS = "Keine EWO-Daten gefunden. Evtl. verstorben oder verzogen?";
 
     public static final String STATUS_UP = "UP";

@@ -1,7 +1,5 @@
-import { ApiError, Levels } from "@/api/error";
-
 /**
- * Liefert eine default GET-Config für fetch
+ * Returns a default GET-Config for fetch
  */
 export function getGETConfig(): RequestInit {
   const requestMethod = "GET";
@@ -14,8 +12,8 @@ export function getGETConfig(): RequestInit {
 }
 
 /**
- * Liefert eine default POST-Config für fetch
- * @param body Optional zu übertragender Body
+ * Returns a default POST-Config for fetch
+ * @param body Optional body to be transferred
  */
 // eslint-disable-next-line
 export function getPOSTConfig(body: any): RequestInit {
@@ -31,53 +29,7 @@ export function getPOSTConfig(body: any): RequestInit {
 }
 
 /**
- * Deckt das Default-Handling einer Response ab. Dazu zählt:
- *
- * - Fehler bei fehlenden Berechtigungen --> HTTP 403
- * - Reload der App bei Session-Timeout --> HTTP 3xx
- * - Default-Fehler bei allen HTTP-Codes !2xx
- *
- * @param response Die response aus fetch-Befehl die geprüft werden soll.
- * @param errorMessage Die Fehlermeldung, welche bei einem HTTP-Code != 2xx angezeigt werden soll.
- */
-export function defaultResponseHandler(
-  response: Response,
-  errorMessage = "Es ist ein unbekannter Fehler aufgetreten."
-): void {
-  if (!response.ok) {
-    if (response.status === 403) {
-      throw new ApiError({
-        level: Levels.ERROR,
-        message: `Sie haben nicht die nötigen Rechte um diese Aktion durchzuführen.`,
-      });
-    } else if (response.type === "opaqueredirect") {
-      location.reload();
-    }
-    throw new ApiError({
-      level: Levels.WARNING,
-      message: errorMessage,
-    });
-  }
-}
-
-/**
- * Default Catch-Handler für alle Anfragen des Service.
- * Schmeißt derzeit nur einen ApiError
- * @param error die Fehlermeldung aus fetch-Befehl
- * @param errorMessage Fehler-Text
- */
-export function defaultCatchHandler(
-  error: Error,
-  errorMessage = "Es ist ein unbekannter Fehler aufgetreten."
-): PromiseLike<never> {
-  throw new ApiError({
-    level: Levels.WARNING,
-    message: errorMessage,
-  });
-}
-
-/**
- *  Baut den Header fuer den Request auf
+ *  Builds the header for the request
  * @returns {Headers}
  */
 export function getHeaders(requestMethod = "GET"): Headers {
@@ -93,7 +45,7 @@ export function getHeaders(requestMethod = "GET"): Headers {
 }
 
 /**
- * Liefert den XSRF-TOKEN zurück.
+ * Returns the XSRF-TOKEN.
  * @returns {string|string}
  */
 function _getXSRFToken(): string {

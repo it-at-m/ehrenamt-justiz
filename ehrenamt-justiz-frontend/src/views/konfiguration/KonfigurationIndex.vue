@@ -3,7 +3,9 @@
     <v-card flat>
       <v-card-title>
         <v-row>
-          <v-col class="text-left"> Konfigurationen </v-col>
+          <v-col class="text-left">
+            {{ t("views.konfigurationIndex.header") }}
+          </v-col>
 
           <v-col class="text-right">
             <v-btn
@@ -14,7 +16,7 @@
               color="accent"
               :to="{ path: '/configuration/create' }"
             >
-              Neue Konfiguration
+              {{ t("views.konfigurationIndex.createKonfiguration") }}
             </v-btn>
           </v-col>
         </v-row>
@@ -22,12 +24,13 @@
       <konfiguration-list />
     </v-card>
     <online-help-dialog-component
-      component="Das ist die Onlinehilfe für die Übersicht der Konfigurationen (Under Construction)"
+      :helptext="t('views.konfigurationIndex.onlineHelp')"
     />
   </v-container>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
 import {
   VBtn,
   VCard,
@@ -40,4 +43,6 @@ import {
 import AuthService from "@/api/AuthService";
 import KonfigurationList from "@/components/konfiguration/KonfigurationList.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
+
+const { t } = useI18n();
 </script>

@@ -10,7 +10,7 @@
             <v-text-field
               v-model="search"
               prepend-inner-icon="mdi-magnify"
-              label="Suche"
+              :label="t('components.bewerbungenTable.suche')"
               single-line
               hide-details
               select-strategy="all"
@@ -31,7 +31,7 @@
               "
               color="error"
               @click="deleteRequested"
-              >Löschen</v-btn
+              >{{ t("components.bewerbungenTable.buttons.loeschen") }}</v-btn
             >
           </v-col>
           <v-col
@@ -50,7 +50,9 @@
               color="accent"
               :loading="vorschlagsListeAnimationAktiv"
               @click="aufVorschlagslisteSetzen"
-              >Auf Vorschlagsliste setzen</v-btn
+              >{{
+                t("components.bewerbungenTable.buttons.zurVorschlagsliste")
+              }}</v-btn
             >
           </v-col>
           <v-col
@@ -66,7 +68,9 @@
               "
               color="accent"
               @click="datenHerunterladen"
-              >Daten herunterladen</v-btn
+              >{{
+                t("components.bewerbungenTable.buttons.datenHerunterladen")
+              }}</v-btn
             >
           </v-col>
         </v-row>
@@ -78,7 +82,9 @@
         :items="personenTableData"
         :items-length="totalItems"
         show-select
-        items-per-page-text="Bewerber je Seite"
+        :items-per-page-text="
+          t('components.bewerbungenTable.table.itemsperpagetext')
+        "
         :row-props="getRowProps"
         :loading="loadingAnimationAktiv"
         :multi-sort="true"
@@ -112,7 +118,9 @@
                   :icon="mdiPencil"
               /></span>
             </template>
-            <span>Bewerber ändern</span>
+            <span>{{
+              t("components.bewerbungenTable.table.actions.bewerberAendern")
+            }}</span>
           </v-tooltip>
           <v-tooltip location="bottom">
             <template #activator="{ props }">
@@ -123,7 +131,9 @@
                   :icon="mdiEye"
               /></span>
             </template>
-            <span>Bewerber anzeigen</span>
+            <span>{{
+              t("components.bewerbungenTable.table.actions.bewerberAnzeigen")
+            }}</span>
           </v-tooltip>
         </template>
         <template
@@ -144,10 +154,10 @@
           ></v-checkbox-btn>
         </template>
         <template #no-data>
-          {{ TABELLEN.NO_RESULTS_TEXT }}
+          {{ t("general.listeIstLeer") }}
         </template>
         <template #loading>
-          {{ TABELLEN.LOADING_ITEMS }}
+          {{ t("general.datenWerdenGeladen") }}
         </template>
       </v-data-table-server>
       <invalide-personen-select
@@ -162,11 +172,16 @@
     </v-card>
     <yes-no-dialog
       v-model="yesNoDialogVisible"
-      dialogtitle="Auf Vorschlagsliste setzen"
+      :dialogtitle="
+        t(
+          'components.bewerbungenTable.table.aufVorschlagslisteSetzen.dialogtitle'
+        )
+      "
       :dialogtext="
-        'Bestätigen Sie die Übernahme von ' +
-        selectedUUIDs.length +
-        ' Bewerbung(en) in die Vorschlagsliste'
+        t(
+          'components.bewerbungenTable.table.aufVorschlagslisteSetzen.dialogtext',
+          { count: selectedUUIDs.length }
+        )
       "
       :is-animation="vorschlagsListeAnimationAktiv"
       @no="abbruchAufVorschlagslisteSetzen"
@@ -176,7 +191,11 @@
   <delete-dialog
     v-model="deleteDialogVisible"
     :is-animation="deleteAnimationAktiv"
-    :descriptor-string="selectedUUIDs.length + ' Bewerber'"
+    :descriptor-string="
+      t('components.bewerbungenTable.table.delete.dialogtext', {
+        count: selectedUUIDs.length,
+      })
+    "
     :type-string="2"
     @delete="deleteConfirmed"
     @cancel="deleteCanceled"
@@ -187,7 +206,8 @@
 import type PersonenTableData from "@/types/PersonenTableData";
 
 import { mdiEye, mdiPencil } from "@mdi/js";
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import {
   VBtn,
@@ -213,63 +233,63 @@ import {
   BEARBEIGUNGS_MODUS,
   PERSONENSTATUS,
   STATUS_INDICATORS,
-  TABELLEN,
 } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { useUserStore } from "@/stores/user";
 import InvalidePersonenSelect from "@/views/vorschlaege/InvalidePersonenSelect.vue";
 
-const headers: ReadonlyHeaders = [
+const { t } = useI18n();
+const headers: ReadonlyHeaders = computed(() => [
   {
-    title: "Familienname",
+    title: t("components.bewerbungenTable.table.familienname"),
     value: "familienname",
     align: "start",
     sortable: true,
   },
   {
-    title: "Vorname",
+    title: t("components.bewerbungenTable.table.vorname"),
     value: "vorname",
     align: "start",
     sortable: true,
   },
   {
-    title: "Geburtsdatum",
+    title: t("components.bewerbungenTable.table.geburtsdatum"),
     value: "geburtsdatum",
     align: "end",
     sortable: true,
   },
   {
-    title: "Derzeitiger Beruf",
+    title: t("components.bewerbungenTable.table.derzeitigerBeruf"),
     value: "derzeitausgeuebterberuf",
     align: "start",
     sortable: true,
   },
   {
-    title: "Arbeitgeber",
+    title: t("components.bewerbungenTable.table.arbeitgeber"),
     value: "arbeitgeber",
     align: "start",
     sortable: true,
   },
   {
-    title: "Mailadresse",
+    title: t("components.bewerbungenTable.table.mailAdresse"),
     value: "mailadresse",
     align: "start",
     sortable: true,
   },
   {
-    title: "Ausgeübte Ehrenämter",
+    title: t("components.bewerbungenTable.table.ausgeuebteEhrenaemter"),
     value: "ausgeuebteehrenaemter",
     align: "start",
     sortable: true,
   },
   {
-    title: "Aktionen",
+    title: t("components.bewerbungenTable.table.actions.header"),
     value: "actions",
     align: "start",
     sortable: false,
   },
-];
+]) as unknown as ReadonlyHeaders;
 const snackbarStore = useSnackbarStore();
 const router = useRouter();
 const personenTableData = ref<PersonenTableData[]>([]);
@@ -290,7 +310,6 @@ const invalidePersonenSelectVisible = ref(false);
 const invalidePersonen = ref<PersonenTableData[]>([]);
 const userStore = useUserStore();
 const user = userStore.getUser;
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function loadItems(options: any) {
   itemsSort.value = options.sortBy;
@@ -401,8 +420,9 @@ async function aufVorschlagslisteSetzen(): Promise<void> {
         // No authorization: Error:
         snackbarStore.showMessage({
           level: STATUS_INDICATORS.ERROR,
-          message:
-            "Die Auswahl enthält invalide Personen. Bitte wenden Sie sich an einen Sondersachbearbeiter, der diese Validierung umgehen kann.",
+          message: t(
+            "components.bewerbungenTable.table.aufVorschlagslisteSetzen.message"
+          ),
         });
       }
     })
@@ -479,6 +499,7 @@ function datenHerunterladen() {
     PERSONENSTATUS.STATUS_BEWERBUNG +
     "_";
   EhrenamtJustizService.convertToCSVFile(
+    t,
     selectedUUIDs.value,
     dateiname,
     PERSONENSTATUS.STATUS_BEWERBUNG

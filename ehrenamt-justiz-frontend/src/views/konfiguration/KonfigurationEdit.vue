@@ -10,13 +10,17 @@
           class="text-h5"
           style="margin-bottom: 1em"
         >
-          Konfiguration
+          {{ t("views.konfigurationEdit.header") }}
           {{
             konfigurationData.action == BEARBEIGUNGS_MODUS.EDIT_MODUS
-              ? "bearbeiten"
-              : "anzeigen"
+              ? t("views.konfigurationEdit.bearbeiten")
+              : t("views.konfigurationEdit.anzeigen")
           }}
-          ({{ konfigurationData.aktiv ? "Aktiv" : "Inaktiv" }})
+          {{
+            konfigurationData.aktiv
+              ? t("views.konfigurationEdit.aktiv")
+              : t("views.konfigurationEdit.inAktiv")
+          }}
         </h1>
         <konfiguration-form
           v-model="konfigurationData"
@@ -26,7 +30,7 @@
       </template>
     </v-card>
     <online-help-dialog-component
-      component="Das ist die Onlinehilfe für die Bearbeitung einer Konfiguration (Under Construction)"
+      :helptext="t('views.konfigurationEdit.onlineHelp')"
     />
   </v-container>
 </template>
@@ -35,6 +39,7 @@
 import type KonfigurationFormData from "@/types/KonfigurationFormData";
 
 import { onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";
@@ -47,6 +52,7 @@ import { useSnackbarStore } from "@/stores/snackbar";
 const route = useRoute();
 const router = useRouter();
 const snackbarStore = useSnackbarStore();
+const { t } = useI18n();
 
 const konfigurationData = ref<KonfigurationFormData>({
   aktiv: false,
