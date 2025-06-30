@@ -29,7 +29,6 @@ import org.springframework.web.client.HttpServerErrorException;
 @RestController
 @Slf4j
 @RequestMapping("/ehrenamtjustiz")
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public class EhrenamtJustizRestController {
 
     private final PersonRepository personRepository;

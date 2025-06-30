@@ -4,7 +4,6 @@ package de.muenchen.ehrenamtjustiz.eai.personeninfo.config;
  * collection of constants that are relevant for the connection to the EAI.
  *
  */
-@SuppressWarnings("PMD.DataClass")
 public final class Konstanten {
     /**
      * Subpath to the documentation of the API

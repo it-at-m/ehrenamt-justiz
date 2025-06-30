@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-@SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.NPathComplexity", "PMD.LambdaCanBeMethodReference", "PMD.CouplingBetweenObjects", "PMD.GodClass" })
+@SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.NPathComplexity", "PMD.CouplingBetweenObjects" })
 public class MappingBean {
 
     public LesePersonErweitert.Anfrage toEWOLesen(@Header("om") final String om) {

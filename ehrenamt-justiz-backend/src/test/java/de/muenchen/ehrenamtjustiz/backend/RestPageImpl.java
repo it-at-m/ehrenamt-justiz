@@ -9,7 +9,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 @JsonIgnoreProperties(ignoreUnknown = true, value = { "pageable" })
-@SuppressWarnings("PMD.UnusedFormalParameter")
 public class RestPageImpl<T> extends PageImpl<T> {
     @Serial
     private static final long serialVersionUID = 1L;
