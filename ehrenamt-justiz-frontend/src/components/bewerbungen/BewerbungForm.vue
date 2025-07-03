@@ -89,10 +89,10 @@
         <v-card>
           <v-card-text>
             <v-expansion-panels
-              v-model="panel"
+              v-model="activeExpansionPanel"
               multiple
             >
-              <v-expansion-panel title="Name">
+              <v-expansion-panel :title="t('components.bewerbungForm.tabEwo.expansionPanel.name')">
                 <v-expansion-panel-text>
                   <v-row>
                     <v-col class="col">
@@ -143,7 +143,7 @@
                 </v-expansion-panel-text>
               </v-expansion-panel>
               <v-expansion-panel
-                title="Personendaten"
+                :title="t('components.bewerbungForm.tabEwo.expansionPanel.personenDaten')"
                 :hidden="
                   bewerbung.ewo_auskunftssperre.length > 0 &&
                   !AuthService.checkAuth(
@@ -273,7 +273,7 @@
               </v-expansion-panel>
 
               <v-expansion-panel
-                title="Adresse"
+                :title="t('components.bewerbungForm.tabEwo.expansionPanel.adresse')"
                 :hidden="
                   bewerbung.ewo_auskunftssperre.length > 0 &&
                   !AuthService.checkAuth(
@@ -473,7 +473,7 @@
                 </v-expansion-panel-text>
               </v-expansion-panel>
               <v-expansion-panel
-                title="Sonstiges"
+                :title="t('components.bewerbungForm.tabEwo.expansionPanel.sonstiges')"
                 :hidden="
                   bewerbung.ewo_auskunftssperre.length > 0 &&
                   !AuthService.checkAuth(
@@ -762,7 +762,7 @@ const snackbarStore = useSnackbarStore();
 
 const form = ref();
 
-const panel = ref([0, 1, 2, 3]);
+const activeExpansionPanel = ref([0, 1, 2, 3]);
 
 const active_tab = ref("bewerber");
 
