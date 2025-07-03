@@ -92,7 +92,11 @@
               v-model="activeExpansionPanel"
               multiple
             >
-              <v-expansion-panel :title="t('components.bewerbungForm.tabEwo.expansionPanel.name')">
+              <v-expansion-panel
+                :title="
+                  t('components.bewerbungForm.tabEwo.expansionPanel.name')
+                "
+              >
                 <v-expansion-panel-text>
                   <v-row>
                     <v-col class="col">
@@ -143,7 +147,11 @@
                 </v-expansion-panel-text>
               </v-expansion-panel>
               <v-expansion-panel
-                :title="t('components.bewerbungForm.tabEwo.expansionPanel.personenDaten')"
+                :title="
+                  t(
+                    'components.bewerbungForm.tabEwo.expansionPanel.personenDaten'
+                  )
+                "
                 :hidden="
                   bewerbung.ewo_auskunftssperre.length > 0 &&
                   !AuthService.checkAuth(
@@ -273,7 +281,9 @@
               </v-expansion-panel>
 
               <v-expansion-panel
-                :title="t('components.bewerbungForm.tabEwo.expansionPanel.adresse')"
+                :title="
+                  t('components.bewerbungForm.tabEwo.expansionPanel.adresse')
+                "
                 :hidden="
                   bewerbung.ewo_auskunftssperre.length > 0 &&
                   !AuthService.checkAuth(
@@ -473,7 +483,9 @@
                 </v-expansion-panel-text>
               </v-expansion-panel>
               <v-expansion-panel
-                :title="t('components.bewerbungForm.tabEwo.expansionPanel.sonstiges')"
+                :title="
+                  t('components.bewerbungForm.tabEwo.expansionPanel.sonstiges')
+                "
                 :hidden="
                   bewerbung.ewo_auskunftssperre.length > 0 &&
                   !AuthService.checkAuth(
