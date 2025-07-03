@@ -75,9 +75,9 @@
     </v-row>
     <v-tabs v-model="active_tab">
       <v-tab value="ewo">{{ t("components.bewerbungForm.tabs.ausEwo") }}</v-tab>
-      <v-tab value="bewerber">{{
-        t("components.bewerbungForm.tabs.bewerberZusatzangaben")
-      }}</v-tab>
+      <v-tab value="bewerber"
+        >{{ t("components.bewerbungForm.tabs.bewerberZusatzangaben") }}
+      </v-tab>
     </v-tabs>
     <v-tabs-window v-model="active_tab">
       <v-tabs-window-item
@@ -86,321 +86,398 @@
         value="ewo"
         eager
       >
-        <v-card
-          class="scroll vcard"
-          disabled
-        >
+        <v-card>
           <v-card-text>
-            <v-row>
-              <v-col class="col">
-                <v-text-field
-                  v-model="bewerbung.ewo_vorname"
-                  :rules="[rules.RULE_REQUIRED]"
-                  :label="t('components.bewerbungForm.tabEwo.vorname')"
-                  persistent-placeholder
-                  density="compact"
-                  variant="outlined"
-                />
-              </v-col>
-              <v-col class="col">
-                <v-text-field
-                  v-model="bewerbung.ewo_familienname"
-                  :rules="[rules.RULE_REQUIRED]"
-                  :label="t('components.bewerbungForm.tabEwo.familienname')"
-                  persistent-placeholder
-                  density="compact"
-                  variant="outlined"
-                />
-              </v-col>
-            </v-row>
-            <v-sheet
-              :hidden="
-                bewerbung.ewo_auskunftssperre.length > 0 &&
-                !AuthService.checkAuth(
-                  'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
-                )
-              "
+            <v-expansion-panels
+              v-model="panel"
+              multiple
             >
-              <!--Hidden and no v-if: guarantee of execution of rules-->
-              <v-row>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_geburtsdatum"
-                    :rules="
-                      bewerbung.validierungdeaktivieren
-                        ? [rules.RULE_REQUIRED]
-                        : [rules.RULE_REQUIRED, rules.RULE_GEBURTSDATUM]
-                    "
-                    :label="t('components.bewerbungForm.tabEwo.geburtsdatum')"
-                    persistent-placeholder
-                    type="date"
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_geburtsname"
-                    :label="t('components.bewerbungForm.tabEwo.geburtsname')"
-                    persistent-placeholder
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col class="col">
-                  <v-select
-                    v-model="bewerbung.ewo_geschlecht"
-                    :items="geschlechtswerte"
-                    :rules="[rules.RULE_REQUIRED]"
-                    :label="t('components.bewerbungForm.tabEwo.geschlecht')"
-                    persistent-placeholder
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewoid"
-                    :rules="[rules.RULE_REQUIRED]"
-                    :label="
-                      t('components.bewerbungForm.tabEwo.ordnungsmerkmal')
-                    "
-                    persistent-placeholder
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_akademischergrad"
-                    :label="
-                      t('components.bewerbungForm.tabEwo.akademischerGrad')
-                    "
-                    persistent-placeholder
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_geburtsort"
-                    :rules="[rules.RULE_REQUIRED]"
-                    :label="t('components.bewerbungForm.tabEwo.geburtsOrt')"
-                    persistent-placeholder
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_geburtsland"
-                    :rules="[rules.RULE_REQUIRED]"
-                    :label="t('components.bewerbungForm.tabEwo.geburtsLand')"
-                    persistent-placeholder
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_familienstand"
-                    :rules="[rules.RULE_REQUIRED]"
-                    :label="t('components.bewerbungForm.tabEwo.familienStand')"
-                    persistent-placeholder
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col class="col">
-                  <v-textarea
-                    v-model="bewerbung.ewo_staatsangehoerigkeit"
-                    :rules="
-                      bewerbung.validierungdeaktivieren
-                        ? []
-                        : [rules.RULE_STAATSANGEHOERIGKEIT]
-                    "
-                    :label="
-                      t('components.bewerbungForm.tabEwo.staatsangehoerigkeit')
-                    "
-                    persistent-placeholder
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col class="col">
-                  <v-textarea
-                    v-if="bewerbung.status != PERSONENSTATUS.STATUS_INERFASSUNG"
-                    v-model="bewerbung.ewo_konfliktfeld"
-                    :label="t('components.bewerbungForm.tabEwo.konfliktfelder')"
-                    persistent-placeholder
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_wohnungsgeber"
-                    :label="t('components.bewerbungForm.tabEwo.wohnungsgeber')"
-                    persistent-placeholder
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_strasse"
-                    :label="t('components.bewerbungForm.tabEwo.strasse')"
-                    persistent-placeholder
-                    :rules="[rules.RULE_REQUIRED]"
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_hausnummer"
-                    :label="t('components.bewerbungForm.tabEwo.hausnummer')"
-                    persistent-placeholder
-                    :rules="[rules.RULE_REQUIRED]"
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_buchstabehausnummer"
-                    :label="
-                      t('components.bewerbungForm.tabEwo.buchstabeHausnummer')
-                    "
-                    persistent-placeholder
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_appartmentnummer"
-                    :label="
-                      t('components.bewerbungForm.tabEwo.appartmentNummer')
-                    "
-                    persistent-placeholder
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_stockwerk"
-                    :label="t('components.bewerbungForm.tabEwo.stockwerk')"
-                    persistent-placeholder
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_teilnummerhausnummer"
-                    :label="
-                      t('components.bewerbungForm.tabEwo.teilnummerHausnummer')
-                    "
-                    persistent-placeholder
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_adresszusatz"
-                    :label="t('components.bewerbungForm.tabEwo.adressZusatz')"
-                    persistent-placeholder
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_postleitzahl"
-                    :label="t('components.bewerbungForm.tabEwo.postleitzahl')"
-                    persistent-placeholder
-                    :rules="[rules.RULE_REQUIRED]"
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_ort"
-                    :rules="
-                      bewerbung.validierungdeaktivieren
-                        ? [rules.RULE_REQUIRED]
-                        : [rules.RULE_REQUIRED, rules.RULE_WOHNSITZ]
-                    "
-                    :label="t('components.bewerbungForm.tabEwo.ort')"
-                    persistent-placeholder
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col class="col">
-                  <v-text-field
-                    v-model="bewerbung.ewo_inmuenchenseit"
-                    :label="
-                      t(
-                        'components.bewerbungForm.tabEwo.inMuenchenWohnhaftSeit'
-                      )
-                    "
-                    persistent-placeholder
-                    :rules="[rules.RULE_REQUIRED]"
-                    type="date"
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col class="col">
-                  <v-select
-                    v-model="bewerbung.ewo_wohnungsstatus"
-                    :items="WOHNUNGSSTATUS_ARTEN"
-                    :label="t('components.bewerbungForm.tabEwo.wohnungsstatus')"
-                    persistent-placeholder
-                    :rules="[rules.RULE_REQUIRED]"
-                    density="compact"
-                    variant="outlined"
-                  />
-                </v-col>
-              </v-row>
-            </v-sheet>
+              <v-expansion-panel title="Name">
+                <v-expansion-panel-text>
+                  <v-row>
+                    <v-col class="col">
+                      <v-text-field
+                        v-model="bewerbung.ewo_vorname"
+                        :rules="[rules.RULE_REQUIRED]"
+                        :label="t('components.bewerbungForm.tabEwo.vorname')"
+                        persistent-placeholder
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                    <v-col class="col">
+                      <v-text-field
+                        v-model="bewerbung.ewo_familienname"
+                        :rules="[rules.RULE_REQUIRED]"
+                        :label="
+                          t('components.bewerbungForm.tabEwo.familienname')
+                        "
+                        persistent-placeholder
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                    <v-col
+                      class="col"
+                      :hidden="
+                        bewerbung.ewo_auskunftssperre.length > 0 &&
+                        !AuthService.checkAuth(
+                          'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
+                        )
+                      "
+                    >
+                      <v-text-field
+                        v-model="bewerbung.ewo_geburtsname"
+                        :label="
+                          t('components.bewerbungForm.tabEwo.geburtsname')
+                        "
+                        persistent-placeholder
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                  </v-row>
+                </v-expansion-panel-text>
+              </v-expansion-panel>
+              <v-expansion-panel
+                title="Personendaten"
+                :hidden="
+                  bewerbung.ewo_auskunftssperre.length > 0 &&
+                  !AuthService.checkAuth(
+                    'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
+                  )
+                "
+              >
+                <v-expansion-panel-text>
+                  <v-row>
+                    <v-col class="col">
+                      <v-text-field
+                        v-model="bewerbung.ewoid"
+                        :rules="[rules.RULE_REQUIRED]"
+                        :label="
+                          t('components.bewerbungForm.tabEwo.ordnungsmerkmal')
+                        "
+                        persistent-placeholder
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                    <v-col class="col">
+                      <v-text-field
+                        v-model="bewerbung.ewo_akademischergrad"
+                        :label="
+                          t('components.bewerbungForm.tabEwo.akademischerGrad')
+                        "
+                        persistent-placeholder
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                    <v-col class="col">
+                      <v-select
+                        v-model="bewerbung.ewo_geschlecht"
+                        :items="geschlechtswerte"
+                        :rules="[rules.RULE_REQUIRED]"
+                        :label="t('components.bewerbungForm.tabEwo.geschlecht')"
+                        persistent-placeholder
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                    <v-col class="col">
+                      <v-text-field
+                        v-model="bewerbung.ewo_familienstand"
+                        :rules="[rules.RULE_REQUIRED]"
+                        :label="
+                          t('components.bewerbungForm.tabEwo.familienStand')
+                        "
+                        persistent-placeholder
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                  </v-row>
+
+                  <!--Hidden and no v-if: guarantee of execution of rules-->
+                  <v-row>
+                    <v-col class="col">
+                      <v-text-field
+                        v-model="bewerbung.ewo_geburtsdatum"
+                        :rules="
+                          bewerbung.validierungdeaktivieren
+                            ? [rules.RULE_REQUIRED]
+                            : [rules.RULE_REQUIRED, rules.RULE_GEBURTSDATUM]
+                        "
+                        :label="
+                          t('components.bewerbungForm.tabEwo.geburtsdatum')
+                        "
+                        persistent-placeholder
+                        type="date"
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                    <v-col class="col">
+                      <v-text-field
+                        v-model="bewerbung.ewo_geburtsort"
+                        :rules="[rules.RULE_REQUIRED]"
+                        :label="t('components.bewerbungForm.tabEwo.geburtsOrt')"
+                        persistent-placeholder
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                    <v-col class="col">
+                      <v-text-field
+                        v-model="bewerbung.ewo_geburtsland"
+                        :rules="[rules.RULE_REQUIRED]"
+                        :label="
+                          t('components.bewerbungForm.tabEwo.geburtsLand')
+                        "
+                        persistent-placeholder
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                    <v-col class="col">
+                      <v-textarea
+                        v-model="bewerbung.ewo_staatsangehoerigkeit"
+                        :rules="
+                          bewerbung.validierungdeaktivieren
+                            ? []
+                            : [rules.RULE_STAATSANGEHOERIGKEIT]
+                        "
+                        :label="
+                          t(
+                            'components.bewerbungForm.tabEwo.staatsangehoerigkeit'
+                          )
+                        "
+                        persistent-placeholder
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                  </v-row>
+                </v-expansion-panel-text>
+              </v-expansion-panel>
+
+              <v-expansion-panel
+                title="Adresse"
+                :hidden="
+                  bewerbung.ewo_auskunftssperre.length > 0 &&
+                  !AuthService.checkAuth(
+                    'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
+                  )
+                "
+              >
+                <v-expansion-panel-text>
+                  <v-row>
+                    <v-col
+                      class="col"
+                      md="4"
+                    >
+                      <v-text-field
+                        v-model="bewerbung.ewo_strasse"
+                        :label="t('components.bewerbungForm.tabEwo.strasse')"
+                        persistent-placeholder
+                        :rules="[rules.RULE_REQUIRED]"
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                    <v-col cols="8">
+                      <v-row>
+                        <v-col
+                          class="col"
+                          md="3"
+                        >
+                          <v-text-field
+                            v-model="bewerbung.ewo_hausnummer"
+                            :label="
+                              t('components.bewerbungForm.tabEwo.hausnummer')
+                            "
+                            persistent-placeholder
+                            :rules="[rules.RULE_REQUIRED]"
+                            density="compact"
+                            variant="outlined"
+                          />
+                        </v-col>
+                        <v-col
+                          class="col"
+                          md="2"
+                        >
+                          <v-text-field
+                            v-model="bewerbung.ewo_buchstabehausnummer"
+                            :label="
+                              t(
+                                'components.bewerbungForm.tabEwo.buchstabeHausnummer'
+                              )
+                            "
+                            persistent-placeholder
+                            density="compact"
+                            variant="outlined"
+                          />
+                        </v-col>
+                        <v-col
+                          class="col"
+                          md="2"
+                        >
+                          <v-text-field
+                            v-model="bewerbung.ewo_appartmentnummer"
+                            :label="
+                              t(
+                                'components.bewerbungForm.tabEwo.appartmentNummer'
+                              )
+                            "
+                            persistent-placeholder
+                            density="compact"
+                            variant="outlined"
+                          />
+                        </v-col>
+                        <v-col
+                          class="col"
+                          md="2"
+                        >
+                          <v-text-field
+                            v-model="bewerbung.ewo_stockwerk"
+                            :label="
+                              t('components.bewerbungForm.tabEwo.stockwerk')
+                            "
+                            persistent-placeholder
+                            density="compact"
+                            variant="outlined"
+                          />
+                        </v-col>
+                        <v-col
+                          class="col"
+                          md="2"
+                        >
+                          <v-text-field
+                            v-model="bewerbung.ewo_teilnummerhausnummer"
+                            :label="
+                              t(
+                                'components.bewerbungForm.tabEwo.teilnummerHausnummer'
+                              )
+                            "
+                            persistent-placeholder
+                            density="compact"
+                            variant="outlined"
+                          />
+                        </v-col>
+                      </v-row>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col class="col">
+                      <v-text-field
+                        v-model="bewerbung.ewo_adresszusatz"
+                        :label="
+                          t('components.bewerbungForm.tabEwo.adressZusatz')
+                        "
+                        persistent-placeholder
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                    <v-col class="col">
+                      <v-text-field
+                        v-model="bewerbung.ewo_wohnungsgeber"
+                        :label="
+                          t('components.bewerbungForm.tabEwo.wohnungsgeber')
+                        "
+                        persistent-placeholder
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                    <v-col class="col">
+                      <v-select
+                        v-model="bewerbung.ewo_wohnungsstatus"
+                        :items="WOHNUNGSSTATUS_ARTEN"
+                        :label="
+                          t('components.bewerbungForm.tabEwo.wohnungsstatus')
+                        "
+                        persistent-placeholder
+                        :rules="[rules.RULE_REQUIRED]"
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col class="col">
+                      <v-text-field
+                        v-model="bewerbung.ewo_postleitzahl"
+                        :label="
+                          t('components.bewerbungForm.tabEwo.postleitzahl')
+                        "
+                        persistent-placeholder
+                        :rules="[rules.RULE_REQUIRED]"
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                    <v-col class="col">
+                      <v-text-field
+                        v-model="bewerbung.ewo_ort"
+                        :rules="
+                          bewerbung.validierungdeaktivieren
+                            ? [rules.RULE_REQUIRED]
+                            : [rules.RULE_REQUIRED, rules.RULE_WOHNSITZ]
+                        "
+                        :label="t('components.bewerbungForm.tabEwo.ort')"
+                        persistent-placeholder
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                    <v-col class="col">
+                      <v-text-field
+                        v-model="bewerbung.ewo_inmuenchenseit"
+                        :label="
+                          t(
+                            'components.bewerbungForm.tabEwo.inMuenchenWohnhaftSeit'
+                          )
+                        "
+                        persistent-placeholder
+                        :rules="[rules.RULE_REQUIRED]"
+                        type="date"
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                  </v-row>
+                </v-expansion-panel-text>
+              </v-expansion-panel>
+              <v-expansion-panel
+                title="Sonstiges"
+                :hidden="
+                  bewerbung.ewo_auskunftssperre.length > 0 &&
+                  !AuthService.checkAuth(
+                    'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
+                  )
+                "
+              >
+                <v-expansion-panel-text>
+                  <v-row>
+                    <v-col class="col">
+                      <v-textarea
+                        v-if="
+                          bewerbung.status != PERSONENSTATUS.STATUS_INERFASSUNG
+                        "
+                        v-model="bewerbung.ewo_konfliktfeld"
+                        :label="
+                          t('components.bewerbungForm.tabEwo.konfliktfelder')
+                        "
+                        persistent-placeholder
+                        density="compact"
+                        variant="outlined"
+                      />
+                    </v-col>
+                  </v-row>
+                </v-expansion-panel-text>
+              </v-expansion-panel>
+            </v-expansion-panels>
           </v-card-text>
         </v-card>
       </v-tabs-window-item>
@@ -410,7 +487,7 @@
         value="bewerber"
         eager
       >
-        <v-card class="scroll vcard">
+        <v-card>
           <v-card-text>
             <v-row>
               <v-col class="col">
@@ -428,8 +505,6 @@
                   autofocus
                 />
               </v-col>
-            </v-row>
-            <v-row>
               <v-col class="col">
                 <v-text-field
                   v-model="bewerbung.arbeitgeber"
@@ -480,8 +555,6 @@
                   variant="outlined"
                 />
               </v-col>
-            </v-row>
-            <v-row>
               <v-col class="col">
                 <v-text-field
                   v-model="bewerbung.telefongesch"
@@ -496,8 +569,6 @@
                   variant="outlined"
                 />
               </v-col>
-            </v-row>
-            <v-row>
               <v-col class="col">
                 <v-text-field
                   v-model="bewerbung.telefonmobil"
@@ -530,8 +601,6 @@
                   variant="outlined"
                 />
               </v-col>
-            </v-row>
-            <v-row>
               <v-col class="col">
                 <v-text-field
                   v-model="bewerbung.bewerbungvom"
@@ -547,8 +616,6 @@
                   variant="outlined"
                 />
               </v-col>
-            </v-row>
-            <v-row>
               <v-col class="col">
                 <v-select
                   v-model="bewerbung.status"
@@ -585,8 +652,6 @@
                   variant="outlined"
                 />
               </v-col>
-            </v-row>
-            <v-row>
               <v-col class="col">
                 <v-checkbox
                   v-model="bewerbung.warbereitstaetigalsvorvorperiode"
@@ -631,10 +696,12 @@ import {
   VCardText,
   VCheckbox,
   VCol,
+  VExpansionPanel,
+  VExpansionPanels,
+  VExpansionPanelText,
   VForm,
   VRow,
   VSelect,
-  VSheet,
   VTab,
   VTabs,
   VTabsWindow,
@@ -670,6 +737,8 @@ const rules = useRules();
 const snackbarStore = useSnackbarStore();
 
 const form = ref();
+
+const panel = ref([0, 1, 2, 3]);
 
 const active_tab = ref("bewerber");
 
@@ -718,6 +787,7 @@ const geschlechtswerte: string[] = [
 const abbruchOderSpeichern = ref(false);
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const { cancel, leave, saveLeaveDialog } = useSaveLeave(isDirty);
+
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 function isDirty(): boolean {
