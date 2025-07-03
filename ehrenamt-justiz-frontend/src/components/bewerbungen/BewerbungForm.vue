@@ -125,9 +125,9 @@
                     </v-col>
                     <v-col
                       class="col"
-                      :hidden="
-                        bewerbung.ewo_auskunftssperre.length > 0 &&
-                        !AuthService.checkAuth(
+                      v-show="
+                        bewerbung.ewo_auskunftssperre.length == 0 ||
+                        AuthService.checkAuth(
                           'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
                         )
                       "
@@ -152,9 +152,9 @@
                     'components.bewerbungForm.tabEwo.expansionPanel.personenDaten'
                   )
                 "
-                :hidden="
-                  bewerbung.ewo_auskunftssperre.length > 0 &&
-                  !AuthService.checkAuth(
+                v-show="
+                  bewerbung.ewo_auskunftssperre.length == 0 ||
+                  AuthService.checkAuth(
                     'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
                   )
                 "
@@ -213,7 +213,6 @@
                     </v-col>
                   </v-row>
 
-                  <!--Hidden and no v-if: guarantee of execution of rules-->
                   <v-row>
                     <v-col class="col">
                       <v-text-field
@@ -284,9 +283,9 @@
                 :title="
                   t('components.bewerbungForm.tabEwo.expansionPanel.adresse')
                 "
-                :hidden="
-                  bewerbung.ewo_auskunftssperre.length > 0 &&
-                  !AuthService.checkAuth(
+                v-show="
+                  bewerbung.ewo_auskunftssperre.length == 0 ||
+                  AuthService.checkAuth(
                     'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
                   )
                 "
@@ -486,9 +485,9 @@
                 :title="
                   t('components.bewerbungForm.tabEwo.expansionPanel.sonstiges')
                 "
-                :hidden="
-                  bewerbung.ewo_auskunftssperre.length > 0 &&
-                  !AuthService.checkAuth(
+                v-show="
+                  bewerbung.ewo_auskunftssperre.length == 0 ||
+                  AuthService.checkAuth(
                     'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
                   )
                 "
@@ -823,7 +822,6 @@ const geschlechtswerte: string[] = [
 const abbruchOderSpeichern = ref(false);
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const { cancel, leave, saveLeaveDialog } = useSaveLeave(isDirty);
-
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 function isDirty(): boolean {
@@ -900,7 +898,7 @@ function setFocusAufFehler() {
       setTimeout(() => {
         v_input.scrollIntoView({
           behavior: "smooth",
-          block: "nearest",
+          block: "start",
           inline: "start",
         });
       }, 400);
