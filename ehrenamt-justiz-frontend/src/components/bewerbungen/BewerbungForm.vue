@@ -103,6 +103,7 @@
                         persistent-placeholder
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                     <v-col class="col">
@@ -115,6 +116,7 @@
                         persistent-placeholder
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                     <v-col
@@ -134,6 +136,7 @@
                         persistent-placeholder
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                   </v-row>
@@ -160,6 +163,7 @@
                         persistent-placeholder
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                     <v-col class="col">
@@ -171,6 +175,7 @@
                         persistent-placeholder
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                     <v-col class="col">
@@ -182,6 +187,7 @@
                         persistent-placeholder
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                     <v-col class="col">
@@ -194,6 +200,7 @@
                         persistent-placeholder
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                   </v-row>
@@ -215,6 +222,7 @@
                         type="date"
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                     <v-col class="col">
@@ -225,6 +233,7 @@
                         persistent-placeholder
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                     <v-col class="col">
@@ -237,6 +246,7 @@
                         persistent-placeholder
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                     <v-col class="col">
@@ -255,6 +265,7 @@
                         persistent-placeholder
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                   </v-row>
@@ -283,6 +294,7 @@
                         :rules="[rules.RULE_REQUIRED]"
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                     <v-col cols="8">
@@ -300,6 +312,7 @@
                             :rules="[rules.RULE_REQUIRED]"
                             density="compact"
                             variant="outlined"
+                            disabled
                           />
                         </v-col>
                         <v-col
@@ -316,6 +329,7 @@
                             persistent-placeholder
                             density="compact"
                             variant="outlined"
+                            disabled
                           />
                         </v-col>
                         <v-col
@@ -332,6 +346,7 @@
                             persistent-placeholder
                             density="compact"
                             variant="outlined"
+                            disabled
                           />
                         </v-col>
                         <v-col
@@ -346,6 +361,7 @@
                             persistent-placeholder
                             density="compact"
                             variant="outlined"
+                            disabled
                           />
                         </v-col>
                         <v-col
@@ -362,6 +378,7 @@
                             persistent-placeholder
                             density="compact"
                             variant="outlined"
+                            disabled
                           />
                         </v-col>
                       </v-row>
@@ -377,6 +394,7 @@
                         persistent-placeholder
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                     <v-col class="col">
@@ -388,6 +406,7 @@
                         persistent-placeholder
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                     <v-col class="col">
@@ -401,6 +420,7 @@
                         :rules="[rules.RULE_REQUIRED]"
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                   </v-row>
@@ -415,6 +435,7 @@
                         :rules="[rules.RULE_REQUIRED]"
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                     <v-col class="col">
@@ -429,6 +450,7 @@
                         persistent-placeholder
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                     <v-col class="col">
@@ -444,6 +466,7 @@
                         type="date"
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                   </v-row>
@@ -472,6 +495,7 @@
                         persistent-placeholder
                         density="compact"
                         variant="outlined"
+                        disabled
                       />
                     </v-col>
                   </v-row>
