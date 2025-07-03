@@ -3,7 +3,7 @@ INSERT INTO konfiguration (id, ehrenamtjustizart, bezeichnung, aktiv, amtsperiod
 INSERT INTO konfiguration (id, ehrenamtjustizart, bezeichnung, aktiv, amtsperiodevon, amtsperiodebis, altervon, alterbis, staatsangehoerigkeit, wohnsitz) VALUES('2f3d0a19-dc99-40bc-af55-0c72bf8bf82e', 'VERWALTUNGSRICHTER', '2030 - 2035', FALSE, '2030-04-01', '2035-03-31', 25, 120, 'deutsch', 'München');
 
 INSERT INTO Person (id, konfigurationid, familienname, vorname, geburtsdatum, geschlecht, ewoid, akademischergrad, geburtsort, geburtsland, familienstand, strasse, hausnummer, postleitzahl, ort, inmuenchenseit, wohnungsstatus, neuervorschlag, onlinebewerbung, warbereitstaetigals, warbereitstaetigalsvorvorperiode, status)
-VALUES('2f3d0a19-dc99-40bc-af55-0c72bf8bf82f', '2f3d0a19-dc99-40bc-af55-0c72bf8bf82f',  'Huber', 'Gabi', '1981-01-01', 'WEIBLICH', '4714', 'Dr.', 'Bremen', 'Deutschland', 'ledig', 'Bachstr.', '1', '80630', 'München', '1999-01-01', 'HAUPTWOHNUNG', true, false, false, false, 'Bewerbung');
+VALUES('2f3d0a19-dc99-40bc-af55-0c72bf8bf82f', '2f3d0a19-dc99-40bc-af55-0c72bf8bf82f',  'Huber', 'Gabi', '1981-01-01', 'WEIBLICH', '4714', 'Dr.', 'Bremen', 'Deutschland', 'ledig', 'Bachstr.', '1', '80630', 'München', '1999-01-01', 'HAUPTWOHNUNG', true, false, false, false, 'BEWERBUNG');
 
 INSERT INTO Staatsangehoerigkeit (personid, staatsangehoerigkeit_text, lfdnr)
 VALUES('2f3d0a19-dc99-40bc-af55-0c72bf8bf82f', 'deutsch', 0);
@@ -15,7 +15,12 @@ INSERT INTO KonfliktFeld (personid, person_attribut, lfdnr)
 VALUES('2f3d0a19-dc99-40bc-af55-0c72bf8bf82f', 'strasse', 0);
 INSERT INTO KonfliktFeld (personid, person_attribut, lfdnr)
 VALUES('2f3d0a19-dc99-40bc-af55-0c72bf8bf82f', 'vorname', 1);
-CREATE EXTENSION pgcrypto;
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_extension WHERE extname = 'pgcrypto') THEN
+        CREATE EXTENSION pgcrypto;
+END IF;
+END $$;
 do $$
 begin
 for i in 1..1000 BY 3 loop
