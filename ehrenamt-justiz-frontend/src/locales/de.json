@@ -250,6 +250,12 @@
         "bewerberZusatzangaben": "Bewerber Zusatzangaben"
       },
       "tabEwo": {
+        "expansionPanel": {
+          "name": "Name",
+          "personenDaten": "Personendaten",
+          "adresse": "Adresse",
+          "sonstiges": "Sonstiges"
+        },
         "vorname": "Vorname",
         "familienname": "Familienname",
         "geburtsdatum": "Geburtsdatum",
