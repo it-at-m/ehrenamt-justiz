@@ -150,7 +150,7 @@ services:
   backend:
     profiles:
       - backend
-    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:latest@sha256:5d07934879f13e64a294ae8da3bd039f430e79366f358bdbbac8d6eaf7f65104
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:latest@sha256:5d07934879f13e64a294ae8da3bd039f430e79366f358bdbbac8d6eaf7f65104
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
@@ -169,7 +169,7 @@ services:
   frontend:
     profiles:
       - frontend
-    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:latest@sha256:c690802d3b5c0cce009b565645aacd559d803fdfa741f6150aece92586432b5e
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:latest@sha256:c690802d3b5c0cce009b565645aacd559d803fdfa741f6150aece92586432b5e
     ports:
       - "8081:8080"
     networks:
@@ -182,7 +182,7 @@ services:
   online:
     profiles:
       - online
-    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:latest@sha256:295afeacdd8694bbd32bbc60f27ab8bd72dc4b6dd34b189ec942b5edb9949a2c
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:latest@sha256:295afeacdd8694bbd32bbc60f27ab8bd72dc4b6dd34b189ec942b5edb9949a2c
     ports:
       - "8082:8080"
     networks:
