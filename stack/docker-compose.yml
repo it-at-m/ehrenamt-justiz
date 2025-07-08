@@ -150,7 +150,7 @@ services:
   backend:
     profiles:
       - backend
-    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:latest@sha256:dfaa93abd23e751f81a32f59aaeacaea168165eb26929432f42701bd01a6bfed
+    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:latest
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
@@ -169,7 +169,7 @@ services:
   frontend:
     profiles:
       - frontend
-    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:latest@sha256:7070d436c31df8755bc918cf51a94e62646cb703ae39de620027dd6254186060
+    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:latest
     ports:
       - "8081:8080"
     networks:
@@ -182,7 +182,7 @@ services:
   online:
     profiles:
       - online
-    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:latest@sha256:581ba243a7fbe2fe65a1492617d13d70ca0838a2e896def46010745765c92eee
+    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:latest
     ports:
       - "8082:8080"
     networks:
@@ -197,7 +197,7 @@ services:
   eai:
     profiles:
       - eai
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai:latest@sha256:88cfdf6d929fa59c15a92e86afa9bf92d766e230ef0250ac12926fa1c4afb8c5
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai:latest
     volumes:
       - ../ehrenamt-justiz-eai/entrypoint.sh:/usr/local/bin/entrypoint.sh:rwx
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
@@ -219,7 +219,7 @@ services:
   aenderungsservice:
     profiles:
       - aenderungsservice
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice:latest@sha256:35df0b98c3ac6de3d54939dd31e4451934efe5004acc10697fcaef956771d4ff
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice:latest
     volumes:
       - ../ehrenamt-justiz-aenderungsservice/src/main/resources/truststore.jks:/etc/ssl/truststore.jks
       - ../ehrenamt-justiz-aenderungsservice/src/main/resources/kafka-auth-keystore.jks:/etc/ssl/kafka-auth-keystore.jks
