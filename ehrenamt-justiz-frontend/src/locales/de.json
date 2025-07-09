@@ -339,6 +339,10 @@
         "alleUebernehmen": "Alle übernehmen",
         "speichern": "Speichern"
       },
+      "expansionPanel": {
+        "datenAusEWOUebernehmen": "Daten aus EWO übernehmen",
+        "bewerberZusatzangaben": "Bewerber Zusatzangaben"
+      },
       "form": {
         "familienname": "Familienname",
         "geburtsname": "Geburtsname",
