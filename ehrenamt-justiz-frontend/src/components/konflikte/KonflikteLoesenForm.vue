@@ -109,14 +109,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(FAMILIENNAME)"
-                :disabled="!isKonflikt(FAMILIENNAME)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenFamilienname()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.familienname'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(FAMILIENNAME)"
+                      :disabled="!isKonflikt(FAMILIENNAME)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenFamilienname()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -151,14 +168,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(GEBURTSNAME)"
-                :disabled="!isKonflikt(GEBURTSNAME)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenGeburtsname()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.geburtsname'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(GEBURTSNAME)"
+                      :disabled="!isKonflikt(GEBURTSNAME)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenGeburtsname()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -193,14 +227,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(VORNAME)"
-                :disabled="!isKonflikt(VORNAME)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenVorname()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.vorname'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(VORNAME)"
+                      :disabled="!isKonflikt(VORNAME)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenVorname()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -236,14 +287,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(GEBURTSDATUM)"
-                :disabled="!isKonflikt(GEBURTSDATUM)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenGeburtsdatum()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.geburtsdatum'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(GEBURTSDATUM)"
+                      :disabled="!isKonflikt(GEBURTSDATUM)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenGeburtsdatum()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -280,14 +348,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(GESCHLECHT)"
-                :disabled="!isKonflikt(GESCHLECHT)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenGeschlecht()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.geschlecht'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(GESCHLECHT)"
+                      :disabled="!isKonflikt(GESCHLECHT)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenGeschlecht()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -325,14 +410,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(ORDNUNGSMERKMAL)"
-                :disabled="!isKonflikt(ORDNUNGSMERKMAL)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenOrdnungsmerkmal()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.ordnungsmerkmal'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(ORDNUNGSMERKMAL)"
+                      :disabled="!isKonflikt(ORDNUNGSMERKMAL)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenOrdnungsmerkmal()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -371,14 +473,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(AKADEMISCHERGRAD)"
-                :disabled="!isKonflikt(AKADEMISCHERGRAD)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenAkademischergrad()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.akademischerGrad'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(AKADEMISCHERGRAD)"
+                      :disabled="!isKonflikt(AKADEMISCHERGRAD)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenAkademischergrad()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -415,14 +534,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(GEBURTSORT)"
-                :disabled="!isKonflikt(GEBURTSORT)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenGeburtsort()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.geburtsOrt'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(GEBURTSORT)"
+                      :disabled="!isKonflikt(GEBURTSORT)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenGeburtsort()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -457,14 +593,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(GEBURTSLAND)"
-                :disabled="!isKonflikt(GEBURTSLAND)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenGeburtsland()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.geburtsLand'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(GEBURTSLAND)"
+                      :disabled="!isKonflikt(GEBURTSLAND)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenGeburtsland()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -499,14 +652,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(FAMILIENSTAND)"
-                :disabled="!isKonflikt(FAMILIENSTAND)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenFamilienstand()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.familienStand'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(FAMILIENSTAND)"
+                      :disabled="!isKonflikt(FAMILIENSTAND)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenFamilienstand()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -543,14 +713,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(STAATSANGEHOERIGKEIT)"
-                :disabled="!isKonflikt(STAATSANGEHOERIGKEIT)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenStaatsangehoerigkeiten()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.staatsangehoerigkeit'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(STAATSANGEHOERIGKEIT)"
+                      :disabled="!isKonflikt(STAATSANGEHOERIGKEIT)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenStaatsangehoerigkeiten()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -587,14 +774,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(WOHNUNGSGEBER)"
-                :disabled="!isKonflikt(WOHNUNGSGEBER)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenWohnungsgeber()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.wohnungsgeber'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(WOHNUNGSGEBER)"
+                      :disabled="!isKonflikt(WOHNUNGSGEBER)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenWohnungsgeber()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -629,14 +833,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(STRASSE)"
-                :disabled="!isKonflikt(STRASSE)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenStrasse()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.strasse'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(STRASSE)"
+                      :disabled="!isKonflikt(STRASSE)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenStrasse()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -671,14 +892,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(HAUSNUMMER)"
-                :disabled="!isKonflikt(HAUSNUMMER)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenHausnummer()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.hausnummer'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(HAUSNUMMER)"
+                      :disabled="!isKonflikt(HAUSNUMMER)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenHausnummer()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -715,14 +953,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(APPARTMENTNUMMER)"
-                :disabled="!isKonflikt(APPARTMENTNUMMER)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenAppartmentnummer()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.appartmentNummer'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(APPARTMENTNUMMER)"
+                      :disabled="!isKonflikt(APPARTMENTNUMMER)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenAppartmentnummer()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -761,14 +1016,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(BUCHSTABEHAUSNUMMER)"
-                :disabled="!isKonflikt(BUCHSTABEHAUSNUMMER)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenBuchstabehausnummer()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.buchstabeHausnummer'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(BUCHSTABEHAUSNUMMER)"
+                      :disabled="!isKonflikt(BUCHSTABEHAUSNUMMER)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenBuchstabehausnummer()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -805,14 +1077,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(STOCKWERK)"
-                :disabled="!isKonflikt(STOCKWERK)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenStockwerk()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.stockwerk'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(STOCKWERK)"
+                      :disabled="!isKonflikt(STOCKWERK)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenStockwerk()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -849,14 +1138,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(TEILNUMMERHAUSNUMMER)"
-                :disabled="!isKonflikt(TEILNUMMERHAUSNUMMER)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenTeilnummerhausnummer()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.teilnummerHausnummer'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(TEILNUMMERHAUSNUMMER)"
+                      :disabled="!isKonflikt(TEILNUMMERHAUSNUMMER)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenTeilnummerhausnummer()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -893,14 +1199,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(ADRESSZUSATZ)"
-                :disabled="!isKonflikt(ADRESSZUSATZ)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenAdresszusatz()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.adressZusatz'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(ADRESSZUSATZ)"
+                      :disabled="!isKonflikt(ADRESSZUSATZ)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenAdresszusatz()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -935,14 +1258,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(POSTLEITZAHL)"
-                :disabled="!isKonflikt(POSTLEITZAHL)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenPostleitzahl()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.postleitzahl'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(POSTLEITZAHL)"
+                      :disabled="!isKonflikt(POSTLEITZAHL)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenPostleitzahl()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -977,14 +1317,27 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(ORT)"
-                :disabled="!isKonflikt(ORT)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenOrt()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    { feldname: t('components.konflikteLoesenForm.form.ort') }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(ORT)"
+                      :disabled="!isKonflikt(ORT)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenOrt()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -1024,14 +1377,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(INMUENCHENSEIT)"
-                :disabled="!isKonflikt(INMUENCHENSEIT)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenInMuenchenseit()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.inMuenchenWohnhaftSeit'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(INMUENCHENSEIT)"
+                      :disabled="!isKonflikt(INMUENCHENSEIT)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenInMuenchenseit()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -1072,14 +1442,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(WOHNUNGSSTATUS)"
-                :disabled="!isKonflikt(WOHNUNGSSTATUS)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenWohnungsstatus()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.wohnungsstatus'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(WOHNUNGSSTATUS)"
+                      :disabled="!isKonflikt(WOHNUNGSSTATUS)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenWohnungsstatus()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -1119,14 +1506,31 @@
               class="col"
               md="1"
             >
-              <v-btn
-                v-if="isKonfliktOriginal(AUSKUNFTSSPERRE)"
-                :disabled="!isKonflikt(AUSKUNFTSSPERRE)"
-                class="button-konflikt-loesen"
-                @click="konfliktLoesenAuskunftssperren()"
+              <v-tooltip
+                :text="
+                  t(
+                    'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                    {
+                      feldname: t(
+                        'components.konflikteLoesenForm.form.auskunftsSperre'
+                      ),
+                    }
+                  )
+                "
               >
-                <v-icon :icon="mdiTransferLeft" />
-              </v-btn>
+                <template #activator="{ props }">
+                  <span v-bind="props">
+                    <v-btn
+                      v-if="isKonfliktOriginal(AUSKUNFTSSPERRE)"
+                      :disabled="!isKonflikt(AUSKUNFTSSPERRE)"
+                      class="button-konflikt-loesen"
+                      @click="konfliktLoesenAuskunftssperren()"
+                    >
+                      <v-icon :icon="mdiTransferLeft" />
+                    </v-btn>
+                  </span>
+                </template>
+              </v-tooltip>
             </v-col>
             <v-col
               class="col"
@@ -1424,6 +1828,7 @@ import {
   VSelect,
   VTextarea,
   VTextField,
+  VTooltip,
 } from "vuetify/components";
 
 import BewerbungForm from "@/components/bewerbungen/BewerbungForm.vue";
@@ -1446,7 +1851,7 @@ const form = ref();
 
 const formValid = ref(false);
 
-const activeExpansionPanel = ref([0, 1, 2, 3]);
+const activeExpansionPanel = ref([0, 1]);
 
 const FAMILIENNAME = "Familienname";
 const GEBURTSNAME = "Geburtsname";
