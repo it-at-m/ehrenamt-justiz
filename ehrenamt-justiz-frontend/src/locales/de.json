@@ -338,7 +338,7 @@
         "abbrechen": "Abbrechen",
         "alleUebernehmen": "Alle übernehmen",
         "speichern": "Speichern",
-        "datenAusEWOUebernehmen": "{feldname} aus EWO übernehmen um diesen Konflikt zu lösen"
+        "datenAusEWOUebernehmen": "{feldname} aus EWO übernehmen, um diesen Konflikt zu lösen"
       },
       "expansionPanel": {
         "datenAusEWOUebernehmen": "Daten aus EWO übernehmen",
