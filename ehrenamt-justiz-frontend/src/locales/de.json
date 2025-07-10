@@ -327,7 +327,7 @@
       }
     },
     "konflikteLoesenForm": {
-      "onlineHelp": "Hier haben Sie die Möglichkeit, Konflikte bei einem Bewerber zu beheben. Im linken Bereich sehen Sie die aktuellen Daten aus dem Einwohnermeldewesen, während im rechten Bereich die abweichenden Bewerberdaten (Konflikte) angezeigt werden.\n\nUm die Konflikte zu lösen, übernehmen Sie einfach die aktuellen Daten aus dem Einwohnermeldewesen und speichern Sie diese. Einzelne Konflikte können behoben werden, indem Sie auf den roten Button (mit dem Pfeil nach links) klicken.\n\nWenn Sie alle Konflikte auf einmal lösen möchten, nutzen Sie den Button 'Alle Übernehmen'. Bitte beachten Sie, dass der Speicher-Button erst aktiv wird, nachdem alle Konflikte gelöst wurden.",
+      "onlineHelp": "Hier haben Sie die Möglichkeit, Konflikte bei einem Bewerber zu beheben. Im rechten Bereich sehen Sie die Daten aus dem Einwohnermeldewesen, während im linken Bereich die aktuellen Bewerberdaten angezeigt werden. Wenn diese abweichen dann entsteht ein Konflikt.\n\nUm die Konflikte zu lösen, übernehmen Sie einfach die Daten aus dem Einwohnermeldewesen und speichern Sie diese. Einzelne Konflikte können behoben werden, indem Sie auf die roten Button (mit dem Pfeil nach links) klicken.\n\nWenn Sie alle Konflikte auf einmal lösen möchten, nutzen Sie den Button 'Alle Übernehmen'. Bitte beachten Sie, dass der Speicher-Button erst aktiv wird, nachdem alle Konflikte gelöst wurden.",
       "header": {
         "konflikteLoesen": "Konflikte lösen",
         "auskunftssperre": "Auskunftssperre",
