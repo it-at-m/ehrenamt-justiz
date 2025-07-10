@@ -22,7 +22,12 @@ import de.muenchen.ehrenamtjustiz.backend.rest.controller.PersonRestController;
 import de.muenchen.ehrenamtjustiz.backend.testdata.KonfigurationTestDataBuilder;
 import de.muenchen.ehrenamtjustiz.backend.testdata.PersonTestDataBuilder;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -99,8 +104,7 @@ class PersonIntegrationsTest {
         uuidPerson = person.getId();
     }
 
-    private static @NotNull
-    Person initPerson() {
+    private static @NotNull Person initPerson() {
         return new PersonTestDataBuilder().withKonfigurationid(uuidKonfiguration).build();
     }
 

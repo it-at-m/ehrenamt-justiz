@@ -321,6 +321,8 @@
             <endWithNewline />
             <importOrder />
             <removeUnusedImports />
+            <removeWildcardImports />
+            <formatAnnotations />
           </java>
         </configuration>
         <executions>

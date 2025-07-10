@@ -181,8 +181,7 @@ class AenderungsServiceIntegrationsTest {
 
     }
 
-    private static @NotNull
-    Person createPerson(final Konfiguration konfiguration) {
+    private static @NotNull Person createPerson(final Konfiguration konfiguration) {
         // new person
         return new PersonTestDataBuilder().withKonfigurationid(konfiguration.getId()).withEwoid(TEST_OM).build();
     }

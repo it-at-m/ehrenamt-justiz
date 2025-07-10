@@ -7,7 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import de.muenchen.ehrenamtjustiz.konstanten.Konstanten;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,6 +1,7 @@
 package de.muenchen.ehrenamtjustiz.backend.rest.controller;
 
-import de.muenchen.ehrenamtjustiz.backend.domain.*;
+import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
+import de.muenchen.ehrenamtjustiz.backend.domain.Person;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerDatenDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerSucheDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.OnlineBewerbungDatenDto;

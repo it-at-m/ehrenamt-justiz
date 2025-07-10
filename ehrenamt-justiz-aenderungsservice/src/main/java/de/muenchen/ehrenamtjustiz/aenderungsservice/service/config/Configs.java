@@ -13,7 +13,7 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.listener.DefaultErrorHandler;
 import org.springframework.kafka.listener.KafkaListenerErrorHandler;
 import org.springframework.kafka.support.ExponentialBackOffWithMaxRetries;
-import org.springframework.web.client.*;
+import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Configuration
