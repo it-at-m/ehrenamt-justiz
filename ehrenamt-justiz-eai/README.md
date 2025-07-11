@@ -70,7 +70,7 @@ Example of an EAI call in docker desktop with the parameter om:
 ![SoapUI ewosuchemitom Docker example](../docs/images/SoapUI_ewosuchemitom_docker.PNG)
 
 ## Start EAI
-Change to the folder "ehrenamt-justiz-backend" and call the following scripts depending on your operating system
+Change to the folder "ehrenamt-justiz-eai" and call the following scripts depending on your operating system
 
 | Betriebssystem | Profile            |  Script                 |
 |:---------------|:-------------------|:------------------------|
