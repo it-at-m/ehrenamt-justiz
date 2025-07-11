@@ -1,6 +1,7 @@
 # Online application of Ehrenamt-Justiz
 
 ## Start frontend
+
 Change to the folder "ehrenamt-justiz-online" and call the following commands:
 
 npm install
