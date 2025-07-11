@@ -1,5 +1,7 @@
 # Docker-Compose
 
+Fhe following containers are created in the docker desktop for the complete start of the application:
+
 | Image/Container | Description | Port | Link |
 | ------------- | ------------- | ------------- |  ------------- |
 | postgres | PostgreSQL | 5432 | 
@@ -14,13 +16,25 @@
 | eai | Residents registration EAI (Enterprise application integration) | 8085 | |
 | aenderungsservice | Residents registration change service of Ehrenamt-Justiz | 8086 | |
 
-Start of docker-compose:
+## Configuration of Docker-Compose
+Before starting the Docker-Compose, the following configurations must be made in the docker-compose.yml file:
+
+| Component concerned | entry | description | 
+| ------------- | ------------- | ------------- | 
+| eai | service.eai.environment.PRODUCER_USER | user for calling EWO-eai | 
+| eai | service.eai.environment.PRODUCER_PASSWORD | password for calling EWO-eai | 
+| change service | service.aenderungsservice.environment.KEY_STORE_PASSWORD | password for key store of kafka producer | 
+| change service | service.aenderungsservice.environment.TRUST_STORE_PASSWORD | password for trust store of kafka producer | 
+
+## Start of docker-compose
 ````
 cd ~/develop/ehrenamt-justiz/stack/
 docker-compose --profile=backend --profile=frontend --profile=online --profile=eai --profile=aenderungsservice up -d
+
+If you omit a profile, this service will not be started.
 ````
 
-Stop of docker-compose:
+## Stop of docker-compose
 ````
 cd ~/develop/ehrenamt-justiz/stack/
 docker-compose --profile=backend --profile=frontend --profile=online --profile=eai --profile=aenderungsservice stop -d
