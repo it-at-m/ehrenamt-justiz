@@ -1,7 +1,9 @@
 # Ehrenamt-Justiz API
 
+## Interface
 The Ehrenamt-Justiz API defines the interface between the core application of Ehrenamt-Justiz and the EAI for the residents' registration system
 
+### Request
 Structure for search request to EWO-EAI (BuergerSucheAnfrage):
 
 | name           | datatype  |  description                     |
@@ -10,6 +12,7 @@ Structure for search request to EWO-EAI (BuergerSucheAnfrage):
 | vorname        | string    | given name                       |
 | geburtsdatum   | LocalDate | birth name                       |
 
+### Response
 Structure for response from EWO-EAI (EWOBuerger):
 
 | name                   | datatype  |  description                     |
@@ -41,6 +44,10 @@ Structure for response from EWO-EAI (EWOBuerger):
 | wohnungsstatus | enum: HAUPTWOHNUNG or NEBENWOHNUNG | Residential status: main residence or secondary residence |
 | auskunftssperren | List of String | blocking of information if list is not empty|
 
+## General
+The api also contains commonly used exceptions and constants. 
+
+## Release build
 
 The release is built by manually calling the action “api-release” (https://github.com/it-at-m/ehrenamt-justiz/actions/workflows/api-release.yml) and saved in the central Maven repository (https://central.sonatype.com/search?q=ehrenamt-justiz).
 
