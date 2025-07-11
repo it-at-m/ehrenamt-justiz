@@ -8,6 +8,7 @@ Structure for search request to EWO-EAI (BuergerSucheAnfrage):
 |:---------------|:-------------------|:------------------------|
 | familienname   | string    | surname                          |
 | vorname        | string    | given name                       |
+| geburtsdatum   | LocalDate | birth name                       |
 
 Structure for response from EWO-EAI (EWOBuerger):
 
