@@ -1,4 +1,15 @@
 # Database schema
+
+## Start backend
+Change to the folder "ehrenamt-justiz-backend" and call the following scripts depending on your operating system
+
+| Betriebssystem | Profile            |  Script                 |
+|:---------------|:-------------------|:------------------------|
+| Windows        | Local              | runLocal.bat            |
+| Windows        | Local, nosecurity  | runLocalNoSecurity.bat  |
+| Linux          | Local              | runLocal.sh             |
+| Linux          | Local, nosecurity  | runLocalNoSecurity.bat  |
+
 ## ER-Diagramm
 The following figure shows the ER diagram with all tables and the relationships between them.
 ![ER Model](../docs/images/DB_ER_Model.png)
