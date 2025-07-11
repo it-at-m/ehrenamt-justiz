@@ -97,3 +97,12 @@ aenderungsservice:
 
 A “blocking entry” in Kafka listener contexts refers to a situation where a consumer (in this case a Kafka listener) is blocked from processing messages and is unable to consume new messages from a Kafka partition until the current processing is complete (For example, timeout when calling the backend or when calling the Residents registration EAI).
 
+## Start backend
+Change to the folder "ehrenamt-justiz-backend" and call the following scripts depending on your operating system
+
+| Betriebssystem | Profile            |  Script                 |
+|:---------------|:-------------------|:------------------------|
+| Windows        | Local              | runLocal.bat            |
+| Windows        | Local, nosecurity  | runLocalNoSecurity.bat  |
+| Linux          | Local              | runLocal.sh             |
+| Linux          | Local, nosecurity  | runLocalNoSecurity.bat  |
