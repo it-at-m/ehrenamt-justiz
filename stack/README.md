@@ -19,12 +19,12 @@ Fhe following containers are created in the docker desktop for the complete star
 ## Configuration of Docker-Compose
 Before starting the Docker-Compose, the following configurations must be made in the docker-compose.yml file:
 
-| Component concerned | entry | description | 
-| ------------- | ------------- | ------------- | 
-| eai | service.eai.environment.PRODUCER_USER | user for calling EWO-eai | 
-| eai | service.eai.environment.PRODUCER_PASSWORD | password for calling EWO-eai | 
-| change service | service.aenderungsservice.environment.KEY_STORE_PASSWORD | password for key store of kafka producer | 
-| change service | service.aenderungsservice.environment.TRUST_STORE_PASSWORD | password for trust store of kafka producer | 
+Details can be found here:
+
+https://github.com/it-at-m/ehrenamt-justiz?tab=readme-ov-file#manual-adaption-for-starting-the-eai
+
+https://github.com/it-at-m/ehrenamt-justiz?tab=readme-ov-file#manual-work-for-starting-the-ej-change-service
+
 
 ## Start of docker-compose
 ````
