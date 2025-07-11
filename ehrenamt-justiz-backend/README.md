@@ -76,6 +76,16 @@ The following table shows the most important configurations of the backend (appl
 | spring.datasource.username | Username for connecting to database |  |
 | spring.datasource.password | Password for connecting to database |  |
 
+# pgAdmin
+
+The GUI ‘pgAdmin’ serves as a graphical interface to the PostgreSQL database.
+If the database und pgAdmin were started in docker desktop, then pgAdmin can be started in the browser with this address: 
+```
+http://localhost:5050/browser/
+```
+
+![pgAdmin](../docs/images/pgadmin.PNG)
+
 ## User, roles and authorizations
 
 Users, roles and authorizations are defined in this repository for keycloak (dev) and for docker desktop.
