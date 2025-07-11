@@ -33,12 +33,12 @@ Structure for response from EWO-EAI (EWOBuerger.):
 | stockwerk | string | number of floor |
 | teilnummerHausnummer| string | partial number of the house number |
 | zusatz| string | addition |
-| konfliktFelder | List<String> | data fields with conflicts |
+| konfliktFelder | List of String | data fields with conflicts |
 | postleitzahl | string | postal code |
 | ort | string | place of residence |
 | inMuenchenSeit| LocalDate | in munich since |
 | wohnungsstatus | enum: HAUPTWOHNUNG or NEBENWOHNUNG | Residential status: main residence or secondary residence |
-| auskunftssperren | List<String> | blocking of information if list is not empty|
+| auskunftssperren | List of String | blocking of information if list is not empty|
 
 
 The search query and the result of the queries to the residents' registration system are defined in this module.
