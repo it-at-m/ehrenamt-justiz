@@ -13,7 +13,7 @@ Structure for response from EWO-EAI (EWOBuerger):
 
 | name                   | datatype  |  description                     |
 |:-----------------------|:----------|:---------------------------------|
-| familienname  string    | surname |
+| familienname  | string | surname |
 | familiennameZusatz | string    | surname addition  |
 | geburtsname | string    | birth name |
 | geburtsnameZusatz | string    | birth name addition |
