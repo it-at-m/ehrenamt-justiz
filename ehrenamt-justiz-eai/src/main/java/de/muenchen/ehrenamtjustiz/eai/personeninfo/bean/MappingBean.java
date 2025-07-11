@@ -1,6 +1,20 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo.bean;
 
-import de.muenchen.eai.ewo.api.fachlich.model.person.v2.*;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.AbstractWohnungType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.AktuelleWohnungType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.AnschriftErweitertType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.BenutzerType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.DatensatzstatusType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.GeburtsdatenType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.GeburtsdatumType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.NamenType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.PersonErweitert;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.PersonErweitertType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.PersonenSuchkriterienErweitertType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.StaatsangehoerigkeitType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.VornameType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.WohnungsNutzungszustandType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.ZuzugdatenType;
 import de.muenchen.eai.ewo.api.fachlich.service.erweitert.person.v2.LesePersonErweitert;
 import de.muenchen.eai.ewo.api.fachlich.service.erweitert.person.v2.LesePersonErweitertResponse;
 import de.muenchen.eai.ewo.api.fachlich.service.erweitert.person.v2.SuchePersonErweitert;
@@ -13,7 +27,11 @@ import de.muenchen.ehrenamtjustiz.eai.personeninfo.exception.PersonNotFoundExcep
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.util.CountryCode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.xml.datatype.XMLGregorianCalendar;
 import org.apache.camel.Header;

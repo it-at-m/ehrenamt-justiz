@@ -1,7 +1,14 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo.converter;
 
-import com.google.gson.*;
-import de.muenchen.eai.ewo.api.fachlich.model.person.v2.*;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.AbstractWohnungType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.AktuelleWohnungType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.InaktuelleWohnungType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.WegzugsWohnungType;
+import de.muenchen.eai.ewo.api.fachlich.model.person.v2.ZuzugsWohnungType;
 import java.lang.reflect.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -8,13 +8,25 @@ import de.muenchen.ehrenamtjustiz.backend.common.BaseEntity;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
-import jakarta.persistence.*;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OrderColumn;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serial;
 import java.util.Collections;
 import java.util.UUID;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 /**
@@ -37,138 +49,100 @@ public class Person extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     @Column(name = "ewoid")
-    @Size(max = 255)
-    private String ewoid;
+    @Size(max = 255) private String ewoid;
 
     @Column(name = "konfigurationid")
     private UUID konfigurationid;
 
     @Column(name = "familienname")
-    @NotNull
-    @Size(max = 255)
-    private String familienname;
+    @NotNull @Size(max = 255) private String familienname;
 
     @Column(name = "geburtsname")
-    @Size(max = 255)
-    private String geburtsname;
+    @Size(max = 255) private String geburtsname;
 
     @Column(name = "vorname")
-    @NotNull
-    @Size(max = 255)
-    private String vorname;
+    @NotNull @Size(max = 255) private String vorname;
 
     @Column(name = "geburtsdatum")
-    @NotNull
-    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @NotNull @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private java.time.LocalDate geburtsdatum;
 
     @Column(name = "geschlecht")
-    @NotNull
-    @Enumerated(EnumType.STRING)
+    @NotNull @Enumerated(EnumType.STRING)
     private Geschlecht geschlecht;
 
     @Column(name = "akademischergrad")
-    @Size(max = 255)
-    private String akademischergrad;
+    @Size(max = 255) private String akademischergrad;
 
     @Column(name = "geburtsort")
-    @NotNull
-    @Size(max = 255)
-    private String geburtsort;
+    @NotNull @Size(max = 255) private String geburtsort;
 
     @Column(name = "geburtsland")
-    @NotNull
-    @Size(max = 255)
-    private String geburtsland;
+    @NotNull @Size(max = 255) private String geburtsland;
 
     @Column(name = "familienstand")
-    @NotNull
-    @Size(max = 255)
-    private String familienstand;
+    @NotNull @Size(max = 255) private String familienstand;
 
     @Column(name = "strasse")
-    @NotNull
-    @Size(max = 255)
-    private String strasse;
+    @NotNull @Size(max = 255) private String strasse;
 
     @Column(name = "hausnummer")
-    @NotNull
-    @Size(max = 255)
-    private String hausnummer;
+    @NotNull @Size(max = 255) private String hausnummer;
 
     @Column(name = "appartmentnummer")
-    @Size(max = 255)
-    private String appartmentnummer;
+    @Size(max = 255) private String appartmentnummer;
 
     @Column(name = "buchstabehausnummer")
-    @Size(max = 255)
-    private String buchstabehausnummer;
+    @Size(max = 255) private String buchstabehausnummer;
 
     @Column(name = "stockwerk")
-    @Size(max = 255)
-    private String stockwerk;
+    @Size(max = 255) private String stockwerk;
 
     @Column(name = "teilnummerhausnummer")
-    @Size(max = 255)
-    private String teilnummerhausnummer;
+    @Size(max = 255) private String teilnummerhausnummer;
 
     @Column(name = "adresszusatz")
-    @Size(max = 255)
-    private String adresszusatz;
+    @Size(max = 255) private String adresszusatz;
 
     @Column(name = "postleitzahl")
-    @NotNull
-    @Size(max = 255)
-    private String postleitzahl;
+    @NotNull @Size(max = 255) private String postleitzahl;
 
     @Column(name = "ort")
-    @NotNull
-    @Size(max = 255)
-    private String ort;
+    @NotNull @Size(max = 255) private String ort;
 
     @Column(name = "inmuenchenseit")
-    @NotNull
-    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @NotNull @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private java.time.LocalDate inmuenchenseit;
 
     @Column(name = "wohnungsgeber")
-    @Size(max = 255)
-    private String wohnungsgeber;
+    @Size(max = 255) private String wohnungsgeber;
 
     @Column(name = "wohnungsstatus")
-    @NotNull
-    @Enumerated(EnumType.STRING)
+    @NotNull @Enumerated(EnumType.STRING)
     private Wohnungsstatus wohnungsstatus;
 
     @Column(name = "derzeitausgeuebterberuf")
-    @Size(max = 255)
-    private String derzeitausgeuebterberuf;
+    @Size(max = 255) private String derzeitausgeuebterberuf;
 
     @Column(name = "arbeitgeber")
-    @Size(max = 255)
-    private String arbeitgeber;
+    @Size(max = 255) private String arbeitgeber;
 
     @Column(name = "telefonnummer")
-    @Size(max = 255)
-    private String telefonnummer;
+    @Size(max = 255) private String telefonnummer;
 
     @Column(name = "telefongesch")
-    @Size(max = 255)
-    private String telefongesch;
+    @Size(max = 255) private String telefongesch;
 
     @Column(name = "telefonmobil")
-    @Size(max = 255)
-    private String telefonmobil;
+    @Size(max = 255) private String telefonmobil;
 
     @Column(name = "mailadresse")
-    @Size(max = 150)
-    private String mailadresse;
+    @Size(max = 150) private String mailadresse;
 
     @Column(name = "ausgeuebteehrenaemter")
-    @Size(max = 4000)
-    private String ausgeuebteehrenaemter;
+    @Size(max = 4000) private String ausgeuebteehrenaemter;
 
     @Column(name = "onlinebewerbung")
     private boolean onlinebewerbung = false;
@@ -192,29 +166,25 @@ public class Person extends BaseEntity {
     private Status status;
 
     @Column(name = "bemerkung")
-    @Size(max = 255)
-    private String bemerkung;
+    @Size(max = 255) private String bemerkung;
 
     @Column(name = "sperrentyp")
     @OrderColumn(name = "lfdnr")
     @CollectionTable(name = "auskunftssperre", joinColumns = { @JoinColumn(name = "personid") })
     @ElementCollection(fetch = FetchType.EAGER)
-    @Size(max = 255)
-    private java.util.List<String> auskunftssperre = new java.util.ArrayList<>();
+    @Size(max = 255) private java.util.List<String> auskunftssperre = new java.util.ArrayList<>();
 
     @Column(name = "person_attribut")
     @OrderColumn(name = "lfdnr")
     @CollectionTable(name = "konfliktfeld", joinColumns = { @JoinColumn(name = "personid") })
     @ElementCollection(fetch = FetchType.EAGER)
-    @Size(max = 255)
-    private java.util.List<String> konfliktfeld = new java.util.ArrayList<>();
+    @Size(max = 255) private java.util.List<String> konfliktfeld = new java.util.ArrayList<>();
 
     @Column(name = "staatsangehoerigkeit_text")
     @OrderColumn(name = "lfdnr")
     @CollectionTable(name = "staatsangehoerigkeit", joinColumns = { @JoinColumn(name = "personid") })
     @ElementCollection(fetch = FetchType.EAGER)
-    @Size(max = 255)
-    private java.util.List<String> staatsangehoerigkeit = new java.util.ArrayList<>();
+    @Size(max = 255) private java.util.List<String> staatsangehoerigkeit = new java.util.ArrayList<>();
 
     // because of EI_EXPOSE_REP
     public java.util.List<String> getAuskunftssperre() {

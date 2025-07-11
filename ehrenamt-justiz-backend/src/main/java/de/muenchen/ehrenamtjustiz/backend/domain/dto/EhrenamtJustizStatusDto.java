@@ -1,7 +1,11 @@
 package de.muenchen.ehrenamtjustiz.backend.domain.dto;
 
 import jakarta.persistence.Embeddable;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Embeddable
 @Getter

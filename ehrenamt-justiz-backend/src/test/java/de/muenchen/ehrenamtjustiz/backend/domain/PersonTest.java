@@ -126,8 +126,7 @@ class PersonTest {
         }
     }
 
-    private static @NotNull
-    Person getPerson() {
+    private static @NotNull Person getPerson() {
         return new PersonTestDataBuilder().withKonfigurationid(konfigurationId).build();
     }
 

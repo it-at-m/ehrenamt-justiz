@@ -2,7 +2,10 @@ package de.muenchen.ehrenamtjustiz.backend.integration;
 
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFILE;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;

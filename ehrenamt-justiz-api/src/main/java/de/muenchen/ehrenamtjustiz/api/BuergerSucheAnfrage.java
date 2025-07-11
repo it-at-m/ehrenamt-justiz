@@ -7,7 +7,10 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import de.muenchen.ehrenamtjustiz.konstanten.Konstanten;
 import java.time.LocalDate;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * This class represents a BuergerSucheAnfrage

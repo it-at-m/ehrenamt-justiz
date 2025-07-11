@@ -1,6 +1,7 @@
 package de.muenchen.ehrenamtjustiz.backend;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
