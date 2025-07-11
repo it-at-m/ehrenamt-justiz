@@ -4,8 +4,11 @@
 
 Change to the folder "ehrenamt-justiz-frontend" and call the following commands:
 
+```
 npm install
+
 npm run dev
+```
 
 The frontend starts on port 8081
 
