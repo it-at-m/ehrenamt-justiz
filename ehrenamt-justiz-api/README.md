@@ -9,7 +9,7 @@ Structure for search request to EWO-EAI (BuergerSucheAnfrage):
 | familienname   | string    | surname                          |
 | vorname        | string    | given name                       |
 
-Structure for response from EWO-EAI (EWOBuerger.):
+Structure for response from EWO-EAI (EWOBuerger):
 
 | name                   | datatype  |  description                     |
 |:-----------------------|:----------|:---------------------------------|
