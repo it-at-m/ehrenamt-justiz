@@ -1,5 +1,13 @@
 # Online application of Ehrenamt-Justiz
 
+## Start frontend
+Change to the folder "ehrenamt-justiz-online" and call the following commands:
+
+npm install
+npm run dev
+
+The frontend starts on port 8082
+
 ## Language support
 
 Language support with vue-i18n: The German language constants are stored here: src/locales/de.json
