@@ -151,3 +151,20 @@ These authorizations are defined:
 | EWOSUCHEMITOM  |  ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter",  "clientrole_administrator"] |
 | ONLINEBEWERBEN  |  not used  |
 
+# Swagger UI
+
+Swagger UI is an open source tool that helps developers to document and test APIs (Application Programming Interfaces). It provides a user-friendly interface that allows the endpoints of an API to be displayed in an interactive format and interacted with directly.
+
+Swagger UI can be called from the backend if the profile 'local' is used:
+```
+http://localhost:39146/swagger-ui/index.html
+```
+
+# API-docs
+
+API docs, short for API documentation, are a collection of information that helps developers, users and other stakeholders to understand and effectively use an API (Application Programming Interface).
+
+API-docs can be called from the backend if the profile 'local' is used:
+```
+http://localhost:39146/v3/api-docs
+```
