@@ -75,6 +75,10 @@ The following table shows the most important configurations of the backend (appl
 | spring.datasource.url | url, port and schema of database | jdbc:postgresql://host.docker.internal:5432/postgres?currentSchema=ej |
 | spring.datasource.username | Username for connecting to database |  |
 | spring.datasource.password | Password for connecting to database |  |
+| springdoc.show-actuator | Enables actuator | true |
+| springdoc.swagger-ui.enabled | Enable Swagger UI | true |
+| springdoc.api-docs.enabled | Enable API docs | true |
+| springdoc.api-docs.version | Version of API docs | openapi_3_0 |
 
 # pgAdmin
 
