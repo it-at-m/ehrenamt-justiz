@@ -1,6 +1,6 @@
-package de.muenchen.ehrenamtjustiz.backend.configuration;
+package de.muenchen.ehrenamtjustiz.backend.configuration.filter;
 
-import de.muenchen.ehrenamtjustiz.backend.configuration.nfcconverter.NfcRequestFilter;
+import de.muenchen.ehrenamtjustiz.backend.configuration.filter.nfcconverter.NfcRequestFilter;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ import org.springframework.core.Ordered;
  * </ul>
  */
 @Configuration
-public class UnicodeConfiguration {
+public class UnicodeFilterConfiguration {
 
     private static final String NFC_FILTER_NAME = "nfcRequestFilter";
 

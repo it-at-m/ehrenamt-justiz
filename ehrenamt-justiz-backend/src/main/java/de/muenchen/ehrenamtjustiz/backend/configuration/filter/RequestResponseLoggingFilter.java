@@ -1,6 +1,7 @@
-package de.muenchen.ehrenamtjustiz.backend.security;
+package de.muenchen.ehrenamtjustiz.backend.configuration.filter;
 
-import de.muenchen.ehrenamtjustiz.backend.configuration.SecurityProperties;
+import de.muenchen.ehrenamtjustiz.backend.configuration.security.SecurityProperties;
+import de.muenchen.ehrenamtjustiz.backend.security.AuthUtils;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
