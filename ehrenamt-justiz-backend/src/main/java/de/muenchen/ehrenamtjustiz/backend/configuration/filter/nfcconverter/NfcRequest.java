@@ -1,4 +1,4 @@
-package de.muenchen.ehrenamtjustiz.backend.configuration.nfcconverter;
+package de.muenchen.ehrenamtjustiz.backend.configuration.filter.nfcconverter;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;

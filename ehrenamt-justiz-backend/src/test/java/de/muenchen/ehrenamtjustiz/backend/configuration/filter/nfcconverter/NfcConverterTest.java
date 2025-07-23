@@ -1,4 +1,4 @@
-package de.muenchen.ehrenamtjustiz.backend.configuration.nfcconverter;
+package de.muenchen.ehrenamtjustiz.backend.configuration.filter.nfcconverter;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;

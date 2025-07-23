@@ -1,4 +1,4 @@
-package de.muenchen.ehrenamtjustiz.backend.configuration.nfcconverter;
+package de.muenchen.ehrenamtjustiz.backend.configuration.filter.nfcconverter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
