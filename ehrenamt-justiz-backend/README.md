@@ -155,6 +155,8 @@ These authorizations are defined:
 | EWOSUCHEMITOM  |  ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter",  "clientrole_administrator"] |
 | ONLINEBEWERBEN  |  not used  |
 
+PLEASE NOTE: To use the permissions, the backend must also be started with the ‘userinfo-authorities’ profile. Otherwise, only the roles will be evaluated. This will change again in the future. Currently, this profile is essential for working with the application.
+
 # Swagger UI
 
 Swagger UI is an open source tool that helps developers to document and test APIs (Application Programming Interfaces). It provides a user-friendly interface that allows the endpoints of an API to be displayed in an interactive format and interacted with directly.
