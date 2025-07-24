@@ -125,7 +125,7 @@ podman compose --profile=backend --profile=frontend --profile=eai --profile=onli
 
 These containers are started:
 <p>
-    <img height="800" src="../docs/images/DockerDesktopEhrenamtjustiz.PNG"  alt="Container Podman Desktop"/>
+    <img height="800" src="../docs/images/PodmanDesktopEhrenamtjustiz.png"  alt="Container Podman Desktop"/>
 </p>
 
 
