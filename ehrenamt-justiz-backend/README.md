@@ -5,9 +5,9 @@ Change to the folder "ehrenamt-justiz-backend" and call the following scripts de
 
 | Betriebssystem | Profile            |  Script                 |
 |:---------------|:-------------------|:------------------------|
-| Windows        | Local              | runLocal.bat            |
+| Windows        | Local,userinfo-authorities | runLocal.bat            |
 | Windows        | Local, nosecurity  | runLocalNoSecurity.bat  |
-| Linux          | Local              | runLocal.sh             |
+| Linux          | Local,userinfo-authorities | runLocal.sh             |
 | Linux          | Local, nosecurity  | runLocalNoSecurity.bat  |
 
 ## ER-Diagramm
