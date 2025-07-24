@@ -61,10 +61,10 @@ The project is built with technologies we use in our projects
 * [PostgreSQL](https://www.postgresql.org)
 * [Flyway](https://github.com/flyway/flyway)
 * [Apache Camel](https://camel.apache.org)
-* [Docker](https://www.docker.com)
+* [Podman](https://www.podman.io)
 
 
-## Get Ready to use Ehrenamtjustiz local in Docker Desktop
+## Get Ready to use Ehrenamtjustiz local in Podman Desktop
 
 
 ### Clone Repository from github
@@ -117,15 +117,15 @@ The following must be done to use the EJ change service (Kafka)
       ...
         - GROUP_ID=lhm-ewo-eai-aenderungen-ehrenamt-justiz...
   ```
-### Starting Ehrenamtjustiz in Docker Desktop
+### Starting Ehrenamtjustiz in Podman Desktop
 ```
 cd ~/develop/ehrenamt-justiz/stack  
-docker-compose --profile=backend --profile=frontend --profile=eai --profile=online --profile=aenderungsservice up -d
+podman compose --profile=backend --profile=frontend --profile=eai --profile=online --profile=aenderungsservice up -d
 ```
 
 These containers are started:
 <p>
-    <img height="800" src="../docs/images/DockerDesktopEhrenamtjustiz.PNG"  alt="Container Docker Desktop"/>
+    <img height="800" src="../docs/images/DockerDesktopEhrenamtjustiz.PNG"  alt="Container Podman Desktop"/>
 </p>
 
 
@@ -135,12 +135,12 @@ url: http://localhost:8083
 ```
 
 <p>
-    <img height="800" src="../docs/images/ApplicationEhrenamtjustiz.PNG"  alt="Container Docker Desktop"/>
+    <img height="800" src="../docs/images/ApplicationEhrenamtjustiz.PNG"  alt="Container Podman Desktop"/>
 </p>
 
 #### Users
 
-These users are only for testing purpose in docker desktop:
+These users are only for testing purpose in podman desktop:
 
 | user | Description | role | password |
 | ------------- | ------------- | ------------- | ------------- |
@@ -153,12 +153,12 @@ After starting the application for the first time, an active configuration must 
 
 ##### Create configuration
 <p>
-    <img height="800" src="../docs/images/AktiveKonfigurationAnlegen.PNG"  alt="Container Docker Desktop"/>
+    <img height="800" src="../docs/images/AktiveKonfigurationAnlegen.PNG"  alt="Container Podman Desktop"/>
 </p>
 
 ##### Activate configuration
 <p>
-    <img height="500" src="../docs/images/KonfigurationAktivieren.PNG"  alt="Container Docker Desktop"/>
+    <img height="500" src="../docs/images/KonfigurationAktivieren.PNG"  alt="Container Podman Desktop"/>
 </p>
 
 ### Start online application in browser
@@ -167,12 +167,12 @@ url: http://localhost:8083/public/online/
 ```
 
 <p>
-    <img height="1600" src="../docs/images/OnlineBewerbungSchoeffen.PNG"  alt="Container Docker Desktop"/>
+    <img height="1600" src="../docs/images/OnlineBewerbungSchoeffen.PNG"  alt="Container Podman Desktop"/>
 </p>
 
 
-### Stop Container for Ehrenamtjustiz in Docker Desktop
-`docker-compose --profile=backend --profile=frontend --profile=eai --profile=online --profile=aenderungsservice stop`
+### Stop Container for Ehrenamtjustiz in Podman Desktop
+`podman compose --profile=backend --profile=frontend --profile=eai --profile=online --profile=aenderungsservice stop`
 
 
 ## Contributing
