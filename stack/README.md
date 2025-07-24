@@ -1,4 +1,4 @@
-# Docker-Compose
+# Podman-Compose
 
 Fhe following containers are created in podman for the complete start of the application:
 
