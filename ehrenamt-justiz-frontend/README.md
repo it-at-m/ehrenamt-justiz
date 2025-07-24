@@ -18,7 +18,7 @@ Language support with vue-i18n: The German language constants are stored here: s
 
 ## Application in the browser
 
-If the application is running local in Docker desktop, it can be opened in the browser with the following link: http://localhost:8083
+If the application is running local in podman, it can be opened in the browser with the following link: http://localhost:8083
 
 Screenshots of frontend:
 
