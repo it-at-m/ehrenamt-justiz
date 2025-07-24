@@ -59,12 +59,12 @@ Settings in detail:
 Certificates are required to use the kafka service
 The current certificates and passwords are stored in KeePass: kafka-auth-keystore.jks and truststore.jks
 
-If the change service is executed in Docker desktop, the certificates must be saved here relative to the “stack” directory:
+If the change service is executed in Podman desktop, the certificates must be saved here relative to the “stack” directory:
 ```
 ../ehrenamt-justiz-aenderungsservice/src/main/resources/truststore.jks
 ../ehrenamt-justiz-aenderungsservice/src/main/resources/kafka-auth-keystore.jks
 ```
-It is also necessary to set the spring.kafka.ssl.key-store-password and spring.kafka.ssl.trust-store-password in application-docker.yml. The other settings are already defined for docker-desktop so that they can be used with the LHM Munich change service.
+It is also necessary to set the spring.kafka.ssl.key-store-password and spring.kafka.ssl.trust-store-password in application-docker.yml. The other settings are already defined for podman desktop so that they can be used with the LHM Munich change service.
 
 ### Call the backend by the change service
 
