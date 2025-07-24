@@ -1,7 +1,10 @@
 # Database schema
 
-## Start backend
+## Start backend local
 Change to the folder "ehrenamt-justiz-backend" and call the following scripts depending on your operating system
+
+PLEASE NOTE: To use the permissions, the backend must also be started with the ‘userinfo-authorities’ profile. Otherwise, only the roles will be evaluated. This will change again in the future. Currently, this profile is essential for working with the application.
+
 
 | Betriebssystem | Profile            |  Script                 |
 |:---------------|:-------------------|:------------------------|
