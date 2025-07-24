@@ -64,7 +64,7 @@ The project is built with technologies we use in our projects
 * [Podman](https://www.podman.io)
 
 
-## Get Ready to use Ehrenamtjustiz local in Podman Desktop
+## Get Ready to use Ehrenamtjustiz local in Podman
 
 
 ### Clone Repository from github
@@ -117,7 +117,7 @@ The following must be done to use the EJ change service (Kafka)
       ...
         - GROUP_ID=lhm-ewo-eai-aenderungen-ehrenamt-justiz...
   ```
-### Starting Ehrenamtjustiz in Podman Desktop
+### Starting Ehrenamtjustiz in Podman
 ```
 cd ~/develop/ehrenamt-justiz/stack  
 podman compose --profile=backend --profile=frontend --profile=eai --profile=online --profile=aenderungsservice up -d
@@ -140,7 +140,7 @@ url: http://localhost:8083
 
 #### Users
 
-These users are only for testing purpose in podman desktop:
+These users are only for testing purpose in podman:
 
 | user | Description | role | password |
 | ------------- | ------------- | ------------- | ------------- |
@@ -171,7 +171,7 @@ url: http://localhost:8083/public/online/
 </p>
 
 
-### Stop Container for Ehrenamtjustiz in Podman Desktop
+### Stop Container for Ehrenamtjustiz in Podman
 `podman compose --profile=backend --profile=frontend --profile=eai --profile=online --profile=aenderungsservice stop`
 
 
