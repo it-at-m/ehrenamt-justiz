@@ -50,8 +50,8 @@ Configuration of this EAI in application-[profile].yml:
 | ------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ------------- |
 | spring.port | Port used to run the spring boot application                                                                                                                                                         | 8085 |
 | ewo.eai.url | url of residents' registration system                                                                                                                                                                | http://.... |
-| producer.user | User for authentication on residents' registration system.  In a docker desktop environment, this user must be defined in docker-compose.yml in the environment variable “PRODUCER_USER”.            |  |
-| producer.password | Password for authentication on residents' registration system. In a docker desktop environment, this password must be defined in docker-compose.yml in the environment variable “PRODUCER_PASSWORD”. |  |
+| producer.user | User for authentication on residents' registration system.  In a podman environment, this user must be defined in docker-compose.yml in the environment variable “PRODUCER_USER”.            |  |
+| producer.password | Password for authentication on residents' registration system. In a podman environment, this password must be defined in docker-compose.yml in the environment variable “PRODUCER_PASSWORD”. |  |
 | api.auth.users.username | User for authentication on this EAI                                                                                                                                                                  |  |
 | api.auth.users.password | Password for authentication on this EAI                                                                                                                                                              |  |
 
@@ -61,11 +61,11 @@ The EAI can be tested with SoapUI. The xml project to be imported into SoapUI ca
 
 [ehrenamt-justiz-soapui-project.xml](https://github.com/it-at-m/ehrenamt-justiz/blob/main/ehrenamt-justiz-eai/src/test/resources/ehrenamt-justiz-soapui-project.xml)
 
-Example of an EAI call in docker desktop with the parameters first name, last name and date of birth:
+Example of an EAI call in podman with the parameters first name, last name and date of birth:
 
 ![SoapUI ewosuche Docker example](../docs/images/SoapUI_ewosuche_docker.PNG)
 
-Example of an EAI call in docker desktop with the parameter om:
+Example of an EAI call in podman with the parameter om:
 
 ![SoapUI ewosuchemitom Docker example](../docs/images/SoapUI_ewosuchemitom_docker.PNG)
 
