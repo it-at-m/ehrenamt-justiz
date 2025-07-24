@@ -69,7 +69,7 @@ The following table shows the most important configurations of the backend (appl
 | ewo.eai.server | url and port of EAI to residents' registration system | http://host.docker.internal:8085 |
 | ewo.eai.user | User for EAI to residents' registration system |  |
 | ewo.eai.password | Password forEAI to residents' registration system |  |
-| sso.url |url and port to keycloak server | http://kubernetes.docker.internal:8100 |
+| sso.url |url and port to keycloak server | http://keycloak:8100 |
 | sso.real | Realm used in keycloak | local_realm |
 | sso.client | Client used in keycloak | ej-app |
 | spring.datasource.url | url, port and schema of database | jdbc:postgresql://host.docker.internal:5432/postgres?currentSchema=ej |
