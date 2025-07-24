@@ -1,6 +1,6 @@
 # Docker-Compose
 
-Fhe following containers are created in the docker desktop for the complete start of the application:
+Fhe following containers are created in podman for the complete start of the application:
 
 | Image/Container | Description | Port | Link |
 | ------------- | ------------- | ------------- |  ------------- |
@@ -16,8 +16,8 @@ Fhe following containers are created in the docker desktop for the complete star
 | eai | Residents registration EAI (Enterprise application integration) | 8085 | |
 | aenderungsservice | Residents registration change service of Ehrenamt-Justiz | 8086 | |
 
-## Configuration of Docker-Compose
-Before starting the Docker-Compose, the following configurations must be made in the docker-compose.yml file:
+## Configuration of Podman-Compose
+Before starting the application with podman Podman-Compose, the following configurations must be made in the docker-compose.yml file:
 
 Details can be found here:
 
@@ -26,17 +26,17 @@ https://github.com/it-at-m/ehrenamt-justiz?tab=readme-ov-file#manual-adaption-fo
 https://github.com/it-at-m/ehrenamt-justiz?tab=readme-ov-file#manual-work-for-starting-the-ej-change-service
 
 
-## Start of docker-compose
+## Start of Podman-Compose
 ````
 cd ~/develop/ehrenamt-justiz/stack/
-docker-compose --profile=backend --profile=frontend --profile=online --profile=eai --profile=aenderungsservice up -d
+podman -compose --profile=backend --profile=frontend --profile=online --profile=eai --profile=aenderungsservice up -d
 
 If you omit a profile, this service will not be started.
 ````
 
-## Stop of docker-compose
+## Stop of Podman-Compose
 ````
 cd ~/develop/ehrenamt-justiz/stack/
-docker-compose --profile=backend --profile=frontend --profile=online --profile=eai --profile=aenderungsservice stop -d
+podman -compose --profile=backend --profile=frontend --profile=online --profile=eai --profile=aenderungsservice stop -d
 ````
 
