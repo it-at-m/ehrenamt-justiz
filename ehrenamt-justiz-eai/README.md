@@ -61,11 +61,11 @@ The EAI can be tested with SoapUI. The xml project to be imported into SoapUI ca
 
 [ehrenamt-justiz-soapui-project.xml](https://github.com/it-at-m/ehrenamt-justiz/blob/main/ehrenamt-justiz-eai/src/test/resources/ehrenamt-justiz-soapui-project.xml)
 
-Example of an EAI call in podman with the parameters first name, last name and date of birth:
+Example of an EAI call in SoapUI with the parameters first name, last name and date of birth:
 
 ![SoapUI ewosuche Docker example](../docs/images/SoapUI_ewosuche_docker.PNG)
 
-Example of an EAI call in podman with the parameter om:
+Example of an EAI call in SoapUI with the parameter om:
 
 ![SoapUI ewosuchemitom Docker example](../docs/images/SoapUI_ewosuchemitom_docker.PNG)
 
