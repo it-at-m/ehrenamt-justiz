@@ -61,25 +61,17 @@
     @cancel="deleteCanceled"
   />
   <yes-no-dialog
-      v-model="yesNoDialogVisible"
-      :dialogtitle="
-        t(
-          'components.konfigurationListItem.activSetzen.dialogtitle'
-        )
-      "
-      :dialogtext="
-        t(
-          'components.konfigurationListItem.activSetzen.dialogtext'
-        )
-      "
-      @no="abbruchSetActive"
-      @yes="setActive"
+    v-model="yesNoDialogVisible"
+    :dialogtitle="t('components.konfigurationListItem.activSetzen.dialogtitle')"
+    :dialogtext="t('components.konfigurationListItem.activSetzen.dialogtext')"
+    @no="abbruchSetActive"
+    @yes="setActive"
   />
 </template>
 
 <script setup lang="ts">
 import type KonfigurationData from "@/types/KonfigurationData";
-import YesNoDialog from "@/components/common/YesNoDialog.vue";
+
 import { mdiLightbulbOnOutline } from "@mdi/js";
 import { computed, ref, useAttrs } from "vue";
 import { useI18n } from "vue-i18n";
@@ -96,6 +88,7 @@ import AuthService from "@/api/AuthService";
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";
 import DeleteDialog from "@/components/common/DeleteDialog.vue";
 import ListItemActions from "@/components/common/ListItemActions.vue";
+import YesNoDialog from "@/components/common/YesNoDialog.vue";
 import { BEARBEIGUNGS_MODUS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
@@ -179,11 +172,9 @@ function deleteConfirmed(): void {
     });
 }
 
-
 async function anfordernsetActive(): Promise<void> {
   yesNoDialogVisible.value = true;
 }
-
 
 function setActive(): void {
   KonfigurationApiService.setActive(props.konfiguration)
