@@ -38,7 +38,7 @@ The PostgreSQL database servers requested for the individual environments in the
 
 ### SQL-Commands 
 The following SQL command can be used to link all tables for an evaluation, for example:    
-```
+```sql
 select p.vorname, p.familienname, k.bezeichnung, s.staatsangehoerigkeit_text, f.person_attribut, a.sperrentyp from ehrju.person p
 left outer join ehrju.konfiguration k on k.id = p.konfiguration_id
 left outer join ehrju.staatsangehoerigkeit s on s.person_id = p.id
@@ -185,7 +185,7 @@ Logging is controlled via configuration file application-*.yml. logback-spring.x
 
 Example:
 
-```
+```yaml
 logging:
   include-application-group: false # disabled because application group is only relevant when deployed
   structured:

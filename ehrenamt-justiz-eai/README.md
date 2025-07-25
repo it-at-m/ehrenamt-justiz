@@ -83,7 +83,7 @@ Logging is controlled via configuration file application-*.yml. logback-spring.x
 
 Example:
 
-```
+```yaml
 logging:
   include-application-group: false # disabled because application group is only relevant when deployed
   structured:

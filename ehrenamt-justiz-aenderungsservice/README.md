@@ -15,7 +15,7 @@ Conflicts are dealt with and resolved in the core application:
 To retrieve the data from apache kafka service, the following settings must be made:
 
 application-[profile].yml
-```
+```yaml
 spring:
   kafka:
     bootstrap-servers: ...
@@ -67,7 +67,7 @@ It is also necessary to set the spring.kafka.ssl.key-store-password and spring.k
 The following configurations must be carried out so that the change service can call up the backend service
 
 application-[profile].yml
-```
+```yaml
 aenderungsservice:
   backend:
     server: http://localhost:8083
@@ -110,7 +110,7 @@ Logging is controlled via the configuration file application-*.yml. logback-spri
 
 Example:
 
-```
+```yaml
 logging:
   include-application-group: false # disabled because application group is only relevant when deployed
   structured:
