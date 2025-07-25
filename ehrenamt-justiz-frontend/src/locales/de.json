@@ -167,6 +167,10 @@
       },
       "tooltip": {
         "aktivSetzen": "Aktiv setzen"
+      },
+      "activSetzen": {
+        "dialogtitle": "Konfiguration aktiv setzen",
+        "dialogtext": "Die Aktivierung einer Konfiguration in der Anwendung hat zur Folge, dass sämtliche Daten, die ab diesem Zeitpunkt verarbeitet werden, unter der entsprechenden aktiven Konfiguration gespeichert werden. Es ist zu beachten, dass eine Änderung der aktiven Konfiguration grundsätzlich außerhalb der regulären Betriebszeiten erfolgen muss, um Störungen im laufenden Betrieb zu vermeiden. Des Weiteren ist es erforderlich, dass alle Nutzer das Programm schließen und sich anschließend erneut anmelden, um die Änderungen wirksam werden zu lassen. Diese Vorgehensweise gewährleistet die Integrität der Daten und die ordnungsgemäße Funktion der Anwendung."
       }
     },
     "konfigurationForm": {

@@ -19,7 +19,7 @@
               <v-btn
                 class="listitem"
                 v-bind="props"
-                @click="setActive"
+                @click="requestSetActive"
                 :icon="mdiLightbulbOnOutline"
               />
             </span>
@@ -60,6 +60,13 @@
     @delete="deleteConfirmed"
     @cancel="deleteCanceled"
   />
+  <yes-no-dialog
+    v-model="yesNoDialogVisible"
+    :dialogtitle="t('components.konfigurationListItem.activSetzen.dialogtitle')"
+    :dialogtext="t('components.konfigurationListItem.activSetzen.dialogtext')"
+    @no="cancelSetActive"
+    @yes="setActive"
+  />
 </template>
 
 <script setup lang="ts">
@@ -81,6 +88,7 @@ import AuthService from "@/api/AuthService";
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";
 import DeleteDialog from "@/components/common/DeleteDialog.vue";
 import ListItemActions from "@/components/common/ListItemActions.vue";
+import YesNoDialog from "@/components/common/YesNoDialog.vue";
 import { BEARBEIGUNGS_MODUS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
@@ -89,7 +97,6 @@ const props = defineProps<{
 }>();
 const emits = defineEmits<{
   deleted: [p: KonfigurationData];
-  reloadItems: [];
 }>();
 const snackbarStore = useSnackbarStore();
 const router = useRouter();
@@ -97,6 +104,7 @@ const attrs = useAttrs();
 
 const deleteDialogVisible = ref(false);
 const animationAktiv = ref(false);
+const yesNoDialogVisible = ref(false);
 
 const title = computed(
   () =>
@@ -164,15 +172,25 @@ function deleteConfirmed(): void {
     });
 }
 
+async function requestSetActive(): Promise<void> {
+  yesNoDialogVisible.value = true;
+}
+
 function setActive(): void {
   KonfigurationApiService.setActive(props.konfiguration)
     .then(() => {
-      emits("reloadItems");
+      // Complete reload of the current page and application
+      window.location.reload();
     })
     .catch((err) => {
       snackbarStore.showMessage(err);
     });
 }
+
+function cancelSetActive() {
+  yesNoDialogVisible.value = false;
+}
+
 const showDelete = computed(() => attrs.onRemoved != null);
 </script>
 
