@@ -5,21 +5,17 @@ These changes are transmitted to us via Apcache Kafka queues. The Residents regi
 
 ## System overview
 
-<p>
-    <img height="1400" src="../docs/images/SystemOverviewChangeServiceEnglish.PNG"  alt="Handling and resolving conflicts"/>
-</p>
+![System overview](../docs/images/SystemOverviewChangeServiceEnglish.PNG)
 
-Conflicts are dealt with and resolved in the coe application:
-<p>
-    <img height="1400" src="../docs/images/KonflikteBearbeiten.PNG"  alt="Handling and resolving conflicts"/>
-</p>
+Conflicts are dealt with and resolved in the core application:
+![Handling and resolving conflicts](../docs/images/KonflikteBearbeiten.PNG)
 
 ## Configuration of Kafka service
 ### Settings in application-[profile].yml
 To retrieve the data from apache kafka service, the following settings must be made:
 
 application-[profile].yml
-```
+```yaml
 spring:
   kafka:
     bootstrap-servers: ...
@@ -71,7 +67,7 @@ It is also necessary to set the spring.kafka.ssl.key-store-password and spring.k
 The following configurations must be carried out so that the change service can call up the backend service
 
 application-[profile].yml
-```
+```yaml
 aenderungsservice:
   backend:
     server: http://localhost:8083
@@ -106,3 +102,24 @@ Change to the folder "ehrenamt-justiz-aenderungsservice" and call the following 
 | Windows        | Local, nosecurity  | runLocalNoSecurity.bat  |
 | Linux          | Local              | runLocal.sh             |
 | Linux          | Local, nosecurity  | runLocalNoSecurity.bat  |
+
+
+# Logging
+
+Logging is controlled via the configuration file application-*.yml. logback-spring.xml is no longer used.
+
+Example:
+
+```yaml
+logging:
+  include-application-group: false # disabled because application group is only relevant when deployed
+  structured:
+    format:
+      console: # set to empty to disable structured logging locally
+  level:
+    root: INFO
+    de.muenchen.ehrenamtjustiz.aenderungsservice: DEBUG
+    org.springframework.cache: TRACE
+    org.springframework.web: DEBUG
+    org.springframework.security: debug
+```

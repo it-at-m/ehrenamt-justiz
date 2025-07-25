@@ -76,3 +76,26 @@ Change to the folder "ehrenamt-justiz-eai" and call the following scripts depend
 |:---------------|:-------------------|:------------------------|
 | Windows        | Local              | runLocal.bat            |
 | Linux          | Local              | runLocal.sh             |
+
+# Logging
+
+Logging is controlled via configuration file application-*.yml. logback-spring.xml is no longer used.
+
+Example:
+
+```yaml
+logging:
+  include-application-group: false # disabled because application group is only relevant when deployed
+  structured:
+    format:
+      console: # set to empty to disable structured logging locally
+  level:
+    root: INFO
+    de.muenchen.ehrenamtjustiz.eai.personeninfo.processor.CountingProcessor: TRACE
+    de.muenchen.ehrenamtjustiz.eai.personeninfo.filter.RequestResponseLoggingFilter: DEBUG
+    org.apache.camel.Tracing: TRACE
+    org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer: INFO
+    de.muenchen.ehrenamtjustiz.eai.personeninfo: DEBUG
+    route.interceptedFrom: WARN
+    org.apache.cxf.services: INFO
+```

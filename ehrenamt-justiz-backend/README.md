@@ -41,7 +41,7 @@ The PostgreSQL database servers requested for the individual environments in the
 
 ### SQL-Commands 
 The following SQL command can be used to link all tables for an evaluation, for example:    
-```
+```sql
 select p.vorname, p.familienname, k.bezeichnung, s.staatsangehoerigkeit_text, f.person_attribut, a.sperrentyp from ehrju.person p
 left outer join ehrju.konfiguration k on k.id = p.konfiguration_id
 left outer join ehrju.staatsangehoerigkeit s on s.person_id = p.id
@@ -169,7 +169,7 @@ Swagger UI can be called from the backend if the profile 'local' is used:
 http://localhost:39146/swagger-ui/index.html
 ```
 
-![ER Model](../docs/images/Swagger_Backend.PNG)
+![Swagger UI](../docs/images/Swagger_Backend.PNG)
 
 # API-docs
 
@@ -180,4 +180,24 @@ API-docs can be called from the backend if the profile 'local' is used:
 http://localhost:39146/v3/api-docs
 ```
 
-![ER Model](../docs/images/ApiDocs_Backend.PNG)
+![API-docs](../docs/images/ApiDocs_Backend.PNG)
+
+# Logging
+
+Logging is controlled via configuration file application-*.yml. logback-spring.xml is no longer used.
+
+Example:
+
+```yaml
+logging:
+  include-application-group: false # disabled because application group is only relevant when deployed
+  structured:
+    format:
+      console: # set to empty to disable structured logging locally
+  level:
+    root: INFO
+    de.muenchen.refarch: DEBUG
+    org.springframework.cache: TRACE
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+```
