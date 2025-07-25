@@ -110,7 +110,7 @@ Change to the folder "ehrenamt-justiz-aenderungsservice" and call the following 
 
 # Logging
 
-Logging is controlled via application-*.yml.
+Logging is controlled via configuration file application-*.yml. logback-spring.xml is no longer used.
 
 Example:
 ```

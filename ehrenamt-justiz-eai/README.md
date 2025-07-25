@@ -79,7 +79,7 @@ Change to the folder "ehrenamt-justiz-eai" and call the following scripts depend
 
 # Logging
 
-Logging is controlled via application-*.yml.
+Logging is controlled via configuration file application-*.yml. logback-spring.xml is no longer used.
 
 Example:
 ```

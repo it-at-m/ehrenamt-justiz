@@ -181,7 +181,7 @@ http://localhost:39146/v3/api-docs
 
 # Logging
 
-Logging is controlled via application-*.yml.
+Logging is controlled via configuration file application-*.yml. logback-spring.xml is no longer used.
 
 Example:
 ```
