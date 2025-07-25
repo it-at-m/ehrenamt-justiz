@@ -184,6 +184,7 @@ http://localhost:39146/v3/api-docs
 Logging is controlled via configuration file application-*.yml. logback-spring.xml is no longer used.
 
 Example:
+
 ```
 logging:
   include-application-group: false # disabled because application group is only relevant when deployed

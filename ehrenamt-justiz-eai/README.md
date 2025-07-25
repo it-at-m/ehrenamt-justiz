@@ -82,6 +82,7 @@ Change to the folder "ehrenamt-justiz-eai" and call the following scripts depend
 Logging is controlled via configuration file application-*.yml. logback-spring.xml is no longer used.
 
 Example:
+
 ```
 logging:
   include-application-group: false # disabled because application group is only relevant when deployed

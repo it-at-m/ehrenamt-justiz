@@ -5,14 +5,10 @@ These changes are transmitted to us via Apcache Kafka queues. The Residents regi
 
 ## System overview
 
-<p>
-    <img src="../docs/images/SystemOverviewChangeServiceEnglish.PNG"  alt="Handling and resolving conflicts"/>
-</p>
+![System overview](../docs/images/SystemOverviewChangeServiceEnglish.PNG)
 
 Conflicts are dealt with and resolved in the coe application:
-<p>
-    <img src="../docs/images/KonflikteBearbeiten.PNG"  alt="Handling and resolving conflicts"/>
-</p>
+![Handling and resolving conflicts](../docs/images/KonflikteBearbeiten.PNG)
 
 ## Configuration of Kafka service
 ### Settings in application-[profile].yml
@@ -110,9 +106,10 @@ Change to the folder "ehrenamt-justiz-aenderungsservice" and call the following 
 
 # Logging
 
-Logging is controlled via configuration file application-*.yml. logback-spring.xml is no longer used.
+Logging is controlled via the configuration file application-*.yml. logback-spring.xml is no longer used.
 
 Example:
+
 ```
 logging:
   include-application-group: false # disabled because application group is only relevant when deployed
