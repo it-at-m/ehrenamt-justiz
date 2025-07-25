@@ -166,7 +166,7 @@ Swagger UI can be called from the backend if the profile 'local' is used:
 http://localhost:39146/swagger-ui/index.html
 ```
 
-![ER Model](../docs/images/Swagger_Backend.PNG)
+![Swagger UI](../docs/images/Swagger_Backend.PNG)
 
 # API-docs
 
@@ -177,4 +177,23 @@ API-docs can be called from the backend if the profile 'local' is used:
 http://localhost:39146/v3/api-docs
 ```
 
-![ER Model](../docs/images/ApiDocs_Backend.PNG)
+![API-docs](../docs/images/ApiDocs_Backend.PNG)
+
+# Logging
+
+Logging is controlled via application-*.yml.
+
+Example:
+```
+logging:
+  include-application-group: false # disabled because application group is only relevant when deployed
+  structured:
+    format:
+      console: # set to empty to disable structured logging locally
+  level:
+    root: INFO
+    de.muenchen.refarch: DEBUG
+    org.springframework.cache: TRACE
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+```

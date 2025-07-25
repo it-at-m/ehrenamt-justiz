@@ -6,12 +6,12 @@ These changes are transmitted to us via Apcache Kafka queues. The Residents regi
 ## System overview
 
 <p>
-    <img height="1400" src="../docs/images/SystemOverviewChangeServiceEnglish.PNG"  alt="Handling and resolving conflicts"/>
+    <img src="../docs/images/SystemOverviewChangeServiceEnglish.PNG"  alt="Handling and resolving conflicts"/>
 </p>
 
 Conflicts are dealt with and resolved in the coe application:
 <p>
-    <img height="1400" src="../docs/images/KonflikteBearbeiten.PNG"  alt="Handling and resolving conflicts"/>
+    <img src="../docs/images/KonflikteBearbeiten.PNG"  alt="Handling and resolving conflicts"/>
 </p>
 
 ## Configuration of Kafka service
@@ -106,3 +106,23 @@ Change to the folder "ehrenamt-justiz-aenderungsservice" and call the following 
 | Windows        | Local, nosecurity  | runLocalNoSecurity.bat  |
 | Linux          | Local              | runLocal.sh             |
 | Linux          | Local, nosecurity  | runLocalNoSecurity.bat  |
+
+
+# Logging
+
+Logging is controlled via application-*.yml.
+
+Example:
+```
+logging:
+  include-application-group: false # disabled because application group is only relevant when deployed
+  structured:
+    format:
+      console: # set to empty to disable structured logging locally
+  level:
+    root: INFO
+    de.muenchen.ehrenamtjustiz.aenderungsservice: DEBUG
+    org.springframework.cache: TRACE
+    org.springframework.web: DEBUG
+    org.springframework.security: debug
+```

@@ -26,13 +26,6 @@ spring:
           audiences:
            - ${sso.client}
 
-# Define eai
-ewo:
-  eai:
-    server: http://host.docker.internal:8085
-    user: testuser
-    password: testpw
-
 # Define the local keycloak configuration here
 # Deduplication-only property
 sso:
@@ -45,3 +38,22 @@ refarch:
     client-id: ${sso.client}
     user-info-uri: ${sso.url}/auth/realms/${sso.realm}/protocol/openid-connect/userinfo
     logging-mode: all
+
+logging:
+  include-application-group: false # disabled because application group is only relevant when deployed
+  structured:
+    format:
+      console: # set to empty to disable structured logging locally
+  level:
+    root: INFO
+    de.muenchen.refarch: DEBUG
+    org.springframework.cache: TRACE
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+
+# Define eai
+ewo:
+  eai:
+    server: http://host.docker.internal:8085
+    user: testuser
+    password: testpw

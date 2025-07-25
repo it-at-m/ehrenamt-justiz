@@ -14,6 +14,18 @@ spring:
       auto-offset-reset: earliest
       enable-auto-commit: true
 
+logging:
+  include-application-group: false # disabled because application group is only relevant when deployed
+  structured:
+    format:
+      console: # set to empty to disable structured logging locally
+  level:
+    root: INFO
+    de.muenchen.ehrenamtjustiz.aenderungsservice: DEBUG
+    org.springframework.cache: TRACE
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+
 aenderungsservice:
   backend:
     server: http://host.docker.internal:8083
