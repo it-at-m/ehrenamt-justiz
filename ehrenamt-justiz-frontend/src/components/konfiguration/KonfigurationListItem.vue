@@ -19,7 +19,7 @@
               <v-btn
                 class="listitem"
                 v-bind="props"
-                @click="anfordernsetActive"
+                @click="requestSetActive"
                 :icon="mdiLightbulbOnOutline"
               />
             </span>
@@ -64,7 +64,7 @@
     v-model="yesNoDialogVisible"
     :dialogtitle="t('components.konfigurationListItem.activSetzen.dialogtitle')"
     :dialogtext="t('components.konfigurationListItem.activSetzen.dialogtext')"
-    @no="abbruchSetActive"
+    @no="cancelSetActive"
     @yes="setActive"
   />
 </template>
@@ -172,7 +172,7 @@ function deleteConfirmed(): void {
     });
 }
 
-async function anfordernsetActive(): Promise<void> {
+async function requestSetActive(): Promise<void> {
   yesNoDialogVisible.value = true;
 }
 
@@ -187,7 +187,7 @@ function setActive(): void {
     });
 }
 
-function abbruchSetActive() {
+function cancelSetActive() {
   yesNoDialogVisible.value = false;
 }
 
