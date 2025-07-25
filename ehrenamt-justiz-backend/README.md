@@ -86,7 +86,7 @@ The following table shows the most important configurations of the backend (appl
 # pgAdmin
 
 The GUI ‘pgAdmin’ serves as a graphical interface to the PostgreSQL database.
-If the database und pgAdmin were started in docker desktop, then pgAdmin can be started in the browser with this address: 
+If the database und pgAdmin were started in podman, then pgAdmin can be started in the browser with this address: 
 ```
 http://localhost:5050/browser/
 ```
@@ -95,16 +95,16 @@ http://localhost:5050/browser/
 
 ## User, roles and authorizations
 
-Users, roles and authorizations are defined in this repository for keycloak (dev) and for docker desktop.
+Users, roles and authorizations are defined in this repository for keycloak (dev) and for podman.
 
 The definition files for keycloak can be found here:  [keycloak files](https://github.com/it-at-m/ehrenamt-justiz/tree/main/ehrenamt-justiz-backend/sso-config)
 
 ### Users
 
-Users for docker desktop are defined here:
-[Users for docker desktop](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/04_add-users.yml)
+Users for podman are defined here:
+[Users for podman](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/04_add-users.yml)
 
-These users are only for testing purpose in docker desktop:
+These users are only for testing purpose in podman:
 
 | user | Description | role | password |
 | ------------- | ------------- | ------------- | ------------- |
@@ -115,8 +115,8 @@ These users are only for testing purpose in docker desktop:
 
 ### Roles
 
-Roles are assigned to user for docker desktop here:
-[Roles for docker desktop](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/05_assign-roles.yml)
+Roles are assigned to user for podman here:
+[Roles for podman](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/05_assign-roles.yml)
 
 These assignments are defined:
 
@@ -129,8 +129,8 @@ These assignments are defined:
 
 ### Authorizations
 
-Authorizations and roles for docker desktop are defined here:
-[Authorizations for docker desktop](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/permissions/example_authorization.json)
+Authorizations and roles for podman are defined here:
+[Authorizations for podman](https://github.com/it-at-m/ehrenamt-justiz/blob/main/stack/keycloak/migration/permissions/example_authorization.json)
 
 These roles are defined:
 
