@@ -7,7 +7,7 @@ These changes are transmitted to us via Apcache Kafka queues. The Residents regi
 
 ![System overview](../docs/images/SystemOverviewChangeServiceEnglish.PNG)
 
-Conflicts are dealt with and resolved in the coe application:
+Conflicts are dealt with and resolved in the core application:
 ![Handling and resolving conflicts](../docs/images/KonflikteBearbeiten.PNG)
 
 ## Configuration of Kafka service
