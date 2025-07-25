@@ -19,7 +19,7 @@
               <v-btn
                 class="listitem"
                 v-bind="props"
-                @click="setActive"
+                @click="anfordernsetActive"
                 :icon="mdiLightbulbOnOutline"
               />
             </span>
@@ -60,11 +60,26 @@
     @delete="deleteConfirmed"
     @cancel="deleteCanceled"
   />
+  <yes-no-dialog
+      v-model="yesNoDialogVisible"
+      :dialogtitle="
+        t(
+          'components.konfigurationListItem.activSetzen.dialogtitle'
+        )
+      "
+      :dialogtext="
+        t(
+          'components.konfigurationListItem.activSetzen.dialogtext'
+        )
+      "
+      @no="abbruchSetActive"
+      @yes="setActive"
+  />
 </template>
 
 <script setup lang="ts">
 import type KonfigurationData from "@/types/KonfigurationData";
-
+import YesNoDialog from "@/components/common/YesNoDialog.vue";
 import { mdiLightbulbOnOutline } from "@mdi/js";
 import { computed, ref, useAttrs } from "vue";
 import { useI18n } from "vue-i18n";
@@ -89,7 +104,6 @@ const props = defineProps<{
 }>();
 const emits = defineEmits<{
   deleted: [p: KonfigurationData];
-  reloadItems: [];
 }>();
 const snackbarStore = useSnackbarStore();
 const router = useRouter();
@@ -97,6 +111,7 @@ const attrs = useAttrs();
 
 const deleteDialogVisible = ref(false);
 const animationAktiv = ref(false);
+const yesNoDialogVisible = ref(false);
 
 const title = computed(
   () =>
@@ -164,15 +179,27 @@ function deleteConfirmed(): void {
     });
 }
 
+
+async function anfordernsetActive(): Promise<void> {
+  yesNoDialogVisible.value = true;
+}
+
+
 function setActive(): void {
   KonfigurationApiService.setActive(props.konfiguration)
     .then(() => {
-      emits("reloadItems");
+      // Complete reload of the current page and application
+      window.location.reload();
     })
     .catch((err) => {
       snackbarStore.showMessage(err);
     });
 }
+
+function abbruchSetActive() {
+  yesNoDialogVisible.value = false;
+}
+
 const showDelete = computed(() => attrs.onRemoved != null);
 </script>
 
