@@ -53,7 +53,7 @@ logging:
       console: # set to empty to disable structured logging locally
   level:
     root: INFO
-    de.muenchen.refarch: DEBUG
+    de.muenchen.ehrenamtjustiz.backend: DEBUG
     org.springframework.cache: TRACE
     org.springframework.web: DEBUG
     org.springframework.security: DEBUG
