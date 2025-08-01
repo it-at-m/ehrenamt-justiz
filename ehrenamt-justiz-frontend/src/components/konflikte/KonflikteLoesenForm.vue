@@ -1736,6 +1736,75 @@
                       />
                     </v-col>
                   </v-row>
+                  <v-row>
+                    <v-col
+                        class="col"
+                        md="5"
+                    >
+                      <v-select
+                          v-model="konfliktloesenformdata.person_wohnungsstatus"
+                          :items="WOHNUNGSSTATUS_ARTEN"
+                          density="compact"
+                          :label="
+                          t(
+                            'components.konflikteLoesenForm.form.wohnungsstatus'
+                          )
+                        "
+                          persistent-placeholder
+                          variant="outlined"
+                          :hide-details="true"
+                      />
+                    </v-col>
+                    <v-col
+                        class="col"
+                        md="1"
+                    >
+                      <v-tooltip
+                          :text="
+                          t(
+                            'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
+                            {
+                              feldname: t(
+                                'components.konflikteLoesenForm.form.wohnungsstatus'
+                              ),
+                            }
+                          )
+                        "
+                      >
+                        <template #activator="{ props }">
+                          <span v-bind="props">
+                            <v-btn
+                                v-if="isKonfliktOriginal(WOHNUNGSSTATUS)"
+                                :disabled="!isKonflikt(WOHNUNGSSTATUS)"
+                                class="button-konflikt-loesen"
+                                @click="konfliktLoesenWohnungsstatus()"
+                            >
+                              <v-icon :icon="mdiTransferLeft" />
+                            </v-btn>
+                          </span>
+                        </template>
+                      </v-tooltip>
+                    </v-col>
+                    <v-col
+                        class="col"
+                        md="5"
+                    >
+                      <v-select
+                          v-if="isKonfliktOriginal(WOHNUNGSSTATUS)"
+                          v-model="konfliktloesenformdata.ewo_wohnungsstatus"
+                          :items="WOHNUNGSSTATUS_ARTEN"
+                          density="compact"
+                          :label="
+                          t(
+                            'components.konflikteLoesenForm.form.wohnungsstatus'
+                          )
+                        "
+                          persistent-placeholder
+                          variant="outlined"
+                          :hide-details="true"
+                      />
+                    </v-col>
+                  </v-row>
                 </v-expansion-panel-text>
               </v-expansion-panel>
               <v-expansion-panel
@@ -1808,75 +1877,6 @@
                         "
                         persistent-placeholder
                         type="date"
-                        variant="outlined"
-                        :hide-details="true"
-                      />
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col
-                      class="col"
-                      md="5"
-                    >
-                      <v-select
-                        v-model="konfliktloesenformdata.person_wohnungsstatus"
-                        :items="WOHNUNGSSTATUS_ARTEN"
-                        density="compact"
-                        :label="
-                          t(
-                            'components.konflikteLoesenForm.form.wohnungsstatus'
-                          )
-                        "
-                        persistent-placeholder
-                        variant="outlined"
-                        :hide-details="true"
-                      />
-                    </v-col>
-                    <v-col
-                      class="col"
-                      md="1"
-                    >
-                      <v-tooltip
-                        :text="
-                          t(
-                            'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
-                            {
-                              feldname: t(
-                                'components.konflikteLoesenForm.form.wohnungsstatus'
-                              ),
-                            }
-                          )
-                        "
-                      >
-                        <template #activator="{ props }">
-                          <span v-bind="props">
-                            <v-btn
-                              v-if="isKonfliktOriginal(WOHNUNGSSTATUS)"
-                              :disabled="!isKonflikt(WOHNUNGSSTATUS)"
-                              class="button-konflikt-loesen"
-                              @click="konfliktLoesenWohnungsstatus()"
-                            >
-                              <v-icon :icon="mdiTransferLeft" />
-                            </v-btn>
-                          </span>
-                        </template>
-                      </v-tooltip>
-                    </v-col>
-                    <v-col
-                      class="col"
-                      md="5"
-                    >
-                      <v-select
-                        v-if="isKonfliktOriginal(WOHNUNGSSTATUS)"
-                        v-model="konfliktloesenformdata.ewo_wohnungsstatus"
-                        :items="WOHNUNGSSTATUS_ARTEN"
-                        density="compact"
-                        :label="
-                          t(
-                            'components.konflikteLoesenForm.form.wohnungsstatus'
-                          )
-                        "
-                        persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
                       />
@@ -2088,12 +2088,13 @@ onMounted(() => {
       ADRESSZUSATZ,
       POSTLEITZAHL,
       ORT,
+      WOHNUNGSSTATUS
     ])
   ) {
     // Adresse
     activeExpansionPanel.value.push(2);
   }
-  if (isKonflikts([INMUENCHENSEIT, WOHNUNGSSTATUS, AUSKUNFTSSPERRE])) {
+  if (isKonflikts([INMUENCHENSEIT, AUSKUNFTSSPERRE])) {
     // Sonstiges
     activeExpansionPanel.value.push(3);
   }
