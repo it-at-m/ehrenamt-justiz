@@ -344,9 +344,15 @@
         "speichern": "Speichern",
         "datenAusEWOUebernehmen": "{feldname} aus EWO übernehmen, um diesen Konflikt zu lösen"
       },
-      "expansionPanel": {
+      "tab": {
         "datenAusEWOUebernehmen": "Daten aus EWO übernehmen",
         "bewerberZusatzangaben": "Bewerber Zusatzangaben"
+      },
+      "expansionPanel": {
+        "name": "Name",
+        "personenDaten": "Personendaten",
+        "adresse": "Adresse",
+        "sonstiges": "Sonstiges"
       },
       "form": {
         "familienname": "Familienname",
