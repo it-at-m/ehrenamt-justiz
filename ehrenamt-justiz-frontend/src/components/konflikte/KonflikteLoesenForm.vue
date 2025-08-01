@@ -1738,29 +1738,29 @@
                   </v-row>
                   <v-row>
                     <v-col
-                        class="col"
-                        md="5"
+                      class="col"
+                      md="5"
                     >
                       <v-select
-                          v-model="konfliktloesenformdata.person_wohnungsstatus"
-                          :items="WOHNUNGSSTATUS_ARTEN"
-                          density="compact"
-                          :label="
+                        v-model="konfliktloesenformdata.person_wohnungsstatus"
+                        :items="WOHNUNGSSTATUS_ARTEN"
+                        density="compact"
+                        :label="
                           t(
                             'components.konflikteLoesenForm.form.wohnungsstatus'
                           )
                         "
-                          persistent-placeholder
-                          variant="outlined"
-                          :hide-details="true"
+                        persistent-placeholder
+                        variant="outlined"
+                        :hide-details="true"
                       />
                     </v-col>
                     <v-col
-                        class="col"
-                        md="1"
+                      class="col"
+                      md="1"
                     >
                       <v-tooltip
-                          :text="
+                        :text="
                           t(
                             'components.konflikteLoesenForm.buttons.datenAusEWOUebernehmen',
                             {
@@ -1774,10 +1774,10 @@
                         <template #activator="{ props }">
                           <span v-bind="props">
                             <v-btn
-                                v-if="isKonfliktOriginal(WOHNUNGSSTATUS)"
-                                :disabled="!isKonflikt(WOHNUNGSSTATUS)"
-                                class="button-konflikt-loesen"
-                                @click="konfliktLoesenWohnungsstatus()"
+                              v-if="isKonfliktOriginal(WOHNUNGSSTATUS)"
+                              :disabled="!isKonflikt(WOHNUNGSSTATUS)"
+                              class="button-konflikt-loesen"
+                              @click="konfliktLoesenWohnungsstatus()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
                             </v-btn>
@@ -1786,22 +1786,22 @@
                       </v-tooltip>
                     </v-col>
                     <v-col
-                        class="col"
-                        md="5"
+                      class="col"
+                      md="5"
                     >
                       <v-select
-                          v-if="isKonfliktOriginal(WOHNUNGSSTATUS)"
-                          v-model="konfliktloesenformdata.ewo_wohnungsstatus"
-                          :items="WOHNUNGSSTATUS_ARTEN"
-                          density="compact"
-                          :label="
+                        v-if="isKonfliktOriginal(WOHNUNGSSTATUS)"
+                        v-model="konfliktloesenformdata.ewo_wohnungsstatus"
+                        :items="WOHNUNGSSTATUS_ARTEN"
+                        density="compact"
+                        :label="
                           t(
                             'components.konflikteLoesenForm.form.wohnungsstatus'
                           )
                         "
-                          persistent-placeholder
-                          variant="outlined"
-                          :hide-details="true"
+                        persistent-placeholder
+                        variant="outlined"
+                        :hide-details="true"
                       />
                     </v-col>
                   </v-row>
@@ -2088,7 +2088,7 @@ onMounted(() => {
       ADRESSZUSATZ,
       POSTLEITZAHL,
       ORT,
-      WOHNUNGSSTATUS
+      WOHNUNGSSTATUS,
     ])
   ) {
     // Adresse
