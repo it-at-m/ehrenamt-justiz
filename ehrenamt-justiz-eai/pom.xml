@@ -4,7 +4,7 @@
     <!-- ARTIFACTID muss auch in Properties file geaendert werden -->
     <groupId>de.muenchen.ehrenamt-justiz</groupId>
     <artifactId>ehrenamt-justiz-eai</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
     <!-- VERSION muss auch in Properties file und application.yml geändert werden-->
     <name>ehrenamt-justiz-eai</name>
     <description>EAI of Ehrenamtjustiz</description>
@@ -20,7 +20,7 @@
         <url>https://github.com/it-at-m/ehrenamt-justiz.git</url>
         <connection>scm:git:https://github.com/it-at-m/ehrenamt-justiz.git</connection>
         <developerConnection>scm:git:https://github.com/it-at-m/ehrenamt-justiz.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>ehrenamt-justiz-eai-0.0.2</tag>
     </scm>
     <developers>
         <developer>
