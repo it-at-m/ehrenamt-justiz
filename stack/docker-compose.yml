@@ -20,7 +20,7 @@ services:
 
   # see https://event-driven.io/en/automatically_connect_pgadmin_to_database/
   pg-admin:
-    image: dpage/pgadmin4:9.5.0@sha256:2a830466aafd9cbc2aea0f76ff81a80dbbba819f2f5db7e69cb40e9cbdb6bc7b
+    image: dpage/pgadmin4:9.7.0@sha256:5929bac24d91b5d7219686c8d66a703cd5851a498620bca4f5e4263873b015c0
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com
       - PGADMIN_DEFAULT_PASSWORD=admin
