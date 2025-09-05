@@ -38,7 +38,7 @@ camel:
 
 service:
   rest:
-    basepath: "/personeninfo/api"
+    basepath: "/api/personeninfo"
 
 info:
   application:
