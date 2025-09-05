@@ -94,6 +94,6 @@ info:
 # Define eai
 ewo:
   eai:
-    basepath: /personeninfo/api
+    basepath: /api/personeninfo
     connecttimeout: 15000
     readtimeout: 15000
