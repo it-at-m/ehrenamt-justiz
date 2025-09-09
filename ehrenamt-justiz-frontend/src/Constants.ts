@@ -1,9 +1,17 @@
-// export const API_BASE: string | undefined = import.meta.env
-//  .VITE_VUE_APP_API_URL;
-export const API_BASE: string | undefined = import.meta.env
-  .VITE_VUE_APP_GATEWAY_URL
-  ? import.meta.env.VITE_VUE_APP_GATEWAY_URL
-  : import.meta.env.VITE_VUE_APP_API_URL;
+const resolvedApiBase = [
+  import.meta.env.VITE_VUE_APP_GATEWAY_URL,
+  import.meta.env.VITE_VUE_APP_API_URL,
+]
+  .map((v) => (typeof v === "string" ? v.trim() : ""))
+  .find((v) => v.length > 0);
+
+export const API_BASE: string =
+  resolvedApiBase?.replace(/\/+$/, "") ??
+  (() => {
+    throw new Error(
+      "Missing API base URL. Set VITE_VUE_APP_GATEWAY_URL or VITE_VUE_APP_API_URL."
+    );
+  })();
 export const ROUTES_HOME = "home";
 export const ROUTES_GETSTARTED = "getstarted";
 
