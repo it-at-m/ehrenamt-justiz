@@ -1,5 +1,5 @@
 const resolvedApiBase = [
-  import.meta.env.VITE_VUE_APP_GATEWAY_URL,
+  process.env.VITE_VUE_APP_GATEWAY_URL,
   import.meta.env.VITE_VUE_APP_API_URL,
 ]
   .map((v) => (typeof v === "string" ? v.trim() : ""))
