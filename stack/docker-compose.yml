@@ -154,7 +154,7 @@ services:
   backend:
     profiles:
       - backend
-    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:dev
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:dev
     environment:
       - SPRING_PROFILES_ACTIVE=docker,userinfo-authorities
     ports:
@@ -173,7 +173,7 @@ services:
   frontend:
     profiles:
       - frontend
-    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:dev
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:dev
     ports:
       - "8081:8080"
     networks:
@@ -186,7 +186,7 @@ services:
   online:
     profiles:
       - online
-    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:dev
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:dev
     ports:
       - "8082:8080"
     networks:
