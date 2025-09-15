@@ -110,7 +110,7 @@ export default class EntityApiService<T extends Idable> {
                                 relationData["_embedded"]
                               )[0];
                               relationData =
-                                relationData["_embedded"][entityType];
+                                relationData["_embedded"]?.[entityType];
                             }
                             entity[relationName] = relationData;
                             resolveRelation();

@@ -29,7 +29,7 @@ class PersonenApiServiceClass extends EntityApiService<PersonData> {
       // Sort to "feldname1/sortierung,feldname2/sortierung..." (for example "familienname/asc,vorname/asc,geburtsdatum/desc") bringen
       let sortString = "";
       for (let i = 0; i < sortBy.length; i++) {
-        sortString = sortString + sortBy[i].key + "/" + sortBy[i].order;
+        sortString = sortString + sortBy[i]?.key + "/" + sortBy[i]?.order;
         if (i + 1 < sortBy.length) {
           sortString = sortString + ",";
         }

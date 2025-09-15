@@ -75,7 +75,7 @@ async function save() {
         // More than one citizen: Select citizen by User
         ewoBuergerSelect.value = ewoBuergers;
         ewoBuergerSelectVisible.value = true;
-      } else {
+      } else if (ewoBuergers[0]) {
         // Check, if person already exist
         EWOBuergerApiService.pruefenNeuePerson(ewoBuergers[0]).then(
           (person) => {
@@ -103,6 +103,13 @@ async function save() {
             }
           }
         );
+      } else {
+        // No citizen found
+        snackbarStore.showMessage({
+          level: STATUS_INDICATORS.WARNING,
+          message: t("views.eWOBuergerCreate.keinePersonGefundenMessage"),
+          show: true,
+        });
       }
     });
   } catch (err) {
