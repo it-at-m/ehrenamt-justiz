@@ -108,9 +108,13 @@ services:
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_ID=online
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_URI=http://host.docker.internal:8082/
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_PREDICATES_0=Path=/public/online/**
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_ID=frontend
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_URI=http://host.docker.internal:8081/
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_PREDICATES_0=Path=/**
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_ID=eai
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_URI=http://host.docker.internal:8085/
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_PREDICATES_0=Path=/public/eai/**
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_FILTERS_0=RewritePath=/public/eai/(?<urlsegments>.*), /$\{urlsegments}
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_ID=frontend
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_URI=http://host.docker.internal:8081/
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_PREDICATES_0=Path=/**
       - SPRING_PROFILES_ACTIVE=test, hazelcast-local
       - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI=http://keycloak:8100/auth/realms/local_realm
       - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_SSO_ISSUERURI=$${spring.security.oauth2.resourceserver.jwt.issuer-uri}
@@ -118,7 +122,7 @@ services:
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_CLIENTID=ej-app
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_CLIENTSECRET=client_secret
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_SCOPE=profile, openid, roles
-      - REFARCH_SECURITY_CSRF_WHITELISTED=/public/aenderungsservice/**
+      - REFARCH_SECURITY_CSRF_WHITELISTED=/public/aenderungsservice/**, /public/eai/**
     networks:
       - keycloak
     extra_hosts:
@@ -150,7 +154,7 @@ services:
   backend:
     profiles:
       - backend
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend@sha256:f76593210177e3924b958c451b3981d1d50f04f1d872d0c9d253bde7cc7f19cf
+    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:dev
     environment:
       - SPRING_PROFILES_ACTIVE=docker,userinfo-authorities
     ports:
@@ -169,7 +173,7 @@ services:
   frontend:
     profiles:
       - frontend
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend@sha256:9a3dee864e58637496d0eb2f99a4bb25316901fb3b492eb18d49237445565f6f
+    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:dev
     ports:
       - "8081:8080"
     networks:
@@ -182,7 +186,7 @@ services:
   online:
     profiles:
       - online
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online@sha256:5ff9ae4cfa17e518e547ac374e29fb4b0230aebef4c8d801c24c1d101d1d53e7
+    image:  ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:dev
     ports:
       - "8082:8080"
     networks:
@@ -197,7 +201,7 @@ services:
   eai:
     profiles:
       - eai
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai@sha256:4ecbadd012fd78af2ecfc60a7f1efcdc7d1817ab3cbc23d87ec99f3f834e9618
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai:dev
     volumes:
       - ../ehrenamt-justiz-eai/entrypoint.sh:/usr/local/bin/entrypoint.sh:rwx
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
@@ -219,7 +223,7 @@ services:
   aenderungsservice:
     profiles:
       - aenderungsservice
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice@sha256:80579280e5b8f3924abe46f204028cfc22b9f0beaf41ba4589e7dad3277cccd1
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice:dev
     volumes:
       - ../ehrenamt-justiz-aenderungsservice/src/main/resources/truststore.jks:/etc/ssl/truststore.jks
       - ../ehrenamt-justiz-aenderungsservice/src/main/resources/kafka-auth-keystore.jks:/etc/ssl/kafka-auth-keystore.jks
