@@ -75,18 +75,20 @@ async function save() {
         // More than one citizen: Select citizen by User
         ewoBuergerSelect.value = ewoBuergers;
         ewoBuergerSelectVisible.value = true;
-      } else {
+      } else if (ewoBuergers[0]) {
         // Check, if person already exist
         EWOBuergerApiService.pruefenNeuePerson(ewoBuergers[0]).then(
           (person) => {
             if (person == null) {
               // Prepare person data from EWO und insert data in DB
               EWOBuergerApiService.vorbereitenUndSpeichernPerson(
+                // @ts-expect-error error: TS2345: Argument of type 'EWOBuergerData | undefined' is not assignable to parameter of type 'EWOBuergerData': already prevented by if-statement
                 ewoBuergers[0]
               ).then(() => {
                 router.push({
                   name: "bewerbung.edit",
                   params: {
+                    // @ts-expect-error error: TS2345: Argument of type 'EWOBuergerData | undefined' is not assignable to parameter of type 'EWOBuergerData': already prevented by if-statement
                     id: ewoBuergers[0].id ? ewoBuergers[0].id : "",
                     action: BEARBEIGUNGS_MODUS.EDIT_MODUS,
                   },
@@ -96,6 +98,7 @@ async function save() {
               snackbarStore.showMessage({
                 level: STATUS_INDICATORS.ERROR,
                 message: t("views.eWOBuergerCreate.bereitsVorhandenMessage", {
+                  // @ts-expect-error error: TS2345: Argument of type 'EWOBuergerData | undefined' is not assignable to parameter of type 'EWOBuergerData': already prevented by if-statement
                   ordnungsmerkmal: ewoBuergers[0].ordnungsmerkmal,
                   status: person.status,
                 }),
@@ -103,6 +106,13 @@ async function save() {
             }
           }
         );
+      } else {
+        // No citizen found
+        snackbarStore.showMessage({
+          level: STATUS_INDICATORS.WARNING,
+          message: t("views.eWOBuergerCreate.keinePersonGefundenMessage"),
+          show: true,
+        });
       }
     });
   } catch (err) {
