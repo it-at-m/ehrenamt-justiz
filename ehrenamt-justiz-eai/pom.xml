@@ -245,7 +245,7 @@
                     <dependency>
                         <groupId>org.jvnet.jaxb</groupId>
                         <artifactId>jaxb-plugins</artifactId>
-                        <version>4.0.9</version>
+                        <version>4.0.10</version>
                     </dependency>
                 </dependencies>
             </plugin>
