@@ -30,6 +30,8 @@ logging:
     de.muenchen.ehrenamtjustiz.eai.personeninfo: DEBUG
     route.interceptedFrom: WARN
     org.apache.cxf.services: INFO
+    org.springframework.cache: TRACE
+    org.springframework.web: DEBUG
 
 producer:
   user: ${PRODUCER_USER}

@@ -22,6 +22,12 @@ ewo:
   eai:
     url: http://localhost:8094/personen/2.0/soap/personErweitert
 
+logging:
+  include-application-group: false # disabled because application group is only relevant when deployed
+  structured:
+    format:
+      console: # set to empty to disable structured logging for testing
+
 management:
   endpoints:
     web:
