@@ -54,6 +54,6 @@ logging:
 # Define eai
 ewo:
   eai:
-    server: http://host.docker.internal:8085
+    server: http://host.docker.internal:8083
     user: testuser
     password: testpw
