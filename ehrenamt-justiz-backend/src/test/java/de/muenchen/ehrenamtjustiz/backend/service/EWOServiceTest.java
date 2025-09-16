@@ -10,6 +10,8 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import de.muenchen.ehrenamtjustiz.api.EWOBuerger;
 import de.muenchen.ehrenamtjustiz.api.Geschlecht;
@@ -24,7 +26,9 @@ import de.muenchen.ehrenamtjustiz.backend.testdata.KonfigurationTestDataBuilder;
 import de.muenchen.ehrenamtjustiz.backend.utils.EhrenamtJustizUtility;
 import de.muenchen.ehrenamtjustiz.exception.AenderungsServiceException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -43,6 +47,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.mockito.ArgumentCaptor;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -305,6 +310,147 @@ class EWOServiceTest {
         assertEquals(expectedEWOBuerger.getWohnungsstatus().name(), actualDto.getWohnungsstatus().name());
         assertEquals(expectedEWOBuerger.getStaatsangehoerigkeit(), actualDto.getStaatsangehoerigkeit());
         assertEquals(expectedEWOBuerger.getAuskunftssperren(), actualDto.getAuskunftssperre());
+    }
+
+
+    @Test
+    void testEwoSucheMitOM_NullBody_ReturnsNull() {
+        final ResponseEntity<EWOBuerger> responseEntity = ResponseEntity.ok(null);
+        when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
+                .thenReturn(responseEntity);
+
+        final EWOBuergerDatenDto actualDto = ewoService.ewoSucheMitOM("1");
+
+        assertNull(actualDto);
+        verify(restTemplate, times(1)).exchange(any(RequestEntity.class), eq(EWOBuerger.class));
+    }
+
+    @Test
+    void testEwoSuche_EmptyArray_ReturnsEmptyList() {
+        final EWOBuerger[] empty = new EWOBuerger[0];
+        final ResponseEntity<EWOBuerger[]> responseEntity = ResponseEntity.ok(empty);
+        when(restTemplate.exchange(anyString(), any(HttpMethod.class), any(HttpEntity.class), eq(EWOBuerger[].class)))
+                .thenReturn(responseEntity);
+
+        final List<EWOBuergerDatenDto> result = ewoService.ewoSuche(EWO_BUERGER_SUCHE_DTO);
+
+        assertNotNull(result);
+        assertEquals(0, result.size());
+        verify(restTemplate, times(1)).exchange(anyString(), any(HttpMethod.class), any(HttpEntity.class), eq(EWOBuerger[].class));
+    }
+
+    @Test
+    void testEwoSuche_NullBody_ReturnsEmptyList() {
+        final ResponseEntity<EWOBuerger[]> responseEntity = ResponseEntity.ok(null);
+        when(restTemplate.exchange(anyString(), any(HttpMethod.class), any(HttpEntity.class), eq(EWOBuerger[].class)))
+                .thenReturn(responseEntity);
+
+        final List<EWOBuergerDatenDto> result = ewoService.ewoSuche(EWO_BUERGER_SUCHE_DTO);
+
+        assertNotNull(result);
+        assertEquals(0, result.size());
+    }
+
+    @Test
+    void testEwoSuche_MultipleResults_AllMapped() {
+        final EWOBuerger first = EWO_BUERGER;
+        final EWOBuerger second = EWOBuerger.builder()
+                .ordnungsmerkmal("2")
+                .familienname("Meier")
+                .geburtsname("Schmidt")
+                .vorname("Claudia")
+                .geburtsdatum(LocalDate.of(1975, 5, 5))
+                .geschlecht(Geschlecht.WEIBLICH)
+                .akademischerGrad("")
+                .geburtsort("Augsburg")
+                .geburtsland("Deutschland")
+                .familienstand("VH")
+                .strasse("Maximilianstr.")
+                .hausnummer("22")
+                .appartmentnummer(null)
+                .buchstabeHausnummer(null)
+                .stockwerk(null)
+                .teilnummerHausnummer(null)
+                .zusatz(null)
+                .postleitzahl("86150")
+                .ort("Augsburg")
+                .inMuenchenSeit(null)
+                .wohnungsgeber(null)
+                .wohnungsstatus(Wohnungsstatus.NEBENWOHNUNG)
+                .staatsangehoerigkeit(List.of("deutsch"))
+                .auskunftssperren(List.of())
+                .build();
+
+        final ResponseEntity<EWOBuerger[]> responseEntity = ResponseEntity.ok(new EWOBuerger[] { first, second });
+        when(restTemplate.exchange(anyString(), any(HttpMethod.class), any(HttpEntity.class), eq(EWOBuerger[].class)))
+                .thenReturn(responseEntity);
+
+        final List<EWOBuergerDatenDto> result = ewoService.ewoSuche(EWO_BUERGER_SUCHE_DTO);
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEWOResponse(first, result.get(0));
+        // Validate key fields for second entry as a sanity check
+        assertEquals("2", result.get(1).getOrdnungsmerkmal());
+        assertEquals("Meier", result.get(1).getFamilienname());
+        assertEquals("Claudia", result.get(1).getVorname());
+        assertEquals("Augsburg", result.get(1).getGeburtsort());
+        assertEquals("Augsburg", result.get(1).getGeburtsort());
+        assertEquals("Deutschland", result.get(1).getGeburtsland());
+        assertEquals(Wohnungsstatus.NEBENWOHNUNG.name(), result.get(1).getWohnungsstatus().name());
+    }
+
+    @Test
+    void testEwoSucheMitOMAenderungsService_NullBody_ThrowsAenderungsServiceException() {
+        final ResponseEntity<EWOBuerger> responseEntity = ResponseEntity.ok(null);
+        when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
+                .thenReturn(responseEntity);
+
+        assertThrows(AenderungsServiceException.class, () -> ewoService.ewoSucheMitOMAenderungsService("1"));
+    }
+
+    @Test
+    void testEwoSucheMitOM_RequestEntity_HasGetAndUri() {
+        final EWOBuerger expected = EWO_BUERGER;
+        final ResponseEntity<EWOBuerger> responseEntity = ResponseEntity.ok(expected);
+
+        ArgumentCaptor<RequestEntity> captor = ArgumentCaptor.forClass(RequestEntity.class);
+        when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
+                .thenReturn(responseEntity);
+
+        ewoService.ewoSucheMitOM("1");
+
+        verify(restTemplate, times(1)).exchange(captor.capture(), eq(EWOBuerger.class));
+        RequestEntity<?> req = captor.getValue();
+        assertNotNull(req);
+        assertEquals(HttpMethod.GET, req.getMethod());
+        assertNotNull(req.getUrl());
+        // Basic sanity: the OM should appear somewhere in the request URL (query or path)
+        // We avoid asserting the exact URL to keep tests resilient to refactors.
+        assertTrue(req.getUrl().toString().contains("1"));
+    }
+
+    @Test
+    void testEwoEaiStatus_ServiceUnavailable_MapsDown() {
+        final ResponseEntity<Void> responseEntity = ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(null);
+        when(restTemplate.getForEntity(anyString(), eq(Void.class)))
+                .thenReturn(responseEntity);
+
+        final ResponseEntity<String> status = ewoService.ewoEaiStatus();
+
+        assertEquals(HttpStatus.SERVICE_UNAVAILABLE, status.getStatusCode());
+        assertEquals(EhrenamtJustizUtility.STATUS_DOWN, status.getBody());
+    }
+
+    @Test
+    void testEwoEaiStatus_ResourceAccessException_TreatedAsDown() {
+        when(restTemplate.getForEntity(anyString(), eq(Void.class)))
+                .thenThrow(new ResourceAccessException("Network error"));
+
+        final ResponseEntity<String> status = ewoService.ewoEaiStatus();
+
+        assertEquals(HttpStatus.OK, status.getStatusCode());
+        assertEquals(EhrenamtJustizUtility.STATUS_DOWN, status.getBody());
     }
 
 }

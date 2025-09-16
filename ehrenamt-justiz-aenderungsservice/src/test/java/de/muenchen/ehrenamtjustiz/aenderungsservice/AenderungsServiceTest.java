@@ -1,8 +1,13 @@
 package de.muenchen.ehrenamtjustiz.aenderungsservice;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.AssertionsKt.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
@@ -20,6 +25,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
@@ -105,3 +112,92 @@ class AenderungsServiceTest {
     }
 
 }
+
+    @Test
+    void testConsumeDirect_withWhitespaceOm_throwsBadRequest_andSkipsRestCall() {
+        // Arrange
+        final String invalidOm = "   ";
+
+        // Act + Assert
+        assertThrows(BadRequestException.class, () -> aenderungsService.consumeDirect(invalidOm));
+
+        // Verify no exchange call was made at all
+        verifyNoInteractions(restTemplate);
+    }
+
+    @Test
+    void testConsumeDirect_withEmptyOm_throwsBadRequest_andSkipsRestCall() {
+        // Arrange
+        final String invalidOm = "";
+
+        // Act + Assert
+        assertThrows(BadRequestException.class, () -> aenderungsService.consumeDirect(invalidOm));
+
+        // Verify no exchange call was made at all
+        verifyNoInteractions(restTemplate);
+    }
+
+    @Test
+    void testConsumeDirect_http400_isSurfaced() throws BadRequestException {
+        // Arrange
+        final ResponseEntity<List<String>> badRequest = ResponseEntity.status(HttpStatus.BAD_REQUEST).contentType(MediaType.APPLICATION_JSON).body(List.of("invalid"));
+        when(restTemplate.exchange(any(RequestEntity.class), eq(new ParameterizedTypeReference<List<String>>() {})))
+                .thenReturn(badRequest);
+
+        // Act
+        final HttpStatusCode status = aenderungsService.consumeDirect("12345");
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST.value(), status.value());
+        verify(restTemplate, times(1)).exchange(any(RequestEntity.class), eq(new ParameterizedTypeReference<List<String>>() {}));
+    }
+
+    @Test
+    void testConsumeDirect_http500_isSurfaced() throws BadRequestException {
+        // Arrange
+        final ResponseEntity<List<String>> serverError = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        when(restTemplate.exchange(any(RequestEntity.class), eq(new ParameterizedTypeReference<List<String>>() {})))
+                .thenReturn(serverError);
+
+        // Act
+        final HttpStatusCode status = aenderungsService.consumeDirect("99999");
+
+        // Assert
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), status.value());
+        verify(restTemplate, times(1)).exchange(any(RequestEntity.class), eq(new ParameterizedTypeReference<List<String>>() {}));
+    }
+
+    @Test
+    void testConsumeDirect_okWithBody_exchangeCalledOnce_returns200() throws BadRequestException {
+        // Arrange
+        final List<String> payload = List.of("one", "two");
+        final ResponseEntity<List<String>> okResponse = ResponseEntity.ok().header(HttpHeaders.CACHE_CONTROL, "no-cache").body(payload);
+        when(restTemplate.exchange(any(RequestEntity.class), eq(new ParameterizedTypeReference<List<String>>() {})))
+                .thenReturn(okResponse);
+
+        // Act
+        final HttpStatusCode status = aenderungsService.consumeDirect("4712");
+
+        // Assert
+        assertEquals(HttpStatus.OK.value(), status.value());
+        verify(restTemplate, times(1)).exchange(any(RequestEntity.class), eq(new ParameterizedTypeReference<List<String>>() {}));
+    }
+
+    @Test
+    void testConsumeDirect_restTemplateThrowsUnexpected_runtimeExceptionBubblesAsRuntime() {
+        // Arrange
+        when(restTemplate.exchange(any(RequestEntity.class), eq(new ParameterizedTypeReference<List<String>>() {})))
+                .thenThrow(new RuntimeException("boom"));
+
+        // Act + Assert
+        assertThrows(RuntimeException.class, () -> aenderungsService.consumeDirect("5555"));
+    }
+
+    @Test
+    void testConsumeDirect_doesNotCallRest_whenOmIsEmptyString() {
+        // Act + Assert
+        assertThrows(BadRequestException.class, () -> aenderungsService.consumeDirect(""));
+
+        // Verify no interaction with RestTemplate
+        verifyNoInteractions(restTemplate);
+    }
