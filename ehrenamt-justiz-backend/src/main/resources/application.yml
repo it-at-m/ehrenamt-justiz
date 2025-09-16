@@ -98,3 +98,5 @@ ewo:
     basepath: ${ewo.eai.basepathprefix}/api/personeninfo
     connecttimeout: 15000
     readtimeout: 15000
+  aenderungsservice:
+    basepathprefix: /public/aenderungsservice

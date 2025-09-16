@@ -140,6 +140,26 @@ class EWOBuergerApiServiceClass extends EntityApiService<EWOBuergerData> {
         .catch((reason) => reject(EntityApiService.handleError(reason)));
     });
   }
+
+  public async checkAenderungsserviceStatus(): Promise<string> {
+    return await new Promise<string>((resolve, reject) => {
+      fetch(
+        `${EntityApiService.getBaseUrl()}/ehrenamtjustiz/aenderungsserviceStatus`,
+        getGETConfig()
+      )
+        .then(async (res) => {
+          await res
+            .text()
+            .then(async (createdInstance) => {
+              if (res.ok) return resolve(createdInstance);
+              EntityApiService.handleWrongResponse(HttpMethod.GET, res);
+              reject();
+            })
+            .catch((reason) => reject(EntityApiService.handleError(reason)));
+        })
+        .catch((reason) => reject(EntityApiService.handleError(reason)));
+    });
+  }
 }
 
 export const EWOBuergerApiService = new EWOBuergerApiServiceClass();

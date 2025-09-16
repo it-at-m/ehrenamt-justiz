@@ -71,7 +71,7 @@ application-[profile].yml
 aenderungsservice:
   backend:
     server: http://localhost:8083
-    base-path: /public/aenderungsservice
+    base-path: /public/backendaenderungsservice
     connecttimeout: 30000
     readtimeout: 30000
     retry:
@@ -83,7 +83,7 @@ aenderungsservice:
 | Configuration | Description | Default setting |
 | ------------- | ------------- | ------------- |
 | server  | Host server of backend | 'http://localhost:8083' |
-| base-path | Has to be '/public/aenderungsservice' | /public/aenderungsservice |
+| base-path | Has to be '/public/backendaenderungsservice' | /public/backendaenderungsservice |
 | connecttimeout | Timeout when calling the backend. In milliseconds | 30000 |
 | readtimeout | Readtimeout when calling the backend. In milliseconds | 30000 |
 | maxRetries | Configuration is used, if blocking entry. Maximum number of calls if, for example, a timeout occurs when calling up the backend | 30 |

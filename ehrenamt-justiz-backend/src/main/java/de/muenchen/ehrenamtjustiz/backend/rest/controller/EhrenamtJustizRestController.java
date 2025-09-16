@@ -112,6 +112,18 @@ public class EhrenamtJustizRestController {
         return ewoResponse;
     }
 
+    @GetMapping("/aenderungsserviceStatus")
+    public ResponseEntity<String> aenderungsserviceStatus() {
+
+        log.info("aenderungsserviceStatus wird ermittelt");
+
+        final ResponseEntity<String> ewoResponse = eWOService.aenderungsserviceStatus();
+
+        log.info("aenderungsserviceStatus: {}", ewoResponse.getStatusCode());
+
+        return ewoResponse;
+    }
+
     @PostMapping(value = "/pruefeGeburtsdatum", consumes = { MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<String> pruefeGeburtsdatum(@RequestBody final LocalDate geburtsdatum) {
 

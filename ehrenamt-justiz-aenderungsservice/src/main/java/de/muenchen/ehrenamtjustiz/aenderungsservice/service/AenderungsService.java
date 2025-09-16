@@ -86,7 +86,7 @@ public class AenderungsService {
         final RequestEntity<String> request;
         request = new RequestEntity<>(om, HttpMethod.POST, UriComponentsBuilder
                 .fromUriString(serverBackend)
-                .path(basePathBackend + "/aenderungsservice/aenderungsservicePerson")
+                .path(basePathBackend + "/backendaenderungsservice/aenderungsservicePerson")
                 .build()
                 .toUri());
 

@@ -49,6 +49,19 @@
                 </template>
                 <span>{{ t("app.state.eai") }}</span>
               </v-tooltip>
+              <v-tooltip location="top">
+                <template #activator="{ props }">
+                  <span
+                    :class="aenderungsserviceStatus"
+                    v-bind="props"
+                  >
+                    <v-icon
+                      size="mdi-18px"
+                      :icon="mdiCircle"
+                  /></span>
+                </template>
+                <span>{{ t("app.state.aenderungsservice") }}</span>
+              </v-tooltip>
               <span class="text-white">{{ t("app.head") }}</span>
               <span class="text-secondary">{{ ehrenamtjustizart }}</span>
             </v-toolbar-title>
@@ -227,6 +240,7 @@ const ehrenamtjustizart = ref("");
 const gatewayStatus = ref("DOWN");
 const backendStatus = ref("DOWN");
 const eaiStatus = ref("DOWN");
+const aenderungsserviceStatus = ref("DOWN");
 const isConfigLoaded = computed(() => {
   return (
     userStore.getUser && globalSettingsStore.isKonfigurationLoadingAttempt()
@@ -293,6 +307,7 @@ function healthCheckTimer(): void {
   checkGatewayHealth();
   checkBackendStatus();
   checkEAIStatus();
+  checkAenderungsserviceStatus();
 
   loadActiveKonfiguration();
 
@@ -326,6 +341,16 @@ function checkEAIStatus(): void {
   EWOBuergerApiService.checkEwoEaiStatus()
     .then((content: string) => {
       eaiStatus.value = content;
+    })
+    .catch((error) => {
+      snackbarStore.showMessage(error);
+    });
+}
+function checkAenderungsserviceStatus(): void {
+  aenderungsserviceStatus.value = "DOWN";
+  EWOBuergerApiService.checkAenderungsserviceStatus()
+    .then((content: string) => {
+      aenderungsserviceStatus.value = content;
     })
     .catch((error) => {
       snackbarStore.showMessage(error);

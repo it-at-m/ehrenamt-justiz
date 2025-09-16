@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @Slf4j
-@RequestMapping("/aenderungsservice")
+@RequestMapping("/backendaenderungsservice")
 @SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public class AenderungsServiceRestController {
 
