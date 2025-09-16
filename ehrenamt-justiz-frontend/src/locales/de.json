@@ -23,7 +23,8 @@
     "state": {
       "gateway": "Status Gateway",
       "backend": "Status Backend",
-      "eai": "Status EWO-EAI"
+      "eai": "Status EWO-EAI",
+      "aenderungsservice": "Status Änderungsservice"
     },
     "onlineHelp": "Online-Hilfe",
     "head": " KVR-",

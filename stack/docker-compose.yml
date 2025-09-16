@@ -103,18 +103,22 @@ services:
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_2_FILTERS_0=RewritePath=/public/backend/(?<urlsegments>.*), /$\{urlsegments}
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_ID=backendaenderungsservice
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_URI=http://host.docker.internal:39146/
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_PREDICATES_0=Path=/public/aenderungsservice/**
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_FILTERS_0=RewritePath=/public/aenderungsservice/(?<urlsegments>.*), /$\{urlsegments}
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_ID=online
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_URI=http://host.docker.internal:8082/
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_PREDICATES_0=Path=/public/online/**
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_ID=eai
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_URI=http://host.docker.internal:8085/
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_PREDICATES_0=Path=/public/eai/**
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_FILTERS_0=RewritePath=/public/eai/(?<urlsegments>.*), /$\{urlsegments}
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_ID=frontend
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_URI=http://host.docker.internal:8081/
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_PREDICATES_0=Path=/**
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_PREDICATES_0=Path=/public/backendaenderungsservice/**
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_FILTERS_0=RewritePath=/public/backendaenderungsservice/(?<urlsegments>.*), /$\{urlsegments}
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_ID=aenderungsservice
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_URI=http://host.docker.internal:8086/
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_PREDICATES_0=Path=/public/aenderungsservice/**
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_FILTERS_0=RewritePath=/public/aenderungsservice/(?<urlsegments>.*), /$\{urlsegments}
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_ID=online
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_URI=http://host.docker.internal:8082/
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_PREDICATES_0=Path=/public/online/**
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_ID=eai
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_URI=http://host.docker.internal:8085/
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_PREDICATES_0=Path=/public/eai/**
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_FILTERS_0=RewritePath=/public/eai/(?<urlsegments>.*), /$\{urlsegments}
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_7_ID=frontend
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_7_URI=http://host.docker.internal:8081/
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_7_PREDICATES_0=Path=/**
       - SPRING_PROFILES_ACTIVE=test, hazelcast-local
       - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI=http://keycloak:8100/auth/realms/local_realm
       - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_SSO_ISSUERURI=$${spring.security.oauth2.resourceserver.jwt.issuer-uri}
@@ -122,7 +126,7 @@ services:
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_CLIENTID=ej-app
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_CLIENTSECRET=client_secret
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_SCOPE=profile, openid, roles
-      - REFARCH_SECURITY_CSRF_WHITELISTED=/public/aenderungsservice/**, /public/eai/**
+      - REFARCH_SECURITY_CSRF_WHITELISTED=/public/backendaenderungsservice/**, /public/aenderungsservice/**, /public/eai/**
     networks:
       - keycloak
     extra_hosts:

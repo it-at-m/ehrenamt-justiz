@@ -13,4 +13,6 @@ public interface EWOService {
     List<EWOBuergerDatenDto> ewoSuche(EWOBuergerSucheDto eWOBuergerSucheDto);
 
     ResponseEntity<String> ewoEaiStatus();
+
+    ResponseEntity<String> aenderungsserviceStatus();
 }

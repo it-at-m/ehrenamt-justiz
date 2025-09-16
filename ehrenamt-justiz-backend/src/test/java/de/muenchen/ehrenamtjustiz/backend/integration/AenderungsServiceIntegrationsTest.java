@@ -62,7 +62,7 @@ class AenderungsServiceIntegrationsTest {
 
     public static final String TEST_OM = "4711";
     public static final String TEST_INVALID_OM = "4712";
-    public static final String URI_AENDERUNGSSERVICE = "/aenderungsservice/aenderungsservicePerson";
+    public static final String URI_AENDERUNGSSERVICE = "/backendaenderungsservice/aenderungsservicePerson";
 
     @Autowired
     private KonfigurationRepository konfigurationRepository;
