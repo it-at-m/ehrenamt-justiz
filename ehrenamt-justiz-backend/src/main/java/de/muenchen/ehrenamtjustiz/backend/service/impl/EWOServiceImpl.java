@@ -52,7 +52,10 @@ public class EWOServiceImpl implements EWOService {
     @Value("${ewo.eai.server}")
     private String serverewoeai;
 
-    @Value("${ewo.eai.basepath:personeninfo/ap}")
+    @Value("${ewo.eai.basepathprefix}")
+    private String basepathewoeaiprefix;
+
+    @Value("${ewo.eai.basepath}")
     private String basepathewoeai;
 
     /**
@@ -179,7 +182,7 @@ public class EWOServiceImpl implements EWOService {
     public ResponseEntity<String> ewoEaiStatus() {
 
         try {
-            final ResponseEntity<Void> responseEntity = restTemplate.getForEntity(serverewoeai + "/actuator/health", Void.class);
+            final ResponseEntity<Void> responseEntity = restTemplate.getForEntity(serverewoeai + basepathewoeaiprefix + "/actuator/health", Void.class);
             return new ResponseEntity<>(responseEntity.getStatusCode() == HttpStatus.OK ? EhrenamtJustizUtility.STATUS_UP : EhrenamtJustizUtility.STATUS_DOWN,
                     responseEntity.getStatusCode());
         } catch (RuntimeException ex) {
