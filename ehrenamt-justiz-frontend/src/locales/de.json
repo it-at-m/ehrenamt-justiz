@@ -14,8 +14,8 @@
       "required": "Pflichtfeld",
       "mail": "Valide E-Mail eingeben",
       "geburtsdatum": "Das Alter muss zwischen {alterVon} und {alterBis} Jahren liegen",
-      "staatsangehoerigkeit": "Die Staatsangehörigkeit enhält nicht {staatsangehoerigkeitAusKonfiguration}",
-      "wohnsitz": "Kein Wohnsitz ist in {wohnsitzAusKonfiguration}",
+      "staatsangehoerigkeit": "Die Staatsangehörigkeit enthält nicht {staatsangehoerigkeitAusKonfiguration}",
+      "wohnsitz": "Der Wohnsitz ist nicht in {wohnsitzAusKonfiguration}",
       "numerisch": "Nur numerischer Wert ist hier erlaubt"
     }
   },
