@@ -12,11 +12,11 @@
     },
     "rules": {
       "required": "Pflichtfeld",
-      "mail": "Valide E-Mail eingeben",
+      "mail": "Gültige E-Mail eingeben",
       "geburtsdatum": "Das Alter muss zwischen {alterVon} und {alterBis} Jahren liegen",
       "staatsangehoerigkeit": "Die Staatsangehörigkeit enthält nicht {staatsangehoerigkeitAusKonfiguration}",
       "wohnsitz": "Der Wohnsitz ist nicht in {wohnsitzAusKonfiguration}",
-      "numerisch": "Nur numerischer Wert ist hier erlaubt"
+      "numerisch": "Nur numerische Werte sind erlaubt"
     }
   },
   "app": {
