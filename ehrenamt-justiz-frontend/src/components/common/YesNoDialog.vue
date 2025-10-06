@@ -1,8 +1,8 @@
 <template>
   <v-dialog
     :model-value="modelValue"
-    persistent
     width="800"
+    @click:outside="no"
   >
     <template #activator="{ props: open }">
       <template v-if="buttontext">
@@ -38,14 +38,14 @@
           variant="text"
           @click="no"
         >
-          Nein
+          {{ t("components.yesNoDialog.nein") }}
         </v-btn>
         <v-btn
           id="yesnodialog-btn-yes"
           color="primary"
           @click="yes"
         >
-          Ja
+          {{ t("components.yesNoDialog.ja") }}
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -53,6 +53,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
 import {
   VBtn,
   VCard,
@@ -100,6 +101,8 @@ const emits = defineEmits<{
   no: [];
   yes: [];
 }>();
+
+const { t } = useI18n();
 
 function no(): void {
   emits("no");
