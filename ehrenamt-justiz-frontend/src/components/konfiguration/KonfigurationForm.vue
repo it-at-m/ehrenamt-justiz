@@ -98,7 +98,7 @@
         >
           <v-text-field
             v-model="konfiguration.altervon"
-            :rules="[rules.RULE_REQUIRED]"
+            :rules="[rules.RULE_REQUIRED, rules.RULE_NUMERISCH]"
             :label="t('components.konfigurationForm.mindestalter')"
             persistent-placeholder
             density="compact"
@@ -111,7 +111,7 @@
         >
           <v-text-field
             v-model="konfiguration.alterbis"
-            :rules="[rules.RULE_REQUIRED]"
+            :rules="[rules.RULE_REQUIRED, rules.RULE_NUMERISCH]"
             :label="t('components.konfigurationForm.hoechstalter')"
             persistent-placeholder
             density="compact"

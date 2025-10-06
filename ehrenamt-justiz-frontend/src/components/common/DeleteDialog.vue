@@ -1,8 +1,8 @@
 <template>
   <v-dialog
     :model-value="modelValue"
-    persistent
     max-width="290"
+    @click:outside="cancel"
   >
     <v-card>
       <v-card-title class="text-h5">

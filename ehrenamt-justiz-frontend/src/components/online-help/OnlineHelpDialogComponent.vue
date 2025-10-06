@@ -2,7 +2,7 @@
   <v-dialog
     v-model="visible"
     max-width="800"
-    persistent
+    @click:outside="closeOnlineHelp()"
     @keydown.esc.prevent="closeOnlineHelp()"
     @keydown.enter.prevent="closeOnlineHelp()"
   >

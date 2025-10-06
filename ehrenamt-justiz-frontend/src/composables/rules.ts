@@ -7,14 +7,16 @@
  */
 
 import moment from "moment";
+import { useI18n } from "vue-i18n";
 
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 
 export function useRules() {
+  const { t } = useI18n();
   return {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     RULE_REQUIRED: (v: any): boolean | string => {
-      return !!v || "Feld ist erforderlich";
+      return !!v || t("composables.rules.required");
     },
     /* eslint-enable @typescript-eslint/no-explicit-any */
 
@@ -29,7 +31,7 @@ export function useRules() {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
           v
         ) ||
-        "Valide E-Mail angeben"
+        t("composables.rules.mail")
       );
     },
 
@@ -46,11 +48,10 @@ export function useRules() {
       const altervon = useGlobalSettingsStore().getKonfiguration?.altervon;
       const alterbis = useGlobalSettingsStore().getKonfiguration?.alterbis;
       return (alterbis && alter > alterbis) || (altervon && alter < altervon)
-        ? "Das Alter muss zwischen " +
-            altervon +
-            " und " +
-            alterbis +
-            " Jahren liegen."
+        ? t("composables.rules.geburtsdatum", {
+            alterVon: altervon,
+            alterBis: alterbis,
+          })
         : true;
     },
 
@@ -66,8 +67,10 @@ export function useRules() {
       return staatsangehoerigkeitAusKonfiguration &&
         v.indexOf(staatsangehoerigkeitAusKonfiguration) > -1
         ? true
-        : "Die Staatsangehörigkeit enhält nicht " +
-            staatsangehoerigkeitAusKonfiguration;
+        : t("composables.rules.staatsangehoerigkeit", {
+            staatsangehoerigkeitAusKonfiguration:
+              staatsangehoerigkeitAusKonfiguration,
+          });
     },
 
     /**
@@ -81,7 +84,18 @@ export function useRules() {
 
       return wohnsitzAusKonfiguration && v === wohnsitzAusKonfiguration
         ? true
-        : "Kein Wohnsitz ist in " + wohnsitzAusKonfiguration;
+        : t("composables.rules.wohnsitz", {
+            wohnsitzAusKonfiguration: wohnsitzAusKonfiguration,
+          });
+    },
+
+    /**
+     * validate numeric value
+     * @param v
+     * @constructor
+     */
+    RULE_NUMERISCH: (v: string): boolean | string => {
+      return !v || /^\d+$/.test(v) || t("composables.rules.numerisch");
     },
   };
 }

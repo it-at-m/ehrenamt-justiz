@@ -9,6 +9,14 @@
     "saveLeave": {
       "title": "Ungespeicherte Änderungen",
       "text": "Es sind ungespeicherte Änderungen vorhanden. Wollen Sie die Seite verlassen?"
+    },
+    "rules": {
+      "required": "Pflichtfeld",
+      "mail": "Valide E-Mail eingeben",
+      "geburtsdatum": "Das Alter muss zwischen {alterVon} und {alterBis} Jahren liegen",
+      "staatsangehoerigkeit": "Die Staatsangehörigkeit enhält nicht {staatsangehoerigkeitAusKonfiguration}",
+      "wohnsitz": "Kein Wohnsitz ist in {wohnsitzAusKonfiguration}",
+      "numerisch": "Nur numerischer Wert ist hier erlaubt"
     }
   },
   "app": {
@@ -145,6 +153,10 @@
         "abbrechen": "Abbrechen",
         "loeschen": "Löschen"
       }
+    },
+    "yesNoDialog": {
+      "ja": "Ja",
+      "nein": "Nein"
     },
     "listItemActions": {
       "anzeigen": "Anzeigen",
