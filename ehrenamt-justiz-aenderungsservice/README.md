@@ -123,3 +123,7 @@ logging:
     org.springframework.web: DEBUG
     org.springframework.security: debug
 ```
+
+# Build releases
+
+![Maven release](...github/workflows/maven-release.yml)
