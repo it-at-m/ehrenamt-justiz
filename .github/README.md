@@ -195,7 +195,7 @@ url: http://localhost:8083/public/online/
 1. Open action for maven release: ![Maven release](../.github/workflows/maven-release.yml)
 2. Click on "view runs"
 3. Click on "run workflow"
-4. Select branch, version to use when preparing a release and version to use for new local working copy and Service-Name
+4. Select branch, version to use when preparing a release (e.g. 0.0.4) and version to use for new local working copy (e.g. 0.0.5-SNAPSHOT) and Service-Name (ehrenamt-justiz-backend, ehrenamt-justiz-eai or ehrenamt-justiz-aenderungsservice)
 5. Click on "Run workflow"
    
 ![Build maven release](../docs/images/MavenRelease.png)
