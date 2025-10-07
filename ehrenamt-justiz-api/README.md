@@ -45,7 +45,13 @@ Structure for response from EWO-EAI (EWOBuerger):
 | auskunftssperren | List of String | blocking of information if list is not empty|
 
 ## General
-The api also contains commonly used exceptions and constants. 
+The api also contains commonly used exceptions and constants:
+
+| name           | content  |  description                     |
+|:---------------|:-------------------|:------------------------|
+| DATE_FORMAT | yyyy-MM-dd | Dateformat uses for birthday and in Munich since |
+| AenderungsServiceException | Exception | Exception used in Änderungsservice |
+| ErrorResponse | Response if error in Änderungsservice |Message, om and if error blocks processing of next request in Änderungsserive |
 
 ## Release build
 
