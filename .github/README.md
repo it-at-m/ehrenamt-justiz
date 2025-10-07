@@ -178,35 +178,35 @@ url: http://localhost:8083/public/online/
 
 ### Build release of api
 
-1. Open action for api release: ![API release](../.github/workflows/api-release.yml)
+1. Open action for api release: [API release](../.github/workflows/api-release.yml)
 2. Click on "view runs"
 3. Click on "run workflow"
 4. Select branch, module to release (ehrenamtjustiz-api), release version (e.g. 1.0.0) and next version to use after release (e.g. 1.0.1-SNAPSHOT)
 5. Click on "Run workflow"
-   
+
 ![Build maven release](../docs/images/ApiRelease.png)
 
 6. Check running action
-7. Releases saved in the central Maven repository (https://central.sonatype.com/search?q=ehrenamt-justiz). Wait, wait and wait until it is there.
+7. Releases saved in the [central Maven repository](https://central.sonatype.com/search?q=ehrenamt-justiz). Wait, wait and wait until it is there.
 8. Update api-versions in pom.xml in backend and aenderungsservice and eai and build releases
 
 ### Build release of backend, eai and aenderungsservice
 
-1. Open action for maven release: ![Maven release](../.github/workflows/maven-release.yml)
+1. Open action for maven release: [Maven release workflow](../.github/workflows/maven-release.yml)
 2. Click on "view runs"
 3. Click on "run workflow"
 4. Select branch, version to use when preparing a release (e.g. 0.0.4) and version to use for new local working copy (e.g. 0.0.5-SNAPSHOT) and Service-Name (ehrenamt-justiz-backend, ehrenamt-justiz-eai or ehrenamt-justiz-aenderungsservice)
 5. Click on "Run workflow"
-   
+  
 ![Build maven release](../docs/images/MavenRelease.png)
 
 6. Check running action
-7. Releases can be found here: [Releases](https://github.com/it-at-m/ehrenamt-justiz/releases)
+7. Release can be found here: [Releases page](../../releases)
 8. Update versions in docker-compose.yml for podman
 
 ### Build release of frontend und online
 
-1. Open action for npm release: ![npm release](../.github/workflows/npm-release.yml)
+1. Open action for npm release: [npm release workflow](../.github/workflows/npm-release.yml)
 2. Click on "view runs"
 3. Click on "run workflow"
 4. Select branch, version increment type (patch, minor or major) and node service to release
@@ -215,7 +215,7 @@ url: http://localhost:8083/public/online/
 ![Build npm release](../docs/images/NpmRelease.png)
 
 6. Check running action
-7. Releases can be found here: [Releases](https://github.com/it-at-m/ehrenamt-justiz/releases)
+7. Release can be found here: [Releases page](../../releases)
 8. Update versions in docker-compose.yml for podman
 
 ## Contributing
