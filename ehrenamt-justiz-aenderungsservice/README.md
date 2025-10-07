@@ -126,4 +126,44 @@ logging:
 
 # Build releases
 
-![Maven release](...github/workflows/maven-release.yml)
+## build release of api
+
+1. Open action for maven release: ![Maven release](../.github/workflows/Api-release.yml)
+2. Click on "view runs"
+3. Click on "run workflow"
+4. Select branch, module to release (ehrenamtjustiz-api), release version (e.g. 1.0.0) and next version to use after release (e.g. 1.0.1-SNAPSHOT)
+5. Click on "Run workflow"
+   
+![Build maven release](../docs/images/ApiRelease.png)
+
+6. Check running action
+7. Releases saved in the central Maven repository (https://central.sonatype.com/search?q=ehrenamt-justiz). Wait, wait and wait until it is there.
+8. Update api-versions in pom.xml in backend and aenderungsservice and eai and build releases
+
+## build release of backend, eai and aenderungsservice
+
+1. Open action for maven release: ![Maven release](../.github/workflows/maven-release.yml)
+2. Click on "view runs"
+3. Click on "run workflow"
+4. Select branch, version to use when preparing a release and version to use for new local working copy and Service-Name
+5. Click on "Run workflow"
+   
+![Build maven release](../docs/images/MavenRelease.png)
+
+6. Check running action
+7. Release can be found here: ![Maven release](../releases)
+8. Update versions in docker-compose.yml for podman
+
+## build release of frontend und online
+
+1. Open action for npm release: ![Maven release](../.github/workflows/npm-release.yml)
+2. Click on "view runs"
+3. Click on "run workflow"
+4. Select branch, version increment type (patch, minor or major) and node service to release
+5. Click on "Run workflow"
+
+![Build npm release](../docs/images/NpmRelease.png)
+
+6. Check running action
+7. Release can be found here: ![Maven release](../releases)
+8. Update versions in docker-compose.yml for podman
