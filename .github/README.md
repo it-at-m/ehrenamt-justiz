@@ -201,7 +201,7 @@ url: http://localhost:8083/public/online/
 ![Build maven release](../docs/images/MavenRelease.png)
 
 6. Check running action
-7. Release can be found here: ![Maven release](../releases)
+7. Releases can be found here: ![ehrenamt-justiz releases](../releases)
 8. Update versions in docker-compose.yml for podman
 
 ### Build release of frontend und online
@@ -215,7 +215,7 @@ url: http://localhost:8083/public/online/
 ![Build npm release](../docs/images/NpmRelease.png)
 
 6. Check running action
-7. Release can be found here: ![Maven release](../releases)
+7. Releases can be found here: ![ehrenamt-justiz releases](../releases)
 8. Update versions in docker-compose.yml for podman
 
 ## Contributing
