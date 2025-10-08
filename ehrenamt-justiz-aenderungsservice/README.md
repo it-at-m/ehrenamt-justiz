@@ -121,5 +121,6 @@ logging:
     de.muenchen.ehrenamtjustiz.aenderungsservice: DEBUG
     org.springframework.cache: TRACE
     org.springframework.web: DEBUG
-    org.springframework.security: debug
+    org.springframework.security: DEBUG
 ```
+
