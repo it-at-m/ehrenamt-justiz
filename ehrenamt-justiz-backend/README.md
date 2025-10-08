@@ -35,7 +35,7 @@ The PostgreSQL database servers requested for the individual environments in the
 
 | Server (:Port)                         | Environment | OS       | Description/DB schema                              |
 |:---------------------------------------|:------------|:---------|:---------------------------------------------------|
-| not yet applied for                    | Production  | RHEL 8   | PostgreSQL-Database server ehrju (PostgreSQL 16.6) |
+| ehrjudpp001.srv.muenchen.de:5432       | Production  | RHEL 8   | PostgreSQL-Database server ehrju (PostgreSQL 16.6) |
 | ehrjudpk001.srv.muenchen.de:5432       | Testing     | RHEL 8   | PostgreSQL-Database server ehrju (PostgreSQL 16.6) |
 | ehrjudpc001.srv.muenchen.de:5432       | Coding      | RHEL 8   | PostgreSQL-Datenbankserver ehrju (PostgreSQL 16.6) |
 
