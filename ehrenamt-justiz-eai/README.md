@@ -69,6 +69,10 @@ Example of an EAI call in SoapUI with the parameter om:
 
 ![SoapUI ewosuchemitom Docker example](../docs/images/SoapUI_ewosuchemitom_docker.PNG)
 
+Mock EWO endpoint: When running the EAI locally, you can use the mock EWO endpoint on port 8094:
+
+![SoapUI mock endpoint example](../docs/images/SoapUI_Mock.PNG)
+
 ## Start EAI
 Change to the folder "ehrenamt-justiz-eai" and call the following scripts depending on your operating system
 
