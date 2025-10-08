@@ -33,11 +33,11 @@ The database schema currently contains 6 tables. The following table lists all t
 ## Database server
 The PostgreSQL database servers requested for the individual environments in the MIA server network segment are listed in the following table.
 
-| Server (:Port)                         | Environment | OS       | Description/DB schema                              |
-|:---------------------------------------|:------------|:---------|:---------------------------------------------------|
-| ehrjudpp001.srv.muenchen.de:5432       | Production  | RHEL 8   | PostgreSQL-Database server ehrju (PostgreSQL 16.6) |
-| ehrjudpk001.srv.muenchen.de:5432       | Testing     | RHEL 8   | PostgreSQL-Database server ehrju (PostgreSQL 16.6) |
-| ehrjudpc001.srv.muenchen.de:5432       | Coding      | RHEL 8   | PostgreSQL-Datenbankserver ehrju (PostgreSQL 16.6) |
+| Server                      | Port     | Environment  | OS       | Description/DB schema                        | DB-Name | Schema |
+|:----------------------------|:---------|:-------------|:---------|:---------------------------------------------|:--------|:-------|
+| ehrjudpp001.srv.muenchen.de |5432       | Production  | RHEL 8   | PostgreSQL-Database server (PostgreSQL 16.6) | ehrju   | ej     |
+| ehrjudpk001.srv.muenchen.de |5432       | Testing     | RHEL 8   | PostgreSQL-Database server (PostgreSQL 16.6) | ehrju   | ej     |
+| ehrjudpc001.srv.muenchen.de |5432       | Coding      | RHEL 8   | PostgreSQL-Datenbankserver (PostgreSQL 16.6) | ehrju   | ej     |
 
 ### SQL-Commands 
 The following SQL command can be used to link all tables for an evaluation, for example:    
