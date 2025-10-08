@@ -12,20 +12,21 @@
       variant="text"
       @click="hide"
     >
-      Schließen
+      {{ t("components.theSnackbar.schliessen") }}
     </v-btn>
   </v-snackbar>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
+import { useI18n } from "vue-i18n";
 import { VBtn, VSnackbar } from "vuetify/components";
 
 import { SNACKBAR_DEFAULT_TIMEOUT, STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const snackbarStore = useSnackbarStore();
-
+const { t } = useI18n();
 const show = ref(false);
 const timeout = ref(SNACKBAR_DEFAULT_TIMEOUT);
 const message = ref("");

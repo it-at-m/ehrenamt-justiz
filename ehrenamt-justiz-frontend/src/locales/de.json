@@ -163,6 +163,9 @@
       "bearbeiten": "Bearbeiten",
       "loeschen": "Löschen"
     },
+    "theSnackbar": {
+      "schliessen": "Schließen"
+    },
     "konfigurationList": {
       "eintraegeInsgesamt": "{count} Eintrag insgesamt | {count} Einträge insgesamt",
       "keineKonfigurationVorhanden": "Keine Konfiguration vorhanden"
