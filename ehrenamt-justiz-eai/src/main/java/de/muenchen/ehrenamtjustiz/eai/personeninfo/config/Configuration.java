@@ -123,8 +123,7 @@ public class Configuration {
     @ConditionalOnBean({ UserDetailsService.class })
     public AuthenticationProvider authenticationProvider(final UserDetailsService userDetailsService,
             final PasswordEncoder passwordEncoder) {
-        final DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
+        final DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder);
         return provider;
     }
