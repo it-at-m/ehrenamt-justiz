@@ -14,7 +14,7 @@ import User from "@/types/User";
  * API-Definition (internal only): https://wiki.muenchen.de/betriebshandbuch/wiki/Red_Hat_Single_Sign-On_(Keycloak)#Scopes
  */
 export function getUser(): Promise<User> {
-  return fetch("api/sso/userinfo", getGETConfig())
+  return fetch("/api/sso/userinfo", getGETConfig())
     .catch(defaultCatchHandler)
     .then((response) => {
       defaultResponseHandler(

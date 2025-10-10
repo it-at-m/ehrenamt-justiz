@@ -41,6 +41,7 @@ import type KonfigurationFormData from "@/types/KonfigurationFormData";
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
+import { VCard, VContainer, VProgressLinear } from "vuetify/components";
 
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";
 import KonfigurationForm from "@/components/konfiguration/KonfigurationForm.vue";
