@@ -13,7 +13,8 @@
     "build": "vue-tsc --build --noCheck && vite build && npm run post-build",
     "post-build": "cyclonedx-npm --omit dev --omit optional --output-reproducible -o dist/application.cdx.json  --validate",
     "lint": "prettier . --check && eslint . --concurrency auto && vue-tsc --build --noEmit",
-    "fix": "prettier . --write && eslint . --fix --concurrency auto"
+    "fix": "prettier . --write && eslint . --fix --concurrency auto",
+    "preview": "vite preview --port 8081"
   },
   "dependencies": {
     "@fontsource/roboto": "5.2.8",
