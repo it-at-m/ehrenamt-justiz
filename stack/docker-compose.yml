@@ -158,7 +158,7 @@ services:
   backend:
     profiles:
       - backend
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:dev
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:dev@sha256:542a37bfc6a31ca2fd6244525d39bd5c514a138361aaf4a2e9f9759098226dee
     environment:
       - SPRING_PROFILES_ACTIVE=docker,userinfo-authorities
     ports:
@@ -177,7 +177,7 @@ services:
   frontend:
     profiles:
       - frontend
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:dev
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:dev@sha256:f2ba64d0ce323381ef5dcc6b03754d0c03b558592d362484f43caf5591433545
     ports:
       - "8081:8080"
     networks:
@@ -190,7 +190,7 @@ services:
   online:
     profiles:
       - online
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:dev
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:dev@sha256:602c6c39545c1d4932bd07ef457d29ca7ef2a6344873a9dd94d2ab3af410e6ec
     ports:
       - "8082:8080"
     networks:
@@ -205,7 +205,7 @@ services:
   eai:
     profiles:
       - eai
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai:dev
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai:dev@sha256:a683287d79706425d69109c9f24874d32fc787ddb16bf74661a495ae15f877e7
     volumes:
       - ../ehrenamt-justiz-eai/entrypoint.sh:/usr/local/bin/entrypoint.sh:rwx
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
@@ -227,7 +227,7 @@ services:
   aenderungsservice:
     profiles:
       - aenderungsservice
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice:dev
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice:dev@sha256:c4fce678d7c4fa8e5d055004694c7d52da97f5e984bef2be7f1e699abb1eac32
     volumes:
       - ../ehrenamt-justiz-aenderungsservice/src/main/resources/truststore.jks:/etc/ssl/truststore.jks
       - ../ehrenamt-justiz-aenderungsservice/src/main/resources/kafka-auth-keystore.jks:/etc/ssl/kafka-auth-keystore.jks
