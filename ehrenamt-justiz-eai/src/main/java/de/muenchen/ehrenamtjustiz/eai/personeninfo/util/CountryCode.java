@@ -849,6 +849,7 @@ public enum CountryCode {
         }
     }
 
+    @SuppressWarnings("PMD.UnusedPrivateField")
     private final String name;
     private final String alpha3;
     private final int numeric;
