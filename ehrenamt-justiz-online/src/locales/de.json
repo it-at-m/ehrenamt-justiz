@@ -35,7 +35,7 @@
       "nachname": {
         "label": "Nachname",
         "pflichtfeld": "Nachname ist ein Pflichtfeld!",
-        "maxLaenge": "Nachname darf maximal 255 Zeichen lang sein!"
+        "maxLaenge": "Nachname darf maximal 300 Zeichen lang sein!"
       },
       "geburtsdatum": {
         "label": "Geburtsdatum",

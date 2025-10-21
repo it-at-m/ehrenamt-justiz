@@ -55,10 +55,10 @@ public class Person extends BaseEntity {
     private UUID konfigurationid;
 
     @Column(name = "familienname")
-    @NotNull @Size(max = 255) private String familienname;
+    @NotNull @Size(max = 300) private String familienname;
 
     @Column(name = "geburtsname")
-    @Size(max = 255) private String geburtsname;
+    @Size(max = 300) private String geburtsname;
 
     @Column(name = "vorname")
     @NotNull @Size(max = 255) private String vorname;
