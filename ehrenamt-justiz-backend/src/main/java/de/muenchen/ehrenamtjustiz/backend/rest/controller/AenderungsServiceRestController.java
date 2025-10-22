@@ -55,7 +55,7 @@ public class AenderungsServiceRestController {
         }
     )
     @PostMapping("/aenderungsservicePerson")
-    @SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.PreserveStackTrace", "PMD.AvoidRethrowingException" })
+    @SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.PreserveStackTrace" })
     public ResponseEntity<List<String>> aenderungsServicePerson(@RequestBody final String om) {
 
         final Person personByOM;
