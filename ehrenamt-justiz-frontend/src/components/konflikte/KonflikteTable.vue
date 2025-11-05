@@ -90,11 +90,12 @@
             <template #activator="{ props }">
               <v-icon
                 v-if="
-                  AuthService.checkAuth('WRITE_EHRENAMTJUSTIZDATEN') &&
+                  AuthService.checkAuth('WRITE_EHRENAMTJUSTIZDATEN', t) &&
                   (item.auskunftssperre == undefined ||
                     item.auskunftssperre.length == 0 ||
                     AuthService.checkAuth(
-                      'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
+                      'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE',
+                      t
                     ))
                 "
                 v-bind="props"
@@ -116,7 +117,10 @@
         >
           <v-checkbox-btn
             v-if="
-              AuthService.checkAuth('READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE')
+              AuthService.checkAuth(
+                'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE',
+                t
+              )
             "
             :indeterminate="someSelected && !allSelected"
             :model-value="allSelected"
@@ -324,7 +328,7 @@ function getRowProps(data: any) {
     data.item.auskunftssperre != undefined &&
     data.item.auskunftssperre.length > 0
   ) {
-    if (AuthService.checkAuth("READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE")) {
+    if (AuthService.checkAuth("READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE", t)) {
       return { class: "auskunftssperre" };
     } else {
       return { class: "auskunftssperre v-selection-control--disabled" };
@@ -335,7 +339,7 @@ function getRowProps(data: any) {
 function isAuskunftssperreSichtbar(person: PersonenTableData): boolean {
   return (
     person.auskunftssperre.length == 0 ||
-    AuthService.checkAuth("READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE")
+    AuthService.checkAuth("READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE", t)
   );
 }
 </script>

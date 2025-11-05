@@ -6,13 +6,16 @@
  * @return honorary justice in formatted plain text
  */
 export function formattedEhrenamtjustizart(
-  t: (key: string, options: { count: number }) => string,
+  t: (key: string, options?: { justiceType: string; count: number }) => string,
   ehrenamtjustizart: string | undefined,
   count: number
 ): string {
   if (ehrenamtjustizart === "SCHOEFFEN") {
-    return t("general.schoeffen", { count: count });
+    return t("general.schoeffen", { justiceType: "", count: count });
   } else {
-    return t("general.ehrenamtlicheVerwaltungsrichter", { count: count });
+    return t("general.ehrenamtlicheVerwaltungsrichter", {
+      justiceType: "",
+      count: count,
+    });
   }
 }

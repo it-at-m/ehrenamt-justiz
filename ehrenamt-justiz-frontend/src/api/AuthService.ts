@@ -4,7 +4,7 @@ import { useUserStore } from "@/stores/user";
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export default class AuthService {
-  static checkAuth(authority: string): boolean {
+  static checkAuth(authority: string, t: (key: string) => string): boolean {
     const snackbarStore = useSnackbarStore();
     const userStore = useUserStore();
 
@@ -12,7 +12,7 @@ export default class AuthService {
       // user not yet read from database
       snackbarStore.showMessage({
         level: STATUS_INDICATORS.WARNING,
-        message: "Kein User-Objekt. Navigiere zu Startseite.",
+        message: t("api.message.keinUserObject"),
       });
       return false;
     } else {
