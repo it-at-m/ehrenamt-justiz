@@ -39,6 +39,48 @@
     "aktiveKonfigurationFehlt": "Aktive Konfiguration fehlt",
     "keineAktiveKonfiguration": "Es konnte keine aktive Konfiguration gefunden werden! Bitte nur eine aktive Konfiguration anlegen und dann die Anwendung neu laden!"
   },
+  "api": {
+    "message": {
+      "keinUserObject": "Kein User-Objekt. Navigiere zu Startseite."
+    },
+    "csvHeader": {
+      "familienname": "Familienname",
+      "geburtsname": "Geburtsname",
+      "vorname": "Vorname",
+      "geburtsdatum": "Geburtsdatum",
+      "geschlecht": "Geschlecht",
+      "ewoid": "Ordnungsmerkmal",
+      "akademischergrad": "Akademischer Grad",
+      "geburtsort": "Geburtsort",
+      "geburtsland": "Geburtsland",
+      "familienstand": "Familienstand",
+      "staatsangehoerigkeit": "Staatsangehörigkeit",
+      "wohnungsgeber": "Wohnungsgeber",
+      "strasse": "Straße",
+      "hausnummer": "Hausnummer",
+      "appartmentnummer": "Appartmentnummer",
+      "buchstabehausnummer": "Buchstabe Hausnummer",
+      "stockwerk": "Stockwerk",
+      "teilnummerhausnummer": "Teilnummer Hausnummer",
+      "adresszusatz": "Adresszusatz",
+      "postleitzahl": "Postleitzahl",
+      "ort": "Ort",
+      "inmuenchenseit": "In München seit",
+      "wohnungsstatus": "Wohnungsstatus",
+      "auskunftssperre": "Auskunftssperren",
+      "derzeitausgeuebterberuf": "Derzeit ausgeübter Beruf",
+      "arbeitgeber": "Arbeitgeber",
+      "ausgeuebteehrenaemter": "Ausgeübte Ehrenämter",
+      "telefonnummer": "Telefonnummer (privat)",
+      "telefongesch": "Telefonnummer (dienstlich)",
+      "telefonmobil": "Telefonnummer (mobil)",
+      "mailadresse": "Mailadresse",
+      "onlinebewerbung": "Online Bewerbung",
+      "warbereitstaetigals": "War bereits als {justiceType} tätig?",
+      "warbereitstaetigalsvorvorperiode": "War bereits als {justiceType} in Vorvorperiode tätig?",
+      "bewerbungvom": "Bewerbung vom"
+    }
+  },
   "views": {
     "getStartedView": {
       "onlineHelp": "Hier finden Sie eine Übersicht über alle Bewerbungen, Konflikte und Vorschläge. Wenn neue Bewerber erfasst wurden, haben Sachbearbeiter, je nach Berechtigung, die Möglichkeit, die Daten zu exportieren oder diese als benachrichtigt zu markieren.",

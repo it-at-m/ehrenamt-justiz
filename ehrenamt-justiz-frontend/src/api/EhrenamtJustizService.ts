@@ -111,7 +111,10 @@ class EhrenamtJustizServiceClass {
   }
 
   public async convertToCSVFile(
-    t: (key: string) => string,
+    t: (
+      key: string,
+      options?: { justiceType: string; count: number }
+    ) => string,
     selectedUUIDs: string[],
     dateiName: string,
     status: string
@@ -124,7 +127,10 @@ class EhrenamtJustizServiceClass {
   }
 
   public async convertToCSVFileByPersonCSV(
-    t: (key: string) => string,
+    t: (
+      key: string,
+      options?: { justiceType: string; count: number }
+    ) => string,
     personenCSV: PersonCSV[],
     dateiName: string
   ) {
@@ -136,7 +142,10 @@ class EhrenamtJustizServiceClass {
   }
 
   private static async convertToCSVFile(
-    t: (key: string) => string,
+    t: (
+      key: string,
+      options?: { justiceType: string; count: number }
+    ) => string,
     personenCSV: PersonCSV[],
     dateiName: string
   ) {
@@ -152,143 +161,149 @@ class EhrenamtJustizServiceClass {
       columnHeaders: [
         {
           key: "familienname",
-          displayLabel: "Familienname",
+          displayLabel: t("api.csvHeader.familienname"),
         },
         {
           key: "geburtsname",
-          displayLabel: "Geburtsname",
+          displayLabel: t("api.csvHeader.geburtsname"),
         },
         {
           key: "vorname",
-          displayLabel: "Vorname",
+          displayLabel: t("api.csvHeader.vorname"),
         },
         {
           key: "geburtsdatum",
-          displayLabel: "Geburtsdatum",
+          displayLabel: t("api.csvHeader.geburtsdatum"),
         },
         {
           key: "geschlecht",
-          displayLabel: "Geschlecht",
+          displayLabel: t("api.csvHeader.geschlecht"),
         },
         {
           key: "ewoid",
-          displayLabel: "Ordnungsmerkmal",
+          displayLabel: t("api.csvHeader.ewoid"),
         },
         {
           key: "akademischergrad",
-          displayLabel: "Akademischer Grad",
+          displayLabel: t("api.csvHeader.akademischergrad"),
         },
         {
           key: "geburtsort",
-          displayLabel: "Geburtsort",
+          displayLabel: t("api.csvHeader.geburtsort"),
         },
         {
           key: "geburtsland",
-          displayLabel: "Geburtsland",
+          displayLabel: t("api.csvHeader.geburtsland"),
         },
         {
           key: "familienstand",
-          displayLabel: "Familienstand",
+          displayLabel: t("api.csvHeader.familienstand"),
         },
         {
           key: "staatsangehoerigkeit",
-          displayLabel: "Staatsangehörigkeit",
+          displayLabel: t("api.csvHeader.staatsangehoerigkeit"),
         },
         {
           key: "wohnungsgeber",
-          displayLabel: "Wohnungsgeber",
+          displayLabel: t("api.csvHeader.wohnungsgeber"),
         },
         {
           key: "strasse",
-          displayLabel: "Straße",
+          displayLabel: t("api.csvHeader.strasse"),
         },
         {
           key: "hausnummer",
-          displayLabel: "Hausnummer",
+          displayLabel: t("api.csvHeader.hausnummer"),
         },
         {
           key: "appartmentnummer",
-          displayLabel: "Appartmentnummer",
+          displayLabel: t("api.csvHeader.appartmentnummer"),
         },
         {
           key: "buchstabehausnummer",
-          displayLabel: "Buchstabe Hausnummer",
+          displayLabel: t("api.csvHeader.buchstabehausnummer"),
         },
         {
           key: "stockwerk",
-          displayLabel: "Stockwerk",
+          displayLabel: t("api.csvHeader.stockwerk"),
         },
         {
           key: "teilnummerhausnummer",
-          displayLabel: "Teilnummer Hausnummer",
+          displayLabel: t("api.csvHeader.teilnummerhausnummer"),
         },
         {
           key: "adresszusatz",
-          displayLabel: "Adresszusatz",
+          displayLabel: t("api.csvHeader.adresszusatz"),
         },
         {
           key: "postleitzahl",
-          displayLabel: "Postleitzahl",
+          displayLabel: t("api.csvHeader.postleitzahl"),
         },
         {
           key: "ort",
-          displayLabel: "Ort",
+          displayLabel: t("api.csvHeader.ort"),
         },
         {
           key: "inmuenchenseit",
-          displayLabel: "In München seit",
+          displayLabel: t("api.csvHeader.inmuenchenseit"),
         },
         {
           key: "wohnungsstatus",
-          displayLabel: "Wohnungsstatus",
+          displayLabel: t("api.csvHeader.wohnungsstatus"),
         },
         {
           key: "auskunftssperre",
-          displayLabel: "Auskunftssperren",
+          displayLabel: t("api.csvHeader.auskunftssperre"),
         },
         {
           key: "derzeitausgeuebterberuf",
-          displayLabel: "Derzeit ausgeübter Beruf",
+          displayLabel: t("api.csvHeader.derzeitausgeuebterberuf"),
         },
         {
           key: "arbeitgeber",
-          displayLabel: "Arbeitgeber",
+          displayLabel: t("api.csvHeader.arbeitgeber"),
         },
         {
           key: "ausgeuebteehrenaemter",
-          displayLabel: "Ausgeübte Ehrenämter",
+          displayLabel: t("api.csvHeader.ausgeuebteehrenaemter"),
         },
         {
           key: "telefonnummer",
-          displayLabel: "Telefonnummer (privat)",
+          displayLabel: t("api.csvHeader.telefonnummer"),
         },
         {
           key: "telefongesch",
-          displayLabel: "Telefonnummer (dienstlich)",
+          displayLabel: t("api.csvHeader.telefongesch"),
         },
         {
           key: "telefonmobil",
-          displayLabel: "Telefonnummer (mobil)",
+          displayLabel: t("api.csvHeader.telefonmobil"),
         },
         {
           key: "mailadresse",
-          displayLabel: "Mailadresse",
+          displayLabel: t("api.csvHeader.mailadresse"),
         },
         {
           key: "onlinebewerbung",
-          displayLabel: "Online Bewerbung",
+          displayLabel: t("api.csvHeader.onlinebewerbung"),
         },
         {
           key: "warbereitstaetigals",
-          displayLabel: `War bereits als ${justiceType} tätig?`,
+          displayLabel: t("api.csvHeader.warbereitstaetigals", {
+            justiceType: justiceType,
+            count: 0,
+          }),
         },
         {
           key: "warbereitstaetigalsvorvorperiode",
-          displayLabel: `War bereits als ${justiceType} in Vorvorperiode tätig?`,
+          displayLabel: t("api.csvHeader.warbereitstaetigalsvorvorperiode", {
+            justiceType: justiceType,
+            count: 0,
+          }),
         },
         {
           key: "bewerbungvom",
-          displayLabel: "Bewerbung vom",
+          displayLabel: t("api.csvHeader.bewerbungvom"),
         },
       ],
     });

@@ -8,7 +8,7 @@
       <div
         v-if="
           !props.konfiguration.aktiv &&
-          AuthService.checkAuth('WRITE_KONFIGURATION')
+          AuthService.checkAuth('WRITE_KONFIGURATION', t)
         "
       >
         <v-tooltip
@@ -30,8 +30,8 @@
         v-if="showDelete"
         :show-set-active="true"
         :show-open="true"
-        :show-edit="AuthService.checkAuth('WRITE_KONFIGURATION')"
-        :show-delete="AuthService.checkAuth('DELETE_KONFIGURATION')"
+        :show-edit="AuthService.checkAuth('WRITE_KONFIGURATION', t)"
+        :show-delete="AuthService.checkAuth('DELETE_KONFIGURATION', t)"
         @open="displayKonfiguration"
         @edit="editKonfiguration"
         @delete="deleteRequested"
@@ -40,8 +40,8 @@
         v-else
         :show-set-active="true"
         :show-open="false"
-        :show-edit="AuthService.checkAuth('WRITE_KONFIGURATION')"
-        :show-delete="AuthService.checkAuth('DELETE_KONFIGURATION')"
+        :show-edit="AuthService.checkAuth('WRITE_KONFIGURATION', t)"
+        :show-delete="AuthService.checkAuth('DELETE_KONFIGURATION', t)"
         @open="displayKonfiguration"
         @edit="editKonfiguration"
       />
