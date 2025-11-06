@@ -81,7 +81,10 @@
         <v-col class="col">
           <v-checkbox
             v-if="
-              AuthService.checkAuth('READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE')
+              AuthService.checkAuth(
+                'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE',
+                t
+              )
             "
             v-model="ewobuergerdata.validierungdeaktivieren"
             :label="t('components.eWOBuergerForm.validierungDeaktivieren')"
