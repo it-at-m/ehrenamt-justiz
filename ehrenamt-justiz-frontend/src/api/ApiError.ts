@@ -1,6 +1,5 @@
 import { STATUS_INDICATORS } from "@/Constants.ts";
 
-/* eslint-disable @typescript-eslint/unified-signatures */
 export class ApiError extends Error {
   level: string;
   constructor({

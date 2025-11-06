@@ -65,7 +65,7 @@
         <v-checkbox
           v-if="
             bewerbung.action == BEARBEIGUNGS_MODUS.EDIT_MODUS &&
-            AuthService.checkAuth('READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE', t)
+            AuthService.checkAuth('READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE')
           "
           v-model="bewerbung.validierungdeaktivieren"
           :label="t('components.bewerbungForm.header.validierungDeaktivieren')"
@@ -128,8 +128,7 @@
                       v-show="
                         bewerbung.ewo_auskunftssperre.length == 0 ||
                         AuthService.checkAuth(
-                          'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE',
-                          t
+                          'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
                         )
                       "
                     >
@@ -156,8 +155,7 @@
                 v-show="
                   bewerbung.ewo_auskunftssperre.length == 0 ||
                   AuthService.checkAuth(
-                    'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE',
-                    t
+                    'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
                   )
                 "
               >
@@ -288,8 +286,7 @@
                 v-show="
                   bewerbung.ewo_auskunftssperre.length == 0 ||
                   AuthService.checkAuth(
-                    'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE',
-                    t
+                    'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
                   )
                 "
               >
@@ -491,8 +488,7 @@
                 v-show="
                   bewerbung.ewo_auskunftssperre.length == 0 ||
                   AuthService.checkAuth(
-                    'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE',
-                    t
+                    'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
                   )
                 "
               >

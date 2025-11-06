@@ -9,7 +9,7 @@
 
           <v-col class="text-right">
             <v-btn
-              v-if="AuthService.checkAuth('WRITE_KONFIGURATION', t)"
+              v-if="AuthService.checkAuth('WRITE_KONFIGURATION')"
               id="create-konfiguration"
               location="bottom right"
               fixed
