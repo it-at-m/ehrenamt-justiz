@@ -6,7 +6,7 @@
  * @return honorary justice in formatted plain text
  */
 export function formattedEhrenamtjustizart(
-  t: (key: string, options?: { justiceType: string; count: number }) => string,
+  t: (key: string, options?: { justiceType: string; count: number }) => string, // justiceType not used here
   ehrenamtjustizart: string | undefined,
   count: number
 ): string {
