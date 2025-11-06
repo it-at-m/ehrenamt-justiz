@@ -1,11 +1,10 @@
 import { STATUS_INDICATORS } from "@/Constants.ts";
 
-// prettier-ignore
 export class ApiError extends Error {
   level: string;
   constructor({
     level = STATUS_INDICATORS.ERROR,
-    message = "Ein unbekannter Fehler ist aufgetreten, bitte den Administrator informieren."
+    message = "Ein unbekannter Fehler ist aufgetreten, bitte den Administrator informieren.",
   }: {
     level?: string;
     message?: string;
