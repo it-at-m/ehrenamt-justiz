@@ -1,7 +1,7 @@
 <template>
   <button
     class="banner"
-    onclick="location.href='http://www.muenchen.de/rathaus/home.html';"
+    onclick="location.href = 'http://www.muenchen.de/rathaus/home.html'"
   >
     <img
       src="@/assets/banner980.jpg"
