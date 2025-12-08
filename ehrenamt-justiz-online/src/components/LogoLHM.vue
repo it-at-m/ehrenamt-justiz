@@ -1,7 +1,7 @@
 <template>
   <button
     class="lhmlogo"
-    onclick="location.href='https://www.muenchen.de';"
+    onclick="location.href = 'https://www.muenchen.de'"
   >
     <img
       class="lhmimg"
