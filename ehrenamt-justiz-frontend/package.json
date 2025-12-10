@@ -17,7 +17,7 @@
     "preview": "vite preview --port 8081"
   },
   "dependencies": {
-    "@fontsource/roboto": "5.2.8",
+    "@fontsource/roboto": "5.2.9",
     "@muenchen/appswitcher-vue": "2.2.0",
     "@vueuse/core": "13.9.0",
     "export-to-csv": "1.4.0",
