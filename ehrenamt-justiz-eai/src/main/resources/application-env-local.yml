@@ -38,5 +38,4 @@ producer:
   password:
 ewo:
   eai:
-    url: http://localhost:8094/personen/2.0/soap/personErweitertc
-#    url: https://micro-ewo-apigateway-test-ewo-eai.apps.capk.muenchen.de/personen/2.0/soap/personErweitert
+    url: http://localhost:8094/personen/2.0/soap/personErweitert
