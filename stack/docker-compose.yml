@@ -217,8 +217,8 @@ services:
       <<: *healthcheck
       test: [ "CMD-SHELL", "curl http://localhost:8085/actuator/health/liveness" ]
     environment:
-      - PRODUCER_USER=
-      - PRODUCER_PASSWORD=
+      - PRODUCER_USER=schoeffen
+      - PRODUCER_PASSWORD=RojMArByIPUc0W7d8ukl8KTPjZ
 
   # If the Änderungsservice is to be started in the Docker-Compose, the following command must be executed at startup:
   # docker-compose --profile=aenderungsservice up
@@ -245,9 +245,9 @@ services:
       test: ["CMD-SHELL", "curl http://localhost:8086/actuator/health/liveness"]
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - KEY_STORE_PASSWORD=
-      - TRUST_STORE_PASSWORD=
-      - GROUP_ID=lhm-ewo-eai-aenderungen-ehrenamt-justiz-testDocker0003
+      - KEY_STORE_PASSWORD=4j61rOTDsCpoAutAY9S5
+      - TRUST_STORE_PASSWORD=4j61rOTDsCpoAutAY9S5
+      - GROUP_ID=lhm-ewo-eai-aenderungen-ehrenamt-justiz-testDocker00434
 
 networks:
   keycloak:
