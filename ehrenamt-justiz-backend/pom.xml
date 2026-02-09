@@ -11,7 +11,7 @@
 
     <groupId>de.muenchen.ehrenamt-justiz</groupId>
     <artifactId>ehrenamt-justiz-backend</artifactId>
-    <version>0.0.6-SNAPSHOT</version>
+    <version>0.0.7-SNAPSHOT</version>
     <name>ehrenamt-justiz-backend</name>
     <description>Backend of Ehrenamtjustiz</description>
     <url>https://github.com/it-at-m/ehrenamt-justiz</url>
