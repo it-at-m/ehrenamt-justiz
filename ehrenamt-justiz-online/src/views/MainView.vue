@@ -18,6 +18,7 @@
             v-if="bewerbunggespeichertergebbnis == 'OK'"
             :title="t('mainView.hinweise.ok.title')"
             type="success"
+            variant="header"
           >
             <div>
               {{ t("mainView.hinweise.ok.text") }}
@@ -26,6 +27,7 @@
           <muc-banner
             v-if="bewerbunggespeichertergebbnis == 'ERROR'"
             type="emergency"
+            variant="header"
           >
             <div>
               {{ t("mainView.hinweise.error.text") }}
@@ -34,6 +36,7 @@
           <muc-banner
             v-if="bewerbunggespeichertergebbnis == 'TOO_MANY_REQUESTS'"
             type="emergency"
+            variant="header"
           >
             <div>
               {{ t("mainView.hinweise.toManyRequests.text") }}
@@ -42,12 +45,14 @@
           <muc-banner
             v-if="bewerbunggespeichertergebbnis == 'EINGABEFEHLER'"
             type="emergency"
+            variant="header"
           >
             <div>{{ t("mainView.hinweise.eingabeFehler.text") }}</div>
           </muc-banner>
           <muc-banner
             v-if="technischerfehler != ''"
             type="emergency"
+            variant="header"
           >
             <div>
               {{
