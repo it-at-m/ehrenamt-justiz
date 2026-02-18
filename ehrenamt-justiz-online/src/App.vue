@@ -11,6 +11,7 @@
           v-if="keineAktiveKonfiguration"
           :title="t('app.keineAktiveKonfiguration.title')"
           type="emergency"
+          variant="header"
         >
           <div>
             {{
