@@ -21,7 +21,7 @@ public class AuthoritiesConverterConfiguration {
 
     @Bean
     @Profile("keycloak-permissions")
-    public KeycloakPermissionsAuthoritiesConverter keycloakPermissionsAuthoritiesConverter (
+    public KeycloakPermissionsAuthoritiesConverter keycloakPermissionsAuthoritiesConverter(
             final SecurityProperties securityProperties, final RestTemplateBuilder restTemplateBuilder) {
         return new KeycloakPermissionsAuthoritiesConverter(securityProperties, restTemplateBuilder);
     }
