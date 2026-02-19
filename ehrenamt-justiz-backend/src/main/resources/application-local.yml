@@ -42,9 +42,9 @@ sso:
 
 refarch:
   security:
-    client-id: ${sso.client}
-    user-info-uri: ${sso.url}/auth/realms/${sso.realm}/protocol/openid-connect/userinfo
     logging-mode: all
+    client-id: ${sso.client}
+    permissions-uri: ${sso.url}/auth/realms/${sso.realm}/protocol/openid-connect/token
 
 logging:
   include-application-group: false # disabled because application group is only relevant when deployed
