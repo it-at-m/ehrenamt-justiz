@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Profile;
 /**
  * Configure how authorities are resolved.
  * Either {@link KeycloakRolesAuthoritiesConverter} or with profile "keycloak-permissions"
- * deprecated {@link KeycloakPermissionsAuthoritiesConverter}.
+ * {@link KeycloakPermissionsAuthoritiesConverter}.
  */
 @Configuration
 @Profile("!no-security")
