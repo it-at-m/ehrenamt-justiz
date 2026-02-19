@@ -3,14 +3,14 @@
 ## Start backend local
 Change to the folder "ehrenamt-justiz-backend" and call the following scripts depending on your operating system
 
-PLEASE NOTE: To use the permissions, the backend must also be started with the ‘userinfo-authorities’ profile. Otherwise, only the roles will be evaluated. This will change again in the future. Currently, this profile is essential for working with the application.
+PLEASE NOTE: To use the permissions, the backend must also be started with the ‘keycloak-permissions’ profile. Otherwise, only the roles will be evaluated. This will change again in the future. Currently, this profile is essential for working with the application.
 
 
 | Betriebssystem | Profile            |  Script                 |
 |:---------------|:-------------------|:------------------------|
-| Windows        | Local,userinfo-authorities | runLocal.bat            |
+| Windows        | Local,keycloak-permissions | runLocal.bat            |
 | Windows        | Local, nosecurity  | runLocalNoSecurity.bat  |
-| Linux          | Local,userinfo-authorities | runLocal.sh             |
+| Linux          | Local,keycloak-permissions | runLocal.sh             |
 | Linux          | Local, nosecurity  | runLocalNoSecurity.bat  |
 
 ## ER-Diagramm
@@ -158,7 +158,7 @@ These authorizations are defined:
 | EWOSUCHEMITOM  |  ["clientrole_sachbearbeiter", "clientrole_sondersachbearbeiter",  "clientrole_administrator"] |
 | ONLINEBEWERBEN  |  not used  |
 
-PLEASE NOTE: To use the permissions, the backend must also be started with the ‘userinfo-authorities’ profile. Otherwise, only the roles will be evaluated. This will change again in the future. Currently, this profile is essential for working with the application.
+PLEASE NOTE: To use the permissions, the backend must also be started with the ‘keycloak-permissions’ profile. Otherwise, only the roles will be evaluated.
 
 # Swagger UI
 
