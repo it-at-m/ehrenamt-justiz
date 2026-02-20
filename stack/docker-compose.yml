@@ -160,7 +160,7 @@ services:
       - backend
     image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:dev
     environment:
-      - SPRING_PROFILES_ACTIVE=docker,userinfo-authorities
+      - SPRING_PROFILES_ACTIVE=docker,keycloak-permissions
     ports:
       - "39146:39146"
     networks:
