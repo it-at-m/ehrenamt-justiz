@@ -20,19 +20,19 @@
 </template>
 
 <script setup lang="ts">
-import type KonfigurationFormData from "@/types/KonfigurationFormData";
+import type KonfigurationFormData from "@/types/KonfigurationFormData.ts";
 
 import { reactive, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VCard, VContainer } from "vuetify/components";
 
-import { KonfigurationApiService } from "@/api/KonfigurationApiService";
+import { KonfigurationApiService } from "@/api/KonfigurationApiService.ts";
 import KonfigurationForm from "@/components/konfiguration/KonfigurationForm.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
-import { BEARBEIGUNGS_MODUS } from "@/Constants";
+import { BEARBEIGUNGS_MODUS } from "@/Constants.ts";
 import { STATUS_INDICATORS } from "@/Constants.ts";
-import { useSnackbarStore } from "@/stores/snackbar";
+import { useSnackbarStore } from "@/stores/snackbar.ts";
 
 const snackbarStore = useSnackbarStore();
 const router = useRouter();

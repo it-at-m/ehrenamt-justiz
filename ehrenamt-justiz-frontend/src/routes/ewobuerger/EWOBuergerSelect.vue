@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import type EWOBuergerData from "@/types/EWOBuergerData";
+import type EWOBuergerData from "@/types/EWOBuergerData.ts";
 
 import { mdiAccountPlus } from "@mdi/js";
 import { computed } from "vue";

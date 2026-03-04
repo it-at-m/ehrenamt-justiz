@@ -240,7 +240,7 @@ import {
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { useUserStore } from "@/stores/user";
-import InvalidePersonenSelect from "@/views/vorschlaege/InvalidePersonenSelect.vue";
+import InvalidePersonenSelect from "@/routes/vorschlaege/InvalidePersonenSelect.vue";
 
 const { t } = useI18n();
 const headers: ReadonlyHeaders = computed(() => [
@@ -339,23 +339,15 @@ function loadItems(options: any) {
 }
 
 function editItem(item: { id: { toString: () => string } }) {
-  router.push({
-    name: "bewerbung.edit",
-    params: {
-      id: item.id.toString(),
-      action: BEARBEIGUNGS_MODUS.EDIT_MODUS,
-    },
-  });
+
+  router.push({ name: '/bewerbungen/bewerbungedit/[id]', params: { id: item.id.toString() },  })
+
 }
 
 function displayItem(item: { id: { toString: () => string } }) {
-  router.push({
-    name: "bewerbung.display",
-    params: {
-      id: item.id.toString(),
-      action: BEARBEIGUNGS_MODUS.DISPLAY_MODUS,
-    },
-  });
+
+  router.push({ name: '/bewerbungen/bewerbungedit/[id]', params: { id: item.id.toString() } })
+
 }
 
 function deleteRequested() {

@@ -102,14 +102,14 @@
     </v-app-bar>
     <v-navigation-drawer v-model="drawer">
       <v-list>
-        <v-list-item :to="{ name: ROUTES_GETSTARTED }">
+        <v-list-item to="/getstarted">
           <v-list-item-title>{{
             t("app.navigation.getStarted")
           }}</v-list-item-title>
         </v-list-item>
         <v-list-item
-          :to="{ name: 'bewerbung.create' }"
-          :disabled="
+            :to="{ name: '/ewobuerger/ewobuergercreate' }"
+            :disabled="
             !user ||
             !user.authorities.includes('READ_EWOBUERGER') ||
             !globalSettingsStore ||
@@ -117,11 +117,11 @@
           "
         >
           <v-list-item-title>{{
-            t("app.navigation.bewerbungErstellen")
-          }}</v-list-item-title>
+              t("app.navigation.bewerbungErstellen")
+            }}</v-list-item-title>
         </v-list-item>
         <v-list-item
-          :to="{ name: 'bewerbung.index' }"
+          :to="{ name: '/bewerbungen/bewerbungenindex' }"
           :disabled="
             !user ||
             !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
@@ -134,8 +134,8 @@
           }}</v-list-item-title>
         </v-list-item>
         <v-list-item
-          :to="{ name: 'konflikte.index' }"
-          :disabled="
+            :to="{ name: '/konflikte/konflikteindex' }"
+            :disabled="
             !user ||
             !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
             !globalSettingsStore ||
@@ -143,26 +143,26 @@
           "
         >
           <v-list-item-title>{{
-            t("app.navigation.konflikte")
-          }}</v-list-item-title>
+              t("app.navigation.konflikte")
+            }}</v-list-item-title>
         </v-list-item>
         <v-list-item
-          :to="{ name: 'vorschlaege.index' }"
-          :disabled="
+            :to="{ name: '/vorschlaege/vorschlaegeindex' }"
+            :disabled="
             !user || !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN')
           "
         >
           <v-list-item-title>{{
-            t("app.navigation.vorschlaege")
-          }}</v-list-item-title>
+              t("app.navigation.vorschlaege")
+            }}</v-list-item-title>
         </v-list-item>
         <v-list-item
-          :to="{ name: 'konfiguration.index' }"
-          :disabled="!user || !user.authorities.includes('READ_KONFIGURATION')"
+            :to="{ name: '/konfiguration/konfigurationindex' }"
+            :disabled="!user || !user.authorities.includes('READ_KONFIGURATION')"
         >
           <v-list-item-title>{{
-            t("app.navigation.konfigurationen")
-          }}</v-list-item-title>
+              t("app.navigation.konfigurationen")
+            }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -219,13 +219,15 @@ import { checkHealth } from "@/api/HealthService";
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";
 import { getUser } from "@/api/user-client";
 import TheSnackbar from "@/components/TheSnackbar.vue";
-import { APPSWITCHER_URL, ROUTES_GETSTARTED } from "@/Constants.ts";
+import { APPSWITCHER_URL } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { useUserStore } from "@/stores/user";
 import { formattedEhrenamtjustizart } from "@/tools/Helper";
 import HealthState from "@/types/HealthState";
 import User, { UserLocalDevelopment } from "@/types/User";
+import router from "@/plugins/router";
+import AuthService from "@/api/AuthService.ts";
 
 const { t } = useI18n();
 const appswitcherBaseUrl = APPSWITCHER_URL;
@@ -251,8 +253,29 @@ onMounted(() => {
   loadUser();
   healthCheckTimer();
   loadActiveKonfiguration();
+
+  router.getRoutes().forEach((route)=>{
+    if (route.path == '/ewobuerger/ewobuergercreate' && !AuthService.checkAuthority('READ_EWOBUERGER')) {
+     // router.removeRoute('/ewobuerger/ewobuergercreate');
+    }
+    if (route.path == '/ewobuerger/ewobuergercreate' && !AuthService.checkAuthority('READ_EWOBUERGER')) {
+     // router.removeRoute('/ewobuerger/ewobuergercreate');
+    }
+  })
+
+  router.beforeEach((to, from, next) => {
+    alert(to.path)
+    if (!AuthService.checkAuthority('READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE')) {
+      return
+    } else {
+      next()
+    }
+  })
+
+
   // display drawer at once
   toggleDrawer();
+
 });
 
 /**
