@@ -86,7 +86,7 @@
             <span v-bind="props">
               <v-btn
                 style="font-size: 12px"
-                :onclick="hilfeAnzeigen"
+                @click="hilfeAnzeigen"
                 :icon="mdiHelp"
             /></span>
           </template>
@@ -103,11 +103,9 @@
   </v-app-bar>
 </template>
 <script setup lang="ts">
-import type KonfigurationData from "@/types/KonfigurationData";
-
 import { mdiApps, mdiCircle, mdiHelp } from "@mdi/js";
 import { AppSwitcher } from "@muenchen/appswitcher-vue";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import {
   VAppBar,
@@ -123,21 +121,18 @@ import {
 import { EhrenamtJustizService } from "@/api/EhrenamtJustizService.ts";
 import { EWOBuergerApiService } from "@/api/EWOBuergerApiService.ts";
 import { checkHealth } from "@/api/HealthService.ts";
-import { KonfigurationApiService } from "@/api/KonfigurationApiService";
-import { getUser } from "@/api/user-client";
 import { APPSWITCHER_URL } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar.ts";
 import { useUserStore } from "@/stores/user.ts";
 import { formattedEhrenamtjustizart } from "@/tools/Helper";
 import HealthState from "@/types/HealthState.ts";
-import User, { UserLocalDevelopment } from "@/types/User";
 
 const globalSettingsStore = useGlobalSettingsStore();
 const userStore = useUserStore();
 const snackbarStore = useSnackbarStore();
 const { t } = useI18n();
-const userinfo = ref<string>("");
+const userinfo = ref<string | undefined>("");
 const bezeichnungApp = ref(t("app.aktiveKonfigurationFehlt"));
 const ehrenamtjustizart = ref("");
 const gatewayStatus = ref("DOWN");
@@ -145,59 +140,48 @@ const backendStatus = ref("DOWN");
 const eaiStatus = ref("DOWN");
 const aenderungsserviceStatus = ref("DOWN");
 const appswitcherBaseUrl = APPSWITCHER_URL;
+let healthCheckTimeout: ReturnType<typeof setTimeout> | null = null;
+const user = computed(() => userStore.getUser);
 
 onMounted(() => {
-  loadUser();
+  getUserInfo();
+  getDataFromConfiguration();
   healthCheckTimer();
-  loadActiveKonfiguration();
+});
+
+onUnmounted(() => {
+  if (healthCheckTimeout) {
+    clearTimeout(healthCheckTimeout);
+    healthCheckTimeout = null;
+  }
 });
 
 /**
- * Loads UserInfo from the backend and sets it in the store.
+ * Get UserInfo from the store
  */
-function loadUser(): void {
-  getUser()
-    .then((user: User) => {
-      userinfo.value = user.given_name + " " + user.family_name;
-      if (userinfo.value.trim() === "") {
-        userinfo.value = user.username;
-        if (userinfo.value.trim() === "") {
-          userinfo.value = user.preferred_username;
-        }
-      }
-      userStore.setUser(user);
-    })
-    .catch(() => {
-      // No user info received, so fallback
-      if (import.meta.env.DEV) {
-        userStore.setUser(UserLocalDevelopment());
-      } else {
-        userStore.setUser(null);
-      }
-    });
+function getUserInfo(): void {
+  userinfo.value = user.value?.given_name + " " + user.value?.family_name;
+  if (userinfo.value.trim.length == 0) {
+    userinfo.value = user.value?.username;
+    if (!userinfo.value) {
+      userinfo.value = user.value?.preferred_username;
+    }
+  }
 }
 
 /**
- * Loads active configuration from the backend and sets it in the store.
+ * Get data from active configuration
  */
-function loadActiveKonfiguration(): void {
-  KonfigurationApiService.getAktiveKonfiguration()
-    .then((konfigurationData: KonfigurationData) => {
-      globalSettingsStore.setKonfiguration(konfigurationData);
-      ehrenamtjustizart.value = formattedEhrenamtjustizart(
-        t,
-        konfigurationData.ehrenamtjustizart,
-        2
-      );
-      bezeichnungApp.value = konfigurationData.bezeichnung;
-      globalSettingsStore.setKonfigurationLoadingAttempt(true);
-    })
-    .catch(() => {
-      snackbarStore.showMessage({
-        message: t("app.keineAktiveKonfiguration"),
-      });
-      globalSettingsStore.setKonfigurationLoadingAttempt(true);
-    });
+function getDataFromConfiguration(): void {
+  ehrenamtjustizart.value = formattedEhrenamtjustizart(
+    t,
+    globalSettingsStore?.getKonfiguration?.ehrenamtjustizart,
+    2
+  );
+  bezeichnungApp.value = "";
+  if (globalSettingsStore && globalSettingsStore?.getKonfiguration) {
+    bezeichnungApp.value = globalSettingsStore.getKonfiguration.bezeichnung;
+  }
 }
 
 function healthCheckTimer(): void {
@@ -206,7 +190,7 @@ function healthCheckTimer(): void {
   checkEAIStatus();
   checkAenderungsserviceStatus();
 
-  setTimeout(() => {
+  healthCheckTimeout = setTimeout(() => {
     healthCheckTimer();
   }, 60000);
 }

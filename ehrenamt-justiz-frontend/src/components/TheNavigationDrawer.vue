@@ -11,7 +11,6 @@
         :disabled="
           !user ||
           !user.authorities.includes('READ_EWOBUERGER') ||
-          !globalSettingsStore ||
           !globalSettingsStore.getKonfiguration
         "
       >
@@ -24,7 +23,6 @@
         :disabled="
           !user ||
           !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
-          !globalSettingsStore ||
           !globalSettingsStore.getKonfiguration
         "
       >
@@ -37,7 +35,6 @@
         :disabled="
           !user ||
           !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
-          !globalSettingsStore ||
           !globalSettingsStore.getKonfiguration
         "
       >
@@ -67,7 +64,7 @@
   </v-navigation-drawer>
 </template>
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import {
   VList,
@@ -76,36 +73,12 @@ import {
   VNavigationDrawer,
 } from "vuetify/components";
 
-import { getUser } from "@/api/user-client";
 import { ROUTES_GETSTARTED } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useUserStore } from "@/stores/user";
-import User, { UserLocalDevelopment } from "@/types/User";
 
 const userStore = useUserStore();
-
 const { t } = useI18n();
 const globalSettingsStore = useGlobalSettingsStore();
 const user = computed(() => userStore.getUser);
-
-onMounted(() => {
-  loadUser();
-});
-/**
- * Loads UserInfo from the backend and sets it in the store.
- */
-function loadUser(): void {
-  getUser()
-    .then((user: User) => {
-      userStore.setUser(user);
-    })
-    .catch(() => {
-      // No user info received, so fallback
-      if (import.meta.env.DEV) {
-        userStore.setUser(UserLocalDevelopment());
-      } else {
-        userStore.setUser(null);
-      }
-    });
-}
 </script>
