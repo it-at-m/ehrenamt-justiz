@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer>
+  <v-navigation-drawer v-model="showDrawer">
     <v-list>
       <v-list-item :to="{ name: ROUTES_GETSTARTED }">
         <v-list-item-title>{{
@@ -77,6 +77,7 @@ import { ROUTES_GETSTARTED } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useUserStore } from "@/stores/user";
 
+const showDrawer = defineModel<boolean>({ required: true });
 const userStore = useUserStore();
 const { t } = useI18n();
 const globalSettingsStore = useGlobalSettingsStore();

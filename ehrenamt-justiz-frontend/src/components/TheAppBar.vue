@@ -73,7 +73,7 @@
         class="d-flex justify-start"
       >
         <span class="text-secondary font-weight-bold">
-          <h3>{{ bezeichnungApp }}</h3></span
+          <h3>{{ labelApp }}</h3></span
         >
       </v-col>
       <v-col
@@ -133,7 +133,7 @@ const userStore = useUserStore();
 const snackbarStore = useSnackbarStore();
 const { t } = useI18n();
 const userinfo = ref<string | undefined>("");
-const bezeichnungApp = ref(t("app.aktiveKonfigurationFehlt"));
+const labelApp = ref(t("app.aktiveKonfigurationFehlt"));
 const ehrenamtjustizart = ref("");
 const gatewayStatus = ref("DOWN");
 const backendStatus = ref("DOWN");
@@ -161,7 +161,7 @@ onUnmounted(() => {
  */
 function getUserInfo(): void {
   userinfo.value = user.value?.given_name + " " + user.value?.family_name;
-  if (userinfo.value.trim.length == 0) {
+  if (userinfo.value.trim().length == 0) {
     userinfo.value = user.value?.username;
     if (!userinfo.value) {
       userinfo.value = user.value?.preferred_username;
@@ -173,14 +173,16 @@ function getUserInfo(): void {
  * Get data from active configuration
  */
 function getDataFromConfiguration(): void {
-  ehrenamtjustizart.value = formattedEhrenamtjustizart(
-    t,
-    globalSettingsStore?.getKonfiguration?.ehrenamtjustizart,
-    2
-  );
-  bezeichnungApp.value = "";
-  if (globalSettingsStore && globalSettingsStore?.getKonfiguration) {
-    bezeichnungApp.value = globalSettingsStore.getKonfiguration.bezeichnung;
+  labelApp.value = t("app.aktiveKonfigurationFehlt");
+  ehrenamtjustizart.value = "";
+  if (globalSettingsStore && globalSettingsStore.getKonfiguration) {
+    labelApp.value = globalSettingsStore.getKonfiguration.bezeichnung;
+
+    ehrenamtjustizart.value = formattedEhrenamtjustizart(
+      t,
+      globalSettingsStore.getKonfiguration.ehrenamtjustizart,
+      2
+    );
   }
 }
 
