@@ -51,8 +51,6 @@ import { useGlobalSettingsStore } from "@/stores/globalsettings.ts";
 import { useSnackbarStore } from "@/stores/snackbar.ts";
 import { useUserStore } from "@/stores/user.ts";
 import User, { UserLocalDevelopment } from "@/types/User";
-import router from "@/plugins/router";
-import AuthService from "@/api/AuthService.ts";
 
 const { t } = useI18n();
 const globalSettingsStore = useGlobalSettingsStore();
@@ -68,25 +66,6 @@ const isConfigLoaded = computed(() => {
 onMounted(() => {
   loadUser();
   loadActiveKonfiguration();
-
-  router.getRoutes().forEach((route)=>{
-    if (route.path == '/ewobuerger/ewobuergercreate' && !AuthService.checkAuthority('READ_EWOBUERGER')) {
-     // router.removeRoute('/ewobuerger/ewobuergercreate');
-    }
-    if (route.path == '/ewobuerger/ewobuergercreate' && !AuthService.checkAuthority('READ_EWOBUERGER')) {
-     // router.removeRoute('/ewobuerger/ewobuergercreate');
-    }
-  })
-
-  router.beforeEach((to, from, next) => {
-    alert(to.path)
-    if (!AuthService.checkAuthority('READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE')) {
-      return
-    } else {
-      next()
-    }
-  })
-
 
   // display drawer at once
   toggleNavigation();
