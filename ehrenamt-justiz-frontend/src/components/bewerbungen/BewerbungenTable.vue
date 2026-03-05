@@ -237,10 +237,10 @@ import {
   PERSONENSTATUS,
   STATUS_INDICATORS,
 } from "@/Constants.ts";
+import InvalidePersonenSelect from "@/routes/vorschlaege/InvalidePersonenSelect.vue";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { useUserStore } from "@/stores/user";
-import InvalidePersonenSelect from "@/routes/vorschlaege/InvalidePersonenSelect.vue";
 
 const { t } = useI18n();
 const headers: ReadonlyHeaders = computed(() => [
@@ -339,15 +339,14 @@ function loadItems(options: any) {
 }
 
 function editItem(item: { id: { toString: () => string } }) {
-
-  router.push({ name: '/bewerbungen/bewerbungedit/[id]', params: { id: item.id.toString() },  })
-
+  router.push({ path: `/bewerbungen/bewerbungedit/${item.id}` });
 }
 
 function displayItem(item: { id: { toString: () => string } }) {
-
-  router.push({ name: '/bewerbungen/bewerbungedit/[id]', params: { id: item.id.toString() } })
-
+  router.push({
+    name: "/bewerbungen/bewerbungedit/[id]",
+    params: { id: item.id.toString() },
+  });
 }
 
 function deleteRequested() {

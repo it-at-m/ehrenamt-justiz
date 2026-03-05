@@ -46,8 +46,7 @@ import { VCard, VContainer, VProgressLinear } from "vuetify/components";
 import { KonfigurationApiService } from "@/api/KonfigurationApiService.ts";
 import KonfigurationForm from "@/components/konfiguration/KonfigurationForm.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
-import { BEARBEIGUNGS_MODUS } from "@/Constants.ts";
-import { STATUS_INDICATORS } from "@/Constants.ts";
+import { BEARBEIGUNGS_MODUS, STATUS_INDICATORS } from "@/Constants.ts";
 import { useSnackbarStore } from "@/stores/snackbar.ts";
 
 const route = useRoute();

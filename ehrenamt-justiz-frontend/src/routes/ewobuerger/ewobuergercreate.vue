@@ -31,10 +31,9 @@ import { VCard, VContainer } from "vuetify/components";
 import { EWOBuergerApiService } from "@/api/EWOBuergerApiService.ts";
 import EWOBuergerForm from "@/components/ewobuerger/EWOBuergerForm.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
-import { BEARBEIGUNGS_MODUS } from "@/Constants.ts";
-import { STATUS_INDICATORS } from "@/Constants.ts";
-import { useSnackbarStore } from "@/stores/snackbar.ts";
+import { BEARBEIGUNGS_MODUS, STATUS_INDICATORS } from "@/Constants.ts";
 import EWOBuergerSelect from "@/routes/ewobuerger/EWOBuergerSelect.vue";
+import { useSnackbarStore } from "@/stores/snackbar.ts";
 
 const snackbarStore = useSnackbarStore();
 
