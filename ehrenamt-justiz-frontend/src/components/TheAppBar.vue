@@ -163,7 +163,7 @@ function getUserInfo(): void {
   const givenName = user.value?.given_name;
   const familyName = user.value?.family_name;
   if (givenName || familyName) {
-      userinfo.value = [givenName, familyName].filter(Boolean).join(" ");
+    userinfo.value = [givenName, familyName].filter(Boolean).join(" ");
   } else {
     userinfo.value = user.value?.username;
     if (!userinfo.value) {
