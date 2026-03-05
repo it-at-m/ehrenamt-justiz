@@ -160,8 +160,11 @@ onUnmounted(() => {
  * Get UserInfo from the store
  */
 function getUserInfo(): void {
-  userinfo.value = user.value?.given_name + " " + user.value?.family_name;
-  if (userinfo.value.trim().length == 0) {
+  const givenName = user.value?.given_name;
+  const familyName = user.value?.family_name;
+  if (givenName || familyName) {
+      userinfo.value = [givenName, familyName].filter(Boolean).join(" ");
+  } else {
     userinfo.value = user.value?.username;
     if (!userinfo.value) {
       userinfo.value = user.value?.preferred_username;
