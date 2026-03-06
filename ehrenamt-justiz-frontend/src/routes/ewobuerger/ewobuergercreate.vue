@@ -20,21 +20,20 @@
 </template>
 
 <script setup lang="ts">
-import type EWOBuergerData from "@/types/EWOBuergerData";
-import type EWOBuergerSuche from "@/types/EWOBuergerSuche";
+import type EWOBuergerData from "@/types/EWOBuergerData.ts";
+import type EWOBuergerSuche from "@/types/EWOBuergerSuche.ts";
 
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VCard, VContainer } from "vuetify/components";
 
-import { EWOBuergerApiService } from "@/api/EWOBuergerApiService";
+import { EWOBuergerApiService } from "@/api/EWOBuergerApiService.ts";
 import EWOBuergerForm from "@/components/ewobuerger/EWOBuergerForm.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
-import { BEARBEIGUNGS_MODUS } from "@/Constants";
-import { STATUS_INDICATORS } from "@/Constants.ts";
-import { useSnackbarStore } from "@/stores/snackbar";
-import EWOBuergerSelect from "@/views/ewobuerger/EWOBuergerSelect.vue";
+import { BEARBEIGUNGS_MODUS, STATUS_INDICATORS } from "@/Constants.ts";
+import EWOBuergerSelect from "@/routes/ewobuerger/EWOBuergerSelect.vue";
+import { useSnackbarStore } from "@/stores/snackbar.ts";
 
 const snackbarStore = useSnackbarStore();
 

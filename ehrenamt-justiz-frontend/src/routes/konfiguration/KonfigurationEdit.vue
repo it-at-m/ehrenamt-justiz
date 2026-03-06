@@ -36,19 +36,18 @@
 </template>
 
 <script setup lang="ts">
-import type KonfigurationFormData from "@/types/KonfigurationFormData";
+import type KonfigurationFormData from "@/types/KonfigurationFormData.ts";
 
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import { VCard, VContainer, VProgressLinear } from "vuetify/components";
 
-import { KonfigurationApiService } from "@/api/KonfigurationApiService";
+import { KonfigurationApiService } from "@/api/KonfigurationApiService.ts";
 import KonfigurationForm from "@/components/konfiguration/KonfigurationForm.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
-import { BEARBEIGUNGS_MODUS } from "@/Constants";
-import { STATUS_INDICATORS } from "@/Constants.ts";
-import { useSnackbarStore } from "@/stores/snackbar";
+import { BEARBEIGUNGS_MODUS, STATUS_INDICATORS } from "@/Constants.ts";
+import { useSnackbarStore } from "@/stores/snackbar.ts";
 
 const route = useRoute();
 const router = useRouter();

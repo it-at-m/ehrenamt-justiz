@@ -66,6 +66,7 @@ const isConfigLoaded = computed(() => {
 onMounted(() => {
   loadUser();
   loadActiveKonfiguration();
+
   // display drawer at once
   toggleNavigation();
 });

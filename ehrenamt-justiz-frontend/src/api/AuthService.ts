@@ -19,4 +19,14 @@ export default class AuthService {
       return userStore.getUser.authorities.includes(authority);
     }
   }
+
+  static checkAuthority(authority: string): boolean {
+    const userStore = useUserStore();
+
+    if (!userStore.getUser || !userStore.getUser.authorities) {
+      return false;
+    } else {
+      return userStore.getUser.authorities.includes(authority);
+    }
+  }
 }
