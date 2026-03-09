@@ -65,7 +65,7 @@
     <argLine /> <!-- Must be empty, definition needed for integration of Jacoco and Surefire via @{argLine} lazy property evaluation -->
 
     <!-- Release -->
-    <maven-release-plugin.version>3.1.1</maven-release-plugin.version>
+    <maven-release-plugin.version>3.3.1</maven-release-plugin.version>
 
     <!-- Spotless P2 Mirror configuration (e.g. required when using company internal registry -->
     <p2.username /> <!-- must be empty, override via Maven settings.xml if needed -->
