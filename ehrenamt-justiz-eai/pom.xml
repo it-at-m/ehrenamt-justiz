@@ -64,6 +64,7 @@
 
         <!-- Utility -->
         <refarch-tools.version>1.2.0</refarch-tools.version>
+        <cxf.version>4.2.0</cxf.version>
 
         <!-- Spotless P2 Mirror configuration (e.g. required when using company internal registry -->
         <p2.username /> <!-- must be empty, override via Maven settings.xml if needed -->
@@ -78,6 +79,13 @@
                 <groupId>org.apache.camel.springboot</groupId>
                 <artifactId>camel-spring-boot-dependencies</artifactId>
                 <version>${camel-spring-boot-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-bom</artifactId>
+                <version>${cxf.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -176,7 +184,6 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-ws-security</artifactId>
-            <version>4.1.5</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -214,7 +221,7 @@
             <plugin>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-codegen-plugin</artifactId>
-                <version>4.2.0</version>
+                <version>${cxf.version}</version>
                 <executions>
                     <execution>
                         <id>generate-sources-producer</id>
