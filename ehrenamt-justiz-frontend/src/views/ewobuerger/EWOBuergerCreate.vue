@@ -77,11 +77,11 @@ async function save() {
           ewoBuergerSelectVisible.value = true;
         } else if (ewoBuergers[0]) {
           // Check, if person already exist
-          EWOBuergerApiService.pruefenNeuePerson(ewoBuergers[0]).then(
+          return EWOBuergerApiService.pruefenNeuePerson(ewoBuergers[0]).then(
             (person) => {
               if (person == null) {
                 // Prepare person data from EWO und insert data in DB
-                EWOBuergerApiService.vorbereitenUndSpeichernPerson(
+                return EWOBuergerApiService.vorbereitenUndSpeichernPerson(
                   ewoBuergers[0]
                 ).then(() => {
                   router.push({
@@ -100,6 +100,7 @@ async function save() {
                     status: person.status,
                   }),
                 });
+                return;
               }
             }
           );
