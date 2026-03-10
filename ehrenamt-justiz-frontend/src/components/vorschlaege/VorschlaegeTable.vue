@@ -231,6 +231,7 @@ import { BEARBEIGUNGS_MODUS, PERSONENSTATUS } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { useUserStore } from "@/stores/user";
+import { STATUS_INDICATORS } from "@/Constants.ts";
 
 const { t } = useI18n();
 const headers: ReadonlyHeaders = computed(() => [
