@@ -121,7 +121,7 @@ import {
 import { EhrenamtJustizService } from "@/api/EhrenamtJustizService.ts";
 import { EWOBuergerApiService } from "@/api/EWOBuergerApiService.ts";
 import { checkHealth } from "@/api/HealthService.ts";
-import { APPSWITCHER_URL } from "@/Constants.ts";
+import { APPSWITCHER_URL, STATUS_INDICATORS } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar.ts";
 import { useUserStore } from "@/stores/user.ts";
@@ -206,8 +206,11 @@ function checkGatewayHealth(): void {
     .then((content: HealthState) => {
       gatewayStatus.value = content.status;
     })
-    .catch((error) => {
-      snackbarStore.showMessage(error);
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
     });
 }
 function checkBackendStatus(): void {
@@ -216,8 +219,11 @@ function checkBackendStatus(): void {
     .then((content: string) => {
       backendStatus.value = content;
     })
-    .catch((error) => {
-      snackbarStore.showMessage(error);
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
     });
 }
 function checkEAIStatus(): void {
@@ -226,8 +232,11 @@ function checkEAIStatus(): void {
     .then((content: string) => {
       eaiStatus.value = content;
     })
-    .catch((error) => {
-      snackbarStore.showMessage(error);
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
     });
 }
 function checkAenderungsserviceStatus(): void {
@@ -236,8 +245,11 @@ function checkAenderungsserviceStatus(): void {
     .then((content: string) => {
       aenderungsserviceStatus.value = content;
     })
-    .catch((error) => {
-      snackbarStore.showMessage(error);
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
     });
 }
 function hilfeAnzeigen(): void {

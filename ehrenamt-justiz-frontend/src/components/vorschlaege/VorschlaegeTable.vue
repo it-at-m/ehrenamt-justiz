@@ -318,8 +318,11 @@ function loadItems(options: any) {
       personenTableData.value.push(...pagedData.data);
       totalItems.value = pagedData.totalElements;
     })
-    .catch((err) => {
-      snackbarStore.showMessage(err);
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
     })
     .finally(() => {
       loadingAnimationAktiv.value = false;
@@ -360,8 +363,11 @@ async function deleteConfirmed() {
     .then(() => {
       inTabelleEntfernen();
     })
-    .catch((err) => {
-      snackbarStore.showMessage(err);
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
     })
     .finally(() => {
       deselectAll();

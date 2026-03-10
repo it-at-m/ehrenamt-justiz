@@ -262,6 +262,11 @@
         "inEWOSuchen": "In EWO suchen"
       }
     },
+    "eWOBuergerCreate": {
+      "messages": {
+        "fehler": "Das Formular ist nicht richtig ausgefüllt"
+      }
+    },
     "bewerbungenTable": {
       "suche": "Suche",
       "table": {

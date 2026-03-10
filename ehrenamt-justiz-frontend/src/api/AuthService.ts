@@ -10,9 +10,9 @@ export default class AuthService {
 
     if (!userStore.getUser || !userStore.getUser.authorities) {
       // user not yet read from database
-      snackbarStore.showMessage({
-        level: STATUS_INDICATORS.WARNING,
-        message: t("api.message.keinUserObject"),
+      snackbarStore.push({
+        color: STATUS_INDICATORS.WARNING,
+        text: t("api.message.keinUserObject"),
       });
       return false;
     } else {

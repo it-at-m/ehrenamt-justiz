@@ -201,10 +201,9 @@ function felderLeeren(): void {
 function speichern(): void {
   form.value?.validate();
   if (!formValid.value) {
-    snackbarStore.showMessage({
-      level: STATUS_INDICATORS.ERROR,
-      message: t("components.konfigurationForm.messages.fehler"),
-      show: true,
+    snackbarStore.push({
+      color: STATUS_INDICATORS.ERROR,
+      text: t("components.konfigurationForm.messages.fehler"),
     });
     return;
   }

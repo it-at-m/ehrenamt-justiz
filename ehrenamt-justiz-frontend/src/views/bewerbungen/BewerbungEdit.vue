@@ -139,8 +139,11 @@ function loadBewerbung(): void {
       };
       isLoading.value = false;
     })
-    .catch((err) => {
-      snackbarStore.showMessage(err);
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
       router.push({
         name: "bewerbung.index",
         params: {
@@ -219,12 +222,12 @@ function save(): void {
         name: nextRoute,
       });
     })
-    .catch((err) =>
-      snackbarStore.showMessage({
-        level: STATUS_INDICATORS.ERROR,
-        message: err,
-      })
-    )
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
+    })
     .finally(() => (animationAktiv.value = false));
 }
 
@@ -255,12 +258,12 @@ function cancel(): void {
         name: nextRoute,
       });
     })
-    .catch((err) =>
-      snackbarStore.showMessage({
-        level: STATUS_INDICATORS.ERROR,
-        message: err,
-      })
-    )
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
+    })
     .finally(() => (animationAktiv.value = false));
 }
 </script>

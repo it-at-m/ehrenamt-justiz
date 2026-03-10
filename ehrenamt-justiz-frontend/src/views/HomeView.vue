@@ -21,12 +21,30 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { VCol, VContainer, VImg, VRow } from "vuetify/components";
 
+import { checkHealth } from "@/api/health-client";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
+import { STATUS_INDICATORS } from "@/Constants";
+import { useSnackbarStore } from "@/stores/snackbar";
+import HealthState from "@/types/HealthState";
+
+const snackbarStore = useSnackbarStore();
+const status = ref("DOWN");
 
 const { t } = useI18n();
+onMounted(() => {
+  checkHealth()
+    .then((content: HealthState) => (status.value = content.status))
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
+    });
+});
 </script>
 
 <style scoped>

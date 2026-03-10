@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <the-snackbar />
+    <the-snackbar-queue />
     <the-app-bar
       @clicked-nav-icon="toggleNavigation"
       v-if="isConfigLoaded"
@@ -46,7 +46,7 @@ import { KonfigurationApiService } from "@/api/KonfigurationApiService";
 import { getUser } from "@/api/user-client";
 import TheAppBar from "@/components/TheAppBar.vue";
 import TheNavigationDrawer from "@/components/TheNavigationDrawer.vue";
-import TheSnackbar from "@/components/TheSnackbar.vue";
+import TheSnackbarQueue from "@/components/TheSnackbarQueue.vue";
 import { useGlobalSettingsStore } from "@/stores/globalsettings.ts";
 import { useSnackbarStore } from "@/stores/snackbar.ts";
 import { useUserStore } from "@/stores/user.ts";
@@ -98,8 +98,8 @@ function loadActiveKonfiguration(): void {
       globalSettingsStore.setKonfigurationLoadingAttempt(true);
     })
     .catch(() => {
-      snackbarStore.showMessage({
-        message: t("app.keineAktiveKonfiguration"),
+      snackbarStore.push({
+        text: t("app.keineAktiveKonfiguration"),
       });
       globalSettingsStore.setKonfigurationLoadingAttempt(true);
     });

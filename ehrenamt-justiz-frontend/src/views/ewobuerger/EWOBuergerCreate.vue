@@ -63,60 +63,60 @@ async function save() {
       vorname: ewobuergerSuche.value.vorname.trim(),
       geburtsdatum: ewobuergerSuche.value.geburtsdatum.trim(),
       validierungdeaktivieren: ewobuergerSuche.value.validierungdeaktivieren,
-    }).then((ewoBuergers) => {
-      if (ewoBuergers.length == 0) {
-        // No citizen found
-        snackbarStore.showMessage({
-          level: STATUS_INDICATORS.WARNING,
-          message: t("views.eWOBuergerCreate.keinePersonGefundenMessage"),
-          show: true,
-        });
-      } else if (ewoBuergers.length > 1) {
-        // More than one citizen: Select citizen by User
-        ewoBuergerSelect.value = ewoBuergers;
-        ewoBuergerSelectVisible.value = true;
-      } else if (ewoBuergers[0]) {
-        // Check, if person already exist
-        EWOBuergerApiService.pruefenNeuePerson(ewoBuergers[0]).then(
-          (person) => {
-            if (person == null) {
-              // Prepare person data from EWO und insert data in DB
-              EWOBuergerApiService.vorbereitenUndSpeichernPerson(
-                ewoBuergers[0]
-              ).then(() => {
-                router.push({
-                  name: "bewerbung.edit",
-                  params: {
-                    id: ewoBuergers[0].id ? ewoBuergers[0].id : "",
-                    action: BEARBEIGUNGS_MODUS.EDIT_MODUS,
-                  },
+    })
+      .then((ewoBuergers) => {
+        if (ewoBuergers.length == 0) {
+          // No citizen found
+          snackbarStore.push({
+            color: STATUS_INDICATORS.WARNING,
+            text: t("views.eWOBuergerCreate.keinePersonGefundenMessage"),
+          });
+        } else if (ewoBuergers.length > 1) {
+          // More than one citizen: Select citizen by User
+          ewoBuergerSelect.value = ewoBuergers;
+          ewoBuergerSelectVisible.value = true;
+        } else if (ewoBuergers[0]) {
+          // Check, if person already exist
+          EWOBuergerApiService.pruefenNeuePerson(ewoBuergers[0]).then(
+            (person) => {
+              if (person == null) {
+                // Prepare person data from EWO und insert data in DB
+                EWOBuergerApiService.vorbereitenUndSpeichernPerson(
+                  ewoBuergers[0]
+                ).then(() => {
+                  router.push({
+                    name: "bewerbung.edit",
+                    params: {
+                      id: ewoBuergers[0].id ? ewoBuergers[0].id : "",
+                      action: BEARBEIGUNGS_MODUS.EDIT_MODUS,
+                    },
+                  });
                 });
-              });
-            } else {
-              snackbarStore.showMessage({
-                level: STATUS_INDICATORS.ERROR,
-                message: t("views.eWOBuergerCreate.bereitsVorhandenMessage", {
-                  ordnungsmerkmal: ewoBuergers[0].ordnungsmerkmal,
-                  status: person.status,
-                }),
-              });
+              } else {
+                snackbarStore.push({
+                  color: STATUS_INDICATORS.ERROR,
+                  text: t("views.eWOBuergerCreate.bereitsVorhandenMessage", {
+                    ordnungsmerkmal: ewoBuergers[0].ordnungsmerkmal,
+                    status: person.status,
+                  }),
+                });
+              }
             }
-          }
-        );
-      } else {
-        // No citizen found
-        snackbarStore.showMessage({
-          level: STATUS_INDICATORS.WARNING,
-          message: t("views.eWOBuergerCreate.keinePersonGefundenMessage"),
-          show: true,
+          );
+        } else {
+          // No citizen found
+          snackbarStore.push({
+            color: STATUS_INDICATORS.WARNING,
+            text: t("views.eWOBuergerCreate.keinePersonGefundenMessage"),
+          });
+        }
+      })
+      .catch((error: Error) => {
+        snackbarStore.push({
+          text: error.message,
+          color: STATUS_INDICATORS.ERROR,
         });
-      }
-    });
-  } catch (err) {
-    snackbarStore.showMessage({
-      level: STATUS_INDICATORS.ERROR,
-      message: err as string | undefined,
-    });
+      });
   } finally {
     animationAktiv.value = false;
   }
@@ -140,9 +140,9 @@ async function einBuergerAusgewaehlt(ewoBuerger: EWOBuergerData) {
         }
       );
     } else {
-      snackbarStore.showMessage({
-        level: STATUS_INDICATORS.ERROR,
-        message: t("views.eWOBuergerCreate.bereitsVorhandenMessage", {
+      snackbarStore.push({
+        color: STATUS_INDICATORS.ERROR,
+        text: t("views.eWOBuergerCreate.bereitsVorhandenMessage", {
           ordnungsmerkmal: ewoBuerger.ordnungsmerkmal,
           status: person.status,
         }),

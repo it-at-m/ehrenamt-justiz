@@ -71,9 +71,9 @@ async function save() {
       name: "konfiguration.index",
     });
   } catch (err) {
-    snackbarStore.showMessage({
-      level: STATUS_INDICATORS.ERROR,
-      message: err as string | undefined,
+    snackbarStore.push({
+      text: err.toString(),
+      color: STATUS_INDICATORS.ERROR,
     });
   } finally {
     animationAktiv.value = false;
