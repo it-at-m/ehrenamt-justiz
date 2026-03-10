@@ -70,9 +70,9 @@ async function save() {
     await router.push({
       name: "konfiguration.index",
     });
-  } catch (err) {
+  } catch (err: unknown) {
     snackbarStore.push({
-      text: err.toString(),
+      text: err instanceof Error ? err.message : String(err),
       color: STATUS_INDICATORS.ERROR,
     });
   } finally {
