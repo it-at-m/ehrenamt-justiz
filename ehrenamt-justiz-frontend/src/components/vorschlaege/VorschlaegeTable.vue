@@ -227,11 +227,14 @@ import { EhrenamtJustizService } from "@/api/EhrenamtJustizService";
 import { PersonApiService } from "@/api/PersonApiService";
 import DeleteDialog from "@/components/common/DeleteDialog.vue";
 import YesNoDialog from "@/components/common/YesNoDialog.vue";
-import { BEARBEIGUNGS_MODUS, PERSONENSTATUS } from "@/Constants.ts";
+import {
+  BEARBEIGUNGS_MODUS,
+  PERSONENSTATUS,
+  STATUS_INDICATORS,
+} from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { useUserStore } from "@/stores/user";
-import { STATUS_INDICATORS } from "@/Constants.ts";
 
 const { t } = useI18n();
 const headers: ReadonlyHeaders = computed(() => [
