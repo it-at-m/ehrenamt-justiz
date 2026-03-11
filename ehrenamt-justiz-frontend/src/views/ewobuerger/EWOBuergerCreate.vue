@@ -79,7 +79,7 @@ async function save() {
           // Check, if person already exist
           return EWOBuergerApiService.pruefenNeuePerson(ewoBuergers[0]).then(
             (person) => {
-              if (person == null) {
+              if (person == null && ewoBuergers[0]) {
                 // Prepare person data from EWO und insert data in DB
                 return EWOBuergerApiService.vorbereitenUndSpeichernPerson(
                   ewoBuergers[0]
@@ -87,12 +87,15 @@ async function save() {
                   router.push({
                     name: "bewerbung.edit",
                     params: {
-                      id: ewoBuergers[0].id ? ewoBuergers[0].id : "",
+                      id:
+                        ewoBuergers[0] && ewoBuergers[0].id
+                          ? ewoBuergers[0].id
+                          : "",
                       action: BEARBEIGUNGS_MODUS.EDIT_MODUS,
                     },
                   });
                 });
-              } else {
+              } else if (person && ewoBuergers[0]) {
                 snackbarStore.push({
                   color: STATUS_INDICATORS.ERROR,
                   text: t("views.eWOBuergerCreate.bereitsVorhandenMessage", {
