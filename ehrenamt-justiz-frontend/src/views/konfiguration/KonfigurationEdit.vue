@@ -95,8 +95,11 @@ function loadKonfiguration(): void {
       };
       isLoading.value = false;
     })
-    .catch((err) => {
-      snackbarStore.showMessage(err);
+    .catch((err: Error) => {
+      snackbarStore.push({
+        text: err.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
       router.push({
         name: "konfiguration.index",
       });
@@ -122,12 +125,12 @@ function save(): void {
         name: "konfiguration.index",
       });
     })
-    .catch((err) =>
-      snackbarStore.showMessage({
-        level: STATUS_INDICATORS.ERROR,
-        message: err,
-      })
-    )
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
+    })
     .finally(() => (animationAktiv.value = false));
 }
 </script>

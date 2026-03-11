@@ -849,10 +849,9 @@ function abbruch(): void {
 function speichern(): void {
   form.value?.validate().then((validation: { valid: boolean }) => {
     if (!validation.valid) {
-      snackbarStore.showMessage({
-        level: STATUS_INDICATORS.ERROR,
-        message: t("components.bewerbungForm.speichern.errorMessage"),
-        show: true,
+      snackbarStore.push({
+        color: STATUS_INDICATORS.ERROR,
+        text: t("components.bewerbungForm.speichern.errorMessage"),
       });
       setFocusAufFehler();
     } else {

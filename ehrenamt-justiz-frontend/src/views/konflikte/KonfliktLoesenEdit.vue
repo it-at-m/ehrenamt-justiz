@@ -229,16 +229,13 @@ async function loadPerson(): Promise<void> {
           isLoading.value = false;
         })
         .catch(() => {
-          snackbarStore.showMessage({
-            message: t(
-              "views.konflikteLoesenEdit.messages.fuerOMKeineEwoDaten",
-              {
-                vorname: personenDaten.vorname,
-                familienname: personenDaten.familienname,
-                om: personenDaten.ewoid,
-              }
-            ),
-            level: STATUS_INDICATORS.ERROR,
+          snackbarStore.push({
+            text: t("views.konflikteLoesenEdit.messages.fuerOMKeineEwoDaten", {
+              vorname: personenDaten.vorname,
+              familienname: personenDaten.familienname,
+              om: personenDaten.ewoid,
+            }),
+            color: STATUS_INDICATORS.ERROR,
           });
           router.push({
             name: "konflikte.index",
@@ -248,8 +245,11 @@ async function loadPerson(): Promise<void> {
           });
         });
     })
-    .catch((err) => {
-      snackbarStore.showMessage(err);
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
       router.push({
         name: "bewerbung.index",
         params: {
@@ -315,12 +315,12 @@ function save(): void {
         name: "konflikte.index",
       });
     })
-    .catch((err) =>
-      snackbarStore.showMessage({
-        level: STATUS_INDICATORS.ERROR,
-        message: err,
-      })
-    )
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
+    })
     .finally(() => (isSavingAnimation.value = false));
 }
 </script>

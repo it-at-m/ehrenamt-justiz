@@ -2049,10 +2049,9 @@ const { t } = useI18n();
 
 onMounted(() => {
   if (isKonflikt(KEINEEWODATEN)) {
-    snackbarStore.showMessage({
-      level: STATUS_INDICATORS.WARNING,
-      message: t("components.konflikteLoesenForm.form.messages.keineEWODaten"),
-      show: true,
+    snackbarStore.push({
+      color: STATUS_INDICATORS.WARNING,
+      text: t("components.konflikteLoesenForm.form.messages.keineEWODaten"),
     });
   }
   active_tab.value = "datenAusEWOUebernehmen";
@@ -2115,12 +2114,11 @@ function speichern(): void {
 
   form.value?.validate().then((validation: { valid: boolean }) => {
     if (!validation.valid) {
-      snackbarStore.showMessage({
-        level: STATUS_INDICATORS.WARNING,
-        message: t(
+      snackbarStore.push({
+        color: STATUS_INDICATORS.WARNING,
+        text: t(
           "components.konflikteLoesenForm.form.messages.fehlerhafteEingabe"
         ),
-        show: true,
       });
     } else {
       emits("save");

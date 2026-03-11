@@ -329,8 +329,11 @@ function loadItems(options: any) {
       personenTableData.value.push(...pagedData.data);
       totalItems.value = pagedData.totalElements;
     })
-    .catch((err) => {
-      snackbarStore.showMessage(err);
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
     })
     .finally(() => {
       loadingAnimationAktiv.value = false;
@@ -369,8 +372,11 @@ async function deleteConfirmed() {
     .then(() => {
       inTabelleEntfernen();
     })
-    .catch((err) => {
-      snackbarStore.showMessage(err);
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
     })
     .finally(() => {
       deselectAll();
@@ -421,16 +427,19 @@ async function aufVorschlagslisteSetzen(): Promise<void> {
         invalidePersonenSelectVisible.value = true;
       } else {
         // No authorization: Error:
-        snackbarStore.showMessage({
-          level: STATUS_INDICATORS.ERROR,
-          message: t(
+        snackbarStore.push({
+          color: STATUS_INDICATORS.ERROR,
+          text: t(
             "components.bewerbungenTable.table.aufVorschlagslisteSetzen.message"
           ),
         });
       }
     })
-    .catch((err) => {
-      snackbarStore.showMessage(err);
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
     })
     .finally(() => {
       vorschlagsListeAnimationAktiv.value = false;
@@ -452,8 +461,11 @@ async function bewerberAufVorschlagslisteUebernehmen() {
       inTabelleEntfernen();
       deselectAll();
     })
-    .catch((err) => {
-      snackbarStore.showMessage(err);
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
     })
     .finally(() => {
       invalidePersonenSelectVisible.value = false;

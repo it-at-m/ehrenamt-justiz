@@ -181,10 +181,10 @@ function load(): void {
         ehrenamtJustizStatus.value.anzahlVorschlaegeNeu
       );
     })
-    .catch((error) => {
-      snackbarStore.showMessage({
-        level: STATUS_INDICATORS.ERROR,
-        message: error,
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
       });
       router.back();
     });
@@ -226,10 +226,10 @@ function datenHerunterladen() {
           "_NEUE_VORSCHLAEGE_"
       );
     })
-    .catch((error) => {
-      snackbarStore.showMessage({
-        level: STATUS_INDICATORS.ERROR,
-        message: error,
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
       });
       router.back();
     });
@@ -249,10 +249,10 @@ async function alsBenachrichtigtMarkierenYes() {
     .then(() => {
       load();
     })
-    .catch((error) => {
-      snackbarStore.showMessage({
-        level: STATUS_INDICATORS.ERROR,
-        message: error,
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
       });
     })
     .finally(() => {

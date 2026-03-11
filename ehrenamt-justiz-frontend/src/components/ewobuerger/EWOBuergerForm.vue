@@ -140,10 +140,9 @@ const { t } = useI18n();
 function inEWOSuchen(): void {
   form.value?.validate().then((validation: { valid: boolean }) => {
     if (!validation.valid) {
-      snackbarStore.showMessage({
-        level: STATUS_INDICATORS.WARNING,
-        message: "Das Formular ist nicht richtig ausgefüllt.",
-        show: true,
+      snackbarStore.push({
+        color: STATUS_INDICATORS.ERROR,
+        text: t("components.eWOBuergerCreate.messages.fehler"),
       });
     } else {
       emits("save");

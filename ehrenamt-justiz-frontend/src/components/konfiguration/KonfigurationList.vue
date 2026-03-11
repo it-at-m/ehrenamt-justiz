@@ -57,6 +57,7 @@ import {
 
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";
 import KonfigurationListItem from "@/components/konfiguration/KonfigurationListItem.vue";
+import { STATUS_INDICATORS } from "@/Constants.ts";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const snackbarStore = useSnackbarStore();
@@ -88,8 +89,11 @@ function loadMore(): void {
       totalPages.value = pagedConfiguration.totalPages;
       totalElements.value = pagedConfiguration.totalElements;
     })
-    .catch((err) => {
-      snackbarStore.showMessage(err);
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
     })
     .finally(() => {
       busy.value = false;

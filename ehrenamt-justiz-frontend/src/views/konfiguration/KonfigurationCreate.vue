@@ -70,10 +70,10 @@ async function save() {
     await router.push({
       name: "konfiguration.index",
     });
-  } catch (err) {
-    snackbarStore.showMessage({
-      level: STATUS_INDICATORS.ERROR,
-      message: err as string | undefined,
+  } catch (err: unknown) {
+    snackbarStore.push({
+      text: err instanceof Error ? err.message : String(err),
+      color: STATUS_INDICATORS.ERROR,
     });
   } finally {
     animationAktiv.value = false;

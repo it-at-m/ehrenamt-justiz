@@ -90,6 +90,7 @@ import DeleteDialog from "@/components/common/DeleteDialog.vue";
 import ListItemActions from "@/components/common/ListItemActions.vue";
 import YesNoDialog from "@/components/common/YesNoDialog.vue";
 import { BEARBEIGUNGS_MODUS } from "@/Constants";
+import { STATUS_INDICATORS } from "@/Constants.ts";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const props = defineProps<{
@@ -163,8 +164,11 @@ function deleteConfirmed(): void {
     .then(() => {
       emits("deleted", props.konfiguration);
     })
-    .catch((err) => {
-      snackbarStore.showMessage(err);
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
     })
     .finally(() => {
       animationAktiv.value = false;
@@ -182,8 +186,11 @@ function setActive(): void {
       // Complete reload of the current page and application
       window.location.reload();
     })
-    .catch((err) => {
-      snackbarStore.showMessage(err);
+    .catch((error: Error) => {
+      snackbarStore.push({
+        text: error.message,
+        color: STATUS_INDICATORS.ERROR,
+      });
     });
 }
 
