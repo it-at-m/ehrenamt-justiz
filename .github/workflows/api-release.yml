@@ -40,9 +40,10 @@ jobs:
         uses: it-at-m/lhm_actions/action-templates/actions/action-maven-release@e012d3bda6f9d5511415e2d885f32826049284a4 # v1.0.23
         with:
           app-path: ${{ inputs.module }}
+          java-version: "21"
           releaseVersion: ${{ inputs.release-version }}
           developmentVersion: ${{ inputs.next-version }}
-          use-pr: true
+          use-pr: "true"
           skipDeployment: false
           GPG_PRIVATE_KEY: ${{ secrets.gpg_private_key }}
           SIGN_KEY_PASS: ${{ secrets.gpg_passphrase }}
