@@ -87,7 +87,10 @@ async function save() {
                   router.push({
                     name: "bewerbung.edit",
                     params: {
-                      id: ewoBuergers[0] && ewoBuergers[0].id ? ewoBuergers[0].id : "",
+                      id:
+                        ewoBuergers[0] && ewoBuergers[0].id
+                          ? ewoBuergers[0].id
+                          : "",
                       action: BEARBEIGUNGS_MODUS.EDIT_MODUS,
                     },
                   });
