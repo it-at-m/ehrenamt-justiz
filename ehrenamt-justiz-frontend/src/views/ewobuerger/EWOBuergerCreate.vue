@@ -95,7 +95,7 @@ async function save() {
                     },
                   });
                 });
-              } else {
+              } else if (person && ewoBuergers[0]) {
                 snackbarStore.push({
                   color: STATUS_INDICATORS.ERROR,
                   text: t("views.eWOBuergerCreate.bereitsVorhandenMessage", {
