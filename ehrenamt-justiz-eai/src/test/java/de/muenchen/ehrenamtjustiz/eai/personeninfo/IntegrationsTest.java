@@ -2,6 +2,7 @@ package de.muenchen.ehrenamtjustiz.eai.personeninfo;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -22,8 +23,6 @@ import java.io.File;
 import java.util.List;
 import javax.xml.datatype.XMLGregorianCalendar;
 import org.apache.camel.EndpointInject;
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.commons.io.FileUtils;
 import org.apache.cxf.message.MessageContentsList;
@@ -75,29 +74,25 @@ class IntegrationsTest {
     public ObjectMapper objectMapper;
 
     @BeforeEach
-    public void setup() {
+    public void setUp() {
         cxfProducer.reset();
     }
 
     @Test
-    void test_correctRequestSucheMitOM() throws Exception {
-        cxfProducer.whenAnyExchangeReceived(new Processor() {
+    void givenValidOM_thenSuccessEwoSucheMitOM() throws Exception {
+        cxfProducer.whenAnyExchangeReceived(exchange -> {
 
-            @Override
-            public void process(final Exchange exchange) throws Exception {
-
-                @SuppressWarnings("PMD.LooseCoupling")
-                final MessageContentsList messageContentsList = new MessageContentsList();
-                final String jsonPersonErweitert = FileUtils.readFileToString(new File("src/test/resources/testnachrichten/EWOSucheMitOMResponse.json"),
-                        UTF_8);
-                final Gson gson = new GsonBuilder()
-                        .registerTypeAdapter(XMLGregorianCalendar.class, new XMLGregorianCalendarConverter.Deserializer())
-                        .registerTypeAdapter(AbstractWohnungType.class, new AbstractWohnungTypeconverter.Deserializer())
-                        .create();
-                final LesePersonErweitertResponse lesePersonErweitertResponse = gson.fromJson(jsonPersonErweitert, LesePersonErweitertResponse.class);
-                messageContentsList.add(lesePersonErweitertResponse.getPersonErweitert());
-                exchange.getIn().setBody(messageContentsList);
-            }
+            @SuppressWarnings("PMD.LooseCoupling")
+            final MessageContentsList messageContentsList = new MessageContentsList();
+            final String jsonPersonErweitert = FileUtils.readFileToString(new File("src/test/resources/testnachrichten/EWOSucheMitOMResponse.json"),
+                    UTF_8);
+            final Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(XMLGregorianCalendar.class, new XMLGregorianCalendarConverter.Deserializer())
+                    .registerTypeAdapter(AbstractWohnungType.class, new AbstractWohnungTypeconverter.Deserializer())
+                    .create();
+            final LesePersonErweitertResponse lesePersonErweitertResponse = gson.fromJson(jsonPersonErweitert, LesePersonErweitertResponse.class);
+            messageContentsList.add(lesePersonErweitertResponse.getPersonErweitert());
+            exchange.getIn().setBody(messageContentsList);
         });
         cxfProducer.expectedMessageCount(1);
 
@@ -149,24 +144,20 @@ class IntegrationsTest {
     }
 
     @Test
-    void test_correctRequestSuche() throws Exception {
-        cxfProducer.whenAnyExchangeReceived(new Processor() {
+    void givenValidOM_thenSuccessEwoSuche() throws Exception {
+        cxfProducer.whenAnyExchangeReceived(exchange -> {
 
-            @Override
-            public void process(final Exchange exchange) throws Exception {
-
-                @SuppressWarnings("PMD.LooseCoupling")
-                final MessageContentsList messageContentsList = new MessageContentsList();
-                final String jsonPersonErweitert = FileUtils.readFileToString(new File("src/test/resources/testnachrichten/EWOSucheResponse.json"),
-                        UTF_8);
-                final Gson gson = new GsonBuilder()
-                        .registerTypeAdapter(XMLGregorianCalendar.class, new XMLGregorianCalendarConverter.Deserializer())
-                        .registerTypeAdapter(AbstractWohnungType.class, new AbstractWohnungTypeconverter.Deserializer())
-                        .create();
-                final SuchePersonErweitertResponse suchePersonErweitertResponse = gson.fromJson(jsonPersonErweitert, SuchePersonErweitertResponse.class);
-                messageContentsList.add(suchePersonErweitertResponse.getAntwortErweitert());
-                exchange.getIn().setBody(messageContentsList);
-            }
+            @SuppressWarnings("PMD.LooseCoupling")
+            final MessageContentsList messageContentsList = new MessageContentsList();
+            final String jsonPersonErweitert = FileUtils.readFileToString(new File("src/test/resources/testnachrichten/EWOSucheResponse.json"),
+                    UTF_8);
+            final Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(XMLGregorianCalendar.class, new XMLGregorianCalendarConverter.Deserializer())
+                    .registerTypeAdapter(AbstractWohnungType.class, new AbstractWohnungTypeconverter.Deserializer())
+                    .create();
+            final SuchePersonErweitertResponse suchePersonErweitertResponse = gson.fromJson(jsonPersonErweitert, SuchePersonErweitertResponse.class);
+            messageContentsList.add(suchePersonErweitertResponse.getAntwortErweitert());
+            exchange.getIn().setBody(messageContentsList);
         });
         cxfProducer.expectedMessageCount(1);
 
@@ -248,7 +239,7 @@ class IntegrationsTest {
     }
 
     @Test
-    void test_invalidCredentialsSucheMitOM() {
+    void givenOMAndInvalidCredentials_thenFailedEwoSucheMitOM() {
         LOG.info("port > {}", serverport);
         final MultiValueMap<String, String> headers = new HttpHeaders();
         headers.add("Authorization", "Basic wrongCredentials");
@@ -267,7 +258,7 @@ class IntegrationsTest {
     }
 
     @Test
-    void test_invalidCredentialsSuche() {
+    void givenOMAndInvalidCredentials_thenFailedEwoSuche() {
         LOG.info("port > {}", serverport);
         final String requestBody = Files.contentOf(new File("src/test/resources/testnachrichten/EWOSucheRequest.json"), UTF_8);
         final MultiValueMap<String, String> headers = new HttpHeaders();
@@ -288,7 +279,7 @@ class IntegrationsTest {
     }
 
     @Test
-    void test_wrongPathSucheMitOM() {
+    void givenOMAndInvalidPath_thenFailedEwoSucheMitOM() {
         LOG.info("port > {}", serverport);
         final MultiValueMap<String, String> headers = new HttpHeaders();
         headers.add("Authorization", "Basic dGVzdHVzZXI6dGVzdHB3");
@@ -307,7 +298,7 @@ class IntegrationsTest {
     }
 
     @Test
-    void test_wrongPathSuche() {
+    void givenOMAndInvalidPath_thenFailedEwoSuche() {
         LOG.info("port > {}", serverport);
         final String requestBody = Files.contentOf(new File("src/test/resources/testnachrichten/EWOSucheRequest.json"), UTF_8);
         final MultiValueMap<String, String> headers = new HttpHeaders();
@@ -328,24 +319,20 @@ class IntegrationsTest {
     }
 
     @Test
-    void test_invalidSucheMitOM() throws Exception {
-        cxfProducer.whenAnyExchangeReceived(new Processor() {
+    void givenOMAndInvalidResponse_thenFailedEwoSucheMitOM() throws Exception {
+        cxfProducer.whenAnyExchangeReceived(exchange -> {
 
-            @Override
-            public void process(final Exchange exchange) throws Exception {
-
-                @SuppressWarnings("PMD.LooseCoupling")
-                final MessageContentsList messageContentsList = new MessageContentsList();
-                final String jsonPersonErweitert = FileUtils.readFileToString(new File("src/test/resources/testnachrichten/EWOSucheKeinResponse.json"),
-                        UTF_8);
-                final Gson gson = new GsonBuilder()
-                        .registerTypeAdapter(XMLGregorianCalendar.class, new XMLGregorianCalendarConverter.Deserializer())
-                        .registerTypeAdapter(AbstractWohnungType.class, new AbstractWohnungTypeconverter.Deserializer())
-                        .create();
-                final LesePersonErweitertResponse lesePersonErweitertResponse = gson.fromJson(jsonPersonErweitert, LesePersonErweitertResponse.class);
-                messageContentsList.add(lesePersonErweitertResponse.getPersonErweitert());
-                exchange.getIn().setBody(messageContentsList);
-            }
+            @SuppressWarnings("PMD.LooseCoupling")
+            final MessageContentsList messageContentsList = new MessageContentsList();
+            final String jsonPersonErweitert = FileUtils.readFileToString(new File("src/test/resources/testnachrichten/EWOSucheKeinResponse.json"),
+                    UTF_8);
+            final Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(XMLGregorianCalendar.class, new XMLGregorianCalendarConverter.Deserializer())
+                    .registerTypeAdapter(AbstractWohnungType.class, new AbstractWohnungTypeconverter.Deserializer())
+                    .create();
+            final LesePersonErweitertResponse lesePersonErweitertResponse = gson.fromJson(jsonPersonErweitert, LesePersonErweitertResponse.class);
+            messageContentsList.add(lesePersonErweitertResponse.getPersonErweitert());
+            exchange.getIn().setBody(messageContentsList);
         });
         cxfProducer.expectedMessageCount(1);
 
@@ -368,24 +355,20 @@ class IntegrationsTest {
     }
 
     @Test
-    void test_invalidSuche() throws Exception {
-        cxfProducer.whenAnyExchangeReceived(new Processor() {
+    void givenOMAndInvalidResponse_thenFailedEwoSuche() throws Exception {
+        cxfProducer.whenAnyExchangeReceived(exchange -> {
 
-            @Override
-            public void process(final Exchange exchange) throws Exception {
-
-                @SuppressWarnings("PMD.LooseCoupling")
-                final MessageContentsList messageContentsList = new MessageContentsList();
-                final String jsonPersonErweitert = FileUtils.readFileToString(new File("src/test/resources/testnachrichten/EWOSucheKeinResponse.json"),
-                        UTF_8);
-                final Gson gson = new GsonBuilder()
-                        .registerTypeAdapter(XMLGregorianCalendar.class, new XMLGregorianCalendarConverter.Deserializer())
-                        .registerTypeAdapter(AbstractWohnungType.class, new AbstractWohnungTypeconverter.Deserializer())
-                        .create();
-                final SuchePersonErweitertResponse suchePersonErweitertResponse = gson.fromJson(jsonPersonErweitert, SuchePersonErweitertResponse.class);
-                messageContentsList.add(suchePersonErweitertResponse.getAntwortErweitert());
-                exchange.getIn().setBody(messageContentsList);
-            }
+            @SuppressWarnings("PMD.LooseCoupling")
+            final MessageContentsList messageContentsList = new MessageContentsList();
+            final String jsonPersonErweitert = FileUtils.readFileToString(new File("src/test/resources/testnachrichten/EWOSucheKeinResponse.json"),
+                    UTF_8);
+            final Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(XMLGregorianCalendar.class, new XMLGregorianCalendarConverter.Deserializer())
+                    .registerTypeAdapter(AbstractWohnungType.class, new AbstractWohnungTypeconverter.Deserializer())
+                    .create();
+            final SuchePersonErweitertResponse suchePersonErweitertResponse = gson.fromJson(jsonPersonErweitert, SuchePersonErweitertResponse.class);
+            messageContentsList.add(suchePersonErweitertResponse.getAntwortErweitert());
+            exchange.getIn().setBody(messageContentsList);
         });
         cxfProducer.expectedMessageCount(1);
 
@@ -411,7 +394,7 @@ class IntegrationsTest {
     }
 
     @Test
-    void test_apiDocsIsDelivered() {
+    void givenRunningEAI_thenApiDoc() {
 
         LOG.info("port > {}", serverport);
         final MultiValueMap<String, String> headers = new HttpHeaders();
@@ -427,11 +410,12 @@ class IntegrationsTest {
         LOG.info("result > {}", result.getBody());
 
         assertEquals(200, result.getStatusCode().value());
+        assertNotNull(result.getBody());
         assertTrue(result.getBody().contains("\"title\" : \"Camel REST API\""));
     }
 
     @Test
-    void test_infoEndpointOhneBenutzerErreichbar() {
+    void givenRunningEAI_thenInfoWithoutCredentials() {
         LOG.info("port > {}", serverport);
         final MultiValueMap<String, String> headers = new HttpHeaders();
 
@@ -445,6 +429,7 @@ class IntegrationsTest {
         LOG.info("result-Status > {}", result.getStatusCode());
         LOG.info("result > {}", result.getBody());
 
+        assertNotNull(result.getBody());
         assertTrue(result.getBody().contains("\"description\":"));
         assertTrue(result.getBody().contains("\"version\":"));
         assertTrue(result.getBody().contains("\"name\":"));
@@ -452,7 +437,7 @@ class IntegrationsTest {
     }
 
     @Test
-    void test_infoEndpointMitBenutzerErreichbar() {
+    void givenRunningEAI_thenInfoWithCredentials() {
         LOG.info("port > {}", serverport);
         final MultiValueMap<String, String> headers = new HttpHeaders();
         headers.add("Authorization", "Basic YWN0dWF0b3I6YWN0dWF0b3I=");
@@ -467,6 +452,7 @@ class IntegrationsTest {
         LOG.info("result-Status > {}", result.getStatusCode());
         LOG.info("result > {}", result.getBody());
 
+        assertNotNull(result.getBody());
         assertTrue(result.getBody().contains("\"description\":"));
         assertTrue(result.getBody().contains("\"version\":"));
         assertTrue(result.getBody().contains("\"name\":"));

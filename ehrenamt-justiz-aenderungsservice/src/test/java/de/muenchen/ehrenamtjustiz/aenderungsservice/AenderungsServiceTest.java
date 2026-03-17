@@ -46,7 +46,7 @@ class AenderungsServiceTest {
     private AenderungsService aenderungsService;
 
     @Test
-    void testAenderungsserviceValidAenderungsService() {
+    void givenSetUp_thenCheckNotNull() {
 
         assertNotNull(aenderungsService);
         assertNotNull(restTemplate);
@@ -54,7 +54,7 @@ class AenderungsServiceTest {
     }
 
     @Test
-    void testAenderungsserviceMitErgebnisHTTP200() throws BadRequestException {
+    void givenOM_thenModificationServiceSuccessful() throws BadRequestException {
 
         // Mock the RestTemplate exchange method
         final ResponseEntity<List<String>> mockResponse = ResponseEntity.ok(List.of());
@@ -72,7 +72,7 @@ class AenderungsServiceTest {
     }
 
     @Test
-    void testAenderungsserviceMitHttpClientErrorException() {
+    void givenOM_thenModificationServiceWithClientError() {
 
         when(restTemplate.exchange(any(RequestEntity.class), eq(new ParameterizedTypeReference<List<String>>() {
         }))).thenThrow(HttpClientErrorException.class);
@@ -86,7 +86,7 @@ class AenderungsServiceTest {
     }
 
     @Test
-    void testAenderungsserviceOMisNull() {
+    void givenMissingOM_thenModificationServiceWithBadRequest() {
 
         // Mock the RestTemplate exchange method
         final ResponseEntity<List<String>> mockResponse = ResponseEntity.ok(null);

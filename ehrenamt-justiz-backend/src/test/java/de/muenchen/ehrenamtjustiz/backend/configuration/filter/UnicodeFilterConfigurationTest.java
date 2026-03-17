@@ -3,6 +3,7 @@ package de.muenchen.ehrenamtjustiz.backend.configuration.filter;
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFILE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;
@@ -58,7 +59,7 @@ class UnicodeFilterConfigurationTest {
     private KonfigurationRepository konfigurationRepository;
 
     @Test
-    void testForNfcNormalization() {
+    void givenDecomposedString_thenCovertToNfcNormalized() {
         // Persist entity with decomposed string.
         final Konfiguration konfiguration = new KonfigurationTestDataBuilder().withBezeichnung(TEXT_ATTRIBUTE_DECOMPOSED).build();
 
@@ -67,6 +68,7 @@ class UnicodeFilterConfigurationTest {
                 .postForEntity(URI.create(ENTITY_ENDPOINT_URL), konfiguration, TestConstants.KonfigurationDto.class).getBody();
 
         // Check whether response contains a composed string.
+        assertNotNull(response);
         assertEquals(TEXT_ATTRIBUTE_COMPOSED, response.getBezeichnung());
         assertEquals(TEXT_ATTRIBUTE_COMPOSED.length(), response.getBezeichnung().length());
 
@@ -75,6 +77,7 @@ class UnicodeFilterConfigurationTest {
 
         // Check persisted entity contains a composed string via JPA repository.
         final Konfiguration findKonfiguration = konfigurationRepository.findById(uuid).orElse(null);
+        assertNotNull(findKonfiguration);
         assertEquals(TEXT_ATTRIBUTE_COMPOSED, findKonfiguration.getBezeichnung());
         assertEquals(TEXT_ATTRIBUTE_COMPOSED.length(), findKonfiguration.getBezeichnung().length());
     }

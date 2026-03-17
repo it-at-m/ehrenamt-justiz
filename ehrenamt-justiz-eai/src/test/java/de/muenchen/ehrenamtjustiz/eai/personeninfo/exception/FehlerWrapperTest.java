@@ -19,42 +19,42 @@ class FehlerWrapperTest {
     private FehlerWrapper unitUnderTest;
 
     @BeforeEach
-    void setup() {
+    void setUp() {
         unitUnderTest = new FehlerWrapper();
     }
 
     @Test
-    void isOrHasCauseClass_throwableIstVonGesuchterKlasse() {
+    void givenIOExceptionAndIOException_thenIsOrHasCauseClass() {
         assertTrue(unitUnderTest.isOrHasCauseClass(new IOException(), IOException.class));
     }
 
     @Test
-    void isOrHasCauseClass_throwableIstSubklasseVonGesuchterKlasse() {
+    void givenFileNotFoundExceptionAndIOException_thenIsOrHasCauseClass() {
         assertTrue(unitUnderTest.isOrHasCauseClass(new FileNotFoundException(), IOException.class));
     }
 
     @Test
-    void isOrHasCauseClass_throwableIstWederKlasseNochAbleitungVonGesuchterKlasse() {
+    void givenIOExceptionAndNullPointerException_thenIsOrHasCauseClass() {
         assertFalse(unitUnderTest.isOrHasCauseClass(new IOException(), NullPointerException.class));
     }
 
     @Test
-    void isOrHasCauseClass_CauseIstVonGesuchterKlasse() {
+    void givenExceptionOfIOExceptionAndIOException_thenIsOrHasCauseClass() {
         assertTrue(unitUnderTest.isOrHasCauseClass(new Exception(new Exception(new IOException())), IOException.class));
     }
 
     @Test
-    void isOrHasCauseClass_CauseIstSubklasseVonGesuchterKlasse() {
+    void givenExceptionOfFileNotFoundExceptionAndIOException_thenIsOrHasCauseClass() {
         assertTrue(unitUnderTest.isOrHasCauseClass(new Exception(new Exception(new FileNotFoundException())), IOException.class));
     }
 
     @Test
-    void isOrHasCauseClass_CauseIstWederKlasseNochAbleitungVonGesuchterKlasse() {
+    void givenExceptionOfIOExceptionAndNullPointerException_thenIsOrHasCauseClass() {
         assertFalse(unitUnderTest.isOrHasCauseClass(new Exception(new Exception(new IOException())), NullPointerException.class));
     }
 
     @Test
-    void process_setzeDefaultMessageWennKeineMessageImFehler() {
+    void givenException_thenValidMessage() {
         final Exchange ex = createExchangeWithThrowable(new Exception());
 
         unitUnderTest.process(ex);
@@ -63,7 +63,7 @@ class FehlerWrapperTest {
     }
 
     @Test
-    void process_HttpStatus404BeiPersonNotFoundException() {
+    void givenPersonNotFoundException_thenNotFoundStatus() {
         final Exchange ex = createExchangeWithThrowable(new CamelExecutionException(null, null, new PersonNotFoundException("123", "Keine Person gefunden")));
 
         unitUnderTest.process(ex);
@@ -72,7 +72,7 @@ class FehlerWrapperTest {
     }
 
     @Test
-    void process_HttpStatus504BeiTimeout() {
+    void givenSocketTimeoutException_thenTimeoutStatus() {
         final Exchange ex = createExchangeWithThrowable(new CamelExecutionException(null, null, new SocketTimeoutException()));
 
         unitUnderTest.process(ex);
@@ -81,7 +81,7 @@ class FehlerWrapperTest {
     }
 
     @Test
-    void process_HttpStatus504BeiConnectException() {
+    void givenConnectException_thenTimeoutStatus() {
         final Exchange ex = createExchangeWithThrowable(new CamelExecutionException(null, null, new ConnectException()));
 
         unitUnderTest.process(ex);
@@ -90,7 +90,7 @@ class FehlerWrapperTest {
     }
 
     @Test
-    void process_HttpStatus500BeiAlleAnderenException() {
+    void givenNullPointerException_thenInternalServerException() {
         final Exchange ex = createExchangeWithThrowable(new CamelExecutionException(null, null, new NullPointerException()));
 
         unitUnderTest.process(ex);

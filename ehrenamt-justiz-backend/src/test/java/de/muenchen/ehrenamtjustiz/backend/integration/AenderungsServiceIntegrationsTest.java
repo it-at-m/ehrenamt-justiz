@@ -95,7 +95,7 @@ class AenderungsServiceIntegrationsTest {
     }
 
     @Test
-    void testEWOService() {
+    void givenSetUp_thenCheckNotNull() {
 
         assertNotNull(konfigurationRepository);
         assertNotNull(personRepository);
@@ -106,7 +106,7 @@ class AenderungsServiceIntegrationsTest {
     }
 
     @Test
-    void testAenderungsservicePerson_OhneKonflikt() throws Exception {
+    void givenOMWithoutConflict_thenNoConfict() throws Exception {
 
         Mockito.when(ehrenamtJustizService.getKonflikteAenderungsService(any(Person.class)))
                 .thenReturn(new ArrayList<>(List.of()));
@@ -119,7 +119,7 @@ class AenderungsServiceIntegrationsTest {
     }
 
     @Test
-    void testAenderungsservicePerson_MitKonflikten() throws Exception {
+    void givenOMWithConflict_thenConfict() throws Exception {
 
         Mockito.when(ehrenamtJustizService.getKonflikteAenderungsService(any(Person.class)))
                 .thenReturn(new ArrayList<>(Arrays.asList("Familienname", "Vorname", "Geburtsdatum", "Geschlecht")));
@@ -145,7 +145,7 @@ class AenderungsServiceIntegrationsTest {
     }
 
     @Test
-    void testAenderungsservicePerson_Exception() throws Exception {
+    void givenOMAndException_thenIsClientError() throws Exception {
 
         Mockito.when(ehrenamtJustizService.getKonflikteAenderungsService(any(Person.class)))
                 .thenThrow(new RestClientException("Unexpected error"));
@@ -158,7 +158,7 @@ class AenderungsServiceIntegrationsTest {
     }
 
     @Test
-    void testAenderungsservicePerson_InvalidOM() throws Exception {
+    void givenInvalidOM_thenIsClientError() throws Exception {
 
         mockMvc.perform(post(URI_AENDERUNGSSERVICE)
                 .contentType(MediaType.TEXT_PLAIN)
@@ -168,7 +168,7 @@ class AenderungsServiceIntegrationsTest {
     }
 
     @Test
-    void testAenderungsservicePerson_NoActiveConfiguration() throws Exception {
+    void givenOMAndMissingActiveConfiguration_thenIsClientError() throws Exception {
 
         final Konfiguration konfiguration = konfigurationRepository.findById(activeConfigurationId).get();
         konfiguration.setAktiv(false);

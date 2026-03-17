@@ -15,12 +15,12 @@ class FehlerWrapperTest {
     private FehlerWrapper unitUnderTest;
 
     @BeforeEach
-    void setup() {
+    void setUp() {
         unitUnderTest = new FehlerWrapper();
     }
 
     @Test
-    void test_MessageVonExceptionWirdInFehlerUebernommen() {
+    void givenRuntimeExcetion_thenMessageValid() {
         final Exception exception = new RuntimeException("Bla blubb");
         final Exchange exchange = createExchange(exception);
         unitUnderTest.process(exchange);
@@ -29,7 +29,7 @@ class FehlerWrapperTest {
     }
 
     @Test
-    void test_BeiExceptionOhneMessageWirdDefaultMessageInFehlerGesetzt() {
+    void givenRuntimeExceptionWithoutText_thenMessageValid() {
         final Exception exception = new RuntimeException((String) null);
         final Exchange exchange = createExchange(exception);
 

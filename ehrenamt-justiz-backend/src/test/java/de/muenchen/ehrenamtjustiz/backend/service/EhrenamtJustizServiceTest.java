@@ -52,7 +52,7 @@ class EhrenamtJustizServiceTest {
     private EWOService ewoService;
 
     @Test
-    void testValidEhrenamtJustizService() {
+    void givenSetUp_thenCheckNotNull() {
 
         assertNotNull(ehrenamtJustizService);
         assertNotNull(ewoService);
@@ -60,7 +60,7 @@ class EhrenamtJustizServiceTest {
     }
 
     @Test
-    void testNoKonflikte() {
+    void givenApplication_thenValidateConflictsSuccessful() {
 
         final Person person = getBewerberDaten();
 
@@ -75,7 +75,7 @@ class EhrenamtJustizServiceTest {
     }
 
     @Test
-    void testKonfliktEwoBuergerDatenLeer() {
+    void givenApplication_thenValidateConflictsWithEmptyEWOData() {
 
         final EWOBuergerDatenDto emptyEwoBuergerDatenDto = EWOBuergerDatenDto.builder().build();
 
@@ -92,7 +92,7 @@ class EhrenamtJustizServiceTest {
     }
 
     @Test
-    void testKonfliktBewerberDatenLeer() {
+    void givenEmptyApplication_thenValidateConflicts() {
 
         final Person person = getBewerberDaten();
         final EWOBuergerDatenDto ewoBuergerDatenDto = EhrenamtJustizUtility.getEwoBuergerDatenDto(person);
@@ -110,7 +110,7 @@ class EhrenamtJustizServiceTest {
     }
 
     @Test
-    void testKonflikteEwoServiceLiefertKeineDaten() {
+    void givenApplication_thenValidateConflictsWithoutEWOData() {
 
         final Person person = getBewerberDaten();
 
@@ -124,7 +124,7 @@ class EhrenamtJustizServiceTest {
     }
 
     @Test
-    void testAenderungsservice_NoKonflikte() {
+    void givenApplication_thenValidateConflictsForModificationServiceSuccessful() {
 
         final Person person = getBewerberDaten();
 
@@ -139,7 +139,7 @@ class EhrenamtJustizServiceTest {
     }
 
     @Test
-    void testAenderungsservice_KonfliktEwoBuergerDatenLeer() {
+    void givenApplication_thenValidateConflictsForModificationServiceWithEmptyEWOData() {
 
         final EWOBuergerDatenDto emptyEwoBuergerDatenDto = EWOBuergerDatenDto.builder().build();
 
@@ -156,7 +156,7 @@ class EhrenamtJustizServiceTest {
     }
 
     @Test
-    void testAenderungsservice_KonfliktBewerberDatenLeer() {
+    void givenEmptyApplication_thenValidateConflictsForModificationService() {
 
         final Person person = getBewerberDaten();
         final EWOBuergerDatenDto ewoBuergerDatenDto = EhrenamtJustizUtility.getEwoBuergerDatenDto(person);
@@ -174,7 +174,7 @@ class EhrenamtJustizServiceTest {
     }
 
     @Test
-    void testAenderungsservice_KonflikteEwoServiceLiefertKeineDaten() {
+    void givenApplication_thenValidateConflictsForModificationServiceWithoutEWOData() {
 
         final Person person = getBewerberDaten();
 

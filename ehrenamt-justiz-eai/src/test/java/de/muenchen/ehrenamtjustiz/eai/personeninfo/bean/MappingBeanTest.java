@@ -30,7 +30,7 @@ class MappingBeanTest {
     private static final String FILE_CHARSET = "UTF-8";
 
     @Test
-    void fromEWOLesen() throws Exception {
+    void givenEwoSucheMitOMResponse_thenMappingOK() throws Exception {
 
         @SuppressWarnings("PMD.LooseCoupling")
         final MessageContentsList messageContentsList = new MessageContentsList();
@@ -74,7 +74,7 @@ class MappingBeanTest {
 
     @Test
     @SuppressWarnings("PMD.LinguisticNaming")
-    void toEWOSuche() {
+    void givenEwoDataRequest_thenMappingOK() {
         final BuergerSucheAnfrage buergerSucheAnfrage = BuergerSucheAnfrage.builder().familienname("Test1").vorname("Test2")
                 .geburtsdatum(LocalDate.of(2000, 1, 1)).build();
 
@@ -86,7 +86,7 @@ class MappingBeanTest {
     }
 
     @Test
-    void fromEWOSuche() throws Exception {
+    void givenEwoSucheResponse_thenMappingOK() throws Exception {
 
         @SuppressWarnings("PMD.LooseCoupling")
         final MessageContentsList messageContentsList = new MessageContentsList();
