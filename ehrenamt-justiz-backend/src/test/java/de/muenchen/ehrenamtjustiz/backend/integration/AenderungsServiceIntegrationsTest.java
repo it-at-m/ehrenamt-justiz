@@ -106,7 +106,7 @@ class AenderungsServiceIntegrationsTest {
     }
 
     @Test
-    void givenOMWithoutConflict_thenNoConfict() throws Exception {
+    void givenOMWithoutConflict_thenNoConflict() throws Exception {
 
         Mockito.when(ehrenamtJustizService.getKonflikteAenderungsService(any(Person.class)))
                 .thenReturn(new ArrayList<>(List.of()));

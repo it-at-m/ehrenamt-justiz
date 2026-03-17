@@ -74,7 +74,7 @@ class IntegrationsTest {
     public ObjectMapper objectMapper;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         cxfProducer.reset();
     }
 

@@ -20,7 +20,7 @@ class FehlerWrapperTest {
     }
 
     @Test
-    void givenRuntimeExcetion_thenMessageValid() {
+    void givenRuntimeException_thenMessageValid() {
         final Exception exception = new RuntimeException("Bla blubb");
         final Exchange exchange = createExchange(exception);
         unitUnderTest.process(exchange);

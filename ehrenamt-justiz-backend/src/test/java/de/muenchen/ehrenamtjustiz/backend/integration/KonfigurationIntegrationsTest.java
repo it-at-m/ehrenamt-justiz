@@ -52,7 +52,7 @@ class KonfigurationIntegrationsTest {
             DockerImageName.parse(TestConstants.TESTCONTAINERS_POSTGRES_IMAGE));
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         konfigurationRepository.deleteAll();
 
         konfigurationRepository.save(new KonfigurationTestDataBuilder().build());
