@@ -3,6 +3,7 @@ package de.muenchen.ehrenamtjustiz.backend.integration;
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFILE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
@@ -89,7 +90,7 @@ class PersonIntegrationsTest {
     private UUID uuidPerson;
 
     @BeforeEach
-    void before() {
+    void setUp() {
         personRepository.deleteAll();
         konfigurationRepository.deleteAll();
 
@@ -109,7 +110,7 @@ class PersonIntegrationsTest {
     }
 
     @Test
-    void testLesenPersonenCSV() {
+    void givenPerson_thenCheckReadingCSV() {
 
         // Convert to csv. All attributes are string
         final List<UUID> uuids = new ArrayList<>();
@@ -128,6 +129,8 @@ class PersonIntegrationsTest {
         final List<PersonCSVDto> personCSVS = result.getBody();
 
         // check csv data
+        assertNotNull(personCSVS);
+        assertNotNull(personCSVS.getFirst());
         assertEquals(uuidKonfiguration.toString(), personCSVS.getFirst().getKonfigurationid());
         assertEquals(uuidPerson.toString(), personCSVS.getFirst().getId());
         assertEquals(Status.VORSCHLAG.toReadableString(), personCSVS.getFirst().getStatus());
@@ -151,7 +154,7 @@ class PersonIntegrationsTest {
     }
 
     @Test
-    void testfindPerson() {
+    void givenPerson_thenCheckFindPerson() {
 
         // get persons for table
         final ResponseEntity<RestPageImpl<PersonenTableDatenDto>> result = testRestTemplate.exchange(
@@ -161,12 +164,13 @@ class PersonIntegrationsTest {
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         final Page<PersonenTableDatenDto> pageOfPersonen = result.getBody();
+        assertNotNull(pageOfPersonen);
         assertTrue(pageOfPersonen.getNumberOfElements() > 0);
 
     }
 
     @Test
-    void testCancelBewerbung() {
+    void givenApplication_thenCheckCancel() {
 
         // Insert person with status INERFASSUNG:
         final Person person = initPerson();
@@ -185,7 +189,7 @@ class PersonIntegrationsTest {
     }
 
     @Test
-    void testValidiereAufVorschlagslisteSetzen_GeburtsdatumUngueltig() {
+    void givenApplicationWithInvalidBirthday_thenCheckSettingToSuggestion() {
         // prüfen, ob Geburtsdatum, Wohnort und Staatsangehörigkeit gemäß Konfiguration passt:
 
         // Eine Person anlegen
@@ -209,12 +213,13 @@ class PersonIntegrationsTest {
                 });
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertNotNull(result.getBody());
         assertEquals(1, result.getBody().size()); // Ein fehlerhafte Person
 
     }
 
     @Test
-    void testValidiereAufVorschlagslisteSetzen_OrtUngueltig() {
+    void givenApplicationWithInvalidResidence_thenCheckSettingToSuggestion() {
         // prüfen, ob Geburtsdatum, Wohnort und Staatsangehörigkeit gemäß Konfiguration passt:
 
         // Eine Person anlegen
@@ -238,12 +243,13 @@ class PersonIntegrationsTest {
                 });
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertNotNull(result.getBody());
         assertEquals(1, result.getBody().size()); // Ein fehlerhafte Person
 
     }
 
     @Test
-    void testValidiereAufVorschlagslisteSetzen_StaatsangehoerigkeitUngueltig() {
+    void givenApplicationWithInvalidNationality_thenCheckSettingToSuggestion() {
         // prüfen, ob Geburtsdatum, Wohnort und Staatsangehörigkeit gemäß Konfiguration passt:
 
         // Eine Person anlegen
@@ -267,12 +273,13 @@ class PersonIntegrationsTest {
                 });
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertNotNull(result.getBody());
         assertEquals(1, result.getBody().size()); // Ein fehlerhafte Person
 
     }
 
     @Test
-    void testValidiereAufVorschlagslisteSetzen_AllesGeltig() {
+    void givenApplicationWithValidData_thenCheckSettingToSuggestion() {
         // prüfen, ob Geburtsdatum, Wohnort und Staatsangehörigkeit gemäß Konfiguration passt:
 
         // Eine Person anlegen
@@ -294,12 +301,13 @@ class PersonIntegrationsTest {
                 });
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertNotNull(result.getBody());
         assertEquals(0, result.getBody().size()); // keine fehlerhafte Person
 
     }
 
     @Test
-    void testDeletePersonen() {
+    void givenApplication_thenCheckDelete() {
 
         // Blockweises löschen prüfen
         final UUID[] uuids = new UUID[ANZAHL_PERSONEN];
@@ -330,7 +338,7 @@ class PersonIntegrationsTest {
     }
 
     @Test
-    void testValidiereAufVorschlagslisteSetzen_AlsBenachrichtigtMarkieren() {
+    void givenApplication_thenCheckMarkAsNotified() {
 
         final ResponseEntity<Void> result = testRestTemplate.postForEntity("/personen/alsBenachrichtigtMarkieren", null, Void.class);
 
@@ -339,7 +347,7 @@ class PersonIntegrationsTest {
     }
 
     @Test
-    void testUpdatePerson() {
+    void givenApplication_thenCheckUpdate() {
 
         // Personen anlegen
         final Person person = initPerson();
@@ -352,6 +360,7 @@ class PersonIntegrationsTest {
 
         // Person erneut lesen und prüfen, ob Status ist Bewerbung
         final Person personResult = personRepository.findById(person.getId()).orElse(null);
+        assertNotNull(personResult);
         assertEquals(Status.BEWERBUNG, personResult.getStatus());
 
     }

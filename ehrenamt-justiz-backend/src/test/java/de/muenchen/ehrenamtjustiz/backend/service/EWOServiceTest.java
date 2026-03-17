@@ -111,7 +111,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEWOService() {
+    void givenSetUp_thenCheckNotNull() {
 
         assertNotNull(restTemplate);
         assertNotNull(ewoService);
@@ -120,7 +120,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEwoSucheMitOM_Success() {
+    void givenCitizen_thenReadingWithSuccess() {
 
         final EWOBuerger expectedEWOBuerger = EWO_BUERGER;
 
@@ -135,7 +135,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEwoSucheMitOM_HttpClientErrorException() {
+    void givenCitizen_thenReadingWithBadRequest() {
 
         when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
                 .thenThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST));
@@ -146,7 +146,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEwoSucheMitOM_ResourceAccessException() {
+    void givenCitizen_thenReadingWithResourceAccessException() {
 
         when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
                 .thenThrow(new ResourceAccessException("Network error"));
@@ -157,7 +157,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEwoSucheMitOM_RestClientException() {
+    void givenCitizen_thenReadingWithRestClientException() {
 
         when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
                 .thenThrow(new RestClientException("Unexpected error"));
@@ -168,7 +168,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEwoSuche_Success() {
+    void givenCitizen_thenSearchWithSuccess() {
 
         final EWOBuerger expectedEWOBuerger = EWO_BUERGER;
 
@@ -185,7 +185,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEwoSuche_HttpClientErrorException() {
+    void givenCitizen_thenSearchWithBadRequest() {
 
         when(restTemplate.exchange(anyString(), any(HttpMethod.class), any(HttpEntity.class), eq(EWOBuerger[].class)))
                 .thenThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST));
@@ -195,7 +195,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEwoSucheMitOMAenderungsService_Success() {
+    void givenCitizen_thenReadingForModificationServiceWithSuccess() {
 
         final EWOBuerger expectedEWOBuerger = EWO_BUERGER;
 
@@ -210,7 +210,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEwoSucheMitOMAenderungsService_HttpClientErrorException() {
+    void givenCitizen_thenReadingForModificationServiceWithBadRequest() {
 
         when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
                 .thenThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST));
@@ -220,7 +220,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEwoSucheMitOMAenderungsService_ResourceAccessException() {
+    void givenCitizen_thenReadingForModificationServiceWithResourceAccessException() {
 
         when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
                 .thenThrow(new ResourceAccessException("Network error"));
@@ -229,7 +229,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEwoSucheMitOMAenderungsService_RestClientException() {
+    void givenCitizen_thenReadingForModificationServiceWithRestClientException() {
 
         when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
                 .thenThrow(new RestClientException("Unexpected error"));
@@ -238,7 +238,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEwoEaiStatus_Success() {
+    void givenRunningEAI_thenCheckStatusWithSuccess() {
 
         final ResponseEntity<Void> responseEntity = ResponseEntity.ok(null);
 
@@ -253,7 +253,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEwoEaiStatus_Timeout() {
+    void givenRunningEAI_thenCheckStatusWithTimeout() {
 
         final ResponseEntity<Void> responseEntity = ResponseEntity.status(HttpStatus.REQUEST_TIMEOUT).body(null);
 
@@ -268,7 +268,7 @@ class EWOServiceTest {
     }
 
     @Test
-    void testEwoEaiStatus_Exception() {
+    void givenRunningEAI_thenCheckStatusWithRestClientException() {
 
         when(restTemplate.getForEntity(anyString(), eq(Void.class)))
                 .thenThrow(new RestClientException("Unexpected error"));

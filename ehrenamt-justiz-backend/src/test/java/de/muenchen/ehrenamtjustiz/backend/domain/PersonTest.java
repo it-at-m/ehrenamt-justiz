@@ -66,7 +66,7 @@ class PersonTest {
     private KonfigurationRepository konfigurationRepository;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         // new configuration
         final Konfiguration konfiguration = konfigurationRepository.save(new KonfigurationTestDataBuilder().build());
         konfigurationId = konfiguration.getId();

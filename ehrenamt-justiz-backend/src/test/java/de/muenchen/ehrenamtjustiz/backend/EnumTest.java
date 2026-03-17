@@ -15,7 +15,7 @@ class EnumTest {
     public static final String ERROR_MSG_SUFFIX = " should not be null";
 
     @Test
-    void testEhrenamtjustizart() {
+    void givenEhrenamtsjustizart_thenCheckEntries() {
 
         // Test all Ehrenamtjustizart values
         for (final Ehrenamtjustizart ehrenamtjustizart : Ehrenamtjustizart.values()) {
@@ -27,7 +27,7 @@ class EnumTest {
     }
 
     @Test
-    void testGeschlecht() {
+    void givenGeschlecht_thenCheckEntries() {
 
         // Test all Geschlecht values
         for (final Geschlecht geschlecht : Geschlecht.values()) {
@@ -41,7 +41,7 @@ class EnumTest {
     }
 
     @Test
-    void testStatus() {
+    void givenStatus_thenCheckEntries() {
 
         // Test all Status values
         for (final Status status : Status.values()) {
@@ -55,7 +55,7 @@ class EnumTest {
     }
 
     @Test
-    void testWohnungsstatus() {
+    void givenWohnungsstatus_thenCheckEntries() {
 
         // Test all Wohnungsstatus values
         for (final Wohnungsstatus status : Wohnungsstatus.values()) {

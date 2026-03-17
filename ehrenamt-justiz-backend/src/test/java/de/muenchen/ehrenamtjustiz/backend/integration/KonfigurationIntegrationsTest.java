@@ -52,19 +52,20 @@ class KonfigurationIntegrationsTest {
             DockerImageName.parse(TestConstants.TESTCONTAINERS_POSTGRES_IMAGE));
 
     @BeforeEach
-    public void before() {
+    void setUp() {
         konfigurationRepository.deleteAll();
 
         konfigurationRepository.save(new KonfigurationTestDataBuilder().build());
     }
 
     @Test
-    void testGetAktiveKonfiguration() {
+    void givenConfiguration_thenCheckData() {
 
         final ResponseEntity<KonfigurationDto> result = testRestTemplate.getForEntity("/konfiguration/getAktiveKonfiguration", KonfigurationDto.class);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         final KonfigurationDto konfigurationDto = result.getBody();
+        assertNotNull(konfigurationDto);
         assertNotNull(konfigurationDto.getId());
         assertTrue(konfigurationDto.isAktiv());
         assertNotNull(konfigurationDto.getEhrenamtjustizart());
@@ -79,7 +80,7 @@ class KonfigurationIntegrationsTest {
     }
 
     @Test
-    void testUpdateKonfiguration() {
+    void givenConfiguration_thenValidateUpdate() {
 
         final Konfiguration konfiguration = new KonfigurationTestDataBuilder().withAktiv(false).build();
 
@@ -87,6 +88,7 @@ class KonfigurationIntegrationsTest {
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         final Konfiguration konfigurationResult = result.getBody();
+        assertNotNull(konfigurationResult);
         assertNotNull(konfigurationResult.getId());
         assertFalse(konfigurationResult.isAktiv());
         assertNotNull(konfigurationResult.getEhrenamtjustizart());
@@ -100,7 +102,7 @@ class KonfigurationIntegrationsTest {
     }
 
     @Test
-    void testSetActive() {
+    void givenConfiguration_thenCheckActivation() {
 
         final Konfiguration konfiguration = new KonfigurationTestDataBuilder().withAktiv(false).build();
         konfigurationRepository.save(konfiguration);
@@ -109,6 +111,7 @@ class KonfigurationIntegrationsTest {
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         final KonfigurationDto konfigurationDtoResult = result.getBody();
+        assertNotNull(konfigurationDtoResult);
         assertNotNull(konfigurationDtoResult.getId());
         assertTrue(konfigurationDtoResult.isAktiv());
         assertNotNull(konfigurationDtoResult.getEhrenamtjustizart());

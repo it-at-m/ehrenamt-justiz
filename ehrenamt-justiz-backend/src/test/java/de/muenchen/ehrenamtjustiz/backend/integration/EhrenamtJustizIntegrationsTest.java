@@ -3,6 +3,7 @@ package de.muenchen.ehrenamtjustiz.backend.integration;
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFILE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;
@@ -70,7 +71,7 @@ class EhrenamtJustizIntegrationsTest {
     private static UUID uuidKonfiguration;
 
     @BeforeEach
-    void before() {
+    void setUp() {
         personRepository.deleteAll();
         konfigurationRepository.deleteAll();
 
@@ -79,7 +80,7 @@ class EhrenamtJustizIntegrationsTest {
     }
 
     @Test
-    void test_pruefenNeuePerson_NOT_FOUND() {
+    void givenNewEWOBuergerDaten_thenCheckNotFound() {
 
         final var headers = new HttpHeaders(); //NOPMD
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -98,7 +99,7 @@ class EhrenamtJustizIntegrationsTest {
     }
 
     @Test
-    void test_pruefenNeuePerson_FOUND() {
+    void givenNewEWOBuergerDaten_thenCheckOK() {
 
         // new person
         final Person person = new PersonTestDataBuilder().withKonfigurationid(uuidKonfiguration).build();
@@ -118,7 +119,7 @@ class EhrenamtJustizIntegrationsTest {
     }
 
     @Test
-    void test_vorbereitenUndSpeichernPerson() {
+    void givenSavedEWOBuergerDaten_thenStatusOK() {
 
         final var headers = new HttpHeaders(); //NOPMD
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -149,6 +150,7 @@ class EhrenamtJustizIntegrationsTest {
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         final PersonDto personDto = result.getBody();
+        assertNotNull(personDto);
         assertEquals(eWOBuergerDatenDto.getFamilienname(), personDto.getFamilienname());
         assertEquals(eWOBuergerDatenDto.getOrdnungsmerkmal(), personDto.getEwoid());
         assertEquals(eWOBuergerDatenDto.getVorname(), personDto.getVorname());

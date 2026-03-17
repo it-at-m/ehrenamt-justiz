@@ -58,7 +58,7 @@ class KonfigurationTest {
     private KonfigurationRepository konfigurationRepository;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         testEntityId = konfigurationRepository.save(new KonfigurationTestDataBuilder().build()).getId();
     }
 
