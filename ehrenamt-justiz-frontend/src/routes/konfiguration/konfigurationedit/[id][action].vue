@@ -49,7 +49,7 @@ import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialog
 import { BEARBEIGUNGS_MODUS, STATUS_INDICATORS } from "@/Constants.ts";
 import { useSnackbarStore } from "@/stores/snackbar.ts";
 
-const route = useRoute("/konfiguration/konfigurationedit/[id][action]");
+const route = useRoute();
 const router = useRouter();
 const snackbarStore = useSnackbarStore();
 const { t } = useI18n();

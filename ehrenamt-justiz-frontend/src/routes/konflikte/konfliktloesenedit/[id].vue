@@ -28,7 +28,7 @@ import KonflikteLoesenForm from "@/components/konflikte/KonflikteLoesenForm.vue"
 import { STATUS_INDICATORS } from "@/Constants.ts";
 import { useSnackbarStore } from "@/stores/snackbar.ts";
 
-const route = useRoute("/konflikte/konfliktloesenedit/[id]");
+const route = useRoute();
 const router = useRouter();
 const snackbarStore = useSnackbarStore();
 const { t } = useI18n();
