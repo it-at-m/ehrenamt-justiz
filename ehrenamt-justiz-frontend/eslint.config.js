@@ -7,6 +7,7 @@ import {
 } from "@vue/eslint-config-typescript";
 import { ESLint } from "eslint";
 import vueEslintConfig from "eslint-plugin-vue";
+import { globalIgnores } from "eslint/config";
 
 export default defineConfigWithVueTs(
   ESLint.defaultConfig,
