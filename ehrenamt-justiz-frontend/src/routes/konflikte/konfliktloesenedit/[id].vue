@@ -15,20 +15,20 @@
 </template>
 
 <script setup lang="ts">
-import type KonfliktLoesenFormData from "@/types/KonfliktLoesenFormData";
+import type KonfliktLoesenFormData from "@/types/KonfliktLoesenFormData.ts";
 
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import { VContainer, VProgressLinear } from "vuetify/components";
 
-import { EWOBuergerApiService } from "@/api/EWOBuergerApiService";
-import { PersonApiService } from "@/api/PersonApiService";
+import { EWOBuergerApiService } from "@/api/EWOBuergerApiService.ts";
+import { PersonApiService } from "@/api/PersonApiService.ts";
 import KonflikteLoesenForm from "@/components/konflikte/KonflikteLoesenForm.vue";
 import { STATUS_INDICATORS } from "@/Constants.ts";
-import { useSnackbarStore } from "@/stores/snackbar";
+import { useSnackbarStore } from "@/stores/snackbar.ts";
 
-const route = useRoute();
+const route = useRoute("/konflikte/konfliktloesenedit/[id]");
 const router = useRouter();
 const snackbarStore = useSnackbarStore();
 const { t } = useI18n();
@@ -230,7 +230,7 @@ async function loadPerson(): Promise<void> {
         })
         .catch(() => {
           snackbarStore.push({
-            text: t("views.konflikteLoesenEdit.messages.fuerOMKeineEwoDaten", {
+            text: t("routes.konflikteloesenedit.messages.fuerOMKeineEwoDaten", {
               vorname: personenDaten.vorname,
               familienname: personenDaten.familienname,
               om: personenDaten.ewoid,
@@ -238,7 +238,7 @@ async function loadPerson(): Promise<void> {
             color: STATUS_INDICATORS.ERROR,
           });
           router.push({
-            name: "konflikte.index",
+            name: "/konflikte/konflikteindex",
             params: {
               id: personenDatenId.value,
             },
@@ -251,7 +251,7 @@ async function loadPerson(): Promise<void> {
         color: STATUS_INDICATORS.ERROR,
       });
       router.push({
-        name: "bewerbung.index",
+        name: "/bewerbungen/bewerbungenindex",
         params: {
           id: personenDatenId.value,
         },
@@ -312,7 +312,7 @@ function save(): void {
   })
     .then(() => {
       router.push({
-        name: "konflikte.index",
+        name: "/konflikte/konflikteindex",
       });
     })
     .catch((error: Error) => {
@@ -324,9 +324,3 @@ function save(): void {
     .finally(() => (isSavingAnimation.value = false));
 }
 </script>
-
-<style scoped>
-.auskunftssperre {
-  color: red;
-}
-</style>

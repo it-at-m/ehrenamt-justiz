@@ -2,16 +2,16 @@
   <v-dialog v-model="visible">
     <v-card>
       <v-card-title class="text-h5">{{
-        t("views.invalidePersonenSelect.title")
+        t("routes.invalidepersonenselect.title")
       }}</v-card-title>
-      <v-card-text> {{ t("views.invalidePersonenSelect.text") }}</v-card-text>
+      <v-card-text> {{ t("routes.invalidepersonenselect.text") }}</v-card-text>
       <v-data-table
         :items="invalidePersonen"
         :headers="headers"
         multi-sort
         class="elevation-1"
         :items-per-page-text="
-          t('views.invalidePersonenSelect.table.itemsPerPageText')
+          t('routes.invalidepersonenselect.table.itemsPerPageText')
         "
       >
         <template #item="{ item }">
@@ -25,14 +25,14 @@
       <v-card-actions>
         <v-spacer />
         <v-btn @click="cancelInvalidePersonenSelect">{{
-          t("views.invalidePersonenSelect.buttons.abbrechen")
+          t("routes.invalidepersonenselect.buttons.abbrechen")
         }}</v-btn>
         <v-btn
           class="bg-accent"
           :loading="vorschlagsListeAnimationAktiv"
           @click="invalidePersonenSelect"
         >
-          {{ t("views.invalidePersonenSelect.buttons.validierungUmgehen") }}
+          {{ t("routes.invalidepersonenselect.buttons.validierungUmgehen") }}
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import type PersonenTableData from "@/types/PersonenTableData";
+import type PersonenTableData from "@/types/PersonenTableData.ts";
 
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
@@ -67,19 +67,19 @@ type ReadonlyHeaders = VDataTable["$props"]["headers"];
 
 const headers: ReadonlyHeaders = computed(() => [
   {
-    title: t("views.invalidePersonenSelect.table.familienname"),
+    title: t("routes.invalidepersonenselect.table.familienname"),
     value: "familienname",
     align: "start",
     sortable: true,
   },
   {
-    title: t("views.invalidePersonenSelect.table.vorname"),
+    title: t("routes.invalidepersonenselect.table.vorname"),
     value: "vorname",
     align: "start",
     sortable: true,
   },
   {
-    title: t("views.invalidePersonenSelect.table.geburtsdatum"),
+    title: t("routes.invalidepersonenselect.table.geburtsdatum"),
     value: "geburtsdatum",
     align: "start",
     sortable: true,

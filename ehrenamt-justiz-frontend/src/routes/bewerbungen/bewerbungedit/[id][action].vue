@@ -12,26 +12,26 @@
       @cancel="cancel"
     />
     <online-help-dialog-component
-      :helptext="t('views.bewerbungEdit.onlineHelp')"
+      :helptext="t('routes.bewerbungedit.onlineHelp')"
     />
   </v-container>
 </template>
 
 <script setup lang="ts">
-import type BewerbungFormData from "@/types/BewerbungFormData";
+import type BewerbungFormData from "@/types/BewerbungFormData.ts";
 
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import { VContainer, VProgressLinear } from "vuetify/components";
 
-import { PersonApiService } from "@/api/PersonApiService";
+import { PersonApiService } from "@/api/PersonApiService.ts";
 import BewerbungForm from "@/components/bewerbungen/BewerbungForm.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
 import { PERSONENSTATUS, STATUS_INDICATORS } from "@/Constants.ts";
-import { useSnackbarStore } from "@/stores/snackbar";
+import { useSnackbarStore } from "@/stores/snackbar.ts";
 
-const route = useRoute();
+const route = useRoute("/bewerbungen/bewerbungedit/[id][action]");
 const router = useRouter();
 const snackbarStore = useSnackbarStore();
 const { t } = useI18n();
@@ -145,7 +145,7 @@ function loadBewerbung(): void {
         color: STATUS_INDICATORS.ERROR,
       });
       router.push({
-        name: "bewerbung.index",
+        name: "/bewerbungen/bewerbungenindex",
         params: {
           id: personId.value,
         },
@@ -203,24 +203,26 @@ function save(): void {
   animationAktiv.value = true;
   PersonApiService.updatePerson(getPerson())
     .then((updatedBewerber) => {
-      let nextRoute = "";
       switch (updatedBewerber.status) {
         case PERSONENSTATUS.STATUS_BEWERBUNG: {
-          nextRoute = "bewerbung.index";
+          router.push({
+            name: "/bewerbungen/bewerbungenindex",
+          });
           break;
         }
         case PERSONENSTATUS.STATUS_KONFLIKT: {
-          nextRoute = "konflikte.index";
+          router.push({
+            name: "/konflikte/konflikteindex",
+          });
           break;
         }
         case PERSONENSTATUS.STATUS_VORSCHLAG: {
-          nextRoute = "vorschlaege.index";
+          router.push({
+            name: "/vorschlaege/vorschlaegeindex",
+          });
           break;
         }
       }
-      router.push({
-        name: nextRoute,
-      });
     })
     .catch((error: Error) => {
       snackbarStore.push({
@@ -235,28 +237,32 @@ function cancel(): void {
   animationAktiv.value = true;
   PersonApiService.cancelBewerbung(getPerson())
     .then((canceledBewerber) => {
-      let nextRoute = "";
       switch (canceledBewerber.status) {
         case PERSONENSTATUS.STATUS_BEWERBUNG: {
-          nextRoute = "bewerbung.index";
+          router.push({
+            name: "/bewerbungen/bewerbungenindex",
+          });
           break;
         }
         case PERSONENSTATUS.STATUS_INERFASSUNG: {
-          nextRoute = "bewerbung.index";
+          router.push({
+            name: "/bewerbungen/bewerbungenindex",
+          });
           break;
         }
         case PERSONENSTATUS.STATUS_KONFLIKT: {
-          nextRoute = "konflikte.index";
+          router.push({
+            name: "/konflikte/konflikteindex",
+          });
           break;
         }
         case PERSONENSTATUS.STATUS_VORSCHLAG: {
-          nextRoute = "vorschlaege.index";
+          router.push({
+            name: "/vorschlaege/vorschlaegeindex",
+          });
           break;
         }
       }
-      router.push({
-        name: nextRoute,
-      });
     })
     .catch((error: Error) => {
       snackbarStore.push({

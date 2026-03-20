@@ -10,16 +10,16 @@
           class="text-h5"
           style="margin-bottom: 1em"
         >
-          {{ t("views.konfigurationEdit.header") }}
+          {{ t("routes.konfigurationedit.header") }}
           {{
             konfigurationData.action == BEARBEIGUNGS_MODUS.EDIT_MODUS
-              ? t("views.konfigurationEdit.bearbeiten")
-              : t("views.konfigurationEdit.anzeigen")
+              ? t("routes.konfigurationedit.bearbeiten")
+              : t("routes.konfigurationedit.anzeigen")
           }}
           {{
             konfigurationData.aktiv
-              ? t("views.konfigurationEdit.aktiv")
-              : t("views.konfigurationEdit.inAktiv")
+              ? t("routes.konfigurationedit.aktiv")
+              : t("routes.konfigurationedit.inAktiv")
           }}
         </h1>
         <konfiguration-form
@@ -30,27 +30,26 @@
       </template>
     </v-card>
     <online-help-dialog-component
-      :helptext="t('views.konfigurationEdit.onlineHelp')"
+      :helptext="t('routes.konfigurationedit.onlineHelp')"
     />
   </v-container>
 </template>
 
 <script setup lang="ts">
-import type KonfigurationFormData from "@/types/KonfigurationFormData";
+import type KonfigurationFormData from "@/types/KonfigurationFormData.ts";
 
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import { VCard, VContainer, VProgressLinear } from "vuetify/components";
 
-import { KonfigurationApiService } from "@/api/KonfigurationApiService";
+import { KonfigurationApiService } from "@/api/KonfigurationApiService.ts";
 import KonfigurationForm from "@/components/konfiguration/KonfigurationForm.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
-import { BEARBEIGUNGS_MODUS } from "@/Constants";
-import { STATUS_INDICATORS } from "@/Constants.ts";
-import { useSnackbarStore } from "@/stores/snackbar";
+import { BEARBEIGUNGS_MODUS, STATUS_INDICATORS } from "@/Constants.ts";
+import { useSnackbarStore } from "@/stores/snackbar.ts";
 
-const route = useRoute();
+const route = useRoute("/konfiguration/konfigurationedit/[id][action]");
 const router = useRouter();
 const snackbarStore = useSnackbarStore();
 const { t } = useI18n();
@@ -101,7 +100,7 @@ function loadKonfiguration(): void {
         color: STATUS_INDICATORS.ERROR,
       });
       router.push({
-        name: "konfiguration.index",
+        name: "/konfiguration/konfigurationindex",
       });
     });
 }
@@ -122,7 +121,7 @@ function save(): void {
   })
     .then(() => {
       router.push({
-        name: "konfiguration.index",
+        name: "/konfiguration/konfigurationindex",
       });
     })
     .catch((error: Error) => {

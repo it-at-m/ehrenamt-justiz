@@ -4,7 +4,7 @@
       <v-card-title>
         <v-row>
           <v-col class="text-left">
-            {{ t("views.konfigurationIndex.header") }}
+            {{ t("routes.konfigurationindex.header") }}
           </v-col>
 
           <v-col class="text-right">
@@ -14,9 +14,9 @@
               location="bottom right"
               fixed
               color="accent"
-              :to="{ path: '/configuration/create' }"
+              :to="{ path: '/konfiguration/konfigurationcreate' }"
             >
-              {{ t("views.konfigurationIndex.createKonfiguration") }}
+              {{ t("routes.konfigurationindex.createKonfiguration") }}
             </v-btn>
           </v-col>
         </v-row>
@@ -24,7 +24,7 @@
       <konfiguration-list />
     </v-card>
     <online-help-dialog-component
-      :helptext="t('views.konfigurationIndex.onlineHelp')"
+      :helptext="t('routes.konfigurationindex.onlineHelp')"
     />
   </v-container>
 </template>
@@ -40,7 +40,7 @@ import {
   VRow,
 } from "vuetify/components";
 
-import AuthService from "@/api/AuthService";
+import AuthService from "@/api/AuthService.ts";
 import KonfigurationList from "@/components/konfiguration/KonfigurationList.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
 

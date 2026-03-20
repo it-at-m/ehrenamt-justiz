@@ -8,12 +8,10 @@
           height="200"
         />
       </v-col>
-      <online-help-dialog-component
-        :helptext="t('views.homeView.onlineHelp')"
-      />
+      <online-help-dialog-component :helptext="t('routes.index.onlineHelp')" />
       <v-col class="mb-4">
         <h1 class="text-h3 font-weight-bold mb-3">
-          {{ t("views.homeView.welcome") }}
+          {{ t("routes.index.welcome") }}
         </h1>
       </v-col>
     </v-row>
@@ -25,11 +23,11 @@ import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { VCol, VContainer, VImg, VRow } from "vuetify/components";
 
-import { checkHealth } from "@/api/health-client";
+import { checkHealth } from "@/api/health-client.ts";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
-import { STATUS_INDICATORS } from "@/Constants";
-import { useSnackbarStore } from "@/stores/snackbar";
-import HealthState from "@/types/HealthState";
+import { STATUS_INDICATORS } from "@/Constants.ts";
+import { useSnackbarStore } from "@/stores/snackbar.ts";
+import HealthState from "@/types/HealthState.ts";
 
 const snackbarStore = useSnackbarStore();
 const status = ref("DOWN");

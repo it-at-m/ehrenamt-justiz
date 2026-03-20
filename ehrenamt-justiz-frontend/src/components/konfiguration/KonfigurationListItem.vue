@@ -89,8 +89,7 @@ import { KonfigurationApiService } from "@/api/KonfigurationApiService";
 import DeleteDialog from "@/components/common/DeleteDialog.vue";
 import ListItemActions from "@/components/common/ListItemActions.vue";
 import YesNoDialog from "@/components/common/YesNoDialog.vue";
-import { BEARBEIGUNGS_MODUS } from "@/Constants";
-import { STATUS_INDICATORS } from "@/Constants.ts";
+import { BEARBEIGUNGS_MODUS, STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const props = defineProps<{
@@ -132,7 +131,7 @@ const { t } = useI18n();
 
 function displayKonfiguration() {
   router.push({
-    name: "konfiguration.display",
+    name: "/konfiguration/konfigurationedit/[id][action]",
     params: {
       id: props.konfiguration.id?.toString() ?? "",
       action: BEARBEIGUNGS_MODUS.DISPLAY_MODUS,
@@ -142,7 +141,7 @@ function displayKonfiguration() {
 
 function editKonfiguration() {
   router.push({
-    name: "konfiguration.edit",
+    name: "/konfiguration/konfigurationedit/[id][action]",
     params: {
       id: props.konfiguration.id?.toString() ?? "",
       action: BEARBEIGUNGS_MODUS.EDIT_MODUS,

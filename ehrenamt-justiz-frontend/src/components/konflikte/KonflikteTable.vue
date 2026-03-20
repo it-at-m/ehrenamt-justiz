@@ -271,10 +271,8 @@ function loadItems(options: any) {
 
 function konfliktLoesen(item: { id: { toString: () => string } }) {
   router.push({
-    name: "konfliktloesen.edit",
-    params: {
-      id: item.id.toString(),
-    },
+    name: "/konflikte/konfliktloesenedit/[id]",
+    params: { id: item.id.toString() },
   });
 }
 
