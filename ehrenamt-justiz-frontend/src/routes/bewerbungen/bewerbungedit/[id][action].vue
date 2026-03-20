@@ -31,7 +31,9 @@ import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialog
 import { PERSONENSTATUS, STATUS_INDICATORS } from "@/Constants.ts";
 import { useSnackbarStore } from "@/stores/snackbar.ts";
 
-const route = useRoute("/bewerbungen/bewerbungedit/[id][action]");
+const route = useRoute("/bewerbungen/bewerbungedit/[id][action]") as {
+  params: { id: string; action: string };
+};
 const router = useRouter();
 const snackbarStore = useSnackbarStore();
 const { t } = useI18n();
@@ -85,8 +87,8 @@ const personId = ref("");
 const action = ref("");
 
 onMounted(() => {
-  personId.value = route.params.id as string;
-  action.value = route.params.action as string;
+  personId.value = route.params.id;
+  action.value = route.params.action;
   loadBewerbung();
 });
 
