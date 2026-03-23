@@ -7,6 +7,7 @@ import {
 } from "@vue/eslint-config-typescript";
 import { ESLint } from "eslint";
 import vueEslintConfig from "eslint-plugin-vue";
+import { globalIgnores } from "eslint/config";
 
 export default defineConfigWithVueTs(
   ESLint.defaultConfig,
@@ -54,6 +55,25 @@ export default defineConfigWithVueTs(
         localeDir: "./src/locales/*.json",
         messageSyntaxVersion: "^11.0.0",
       },
+      "import/core-modules": ["vue-router/auto-routes"],
     },
-  }
+    languageOptions: {
+      globals: {
+        definePage: "readonly",
+      },
+    },
+  },
+  {
+    files: ["src/routes/**/*.vue"],
+    rules: {
+      "vue/multi-word-component-names": "off",
+    },
+  },
+  globalIgnores([
+    "dist",
+    "target",
+    "node_modules",
+    "env.d.ts",
+    "route-map.d.ts",
+  ])
 );

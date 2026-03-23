@@ -5,7 +5,7 @@
         class="text-h5"
         style="margin-bottom: 1em"
       >
-        {{ t("views.konfigurationCreate.header") }}
+        {{ t("routes.konfigurationcreate.header") }}
       </h1>
       <konfiguration-form
         v-model="konfigurationData"
@@ -14,25 +14,24 @@
       />
     </v-card>
     <online-help-dialog-component
-      :helptext="t('views.konfigurationCreate.onlineHelp')"
+      :helptext="t('routes.konfigurationcreate.onlineHelp')"
     />
   </v-container>
 </template>
 
 <script setup lang="ts">
-import type KonfigurationFormData from "@/types/KonfigurationFormData";
+import type KonfigurationFormData from "@/types/KonfigurationFormData.ts";
 
 import { reactive, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VCard, VContainer } from "vuetify/components";
 
-import { KonfigurationApiService } from "@/api/KonfigurationApiService";
+import { KonfigurationApiService } from "@/api/KonfigurationApiService.ts";
 import KonfigurationForm from "@/components/konfiguration/KonfigurationForm.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
-import { BEARBEIGUNGS_MODUS } from "@/Constants";
-import { STATUS_INDICATORS } from "@/Constants.ts";
-import { useSnackbarStore } from "@/stores/snackbar";
+import { BEARBEIGUNGS_MODUS, STATUS_INDICATORS } from "@/Constants.ts";
+import { useSnackbarStore } from "@/stores/snackbar.ts";
 
 const snackbarStore = useSnackbarStore();
 const router = useRouter();
@@ -68,7 +67,7 @@ async function save() {
       alterbis: konfigurationData.alterbis,
     });
     await router.push({
-      name: "konfiguration.index",
+      name: "/konfiguration/konfigurationindex",
     });
   } catch (err: unknown) {
     snackbarStore.push({

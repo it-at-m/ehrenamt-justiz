@@ -15,7 +15,7 @@
           <v-btn
             variant="text"
             exact
-            :to="{ name: 'konfiguration.index' }"
+            :to="{ name: '/konfiguration/konfigurationindex' }"
             class="ml-auto"
           >
             {{ t("components.konfigurationForm.buttons.abbrechen") }}
@@ -164,8 +164,7 @@ import {
 
 import App from "@/App.vue";
 import { useRules } from "@/composables/rules";
-import { BEARBEIGUNGS_MODUS } from "@/Constants";
-import { STATUS_INDICATORS } from "@/Constants.ts";
+import { BEARBEIGUNGS_MODUS, STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const props = defineProps<{

@@ -1,11 +1,11 @@
 <template>
   <v-container>
     <v-card flat>
-      <v-card-title> {{ t("views.bewerbungenIndex.title") }}</v-card-title>
+      <v-card-title> {{ t("routes.bewerbungenindex.title") }}</v-card-title>
       <bewerbungen-table />
     </v-card>
     <online-help-dialog-component
-      :helptext="t('views.bewerbungenIndex.onlineHelp')"
+      :helptext="t('routes.bewerbungenindex.onlineHelp')"
     />
   </v-container>
 </template>

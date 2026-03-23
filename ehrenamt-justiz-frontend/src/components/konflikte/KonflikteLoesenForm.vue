@@ -39,7 +39,7 @@
           {{ t("components.konflikteLoesenForm.buttons.alleUebernehmen") }}
         </v-btn>
         <v-btn
-          :to="{ name: 'konflikte.index' }"
+          :to="{ name: '/konflikte/konflikteindex' }"
           class="ml-auto"
           exact
           variant="text"

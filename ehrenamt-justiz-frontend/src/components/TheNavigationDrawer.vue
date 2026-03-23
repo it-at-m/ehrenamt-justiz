@@ -1,13 +1,13 @@
 <template>
   <v-navigation-drawer v-model="showDrawer">
     <v-list>
-      <v-list-item :to="{ name: ROUTES_GETSTARTED }">
+      <v-list-item :to="{ name: '/getstarted' }">
         <v-list-item-title>{{
           t("app.navigation.getStarted")
         }}</v-list-item-title>
       </v-list-item>
       <v-list-item
-        :to="{ name: 'bewerbung.create' }"
+        :to="{ name: '/ewobuerger/ewobuergercreate' }"
         :disabled="
           !user ||
           !user.authorities.includes('READ_EWOBUERGER') ||
@@ -19,7 +19,7 @@
         }}</v-list-item-title>
       </v-list-item>
       <v-list-item
-        :to="{ name: 'bewerbung.index' }"
+        :to="{ name: '/bewerbungen/bewerbungenindex' }"
         :disabled="
           !user ||
           !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
@@ -31,7 +31,7 @@
         }}</v-list-item-title>
       </v-list-item>
       <v-list-item
-        :to="{ name: 'konflikte.index' }"
+        :to="{ name: '/konflikte/konflikteindex' }"
         :disabled="
           !user ||
           !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN') ||
@@ -43,7 +43,7 @@
         }}</v-list-item-title>
       </v-list-item>
       <v-list-item
-        :to="{ name: 'vorschlaege.index' }"
+        :to="{ name: '/vorschlaege/vorschlaegeindex' }"
         :disabled="
           !user || !user.authorities.includes('READ_EHRENAMTJUSTIZDATEN')
         "
@@ -53,7 +53,7 @@
         }}</v-list-item-title>
       </v-list-item>
       <v-list-item
-        :to="{ name: 'konfiguration.index' }"
+        :to="{ name: '/konfiguration/konfigurationindex' }"
         :disabled="!user || !user.authorities.includes('READ_KONFIGURATION')"
       >
         <v-list-item-title>{{
@@ -73,7 +73,6 @@ import {
   VNavigationDrawer,
 } from "vuetify/components";
 
-import { ROUTES_GETSTARTED } from "@/Constants.ts";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useUserStore } from "@/stores/user";
 

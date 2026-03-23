@@ -2,9 +2,9 @@
   <v-dialog v-model="visible">
     <v-card>
       <v-card-title class="text-h5">{{
-        t("views.eWOBuergerSelect.title")
+        t("routes.ewobuergerselect.title")
       }}</v-card-title>
-      <v-card-text>{{ t("views.eWOBuergerSelect.text") }}</v-card-text>
+      <v-card-text>{{ t("routes.ewobuergerselect.text") }}</v-card-text>
       <v-data-table
         :items="eWOBuergerData"
         :headers="headers"
@@ -24,7 +24,7 @@
                   />
                 </template>
                 <span>{{
-                  t("views.eWOBuergerSelect.table.actions.tooltip")
+                  t("routes.ewobuergerselect.table.actions.tooltip")
                 }}</span>
               </v-tooltip>
             </td>
@@ -34,15 +34,15 @@
             <td>
               {{
                 item.auskunftssperre.length > 0
-                  ? t("views.eWOBuergerSelect.table.auskunftssperre.content")
+                  ? t("routes.ewobuergerselect.table.auskunftssperre.content")
                   : ""
               }}
             </td>
             <td>
               {{
                 item.ewoidbereitserfasst
-                  ? t("views.eWOBuergerSelect.table.bereitsErfasst.contentYes")
-                  : t("views.eWOBuergerSelect.table.bereitsErfasst.contentNo")
+                  ? t("routes.ewobuergerselect.table.bereitsErfasst.contentYes")
+                  : t("routes.ewobuergerselect.table.bereitsErfasst.contentNo")
               }}
             </td>
           </tr>
@@ -54,7 +54,7 @@
           variant="outlined"
           @click="cancelBuergerSelect"
         >
-          {{ t("views.eWOBuergerSelect.buttons.abbrechen") }}
+          {{ t("routes.ewobuergerselect.buttons.abbrechen") }}
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import type EWOBuergerData from "@/types/EWOBuergerData";
+import type EWOBuergerData from "@/types/EWOBuergerData.ts";
 
 import { mdiAccountPlus } from "@mdi/js";
 import { computed } from "vue";
@@ -89,37 +89,37 @@ type ReadonlyHeaders = VDataTable["$props"]["headers"];
 const { t } = useI18n();
 const headers: ReadonlyHeaders = computed(() => [
   {
-    title: t("views.eWOBuergerSelect.table.actions.title"),
+    title: t("routes.ewobuergerselect.table.actions.title"),
     value: "actions",
     align: "start",
     sortable: false,
   },
   {
-    title: t("views.eWOBuergerSelect.table.familienname"),
+    title: t("routes.ewobuergerselect.table.familienname"),
     value: "familienname",
     align: "start",
     sortable: true,
   },
   {
-    title: t("views.eWOBuergerSelect.table.vorname"),
+    title: t("routes.ewobuergerselect.table.vorname"),
     value: "vorname",
     align: "start",
     sortable: true,
   },
   {
-    title: t("views.eWOBuergerSelect.table.geburtsdatum"),
+    title: t("routes.ewobuergerselect.table.geburtsdatum"),
     value: "geburtsdatum",
     align: "start",
     sortable: true,
   },
   {
-    title: t("views.eWOBuergerSelect.table.auskunftssperre.title"),
+    title: t("routes.ewobuergerselect.table.auskunftssperre.title"),
     value: "auskunftssperre",
     align: "start",
     sortable: true,
   },
   {
-    title: t("views.eWOBuergerSelect.table.bereitsErfasst.title"),
+    title: t("routes.ewobuergerselect.table.bereitsErfasst.title"),
     value: "ewoidbereitserfasst",
     align: "start",
     sortable: true,

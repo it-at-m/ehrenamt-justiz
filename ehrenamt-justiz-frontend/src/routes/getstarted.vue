@@ -11,11 +11,11 @@
           v-bind="props"
           :class="isHovering ? 'person-hover-color' : 'person-bewerbung-color'"
           cols="3"
-          @click="router.push({ name: 'bewerbung.index' })"
+          @click="router.push({ name: '/bewerbungen/bewerbungenindex' })"
         >
           <h2>
             {{
-              t("views.getStartedView.bewerbungen", {
+              t("routes.getstartedview.bewerbungen", {
                 count: ehrenamtJustizStatus
                   ? ehrenamtJustizStatus.anzahlBewerbungen
                   : "0",
@@ -35,11 +35,11 @@
           v-bind="props"
           :class="isHovering ? 'person-hover-color' : 'person-konflikte-color'"
           cols="3"
-          @click="router.push({ name: 'konflikte.index' })"
+          @click="router.push({ name: '/konflikte/konflikteindex' })"
         >
           <h2>
             {{
-              t("views.getStartedView.konflikte", {
+              t("routes.getstartedview.konflikte", {
                 count: ehrenamtJustizStatus
                   ? ehrenamtJustizStatus.anzahlKonflikte
                   : "0",
@@ -61,11 +61,11 @@
             isHovering ? 'person-hover-color' : 'person-vorschlaege-color'
           "
           cols="3"
-          @click="router.push({ name: 'vorschlaege.index' })"
+          @click="router.push({ name: '/vorschlaege/vorschlaegeindex' })"
         >
           <h2>
             {{
-              t("views.getStartedView.vorschlaege", {
+              t("routes.getstartedview.vorschlaege", {
                 count: ehrenamtJustizStatus
                   ? ehrenamtJustizStatus.anzahlVorschlaege
                   : "0",
@@ -81,7 +81,7 @@
       >
         <h2>
           {{
-            t("views.getStartedView.neueVorschlaege", {
+            t("routes.getstartedview.neueVorschlaege", {
               count: ehrenamtJustizStatus
                 ? ehrenamtJustizStatus.anzahlVorschlaegeNeu
                 : "0",
@@ -97,7 +97,7 @@
             )
           "
           @click="datenHerunterladen"
-          >{{ t("views.getStartedView.buttons.datenHerunterladen") }}
+          >{{ t("routes.getstartedview.buttons.datenHerunterladen") }}
         </v-btn>
 
         <v-btn
@@ -108,40 +108,40 @@
             )
           "
           @click="alsBenachrichtigtMarkierenBestaetigen"
-          >{{ t("views.getStartedView.buttons.alsBenachrichtigtMarkieren") }}
+          >{{ t("routes.getstartedview.buttons.alsBenachrichtigtMarkieren") }}
         </v-btn>
       </v-col>
     </v-row>
     <yes-no-dialog
       v-model="yesNoDialogVisible"
-      :dialogtitle="t('views.getStartedView.yesNoDialog.dialogtitle')"
-      :dialogtext="t('views.getStartedView.yesNoDialog.dialogtext')"
+      :dialogtitle="t('routes.getstartedview.yesNoDialog.dialogtitle')"
+      :dialogtext="t('routes.getstartedview.yesNoDialog.dialogtext')"
       :is-animation="benachrichtigtMarkierenAnimationAktiv"
       @no="alsBenachrichtigtMarkierenNo"
       @yes="alsBenachrichtigtMarkierenYes"
     />
     <online-help-dialog-component
-      :helptext="t('views.getStartedView.onlineHelp')"
+      :helptext="t('routes.getstartedview.onlineHelp')"
     />
   </v-container>
 </template>
 
 <script setup lang="ts">
-import type EhrenamtJustizStatus from "@/types/EhrenamtJustizStatus";
+import type EhrenamtJustizStatus from "@/types/EhrenamtJustizStatus.ts";
 
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VBtn, VCol, VContainer, VHover, VRow } from "vuetify/components";
 
-import { EhrenamtJustizService } from "@/api/EhrenamtJustizService";
-import { PersonApiService } from "@/api/PersonApiService";
+import { EhrenamtJustizService } from "@/api/EhrenamtJustizService.ts";
+import { PersonApiService } from "@/api/PersonApiService.ts";
 import YesNoDialog from "@/components/common/YesNoDialog.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
 import { STATUS_INDICATORS } from "@/Constants.ts";
-import { useGlobalSettingsStore } from "@/stores/globalsettings";
-import { useSnackbarStore } from "@/stores/snackbar";
-import { useUserStore } from "@/stores/user";
+import { useGlobalSettingsStore } from "@/stores/globalsettings.ts";
+import { useSnackbarStore } from "@/stores/snackbar.ts";
+import { useUserStore } from "@/stores/user.ts";
 
 const ehrenamtJustizStatus = ref<EhrenamtJustizStatus | null>(null);
 const textAnzahlBewerbungen = ref();

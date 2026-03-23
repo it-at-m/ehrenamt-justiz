@@ -14,27 +14,26 @@
       ></e-w-o-buerger-select>
     </v-card>
     <online-help-dialog-component
-      :helptext="t('views.eWOBuergerCreate.onlineHelp')"
+      :helptext="t('routes.ewobuergercreate.onlineHelp')"
     />
   </v-container>
 </template>
 
 <script setup lang="ts">
-import type EWOBuergerData from "@/types/EWOBuergerData";
-import type EWOBuergerSuche from "@/types/EWOBuergerSuche";
+import type EWOBuergerData from "@/types/EWOBuergerData.ts";
+import type EWOBuergerSuche from "@/types/EWOBuergerSuche.ts";
 
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VCard, VContainer } from "vuetify/components";
 
-import { EWOBuergerApiService } from "@/api/EWOBuergerApiService";
+import { EWOBuergerApiService } from "@/api/EWOBuergerApiService.ts";
 import EWOBuergerForm from "@/components/ewobuerger/EWOBuergerForm.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
-import { BEARBEIGUNGS_MODUS } from "@/Constants";
-import { STATUS_INDICATORS } from "@/Constants.ts";
-import { useSnackbarStore } from "@/stores/snackbar";
-import EWOBuergerSelect from "@/views/ewobuerger/EWOBuergerSelect.vue";
+import { BEARBEIGUNGS_MODUS, STATUS_INDICATORS } from "@/Constants.ts";
+import EWOBuergerSelect from "@/routes/ewobuerger/ewobuergerselect.vue";
+import { useSnackbarStore } from "@/stores/snackbar.ts";
 
 const snackbarStore = useSnackbarStore();
 
@@ -69,7 +68,7 @@ async function save() {
           // No citizen found
           snackbarStore.push({
             color: STATUS_INDICATORS.WARNING,
-            text: t("views.eWOBuergerCreate.keinePersonGefundenMessage"),
+            text: t("routes.ewobuergercreate.keinePersonGefundenMessage"),
           });
         } else if (ewoBuergers.length > 1) {
           // More than one citizen: Select citizen by User
@@ -85,7 +84,7 @@ async function save() {
                   ewoBuergers[0]
                 ).then(() => {
                   router.push({
-                    name: "bewerbung.edit",
+                    name: "/bewerbungen/bewerbungedit/[id][action]",
                     params: {
                       id:
                         ewoBuergers[0] && ewoBuergers[0].id
@@ -98,7 +97,7 @@ async function save() {
               } else if (person && ewoBuergers[0]) {
                 snackbarStore.push({
                   color: STATUS_INDICATORS.ERROR,
-                  text: t("views.eWOBuergerCreate.bereitsVorhandenMessage", {
+                  text: t("routes.ewobuergercreate.bereitsVorhandenMessage", {
                     ordnungsmerkmal: ewoBuergers[0].ordnungsmerkmal,
                     status: person.status,
                   }),
@@ -111,7 +110,7 @@ async function save() {
           // No citizen found
           snackbarStore.push({
             color: STATUS_INDICATORS.WARNING,
-            text: t("views.eWOBuergerCreate.keinePersonGefundenMessage"),
+            text: t("routes.ewobuergercreate.keinePersonGefundenMessage"),
           });
         }
       })
@@ -135,7 +134,7 @@ async function einBuergerAusgewaehlt(ewoBuerger: EWOBuergerData) {
       EWOBuergerApiService.vorbereitenUndSpeichernPerson(ewoBuerger).then(
         () => {
           router.push({
-            name: "bewerbung.edit",
+            name: "/bewerbungen/bewerbungedit/[id][action]",
             params: {
               id: ewoBuerger.id ? ewoBuerger.id : "",
               action: BEARBEIGUNGS_MODUS.EDIT_MODUS,
@@ -146,7 +145,7 @@ async function einBuergerAusgewaehlt(ewoBuerger: EWOBuergerData) {
     } else {
       snackbarStore.push({
         color: STATUS_INDICATORS.ERROR,
-        text: t("views.eWOBuergerCreate.bereitsVorhandenMessage", {
+        text: t("routes.ewobuergercreate.bereitsVorhandenMessage", {
           ordnungsmerkmal: ewoBuerger.ordnungsmerkmal,
           status: person.status,
         }),
