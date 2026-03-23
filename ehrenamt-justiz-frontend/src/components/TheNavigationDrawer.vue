@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer v-model="showDrawer">
     <v-list>
-      <v-list-item to="/getstarted">
+      <v-list-item :to="{ name: '/getstarted' }">
         <v-list-item-title>{{
           t("app.navigation.getStarted")
         }}</v-list-item-title>
