@@ -146,9 +146,6 @@ function loadBewerbung(): void {
       });
       router.push({
         name: "/bewerbungen/bewerbungenindex",
-        params: {
-          id: personId.value,
-        },
       });
     });
 }

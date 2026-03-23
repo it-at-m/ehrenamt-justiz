@@ -252,9 +252,6 @@ async function loadPerson(): Promise<void> {
       });
       router.push({
         name: "/bewerbungen/bewerbungenindex",
-        params: {
-          id: personenDatenId.value,
-        },
       });
     });
 }
