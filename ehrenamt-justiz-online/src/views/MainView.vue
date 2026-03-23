@@ -5,7 +5,7 @@
       v-if="useActiveKonfigurationStore().getKonfiguration"
       class="d-flex align-center flex-column"
       title=""
-      :disabled=false
+      :disabled="false"
     >
       <template #headerPrefix
         ><div id="headerOnlineBewerbung">
