@@ -137,7 +137,6 @@ function loadBewerbung(): void {
         validierungdeaktivieren: false,
         action: action.value,
       };
-      isLoading.value = false;
     })
     .catch((error: Error) => {
       snackbarStore.push({
@@ -147,7 +146,8 @@ function loadBewerbung(): void {
       router.push({
         name: "/bewerbungen/bewerbungenindex",
       });
-    });
+    })
+    .finally(() => (isLoading.value = false));
 }
 
 function getPerson() {
