@@ -4,7 +4,7 @@
     <!-- ARTIFACTID muss auch in Properties file geaendert werden -->
     <groupId>de.muenchen.ehrenamt-justiz</groupId>
     <artifactId>ehrenamt-justiz-eai</artifactId>
-    <version>0.0.9-SNAPSHOT</version>
+    <version>0.0.10-SNAPSHOT</version>
     <!-- VERSION muss auch in Properties file und application.yml geändert werden-->
     <name>ehrenamt-justiz-eai</name>
     <description>EAI of Ehrenamtjustiz</description>
