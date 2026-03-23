@@ -238,12 +238,7 @@ function cancel(): void {
   PersonApiService.cancelBewerbung(getPerson())
     .then((canceledBewerber) => {
       switch (canceledBewerber.status) {
-        case PERSONENSTATUS.STATUS_BEWERBUNG: {
-          router.push({
-            name: "/bewerbungen/bewerbungenindex",
-          });
-          break;
-        }
+        case PERSONENSTATUS.STATUS_BEWERBUNG:
         case PERSONENSTATUS.STATUS_INERFASSUNG: {
           router.push({
             name: "/bewerbungen/bewerbungenindex",
