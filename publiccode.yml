@@ -9,8 +9,7 @@ description:
   de:
     features:
         - "Berufung Schöff*innen beim Amtsgericht oder ehrenamtlicher Richter*innen"
-    documentation:
-       - https://opensource.muenchen.de/de/software/ehrenamtjustiz.html
+    documentation: https://opensource.muenchen.de/de/software/ehrenamtjustiz.html
     genericName: Ehrenamtjustiz
     longDescription: >
       Die Anwendung Ehrenamtjustiz vereinfacht die Abläufe rund um die Berufung Schöff*innen beim Amtsgericht oder ehrenamtlicher Richter*innen am Verwaltungsgericht.
