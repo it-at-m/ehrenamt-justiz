@@ -39,6 +39,6 @@ platforms:
 releaseDate: "2025-12-01"
 softwareType: standalone/web
 url: "https://github.com/it-at-m/ehrenamt-justiz"
-softwareVersion: 1.0.0
+softwareVersion: 0.0.9
 usedBy:
   - Landeshauptstadt München
