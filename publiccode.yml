@@ -1,0 +1,44 @@
+publiccodeYmlVersion: "0.4"
+applicationSuite: Ehrenamtjustiz
+categories:
+  - regulations-and-directives
+  - employee-management
+  - erp
+  - business-process-management
+description:
+  de:
+    features:
+        - "Berufung Schöff*innen beim Amtsgericht oder ehrenamtlicher Richter*innen"
+    documentation: https://opensource.muenchen.de/de/software/ehrenamtjustiz.html
+    genericName: Ehrenamtjustiz
+    longDescription: >
+      Die Anwendung Ehrenamtjustiz vereinfacht die Abläufe rund um die Berufung Schöff*innen beim Amtsgericht oder ehrenamtlicher Richter*innen am Verwaltungsgericht.
+
+      Das Fachverfahren „Ehrenamtliche für die Justiz“ unterstützt Sachbearbeiter*innen der Gemeindeverwaltung bei der Erfassung und Verwaltung von Bewerbungen für das Amt als Schöff*innen beim Amtsgericht oder ehrenamtlicher Richter*innen am Verwaltungsgericht, bei der Erstellung der Vorschlagslisten für das jeweilige Gericht, in dem die vorliegenden Daten der*des Bewerber*in mit den Daten im Melderegister abgeglichen werden. Des Weiteren kann den Bürger*innen die Möglichkeit gegeben werden, sich online mit der Gemeindeverwaltung in Verbindung zu setzen, um auf die jeweilige Vorschlagsliste aufgenommen zu werden.
+    shortDescription: >
+      Die Anwendung Ehrenamtjustiz vereinfacht die Abläufe rund um die Berufung Schöff*innen beim Amtsgericht oder ehrenamtlicher Richter*innen am Verwaltungsgericht.
+developmentStatus: stable
+intendedAudience:
+  countries:
+    - de
+landingURL: "https://opensource.muenchen.de/de/software/ehrenamtjustiz.html"
+legal:
+  license: MIT
+localisation:
+  availableLanguages:
+    - de
+  localisationReady: true
+maintenance:
+  contacts:
+    - email: opensource@muenchen.de
+      name: Klaus Mueller
+  type: community
+name: Ehrenamtjustiz
+platforms:
+  - web
+releaseDate: "2025-12-01"
+softwareType: standalone/web
+url: "https://github.com/it-at-m/ehrenamt-justiz"
+softwareVersion: 0.0.9
+usedBy:
+  - Landeshauptstadt München
