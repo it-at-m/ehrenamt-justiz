@@ -47,7 +47,7 @@
     <spring-kafka.version>3.3.14</spring-kafka.version>
 
     <!-- Utility -->
-    <refarch-tools.version>1.2.0</refarch-tools.version>
+    <refarch-tools.version>1.2.1</refarch-tools.version>
 
     <!-- Core Frameworks -->
     <spring-cloud-dependencies.version>2025.0.1</spring-cloud-dependencies.version> <!-- Must match the chosen Spring Boot version -->
