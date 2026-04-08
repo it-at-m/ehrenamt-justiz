@@ -64,7 +64,7 @@
         <maven-release-plugin.version>3.3.1</maven-release-plugin.version>
 
         <!-- Utility -->
-        <refarch-tools.version>1.2.0</refarch-tools.version>
+        <refarch-tools.version>1.2.2</refarch-tools.version>
         <cxf.version>4.2.0</cxf.version>
 
         <!-- Spotless P2 Mirror configuration (e.g. required when using company internal registry -->
