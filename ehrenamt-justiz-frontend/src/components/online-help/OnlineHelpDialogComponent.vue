@@ -12,8 +12,8 @@
       }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-icon
-        @click="closeOnlineHelp()"
         :icon="mdiClose"
+        @click="closeOnlineHelp()"
       />
     </v-toolbar>
     <v-card flat>

@@ -2,12 +2,12 @@
   <v-app>
     <the-snackbar-queue />
     <the-app-bar
-      @clicked-nav-icon="toggleNavigation"
       v-if="isConfigLoaded"
+      @clicked-nav-icon="toggleNavigation"
     />
     <the-navigation-drawer
-      v-model="isNavigationShown"
       v-if="isConfigLoaded"
+      v-model="isNavigationShown"
     />
     <v-main>
       <v-container fluid>
@@ -16,8 +16,8 @@
           indeterminate
         ></v-progress-circular>
         <router-view
-          v-slot="{ Component }"
           v-else
+          v-slot="{ Component }"
         >
           <v-fade-transition mode="out-in">
             <component :is="Component" />

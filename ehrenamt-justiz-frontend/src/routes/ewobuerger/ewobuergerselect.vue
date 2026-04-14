@@ -19,8 +19,8 @@
                   <v-icon
                     v-bind="props"
                     @click="selectBuerger(item)"
-                    @keydown.enter.prevent="selectBuerger(item)"
                     :icon="mdiAccountPlus"
+                    @keydown.enter.prevent="selectBuerger(item)"
                   />
                 </template>
                 <span>{{

@@ -71,10 +71,10 @@ import {
 } from "vuetify/components";
 
 export interface Props {
-  showOpen: boolean;
-  showEdit: boolean;
-  showDelete: boolean;
-  showSetActive: boolean;
+  showOpen?: boolean;
+  showEdit?: boolean;
+  showDelete?: boolean;
+  showSetActive?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
