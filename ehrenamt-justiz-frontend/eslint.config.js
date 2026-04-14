@@ -49,7 +49,7 @@ export default defineConfigWithVueTs(
           ],
         },
       ],
-      "no-shadow": "off",
+      "vue/no-template-shadow": "off"
     },
     settings: {
       "vue-i18n": {

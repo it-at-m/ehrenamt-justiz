@@ -52,6 +52,7 @@ export default defineConfigWithVueTs(
           ],
         },
       ],
+      "vue/no-v-html": "off"
     },
     settings: {
       "vue-i18n": {
