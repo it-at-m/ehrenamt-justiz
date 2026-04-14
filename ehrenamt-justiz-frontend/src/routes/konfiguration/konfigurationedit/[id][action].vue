@@ -72,9 +72,7 @@ const konfigurationId = ref("");
 const action = ref("");
 
 onMounted(() => {
-  // @ts-expect-error temporary ignore
   konfigurationId.value = route.params.id as string;
-  // @ts-expect-error temporary ignore
   action.value = route.params.action as string;
   loadKonfiguration();
 });

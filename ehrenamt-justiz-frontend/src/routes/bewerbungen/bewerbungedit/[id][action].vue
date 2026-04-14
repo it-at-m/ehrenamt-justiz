@@ -85,9 +85,7 @@ const personId = ref("");
 const action = ref("");
 
 onMounted(() => {
-  // @ts-expect-error temporary ignore
   personId.value = route.params.id as string;
-  // @ts-expect-error temporary ignore
   action.value = route.params.action as string;
   loadBewerbung();
 });

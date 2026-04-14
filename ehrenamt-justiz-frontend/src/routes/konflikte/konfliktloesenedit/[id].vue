@@ -105,7 +105,6 @@ const isSavingAnimation = ref(false);
 const personenDatenId = ref("");
 
 onMounted(() => {
-  // @ts-expect-error temporary ignore
   personenDatenId.value = route.params.id as string;
   loadPerson();
 });
