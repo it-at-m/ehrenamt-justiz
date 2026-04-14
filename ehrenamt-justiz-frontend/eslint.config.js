@@ -49,7 +49,8 @@ export default defineConfigWithVueTs(
           ],
         },
       ],
-      "vue/no-template-shadow": "off"
+      "vue/no-template-shadow": "off",
+      "vue/no-required-prop-with-default": "off",
     },
     settings: {
       "vue-i18n": {
