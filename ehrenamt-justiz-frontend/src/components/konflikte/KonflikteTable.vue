@@ -99,8 +99,8 @@
                     ))
                 "
                 v-bind="props"
-                @click="konfliktLoesen(item)"
                 :icon="mdiPencil"
+                @click="konfliktLoesen(item)"
               />
             </template>
             <span>{{

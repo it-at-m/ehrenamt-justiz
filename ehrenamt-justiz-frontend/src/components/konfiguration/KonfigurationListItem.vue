@@ -19,8 +19,8 @@
               <v-btn
                 class="listitem"
                 v-bind="props"
-                @click="requestSetActive"
                 :icon="mdiLightbulbOnOutline"
+                @click="requestSetActive"
               />
             </span>
           </template>

@@ -11,7 +11,7 @@ import vueEslintConfig from "eslint-plugin-vue";
 export default defineConfigWithVueTs(
   ESLint.defaultConfig,
   jsEslintConfig.configs.recommended,
-  vueEslintConfig.configs["flat/essential"],
+  vueEslintConfig.configs["flat/recommended-error"],
   vueTsConfigs.strict,
   vueTsConfigs.stylistic,
   vueI18nEslintConfig.configs.recommended,
@@ -52,6 +52,7 @@ export default defineConfigWithVueTs(
           ],
         },
       ],
+      "vue/no-v-html": "off",
     },
     settings: {
       "vue-i18n": {

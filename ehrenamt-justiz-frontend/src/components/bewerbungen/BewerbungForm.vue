@@ -124,7 +124,6 @@
                       />
                     </v-col>
                     <v-col
-                      class="col"
                       v-show="
                         bewerbung.ewo_auskunftssperre.length == 0 ||
                         AuthService.checkAuth(
@@ -132,6 +131,7 @@
                           t
                         )
                       "
+                      class="col"
                     >
                       <v-text-field
                         v-model="bewerbung.ewo_geburtsname"
@@ -148,16 +148,16 @@
                 </v-expansion-panel-text>
               </v-expansion-panel>
               <v-expansion-panel
-                :title="
-                  t(
-                    'components.bewerbungForm.tabEwo.expansionPanel.personenDaten'
-                  )
-                "
                 v-show="
                   bewerbung.ewo_auskunftssperre.length == 0 ||
                   AuthService.checkAuth(
                     'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE',
                     t
+                  )
+                "
+                :title="
+                  t(
+                    'components.bewerbungForm.tabEwo.expansionPanel.personenDaten'
                   )
                 "
               >
@@ -282,15 +282,15 @@
               </v-expansion-panel>
 
               <v-expansion-panel
-                :title="
-                  t('components.bewerbungForm.tabEwo.expansionPanel.adresse')
-                "
                 v-show="
                   bewerbung.ewo_auskunftssperre.length == 0 ||
                   AuthService.checkAuth(
                     'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE',
                     t
                   )
+                "
+                :title="
+                  t('components.bewerbungForm.tabEwo.expansionPanel.adresse')
                 "
               >
                 <v-expansion-panel-text>
@@ -485,15 +485,15 @@
                 </v-expansion-panel-text>
               </v-expansion-panel>
               <v-expansion-panel
-                :title="
-                  t('components.bewerbungForm.tabEwo.expansionPanel.sonstiges')
-                "
                 v-show="
                   bewerbung.ewo_auskunftssperre.length == 0 ||
                   AuthService.checkAuth(
                     'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE',
                     t
                   )
+                "
+                :title="
+                  t('components.bewerbungForm.tabEwo.expansionPanel.sonstiges')
                 "
               >
                 <v-expansion-panel-text>

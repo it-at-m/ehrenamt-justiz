@@ -12,7 +12,7 @@ import { globalIgnores } from "eslint/config";
 export default defineConfigWithVueTs(
   ESLint.defaultConfig,
   jsEslintConfig.configs.recommended,
-  vueEslintConfig.configs["flat/essential"],
+  vueEslintConfig.configs["flat/recommended-error"],
   vueTsConfigs.strict,
   vueTsConfigs.stylistic,
   vueI18nEslintConfig.configs.recommended,
@@ -49,6 +49,8 @@ export default defineConfigWithVueTs(
           ],
         },
       ],
+      "vue/no-template-shadow": "off",
+      "vue/no-required-prop-with-default": "off",
     },
     settings: {
       "vue-i18n": {

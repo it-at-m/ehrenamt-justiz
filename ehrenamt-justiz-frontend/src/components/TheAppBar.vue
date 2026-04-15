@@ -6,8 +6,8 @@
         class="d-flex align-center justify-start"
       >
         <v-app-bar-nav-icon
-          @click="emit('clickedNavIcon')"
           class="mx-2"
+          @click="emit('clickedNavIcon')"
         />
         <router-link to="/">
           <v-toolbar-title class="font-weight-bold">
@@ -86,8 +86,8 @@
             <span v-bind="props">
               <v-btn
                 style="font-size: 12px"
-                @click="hilfeAnzeigen"
                 :icon="mdiHelp"
+                @click="hilfeAnzeigen"
             /></span>
           </template>
           <span>{{ t("app.onlineHelp") }}</span>

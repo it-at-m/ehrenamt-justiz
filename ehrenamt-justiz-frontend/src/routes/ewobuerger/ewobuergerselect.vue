@@ -18,9 +18,9 @@
                 <template #activator="{ props }">
                   <v-icon
                     v-bind="props"
+                    :icon="mdiAccountPlus"
                     @click="selectBuerger(item)"
                     @keydown.enter.prevent="selectBuerger(item)"
-                    :icon="mdiAccountPlus"
                   />
                 </template>
                 <span>{{

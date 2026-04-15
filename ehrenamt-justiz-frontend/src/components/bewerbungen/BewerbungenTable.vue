@@ -114,8 +114,8 @@
               <span v-bind="props">
                 <v-icon
                   v-bind="props"
-                  @click="editItem(item)"
                   :icon="mdiPencil"
+                  @click="editItem(item)"
               /></span>
             </template>
             <span>{{
@@ -127,8 +127,8 @@
               <span v-bind="props">
                 <v-icon
                   v-bind="props"
-                  @click="displayItem(item)"
                   :icon="mdiEye"
+                  @click="displayItem(item)"
               /></span>
             </template>
             <span>{{
