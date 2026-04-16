@@ -49,9 +49,6 @@
     <!-- Utility -->
     <refarch-tools.version>1.2.2</refarch-tools.version>
 
-    <!-- Core Frameworks -->
-    <spring-cloud-dependencies.version>2025.0.2</spring-cloud-dependencies.version> <!-- Must match the chosen Spring Boot version -->
-
     <!-- Linting & Formatting -->
     <spotless-maven-plugin.version>3.4.0</spotless-maven-plugin.version>
     <itm-java-codeformat.version>1.0.10</itm-java-codeformat.version>
@@ -73,21 +70,6 @@
     <p2.password /> <!-- must be empty, override via Maven settings.xml if needed -->
     <p2.mirror>download.eclipse.org</p2.mirror>
   </properties>
-
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <!-- Import dependency management from Spring Cloud -->
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-dependencies</artifactId>
-        <version>${spring-cloud-dependencies.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
 
   <dependencies>
     <!-- Spring Boot -->
