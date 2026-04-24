@@ -1,9 +1,11 @@
+import type { UserInfo } from "@/types/UserInfo";
+
 import {
   defaultCatchHandler,
   defaultResponseHandler,
   getGETConfig,
-} from "@/api/FetchUtils.ts";
-import User from "@/types/User";
+} from "@/api/FetchUtils";
+import { USERINFO_EMPTY } from "@/types/UserInfo";
 
 /**
  * Retrieves the user data via the userinfo route of the API gateway. The SSO client must be configured so that
@@ -13,7 +15,7 @@ import User from "@/types/User";
  *
  * API-Definition (internal only): https://wiki.muenchen.de/betriebshandbuch/wiki/Red_Hat_Single_Sign-On_(Keycloak)#Scopes
  */
-export function getUser(): Promise<User> {
+export function getUserInfo(): Promise<UserInfo> {
   return fetch("/api/sso/userinfo", getGETConfig())
     .catch(defaultCatchHandler)
     .then((response) => {
@@ -23,26 +25,10 @@ export function getUser(): Promise<User> {
       );
       return response.json();
     })
-    .then((json: Partial<User>) => {
-      const u = new User();
-      u.sub = json.sub || "";
-
-      // LHM
-      u.displayName = json.displayName || "";
-      u.surname = json.surname || "";
-      u.telephoneNumber = json.telephoneNumber || "";
-      u.email = json.email || "";
-      u.username = json.username || "";
-      u.given_name = json.given_name || "";
-      u.family_name = json.family_name || "";
-      u.department = json.department || "";
-      u.lhmObjectID = json.lhmObjectID || "";
-
-      // LHM_Extended
-      u.preferred_username = json.preferred_username || "";
-      u.memberof = json.memberof || [];
-      u.user_roles = json.user_roles || [];
-      u.authorities = json.authorities || [];
-      return u;
+    .then((userInfo: Partial<UserInfo>) => {
+      return {
+        ...USERINFO_EMPTY,
+        ...userInfo,
+      };
     });
 }

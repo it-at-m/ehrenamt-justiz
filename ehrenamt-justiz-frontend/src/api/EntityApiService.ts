@@ -1,6 +1,6 @@
 import type PagedEntity from "@/types/base/PagedEntity";
 
-import { API_BASE, STATUS_INDICATORS } from "@/Constants.ts";
+import { API_BASE, STATUS_INDICATORS } from "@/Constants";
 import HttpMethod from "@/types/base/HttpMethod";
 import { ApiError } from "./ApiError";
 import {

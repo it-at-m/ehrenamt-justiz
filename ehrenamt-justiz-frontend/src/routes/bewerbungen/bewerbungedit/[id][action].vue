@@ -18,18 +18,18 @@
 </template>
 
 <script setup lang="ts">
-import type BewerbungFormData from "@/types/BewerbungFormData.ts";
+import type BewerbungFormData from "@/types/BewerbungFormData";
 
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import { VContainer, VProgressLinear } from "vuetify/components";
 
-import { PersonApiService } from "@/api/PersonApiService.ts";
+import { PersonApiService } from "@/api/PersonApiService";
 import BewerbungForm from "@/components/bewerbungen/BewerbungForm.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
-import { PERSONENSTATUS, STATUS_INDICATORS } from "@/Constants.ts";
-import { useSnackbarStore } from "@/stores/snackbar.ts";
+import { PERSONENSTATUS, STATUS_INDICATORS } from "@/Constants";
+import { useSnackbarStore } from "@/stores/snackbar";
 
 const route = useRoute();
 const router = useRouter();

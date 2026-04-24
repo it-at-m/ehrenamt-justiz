@@ -74,11 +74,11 @@ import {
 } from "vuetify/components";
 
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
-import { useUserStore } from "@/stores/user";
+import { useUserInfoStore } from "@/stores/userinfo";
 
 const showDrawer = defineModel<boolean>({ required: true });
-const userStore = useUserStore();
+const userInfoStore = useUserInfoStore();
 const { t } = useI18n();
 const globalSettingsStore = useGlobalSettingsStore();
-const user = computed(() => userStore.getUser);
+const user = computed(() => userInfoStore.getUserInfo);
 </script>

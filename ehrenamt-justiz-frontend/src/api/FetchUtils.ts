@@ -1,5 +1,5 @@
 import { ApiError } from "@/api/ApiError";
-import { STATUS_INDICATORS } from "@/Constants.ts";
+import { STATUS_INDICATORS } from "@/Constants";
 
 /**
  * Returns a default GET-Config for fetch

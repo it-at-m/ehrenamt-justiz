@@ -30,6 +30,7 @@
 
 <script setup lang="ts">
 import type KonfigurationData from "@/types/KonfigurationData";
+import type { UserInfo } from "@/types/UserInfo";
 
 import { useToggle } from "@vueuse/core";
 import { computed, onMounted } from "vue";
@@ -43,28 +44,29 @@ import {
 } from "vuetify/components";
 
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";
-import { getUser } from "@/api/user-client";
+import { getUserInfo } from "@/api/userinfo-client";
 import TheAppBar from "@/components/TheAppBar.vue";
 import TheNavigationDrawer from "@/components/TheNavigationDrawer.vue";
 import TheSnackbarQueue from "@/components/TheSnackbarQueue.vue";
-import { useGlobalSettingsStore } from "@/stores/globalsettings.ts";
-import { useSnackbarStore } from "@/stores/snackbar.ts";
-import { useUserStore } from "@/stores/user.ts";
-import User, { UserLocalDevelopment } from "@/types/User";
+import { useGlobalSettingsStore } from "@/stores/globalsettings";
+import { useSnackbarStore } from "@/stores/snackbar";
+import { useUserInfoStore } from "@/stores/userinfo";
+import { USERINFO_LOCAL_DEVELOPMENT } from "@/types/UserInfo";
 
+const userInfoStore = useUserInfoStore();
 const { t } = useI18n();
 const globalSettingsStore = useGlobalSettingsStore();
-const userStore = useUserStore();
 const [isNavigationShown, toggleNavigation] = useToggle();
 const snackbarStore = useSnackbarStore();
 const isConfigLoaded = computed(() => {
   return (
-    userStore.getUser && globalSettingsStore.isKonfigurationLoadingAttempt()
+    userInfoStore.getUserInfo &&
+    globalSettingsStore.isKonfigurationLoadingAttempt()
   );
 });
 
 onMounted(() => {
-  loadUser();
+  loadUserInfo();
   loadActiveKonfiguration();
   // display drawer at once
   toggleNavigation();
@@ -73,17 +75,17 @@ onMounted(() => {
 /**
  * Loads UserInfo from the backend and sets it in the store.
  */
-function loadUser(): void {
-  getUser()
-    .then((user: User) => {
-      userStore.setUser(user);
+function loadUserInfo(): void {
+  getUserInfo()
+    .then((userInfo: UserInfo) => {
+      userInfoStore.setUserInfo(userInfo);
     })
     .catch(() => {
       // No user info received, so fallback
       if (import.meta.env.DEV) {
-        userStore.setUser(UserLocalDevelopment());
+        userInfoStore.setUserInfo(USERINFO_LOCAL_DEVELOPMENT);
       } else {
-        userStore.setUser(null);
+        userInfoStore.setUserInfo(null);
       }
     });
 }
