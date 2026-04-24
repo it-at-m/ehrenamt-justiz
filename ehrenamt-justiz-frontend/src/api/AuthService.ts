@@ -7,8 +7,9 @@ export default class AuthService {
   static checkAuth(authority: string, t: (key: string) => string): boolean {
     const snackbarStore = useSnackbarStore();
     const userInfoStore = useUserInfoStore();
+    const userInfo = userInfoStore.getUserInfo;
 
-    if (!userInfoStore.getUserInfo || !userInfoStore.getUserInfo.authorities) {
+    if (!userInfo || !userInfo.authorities) {
       // user not yet read from database
       snackbarStore.push({
         color: STATUS_INDICATORS.WARNING,
@@ -16,7 +17,7 @@ export default class AuthService {
       });
       return false;
     } else {
-      return userInfoStore.getUserInfo.authorities.includes(authority);
+      return userInfo.authorities.includes(authority);
     }
   }
 }
