@@ -1,14 +1,14 @@
-import { STATUS_INDICATORS } from "@/Constants.ts";
+import { STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
-import { useUserStore } from "@/stores/user";
+import { useUserInfoStore } from "@/stores/userinfo";
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export default class AuthService {
   static checkAuth(authority: string, t: (key: string) => string): boolean {
     const snackbarStore = useSnackbarStore();
-    const userStore = useUserStore();
+    const userInfoStore = useUserInfoStore();
 
-    if (!userStore.getUser || !userStore.getUser.authorities) {
+    if (!userInfoStore.getUserInfo || !userInfoStore.getUserInfo.authorities) {
       // user not yet read from database
       snackbarStore.push({
         color: STATUS_INDICATORS.WARNING,
@@ -16,7 +16,7 @@ export default class AuthService {
       });
       return false;
     } else {
-      return userStore.getUser.authorities.includes(authority);
+      return userInfoStore.getUserInfo.authorities.includes(authority);
     }
   }
 }

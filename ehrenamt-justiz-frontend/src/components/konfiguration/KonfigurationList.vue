@@ -57,7 +57,7 @@ import {
 
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";
 import KonfigurationListItem from "@/components/konfiguration/KonfigurationListItem.vue";
-import { STATUS_INDICATORS } from "@/Constants.ts";
+import { STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const snackbarStore = useSnackbarStore();

@@ -127,21 +127,21 @@
 </template>
 
 <script setup lang="ts">
-import type EhrenamtJustizStatus from "@/types/EhrenamtJustizStatus.ts";
+import type EhrenamtJustizStatus from "@/types/EhrenamtJustizStatus";
 
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VBtn, VCol, VContainer, VHover, VRow } from "vuetify/components";
 
-import { EhrenamtJustizService } from "@/api/EhrenamtJustizService.ts";
-import { PersonApiService } from "@/api/PersonApiService.ts";
+import { EhrenamtJustizService } from "@/api/EhrenamtJustizService";
+import { PersonApiService } from "@/api/PersonApiService";
 import YesNoDialog from "@/components/common/YesNoDialog.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
-import { STATUS_INDICATORS } from "@/Constants.ts";
-import { useGlobalSettingsStore } from "@/stores/globalsettings.ts";
-import { useSnackbarStore } from "@/stores/snackbar.ts";
-import { useUserStore } from "@/stores/user.ts";
+import { STATUS_INDICATORS } from "@/Constants";
+import { useGlobalSettingsStore } from "@/stores/globalsettings";
+import { useSnackbarStore } from "@/stores/snackbar";
+import { useUserInfoStore } from "@/stores/userinfo";
 
 const ehrenamtJustizStatus = ref<EhrenamtJustizStatus | null>(null);
 const textAnzahlBewerbungen = ref();
@@ -155,8 +155,8 @@ const X_UNICODE = 0x00d7;
 const PERSON_UNICODE = 0x1f9cd;
 const yesNoDialogVisible = ref(false);
 const benachrichtigtMarkierenAnimationAktiv = ref(false);
-const userStore = useUserStore();
-const user = userStore.getUser;
+const userInfoStore = useUserInfoStore();
+const user = userInfoStore.getUserInfo;
 const { t } = useI18n();
 
 onMounted(() => {

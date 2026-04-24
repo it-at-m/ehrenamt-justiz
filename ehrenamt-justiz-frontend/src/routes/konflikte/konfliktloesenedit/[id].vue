@@ -15,18 +15,18 @@
 </template>
 
 <script setup lang="ts">
-import type KonfliktLoesenFormData from "@/types/KonfliktLoesenFormData.ts";
+import type KonfliktLoesenFormData from "@/types/KonfliktLoesenFormData";
 
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import { VContainer, VProgressLinear } from "vuetify/components";
 
-import { EWOBuergerApiService } from "@/api/EWOBuergerApiService.ts";
-import { PersonApiService } from "@/api/PersonApiService.ts";
+import { EWOBuergerApiService } from "@/api/EWOBuergerApiService";
+import { PersonApiService } from "@/api/PersonApiService";
 import KonflikteLoesenForm from "@/components/konflikte/KonflikteLoesenForm.vue";
-import { STATUS_INDICATORS } from "@/Constants.ts";
-import { useSnackbarStore } from "@/stores/snackbar.ts";
+import { STATUS_INDICATORS } from "@/Constants";
+import { useSnackbarStore } from "@/stores/snackbar";
 
 const route = useRoute();
 const router = useRouter();
