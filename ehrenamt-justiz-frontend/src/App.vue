@@ -59,7 +59,10 @@ const globalSettingsStore = useGlobalSettingsStore();
 const [isNavigationShown, toggleNavigation] = useToggle();
 const snackbarStore = useSnackbarStore();
 const isConfigLoaded = computed(() => {
-  return userInfoStore.getUserInfo && globalSettingsStore.isKonfigurationLoadingAttempt();
+  return (
+    userInfoStore.getUserInfo &&
+    globalSettingsStore.isKonfigurationLoadingAttempt()
+  );
 });
 
 onMounted(() => {
