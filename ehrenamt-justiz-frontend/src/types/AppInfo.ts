@@ -1,8 +1,8 @@
 export interface AppInfo {
-    application: Application;
+  application: Application;
 }
 
 interface Application {
-    name: string;
-    version: string;
+  name: string;
+  version: string;
 }
