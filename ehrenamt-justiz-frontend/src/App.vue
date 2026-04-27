@@ -75,10 +75,9 @@ onMounted(() => {
  * Loads UserInfo from the backend and sets it in the store.
  */
 function loadUserInfo(): void {
-  getUserInfo()
-    .then((userInfo: UserInfo) => {
-      userInfoStore.setUserInfo(userInfo);
-    });
+  getUserInfo().then((userInfo: UserInfo) => {
+    userInfoStore.setUserInfo(userInfo);
+  });
 }
 
 /**
