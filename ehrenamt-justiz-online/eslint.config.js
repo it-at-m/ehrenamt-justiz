@@ -7,6 +7,7 @@ import {
 } from "@vue/eslint-config-typescript";
 import { ESLint } from "eslint";
 import vueEslintConfig from "eslint-plugin-vue";
+import { globalIgnores } from "eslint/config";
 
 export default defineConfigWithVueTs(
   ESLint.defaultConfig,
@@ -60,5 +61,12 @@ export default defineConfigWithVueTs(
         messageSyntaxVersion: "^11.0.0",
       },
     },
-  }
+  },
+  globalIgnores([
+    "dist",
+    "target",
+    "node_modules",
+    "env.d.ts",
+    "src/api/generated/*/**",
+  ])
 );
