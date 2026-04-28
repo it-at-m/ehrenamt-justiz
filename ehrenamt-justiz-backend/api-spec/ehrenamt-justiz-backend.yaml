@@ -1,0 +1,2304 @@
+openapi: 3.0.1
+info:
+  title: ehrenamt-justiz-backend
+  description: Backend of Ehrenamtjustiz
+  version: 0.0.10-SNAPSHOT
+servers:
+- url: http://localhost:8086
+  description: Generated server url
+tags:
+- name: Actuator
+  description: Monitor and interact
+  externalDocs:
+    description: Spring Boot Actuator Web API Documentation
+    url: https://docs.spring.io/spring-boot/docs/current/actuator-api/html/
+paths:
+  /konfigurationen:
+    get:
+      tags:
+      - konfiguration-entity-controller
+      description: get-konfiguration
+      operationId: getCollectionResource-konfiguration-get
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/PagedModelEntityModelKonfiguration"
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: "#/components/schemas/PagedModelEntityModelKonfiguration"
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - konfiguration-entity-controller
+      description: create-konfiguration
+      operationId: postCollectionResource-konfiguration-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KonfigurationRequestBody"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelKonfiguration"
+  /konfigurationen/search/findByAktiv:
+    get:
+      tags:
+      - konfiguration-search-controller
+      operationId: executeSearch-konfiguration-get
+      parameters:
+      - name: aktiv
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelKonfiguration"
+        "404":
+          description: Not Found
+  /konfigurationen/{id}:
+    get:
+      tags:
+      - konfiguration-entity-controller
+      description: get-konfiguration
+      operationId: getItemResource-konfiguration-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelKonfiguration"
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - konfiguration-entity-controller
+      description: update-konfiguration
+      operationId: putItemResource-konfiguration-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KonfigurationRequestBody"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelKonfiguration"
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelKonfiguration"
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - konfiguration-entity-controller
+      description: delete-konfiguration
+      operationId: deleteItemResource-konfiguration-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - konfiguration-entity-controller
+      description: patch-konfiguration
+      operationId: patchItemResource-konfiguration-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KonfigurationRequestBody"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelKonfiguration"
+        "204":
+          description: No Content
+  /personen:
+    get:
+      tags:
+      - person-entity-controller
+      description: get-person
+      operationId: getCollectionResource-person-get
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/PagedModelEntityModelPerson"
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: "#/components/schemas/PagedModelEntityModelPerson"
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - person-entity-controller
+      description: create-person
+      operationId: postCollectionResource-person-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonRequestBody"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelPerson"
+  /personen/search/alsBenachrichtigtMarkieren:
+    get:
+      tags:
+      - person-search-controller
+      operationId: executeSearch-person-get
+      parameters:
+      - name: aktiveKonfiguration
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+  /personen/search/countByNeuerVorschlagStatus:
+    get:
+      tags:
+      - person-search-controller
+      operationId: executeSearch-person-get_1
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - INERFASSUNG
+          - BEWERBUNG
+          - VORSCHLAG
+          - KONFLIKT
+      - name: aktiveKonfiguration
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: integer
+                format: int64
+        "404":
+          description: Not Found
+  /personen/search/countByStatus:
+    get:
+      tags:
+      - person-search-controller
+      operationId: executeSearch-person-get_2
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - INERFASSUNG
+          - BEWERBUNG
+          - VORSCHLAG
+          - KONFLIKT
+      - name: aktiveKonfiguration
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: integer
+                format: int64
+        "404":
+          description: Not Found
+  /personen/search/deleteInErfassung:
+    get:
+      tags:
+      - person-search-controller
+      operationId: executeSearch-person-get_3
+      parameters:
+      - name: id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+  /personen/search/findByOM:
+    get:
+      tags:
+      - person-search-controller
+      operationId: executeSearch-person-get_4
+      parameters:
+      - name: om
+        in: query
+        schema:
+          type: string
+      - name: aktiveKonfiguration
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelPerson"
+        "404":
+          description: Not Found
+  /personen/search/findPersonBySearch:
+    get:
+      tags:
+      - person-search-controller
+      operationId: executeSearch-person-get_5
+      parameters:
+      - name: search
+        in: query
+        schema:
+          type: string
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - INERFASSUNG
+          - BEWERBUNG
+          - VORSCHLAG
+          - KONFLIKT
+      - name: aktiveKonfiguration
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/PagedModelEntityModelPerson"
+        "404":
+          description: Not Found
+  /personen/search/findPersonByStatus:
+    get:
+      tags:
+      - person-search-controller
+      operationId: executeSearch-person-get_6
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - INERFASSUNG
+          - BEWERBUNG
+          - VORSCHLAG
+          - KONFLIKT
+      - name: aktiveKonfiguration
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/CollectionModelEntityModelPerson"
+        "404":
+          description: Not Found
+  /personen/search/getNeueVorschlaege:
+    get:
+      tags:
+      - person-search-controller
+      operationId: executeSearch-person-get_7
+      parameters:
+      - name: aktiveKonfiguration
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelPerson"
+        "404":
+          description: Not Found
+  /personen/search/retrieveAll:
+    get:
+      tags:
+      - person-search-controller
+      operationId: executeSearch-person-get_8
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/CollectionModelEntityModelPerson"
+        "404":
+          description: Not Found
+  /personen/{id}:
+    get:
+      tags:
+      - person-entity-controller
+      description: get-person
+      operationId: getItemResource-person-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelPerson"
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - person-entity-controller
+      description: update-person
+      operationId: putItemResource-person-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonRequestBody"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelPerson"
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelPerson"
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - person-entity-controller
+      description: delete-person
+      operationId: deleteItemResource-person-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - person-entity-controller
+      description: patch-person
+      operationId: patchItemResource-person-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonRequestBody"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelPerson"
+        "204":
+          description: No Content
+  /profile:
+    get:
+      tags:
+      - profile-controller
+      operationId: listAllFormsOfMetadata
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/RepresentationModelObject"
+  /profile/konfigurationen:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: "#/components/schemas/JsonSchema"
+  /profile/personen:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor_1
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: "#/components/schemas/JsonSchema"
+  /personen/validiereAufVorschlagslisteSetzen:
+    post:
+      tags:
+      - person-rest-controller
+      operationId: validiereAufVorschlagslisteSetzen
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: uuid
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PersonDto"
+  /personen/updatePerson:
+    post:
+      tags:
+      - person-rest-controller
+      operationId: updatePerson
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/PersonDto"
+  /personen/lesenPersonenCSV:
+    post:
+      tags:
+      - person-rest-controller
+      operationId: lesenPersonenCSV
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PersonCSVDto"
+  /personen/deletePersonen:
+    post:
+      tags:
+      - person-rest-controller
+      operationId: deletePersonen
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: uuid
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: object
+  /personen/cancelBewerbung:
+    post:
+      tags:
+      - person-rest-controller
+      operationId: cancelBewerbung
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/PersonDto"
+  /personen/aufVorschlagslisteSetzen:
+    post:
+      tags:
+      - person-rest-controller
+      operationId: aufVorschlagslisteSetzen
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: uuid
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PersonDto"
+  /personen/aufBewerberlisteSetzen:
+    post:
+      tags:
+      - person-rest-controller
+      operationId: aufBewerberlisteSetzen
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: uuid
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PersonDto"
+  /personen/alsBenachrichtigtMarkieren:
+    post:
+      tags:
+      - person-rest-controller
+      operationId: alsBenachrichtigtMarkieren
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: object
+  /onlinebewerbung/bewerbungSpeichern:
+    post:
+      tags:
+      - online-bewerbung-rest-controller
+      operationId: bewerbungSpeichern
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OnlineBewerbungDatenDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: string
+  /konfiguration/updateKonfiguration:
+    post:
+      tags:
+      - konfiguration-rest-controller
+      operationId: updateKonfiguration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KonfigurationDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/KonfigurationDto"
+  /konfiguration/setActive:
+    post:
+      tags:
+      - konfiguration-rest-controller
+      operationId: setActive
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KonfigurationDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/KonfigurationDto"
+  /ehrenamtjustiz/vorbereitenUndSpeichernPerson:
+    post:
+      tags:
+      - ehrenamt-justiz-rest-controller
+      operationId: vorbereitenUndSpeichernPerson
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EWOBuergerDatenDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/PersonDto"
+  /ehrenamtjustiz/pruefenNeuePerson:
+    post:
+      tags:
+      - ehrenamt-justiz-rest-controller
+      operationId: pruefenNeuePerson
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EWOBuergerDatenDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/PersonDto"
+  /ehrenamtjustiz/pruefeWohnsitz:
+    post:
+      tags:
+      - ehrenamt-justiz-rest-controller
+      operationId: pruefeWohnsitz
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: string
+  /ehrenamtjustiz/pruefeStaatsangehoerigkeit:
+    post:
+      tags:
+      - ehrenamt-justiz-rest-controller
+      operationId: pruefetaatsangehoerigkeit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: string
+  /ehrenamtjustiz/pruefeGeburtsdatum:
+    post:
+      tags:
+      - ehrenamt-justiz-rest-controller
+      operationId: pruefeGeburtsdatum
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              format: date
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: string
+  /ehrenamtjustiz/ewoSuche:
+    post:
+      tags:
+      - ehrenamt-justiz-rest-controller
+      operationId: ewoSuche
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EWOBuergerSucheDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EWOBuergerDatenDto"
+  /backendaenderungsservice/aenderungsservicePerson:
+    post:
+      tags:
+      - aenderungs-service-rest-controller
+      summary: "Update person status auf KONFLIKT, falls Konflikte vorhanden sind"
+      description: "Ermittelt die Konflikte, setzt den KONFLIKT-Status und macht einen\
+        \ Update auf die Tabelle Person"
+      operationId: aenderungsServicePerson
+      requestBody:
+        description: The person identifier
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: Person updated successfully
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "404":
+          description: Person not found
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "500":
+          description: Internal error during processing
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /personen/getNeueVorschlaege:
+    get:
+      tags:
+      - person-rest-controller
+      operationId: getNeueVorschlaege
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PersonCSVDto"
+  /personen/findPersonen:
+    get:
+      tags:
+      - person-rest-controller
+      operationId: findPersonen
+      parameters:
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+          default: '*'
+      - name: sortby
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ""
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      - name: status
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - INERFASSUNG
+          - BEWERBUNG
+          - VORSCHLAG
+          - KONFLIKT
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PagePersonenTableDatenDto"
+  /konfiguration/getAktiveKonfiguration:
+    get:
+      tags:
+      - konfiguration-rest-controller
+      operationId: getAktiveKonfiguration
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KonfigurationDto"
+  /ehrenamtjustiz/ewoSucheMitOM:
+    get:
+      tags:
+      - ehrenamt-justiz-rest-controller
+      operationId: ewoSucheMitOm
+      parameters:
+      - name: om
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EWOBuergerDatenDto"
+  /ehrenamtjustiz/ewoEaiStatus:
+    get:
+      tags:
+      - ehrenamt-justiz-rest-controller
+      operationId: ewoEaiStatus
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: string
+  /ehrenamtjustiz/ehrenamtJustizStatus:
+    get:
+      tags:
+      - ehrenamt-justiz-rest-controller
+      operationId: ehrenamtJustizStatus
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EhrenamtJustizStatusDto"
+  /ehrenamtjustiz/aenderungsserviceStatus:
+    get:
+      tags:
+      - ehrenamt-justiz-rest-controller
+      operationId: aenderungsserviceStatus
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: string
+  /actuator:
+    get:
+      tags:
+      - Actuator
+      summary: Actuator root web endpoint
+      operationId: links
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    $ref: "#/components/schemas/Link"
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    $ref: "#/components/schemas/Link"
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    $ref: "#/components/schemas/Link"
+  /actuator/sbom:
+    get:
+      tags:
+      - Actuator
+      summary: Actuator web endpoint 'sbom'
+      operationId: sboms
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+  /actuator/sbom/{id}:
+    get:
+      tags:
+      - Actuator
+      summary: Actuator web endpoint 'sbom-id'
+      operationId: sbom
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+        "404":
+          description: Not Found
+  /actuator/metrics:
+    get:
+      tags:
+      - Actuator
+      summary: Actuator web endpoint 'prometheus'
+      operationId: scrape
+      parameters:
+      - name: format
+        in: query
+        schema:
+          type: string
+          enum:
+          - CONTENT_TYPE_004
+          - CONTENT_TYPE_OPENMETRICS_100
+          - CONTENT_TYPE_PROTOBUF
+      - name: includedNames
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain;version=0.0.4;charset=utf-8:
+              schema:
+                type: object
+            application/openmetrics-text;version=1.0.0;charset=utf-8:
+              schema:
+                type: object
+            application/vnd.google.protobuf;proto=io.prometheus.client.MetricFamily;encoding=delimited:
+              schema:
+                type: object
+  /actuator/info:
+    get:
+      tags:
+      - Actuator
+      summary: Actuator web endpoint 'info'
+      operationId: info
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+  /actuator/health:
+    get:
+      tags:
+      - Actuator
+      summary: Actuator web endpoint 'health'
+      operationId: health
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    AbstractJsonSchemaPropertyObject:
+      type: object
+      properties:
+        title:
+          type: string
+        readOnly:
+          type: boolean
+    Item:
+      type: object
+      properties:
+        type:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/AbstractJsonSchemaPropertyObject"
+        requiredProperties:
+          type: array
+          items:
+            type: string
+    JsonSchema:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/AbstractJsonSchemaPropertyObject"
+        requiredProperties:
+          type: array
+          items:
+            type: string
+        definitions:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/Item"
+        type:
+          type: string
+        $schema:
+          type: string
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        hreflang:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
+        templated:
+          type: boolean
+    RepresentationModelObject:
+      type: object
+      properties:
+        _links:
+          $ref: "#/components/schemas/Links"
+    EntityModelKonfiguration:
+      required:
+      - aktiv
+      - alterbis
+      - altervon
+      - amtsperiodebis
+      - amtsperiodevon
+      - bezeichnung
+      - staatsangehoerigkeit
+      - wohnsitz
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        ehrenamtjustizart:
+          type: string
+          enum:
+          - SCHOEFFEN
+          - VERWALTUNGSRICHTER
+        bezeichnung:
+          maxLength: 255
+          minLength: 0
+          type: string
+        aktiv:
+          type: boolean
+        amtsperiodevon:
+          type: string
+          format: date
+        amtsperiodebis:
+          type: string
+          format: date
+        altervon:
+          type: integer
+        alterbis:
+          type: integer
+        staatsangehoerigkeit:
+          maxLength: 255
+          minLength: 0
+          type: string
+        wohnsitz:
+          maxLength: 255
+          minLength: 0
+          type: string
+        _links:
+          $ref: "#/components/schemas/Links"
+    PageMetadata:
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int64
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        number:
+          type: integer
+          format: int64
+    PagedModelEntityModelKonfiguration:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            konfigurationen:
+              type: array
+              items:
+                $ref: "#/components/schemas/EntityModelKonfiguration"
+        _links:
+          $ref: "#/components/schemas/Links"
+        page:
+          $ref: "#/components/schemas/PageMetadata"
+    EntityModelPerson:
+      required:
+      - familienname
+      - familienstand
+      - geburtsdatum
+      - geburtsland
+      - geburtsort
+      - geschlecht
+      - hausnummer
+      - inmuenchenseit
+      - ort
+      - postleitzahl
+      - strasse
+      - vorname
+      - wohnungsstatus
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        ewoid:
+          maxLength: 255
+          minLength: 0
+          type: string
+        konfigurationid:
+          type: string
+          format: uuid
+        familienname:
+          maxLength: 300
+          minLength: 0
+          type: string
+        geburtsname:
+          maxLength: 300
+          minLength: 0
+          type: string
+        vorname:
+          maxLength: 255
+          minLength: 0
+          type: string
+        geburtsdatum:
+          type: string
+          format: date
+        geschlecht:
+          type: string
+          enum:
+          - MAENNLICH
+          - WEIBLICH
+          - DIVERS
+          - UNBEKANNT
+        akademischergrad:
+          maxLength: 255
+          minLength: 0
+          type: string
+        geburtsort:
+          maxLength: 255
+          minLength: 0
+          type: string
+        geburtsland:
+          maxLength: 255
+          minLength: 0
+          type: string
+        familienstand:
+          maxLength: 255
+          minLength: 0
+          type: string
+        strasse:
+          maxLength: 255
+          minLength: 0
+          type: string
+        hausnummer:
+          maxLength: 255
+          minLength: 0
+          type: string
+        appartmentnummer:
+          maxLength: 255
+          minLength: 0
+          type: string
+        buchstabehausnummer:
+          maxLength: 255
+          minLength: 0
+          type: string
+        stockwerk:
+          maxLength: 255
+          minLength: 0
+          type: string
+        teilnummerhausnummer:
+          maxLength: 255
+          minLength: 0
+          type: string
+        adresszusatz:
+          maxLength: 255
+          minLength: 0
+          type: string
+        postleitzahl:
+          maxLength: 255
+          minLength: 0
+          type: string
+        ort:
+          maxLength: 255
+          minLength: 0
+          type: string
+        inmuenchenseit:
+          type: string
+          format: date
+        wohnungsgeber:
+          maxLength: 255
+          minLength: 0
+          type: string
+        wohnungsstatus:
+          type: string
+          enum:
+          - HAUPTWOHNUNG
+          - NEBENWOHNUNG
+        derzeitausgeuebterberuf:
+          maxLength: 255
+          minLength: 0
+          type: string
+        arbeitgeber:
+          maxLength: 255
+          minLength: 0
+          type: string
+        telefonnummer:
+          maxLength: 255
+          minLength: 0
+          type: string
+        telefongesch:
+          maxLength: 255
+          minLength: 0
+          type: string
+        telefonmobil:
+          maxLength: 255
+          minLength: 0
+          type: string
+        mailadresse:
+          maxLength: 150
+          minLength: 0
+          type: string
+        ausgeuebteehrenaemter:
+          maxLength: 4000
+          minLength: 0
+          type: string
+        onlinebewerbung:
+          type: boolean
+        neuervorschlag:
+          type: boolean
+        warbereitstaetigals:
+          type: boolean
+        warbereitstaetigalsvorvorperiode:
+          type: boolean
+        bewerbungvom:
+          type: string
+          format: date
+        status:
+          type: string
+          enum:
+          - INERFASSUNG
+          - BEWERBUNG
+          - VORSCHLAG
+          - KONFLIKT
+        bemerkung:
+          maxLength: 255
+          minLength: 0
+          type: string
+        auskunftssperre:
+          maxItems: 255
+          minItems: 0
+          type: array
+          items:
+            type: string
+        konfliktfeld:
+          maxItems: 255
+          minItems: 0
+          type: array
+          items:
+            type: string
+        staatsangehoerigkeit:
+          maxItems: 255
+          minItems: 0
+          type: array
+          items:
+            type: string
+        _links:
+          $ref: "#/components/schemas/Links"
+    PagedModelEntityModelPerson:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            personen:
+              type: array
+              items:
+                $ref: "#/components/schemas/EntityModelPerson"
+        _links:
+          $ref: "#/components/schemas/Links"
+        page:
+          $ref: "#/components/schemas/PageMetadata"
+    CollectionModelEntityModelPerson:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            personen:
+              type: array
+              items:
+                $ref: "#/components/schemas/EntityModelPerson"
+        _links:
+          $ref: "#/components/schemas/Links"
+    KonfigurationRequestBody:
+      required:
+      - aktiv
+      - alterbis
+      - altervon
+      - amtsperiodebis
+      - amtsperiodevon
+      - bezeichnung
+      - staatsangehoerigkeit
+      - wohnsitz
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        ehrenamtjustizart:
+          type: string
+          enum:
+          - SCHOEFFEN
+          - VERWALTUNGSRICHTER
+        bezeichnung:
+          maxLength: 255
+          minLength: 0
+          type: string
+        aktiv:
+          type: boolean
+        amtsperiodevon:
+          type: string
+          format: date
+        amtsperiodebis:
+          type: string
+          format: date
+        altervon:
+          type: integer
+        alterbis:
+          type: integer
+        staatsangehoerigkeit:
+          maxLength: 255
+          minLength: 0
+          type: string
+        wohnsitz:
+          maxLength: 255
+          minLength: 0
+          type: string
+    PersonRequestBody:
+      required:
+      - familienname
+      - familienstand
+      - geburtsdatum
+      - geburtsland
+      - geburtsort
+      - geschlecht
+      - hausnummer
+      - inmuenchenseit
+      - ort
+      - postleitzahl
+      - strasse
+      - vorname
+      - wohnungsstatus
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        ewoid:
+          maxLength: 255
+          minLength: 0
+          type: string
+        konfigurationid:
+          type: string
+          format: uuid
+        familienname:
+          maxLength: 300
+          minLength: 0
+          type: string
+        geburtsname:
+          maxLength: 300
+          minLength: 0
+          type: string
+        vorname:
+          maxLength: 255
+          minLength: 0
+          type: string
+        geburtsdatum:
+          type: string
+          format: date
+        geschlecht:
+          type: string
+          enum:
+          - MAENNLICH
+          - WEIBLICH
+          - DIVERS
+          - UNBEKANNT
+        akademischergrad:
+          maxLength: 255
+          minLength: 0
+          type: string
+        geburtsort:
+          maxLength: 255
+          minLength: 0
+          type: string
+        geburtsland:
+          maxLength: 255
+          minLength: 0
+          type: string
+        familienstand:
+          maxLength: 255
+          minLength: 0
+          type: string
+        strasse:
+          maxLength: 255
+          minLength: 0
+          type: string
+        hausnummer:
+          maxLength: 255
+          minLength: 0
+          type: string
+        appartmentnummer:
+          maxLength: 255
+          minLength: 0
+          type: string
+        buchstabehausnummer:
+          maxLength: 255
+          minLength: 0
+          type: string
+        stockwerk:
+          maxLength: 255
+          minLength: 0
+          type: string
+        teilnummerhausnummer:
+          maxLength: 255
+          minLength: 0
+          type: string
+        adresszusatz:
+          maxLength: 255
+          minLength: 0
+          type: string
+        postleitzahl:
+          maxLength: 255
+          minLength: 0
+          type: string
+        ort:
+          maxLength: 255
+          minLength: 0
+          type: string
+        inmuenchenseit:
+          type: string
+          format: date
+        wohnungsgeber:
+          maxLength: 255
+          minLength: 0
+          type: string
+        wohnungsstatus:
+          type: string
+          enum:
+          - HAUPTWOHNUNG
+          - NEBENWOHNUNG
+        derzeitausgeuebterberuf:
+          maxLength: 255
+          minLength: 0
+          type: string
+        arbeitgeber:
+          maxLength: 255
+          minLength: 0
+          type: string
+        telefonnummer:
+          maxLength: 255
+          minLength: 0
+          type: string
+        telefongesch:
+          maxLength: 255
+          minLength: 0
+          type: string
+        telefonmobil:
+          maxLength: 255
+          minLength: 0
+          type: string
+        mailadresse:
+          maxLength: 150
+          minLength: 0
+          type: string
+        ausgeuebteehrenaemter:
+          maxLength: 4000
+          minLength: 0
+          type: string
+        onlinebewerbung:
+          type: boolean
+        neuervorschlag:
+          type: boolean
+        warbereitstaetigals:
+          type: boolean
+        warbereitstaetigalsvorvorperiode:
+          type: boolean
+        bewerbungvom:
+          type: string
+          format: date
+        status:
+          type: string
+          enum:
+          - INERFASSUNG
+          - BEWERBUNG
+          - VORSCHLAG
+          - KONFLIKT
+        bemerkung:
+          maxLength: 255
+          minLength: 0
+          type: string
+        auskunftssperre:
+          maxItems: 255
+          minItems: 0
+          type: array
+          items:
+            type: string
+        konfliktfeld:
+          maxItems: 255
+          minItems: 0
+          type: array
+          items:
+            type: string
+        staatsangehoerigkeit:
+          maxItems: 255
+          minItems: 0
+          type: array
+          items:
+            type: string
+      description: |-
+        This class represents a Person.
+         <p>
+         The entity's content will be loaded according to the reference variable.
+         </p>
+    PersonDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        ewoid:
+          type: string
+        konfigurationid:
+          type: string
+          format: uuid
+        familienname:
+          type: string
+        geburtsname:
+          type: string
+        vorname:
+          type: string
+        geburtsdatum:
+          type: string
+          format: date
+        geschlecht:
+          type: string
+          enum:
+          - MAENNLICH
+          - WEIBLICH
+          - DIVERS
+          - UNBEKANNT
+        akademischergrad:
+          type: string
+        geburtsort:
+          type: string
+        geburtsland:
+          type: string
+        familienstand:
+          type: string
+        strasse:
+          type: string
+        hausnummer:
+          type: string
+        appartmentnummer:
+          type: string
+        buchstabehausnummer:
+          type: string
+        stockwerk:
+          type: string
+        teilnummerhausnummer:
+          type: string
+        adresszusatz:
+          type: string
+        postleitzahl:
+          type: string
+        ort:
+          type: string
+        inmuenchenseit:
+          type: string
+          format: date
+        wohnungsgeber:
+          type: string
+        wohnungsstatus:
+          type: string
+          enum:
+          - HAUPTWOHNUNG
+          - NEBENWOHNUNG
+        derzeitausgeuebterberuf:
+          type: string
+        arbeitgeber:
+          type: string
+        telefonnummer:
+          type: string
+        telefongesch:
+          type: string
+        telefonmobil:
+          type: string
+        mailadresse:
+          type: string
+        ausgeuebteehrenaemter:
+          type: string
+        onlinebewerbung:
+          type: boolean
+        neuervorschlag:
+          type: boolean
+        warbereitstaetigals:
+          type: boolean
+        warbereitstaetigalsvorvorperiode:
+          type: boolean
+        bewerbungvom:
+          type: string
+          format: date
+        status:
+          type: string
+          enum:
+          - INERFASSUNG
+          - BEWERBUNG
+          - VORSCHLAG
+          - KONFLIKT
+        bemerkung:
+          type: string
+        auskunftssperre:
+          type: array
+          items:
+            type: string
+        konfliktfeld:
+          type: array
+          items:
+            type: string
+        staatsangehoerigkeit:
+          type: array
+          items:
+            type: string
+    PersonCSVDto:
+      type: object
+      properties:
+        id:
+          type: string
+        ewoid:
+          type: string
+        konfigurationid:
+          type: string
+        familienname:
+          type: string
+        geburtsname:
+          type: string
+        vorname:
+          type: string
+        geburtsdatum:
+          type: string
+        geschlecht:
+          type: string
+        akademischergrad:
+          type: string
+        geburtsort:
+          type: string
+        geburtsland:
+          type: string
+        familienstand:
+          type: string
+        strasse:
+          type: string
+        hausnummer:
+          type: string
+        appartmentnummer:
+          type: string
+        buchstabehausnummer:
+          type: string
+        stockwerk:
+          type: string
+        teilnummerhausnummer:
+          type: string
+        adresszusatz:
+          type: string
+        postleitzahl:
+          type: string
+        ort:
+          type: string
+        inmuenchenseit:
+          type: string
+        wohnungsgeber:
+          type: string
+        wohnungsstatus:
+          type: string
+        derzeitausgeuebterberuf:
+          type: string
+        arbeitgeber:
+          type: string
+        telefonnummer:
+          type: string
+        telefongesch:
+          type: string
+        telefonmobil:
+          type: string
+        mailadresse:
+          type: string
+        ausgeuebteehrenaemter:
+          type: string
+        onlinebewerbung:
+          type: string
+        neuervorschlag:
+          type: string
+        warbereitstaetigals:
+          type: string
+        warbereitstaetigalsvorvorperiode:
+          type: string
+        bewerbungvom:
+          type: string
+        status:
+          type: string
+        bemerkung:
+          type: string
+        auskunftssperre:
+          type: string
+        konfliktfeld:
+          type: string
+        staatsangehoerigkeit:
+          type: string
+    OnlineBewerbungDatenDto:
+      type: object
+      properties:
+        nachname:
+          type: string
+        vorname:
+          type: string
+        geburtsdatum:
+          type: string
+          format: date
+        beruf:
+          type: string
+        telefonnummer:
+          type: string
+        mail:
+          type: string
+    KonfigurationDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        ehrenamtjustizart:
+          type: string
+          enum:
+          - SCHOEFFEN
+          - VERWALTUNGSRICHTER
+        bezeichnung:
+          type: string
+        aktiv:
+          type: boolean
+        amtsperiodevon:
+          type: string
+          format: date
+        amtsperiodebis:
+          type: string
+          format: date
+        altervon:
+          type: integer
+        alterbis:
+          type: integer
+        staatsangehoerigkeit:
+          type: string
+        wohnsitz:
+          type: string
+    EWOBuergerDatenDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        familienname:
+          type: string
+        geburtsname:
+          type: string
+        vorname:
+          type: string
+        geburtsdatum:
+          type: string
+          format: date
+        geschlecht:
+          type: string
+          enum:
+          - MAENNLICH
+          - WEIBLICH
+          - DIVERS
+          - UNBEKANNT
+        ordnungsmerkmal:
+          type: string
+        akademischergrad:
+          type: string
+        geburtsort:
+          type: string
+        geburtsland:
+          type: string
+        familienstand:
+          type: string
+        staatsangehoerigkeit:
+          type: array
+          items:
+            type: string
+        wohnungsgeber:
+          type: string
+        strasse:
+          type: string
+        hausnummer:
+          type: string
+        appartmentnummer:
+          type: string
+        buchstabehausnummer:
+          type: string
+        stockwerk:
+          type: string
+        teilnummerhausnummer:
+          type: string
+        adresszusatz:
+          type: string
+        konfliktfeld:
+          type: array
+          items:
+            type: string
+        postleitzahl:
+          type: string
+        ort:
+          type: string
+        inmuenchenseit:
+          type: string
+          format: date
+        wohnungsstatus:
+          type: string
+          enum:
+          - HAUPTWOHNUNG
+          - NEBENWOHNUNG
+        auskunftssperre:
+          type: array
+          items:
+            type: string
+        ewoidbereitserfasst:
+          type: boolean
+    EWOBuergerSucheDto:
+      type: object
+      properties:
+        familienname:
+          type: string
+        vorname:
+          type: string
+        geburtsdatum:
+          type: string
+          format: date
+      description: |-
+        This class represents a BuergerSucheAnfrage_.
+         <p>
+         Only oid and reference will be stored in the database.
+         The entity's content will be loaded according to the reference variable.
+         </p>
+    PagePersonenTableDatenDto:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/PersonenTableDatenDto"
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: "#/components/schemas/PageableObject"
+        empty:
+          type: boolean
+    PageableObject:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
+    PersonenTableDatenDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        familienname:
+          type: string
+        vorname:
+          type: string
+        geburtsdatum:
+          type: string
+          format: date
+        konfliktfeld:
+          type: array
+          items:
+            type: string
+        auskunftssperre:
+          type: array
+          items:
+            type: string
+        derzeitausgeuebterberuf:
+          type: string
+        arbeitgeber:
+          type: string
+        mailadresse:
+          type: string
+        ausgeuebteehrenaemter:
+          type: string
+        status:
+          type: string
+          enum:
+          - INERFASSUNG
+          - BEWERBUNG
+          - VORSCHLAG
+          - KONFLIKT
+    SortObject:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+    EhrenamtJustizStatusDto:
+      type: object
+      properties:
+        anzahlBewerbungen:
+          type: integer
+          format: int64
+        anzahlKonflikte:
+          type: integer
+          format: int64
+        anzahlVorschlaege:
+          type: integer
+          format: int64
+        anzahlVorschlaegeNeu:
+          type: integer
+          format: int64
+    Links:
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/Link"
+  securitySchemes:
+    bearerAuth:
+      type: http
+      name: bearerAuth
+      scheme: bearer
+      bearerFormat: JWT
