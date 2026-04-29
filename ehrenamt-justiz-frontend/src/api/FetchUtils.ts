@@ -138,7 +138,7 @@ export function defaultCatchHandler(
  *  Creates header
  * @returns {Headers}
  */
-function getHeaders(): Headers {
+export function getHeaders(): Headers {
   const headers = new Headers({
     "Content-Type": "application/json",
   });
