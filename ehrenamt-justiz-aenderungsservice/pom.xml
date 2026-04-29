@@ -4,13 +4,13 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.13</version>
+    <version>3.5.14</version>
     <relativePath />
   </parent>
 
   <groupId>de.muenchen-ehrenamt-justiz</groupId>
   <artifactId>ehrenamt-justiz-aenderungsservice</artifactId>
-  <version>0.0.10-SNAPSHOT</version>
+  <version>0.0.11-SNAPSHOT</version>
 
   <name>ehrenamt-justiz-aenderungsservice</name>
   <description>Change Service for the Ehrenamtjustiz application</description>
