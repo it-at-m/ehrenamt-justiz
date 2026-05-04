@@ -256,11 +256,11 @@ import {
   BEARBEIGUNGS_MODUS,
   PERSONENSTATUS,
   STATUS_INDICATORS,
-} from "@/Constants.ts";
+} from "@/Constants";
 import InvalidePersonenSelect from "@/routes/vorschlaege/invalidepersonenselect.vue";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
-import { useUserStore } from "@/stores/user";
+import { useUserInfoStore } from "@/stores/userinfo";
 
 const { t } = useI18n();
 const headers: ReadonlyHeaders = computed(() => [
@@ -337,8 +337,8 @@ const vorschlagsListeAnimationAktiv = ref(false);
 const yesNoDialogVisible = ref(false);
 const invalidePersonenSelectVisible = ref(false);
 const invalidePersonen = ref<PersonenTableData[]>([]);
-const userStore = useUserStore();
-const user = userStore.getUser;
+const userInfoStore = useUserInfoStore();
+const user = userInfoStore.getUserInfo;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function loadItems(options: any) {
   itemsSort.value = options.sortBy;

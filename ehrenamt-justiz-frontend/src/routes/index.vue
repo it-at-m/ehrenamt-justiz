@@ -19,15 +19,16 @@
 </template>
 
 <script setup lang="ts">
+import type { HealthState } from "@/types/HealthState";
+
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { VCol, VContainer, VImg, VRow } from "vuetify/components";
 
-import { checkHealth } from "@/api/health-client.ts";
+import { checkHealth } from "@/api/healthstate-client";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
-import { STATUS_INDICATORS } from "@/Constants.ts";
-import { useSnackbarStore } from "@/stores/snackbar.ts";
-import HealthState from "@/types/HealthState.ts";
+import { STATUS_INDICATORS } from "@/Constants";
+import { useSnackbarStore } from "@/stores/snackbar";
 
 const snackbarStore = useSnackbarStore();
 const status = ref("DOWN");

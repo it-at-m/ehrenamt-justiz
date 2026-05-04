@@ -816,7 +816,7 @@ import {
   PERSONENSTATUS,
   STATUS_INDICATORS,
   WOHNUNGSSTATUS_ARTEN,
-} from "@/Constants.ts";
+} from "@/Constants";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { formattedEhrenamtjustizart } from "@/tools/Helper";

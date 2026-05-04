@@ -59,7 +59,7 @@ class UnicodeFilterConfigurationTest {
     private KonfigurationRepository konfigurationRepository;
 
     @Test
-    void givenDecomposedString_thenCovertToNfcNormalized() {
+    void givenDecomposedString_thenConvertToNfcNormalized() {
         // Persist entity with decomposed string.
         final Konfiguration konfiguration = new KonfigurationTestDataBuilder().withBezeichnung(TEXT_ATTRIBUTE_DECOMPOSED).build();
 

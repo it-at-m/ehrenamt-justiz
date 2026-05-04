@@ -17,13 +17,13 @@
     - any-glob-to-any-file: ['ehrenamt-justiz-backend/**']
 "Ehrenamt-Justiz: EAI":
   - changed-files:
-      - any-glob-to-any-file: ['ehrenamt-justiz-eai/**']
+    - any-glob-to-any-file: ['ehrenamt-justiz-eai/**']
 "Ehrenamt-Justiz: Frontend":
   - changed-files:
-      - any-glob-to-any-file: ['ehrenamt-justiz-frontend/**']
+    - any-glob-to-any-file: ['ehrenamt-justiz-frontend/**']
 "Ehrenamt-Justiz: Online":
   - changed-files:
-      - any-glob-to-any-file: ['ehrenamt-justiz-online/**']
+    - any-glob-to-any-file: ['ehrenamt-justiz-online/**']
 "Ehrenamt-Justiz: Aenderungsservice":
   - changed-files:
-      - any-glob-to-any-file: ['ehrenamt-justiz-aenderungsservice/**']
+    - any-glob-to-any-file: ['ehrenamt-justiz-aenderungsservice/**']

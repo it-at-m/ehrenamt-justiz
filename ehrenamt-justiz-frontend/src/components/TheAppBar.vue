@@ -103,6 +103,8 @@
   </v-app-bar>
 </template>
 <script setup lang="ts">
+import type { HealthState } from "@/types/HealthState";
+
 import { mdiApps, mdiCircle, mdiHelp } from "@mdi/js";
 import { AppSwitcher } from "@muenchen/appswitcher-vue";
 import { computed, onMounted, onUnmounted, ref } from "vue";
@@ -118,18 +120,17 @@ import {
   VTooltip,
 } from "vuetify/components";
 
-import { EhrenamtJustizService } from "@/api/EhrenamtJustizService.ts";
-import { EWOBuergerApiService } from "@/api/EWOBuergerApiService.ts";
-import { checkHealth } from "@/api/HealthService.ts";
-import { APPSWITCHER_URL, STATUS_INDICATORS } from "@/Constants.ts";
+import { EhrenamtJustizService } from "@/api/EhrenamtJustizService";
+import { EWOBuergerApiService } from "@/api/EWOBuergerApiService";
+import { checkHealth } from "@/api/HealthService";
+import { APPSWITCHER_URL, STATUS_INDICATORS } from "@/Constants";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
-import { useSnackbarStore } from "@/stores/snackbar.ts";
-import { useUserStore } from "@/stores/user.ts";
+import { useSnackbarStore } from "@/stores/snackbar";
+import { useUserInfoStore } from "@/stores/userinfo";
 import { formattedEhrenamtjustizart } from "@/tools/Helper";
-import HealthState from "@/types/HealthState.ts";
 
 const globalSettingsStore = useGlobalSettingsStore();
-const userStore = useUserStore();
+const userInfoStore = useUserInfoStore();
 const snackbarStore = useSnackbarStore();
 const { t } = useI18n();
 const userinfo = ref<string | undefined>("");
@@ -141,7 +142,7 @@ const eaiStatus = ref("DOWN");
 const aenderungsserviceStatus = ref("DOWN");
 const appswitcherBaseUrl = APPSWITCHER_URL;
 let healthCheckTimeout: ReturnType<typeof setTimeout> | null = null;
-const user = computed(() => userStore.getUser);
+const user = computed(() => userInfoStore.getUserInfo);
 
 onMounted(() => {
   getUserInfo();
@@ -160,7 +161,7 @@ onUnmounted(() => {
  * Get UserInfo from the store
  */
 function getUserInfo(): void {
-  const givenName = user.value?.given_name;
+  const givenName = user.value?.givenname;
   const familyName = user.value?.family_name;
   if (givenName || familyName) {
     userinfo.value = [givenName, familyName].filter(Boolean).join(" ");

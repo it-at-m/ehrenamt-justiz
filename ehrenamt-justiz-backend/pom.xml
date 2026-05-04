@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.13</version>
+        <version>3.5.14</version>
         <relativePath />
     </parent>
 
     <groupId>de.muenchen.ehrenamt-justiz</groupId>
     <artifactId>ehrenamt-justiz-backend</artifactId>
-    <version>0.0.10-SNAPSHOT</version>
+    <version>0.0.11-SNAPSHOT</version>
     <name>ehrenamt-justiz-backend</name>
     <description>Backend of Ehrenamtjustiz</description>
     <url>https://github.com/it-at-m/ehrenamt-justiz</url>
@@ -54,7 +54,7 @@
         <!-- Testing -->
         <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
         <argLine /> <!-- Must be empty, definition needed for integration of Jacoco and Surefire via @{argLine} lazy property evaluation -->
-        <archunit.version>1.4.1</archunit.version>
+        <archunit.version>1.4.2</archunit.version>
 
         <!-- Release -->
         <maven-release-plugin.version>3.3.1</maven-release-plugin.version>
@@ -314,8 +314,9 @@
                 <artifactId>springdoc-openapi-maven-plugin</artifactId>
                 <version>${springdoc-openapi-maven-plugin.version}</version>
                 <configuration>
-                <apiDocsUrl>http://localhost:39146/v3/api-docs</apiDocsUrl>
+                    <apiDocsUrl>http://localhost:8086/v3/api-docs.yaml</apiDocsUrl>
                     <outputFileName>${project.name}.yaml</outputFileName>
+                    <outputDir>${project.basedir}/api-spec</outputDir>
                     <failOnError>true</failOnError>
                 </configuration>
             </plugin>

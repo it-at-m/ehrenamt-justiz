@@ -103,19 +103,19 @@ services:
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_PREDICATES_0=Path=/api/sso/userinfo
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_FILTERS_0=RewritePath=/api/sso/userinfo, /auth/realms/local_realm/protocol/openid-connect/userinfo
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_1_ID=backend
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_1_URI=http://host.docker.internal:39146/
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_1_URI=http://host.docker.internal:8086/
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_1_PREDICATES_0=Path=/api/ej-app-backend-service/**
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_1_FILTERS_0=RewritePath=/api/ej-app-backend-service/(?<urlsegments>.*), /$\{urlsegments}
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_2_ID=backendonline
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_2_URI=http://host.docker.internal:39146/
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_2_URI=http://host.docker.internal:8086/
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_2_PREDICATES_0=Path=/public/backend/**
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_2_FILTERS_0=RewritePath=/public/backend/(?<urlsegments>.*), /$\{urlsegments}
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_ID=backendaenderungsservice
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_URI=http://host.docker.internal:39146/
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_URI=http://host.docker.internal:8086/
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_PREDICATES_0=Path=/public/backendaenderungsservice/**
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_FILTERS_0=RewritePath=/public/backendaenderungsservice/(?<urlsegments>.*), /$\{urlsegments}
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_ID=aenderungsservice
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_URI=http://host.docker.internal:8086/
+      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_URI=http://host.docker.internal:8087/
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_PREDICATES_0=Path=/public/aenderungsservice/**
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_FILTERS_0=RewritePath=/public/aenderungsservice/(?<urlsegments>.*), /$\{urlsegments}
       - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_ID=online
@@ -171,12 +171,12 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=docker,keycloak-permissions
     ports:
-      - "39146:39146"
+      - "8086:8086"
     networks:
       - keycloak
     healthcheck:
       <<: *healthcheck
-      test: [ "CMD-SHELL", "curl http://localhost:39146/actuator/health/liveness" ]
+      test: [ "CMD-SHELL", "curl http://localhost:8086/actuator/health/liveness" ]
 
 
   # If the frontend is to be started in the Docker-Compose, the following command must be executed at startup:
@@ -246,17 +246,16 @@ services:
       eai:
         condition: service_healthy
     ports:
-      - "8086:8086"
+      - "8087:8087"
     networks:
       - keycloak
     healthcheck:
       <<: *healthcheck
-      test: ["CMD-SHELL", "curl http://localhost:8086/actuator/health/liveness"]
+      test: ["CMD-SHELL", "curl http://localhost:8087/actuator/health/liveness"]
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - KEY_STORE_PASSWORD=
       - TRUST_STORE_PASSWORD=
-      - GROUP_ID=lhm-ewo-eai-aenderungen-ehrenamt-justiz-testDocker0003
+      - GROUP_ID=lhm-ewo-eai-aenderungen-ehrenamt-justiz
 
 networks:
   keycloak:

@@ -4,7 +4,7 @@
     <!-- ARTIFACTID muss auch in Properties file geaendert werden -->
     <groupId>de.muenchen.ehrenamt-justiz</groupId>
     <artifactId>ehrenamt-justiz-eai</artifactId>
-    <version>0.0.10-SNAPSHOT</version>
+    <version>0.0.11-SNAPSHOT</version>
     <!-- VERSION muss auch in Properties file und application.yml geändert werden-->
     <name>ehrenamt-justiz-eai</name>
     <description>EAI of Ehrenamtjustiz</description>
@@ -33,7 +33,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.10</version> <!-- must match the chosen Camel version in properties -> camel-spring-boot-dependencies.version, see e.g. https://central.sonatype.com/artifact/org.apache.camel.springboot/camel-spring-boot/dependencies and search for 'spring-boot-starter' -->
+        <version>3.5.13</version> <!-- must match the chosen Camel version in properties -> camel-spring-boot-dependencies.version, see e.g. https://central.sonatype.com/artifact/org.apache.camel.springboot/camel-spring-boot/dependencies and search for 'spring-boot-starter' -->
         <relativePath />
     </parent>
 
@@ -45,7 +45,7 @@
         <maven.compiler.release>${java.version}</maven.compiler.release>
 
         <!-- Core Frameworks -->
-        <camel-spring-boot-dependencies.version>4.18.1</camel-spring-boot-dependencies.version>
+        <camel-spring-boot-dependencies.version>4.18.2</camel-spring-boot-dependencies.version>
 
         <!-- Linting & Formatting -->
         <spotless-maven-plugin.version>3.4.0</spotless-maven-plugin.version>
@@ -58,7 +58,7 @@
         <!-- Testing -->
         <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
         <argLine /> <!-- Must be empty, definition needed for integration of Jacoco and Surefire via @{argLine} lazy property evaluation -->
-        <archunit.version>1.4.1</archunit.version>
+        <archunit.version>1.4.2</archunit.version>
 
         <!-- Release -->
         <maven-release-plugin.version>3.3.1</maven-release-plugin.version>

@@ -1,5 +1,5 @@
 server:
-  port: 8086
+  port: 8087
 spring:
   kafka:
     bootstrap-servers: lhm-cluster-kafka-tls-bootstrap-lhmeventbus-k.apps.capk.muenchen.de:443

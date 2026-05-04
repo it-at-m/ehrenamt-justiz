@@ -31,8 +31,8 @@
 import { useI18n } from "vue-i18n";
 import { VBtn, VIcon, VLayout, VSnackbarQueue } from "vuetify/components";
 
-import { STATUS_INDICATORS } from "@/Constants.ts";
-import { useSnackbarStore } from "@/stores/snackbar.ts";
+import { STATUS_INDICATORS } from "@/Constants";
+import { useSnackbarStore } from "@/stores/snackbar";
 
 const snackbarStore = useSnackbarStore();
 

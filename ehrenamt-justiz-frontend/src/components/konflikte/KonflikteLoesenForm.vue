@@ -1997,10 +1997,10 @@ import {
 
 import BewerbungForm from "@/components/bewerbungen/BewerbungForm.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
-import { STATUS_INDICATORS, WOHNUNGSSTATUS_ARTEN } from "@/Constants.ts";
+import { STATUS_INDICATORS, WOHNUNGSSTATUS_ARTEN } from "@/Constants";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
-import { formattedEhrenamtjustizart } from "@/tools/Helper.ts";
+import { formattedEhrenamtjustizart } from "@/tools/Helper";
 
 const props = defineProps<{
   modelValue: KonfliktLoesenFormData;

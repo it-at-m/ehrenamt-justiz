@@ -6,4 +6,4 @@ logging:
 
 aenderungsservice:
   backend:
-    server: http://localhost:39146
+    server: http://localhost:8086

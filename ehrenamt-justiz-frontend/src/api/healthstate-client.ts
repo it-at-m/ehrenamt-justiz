@@ -1,5 +1,6 @@
-import { defaultResponseHandler, getGETConfig } from "@/api/FetchUtils.ts";
-import HealthState from "@/types/HealthState";
+import type { HealthState } from "@/types/HealthState";
+
+import { defaultResponseHandler, getGETConfig } from "@/api/FetchUtils";
 
 export function checkHealth(): Promise<HealthState> {
   return fetch("actuator/health", getGETConfig())

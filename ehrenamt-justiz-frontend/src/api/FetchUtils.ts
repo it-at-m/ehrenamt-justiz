@@ -1,5 +1,5 @@
 import { ApiError } from "@/api/ApiError";
-import { STATUS_INDICATORS } from "@/Constants.ts";
+import { STATUS_INDICATORS } from "@/Constants";
 
 /**
  * Returns a default GET-Config for fetch
@@ -156,7 +156,7 @@ export function defaultCatchHandler(
  *  Creates header
  * @returns {Headers}
  */
-function getHeaders(): Headers {
+export function getHeaders(): Headers {
   const headers = new Headers({
     "Content-Type": "application/json",
   });
