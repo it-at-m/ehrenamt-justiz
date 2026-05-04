@@ -34,7 +34,6 @@ public class DocumentRestController {
     @PostMapping(value = "/getDocumentByPersonId", produces = { MediaType.APPLICATION_JSON_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_READ_EHRENAMTJUSTIZDATEN)
     @SuppressFBWarnings("NP_NONNULL_PARAM_VIOLATION")
-    @SuppressWarnings("PMD.AvoidLiteralsInIfCondition")
     public ResponseEntity<DocumentDto> getDocumentByPersonId(@RequestBody final UUID personId) {
 
         final Document[] documents = documentRepository.getDocumentByPersonId(personId);

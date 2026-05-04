@@ -141,7 +141,7 @@ public class PersonRestController {
             personenTableDatenDto.setAusgeuebteehrenaemter(entity.getAusgeuebteehrenaemter());
             personenTableDatenDto.setStatus(entity.getStatus());
 
-            Document[] documentByPersonId = documentRepository.getDocumentByPersonId(entity.getId());
+                final Document[] documentByPersonId = documentRepository.getDocumentByPersonId(entity.getId());
             personenTableDatenDto.setDateiVerfassungstreue(documentByPersonId != null && documentByPersonId.length > 0);
 
             return personenTableDatenDto;
@@ -251,7 +251,7 @@ public class PersonRestController {
     private void dateiVerfassungstreueSpeichern(final MultipartFile dateiVerfassungstreue, final Person savedPerson) throws IOException {
 
         // Bestehende Dokumente löschen
-        Document[] documents = documentRepository.getDocumentByPersonId(savedPerson.getId());
+        final Document[] documents = documentRepository.getDocumentByPersonId(savedPerson.getId());
 
         if (documents.length == 0 && dateiVerfassungstreue != null) {
             documentSpeichern(dateiVerfassungstreue, savedPerson);
@@ -277,7 +277,7 @@ public class PersonRestController {
 
     }
 
-    private void documentSpeichern(MultipartFile dateiVerfassungstreue, Person savedPerson) throws IOException {
+    private void documentSpeichern(final MultipartFile dateiVerfassungstreue, final Person savedPerson) throws IOException {
         // Neues Dokument speichern:
         final String originalFilename = dateiVerfassungstreue.getOriginalFilename();
         if (originalFilename == null) {
