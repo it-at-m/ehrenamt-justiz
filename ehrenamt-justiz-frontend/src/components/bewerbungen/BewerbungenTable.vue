@@ -446,7 +446,20 @@ async function aufVorschlagslisteSetzen(): Promise<void> {
         AuthService.checkAuth("READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE", t)
       ) {
         // Authorization available: Obtain confirmation from user:
-        invalidePersonen.value = fehlerhaftePersonen;
+        invalidePersonen.value = fehlerhaftePersonen.map((item) => ({
+          id: item.id,
+          familienname: item.familienname,
+          vorname: item.vorname,
+          geburtsdatum: item.geburtsdatum,
+          konfliktfeld: item.konfliktfeld,
+          auskunftssperre: item.auskunftssperre,
+          derzeitausgeuebterberuf: item.derzeitausgeuebterberuf,
+          arbeitgeber: item.arbeitgeber,
+          mailadresse: item.mailadresse,
+          ausgeuebteehrenaemter: item.ausgeuebteehrenaemter,
+          status: item.status,
+          dateiVerfassungstreue: undefined,
+        }));
         invalidePersonenSelectVisible.value = true;
       } else {
         // No authorization: Error:

@@ -751,7 +751,7 @@
                     <template #default="{ files, onClickRemove }">
                       <v-file-upload-item
                         v-for="(file, index) in files"
-                        :key="file"
+                        :key="file.name"
                         :file="file"
                         clearable
                         show-size
@@ -922,7 +922,7 @@ function speichern(): void {
     }
   });
 }
-function dateiVerfassungstrueAnzeigen(file) {
+function dateiVerfassungstrueAnzeigen(file: File) {
   const url = URL.createObjectURL(file);
   window.open(url, "_blank", "noopener,noreferrer");
   setTimeout(() => URL.revokeObjectURL(url), 10_000);
