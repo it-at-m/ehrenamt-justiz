@@ -141,7 +141,7 @@ public class PersonRestController {
             personenTableDatenDto.setAusgeuebteehrenaemter(entity.getAusgeuebteehrenaemter());
             personenTableDatenDto.setStatus(entity.getStatus());
 
-                final Document[] documentByPersonId = documentRepository.getDocumentByPersonId(entity.getId());
+            final Document[] documentByPersonId = documentRepository.getDocumentByPersonId(entity.getId());
             personenTableDatenDto.setDateiVerfassungstreue(documentByPersonId != null && documentByPersonId.length > 0);
 
             return personenTableDatenDto;

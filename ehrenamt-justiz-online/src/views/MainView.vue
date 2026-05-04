@@ -196,7 +196,7 @@ const focusActiveStepperItem = async () => {
     (stepperRef.value as ComponentPublicInstance | null)?.$el ??
     (stepperRef.value as HTMLElement | null);
 
-  if (!rootEl) return;
+  if (!(rootEl instanceof HTMLElement)) return;
 
   const activeIcon = rootEl.querySelector<HTMLElement>(
     ".m-form-step__icon[aria-current='step']"
