@@ -1,17 +1,21 @@
 package de.muenchen.ehrenamtjustiz.backend.rest.controller;
 
+import de.muenchen.ehrenamtjustiz.backend.domain.Document;
 import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
 import de.muenchen.ehrenamtjustiz.backend.domain.Person;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonCSVDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonenTableDatenDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.mapper.PersonMapper;
+import de.muenchen.ehrenamtjustiz.backend.domain.enums.DocumentSource;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
+import de.muenchen.ehrenamtjustiz.backend.rest.DocumentRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
 import de.muenchen.ehrenamtjustiz.backend.security.Authorities;
 import de.muenchen.ehrenamtjustiz.backend.service.EhrenamtJustizService;
 import de.muenchen.ehrenamtjustiz.backend.utils.EhrenamtJustizUtility;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,12 +35,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @AllArgsConstructor
@@ -62,6 +69,10 @@ public class PersonRestController {
 
     @Autowired
     private final EhrenamtJustizService ehrenamtJustizService;
+
+    @Autowired
+    DocumentRepository documentRepository;
+
     @Autowired
     private PersonMapper personMapper;
 
@@ -92,7 +103,7 @@ public class PersonRestController {
             final String[] sorts = new String[sortDefinition.length];
             String direction = "false";
             for (int i = 0; i < sortDefinition.length; i++) {
-                final val sortAtr = sortDefinition[i].split("/");
+                val sortAtr = sortDefinition[i].split("/");
                 sorts[i] = sortAtr[0];
                 direction = sortAtr[1];
             }
@@ -130,6 +141,9 @@ public class PersonRestController {
             personenTableDatenDto.setAusgeuebteehrenaemter(entity.getAusgeuebteehrenaemter());
             personenTableDatenDto.setStatus(entity.getStatus());
 
+            Document[] documentByPersonId = documentRepository.getDocumentByPersonId(entity.getId());
+            personenTableDatenDto.setDateiVerfassungstreue(documentByPersonId != null && documentByPersonId.length > 0);
+
             return personenTableDatenDto;
         });
     }
@@ -144,23 +158,32 @@ public class PersonRestController {
         int geloeschtePersonen = 0;
 
         final List<Person> personsToDelete = new ArrayList<>();
+        final List<UUID> personIdsToDelete = new ArrayList<>();
         for (final UUID uuid : uuids) {
 
             final Optional<Person> person = personRepository.findById(uuid);
-            person.ifPresent(personsToDelete::add);
+            if (person.isPresent()) {
+                personsToDelete.add(person.get());
+                personIdsToDelete.add(uuid);
+            }
 
             if (personsToDelete.size() == 100) {
                 // Size of transaction is 100
                 personRepository.deleteAll(personsToDelete);
+                personIdsToDelete.add(uuid);
+                documentRepository.deleteByPersonIds(personIdsToDelete);
                 geloeschtePersonen += personsToDelete.size();
                 personsToDelete.clear();
+                personIdsToDelete.clear();
             }
         }
 
         if (!personsToDelete.isEmpty()) {
             personRepository.deleteAll(personsToDelete);
+            documentRepository.deleteByPersonIds(personIdsToDelete);
             geloeschtePersonen += personsToDelete.size();
             personsToDelete.clear();
+            personIdsToDelete.clear();
         }
 
         log.info("deletePersonen aufgerufen und {} Personen gelöscht", geloeschtePersonen);
@@ -168,9 +191,10 @@ public class PersonRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(value = "/updatePerson", consumes = { MediaType.APPLICATION_JSON_VALUE })
+    @PostMapping(value = "/updatePerson", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
-    public ResponseEntity<PersonDto> updatePerson(@RequestBody final PersonDto personDto) {
+    public ResponseEntity<PersonDto> updatePerson(@RequestPart(value = "dateiVerfassungstreue", required = false) final MultipartFile dateiVerfassungstreue,
+            @RequestPart("person") final PersonDto personDto) throws IOException {
 
         final Person person = personMapper.model2Entity(personDto);
 
@@ -185,6 +209,9 @@ public class PersonRestController {
 
         // Person U P D A T E
         final Person personResult = personRepository.save(person);
+
+        // Datei Verfassungstreue speichern
+        dateiVerfassungstreueSpeichern(dateiVerfassungstreue, personResult);
 
         final PersonDto personDtoResult = personMapper.entity2Model(personResult);
         /*
@@ -221,13 +248,65 @@ public class PersonRestController {
         return new ResponseEntity<>(personDtoResult, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/cancelBewerbung", consumes = { MediaType.APPLICATION_JSON_VALUE })
-    @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
-    public ResponseEntity<PersonDto> cancelBewerbung(@RequestBody final PersonDto personDto) {
+    private void dateiVerfassungstreueSpeichern(final MultipartFile dateiVerfassungstreue, final Person savedPerson) throws IOException {
 
+        // Bestehende Dokumente löschen
+        Document[] documents = documentRepository.getDocumentByPersonId(savedPerson.getId());
+
+        if (documents.length == 0 && dateiVerfassungstreue != null) {
+            documentSpeichern(dateiVerfassungstreue, savedPerson);
+            return;
+        }
+
+        for (final Document document : documents) {
+            if (dateiVerfassungstreue != null &&
+                    document.getFileName().equals(dateiVerfassungstreue.getOriginalFilename()) &&
+                    document.getFileLength().equals(dateiVerfassungstreue.getSize()) &&
+                    document.getContentType().equals(dateiVerfassungstreue.getContentType())) {
+                continue;
+            }
+
+            documentRepository.delete(document);
+
+            if (dateiVerfassungstreue == null) {
+                continue;
+            }
+
+            documentSpeichern(dateiVerfassungstreue, savedPerson);
+        }
+
+    }
+
+    private void documentSpeichern(MultipartFile dateiVerfassungstreue, Person savedPerson) throws IOException {
+        // Neues Dokument speichern:
+        final String originalFilename = dateiVerfassungstreue.getOriginalFilename();
+        if (originalFilename == null) {
+            log.error("OriginalFilename für die Bestätigung der Verfassungstreue ist null für Person ID={}", savedPerson.getEwoid());
+            return;
+        }
+
+        log.info(String.format("Starts storing document with name =%s for person ID =%s", originalFilename, savedPerson.getEwoid()));
+        final String fileName = StringUtils.cleanPath(originalFilename);
+        final Document newdocument = new Document();
+        newdocument.setId(UUID.randomUUID());
+        newdocument.setFileName(fileName);
+        newdocument.setFileLength(dateiVerfassungstreue.getSize());
+        newdocument.setContentType(dateiVerfassungstreue.getContentType());
+        newdocument.setFileData(dateiVerfassungstreue.getBytes());
+        newdocument.setPersonid(savedPerson.getId());
+        newdocument.setDocumentSource(DocumentSource.CORE);
+        documentRepository.save(newdocument);
+    }
+
+    @PostMapping(value = "/cancelBewerbung", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
+    @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
+    public ResponseEntity<PersonDto> cancelBewerbung(@RequestPart(value = "dateiVerfassungstreue", required = false) final MultipartFile dateiVerfassungstreue,
+            @RequestPart("person") final PersonDto personDto) {
         if (personDto.getStatus() == Status.INERFASSUNG) {
             // delete person, because inserting was interrupted
             personRepository.deleteInErfassung(personDto.getId());
+            // delete document
+            documentRepository.deleteByPersonId(personDto.getId());
         }
 
         return new ResponseEntity<>(personDto, HttpStatus.OK);

@@ -105,6 +105,26 @@
             item.mailadresse
           }}</span>
         </template>
+        <template #[`item.dateiVerfassungstreue`]="{ item }">
+          <v-tooltip
+            v-if="AuthService.checkAuth('WRITE_EHRENAMTJUSTIZDATEN', t)"
+            location="bottom"
+          >
+            <template #activator="{ props }">
+              <span v-bind="props">
+                <v-icon
+                  v-if="item.dateiVerfassungstreue"
+                  :icon="mdiFile"
+                />
+              </span>
+            </template>
+            <span>{{
+              t(
+                "components.bewerbungenTable.table.dateiVerfassungstreueTooltip"
+              )
+            }}</span>
+          </v-tooltip>
+        </template>
         <template #[`item.actions`]="{ item }">
           <v-tooltip
             v-if="AuthService.checkAuth('WRITE_EHRENAMTJUSTIZDATEN', t)"
@@ -208,7 +228,7 @@
 <script setup lang="ts">
 import type PersonenTableData from "@/types/PersonenTableData";
 
-import { mdiEye, mdiPencil } from "@mdi/js";
+import { mdiEye, mdiFile, mdiPencil } from "@mdi/js";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
@@ -285,6 +305,12 @@ const headers: ReadonlyHeaders = computed(() => [
     value: "ausgeuebteehrenaemter",
     align: "start",
     sortable: true,
+  },
+  {
+    title: t("components.bewerbungenTable.table.dateiVerfassungstreue"),
+    value: "dateiVerfassungstreue",
+    align: "start",
+    sortable: false,
   },
   {
     title: t("components.bewerbungenTable.table.actions.header"),

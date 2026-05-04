@@ -9,5 +9,6 @@ export default interface PersonenTableData {
   arbeitgeber: string;
   mailadresse: string;
   ausgeuebteehrenaemter: string;
+  dateiVerfassungstreue: boolean;
   status: string;
 }

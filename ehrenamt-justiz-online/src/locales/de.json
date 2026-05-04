@@ -1,12 +1,72 @@
 {
+  "allgemeineInfo": {
+    "buttons": {
+      "weiter": "Weiter"
+    }
+  },
   "app": {
     "keineAktiveKonfiguration": {
       "title": "Keine aktive Konfiguration",
       "text": "Es konnte keine aktive Konfiguration gefunden werden! Bitte nur eine aktive Konfiguration anlegen und dann die Anwendung neu laden! Ursache: {cause}"
     }
   },
+  "bewerberDaten": {
+    "vorname": {
+      "label": "Vorname",
+      "pflichtfeld": "Vorname ist ein Pflichtfeld!",
+      "maxLaenge": "Vorname darf maximal 255 Zeichen lang sein!"
+    },
+    "nachname": {
+      "label": "Nachname",
+      "pflichtfeld": "Nachname ist ein Pflichtfeld!",
+      "maxLaenge": "Nachname darf maximal 300 Zeichen lang sein!"
+    },
+    "geburtsdatum": {
+      "label": "Geburtsdatum",
+      "pflichtfeld": "Geburtsdatum ist ein Pflichtfeld!",
+      "invalide": "Das Alter muss zwischen {altervon} und {alterbis} Jahren liegen."
+    },
+    "beruf": {
+      "label": "Beruf",
+      "pflichtfeld": "Beruf ist ein Pflichtfeld!",
+      "maxLaenge": "Beruf darf maximal 255 Zeichen lang sein!"
+    },
+    "telefonnummer": {
+      "label": "Telefonnummer",
+      "invalide": "Valide Telefonnummer eingeben!"
+    },
+    "mail": {
+      "label": "Mail",
+      "placeholder": "Mail-Adresse",
+      "pflichtfeld": "Mail ist ein Pflichtfeld!",
+      "invalide": "Valide Mail eingeben!"
+    },
+    "buttons": {
+      "zurueck": "Zurück",
+      "weiter": "Weiter",
+      "leeren": "Leeren"
+    }
+  },
+  "ehrenamtJustizOnlineService": {
+    "fehlermeldungen": {
+      "default": "Ein unbekannter Fehler ist aufgetreten, bitte den Administrator informieren.",
+      "http404": "Dieser Datensatz wurde nicht gefunden.",
+      "http409": "Dieser Datensatz kann nicht gelöscht werden, da er von anderen Teilen des Programms noch benötigt wird.",
+      "http500": "Interner Serverfehler. Es können keine Daten ermittelt werden.",
+      "fehlerBeiMethodeGetAktiveKonfiguration": "Fehler beim Aufruf der Methode 'GetAktiveKonfiguration'",
+      "fehlerBeiMethodeLesenVerfassungstreueMuster": "Fehler beim Aufruf der Methode 'lesenVerfassungstreueMuster'",
+      "fehlerBeiMethodeBewerbungSpeichern": "Fehler beim Aufruf der Methode 'BewerbungSpeichern'",
+      "fehlerBeiMethodePruefen": "Fehler beim Aufruf der Methode 'pruefen'"
+    }
+  },
   "mainView": {
     "header": "Schöffen Onlinebewerbung",
+    "stepper": {
+      "allgemeineInfo": "Allgemeines",
+      "bewerberDaten": "Bewerber",
+      "verfassungsteueDaten": "Verfassungstreue",
+      "bewerbungUebertragen": "Bewerbung übertragen"
+    },
     "hinweise": {
       "ok": {
         "title": "Erfolgreich übertragen",
@@ -25,43 +85,7 @@
         "text": "Technischer Fehler: { cause }"
       }
     },
-    "info": "Auf dieser Seite haben Sie die Möglichkeit sich über das unten stehende Formular als Schöffe zu bewerben. Zusätzliche Infos zum Amt und den Aufgaben eines Schöffen finden Sie",
-    "form": {
-      "vorname": {
-        "label": "Vorname",
-        "pflichtfeld": "Vorname ist ein Pflichtfeld!",
-        "maxLaenge": "Vorname darf maximal 255 Zeichen lang sein!"
-      },
-      "nachname": {
-        "label": "Nachname",
-        "pflichtfeld": "Nachname ist ein Pflichtfeld!",
-        "maxLaenge": "Nachname darf maximal 300 Zeichen lang sein!"
-      },
-      "geburtsdatum": {
-        "label": "Geburtsdatum",
-        "pflichtfeld": "Geburtsdatum ist ein Pflichtfeld!",
-        "invalide": "Das Alter muss zwischen {altervon} und {alterbis} Jahren liegen."
-      },
-      "beruf": {
-        "label": "Beruf",
-        "pflichtfeld": "Beruf ist ein Pflichtfeld!",
-        "maxLaenge": "Beruf darf maximal 255 Zeichen lang sein!"
-      },
-      "telefonnummer": {
-        "label": "Telefonnummer",
-        "invalide": "Valide Telefonnummer eingeben!"
-      },
-      "mail": {
-        "label": "Mail",
-        "placeholder": "Mail-Adresse",
-        "pflichtfeld": "Mail ist ein Pflichtfeld!",
-        "invalide": "Valide Mail eingeben!"
-      }
-    },
-    "buttons": {
-      "bewerben": "Bewerben",
-      "leeren": "Leeren"
-    },
+    "info": "Auf dieser Seite haben Sie die Möglichkeit sich als Schöffe zu bewerben. Zusätzliche Infos zum Amt und den Aufgaben eines Schöffen finden Sie",
     "datenschutzErklaerung": {
       "header": "Datenschutzerklärung",
       "content1": "Bewerbung für das Schöffenamt",
@@ -79,14 +103,25 @@
       }
     }
   },
-  "ehrenamtJustizOnlineService": {
-    "fehlermeldungen": {
-      "default": "Ein unbekannter Fehler ist aufgetreten, bitte den Administrator informieren.",
-      "http404": "Dieser Datensatz wurde nicht gefunden.",
-      "http409": "Dieser Datensatz kann nicht gelöscht werden, da er von anderen Teilen des Programms noch benötigt wird.",
-      "http500": "Interner Serverfehler. Es können keine Daten ermittelt werden.",
-      "fehlerBeiMethodeGetAktiveKonfiguration": "Fehler beim Aufruf der Methode 'GetAktiveKonfiguration'",
-      "fehlerBeiMethodeBewerbungSpeichern": "Fehler beim Aufruf der Methode 'BewerbungSpeichern'"
-    }
+  "verfassungstreue": {
+    "anleitung": {
+      "herunterladen": "1. Laden Sie das Muster für die Verfassungstrue hier herunter:",
+      "unterschreiben": "2. Unterschreiben sie das Dokument",
+      "hochladen": "3. Laden sie das unterschriebene PDF-Dokument wieder auf dieser Seite hoch:"
+    },
+    "buttons": {
+      "zurueck": "Zurück",
+      "speichern": "Speichern",
+      "musterHerunterladen": "Muster Verfassungstreue herunterladen"
+    },
+    "buttonText": "Bestätigung der Verfassungstreue hochladen",
+    "additionalInformation": "Maximal eine Datei mit einer maximalen Dateigröße von 1 MB",
+    "maxFileSizeWarning": "Eine Datei hat mehr als 1 MB und kann nicht angefügt werden",
+    "invalidAmountWarning": "Es kann nur eine Datei hochgeladen werden",
+    "invalide": "Anhang für Verfassungstreue wurde nicht hochgeladen!",
+    "keinPDF": "Anhang für Verfassungstreue ist keine PDF-Datei",
+    "dateiname": "Anhang für Bestätigung der Verfassungstreue:",
+    "dateigroesse": "Dateigröße",
+    "keinAnhang": "Anhang für Verfassungstreue fehlt!"
   }
 }

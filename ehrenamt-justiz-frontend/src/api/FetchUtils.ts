@@ -29,6 +29,24 @@ export function getPOSTConfig(body: any): RequestInit {
     redirect: "manual",
   };
 }
+
+/**
+ * Returns a default POST-Config for fetch and FormData
+ * @param body Optional zu übertragender Body
+ */
+// eslint-disable-next-line
+export function getPOSTConfigFormData(body: any): RequestInit {
+  const requestMethod = "POST";
+  return {
+    method: requestMethod,
+    body: body,
+    headers: getHeadersFormData(),
+    mode: "cors",
+    credentials: "same-origin",
+    redirect: "manual",
+  };
+}
+
 /**
  * Returns a default DELETE-Config for fetch
  */
@@ -150,6 +168,19 @@ function getHeaders(): Headers {
   return headers;
 }
 
+/**
+ *  Creates header for FormData
+ * @returns {Headers}
+ */
+function getHeadersFormData(): Headers {
+  const headers = new Headers();
+
+  const csrfCookie = _getXSRFToken();
+  if (csrfCookie !== "") {
+    headers.append("X-XSRF-TOKEN", csrfCookie);
+  }
+  return headers;
+}
 /**
  * Get the XSRF-TOKEN
  * @returns {string|string}

@@ -14,6 +14,7 @@ import de.muenchen.ehrenamtjustiz.backend.domain.Person;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonCSVDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.PersonenTableDatenDto;
+import de.muenchen.ehrenamtjustiz.backend.domain.dto.mapper.PersonMapper;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
@@ -41,11 +42,15 @@ import org.springframework.boot.testcontainers.service.connection.ServiceConnect
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -84,6 +89,9 @@ class PersonIntegrationsTest {
 
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private PersonMapper personMapper;
 
     private static UUID uuidKonfiguration;
 
@@ -177,8 +185,17 @@ class PersonIntegrationsTest {
         person.setStatus(Status.INERFASSUNG);
         final Person personInErfassung = personRepository.save(person);
 
+        PersonDto personInErfassungDto = personMapper.entity2Model(personInErfassung);
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("person", personInErfassungDto);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
         // Person with state INERFASSUNG will be deleted:
-        final ResponseEntity<?> result = testRestTemplate.postForEntity("/personen/cancelBewerbung", personInErfassung, PersonDto.class);
+        final ResponseEntity<?> result = testRestTemplate.postForEntity("/personen/cancelBewerbung", requestEntity, PersonDto.class);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         // Check delete:
@@ -354,7 +371,16 @@ class PersonIntegrationsTest {
         person.setStatus(Status.INERFASSUNG); // Muss nach update auf Bewerbung gesetzt sein
         personRepository.save(person);
 
-        final ResponseEntity<PersonDto> result = testRestTemplate.postForEntity("/personen/updatePerson", person, PersonDto.class);
+        PersonDto personInErfassungDto = personMapper.entity2Model(person);
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("person", personInErfassungDto);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+        final ResponseEntity<PersonDto> result = testRestTemplate.postForEntity("/personen/updatePerson", requestEntity, PersonDto.class);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
 

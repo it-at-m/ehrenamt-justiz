@@ -36,6 +36,22 @@ export function useRules() {
     },
 
     /**
+     * validate file of Verfassungstreue
+     */
+    RULE_FILE_VERFASSUNGSTREUE: (v: File): boolean | string => {
+      if (v == undefined) {
+        return true;
+      }
+      const maxSize = 1024 * 1024; // 1 MB in Bytes
+      const isPDF = v.type === "application/pdf" || v.name.endsWith(".pdf");
+      return v.size > maxSize
+        ? t("composables.rules.anhangZuGross")
+        : !isPDF
+          ? t("composables.rules.anhangKeinPDF")
+          : true;
+    },
+
+    /**
      * validate birthday
      * @param v
      * @constructor
