@@ -458,7 +458,7 @@ async function aufVorschlagslisteSetzen(): Promise<void> {
           mailadresse: item.mailadresse,
           ausgeuebteehrenaemter: item.ausgeuebteehrenaemter,
           status: item.status,
-          dateiVerfassungstreue: undefined,
+          dateiVerfassungstreue: false,
         }));
         invalidePersonenSelectVisible.value = true;
       } else {

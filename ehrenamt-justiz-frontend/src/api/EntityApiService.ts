@@ -328,7 +328,10 @@ export default class EntityApiService<T extends Idable> {
   ): Promise<T> {
     const formData = new FormData();
 
-    if (bestaetigungverfassungstreue_file) {
+    if (
+      bestaetigungverfassungstreue_file &&
+      !Array.isArray(bestaetigungverfassungstreue_file)
+    ) {
       formData.append(
         "dateiVerfassungstreue",
         bestaetigungverfassungstreue_file
