@@ -66,7 +66,7 @@ public class OnlineBewerbungRestController {
     }
 
     @SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.UseObjectForClearerAPI" })
-    @PostMapping(path = "/pruefen", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
+    @PostMapping(path = "/pruefen", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public String pruefen(@RequestParam("vorname") final String vorname,
             @RequestParam("nachname") final String nachname,
             @RequestParam("beruf") final String beruf,

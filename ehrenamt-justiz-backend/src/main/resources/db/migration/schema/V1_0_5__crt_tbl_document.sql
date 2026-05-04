@@ -12,7 +12,7 @@ drop table if exists document cascade;
 
 create table if not exists document (
    id uuid primary key,
-   content_type character varying(20) not null,
+   content_type character varying(100) not null,
    file_id character varying(51),
    file_length bigint,
    file_name character varying(2000) not null,
