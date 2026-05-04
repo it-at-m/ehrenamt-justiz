@@ -5,7 +5,7 @@ import type PersonData from "@/types/PersonData";
 import { ApiError } from "@/api/ApiError";
 import EntityApiService from "@/api/EntityApiService";
 import { getGETConfig, getPOSTConfig } from "@/api/FetchUtils";
-import { STATUS_INDICATORS } from "@/Constants.ts";
+import { STATUS_INDICATORS } from "@/Constants";
 import HttpMethod from "@/types/base/HttpMethod";
 
 class EWOBuergerApiServiceClass extends EntityApiService<EWOBuergerData> {

@@ -118,7 +118,7 @@ import {
 
 import AuthService from "@/api/AuthService";
 import { useRules } from "@/composables/rules";
-import { STATUS_INDICATORS } from "@/Constants.ts";
+import { STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const props = defineProps<{

@@ -164,7 +164,7 @@ import {
 import AuthService from "@/api/AuthService";
 import { PersonApiService } from "@/api/PersonApiService";
 import DeleteDialog from "@/components/common/DeleteDialog.vue";
-import { PERSONENSTATUS, STATUS_INDICATORS } from "@/Constants.ts";
+import { PERSONENSTATUS, STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const { t } = useI18n();

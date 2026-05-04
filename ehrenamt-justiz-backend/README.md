@@ -66,22 +66,22 @@ Important Maven commands in connection with Flyway:
 
 The following table shows the most important configurations of the backend (application-[profile].yml):
 
-| Configuration | Description | Example setting |
-| ------------- | ------------- | ------------- |
-| spring.port | Port used to run the spring boot application  | 39146 |
-| ewo.eai.server | url and port of EAI to residents' registration system | http://host.docker.internal:8085 |
-| ewo.eai.user | User for EAI to residents' registration system |  |
-| ewo.eai.password | Password forEAI to residents' registration system |  |
-| sso.url |url and port to keycloak server | http://keycloak:8100 |
-| sso.real | Realm used in keycloak | local_realm |
-| sso.client | Client used in keycloak | ej-app |
+| Configuration | Description | Example setting                                                       |
+| ------------- | ------------- |-----------------------------------------------------------------------|
+| spring.port | Port used to run the spring boot application  | 8086                                                                  |
+| ewo.eai.server | url and port of EAI to residents' registration system | http://host.docker.internal:8085                                      |
+| ewo.eai.user | User for EAI to residents' registration system |                                                                       |
+| ewo.eai.password | Password forEAI to residents' registration system |                                                                       |
+| sso.url |url and port to keycloak server | http://keycloak:8100                                                  |
+| sso.real | Realm used in keycloak | local_realm                                                           |
+| sso.client | Client used in keycloak | ej-app                                                                |
 | spring.datasource.url | url, port and schema of database | jdbc:postgresql://host.docker.internal:5432/postgres?currentSchema=ej |
-| spring.datasource.username | Username for connecting to database |  |
-| spring.datasource.password | Password for connecting to database |  |
-| springdoc.show-actuator | Enables actuator | true |
-| springdoc.swagger-ui.enabled | Enable Swagger UI | true |
-| springdoc.api-docs.enabled | Enable API docs | true |
-| springdoc.api-docs.version | Version of API docs | openapi_3_0 |
+| spring.datasource.username | Username for connecting to database |                                                                       |
+| spring.datasource.password | Password for connecting to database |                                                                       |
+| springdoc.show-actuator | Enables actuator | true                                                                  |
+| springdoc.swagger-ui.enabled | Enable Swagger UI | true                                                                  |
+| springdoc.api-docs.enabled | Enable API docs | true                                                                  |
+| springdoc.api-docs.version | Version of API docs | openapi_3_0                                                           |
 
 # pgAdmin
 
@@ -166,7 +166,7 @@ Swagger UI is an open source tool that helps developers to document and test API
 
 Swagger UI can be called from the backend if the profile 'local' is used:
 ```
-http://localhost:39146/swagger-ui/index.html
+http://localhost:8086/swagger-ui/index.html
 ```
 
 ![Swagger UI](../docs/images/Swagger_Backend.PNG)
@@ -177,7 +177,7 @@ API docs, short for API documentation, are a collection of information that help
 
 API-docs can be called from the backend if the profile 'local' is used:
 ```
-http://localhost:39146/v3/api-docs
+http://localhost:8086/v3/api-docs
 ```
 
 ![API-docs](../docs/images/ApiDocs_Backend.PNG)
