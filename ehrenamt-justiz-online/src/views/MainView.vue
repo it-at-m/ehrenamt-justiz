@@ -304,8 +304,8 @@ function erstellenVerfassungstreueMuster(): void {
         link.click();
         // Cleanup after delay to allow download to start
         setTimeout(() => URL.revokeObjectURL(url), 1000);
-      } catch (e) {
-        technischerfehler.value = e.toString();
+      } catch (err) {
+        technischerfehler.value = String(err);
       }
     })
     .catch((err) => (technischerfehler.value = err.toString()));

@@ -12,7 +12,6 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import java.io.Serial;
 import java.math.BigInteger;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,13 +26,8 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
+@SuppressWarnings("PMD.MissingSerialVersionUID ")
 public class Konfiguration extends BaseEntity {
-    @Serial
-    private static final long serialVersionUID = 1L;
-
-    // ========= //
-    // Variables //
-    // ========= //
 
     @Column(name = "ehrenamtjustizart")
     @Enumerated(EnumType.STRING)
