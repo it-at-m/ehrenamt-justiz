@@ -23,7 +23,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@SuppressWarnings("PMD.MissingSerialVersionUID ")
+@SuppressWarnings("PMD.MissingSerialVersionUID")
 public class Document extends BaseEntity {
 
     @Column(name = "content_type", nullable = false, length = 100)

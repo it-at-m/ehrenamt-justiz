@@ -42,7 +42,7 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @SuperBuilder
-@SuppressWarnings({ "PMD.TooManyFields", "PMD.MissingSerialVersionUID ", "CPD-START" })
+@SuppressWarnings({ "PMD.TooManyFields", "PMD.MissingSerialVersionUID", "CPD-START" })
 public class Person extends BaseEntity {
 
     @Column(name = "ewoid")

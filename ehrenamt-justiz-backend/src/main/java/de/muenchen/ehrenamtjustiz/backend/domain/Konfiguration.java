@@ -26,7 +26,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@SuppressWarnings("PMD.MissingSerialVersionUID ")
+@SuppressWarnings("PMD.MissingSerialVersionUID")
 public class Konfiguration extends BaseEntity {
 
     @Column(name = "ehrenamtjustizart")
