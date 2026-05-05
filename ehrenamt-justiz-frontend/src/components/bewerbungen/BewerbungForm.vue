@@ -964,15 +964,15 @@ function setFocusAufFehler() {
         }
       }
 
-      if (istAufTab == 0) {
+      if (istAufTab == 1) {
         // Switch to tab "ewo":
         active_tab.value = "ewo";
-      } else if (istAufTab == 1) {
-        // Switch to tab "bewerber":
-        active_tab.value = "bewerber";
-      } else {
+      } else if (istAufTab == 2) {
         // Switch to tab "bestaetigungVerfassungstreue":
         active_tab.value = "bestaetigungVerfassungstreue";
+      } else {
+        // Switch to tab "bewerber" (default for unmatched fields):
+        active_tab.value = "bewerber";
       }
       // Timeout 300, otherwise you will have to click on “Save” twice:
       setTimeout(() => {

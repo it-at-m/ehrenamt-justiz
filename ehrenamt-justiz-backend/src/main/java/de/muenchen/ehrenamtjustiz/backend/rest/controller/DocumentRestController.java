@@ -12,8 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,15 +31,16 @@ public class DocumentRestController {
         this.documentMapper = documentMapper;
     }
 
-    @PostMapping(value = "/getDocumentByPersonId", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "/getDocumentByPersonId/{personId}", produces = { MediaType.APPLICATION_JSON_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_READ_EHRENAMTJUSTIZDATEN)
     @SuppressFBWarnings("NP_NONNULL_PARAM_VIOLATION")
-    public ResponseEntity<DocumentDto> getDocumentByPersonId(@RequestBody final UUID personId) {
+    public ResponseEntity<DocumentDto> getDocumentByPersonId(@PathVariable final UUID personId) {
 
         final Document[] documents = documentRepository.getDocumentByPersonId(personId);
         if (documents == null || documents.length == 0) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         } else {
+            // Only first document:
             return new ResponseEntity<>(documentMapper.entity2Model(documents[0]), HttpStatus.OK);
         }
     }

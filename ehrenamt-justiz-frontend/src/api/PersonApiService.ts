@@ -220,8 +220,8 @@ class PersonenApiServiceClass extends EntityApiService<PersonData> {
   public async getDocumentByPersonId(uuid: string): Promise<DocumentData> {
     return await new Promise<DocumentData>((resolve, reject) => {
       fetch(
-        `${this.getBaseUrl()}/document/getDocumentByPersonId`,
-        getPOSTConfig(uuid)
+        `${this.getBaseUrl()}/document/getDocumentByPersonId/${uuid}`,
+        getGETConfig()
       )
         .then((res) => {
           res

@@ -168,7 +168,7 @@ const STEPPER_ITEMS: StepperItem[] = [
   },
   {
     id: "2",
-    label: t("mainView.stepper.verfassungsteueDaten"),
+    label: t("mainView.stepper.verfassungstreueDaten"),
     icon: "mail",
   },
   {
@@ -267,7 +267,9 @@ function speichern(): void {
     .then((bewerbunggespeichert) => {
       bewerbunggespeichertergebbnis.value = bewerbunggespeichert;
       technischerfehler.value = "";
-      increaseCurrentView();
+      if (bewerbunggespeichert === "OK") {
+        increaseCurrentView();
+      }
     })
     .catch((err) => (technischerfehler.value = err.toString()))
     .finally(() => {
@@ -285,23 +287,26 @@ function erstellenVerfassungstreueMuster(): void {
   ehrenamtJustizOnlineService
     .lesenVerfassungstreueMuster()
     .then((dateiVerfassungstreue) => {
-      // 1) Base64 → Binary → Blob
-      const binary = atob(dateiVerfassungstreue);
-      const bytes = new Uint8Array(binary.length);
-      for (let i = 0; i < binary.length; i++) {
-        bytes[i] = binary.charCodeAt(i);
+      try {
+        // 1) Base64 → Binary → Blob
+        const binary = atob(dateiVerfassungstreue);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+          bytes[i] = binary.charCodeAt(i);
+        }
+        const blob = new Blob([bytes], { type: "application/pdf" });
+
+        // 2) display PDF in browser
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "VerfassungstreueMuster.pdf";
+        link.click();
+        // Cleanup after delay to allow download to start
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      } catch (e) {
+        technischerfehler.value = e.toString();
       }
-      const blob = new Blob([bytes], { type: "application/pdf" });
-
-      // 2) display PDF in browser
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "VerfassungstreueMuster.pdf";
-      link.click();
-
-      // Cleanup
-      URL.revokeObjectURL(url);
     })
     .catch((err) => (technischerfehler.value = err.toString()));
 }

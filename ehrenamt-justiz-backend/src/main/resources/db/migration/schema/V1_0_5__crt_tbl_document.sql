@@ -19,5 +19,6 @@ create table if not exists document (
    file_data bytea not null,
    person_id uuid,
    document_source character varying(20) not null,
-   constraint file_name_person_id_uk UNIQUE (file_name, person_id)
+   constraint file_name_person_id_uk UNIQUE (file_name, person_id),
+   constraint fk_document_person_id foreign key (person_id) references Person(id)
 );

@@ -35,6 +35,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -151,6 +152,7 @@ public class PersonRestController {
     @PostMapping(value = "/deletePersonen", consumes = { MediaType.APPLICATION_JSON_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
     @SuppressWarnings("PMD.AvoidLiteralsInIfCondition")
+    @Transactional
     public ResponseEntity<?> deletePersonen(@RequestBody final UUID[] uuids) {
 
         log.info("deletePersonen aufgerufen für {} IDs", uuids.length);
@@ -169,9 +171,8 @@ public class PersonRestController {
 
             if (personsToDelete.size() == 100) {
                 // Size of transaction is 100
-                personRepository.deleteAll(personsToDelete);
-                personIdsToDelete.add(uuid);
                 documentRepository.deleteByPersonIds(personIdsToDelete);
+                personRepository.deleteAll(personsToDelete);
                 geloeschtePersonen += personsToDelete.size();
                 personsToDelete.clear();
                 personIdsToDelete.clear();
@@ -179,8 +180,8 @@ public class PersonRestController {
         }
 
         if (!personsToDelete.isEmpty()) {
-            personRepository.deleteAll(personsToDelete);
             documentRepository.deleteByPersonIds(personIdsToDelete);
+            personRepository.deleteAll(personsToDelete);
             geloeschtePersonen += personsToDelete.size();
             personsToDelete.clear();
             personIdsToDelete.clear();
@@ -191,7 +192,7 @@ public class PersonRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(value = "/updatePerson", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
+    @PostMapping(value = "/updatePerson", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
     public ResponseEntity<PersonDto> updatePerson(@RequestPart(value = "dateiVerfassungstreue", required = false) final MultipartFile dateiVerfassungstreue,
             @RequestPart("person") final PersonDto personDto) throws IOException {
@@ -298,10 +299,9 @@ public class PersonRestController {
         documentRepository.save(newdocument);
     }
 
-    @PostMapping(value = "/cancelBewerbung", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
+    @PostMapping(value = "/cancelBewerbung", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
-    public ResponseEntity<PersonDto> cancelBewerbung(@RequestPart(value = "dateiVerfassungstreue", required = false) final MultipartFile dateiVerfassungstreue,
-            @RequestPart("person") final PersonDto personDto) {
+    public ResponseEntity<PersonDto> cancelBewerbung(@RequestPart("person") final PersonDto personDto) {
         if (personDto.getStatus() == Status.INERFASSUNG) {
             // delete person, because inserting was interrupted
             personRepository.deleteInErfassung(personDto.getId());

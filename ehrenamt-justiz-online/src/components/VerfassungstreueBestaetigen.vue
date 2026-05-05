@@ -177,7 +177,9 @@ function validateDateiVerfassungstreue(isValid: boolean) {
     zeigeLeerenDateiNameVerfassungstreue.value = true;
     isValid = false;
   } else if (
-    !onlineBewerbungFormData.value.dateiVerfassungstreue.name.endsWith(".pdf")
+    !onlineBewerbungFormData.value.dateiVerfassungstreue.name
+      .toLowerCase()
+      .endsWith(".pdf")
   ) {
     errorMsgDateiVerfassungstreue.value = t("verfassungstreue.keinPDF");
     isValid = false;

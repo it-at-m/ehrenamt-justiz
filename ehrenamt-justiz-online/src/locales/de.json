@@ -64,7 +64,7 @@
     "stepper": {
       "allgemeineInfo": "Allgemeines",
       "bewerberDaten": "Bewerber",
-      "verfassungsteueDaten": "Verfassungstreue",
+      "verfassungstreueDaten": "Verfassungstreue",
       "bewerbungUebertragen": "Bewerbung übertragen"
     },
     "hinweise": {
@@ -105,7 +105,7 @@
   },
   "verfassungstreue": {
     "anleitung": {
-      "herunterladen": "1. Laden Sie das Muster für die Verfassungstrue hier herunter:",
+      "herunterladen": "1. Laden Sie das Muster für die Verfassungstreue hier herunter:",
       "unterschreiben": "2. Unterschreiben sie das Dokument",
       "hochladen": "3. Laden sie das unterschriebene PDF-Dokument wieder auf dieser Seite hoch:"
     },

@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -140,7 +141,8 @@ public class OnlineBewerbungRestController {
 
     @SuppressWarnings({ "PMD.UseObjectForClearerAPI" })
     @PostMapping(path = "/bewerbungSpeichern", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
-    public String bewerbungSpeichern(@RequestParam("dateiVerfassungstreue") final MultipartFile dateiVerfassungstreue,
+    @Transactional
+    public String bewerbungSpeichern(@RequestParam(value = "dateiVerfassungstreue", required = false) final MultipartFile dateiVerfassungstreue,
             @RequestParam("vorname") final String vorname,
             @RequestParam("nachname") final String nachname,
             @RequestParam("beruf") final String beruf,
@@ -150,7 +152,7 @@ public class OnlineBewerbungRestController {
 
         // EWO-search
         final List<EWOBuergerDatenDto> eWOBuergerDaten = ewoSuche(vorname, nachname, geburtsdatum);
-        if (eWOBuergerDaten == null) {
+        if (eWOBuergerDaten == null || eWOBuergerDaten.isEmpty()) {
             return ERROR;
         }
 
@@ -225,19 +227,19 @@ public class OnlineBewerbungRestController {
             final LocalDate geburtsdatum,
             final String mail) {
         final List<String> nullWerte = new ArrayList<>();
-        if (vorname == null) {
+        if (!StringUtils.hasText(vorname)) {
             nullWerte.add("vorname");
         }
-        if (nachname == null) {
+        if (!StringUtils.hasText(nachname)) {
             nullWerte.add("nachname");
         }
         if (geburtsdatum == null) {
             nullWerte.add("geburtsdatum");
         }
-        if (beruf == null) {
+        if (!StringUtils.hasText(beruf)) {
             nullWerte.add("beruf");
         }
-        if (mail == null) {
+        if (!StringUtils.hasText(mail)) {
             nullWerte.add("mailadresse");
         }
         return nullWerte;

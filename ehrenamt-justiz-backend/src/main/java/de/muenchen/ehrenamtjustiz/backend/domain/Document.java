@@ -8,7 +8,6 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotNull;
-import java.io.Serial;
 import java.sql.Types;
 import java.util.UUID;
 import lombok.EqualsAndHashCode;
@@ -16,21 +15,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.JdbcTypeCode;
 
 @Entity
 @Setter
 @Getter
 @ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@SuperBuilder
 public class Document extends BaseEntity {
-    @Serial
-    private static final long serialVersionUID = 1L;
-
-    private UUID id;
 
     @Column(name = "content_type", nullable = false, length = 100)
     private String contentType;
@@ -47,7 +40,7 @@ public class Document extends BaseEntity {
     @Lob
     @JdbcTypeCode(Types.BINARY)
     @Column(name = "file_data")
-    private byte[] fileData;
+    @NotNull private byte[] fileData;
 
     @Column(name = "person_id")
     private UUID personid;

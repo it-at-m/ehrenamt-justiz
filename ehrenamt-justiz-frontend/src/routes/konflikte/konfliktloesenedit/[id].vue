@@ -73,6 +73,7 @@ const konfliktLoesenFormData = ref<KonfliktLoesenFormData>({
   person_konfigurationid: "",
   person_status: "",
   person_validierungdeaktivieren: false,
+  person_bestaetigungverfassungstreue_file: undefined,
   ewo_familienname: "",
   ewo_geburtsname: "",
   ewo_vorname: "",
@@ -183,6 +184,20 @@ async function loadPerson(): Promise<void> {
         personenDaten.konfigurationid;
       konfliktLoesenFormData.value.person_status = personenDaten.status;
 
+      PersonApiService.getDocumentByPersonId(personenDatenId.value).then(
+        (document) => {
+          const byteCharacters = atob(document.fileData);
+          const byteNumbers = new Array(byteCharacters.length);
+          for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+          }
+          const byteArray = new Uint8Array(byteNumbers);
+          konfliktLoesenFormData.value.person_bestaetigungverfassungstreue_file =
+            new File([byteArray], document.fileName, {
+              type: document.contentType,
+            });
+        }
+      );
       // Get data from EWO
       EWOBuergerApiService.ewoSucheMitOM(personenDaten.ewoid)
         .then((eWOBuerger) => {
@@ -308,7 +323,7 @@ function save(): void {
       konfigurationid: konfliktLoesenFormData.value.person_konfigurationid,
       status: konfliktLoesenFormData.value.person_status,
     },
-    undefined
+    konfliktLoesenFormData.value.person_bestaetigungverfassungstreue_file
   )
     .then(() => {
       router.push({
