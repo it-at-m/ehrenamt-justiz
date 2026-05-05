@@ -7,6 +7,7 @@ import {
   getDELETEConfig,
   getGETConfig,
   getPOSTConfig,
+  getPOSTConfigFormData,
   getPUTConfig,
 } from "./FetchUtils";
 
@@ -320,9 +321,30 @@ export default class EntityApiService<T extends Idable> {
     return url;
   }
 
-  public async postData(instance: T, path: string): Promise<T> {
+  public async postData(
+    instance: T,
+    bestaetigungverfassungstreue_file: File | File[] | undefined,
+    path: string
+  ): Promise<T> {
+    const formData = new FormData();
+
+    if (
+      bestaetigungverfassungstreue_file &&
+      !Array.isArray(bestaetigungverfassungstreue_file)
+    ) {
+      formData.append(
+        "dateiVerfassungstreue",
+        bestaetigungverfassungstreue_file
+      );
+    }
+
+    formData.append(
+      "person",
+      new Blob([JSON.stringify(instance)], { type: "application/json" })
+    );
+
     return await new Promise<T>((resolve, reject) => {
-      fetch(`${this.getBaseUrl()}${path}`, getPOSTConfig(instance))
+      fetch(`${this.getBaseUrl()}${path}`, getPOSTConfigFormData(formData))
         .then((res) => {
           res
             .json()

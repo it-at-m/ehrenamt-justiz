@@ -81,7 +81,76 @@ export class EhrenamtJustizOnlineServiceClass {
         .catch((reason) => reject(this.handleError(reason)));
     });
   }
+  /**
+   * Gets the Pattern for 'Verfassungstreue'
+   * @returns Promise<byte[]>
+   */
+  public lesenVerfassungstreueMuster(): Promise<string> {
+    return new Promise((resolve, reject) => {
+      fetch(
+        `${EhrenamtJustizOnlineServiceClass.getBaseUrl()}/onlinebewerbung/lesenVerfassungstreueMuster`,
+        getGETConfig()
+      )
+        .then((res) => {
+          res
+            .text()
+            .then((createdInstance) => {
+              if (res.ok) return resolve(createdInstance);
+              this.handleWrongResponse(HttpMethod.GET, res);
+              reject(
+                new ApiError(
+                  Levels.ERROR,
+                  this.t(
+                    "ehrenamtJustizOnlineService.fehlermeldungen.fehlerBeiMethodeLesenVerfassungstreueMuster"
+                  )
+                )
+              );
+            })
+            .catch((reason) => reject(this.handleError(reason)));
+        })
+        .catch((reason) => reject(this.handleError(reason)));
+    });
+  }
 
+  /**
+   * Check Data
+   * @returns Promise<KonfigurationData>
+   * @param onlineBewerbungFormData
+   */
+  public async pruefen(
+    onlineBewerbungFormData: OnlineBewerbungData
+  ): Promise<string> {
+    return await new Promise<string>((resolve, reject) => {
+      const formData = new FormData();
+      formData.append("vorname", onlineBewerbungFormData.vorname);
+      formData.append("nachname", onlineBewerbungFormData.nachname);
+      formData.append("beruf", onlineBewerbungFormData.beruf);
+      formData.append("geburtsdatum", onlineBewerbungFormData.geburtsdatum);
+      formData.append("mail", onlineBewerbungFormData.mail);
+      formData.append("telefonnummer", onlineBewerbungFormData.telefonnummer);
+      fetch(
+        `${EhrenamtJustizOnlineServiceClass.getBaseUrl()}/onlinebewerbung/pruefen`,
+        getPOSTConfig(formData)
+      )
+        .then(async (res) => {
+          if (res.ok) {
+            await res.text().then(async (createdInstance) => {
+              resolve(createdInstance);
+            });
+          }
+          this.handleWrongResponse(HttpMethod.POST, res);
+          reject(
+            new ApiError(
+              Levels.ERROR,
+              this.t(
+                "ehrenamtJustizOnlineService.fehlermeldungen.fehlerBeiMethodePruefen"
+              )
+            )
+          );
+        })
+        .catch((reason) => reject(this.handleError(reason)));
+    });
+  }
   /**
    * Saves an online application in the database
    * @returns Promise<KonfigurationData>
@@ -90,10 +159,23 @@ export class EhrenamtJustizOnlineServiceClass {
   public async bewerbungSpeichern(
     onlineBewerbungFormData: OnlineBewerbungData
   ): Promise<string> {
+    const formData = new FormData();
+    if (onlineBewerbungFormData.dateiVerfassungstreue) {
+      formData.append(
+        "dateiVerfassungstreue",
+        onlineBewerbungFormData.dateiVerfassungstreue
+      );
+    }
+    formData.append("vorname", onlineBewerbungFormData.vorname);
+    formData.append("nachname", onlineBewerbungFormData.nachname);
+    formData.append("beruf", onlineBewerbungFormData.beruf);
+    formData.append("geburtsdatum", onlineBewerbungFormData.geburtsdatum);
+    formData.append("mail", onlineBewerbungFormData.mail);
+    formData.append("telefonnummer", onlineBewerbungFormData.telefonnummer);
     return await new Promise<string>((resolve, reject) => {
       fetch(
         `${EhrenamtJustizOnlineServiceClass.getBaseUrl()}/onlinebewerbung/bewerbungSpeichern`,
-        getPOSTConfig(onlineBewerbungFormData)
+        getPOSTConfig(formData)
       )
         .then(async (res) => {
           if (res.ok) {

@@ -78,6 +78,7 @@ const bewerbungFormData = ref<BewerbungFormData>({
   status: "",
   validierungdeaktivieren: false,
   action: "",
+  bestaetigungverfassungstreue_file: undefined,
 });
 const isLoading = ref(true);
 const animationAktiv = ref(false);
@@ -136,7 +137,24 @@ function loadBewerbung(): void {
         status: person.status,
         validierungdeaktivieren: false,
         action: action.value,
+        bestaetigungverfassungstreue_file: undefined,
       };
+      PersonApiService.getDocumentByPersonId(personId.value)
+        .then((document) => {
+          const byteArray = Uint8Array.from(atob(document.fileData), (c) =>
+            c.charCodeAt(0)
+          );
+          bewerbungFormData.value.bestaetigungverfassungstreue_file = new File(
+            [byteArray],
+            document.fileName,
+            {
+              type: document.contentType,
+            }
+          );
+        })
+        .catch(() => {
+          // No document attached for this person — leave the field undefined.
+        });
     })
     .catch((error: Error) => {
       snackbarStore.push({
@@ -198,7 +216,10 @@ function getPerson() {
 
 function save(): void {
   animationAktiv.value = true;
-  PersonApiService.updatePerson(getPerson())
+  PersonApiService.updatePerson(
+    getPerson(),
+    bewerbungFormData.value.bestaetigungverfassungstreue_file
+  )
     .then((updatedBewerber) => {
       switch (updatedBewerber.status) {
         case PERSONENSTATUS.STATUS_BEWERBUNG: {
@@ -232,7 +253,10 @@ function save(): void {
 
 function cancel(): void {
   animationAktiv.value = true;
-  PersonApiService.cancelBewerbung(getPerson())
+  PersonApiService.cancelBewerbung(
+    getPerson(),
+    bewerbungFormData.value.bestaetigungverfassungstreue_file
+  )
     .then((canceledBewerber) => {
       switch (canceledBewerber.status) {
         case PERSONENSTATUS.STATUS_BEWERBUNG:

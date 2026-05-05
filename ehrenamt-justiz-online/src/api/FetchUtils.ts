@@ -2,9 +2,8 @@
  * Returns a default GET-Config for fetch
  */
 export function getGETConfig(): RequestInit {
-  const requestMethod = "GET";
   return {
-    headers: getHeaders(requestMethod),
+    headers: getHeaders(),
     mode: "cors",
     credentials: "same-origin",
     redirect: "manual",
@@ -20,8 +19,8 @@ export function getPOSTConfig(body: any): RequestInit {
   const requestMethod = "POST";
   return {
     method: requestMethod,
-    body: body ? JSON.stringify(body) : undefined,
-    headers: getHeaders(requestMethod),
+    body: body,
+    headers: getHeaders(),
     mode: "cors",
     credentials: "same-origin",
     redirect: "manual",
@@ -32,11 +31,9 @@ export function getPOSTConfig(body: any): RequestInit {
  *  Builds the header for the request
  * @returns {Headers}
  */
-export function getHeaders(requestMethod = "GET"): Headers {
+export function getHeaders(): Headers {
   const headers = new Headers();
-  if (requestMethod !== "GET") {
-    headers.append("Content-Type", "application/json");
-  }
+
   const csrfCookie = _getXSRFToken();
   if (csrfCookie !== "") {
     headers.append("X-XSRF-TOKEN", csrfCookie);

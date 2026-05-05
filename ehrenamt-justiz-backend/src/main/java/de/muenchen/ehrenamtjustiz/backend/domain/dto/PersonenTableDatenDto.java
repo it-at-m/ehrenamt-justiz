@@ -41,6 +41,8 @@ public class PersonenTableDatenDto {
 
     private String ausgeuebteehrenaemter;
 
+    private boolean dateiVerfassungstreue;
+
     private Status status;
 
     // because of EI_EXPOSE_REP

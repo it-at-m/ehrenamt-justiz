@@ -16,6 +16,7 @@ spring:
     locations:
       - classpath:db/migration/schema
       # - classpath:db/migration/testdata
+    validate-migration-naming: true
   security:
     oauth2:
       resourceserver:

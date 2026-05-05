@@ -73,6 +73,7 @@ const konfliktLoesenFormData = ref<KonfliktLoesenFormData>({
   person_konfigurationid: "",
   person_status: "",
   person_validierungdeaktivieren: false,
+  person_bestaetigungverfassungstreue_file: undefined,
   ewo_familienname: "",
   ewo_geburtsname: "",
   ewo_vorname: "",
@@ -183,6 +184,19 @@ async function loadPerson(): Promise<void> {
         personenDaten.konfigurationid;
       konfliktLoesenFormData.value.person_status = personenDaten.status;
 
+      PersonApiService.getDocumentByPersonId(personenDatenId.value)
+        .then((document) => {
+          const byteArray = Uint8Array.from(atob(document.fileData), (c) =>
+            c.charCodeAt(0)
+          );
+          konfliktLoesenFormData.value.person_bestaetigungverfassungstreue_file =
+            new File([byteArray], document.fileName, {
+              type: document.contentType,
+            });
+        })
+        .catch(() => {
+          // No document attached for this person — leave the field undefined.
+        });
       // Get data from EWO
       EWOBuergerApiService.ewoSucheMitOM(personenDaten.ewoid)
         .then((eWOBuerger) => {
@@ -258,55 +272,58 @@ async function loadPerson(): Promise<void> {
 
 function save(): void {
   isSavingAnimation.value = true;
-  PersonApiService.updatePerson({
-    id: personenDatenId.value,
-    familienname: konfliktLoesenFormData.value.person_familienname,
-    geburtsname: konfliktLoesenFormData.value.person_geburtsname,
-    vorname: konfliktLoesenFormData.value.person_vorname,
-    geburtsdatum: konfliktLoesenFormData.value.person_geburtsdatum,
-    geschlecht: konfliktLoesenFormData.value.person_geschlecht,
-    ewoid: konfliktLoesenFormData.value.person_ewoid,
-    akademischergrad: konfliktLoesenFormData.value.person_akademischergrad,
-    geburtsort: konfliktLoesenFormData.value.person_geburtsort,
-    geburtsland: konfliktLoesenFormData.value.person_geburtsland,
-    familienstand: konfliktLoesenFormData.value.person_familienstand,
-    staatsangehoerigkeit:
-      konfliktLoesenFormData.value.person_staatsangehoerigkeit,
-    wohnungsgeber: konfliktLoesenFormData.value.person_wohnungsgeber,
-    strasse: konfliktLoesenFormData.value.person_strasse,
-    hausnummer: konfliktLoesenFormData.value.person_hausnummer,
-    appartmentnummer: konfliktLoesenFormData.value.person_appartmentnummer,
-    buchstabehausnummer:
-      konfliktLoesenFormData.value.person_buchstabehausnummer,
-    stockwerk: konfliktLoesenFormData.value.person_stockwerk,
-    teilnummerhausnummer:
-      konfliktLoesenFormData.value.person_teilnummerhausnummer,
-    adresszusatz: konfliktLoesenFormData.value.person_adresszusatz,
-    konfliktfeld: konfliktLoesenFormData.value.person_konfliktfeld,
-    postleitzahl: konfliktLoesenFormData.value.person_postleitzahl,
-    ort: konfliktLoesenFormData.value.person_ort,
-    inmuenchenseit: konfliktLoesenFormData.value.person_inmuenchenseit,
-    wohnungsstatus: konfliktLoesenFormData.value.person_wohnungsstatus,
-    auskunftssperre: konfliktLoesenFormData.value.person_auskunftssperre,
-    derzeitausgeuebterberuf:
-      konfliktLoesenFormData.value.person_derzeitausgeuebterberuf,
-    arbeitgeber: konfliktLoesenFormData.value.person_arbeitgeber,
-    telefonnummer: konfliktLoesenFormData.value.person_telefonnummer,
-    telefongesch: konfliktLoesenFormData.value.person_telefongesch,
-    telefonmobil: konfliktLoesenFormData.value.person_telefonmobil,
-    mailadresse: konfliktLoesenFormData.value.person_mailadresse,
-    ausgeuebteehrenaemter:
-      konfliktLoesenFormData.value.person_ausgeuebteehrenaemter,
-    onlinebewerbung: konfliktLoesenFormData.value.person_onlinebewerbung,
-    neuervorschlag: konfliktLoesenFormData.value.person_neuervorschlag,
-    warbereitstaetigals:
-      konfliktLoesenFormData.value.person_warbereitstaetigals,
-    warbereitstaetigalsvorvorperiode:
-      konfliktLoesenFormData.value.person_warbereitstaetigalsvorvorperiode,
-    bewerbungvom: konfliktLoesenFormData.value.person_bewerbungvom,
-    konfigurationid: konfliktLoesenFormData.value.person_konfigurationid,
-    status: konfliktLoesenFormData.value.person_status,
-  })
+  PersonApiService.updatePerson(
+    {
+      id: personenDatenId.value,
+      familienname: konfliktLoesenFormData.value.person_familienname,
+      geburtsname: konfliktLoesenFormData.value.person_geburtsname,
+      vorname: konfliktLoesenFormData.value.person_vorname,
+      geburtsdatum: konfliktLoesenFormData.value.person_geburtsdatum,
+      geschlecht: konfliktLoesenFormData.value.person_geschlecht,
+      ewoid: konfliktLoesenFormData.value.person_ewoid,
+      akademischergrad: konfliktLoesenFormData.value.person_akademischergrad,
+      geburtsort: konfliktLoesenFormData.value.person_geburtsort,
+      geburtsland: konfliktLoesenFormData.value.person_geburtsland,
+      familienstand: konfliktLoesenFormData.value.person_familienstand,
+      staatsangehoerigkeit:
+        konfliktLoesenFormData.value.person_staatsangehoerigkeit,
+      wohnungsgeber: konfliktLoesenFormData.value.person_wohnungsgeber,
+      strasse: konfliktLoesenFormData.value.person_strasse,
+      hausnummer: konfliktLoesenFormData.value.person_hausnummer,
+      appartmentnummer: konfliktLoesenFormData.value.person_appartmentnummer,
+      buchstabehausnummer:
+        konfliktLoesenFormData.value.person_buchstabehausnummer,
+      stockwerk: konfliktLoesenFormData.value.person_stockwerk,
+      teilnummerhausnummer:
+        konfliktLoesenFormData.value.person_teilnummerhausnummer,
+      adresszusatz: konfliktLoesenFormData.value.person_adresszusatz,
+      konfliktfeld: konfliktLoesenFormData.value.person_konfliktfeld,
+      postleitzahl: konfliktLoesenFormData.value.person_postleitzahl,
+      ort: konfliktLoesenFormData.value.person_ort,
+      inmuenchenseit: konfliktLoesenFormData.value.person_inmuenchenseit,
+      wohnungsstatus: konfliktLoesenFormData.value.person_wohnungsstatus,
+      auskunftssperre: konfliktLoesenFormData.value.person_auskunftssperre,
+      derzeitausgeuebterberuf:
+        konfliktLoesenFormData.value.person_derzeitausgeuebterberuf,
+      arbeitgeber: konfliktLoesenFormData.value.person_arbeitgeber,
+      telefonnummer: konfliktLoesenFormData.value.person_telefonnummer,
+      telefongesch: konfliktLoesenFormData.value.person_telefongesch,
+      telefonmobil: konfliktLoesenFormData.value.person_telefonmobil,
+      mailadresse: konfliktLoesenFormData.value.person_mailadresse,
+      ausgeuebteehrenaemter:
+        konfliktLoesenFormData.value.person_ausgeuebteehrenaemter,
+      onlinebewerbung: konfliktLoesenFormData.value.person_onlinebewerbung,
+      neuervorschlag: konfliktLoesenFormData.value.person_neuervorschlag,
+      warbereitstaetigals:
+        konfliktLoesenFormData.value.person_warbereitstaetigals,
+      warbereitstaetigalsvorvorperiode:
+        konfliktLoesenFormData.value.person_warbereitstaetigalsvorvorperiode,
+      bewerbungvom: konfliktLoesenFormData.value.person_bewerbungvom,
+      konfigurationid: konfliktLoesenFormData.value.person_konfigurationid,
+      status: konfliktLoesenFormData.value.person_status,
+    },
+    konfliktLoesenFormData.value.person_bestaetigungverfassungstreue_file
+  )
     .then(() => {
       router.push({
         name: "/konflikte/konflikteindex",

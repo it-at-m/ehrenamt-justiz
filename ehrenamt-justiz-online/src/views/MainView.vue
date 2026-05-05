@@ -65,167 +65,41 @@
           </muc-banner>
         </div>
         <v-container class="v-card-main-container">
-          <muc-callout type="info">
-            <template #content>
-              {{ t("mainView.info") }}
-              <muc-link
-                label="hier"
-                href="https://stadt.muenchen.de/service/info/hauptabteilung-ii-buergerangelegenheiten/1080614/"
-              />
-            </template>
-          </muc-callout>
-          <v-container fluid>
-            <v-form
-              ref="form"
-              class="m-form m-form--default"
-              @keydown.enter.prevent="speichern"
-            >
-              <v-row dense>
-                <muc-input
-                  v-model="onlineBewerbungFormData.vorname"
-                  :placeholder="t('mainView.form.vorname.label')"
-                  :label="t('mainView.form.vorname.label')"
-                  :required="true"
-                  :error-msg="errorMsgVorname"
-                  max="255"
-                />
-              </v-row>
-              <v-row dense>
-                <muc-input
-                  v-model="onlineBewerbungFormData.nachname"
-                  :placeholder="t('mainView.form.nachname.label')"
-                  :label="t('mainView.form.nachname.label')"
-                  :required="true"
-                  :error-msg="errorMsgNachname"
-                  max="300"
-                />
-              </v-row>
-              <v-row dense>
-                <muc-input
-                  v-model="onlineBewerbungFormData.geburtsdatum"
-                  :placeholder="t('mainView.form.geburtsdatum.label')"
-                  :label="t('mainView.form.geburtsdatum.label')"
-                  :required="true"
-                  type="date"
-                  :error-msg="errorMsgGeburtsdatum"
-                  @keydown.ctrl.v="zwischenablageEinfuegen()"
-                />
-              </v-row>
-              <v-row dense>
-                <muc-input
-                  v-model="onlineBewerbungFormData.beruf"
-                  :placeholder="t('mainView.form.beruf.label')"
-                  :label="t('mainView.form.beruf.label')"
-                  :required="true"
-                  :error-msg="errorMsgBeruf"
-                  max="255"
-                />
-              </v-row>
-              <v-row dense>
-                <muc-input
-                  v-model="onlineBewerbungFormData.telefonnummer"
-                  :placeholder="t('mainView.form.telefonnummer.label')"
-                  :label="t('mainView.form.telefonnummer.label')"
-                  :error-msg="errorMsgTelefonnummer"
-                  max="255"
-                />
-              </v-row>
-              <v-row dense>
-                <muc-input
-                  v-model="onlineBewerbungFormData.mail"
-                  :placeholder="t('mainView.form.mail.placeholder')"
-                  :label="t('mainView.form.mail.label')"
-                  :required="true"
-                  :error-msg="errorMsgMail"
-                  max="150"
-                />
-              </v-row>
-            </v-form>
-          </v-container>
+          <muc-stepper
+            ref="stepperRef"
+            :step-items="STEPPER_ITEMS"
+            :active-item="activeStep"
+            :disable-previous-steps="true"
+            @change-step="changeStep"
+          />
           <muc-divider />
-          <v-row class="button-row">
-            <v-col
-              class="button-wrapper"
-              sm="2"
-              md="2"
-              lg="2"
-              xl="2"
-            >
-              <muc-button
-                variant="primary"
-                @click="speichern()"
-              >
-                {{ t("mainView.buttons.bewerben") }}
-                <svg class="m-button__icon">
-                  <use xlink:href="#icon-floppy"></use>
-                </svg>
-              </muc-button>
-            </v-col>
-            <v-col
-              class="button-wrapper"
-              sm="2"
-              md="2"
-              lg="2"
-              xl="2"
-            >
-              <muc-button
-                variant="secondary"
-                @click="clearInputs()"
-                >{{ t("mainView.buttons.leeren") }}
-                <svg class="m-button__icon">
-                  <use xlink:href="#icon-close"></use>
-                </svg>
-              </muc-button>
-            </v-col>
-            <v-col
-              class="button-wrapper"
-              sm="2"
-              md="2"
-              lg="2"
-              xl="2"
-            >
-              <muc-percentage-spinner
-                v-if="isSavingAnimation"
-                size="40"
-              />
-            </v-col>
-          </v-row>
-          <muc-callout type="info">
-            <template #header>{{
-              t("mainView.datenschutzErklaerung.header")
-            }}</template>
-            <template #content>
-              {{ t("mainView.datenschutzErklaerung.content1") }}
-              <br /><br />
-              {{ t("mainView.datenschutzErklaerung.content2") }}
-              <br /><br />
-              {{ t("mainView.datenschutzErklaerung.content3") }}
-              <br />
-              {{ t("mainView.datenschutzErklaerung.content4") }}
-              <br />
-              {{ t("mainView.datenschutzErklaerung.content5") }}
-              <br /><br />
-              {{ t("mainView.datenschutzErklaerung.content6") }}
-              <muc-link
-                :label="t('mainView.datenschutzErklaerung.links.datenschutz')"
-                href="https://stadt.muenchen.de/infos/impressum-datenschutz.html#datenschutz"
-              />
-              {{ t("mainView.datenschutzErklaerung.content7") }}
-              <br /><br />
-              <muc-link
-                :label="
-                  t(
-                    'mainView.datenschutzErklaerung.links.elektronischeKommunikation'
-                  )
-                "
-                href="https://stadt.muenchen.de/infos/elektronische-kommunikation.html"
-              />
-              <br /><br />
-              {{ t("mainView.datenschutzErklaerung.content8") }}
-              <br /><br />
-              {{ t("mainView.datenschutzErklaerung.content9") }}
-            </template>
-          </muc-callout>
+          <div v-if="currentView === 0">
+            <allgemeine-info @next="increaseCurrentView" />
+          </div>
+          <div v-if="currentView === 1">
+            <bewerber-daten
+              v-model="onlineBewerbungFormData"
+              @previous-step="decreaseCurrentView"
+              @check-and-next-step="checkAndIncreaseCurrentView"
+            />
+          </div>
+          <div v-if="currentView === 2">
+            <verfassungstreue-bestaetigen
+              v-model="onlineBewerbungFormData"
+              @previous-step="decreaseCurrentView"
+              @save="speichern"
+              @erstellen-verfassungstreue-muster="
+                erstellenVerfassungstreueMuster
+              "
+            />
+          </div>
+          <div v-if="currentView === 3">
+            <online-bewerbung-erfolg />
+          </div>
+          <muc-percentage-spinner
+            v-if="isAnimation"
+            size="40"
+          />
         </v-container>
       </template>
     </muc-card>
@@ -238,47 +112,36 @@
 
 <script setup lang="ts">
 import type OnlineBewerbungData from "@/types/OnlineBewerbungData";
+import type { StepperItem } from "@/types/StepperTypes";
+import type { ComponentPublicInstance } from "vue";
 
 import {
   MucBanner,
-  MucButton,
-  MucCallout,
   MucCard,
   MucCardContainer,
   MucDivider,
-  MucInput,
-  MucLink,
   MucPercentageSpinner,
+  MucStepper,
 } from "@muenchen/muc-patternlab-vue";
-import moment from "moment/moment";
-import { ref } from "vue";
+import { nextTick, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
-import { VCol, VContainer, VForm, VRow } from "vuetify/components";
+import { VContainer } from "vuetify/components";
 
 import { EhrenamtJustizOnlineServiceClass } from "@/api/EhrenamtJustizOnlineService";
+import AllgemeineInfo from "@/components/AllgemeineInfo.vue";
+import BewerberDaten from "@/components/BewerberDaten.vue";
 import LogoLHM from "@/components/LogoLHM.vue";
 import MuenchenBanner from "@/components/MuenchenBanner.vue";
+import OnlineBewerbungErfolg from "@/components/OnlineBewerbungErfolg.vue";
+import VerfassungstreueBestaetigen from "@/components/VerfassungstreueBestaetigen.vue";
 import { useActiveKonfigurationStore } from "@/stores/activeconfig";
 
-const form = ref();
 const { t } = useI18n();
 const ehrenamtJustizOnlineService = new EhrenamtJustizOnlineServiceClass(t);
-const hinweise = ref<HTMLInputElement | null>(null);
-const isSavingAnimation = ref(false);
+const hinweise = ref<HTMLDivElement | null>(null);
+const isAnimation = ref(false);
 const bewerbunggespeichertergebbnis = ref("");
 const technischerfehler = ref("");
-
-const errorMsgVorname = ref("");
-const errorMsgNachname = ref("");
-const errorMsgGeburtsdatum = ref("");
-const errorMsgBeruf = ref("");
-const errorMsgTelefonnummer = ref("");
-const errorMsgMail = ref("");
-const REGEXP_TELEFON =
-  /^$|^((\+|00)[1-9]\d{0,3}|0 ?[1-9]|\(00? ?[1-9][\d ]*\))[\d\-/ ]*$/;
-const REGEX_MAIL =
-  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
 const onlineBewerbungFormData = ref<OnlineBewerbungData>({
   nachname: "",
   vorname: "",
@@ -286,176 +149,175 @@ const onlineBewerbungFormData = ref<OnlineBewerbungData>({
   geburtsdatum: "",
   mail: "",
   telefonnummer: "",
+  dateiVerfassungstreue: null,
+});
+const activeStep = ref<string>("0");
+const currentView = ref<number>(0);
+const decreaseCurrentView = () => currentView.value--;
+const increaseCurrentView = () => currentView.value++;
+const STEPPER_ITEMS: StepperItem[] = [
+  {
+    id: "0",
+    label: t("mainView.stepper.allgemeineInfo"),
+    icon: "shopping-cart",
+  },
+  {
+    id: "1",
+    label: t("mainView.stepper.bewerberDaten"),
+    icon: "calendar",
+  },
+  {
+    id: "2",
+    label: t("mainView.stepper.verfassungstreueDaten"),
+    icon: "mail",
+  },
+  {
+    id: "3",
+    label: t("mainView.stepper.bewerbungUebertragen"),
+    icon: "mail",
+  },
+];
+
+/**
+ * Adjusts the current view to the active step in the stepper
+ */
+const changeStep = (step: string) => {
+  if (parseInt(step) < parseInt(activeStep.value)) {
+    currentView.value = parseInt(step);
+  }
+};
+type StepperInstance = ComponentPublicInstance | HTMLElement | null;
+const stepperRef = ref<StepperInstance>(null);
+const focusActiveStepperItem = async () => {
+  await nextTick();
+
+  // Zugriff auf das gerenderte DOM des Steppers
+  const rootEl =
+    (stepperRef.value as ComponentPublicInstance | null)?.$el ??
+    (stepperRef.value as HTMLElement | null);
+
+  if (!(rootEl instanceof HTMLElement)) return;
+
+  const activeIcon = rootEl.querySelector<HTMLElement>(
+    ".m-form-step__icon[aria-current='step']"
+  );
+
+  activeIcon?.focus();
+};
+/**
+ * Adjusts the active step in the stepper to the current view
+ */
+watch(currentView, (newCurrentView) => {
+  activeStep.value = newCurrentView.toString();
+  goToTop();
+  focusActiveStepperItem();
 });
 
-function speichern(): void {
-  if (!isValid()) {
-    bewerbunggespeichertergebbnis.value = "EINGABEFEHLER";
-    technischerfehler.value = "";
-    if (hinweise.value) {
-      hinweise.value.scrollIntoView();
-    }
-  } else {
-    isSavingAnimation.value = true;
-    ehrenamtJustizOnlineService
-      .bewerbungSpeichern({
-        vorname: onlineBewerbungFormData.value.vorname,
-        nachname: onlineBewerbungFormData.value.nachname,
-        geburtsdatum: onlineBewerbungFormData.value.geburtsdatum,
-        telefonnummer: onlineBewerbungFormData.value.telefonnummer,
-        beruf: onlineBewerbungFormData.value.beruf,
-        mail: onlineBewerbungFormData.value.mail,
-      })
-      .then((bewerbunggespeichert) => {
+/**
+ * Sets the view to the top of the page after change the current view
+ */
+const goToTop = async () => {
+  await nextTick();
+  window.scrollTo({ top: 0, behavior: "instant" });
+};
+
+function checkAndIncreaseCurrentView(): void {
+  if (isAnimation.value) {
+    // double submission
+    return;
+  }
+  isAnimation.value = true;
+  ehrenamtJustizOnlineService
+    .pruefen({
+      vorname: onlineBewerbungFormData.value.vorname,
+      nachname: onlineBewerbungFormData.value.nachname,
+      geburtsdatum: onlineBewerbungFormData.value.geburtsdatum,
+      telefonnummer: onlineBewerbungFormData.value.telefonnummer,
+      beruf: onlineBewerbungFormData.value.beruf,
+      mail: onlineBewerbungFormData.value.mail,
+      dateiVerfassungstreue: null,
+    })
+    .then((bewerbunggespeichert) => {
+      if (bewerbunggespeichert == "OK") {
+        bewerbunggespeichertergebbnis.value = "";
+        increaseCurrentView();
+      } else {
         bewerbunggespeichertergebbnis.value = bewerbunggespeichert;
-        technischerfehler.value = "";
-        if (bewerbunggespeichert == "OK") {
-          clearInputs();
+      }
+      technischerfehler.value = "";
+    })
+    .catch((err) => (technischerfehler.value = err.toString()))
+    .finally(() => {
+      isAnimation.value = false;
+      if (hinweise.value) {
+        hinweise.value.scrollIntoView();
+      }
+    });
+}
+
+function speichern(): void {
+  if (isAnimation.value) {
+    // double submission
+    return;
+  }
+  isAnimation.value = true;
+  ehrenamtJustizOnlineService
+    .bewerbungSpeichern({
+      vorname: onlineBewerbungFormData.value.vorname,
+      nachname: onlineBewerbungFormData.value.nachname,
+      geburtsdatum: onlineBewerbungFormData.value.geburtsdatum,
+      telefonnummer: onlineBewerbungFormData.value.telefonnummer,
+      beruf: onlineBewerbungFormData.value.beruf,
+      mail: onlineBewerbungFormData.value.mail,
+      dateiVerfassungstreue:
+        onlineBewerbungFormData.value.dateiVerfassungstreue,
+    })
+    .then((bewerbunggespeichert) => {
+      bewerbunggespeichertergebbnis.value = bewerbunggespeichert;
+      technischerfehler.value = "";
+      if (bewerbunggespeichert === "OK") {
+        increaseCurrentView();
+      }
+    })
+    .catch((err) => (technischerfehler.value = err.toString()))
+    .finally(() => {
+      isAnimation.value = false;
+      if (hinweise.value) {
+        hinweise.value.scrollIntoView();
+      }
+    });
+}
+
+/**
+ * creates pattern of Verfassungstreue
+ */
+function erstellenVerfassungstreueMuster(): void {
+  technischerfehler.value = "";
+  ehrenamtJustizOnlineService
+    .lesenVerfassungstreueMuster()
+    .then((dateiVerfassungstreue) => {
+      try {
+        // 1) Base64 → Binary → Blob
+        const binary = atob(dateiVerfassungstreue);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+          bytes[i] = binary.charCodeAt(i);
         }
-      })
-      .catch((err) => (technischerfehler.value = err.toString()))
-      .finally(() => {
-        isSavingAnimation.value = false;
-        if (hinweise.value) {
-          hinweise.value.scrollIntoView();
-        }
-      });
-  }
-}
+        const blob = new Blob([bytes], { type: "application/pdf" });
 
-function isValid() {
-  let isValid = true;
-
-  isValid = validateVorname(isValid);
-
-  isValid = validateNachname(isValid);
-
-  isValid = validateGeburtsdatum(isValid);
-
-  isValid = validateBeruf(isValid);
-
-  isValid = validateTelefonnummer(isValid);
-
-  isValid = validateMail(isValid);
-
-  return isValid;
-}
-
-function validateVorname(isValid: boolean) {
-  // Vorname ist ein Pflichtfeld
-  errorMsgVorname.value = "";
-  if (!onlineBewerbungFormData.value.vorname) {
-    errorMsgVorname.value = t("mainView.form.vorname.pflichtfeld");
-    isValid = false;
-  } else if (onlineBewerbungFormData.value.vorname.length > 255) {
-    errorMsgVorname.value = t("mainView.form.vorname.maxLaenge");
-    isValid = false;
-  }
-  return isValid;
-}
-
-function validateNachname(isValid: boolean) {
-  // Nachname ist ein Pflichtfeld
-  errorMsgNachname.value = "";
-  if (!onlineBewerbungFormData.value.nachname) {
-    errorMsgNachname.value = t("mainView.form.nachname.pflichtfeld");
-    isValid = false;
-  } else if (onlineBewerbungFormData.value.nachname.length > 300) {
-    errorMsgNachname.value = t("mainView.form.nachname.maxLaenge");
-    isValid = false;
-  }
-  return isValid;
-}
-
-function validateGeburtsdatum(isValid: boolean) {
-  // Geburtsdatum ist ein Pflichtfeld und Alter prüfen
-  errorMsgGeburtsdatum.value = "";
-  if (!onlineBewerbungFormData.value.geburtsdatum) {
-    errorMsgGeburtsdatum.value = t("mainView.form.geburtsdatum.pflichtfeld");
-    isValid = false;
-  } else {
-    const alter = moment(
-      useActiveKonfigurationStore().getKonfiguration?.amtsperiodevon
-    ).diff(onlineBewerbungFormData.value.geburtsdatum, "years");
-
-    const altervon = useActiveKonfigurationStore().getKonfiguration?.altervon;
-    const alterbis = useActiveKonfigurationStore().getKonfiguration?.alterbis;
-    if ((alterbis && alter > alterbis) || (altervon && alter < altervon)) {
-      isValid = false;
-      errorMsgGeburtsdatum.value = t("mainView.form.geburtsdatum.invalide", {
-        altervon: altervon,
-        alterbis: alterbis,
-      });
-    }
-  }
-  return isValid;
-}
-
-function validateBeruf(isValid: boolean) {
-  // Beruf ist ein Pflichtfeld
-  errorMsgBeruf.value = "";
-  if (!onlineBewerbungFormData.value.beruf) {
-    errorMsgBeruf.value = t("mainView.form.beruf.pflichtfeld");
-    isValid = false;
-  } else if (onlineBewerbungFormData.value.beruf.length > 255) {
-    errorMsgBeruf.value = t("mainView.form.beruf.maxLaenge");
-    isValid = false;
-  }
-  return isValid;
-}
-
-function validateTelefonnummer(isValid: boolean) {
-  // Telefonnummer ist ein Pflichtfeld und Format prüfen
-  errorMsgTelefonnummer.value = "";
-
-  if (
-    onlineBewerbungFormData.value.telefonnummer &&
-    !REGEXP_TELEFON.test(onlineBewerbungFormData.value.telefonnummer)
-  ) {
-    errorMsgTelefonnummer.value = t("mainView.form.telefonnummer.invalide");
-    isValid = false;
-  }
-  return isValid;
-}
-
-function validateMail(isValid: boolean) {
-  // Mail ist ein Pflichtfeld und Format prüfen
-  errorMsgMail.value = "";
-  if (!onlineBewerbungFormData.value.mail) {
-    errorMsgMail.value = t("mainView.form.mail.pflichtfeld");
-    isValid = false;
-  } else if (!REGEX_MAIL.test(onlineBewerbungFormData.value.mail)) {
-    errorMsgMail.value = t("mainView.form.mail.invalide");
-    isValid = false;
-  }
-  return isValid;
-}
-
-function clearInputs(): void {
-  onlineBewerbungFormData.value.nachname = "";
-  onlineBewerbungFormData.value.vorname = "";
-  onlineBewerbungFormData.value.beruf = "";
-  onlineBewerbungFormData.value.geburtsdatum = "";
-  onlineBewerbungFormData.value.mail = "";
-  onlineBewerbungFormData.value.telefonnummer = "";
-}
-
-async function zwischenablageEinfuegen(): Promise<void> {
-  // Funktioniert in Firefox (getestet mit Version 115.17.0esr (64-Bit), wenn Property "dom.events.asyncClipboard.readText" auf true gesetzt wird (Vorher im Adressfeld "about:config" eingeben!))
-  // in Edge (getestet mit Version 131.0.2903.51 ) wird um Erlaubnis gefragt
-  // bei Crome (getestet mit Version Version 130.0.6723.117) funktioniert es generell
-  // Datum in der Zwischenablage muss im Format tt.mm.jjjj sein
-  try {
-    const text = await navigator.clipboard.readText();
-    const parts = text.split(".");
-
-    onlineBewerbungFormData.value.geburtsdatum =
-      parts[2] + "-" + parts[1] + "-" + parts[0];
-  } catch (err) {
-    /* eslint-disable no-console */
-    console.log("Failed to read clipboard contents: ", err);
-    /* eslint-enable no-console */
-  }
+        // 2) display PDF in browser
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "VerfassungstreueMuster.pdf";
+        link.click();
+        // Cleanup after delay to allow download to start
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      } catch (err) {
+        technischerfehler.value = String(err);
+      }
+    })
+    .catch((err) => (technischerfehler.value = err.toString()));
 }
 </script>
 
@@ -483,6 +345,16 @@ async function zwischenablageEinfuegen(): Promise<void> {
 #headerOnlineBewerbung {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+}
+.m-form-group {
+  width: 100%;
+}
+:deep(.container) {
+  /*Stepper with:*/
+  width: 1350px;
+}
+:deep(.m-form-step) {
   width: 100%;
 }
 </style>

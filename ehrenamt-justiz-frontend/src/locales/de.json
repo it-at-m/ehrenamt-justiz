@@ -16,7 +16,9 @@
       "geburtsdatum": "Das Alter muss zwischen {alterVon} und {alterBis} Jahren liegen",
       "staatsangehoerigkeit": "Die Staatsangehörigkeit enthält nicht {staatsangehoerigkeitAusKonfiguration}",
       "wohnsitz": "Der Wohnsitz ist nicht in {wohnsitzAusKonfiguration}",
-      "numerisch": "Nur numerische Werte sind erlaubt"
+      "numerisch": "Nur numerische Werte sind erlaubt",
+      "anhangZuGross": "Der Anhang ist zu gross. Maximal 1MB",
+      "anhangKeinPDF": "Der Anhang ist keine PDF-Datei"
     }
   },
   "app": {
@@ -277,6 +279,8 @@
         "arbeitgeber": "Arbeitgeber",
         "mailAdresse": "Mailadresse",
         "ausgeuebteEhrenaemter": "Ausgeübte Ehrenämter",
+        "dateiVerfassungstreue": "",
+        "dateiVerfassungstreueTooltip": "Anhang für Verfassungstreue",
         "actions": {
           "header": "Aktionen",
           "bewerberAendern": "Bewerber ändern",
@@ -314,7 +318,8 @@
       },
       "tabs": {
         "ausEwo": "Aus EWO",
-        "bewerberZusatzangaben": "Bewerber Zusatzangaben"
+        "bewerberZusatzangaben": "Bewerber Zusatzangaben",
+        "bestaetigungVerfassungstrue": "Bestätigung Verfassungstreue"
       },
       "tabEwo": {
         "expansionPanel": {
@@ -360,6 +365,10 @@
         "status": "Status*",
         "warBereitsAlsVerwaltungsrichterTaetig": "War bereits als {artEhrenamtJustiz} tätig",
         "warBereitsInVorperiodeAlsVerwaltungsrichterTaetig": "War bereits in Vorperiode als {artEhrenamtJustiz} tätig"
+      },
+      "tabBestaetigungVerfassungstreue": {
+        "dateiAblegen": "Datei für Verfassungstreue hier ablegen",
+        "dateiDurchsuchen": "Datei durchsuchen"
       },
       "saveLeaveDialog": {
         "dialogtitle": "Sie erfassen gerade eine neue Bewerbung",
@@ -471,6 +480,8 @@
         "arbeitgeber": "Arbeitgeber",
         "mailAdresse": "Mailadresse",
         "ausgeuebteEhrenaemter": "Ausgeübte Ehrenämter",
+        "dateiVerfassungstreue": "",
+        "dateiVerfassungstreueTooltip": "Anhang für Verfassungstreue",
         "actions": {
           "header": "Aktionen",
           "bewerberAendern": "Bewerber ändern",
