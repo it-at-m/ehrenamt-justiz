@@ -139,21 +139,22 @@ function loadBewerbung(): void {
         action: action.value,
         bestaetigungverfassungstreue_file: undefined,
       };
-      PersonApiService.getDocumentByPersonId(personId.value).then(
-        (document) => {
-          const byteCharacters = atob(document.fileData);
-          const byteNumbers = new Array(byteCharacters.length);
-          for (let i = 0; i < byteCharacters.length; i++) {
-            byteNumbers[i] = byteCharacters.charCodeAt(i);
-          }
-          const byteArray = new Uint8Array(byteNumbers);
+      PersonApiService.getDocumentByPersonId(personId.value)
+        .then((document) => {
+          const byteArray = Uint8Array.from(atob(document.fileData), (c) =>
+            c.charCodeAt(0)
+          );
           bewerbungFormData.value.bestaetigungverfassungstreue_file = new File(
             [byteArray],
             document.fileName,
-            { type: document.contentType }
+            {
+              type: document.contentType,
+            }
           );
-        }
-      );
+        })
+        .catch(() => {
+          // No document attached for this person — leave the field undefined.
+        });
     })
     .catch((error: Error) => {
       snackbarStore.push({

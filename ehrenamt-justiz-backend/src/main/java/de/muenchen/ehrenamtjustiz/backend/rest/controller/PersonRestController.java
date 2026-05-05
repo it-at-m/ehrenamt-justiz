@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -254,28 +255,19 @@ public class PersonRestController {
         // Bestehende Dokumente löschen
         final Document[] documents = documentRepository.getDocumentByPersonId(savedPerson.getId());
 
-        if (documents.length == 0 && dateiVerfassungstreue != null) {
-            documentSpeichern(dateiVerfassungstreue, savedPerson);
+        // If the only existing document matches the upload, no work needed.
+        if (documents.length == 1
+                && dateiVerfassungstreue != null
+                && documents[0].getFileName().equals(dateiVerfassungstreue.getOriginalFilename())
+                && documents[0].getFileLength().equals(dateiVerfassungstreue.getSize())
+                && Objects.equals(documents[0].getContentType(), dateiVerfassungstreue.getContentType())) {
             return;
         }
-
-        for (final Document document : documents) {
-            if (dateiVerfassungstreue != null &&
-                    document.getFileName().equals(dateiVerfassungstreue.getOriginalFilename()) &&
-                    document.getFileLength().equals(dateiVerfassungstreue.getSize()) &&
-                    document.getContentType().equals(dateiVerfassungstreue.getContentType())) {
-                continue;
-            }
-
-            documentRepository.delete(document);
-
-            if (dateiVerfassungstreue == null) {
-                continue;
-            }
-
+        // Otherwise: drop all existing, then insert the new one (if any).
+        documentRepository.deleteAll(Arrays.asList(documents));
+        if (dateiVerfassungstreue != null) {
             documentSpeichern(dateiVerfassungstreue, savedPerson);
         }
-
     }
 
     private void documentSpeichern(final MultipartFile dateiVerfassungstreue, final Person savedPerson) throws IOException {

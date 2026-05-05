@@ -184,20 +184,19 @@ async function loadPerson(): Promise<void> {
         personenDaten.konfigurationid;
       konfliktLoesenFormData.value.person_status = personenDaten.status;
 
-      PersonApiService.getDocumentByPersonId(personenDatenId.value).then(
-        (document) => {
-          const byteCharacters = atob(document.fileData);
-          const byteNumbers = new Array(byteCharacters.length);
-          for (let i = 0; i < byteCharacters.length; i++) {
-            byteNumbers[i] = byteCharacters.charCodeAt(i);
-          }
-          const byteArray = new Uint8Array(byteNumbers);
+      PersonApiService.getDocumentByPersonId(personenDatenId.value)
+        .then((document) => {
+          const byteArray = Uint8Array.from(atob(document.fileData), (c) =>
+            c.charCodeAt(0)
+          );
           konfliktLoesenFormData.value.person_bestaetigungverfassungstreue_file =
             new File([byteArray], document.fileName, {
               type: document.contentType,
             });
-        }
-      );
+        })
+        .catch(() => {
+          // No document attached for this person — leave the field undefined.
+        });
       // Get data from EWO
       EWOBuergerApiService.ewoSucheMitOM(personenDaten.ewoid)
         .then((eWOBuerger) => {

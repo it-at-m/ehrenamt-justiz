@@ -138,7 +138,7 @@ import { useActiveKonfigurationStore } from "@/stores/activeconfig";
 
 const { t } = useI18n();
 const ehrenamtJustizOnlineService = new EhrenamtJustizOnlineServiceClass(t);
-const hinweise = ref<HTMLInputElement | null>(null);
+const hinweise = ref<HTMLDivElement | null>(null);
 const isAnimation = ref(false);
 const bewerbunggespeichertergebbnis = ref("");
 const technischerfehler = ref("");
@@ -222,6 +222,10 @@ const goToTop = async () => {
 };
 
 function checkAndIncreaseCurrentView(): void {
+  if (isAnimation.value) {
+    // double submission
+    return;
+  }
   isAnimation.value = true;
   ehrenamtJustizOnlineService
     .pruefen({
@@ -252,6 +256,10 @@ function checkAndIncreaseCurrentView(): void {
 }
 
 function speichern(): void {
+  if (isAnimation.value) {
+    // double submission
+    return;
+  }
   isAnimation.value = true;
   ehrenamtJustizOnlineService
     .bewerbungSpeichern({
@@ -284,6 +292,7 @@ function speichern(): void {
  * creates pattern of Verfassungstreue
  */
 function erstellenVerfassungstreueMuster(): void {
+  technischerfehler.value = "";
   ehrenamtJustizOnlineService
     .lesenVerfassungstreueMuster()
     .then((dateiVerfassungstreue) => {

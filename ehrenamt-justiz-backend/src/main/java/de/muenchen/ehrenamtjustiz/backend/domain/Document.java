@@ -27,7 +27,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 public class Document extends BaseEntity {
 
     @Column(name = "content_type", nullable = false, length = 100)
-    private String contentType;
+    @NotNull private String contentType;
 
     @Column(name = "file_id", length = 51)
     private String fileId;
@@ -48,5 +48,5 @@ public class Document extends BaseEntity {
 
     @Column(name = "document_source", nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
-    private DocumentSource documentSource;
+    @NotNull private DocumentSource documentSource;
 }
