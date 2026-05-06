@@ -133,7 +133,7 @@ import { MucButton, MucDivider, MucInput } from "@muenchen/muc-patternlab-vue";
 import moment from "moment";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { VCol, VForm, VRow, VContainer } from "vuetify/components";
+import { VCol, VContainer, VForm, VRow } from "vuetify/components";
 
 import { useActiveKonfigurationStore } from "@/stores/activeconfig.ts";
 
