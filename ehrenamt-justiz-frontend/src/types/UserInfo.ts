@@ -43,5 +43,4 @@ export const USERINFO_EMPTY: UserInfo = {
   resource_access: {},
 
   authorities: [],
-
 };
