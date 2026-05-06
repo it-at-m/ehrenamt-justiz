@@ -93,7 +93,7 @@ import {
   MucLink,
 } from "@muenchen/muc-patternlab-vue";
 import { useI18n } from "vue-i18n";
-import { VCol, VForm, VRow } from "vuetify/components";
+import { VCol, VForm, VRow, VContainer } from "vuetify/components";
 
 const { t } = useI18n();
 const emits = defineEmits<{

@@ -108,7 +108,7 @@ import {
 } from "@muenchen/muc-patternlab-vue";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { VCol, VRow } from "vuetify/components";
+import { VCol, VRow, VContainer } from "vuetify/components";
 
 const { t } = useI18n();
 const zeigeLeerenDateiNameVerfassungstreue = ref(false);
