@@ -20,6 +20,8 @@ export interface UserInfo {
   // scope: lhm-core
   department: string;
   lhmObjectID: string;
+
+  authorities: string[];
 }
 
 export const USERINFO_EMPTY: UserInfo = {
@@ -39,4 +41,7 @@ export const USERINFO_EMPTY: UserInfo = {
   lhmObjectID: "",
 
   resource_access: {},
+
+  authorities: [],
+
 };
