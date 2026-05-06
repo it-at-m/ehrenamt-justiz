@@ -20,7 +20,6 @@ export interface UserInfo {
   // scope: lhm-core
   department: string;
   lhmObjectID: string;
-
 }
 
 export const USERINFO_EMPTY: UserInfo = {
