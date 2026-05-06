@@ -14,7 +14,8 @@ export class Ad2imageAvatarClient {
    * @returns href to retrieve the avatar for the user
    */
   avatarHref(username: string, mode = "fallbackGeneric", size = "64"): string {
-    const url = new URL("/avatar", this.base);
+    const url = new URL(AD2IMAGE_URL);
+    url.pathname = `${url.pathname}${url.pathname.endsWith("/") ? "" : "/"}avatar`;
     url.searchParams.append("uid", username);
     url.searchParams.append("m", mode);
     url.searchParams.append("size", size);
