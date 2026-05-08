@@ -295,24 +295,22 @@ function erstellenVerfassungstreueMuster(): void {
   technischerfehler.value = "";
   ehrenamtJustizOnlineService
     .lesenVerfassungstreueMuster()
-    .then((dateiVerfassungstreue) => {
+    .then((verfassungstreueMuster) => {
       try {
-        // 1) Base64 → Binary → Blob
-        const binary = atob(dateiVerfassungstreue);
-        const bytes = new Uint8Array(binary.length);
-        for (let i = 0; i < binary.length; i++) {
-          bytes[i] = binary.charCodeAt(i);
-        }
-        const blob = new Blob([bytes], { type: "application/pdf" });
-
-        // 2) display PDF in browser
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "VerfassungstreueMuster.pdf";
-        link.click();
-        // Cleanup after delay to allow download to start
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        const byteArray = Uint8Array.from(
+          atob(verfassungstreueMuster.fileData),
+          (c) => c.charCodeAt(0)
+        );
+        const verfassungstreueMusterFile = new File(
+          [byteArray],
+          verfassungstreueMuster.fileName,
+          {
+            type: verfassungstreueMuster.contentType,
+          }
+        );
+        const url = URL.createObjectURL(verfassungstreueMusterFile);
+        window.open(url, "_blank", "noopener,noreferrer");
+        setTimeout(() => URL.revokeObjectURL(url), 10_000);
       } catch (err) {
         technischerfehler.value = String(err);
       }

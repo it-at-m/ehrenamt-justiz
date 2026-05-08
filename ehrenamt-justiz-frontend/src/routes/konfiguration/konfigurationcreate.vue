@@ -54,18 +54,21 @@ const animationAktiv = ref(false);
 async function save() {
   animationAktiv.value = true;
   try {
-    await KonfigurationApiService.updateKonfiguration({
-      id: undefined,
-      ehrenamtjustizart: konfigurationData.ehrenamtjustizart,
-      bezeichnung: konfigurationData.bezeichnung,
-      aktiv: konfigurationData.aktiv,
-      amtsperiodevon: konfigurationData.amtsperiodevon.trim(),
-      amtsperiodebis: konfigurationData.amtsperiodebis.trim(),
-      staatsangehoerigkeit: konfigurationData.staatsangehoerigkeit.trim(),
-      wohnsitz: konfigurationData.wohnsitz.trim(),
-      altervon: konfigurationData.altervon,
-      alterbis: konfigurationData.alterbis,
-    });
+    await KonfigurationApiService.updateKonfiguration(
+      {
+        id: undefined,
+        ehrenamtjustizart: konfigurationData.ehrenamtjustizart,
+        bezeichnung: konfigurationData.bezeichnung,
+        aktiv: konfigurationData.aktiv,
+        amtsperiodevon: konfigurationData.amtsperiodevon.trim(),
+        amtsperiodebis: konfigurationData.amtsperiodebis.trim(),
+        staatsangehoerigkeit: konfigurationData.staatsangehoerigkeit.trim(),
+        wohnsitz: konfigurationData.wohnsitz.trim(),
+        altervon: konfigurationData.altervon,
+        alterbis: konfigurationData.alterbis,
+      },
+      konfigurationData.vorlageBestaetigungverfassungstreue_file
+    );
     await router.push({
       name: "/konfiguration/konfigurationindex",
     });

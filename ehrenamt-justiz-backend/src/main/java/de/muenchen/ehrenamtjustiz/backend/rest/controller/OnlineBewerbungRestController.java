@@ -3,8 +3,10 @@ package de.muenchen.ehrenamtjustiz.backend.rest.controller;
 import de.muenchen.ehrenamtjustiz.backend.domain.Document;
 import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
 import de.muenchen.ehrenamtjustiz.backend.domain.Person;
+import de.muenchen.ehrenamtjustiz.backend.domain.dto.DocumentDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerDatenDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerSucheDto;
+import de.muenchen.ehrenamtjustiz.backend.domain.dto.mapper.DocumentMapper;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.DocumentSource;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.rest.DocumentRepository;
@@ -20,7 +22,6 @@ import java.util.List;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,17 +54,24 @@ public class OnlineBewerbungRestController {
     DocumentRepository documentRepository;
 
     @Autowired
+    private DocumentMapper documentMapper;
+
+    @Autowired
     PersonRepository personRepository;
 
-    @Value("${verfassungstreue.muster}")
-    private String verfassungstreueMuster;
-
     @GetMapping("/lesenVerfassungstreueMuster")
-    public ResponseEntity<String> lesenVerfassungstreueMuster() {
+    public ResponseEntity<DocumentDto> lesenVerfassungstreueMuster() {
 
-        return ResponseEntity.ok()
-                .contentType(MediaType.TEXT_PLAIN)
-                .body(verfassungstreueMuster);
+        final Konfiguration[] konfiguration = konfigurationRepository.findByAktiv(true);
+
+        // Lesen Muster aus DB
+        final Document[] documents = documentRepository.getDocumentByKonfigurationId(konfiguration[0].getId());
+
+        if (documents == null || documents.length == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        // Only first document:
+        return ResponseEntity.ok(documentMapper.entity2Model(documents[0]));
     }
 
     @SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.UseObjectForClearerAPI" })
@@ -215,6 +223,7 @@ public class OnlineBewerbungRestController {
         document.setFileLength(dateiVerfassungstreue.getSize());
         document.setContentType(dateiVerfassungstreue.getContentType());
         document.setFileData(dateiVerfassungstreue.getBytes());
+        document.setKonfigurationid(null);
         document.setPersonid(savedPerson.getId());
         document.setDocumentSource(DocumentSource.ONLINE);
         documentRepository.save(document);

@@ -28,5 +28,7 @@ public class DocumentDto {
 
     private UUID personid;
 
+    private UUID konfigurationid;
+
     private String documentSource;
 }

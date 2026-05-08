@@ -29,6 +29,18 @@ public class DocumentRestController {
         this.documentMapper = documentMapper;
     }
 
+    @GetMapping(value = "/getDocumentByKonfigurationId/{konfigurationId}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @PreAuthorize(Authorities.HAS_AUTHORITY_READ_EHRENAMTJUSTIZDATEN)
+    public ResponseEntity<DocumentDto> getDocumentByKonfigurationId(@PathVariable final UUID konfigurationId) {
+
+        final Document[] documents = documentRepository.getDocumentByKonfigurationId(konfigurationId);
+        if (documents == null || documents.length == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        // Only first document:
+        return ResponseEntity.ok(documentMapper.entity2Model(documents[0]));
+    }
+
     @GetMapping(value = "/getDocumentByPersonId/{personId}", produces = { MediaType.APPLICATION_JSON_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_READ_EHRENAMTJUSTIZDATEN)
     public ResponseEntity<DocumentDto> getDocumentByPersonId(@PathVariable final UUID personId) {

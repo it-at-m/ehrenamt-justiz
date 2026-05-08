@@ -339,7 +339,7 @@ export default class EntityApiService<T extends Idable> {
     }
 
     formData.append(
-      "person",
+      "object",
       new Blob([JSON.stringify(instance)], { type: "application/json" })
     );
 

@@ -1,3 +1,4 @@
+import type DocumentData from "@/types/DocumentData.ts";
 import type KonfigurationData from "@/types/KonfigurationData";
 import type OnlineBewerbungData from "@/types/OnlineBewerbungData";
 
@@ -85,7 +86,7 @@ export class EhrenamtJustizOnlineServiceClass {
    * Gets the Pattern for 'Verfassungstreue'
    * @returns Promise<byte[]>
    */
-  public lesenVerfassungstreueMuster(): Promise<string> {
+  public lesenVerfassungstreueMuster(): Promise<DocumentData> {
     return new Promise((resolve, reject) => {
       fetch(
         `${EhrenamtJustizOnlineServiceClass.getBaseUrl()}/onlinebewerbung/lesenVerfassungstreueMuster`,
@@ -93,18 +94,11 @@ export class EhrenamtJustizOnlineServiceClass {
       )
         .then((res) => {
           res
-            .text()
+            .json()
             .then((createdInstance) => {
               if (res.ok) return resolve(createdInstance);
               this.handleWrongResponse(HttpMethod.GET, res);
-              reject(
-                new ApiError(
-                  Levels.ERROR,
-                  this.t(
-                    "ehrenamtJustizOnlineService.fehlermeldungen.fehlerBeiMethodeLesenVerfassungstreueMuster"
-                  )
-                )
-              );
+              reject();
             })
             .catch((reason) => reject(this.handleError(reason)));
         })

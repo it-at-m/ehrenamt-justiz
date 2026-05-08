@@ -22,6 +22,13 @@ public interface DocumentRepository extends CrudRepository<Document, UUID> {
 
     @Query(
         "SELECT d FROM Document d " +
+                "where d.konfigurationid=?1"
+    )
+    @PreAuthorize(Authorities.HAS_AUTHORITY_READ_EHRENAMTJUSTIZDATEN)
+    Document[] getDocumentByKonfigurationId(UUID konfigurationId);
+
+    @Query(
+        "SELECT d FROM Document d " +
                 "where d.personid=?1"
     )
     @PreAuthorize(Authorities.HAS_AUTHORITY_READ_EHRENAMTJUSTIZDATEN)

@@ -196,7 +196,7 @@ public class PersonRestController {
     @PostMapping(value = "/updatePerson", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
     public ResponseEntity<PersonDto> updatePerson(@RequestPart(value = "dateiVerfassungstreue", required = false) final MultipartFile dateiVerfassungstreue,
-            @RequestPart("person") final PersonDto personDto) throws IOException {
+            @RequestPart("object") final PersonDto personDto) throws IOException {
 
         final Person person = personMapper.model2Entity(personDto);
 
@@ -287,6 +287,7 @@ public class PersonRestController {
         newdocument.setContentType(dateiVerfassungstreue.getContentType());
         newdocument.setFileData(dateiVerfassungstreue.getBytes());
         newdocument.setPersonid(savedPerson.getId());
+        newdocument.setKonfigurationid(null);
         newdocument.setDocumentSource(DocumentSource.CORE);
         documentRepository.save(newdocument);
     }

@@ -223,7 +223,8 @@
         "staatsangehoerigkeit": "Staatsangehörigkeit: ",
         "wohnsitz": " / Wohnsitz: ",
         "alterVon": " / Alter von: ",
-        "alterBis": " bis "
+        "alterBis": " bis ",
+        "vorlageBestaetigungverfassungstreue": " / Vorlage für Verfassungstreue: "
       },
       "tooltip": {
         "aktivSetzen": "Aktiv setzen"
@@ -243,6 +244,8 @@
       "hoechstalter": "Höchstalter*",
       "staatsangehoerigkeit": "Staatsangehörigkeit*",
       "wohnsitz": "Wohnsitz*",
+      "dateiAblegen": "Vorlage für Verfassungstreue hier ablegen",
+      "dateiDurchsuchen": "Datei durchsuchen",
       "messages": {
         "fehler": "Das Formular ist nicht richtig ausgefüllt"
       },

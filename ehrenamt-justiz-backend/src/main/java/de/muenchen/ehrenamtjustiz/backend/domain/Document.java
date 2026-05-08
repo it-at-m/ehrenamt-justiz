@@ -46,6 +46,9 @@ public class Document extends BaseEntity {
     @Column(name = "person_id")
     private UUID personid;
 
+    @Column(name = "konfiguration_id")
+    private UUID konfigurationid;
+
     @Column(name = "document_source", nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
     @NotNull private DocumentSource documentSource;
