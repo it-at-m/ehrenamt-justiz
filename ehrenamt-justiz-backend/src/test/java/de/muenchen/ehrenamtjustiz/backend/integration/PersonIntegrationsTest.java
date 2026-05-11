@@ -188,7 +188,7 @@ class PersonIntegrationsTest {
         PersonDto personInErfassungDto = personMapper.entity2Model(personInErfassung);
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("person", personInErfassungDto);
+        body.add("object", personInErfassungDto);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
