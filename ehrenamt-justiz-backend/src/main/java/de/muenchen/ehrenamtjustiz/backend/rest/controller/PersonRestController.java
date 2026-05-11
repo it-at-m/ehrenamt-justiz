@@ -294,7 +294,7 @@ public class PersonRestController {
 
     @PostMapping(value = "/cancelBewerbung", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
-    public ResponseEntity<PersonDto> cancelBewerbung(@RequestPart("person") final PersonDto personDto) {
+    public ResponseEntity<PersonDto> cancelBewerbung(@RequestPart("object") final PersonDto personDto) {
         if (personDto.getStatus() == Status.INERFASSUNG) {
             // delete person, because inserting was interrupted
             personRepository.deleteInErfassung(personDto.getId());
