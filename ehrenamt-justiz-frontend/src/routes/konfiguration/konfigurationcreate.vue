@@ -48,7 +48,7 @@ const konfigurationData: KonfigurationFormData = reactive({
   altervon: 0,
   alterbis: 0,
   action: BEARBEIGUNGS_MODUS.EDIT_MODUS,
-  vorlageBestaetigungverfassungstreue_file: undefined
+  vorlageBestaetigungverfassungstreue_file: undefined,
 });
 const animationAktiv = ref(false);
 
