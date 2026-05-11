@@ -54,7 +54,6 @@
       "http409": "Dieser Datensatz kann nicht gelöscht werden, da er von anderen Teilen des Programms noch benötigt wird.",
       "http500": "Interner Serverfehler. Es können keine Daten ermittelt werden.",
       "fehlerBeiMethodeGetAktiveKonfiguration": "Fehler beim Aufruf der Methode 'GetAktiveKonfiguration'",
-      "fehlerBeiMethodeLesenVerfassungstreueMuster": "Fehler beim Aufruf der Methode 'lesenVerfassungstreueMuster'",
       "fehlerBeiMethodeBewerbungSpeichern": "Fehler beim Aufruf der Methode 'BewerbungSpeichern'",
       "fehlerBeiMethodePruefen": "Fehler beim Aufruf der Methode 'pruefen'"
     }

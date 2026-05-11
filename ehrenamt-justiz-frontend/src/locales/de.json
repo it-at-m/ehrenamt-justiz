@@ -223,8 +223,7 @@
         "staatsangehoerigkeit": "Staatsangehörigkeit: ",
         "wohnsitz": " / Wohnsitz: ",
         "alterVon": " / Alter von: ",
-        "alterBis": " bis ",
-        "vorlageBestaetigungverfassungstreue": " / Vorlage für Verfassungstreue: "
+        "alterBis": " bis "
       },
       "tooltip": {
         "aktivSetzen": "Aktiv setzen"
