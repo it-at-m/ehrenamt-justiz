@@ -1,4 +1,4 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
   <v-container fluid>
     <v-row dense>
       <muc-callout
@@ -41,19 +41,24 @@
       />
     </v-row>
     <v-row dense>
-      <muc-input
-        v-if="
-          dateiNameVerfassungstreue ||
-          zeigeLeerenDateiNameVerfassungstreue == true
-        "
-        id="dateiVerfassungstreue"
-        v-model="dateiNameVerfassungstreue"
-        class="mb-5 no-pointer"
-        :label="t('verfassungstreue.dateiname')"
-        :required="true"
-        :error-msg="errorMsgDateiVerfassungstreue"
-        readonly
-      />
+      <div
+        class="w-100"
+        @click="dateiVerfassungstreueAnzeigen"
+      >
+        <muc-input
+          v-if="
+            dateiNameVerfassungstreue ||
+            zeigeLeerenDateiNameVerfassungstreue == true
+          "
+          id="dateiVerfassungstreue"
+          v-model="dateiNameVerfassungstreue"
+          class="mb-5 no-pointer"
+          :label="t('verfassungstreue.dateiname')"
+          :required="true"
+          :error-msg="errorMsgDateiVerfassungstreue"
+          readonly
+        />
+      </div>
     </v-row>
     <muc-divider />
     <v-row class="button-row">
@@ -185,6 +190,17 @@ function validateDateiVerfassungstreue(isValid: boolean) {
     isValid = false;
   }
   return isValid;
+}
+
+function dateiVerfassungstreueAnzeigen() {
+  if (!onlineBewerbungFormData.value.dateiVerfassungstreue) {
+    return;
+  }
+  const url = URL.createObjectURL(
+    onlineBewerbungFormData.value.dateiVerfassungstreue
+  );
+  window.open(url, "_blank", "noopener,noreferrer");
+  setTimeout(() => URL.revokeObjectURL(url), 10_000);
 }
 </script>
 <style scoped>

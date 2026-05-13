@@ -3,12 +3,15 @@
     <muenchen-banner />
     <muc-card
       v-if="useActiveKonfigurationStore().getKonfiguration"
-      class="d-flex align-center flex-column"
+      class="d-flex align-center flex-column w-100"
       title=""
       :disabled="false"
     >
       <template #headerPrefix
-        ><div id="headerOnlineBewerbung">
+        ><div
+          id="headerOnlineBewerbung"
+          style="padding: 20px"
+        >
           <h2>{{ t("mainView.header") }}</h2>
           <logo-l-h-m />
         </div>
@@ -345,12 +348,13 @@ function erstellenVerfassungstreueMuster(): void {
   justify-content: space-between;
   width: 100%;
 }
-.m-form-group {
-  width: 100%;
-}
-:deep(.container) {
+:deep(.m-component__column) {
   /*Stepper with:*/
-  width: 1350px;
+  margin-left: 15% !important;
+  width: 70% !important;
+}
+:deep(.no-link-style) {
+  width: 100%;
 }
 :deep(.m-form-step) {
   width: 100%;
