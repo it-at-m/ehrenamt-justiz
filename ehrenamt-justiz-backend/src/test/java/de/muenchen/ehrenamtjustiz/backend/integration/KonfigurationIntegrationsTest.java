@@ -11,6 +11,7 @@ import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;
 import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.KonfigurationDto;
+import de.muenchen.ehrenamtjustiz.backend.domain.dto.mapper.KonfigurationMapper;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.testdata.KonfigurationTestDataBuilder;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,10 +22,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -42,6 +48,8 @@ class KonfigurationIntegrationsTest {
 
     @Autowired
     public KonfigurationRepository konfigurationRepository;
+    @Autowired
+    private KonfigurationMapper konfigurationMapper;
     @Autowired
     private TestRestTemplate testRestTemplate;
 
@@ -84,7 +92,16 @@ class KonfigurationIntegrationsTest {
 
         final Konfiguration konfiguration = new KonfigurationTestDataBuilder().withAktiv(false).build();
 
-        final ResponseEntity<Konfiguration> result = testRestTemplate.postForEntity("/konfiguration/updateKonfiguration", konfiguration, Konfiguration.class);
+        KonfigurationDto konfigurationDto = konfigurationMapper.entity2Model(konfiguration);
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("object", konfigurationDto);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+        final ResponseEntity<Konfiguration> result = testRestTemplate.postForEntity("/konfiguration/updateKonfiguration", requestEntity, Konfiguration.class);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         final Konfiguration konfigurationResult = result.getBody();

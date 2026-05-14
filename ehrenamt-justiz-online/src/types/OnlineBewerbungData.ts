@@ -10,4 +10,5 @@ export default interface OnlineBewerbungData {
   beruf: string;
   telefonnummer: string;
   mail: string;
+  dateiVerfassungstreue: File | null;
 }

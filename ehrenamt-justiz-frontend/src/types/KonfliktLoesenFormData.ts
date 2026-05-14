@@ -39,6 +39,7 @@ export default interface KonfliktLoesenFormData {
   person_konfigurationid: string;
   person_status: string;
   person_validierungdeaktivieren: boolean;
+  person_bestaetigungverfassungstreue_file: File | File[] | undefined;
 
   ewo_familienname: string;
   ewo_geburtsname: string;

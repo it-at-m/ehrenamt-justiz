@@ -144,6 +144,38 @@
           />
         </v-col>
       </v-row>
+      <v-row>
+        <v-col class="col">
+          <v-file-upload
+            v-model="konfiguration.vorlageBestaetigungverfassungstreue_file"
+            :show-size="true"
+            clearable
+            :rules="[rules.RULE_FILE_VERFASSUNGSTREUE]"
+          >
+            <template #default>
+              <v-file-upload-dropzone
+                density="comfortable"
+                :title="t('components.konfigurationForm.dateiAblegen')"
+                :subtitle="t('components.konfigurationForm.dateiDurchsuchen')"
+              ></v-file-upload-dropzone>
+
+              <v-file-upload-list class="upload-list">
+                <template #default="{ files, onClickRemove }">
+                  <v-file-upload-item
+                    v-for="(file, index) in files"
+                    :key="file.name"
+                    :file="file"
+                    clearable
+                    show-size
+                    @click:remove="onClickRemove(index)"
+                    @click="musterVerfassungstrueAnzeigen(file)"
+                  />
+                </template>
+              </v-file-upload-list>
+            </template>
+          </v-file-upload>
+        </v-col>
+      </v-row>
     </v-form>
   </div>
 </template>
@@ -161,6 +193,12 @@ import {
   VSelect,
   VTextField,
 } from "vuetify/components";
+import {
+  VFileUpload,
+  VFileUploadDropzone,
+  VFileUploadItem,
+  VFileUploadList,
+} from "vuetify/labs/VFileUpload";
 
 import App from "@/App.vue";
 import { useRules } from "@/composables/rules";
@@ -207,6 +245,12 @@ function speichern(): void {
     return;
   }
   emits("save");
+}
+
+function musterVerfassungstrueAnzeigen(file: File) {
+  const url = URL.createObjectURL(file);
+  window.open(url, "_blank", "noopener,noreferrer");
+  setTimeout(() => URL.revokeObjectURL(url), 10_000);
 }
 
 const konfiguration = computed({

@@ -78,6 +78,9 @@
       <v-tab value="bewerber"
         >{{ t("components.bewerbungForm.tabs.bewerberZusatzangaben") }}
       </v-tab>
+      <v-tab value="bestaetigungVerfassungstreue">{{
+        t("components.bewerbungForm.tabs.bestaetigungVerfassungstrue")
+      }}</v-tab>
     </v-tabs>
     <v-tabs-window v-model="active_tab">
       <v-tabs-window-item
@@ -714,6 +717,55 @@
           </v-card-text>
         </v-card>
       </v-tabs-window-item>
+      <v-tabs-window-item
+        :key="3"
+        style="padding: 1em"
+        value="bestaetigungVerfassungstreue"
+        eager
+      >
+        <v-card>
+          <v-card-text>
+            <v-row>
+              <v-file-upload
+                v-model="bewerbung.bestaetigungverfassungstreue_file"
+                :show-size="true"
+                clearable
+                :rules="[rules.RULE_FILE_VERFASSUNGSTREUE]"
+              >
+                <template #default>
+                  <v-file-upload-dropzone
+                    density="comfortable"
+                    :title="
+                      t(
+                        'components.bewerbungForm.tabBestaetigungVerfassungstreue.dateiAblegen'
+                      )
+                    "
+                    :subtitle="
+                      t(
+                        'components.bewerbungForm.tabBestaetigungVerfassungstreue.dateiDurchsuchen'
+                      )
+                    "
+                  ></v-file-upload-dropzone>
+
+                  <v-file-upload-list class="upload-list">
+                    <template #default="{ files, onClickRemove }">
+                      <v-file-upload-item
+                        v-for="(file, index) in files"
+                        :key="file.name"
+                        :file="file"
+                        clearable
+                        show-size
+                        @click:remove="onClickRemove(index)"
+                        @click="dateiVerfassungstrueAnzeigen(file)"
+                      />
+                    </template>
+                  </v-file-upload-list>
+                </template>
+              </v-file-upload>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-tabs-window-item>
     </v-tabs-window>
   </v-form>
   <yes-no-dialog
@@ -748,6 +800,12 @@ import {
   VTextarea,
   VTextField,
 } from "vuetify/components";
+import {
+  VFileUpload,
+  VFileUploadDropzone,
+  VFileUploadItem,
+  VFileUploadList,
+} from "vuetify/labs/VFileUpload";
 
 import AuthService from "@/api/AuthService";
 import YesNoDialog from "@/components/common/YesNoDialog.vue";
@@ -810,6 +868,10 @@ const tab1: string[] = [
   t("components.bewerbungForm.tabEwo.wohnungsstatus"),
 ];
 
+const tab2: string[] = [
+  t("components.bewerbungForm.tabBestaetigungVerfassungstreue.dateiAblegen"),
+];
+
 const statuswerte: string[] = [
   PERSONENSTATUS.STATUS_BEWERBUNG,
   PERSONENSTATUS.STATUS_VORSCHLAG,
@@ -860,6 +922,11 @@ function speichern(): void {
     }
   });
 }
+function dateiVerfassungstrueAnzeigen(file: File) {
+  const url = URL.createObjectURL(file);
+  window.open(url, "_blank", "noopener,noreferrer");
+  setTimeout(() => URL.revokeObjectURL(url), 10_000);
+}
 
 function felderLeeren(): void {
   bewerbung.value.derzeitausgeuebterberuf = "";
@@ -882,19 +949,29 @@ function setFocusAufFehler() {
 
     // Element with: error
     if (v_messages.length > 0) {
-      let istAufTab1 = false;
+      let istAufTab = 0;
       for (const value of tab1) {
         if (v_input.innerHTML.indexOf(value) > 0) {
-          istAufTab1 = true;
+          istAufTab = 1;
           break;
         }
       }
 
-      if (istAufTab1) {
+      for (const value of tab2) {
+        if (v_input.innerHTML.indexOf(value) > 0) {
+          istAufTab = 2;
+          break;
+        }
+      }
+
+      if (istAufTab == 1) {
         // Switch to tab "ewo":
         active_tab.value = "ewo";
+      } else if (istAufTab == 2) {
+        // Switch to tab "bestaetigungVerfassungstreue":
+        active_tab.value = "bestaetigungVerfassungstreue";
       } else {
-        // Switch to tab "bewerber":
+        // Switch to tab "bewerber" (default for unmatched fields):
         active_tab.value = "bewerber";
       }
       // Timeout 300, otherwise you will have to click on “Save” twice:
