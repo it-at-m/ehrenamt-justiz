@@ -27,7 +27,7 @@
     "vue": "3.5.33",
     "vue-router": "5.0.6",
     "vuetify": "3.12.5",
-    "vue-i18n": "11.4.0"
+    "vue-i18n": "11.4.2"
   },
   "devDependencies": {
     "@cyclonedx/cyclonedx-npm": "4.2.1",
