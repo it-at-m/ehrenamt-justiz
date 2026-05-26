@@ -80,5 +80,5 @@ const showDrawer = defineModel<boolean>({ required: true });
 const userInfoStore = useUserInfoStore();
 const { t } = useI18n();
 const globalSettingsStore = useGlobalSettingsStore();
-const user = computed(() => userInfoStore.getUserInfo);
+const user = computed(() => userInfoStore.userInfo);
 </script>
