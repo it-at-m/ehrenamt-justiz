@@ -156,7 +156,7 @@ const PERSON_UNICODE = 0x1f9cd;
 const yesNoDialogVisible = ref(false);
 const benachrichtigtMarkierenAnimationAktiv = ref(false);
 const userInfoStore = useUserInfoStore();
-const user = userInfoStore.getUserInfo;
+const user = userInfoStore.userInfo;
 const { t } = useI18n();
 
 onMounted(() => {

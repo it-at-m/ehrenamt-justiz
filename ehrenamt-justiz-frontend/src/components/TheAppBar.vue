@@ -142,7 +142,7 @@ const eaiStatus = ref("DOWN");
 const aenderungsserviceStatus = ref("DOWN");
 const appswitcherBaseUrl = APPSWITCHER_URL;
 let healthCheckTimeout: ReturnType<typeof setTimeout> | null = null;
-const user = computed(() => userInfoStore.getUserInfo);
+const user = computed(() => userInfoStore.userInfo);
 
 onMounted(() => {
   getUserInfo();

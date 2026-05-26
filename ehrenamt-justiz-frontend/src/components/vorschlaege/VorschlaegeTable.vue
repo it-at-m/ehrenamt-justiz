@@ -304,7 +304,7 @@ const deleteAnimationAktiv = ref(false);
 const bewerberListeAnimationAktiv = ref(false);
 const yesNoDialogVisible = ref(false);
 const userInfoStore = useUserInfoStore();
-const user = userInfoStore.getUserInfo;
+const user = userInfoStore.userInfo;
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function loadItems(options: any) {
