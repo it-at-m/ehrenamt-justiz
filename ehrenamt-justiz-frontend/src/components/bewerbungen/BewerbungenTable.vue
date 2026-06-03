@@ -105,6 +105,26 @@
             item.mailadresse
           }}</span>
         </template>
+        <template #[`item.dateiVerfassungstreue`]="{ item }">
+          <v-tooltip
+            v-if="AuthService.checkAuth('WRITE_EHRENAMTJUSTIZDATEN', t)"
+            location="bottom"
+          >
+            <template #activator="{ props }">
+              <span v-bind="props">
+                <v-icon
+                  v-if="item.dateiVerfassungstreue"
+                  :icon="mdiFile"
+                />
+              </span>
+            </template>
+            <span>{{
+              t(
+                "components.bewerbungenTable.table.dateiVerfassungstreueTooltip"
+              )
+            }}</span>
+          </v-tooltip>
+        </template>
         <template #[`item.actions`]="{ item }">
           <v-tooltip
             v-if="AuthService.checkAuth('WRITE_EHRENAMTJUSTIZDATEN', t)"
@@ -208,7 +228,7 @@
 <script setup lang="ts">
 import type PersonenTableData from "@/types/PersonenTableData";
 
-import { mdiEye, mdiPencil } from "@mdi/js";
+import { mdiEye, mdiFile, mdiPencil } from "@mdi/js";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
@@ -285,6 +305,12 @@ const headers: ReadonlyHeaders = computed(() => [
     value: "ausgeuebteehrenaemter",
     align: "start",
     sortable: true,
+  },
+  {
+    title: t("components.bewerbungenTable.table.dateiVerfassungstreue"),
+    value: "dateiVerfassungstreue",
+    align: "start",
+    sortable: false,
   },
   {
     title: t("components.bewerbungenTable.table.actions.header"),
@@ -420,7 +446,20 @@ async function aufVorschlagslisteSetzen(): Promise<void> {
         AuthService.checkAuth("READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE", t)
       ) {
         // Authorization available: Obtain confirmation from user:
-        invalidePersonen.value = fehlerhaftePersonen;
+        invalidePersonen.value = fehlerhaftePersonen.map((item) => ({
+          id: item.id,
+          familienname: item.familienname,
+          vorname: item.vorname,
+          geburtsdatum: item.geburtsdatum,
+          konfliktfeld: item.konfliktfeld,
+          auskunftssperre: item.auskunftssperre,
+          derzeitausgeuebterberuf: item.derzeitausgeuebterberuf,
+          arbeitgeber: item.arbeitgeber,
+          mailadresse: item.mailadresse,
+          ausgeuebteehrenaemter: item.ausgeuebteehrenaemter,
+          status: item.status,
+          dateiVerfassungstreue: false,
+        }));
         invalidePersonenSelectVisible.value = true;
       } else {
         // No authorization: Error:

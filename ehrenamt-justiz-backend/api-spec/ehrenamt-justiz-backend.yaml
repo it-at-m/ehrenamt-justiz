@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: ehrenamt-justiz-backend
   description: Backend of Ehrenamtjustiz
-  version: 0.0.10-SNAPSHOT
+  version: 0.0.11-SNAPSHOT
 servers:
 - url: http://localhost:8086
   description: Generated server url
@@ -13,6 +13,212 @@ tags:
     description: Spring Boot Actuator Web API Documentation
     url: https://docs.spring.io/spring-boot/docs/current/actuator-api/html/
 paths:
+  /document:
+    get:
+      tags:
+      - document-entity-controller
+      description: get-document
+      operationId: getCollectionResource-document-get
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/CollectionModelEntityModelDocument"
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: "#/components/schemas/CollectionModelEntityModelDocument"
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - document-entity-controller
+      description: create-document
+      operationId: postCollectionResource-document-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentRequestBody"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelDocument"
+  /document/search/deleteByPersonId:
+    get:
+      tags:
+      - document-search-controller
+      operationId: executeSearch-document-get
+      parameters:
+      - name: personId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+  /document/search/deleteByPersonIds:
+    get:
+      tags:
+      - document-search-controller
+      operationId: executeSearch-document-get_1
+      parameters:
+      - name: ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+  /document/search/getDocumentByKonfigurationId:
+    get:
+      tags:
+      - document-search-controller
+      operationId: executeSearch-document-get_2
+      parameters:
+      - name: konfigurationId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelDocument"
+        "404":
+          description: Not Found
+  /document/search/getDocumentByPersonId:
+    get:
+      tags:
+      - document-search-controller
+      operationId: executeSearch-document-get_3
+      parameters:
+      - name: person
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelDocument"
+        "404":
+          description: Not Found
+  /document/{id}:
+    get:
+      tags:
+      - document-entity-controller
+      description: get-document
+      operationId: getItemResource-document-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelDocument"
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - document-entity-controller
+      description: update-document
+      operationId: putItemResource-document-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentRequestBody"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelDocument"
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelDocument"
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - document-entity-controller
+      description: delete-document
+      operationId: deleteItemResource-document-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - document-entity-controller
+      description: patch-document
+      operationId: patchItemResource-document-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentRequestBody"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EntityModelDocument"
+        "204":
+          description: No Content
   /konfigurationen:
     get:
       tags:
@@ -597,7 +803,7 @@ paths:
             application/hal+json:
               schema:
                 $ref: "#/components/schemas/RepresentationModelObject"
-  /profile/konfigurationen:
+  /profile/document:
     get:
       tags:
       - profile-controller
@@ -615,11 +821,29 @@ paths:
             application/schema+json:
               schema:
                 $ref: "#/components/schemas/JsonSchema"
-  /profile/personen:
+  /profile/konfigurationen:
     get:
       tags:
       - profile-controller
       operationId: descriptor_1
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: "#/components/schemas/JsonSchema"
+  /profile/personen:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor_2
       responses:
         "200":
           description: OK
@@ -663,10 +887,17 @@ paths:
       operationId: updatePerson
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
-              $ref: "#/components/schemas/PersonDto"
-        required: true
+              required:
+              - object
+              type: object
+              properties:
+                dateiVerfassungstreue:
+                  type: string
+                  format: binary
+                object:
+                  $ref: "#/components/schemas/PersonDto"
       responses:
         "200":
           description: OK
@@ -724,10 +955,14 @@ paths:
       operationId: cancelBewerbung
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
-              $ref: "#/components/schemas/PersonDto"
-        required: true
+              required:
+              - person
+              type: object
+              properties:
+                person:
+                  $ref: "#/components/schemas/PersonDto"
       responses:
         "200":
           description: OK
@@ -793,17 +1028,103 @@ paths:
             application/hal+json:
               schema:
                 type: object
+  /onlinebewerbung/pruefen:
+    post:
+      tags:
+      - online-bewerbung-rest-controller
+      operationId: pruefen
+      parameters:
+      - name: vorname
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: nachname
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: beruf
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: geburtsdatum
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: mail
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: telefonnummer
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: string
   /onlinebewerbung/bewerbungSpeichern:
     post:
       tags:
       - online-bewerbung-rest-controller
       operationId: bewerbungSpeichern
+      parameters:
+      - name: vorname
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: nachname
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: beruf
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: geburtsdatum
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: mail
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: telefonnummer
+        in: query
+        required: true
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/OnlineBewerbungDatenDto"
-        required: true
+              type: object
+              properties:
+                dateiVerfassungstreue:
+                  type: string
+                  format: binary
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                dateiVerfassungstreue:
+                  type: string
+                  format: binary
       responses:
         "200":
           description: OK
@@ -818,10 +1139,17 @@ paths:
       operationId: updateKonfiguration
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
-              $ref: "#/components/schemas/KonfigurationDto"
-        required: true
+              required:
+              - object
+              type: object
+              properties:
+                dateiVerfassungstreue:
+                  type: string
+                  format: binary
+                object:
+                  $ref: "#/components/schemas/KonfigurationDto"
       responses:
         "200":
           description: OK
@@ -1063,6 +1391,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PagePersonenTableDatenDto"
+  /onlinebewerbung/lesenVerfassungstreueMuster:
+    get:
+      tags:
+      - online-bewerbung-rest-controller
+      operationId: lesenVerfassungstreueMuster
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/DocumentDto"
   /konfiguration/getAktiveKonfiguration:
     get:
       tags:
@@ -1129,6 +1469,44 @@ paths:
             application/hal+json:
               schema:
                 type: string
+  /document/getDocumentByPersonId/{personId}:
+    get:
+      tags:
+      - document-rest-controller
+      operationId: getDocumentByPersonId
+      parameters:
+      - name: personId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentDto"
+  /document/getDocumentByKonfigurationId/{konfigurationId}:
+    get:
+      tags:
+      - document-rest-controller
+      operationId: getDocumentByKonfigurationId
+      parameters:
+      - name: konfigurationId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentDto"
   /actuator:
     get:
       tags:
@@ -1623,6 +2001,90 @@ components:
                 $ref: "#/components/schemas/EntityModelPerson"
         _links:
           $ref: "#/components/schemas/Links"
+    EntityModelDocument:
+      required:
+      - contentType
+      - documentSource
+      - fileData
+      - fileName
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        contentType:
+          type: string
+        fileId:
+          type: string
+        fileLength:
+          type: integer
+          format: int64
+        fileName:
+          type: string
+        fileData:
+          type: string
+          format: byte
+        personid:
+          type: string
+          format: uuid
+        konfigurationid:
+          type: string
+          format: uuid
+        documentSource:
+          type: string
+          enum:
+          - ONLINE
+          - CORE
+          - CONFIGURATION
+        _links:
+          $ref: "#/components/schemas/Links"
+    CollectionModelEntityModelDocument:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            document:
+              type: array
+              items:
+                $ref: "#/components/schemas/EntityModelDocument"
+        _links:
+          $ref: "#/components/schemas/Links"
+    DocumentRequestBody:
+      required:
+      - contentType
+      - documentSource
+      - fileData
+      - fileName
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        contentType:
+          type: string
+        fileId:
+          type: string
+        fileLength:
+          type: integer
+          format: int64
+        fileName:
+          type: string
+        fileData:
+          type: string
+          format: byte
+        personid:
+          type: string
+          format: uuid
+        konfigurationid:
+          type: string
+          format: uuid
+        documentSource:
+          type: string
+          enum:
+          - ONLINE
+          - CORE
+          - CONFIGURATION
     KonfigurationRequestBody:
       required:
       - aktiv
@@ -2047,22 +2509,6 @@ components:
           type: string
         staatsangehoerigkeit:
           type: string
-    OnlineBewerbungDatenDto:
-      type: object
-      properties:
-        nachname:
-          type: string
-        vorname:
-          type: string
-        geburtsdatum:
-          type: string
-          format: date
-        beruf:
-          type: string
-        telefonnummer:
-          type: string
-        mail:
-          type: string
     KonfigurationDto:
       type: object
       properties:
@@ -2222,15 +2668,15 @@ components:
           format: int64
         sort:
           $ref: "#/components/schemas/SortObject"
-        pageNumber:
-          type: integer
-          format: int32
         pageSize:
           type: integer
           format: int32
-        paged:
-          type: boolean
+        pageNumber:
+          type: integer
+          format: int32
         unpaged:
+          type: boolean
+        paged:
           type: boolean
     PersonenTableDatenDto:
       type: object
@@ -2261,6 +2707,8 @@ components:
           type: string
         ausgeuebteehrenaemter:
           type: string
+        dateiVerfassungstreue:
+          type: boolean
         status:
           type: string
           enum:
@@ -2273,10 +2721,36 @@ components:
       properties:
         empty:
           type: boolean
-        sorted:
-          type: boolean
         unsorted:
           type: boolean
+        sorted:
+          type: boolean
+    DocumentDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        contentType:
+          type: string
+        fileId:
+          type: string
+        fileLength:
+          type: integer
+          format: int64
+        fileName:
+          type: string
+        fileData:
+          type: string
+          format: byte
+        personid:
+          type: string
+          format: uuid
+        konfigurationid:
+          type: string
+          format: uuid
+        documentSource:
+          type: string
     EhrenamtJustizStatusDto:
       type: object
       properties:

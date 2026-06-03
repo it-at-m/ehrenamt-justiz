@@ -19,7 +19,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OrderColumn;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import java.io.Serial;
 import java.util.Collections;
 import java.util.UUID;
 import lombok.EqualsAndHashCode;
@@ -43,10 +42,8 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @SuperBuilder
-@SuppressWarnings({ "PMD.TooManyFields", "CPD-START" })
+@SuppressWarnings({ "PMD.TooManyFields", "PMD.MissingSerialVersionUID", "CPD-START" })
 public class Person extends BaseEntity {
-    @Serial
-    private static final long serialVersionUID = 1L;
 
     @Column(name = "ewoid")
     @Size(max = 255) private String ewoid;

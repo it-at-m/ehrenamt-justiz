@@ -40,4 +40,5 @@ export default interface BewerbungFormData {
   status: string;
   validierungdeaktivieren: boolean;
   action: string;
+  bestaetigungverfassungstreue_file: File | File[] | undefined;
 }

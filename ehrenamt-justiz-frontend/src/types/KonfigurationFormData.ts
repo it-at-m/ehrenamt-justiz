@@ -9,4 +9,5 @@ export default interface KonfigurationFormData {
   staatsangehoerigkeit: string;
   wohnsitz: string;
   action: string;
+  vorlageBestaetigungverfassungstreue_file: File | File[] | undefined;
 }

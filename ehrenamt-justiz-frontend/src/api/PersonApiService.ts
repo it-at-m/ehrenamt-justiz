@@ -1,4 +1,5 @@
 import type PagedEntity from "@/types/base/PagedEntity";
+import type DocumentData from "@/types/DocumentData.ts";
 import type PersonCSV from "@/types/PersonCSV";
 import type PersonData from "@/types/PersonData";
 import type PersonenTableData from "@/types/PersonenTableData";
@@ -80,12 +81,26 @@ class PersonenApiServiceClass extends EntityApiService<PersonData> {
     });
   }
 
-  public updatePerson(person: PersonData): Promise<PersonData> {
-    return this.postData(person, "/personen/updatePerson");
+  public updatePerson(
+    person: PersonData,
+    bestaetigungverfassungstreue_file: File | File[] | undefined
+  ): Promise<PersonData> {
+    return this.postData(
+      person,
+      bestaetigungverfassungstreue_file,
+      "/personen/updatePerson"
+    );
   }
 
-  public cancelBewerbung(person: PersonData): Promise<PersonData> {
-    return this.postData(person, "/personen/cancelBewerbung");
+  public cancelBewerbung(
+    person: PersonData,
+    bestaetigungverfassungstreue_file: File | File[] | undefined
+  ): Promise<PersonData> {
+    return this.postData(
+      person,
+      bestaetigungverfassungstreue_file,
+      "/personen/cancelBewerbung"
+    );
   }
 
   public async validiereAufVorschlagslisteSetzen(
@@ -197,6 +212,26 @@ class PersonenApiServiceClass extends EntityApiService<PersonData> {
           if (res.ok) return resolve();
           EntityApiService.handleWrongResponse(HttpMethod.POST, res);
           reject();
+        })
+        .catch((reason) => reject(EntityApiService.handleError(reason)));
+    });
+  }
+
+  public async getDocumentByPersonId(uuid: string): Promise<DocumentData> {
+    return await new Promise<DocumentData>((resolve, reject) => {
+      fetch(
+        `${this.getBaseUrl()}/document/getDocumentByPersonId/${uuid}`,
+        getGETConfig()
+      )
+        .then((res) => {
+          res
+            .json()
+            .then((createdInstance) => {
+              if (res.ok) return resolve(createdInstance);
+              EntityApiService.handleWrongResponse(HttpMethod.POST, res);
+              reject();
+            })
+            .catch((reason) => reject(EntityApiService.handleError(reason)));
         })
         .catch((reason) => reject(EntityApiService.handleError(reason)));
     });
