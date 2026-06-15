@@ -1,7 +1,5 @@
 package de.muenchen.ehrenamtjustiz.backend.rest.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
 import de.muenchen.ehrenamtjustiz.backend.domain.Person;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.EWOBuergerDatenDto;
@@ -31,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
+import tools.jackson.databind.ObjectMapper;
 
 @RestController
 @Slf4j
@@ -79,7 +78,7 @@ public class EhrenamtJustizRestController {
 
     @GetMapping(value = "/ewoSucheMitOM", produces = { MediaType.APPLICATION_JSON_VALUE })
     @PreAuthorize(Authorities.HAS_AUTHORITY_EWOSUCHEMITOM)
-    @SuppressFBWarnings("NP_NONNULL_PARAM_VIOLATION")
+    @SuppressFBWarnings("NP_LOAD_OF_KNOWN_NULL_VALUE")
     public ResponseEntity<EWOBuergerDatenDto> ewoSucheMitOm(@RequestParam("om") final String om) {
 
         log.info("ewoSucheMitOm mit OM: {}", om);
@@ -87,7 +86,7 @@ public class EhrenamtJustizRestController {
         final EWOBuergerDatenDto ewoResponse = eWOService.ewoSucheMitOM(om);
         if (ewoResponse == null) {
             log.info("ewoSucheMitOm: NOT_FOUND");
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(ewoResponse, HttpStatus.NOT_FOUND);
         } else {
 
             log.info("Ergebnis ewoSucheMitOm mit Familienname: {}, Vorname: {}, Geburtsdatum: {}",
@@ -143,7 +142,7 @@ public class EhrenamtJustizRestController {
     }
 
     @PostMapping(value = "/pruefeWohnsitz", consumes = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<String> pruefeWohnsitz(@RequestBody final String ort) throws JsonProcessingException {
+    public ResponseEntity<String> pruefeWohnsitz(@RequestBody final String ort) {
 
         final String ortFilter = new ObjectMapper().readValue(ort, String.class); // To avoid double ""
 
@@ -154,7 +153,7 @@ public class EhrenamtJustizRestController {
     }
 
     @PostMapping(value = "/pruefenNeuePerson", consumes = { MediaType.APPLICATION_JSON_VALUE })
-    @SuppressFBWarnings("NP_NONNULL_PARAM_VIOLATION")
+    @SuppressFBWarnings("NP_LOAD_OF_KNOWN_NULL_VALUE")
     public ResponseEntity<PersonDto> pruefenNeuePerson(@RequestBody final EWOBuergerDatenDto eWOBuergerDaten) {
 
         log.info("pruefenNeuePerson mit EWO-OM: {}", eWOBuergerDaten.getOrdnungsmerkmal());
@@ -165,7 +164,8 @@ public class EhrenamtJustizRestController {
         final Person person = personRepository.findByOM(eWOBuergerDaten.getOrdnungsmerkmal(), konfiguration[0].getId());
         if (person == null) {
             log.info("pruefenNeuePerson: NOT_FOUND");
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            final PersonDto personDto = personMapper.entity2Model(person);
+            return new ResponseEntity<>(personDto, HttpStatus.NOT_FOUND);
         } else {
             log.info("pruefenNeuePerson: OK");
             final PersonDto personDto = personMapper.entity2Model(person);

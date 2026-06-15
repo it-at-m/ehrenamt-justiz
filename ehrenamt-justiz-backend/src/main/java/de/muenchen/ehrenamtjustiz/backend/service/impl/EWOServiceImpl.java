@@ -13,7 +13,6 @@ import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
 import de.muenchen.ehrenamtjustiz.backend.service.EWOService;
 import de.muenchen.ehrenamtjustiz.backend.utils.EhrenamtJustizUtility;
 import de.muenchen.ehrenamtjustiz.exception.AenderungsServiceException;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,19 +20,13 @@ import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 @Slf4j
@@ -41,16 +34,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class EWOServiceImpl implements EWOService {
 
     @Autowired
-    private RestTemplate restTemplate;
+    private RestClient restClient;
 
     @Autowired
     PersonRepository personRepository;
 
     @Autowired
     KonfigurationRepository konfigurationRepository;
-
-    @Value("${ewo.eai.server}")
-    private String serverewoeai;
 
     @Value("${ewo.eai.basepathprefix}")
     private String basepathewoeaiprefix;
@@ -70,21 +60,16 @@ public class EWOServiceImpl implements EWOService {
     @Override
     public EWOBuergerDatenDto ewoSucheMitOM(final String om) {
 
-        final MultiValueMap<String, String> headers = new HttpHeaders();
-        final RequestEntity<String> request;
-
-        request = new RequestEntity<>(headers, HttpMethod.GET, UriComponentsBuilder
-                .fromUriString(serverewoeai)
-                .path(basepathewoeai + "/eairoutes/ewosuchemitom/" + om)
-                .build()
-                .toUri());
-
-        final ResponseEntity<EWOBuerger> responseEntity;
+        final EWOBuerger response;
         EWOBuergerDatenDto eWOBuergerDaten = null;
 
         try {
-            responseEntity = restTemplate.exchange(request, EWOBuerger.class);
-            eWOBuergerDaten = mapToEWOBuerger(responseEntity.getBody());
+            response = restClient
+                    .get()
+                    .uri(basepathewoeai + "/eairoutes/ewosuchemitom/{om}", om)
+                    .retrieve()
+                    .body(EWOBuerger.class);
+            eWOBuergerDaten = mapToEWOBuerger(response);
         } catch (HttpClientErrorException e) {
             log.error("Fehler in ewoSucheMitOM beim OM {}", om, e);
         } catch (ResourceAccessException e) {
@@ -108,21 +93,18 @@ public class EWOServiceImpl implements EWOService {
      */
     @Override
     public EWOBuergerDatenDto ewoSucheMitOMAenderungsService(final String om) {
-        final MultiValueMap<String, String> headers = new HttpHeaders();
-        final RequestEntity<String> request;
 
-        request = new RequestEntity<>(headers, HttpMethod.GET, UriComponentsBuilder
-                .fromUriString(serverewoeai)
-                .path(basepathewoeai + "/eairoutes/ewosuchemitom/" + om)
-                .build()
-                .toUri());
-
-        final ResponseEntity<EWOBuerger> responseEntity;
+        final EWOBuerger response;
         final EWOBuergerDatenDto eWOBuergerDaten;
 
         try {
-            responseEntity = restTemplate.exchange(request, EWOBuerger.class);
-            eWOBuergerDaten = mapToEWOBuerger(responseEntity.getBody());
+            response = restClient
+                    .get()
+                    .uri(basepathewoeai + "/eairoutes/ewosuchemitom/{om}", om)
+                    .retrieve()
+                    .body(EWOBuerger.class);
+
+            eWOBuergerDaten = mapToEWOBuerger(response);
         } catch (HttpClientErrorException e) {
             log.error("Fehler in ewoSucheMitOM beim OM {}", om, e);
             throw new AenderungsServiceException("Fehler in ewoSucheMitOM", om, true);
@@ -144,16 +126,18 @@ public class EWOServiceImpl implements EWOService {
      * @return List<EWOBuergerDatenDto>
      */
     @Override
-    @SuppressFBWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     public List<EWOBuergerDatenDto> ewoSuche(final EWOBuergerSucheDto eWOBuergerSucheDto) {
 
         final List<EWOBuergerDatenDto> eWOBuerger = new ArrayList<>();
 
         final BuergerSucheAnfrage buergerSucheAnfrage = mapToSuchAnfrage(eWOBuergerSucheDto);
 
-        final HttpEntity<BuergerSucheAnfrage> entity = new HttpEntity<>(buergerSucheAnfrage);
-        final ResponseEntity<EWOBuerger[]> responseEntity = restTemplate.exchange(serverewoeai + basepathewoeai + "/eairoutes/ewosuche", HttpMethod.POST,
-                entity, EWOBuerger[].class);
+        final ResponseEntity<EWOBuerger[]> responseEntity = restClient
+                .post()
+                .uri(basepathewoeai + "/eairoutes/ewosuche")
+                .body(buergerSucheAnfrage)
+                .retrieve()
+                .toEntity(EWOBuerger[].class);
 
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
             for (int i = 0; i < Objects.requireNonNull(responseEntity.getBody()).length; i++) {
@@ -185,7 +169,12 @@ public class EWOServiceImpl implements EWOService {
     public ResponseEntity<String> ewoEaiStatus() {
 
         try {
-            final ResponseEntity<Void> responseEntity = restTemplate.getForEntity(serverewoeai + basepathewoeaiprefix + "/actuator/health", Void.class);
+            final ResponseEntity<Void> responseEntity = restClient
+                    .get()
+                    .uri(basepathewoeaiprefix + "/actuator/health")
+                    .retrieve()
+                    .toEntity(Void.class);
+
             return new ResponseEntity<>(responseEntity.getStatusCode() == HttpStatus.OK ? EhrenamtJustizUtility.STATUS_UP : EhrenamtJustizUtility.STATUS_DOWN,
                     responseEntity.getStatusCode());
         } catch (RuntimeException ex) {
@@ -199,8 +188,15 @@ public class EWOServiceImpl implements EWOService {
     public ResponseEntity<String> aenderungsserviceStatus() {
 
         try {
-            final ResponseEntity<Void> responseEntity = restTemplate.getForEntity(serverewoeai + basepathaenderungsserviceprefix + "/actuator/health",
-                    Void.class);
+
+            final ResponseEntity<Void> responseEntity = restClient
+                    .get()
+                    .uri(uriBuilder -> uriBuilder
+                            .path(basepathaenderungsserviceprefix + "/actuator/health")
+                            .build())
+                    .retrieve()
+                    .toEntity(Void.class);
+
             return new ResponseEntity<>(responseEntity.getStatusCode() == HttpStatus.OK ? EhrenamtJustizUtility.STATUS_UP : EhrenamtJustizUtility.STATUS_DOWN,
                     responseEntity.getStatusCode());
         } catch (RuntimeException ex) {
