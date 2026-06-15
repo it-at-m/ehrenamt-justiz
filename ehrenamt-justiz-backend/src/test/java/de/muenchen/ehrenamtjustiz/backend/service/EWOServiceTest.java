@@ -29,6 +29,7 @@ import de.muenchen.ehrenamtjustiz.backend.utils.EhrenamtJustizUtility;
 import de.muenchen.ehrenamtjustiz.exception.AenderungsServiceException;
 import java.time.LocalDate;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -123,6 +124,11 @@ class EWOServiceTest {
 
         // insert new active configuration
         konfigurationRepository.save(new KonfigurationTestDataBuilder().build());
+    }
+
+    @AfterEach
+    void tearDown() {
+        mockRestServiceServer.verify();
     }
 
     @Test
