@@ -6,10 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withBadRequest;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withGatewayTimeout;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 import de.muenchen.ehrenamtjustiz.api.EWOBuerger;
 import de.muenchen.ehrenamtjustiz.api.Geschlecht;
@@ -29,24 +33,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.restclient.test.autoconfigure.AutoConfigureMockRestServiceServer;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.ResourceAccessException;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
-import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.postgresql.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
+import tools.jackson.databind.ObjectMapper;
 
 @Testcontainers
 @ExtendWith(SpringExtension.class)
@@ -54,13 +56,14 @@ import org.testcontainers.utility.DockerImageName;
         classes = { EhrenamtJustizApplication.class },
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
+@AutoConfigureMockRestServiceServer
 @ActiveProfiles(profiles = { SPRING_TEST_PROFILE, SPRING_NO_SECURITY_PROFILE })
 class EWOServiceTest {
 
     @Container
     @ServiceConnection
     @SuppressWarnings("unused")
-    private static final PostgreSQLContainer<?> POSTGRE_SQL_CONTAINER = new PostgreSQLContainer<>(
+    private static final PostgreSQLContainer POSTGRE_SQL_CONTAINER = new PostgreSQLContainer(
             DockerImageName.parse(TestConstants.TESTCONTAINERS_POSTGRES_IMAGE));
 
     private static final EWOBuerger EWO_BUERGER = EWOBuerger.builder()
@@ -94,14 +97,26 @@ class EWOServiceTest {
             .familienname("Huber")
             .geburtsdatum(LocalDate.of(1960, 1, 1)).build();
 
-    @MockitoBean
-    private RestTemplate restTemplate;
+    @Value("${ewo.eai.basepath}")
+    private String basepathewoeai;
+
+    @Value("${ewo.eai.basepathprefix}")
+    private String basepathewoeaiprefix;
+
+    @Value("${ewo.eai.server}")
+    private String serverewoeai;
 
     @Autowired
     private EWOServiceImpl ewoService;
 
     @Autowired
+    private MockRestServiceServer mockRestServiceServer;
+
+    @Autowired
     private KonfigurationRepository konfigurationRepository;
+
+    @Autowired
+    public ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
@@ -113,7 +128,7 @@ class EWOServiceTest {
     @Test
     void givenSetUp_thenCheckNotNull() {
 
-        assertNotNull(restTemplate);
+        assertNotNull(mockRestServiceServer);
         assertNotNull(ewoService);
         assertNotNull(konfigurationRepository);
 
@@ -122,23 +137,22 @@ class EWOServiceTest {
     @Test
     void givenCitizen_thenReadingWithSuccess() {
 
-        final EWOBuerger expectedEWOBuerger = EWO_BUERGER;
-
-        final ResponseEntity<EWOBuerger> responseEntity = ResponseEntity.ok(expectedEWOBuerger);
-        when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
-                .thenReturn(responseEntity);
+        mockRestServiceServer.expect(requestTo(serverewoeai + basepathewoeai + "/eairoutes/ewosuchemitom/1")).andExpect(method(GET))
+                .andRespond(withSuccess(objectMapper.writeValueAsString(EWO_BUERGER), MediaType.APPLICATION_JSON));
 
         final EWOBuergerDatenDto actualDto = ewoService.ewoSucheMitOM("1");
 
-        assertEWOResponse(expectedEWOBuerger, actualDto);
+        assertEWOResponse(EWO_BUERGER, actualDto);
+
+        mockRestServiceServer.verify();
 
     }
 
     @Test
     void givenCitizen_thenReadingWithBadRequest() {
 
-        when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
-                .thenThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST));
+        mockRestServiceServer.expect(requestTo(serverewoeai + basepathewoeai + "/eairoutes/ewosuchemitom/1")).andExpect(method(GET))
+                .andRespond(withBadRequest());
 
         final EWOBuergerDatenDto actualDto = ewoService.ewoSucheMitOM("1");
 
@@ -146,10 +160,10 @@ class EWOServiceTest {
     }
 
     @Test
-    void givenCitizen_thenReadingWithResourceAccessException() {
+    void givenCitizen_thenReadingWithTimeout() {
 
-        when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
-                .thenThrow(new ResourceAccessException("Network error"));
+        mockRestServiceServer.expect(requestTo(serverewoeai + basepathewoeai + "/eairoutes/ewosuchemitom/1")).andExpect(method(GET))
+                .andRespond(withGatewayTimeout());
 
         final EWOBuergerDatenDto actualDto = ewoService.ewoSucheMitOM("1");
 
@@ -157,10 +171,10 @@ class EWOServiceTest {
     }
 
     @Test
-    void givenCitizen_thenReadingWithRestClientException() {
+    void givenCitizen_thenReadingWitServerError() {
 
-        when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
-                .thenThrow(new RestClientException("Unexpected error"));
+        mockRestServiceServer.expect(requestTo(serverewoeai + basepathewoeai + "/eairoutes/ewosuchemitom/1")).andExpect(method(GET))
+                .andRespond(withServerError());
 
         final EWOBuergerDatenDto actualDto = ewoService.ewoSucheMitOM("1");
 
@@ -174,9 +188,8 @@ class EWOServiceTest {
 
         final EWOBuerger[] expectedEWOBuergers = { expectedEWOBuerger };
 
-        final ResponseEntity<EWOBuerger[]> responseEntity = ResponseEntity.ok(expectedEWOBuergers);
-        when(restTemplate.exchange(anyString(), any(HttpMethod.class), any(HttpEntity.class), eq(EWOBuerger[].class)))
-                .thenReturn(responseEntity);
+        mockRestServiceServer.expect(requestTo(serverewoeai + basepathewoeai + "/eairoutes/ewosuche")).andExpect(method(POST))
+                .andRespond(withSuccess(objectMapper.writeValueAsString(expectedEWOBuergers), MediaType.APPLICATION_JSON));
 
         final List<EWOBuergerDatenDto> eWOBuergerDatenDto = ewoService.ewoSuche(EWO_BUERGER_SUCHE_DTO);
 
@@ -187,8 +200,8 @@ class EWOServiceTest {
     @Test
     void givenCitizen_thenSearchWithBadRequest() {
 
-        when(restTemplate.exchange(anyString(), any(HttpMethod.class), any(HttpEntity.class), eq(EWOBuerger[].class)))
-                .thenThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST));
+        mockRestServiceServer.expect(requestTo(serverewoeai + basepathewoeai + "/eairoutes/ewosuche")).andExpect(method(POST))
+                .andRespond(withBadRequest());
 
         assertThrows(HttpClientErrorException.class, () -> ewoService.ewoSuche(EWO_BUERGER_SUCHE_DTO));
 
@@ -199,9 +212,8 @@ class EWOServiceTest {
 
         final EWOBuerger expectedEWOBuerger = EWO_BUERGER;
 
-        final ResponseEntity<EWOBuerger> responseEntity = ResponseEntity.ok(expectedEWOBuerger);
-        when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
-                .thenReturn(responseEntity);
+        mockRestServiceServer.expect(requestTo(serverewoeai + basepathewoeai + "/eairoutes/ewosuchemitom/1")).andExpect(method(GET))
+                .andRespond(withSuccess(objectMapper.writeValueAsString(expectedEWOBuerger), MediaType.APPLICATION_JSON));
 
         final EWOBuergerDatenDto actualDto = ewoService.ewoSucheMitOMAenderungsService("1");
 
@@ -212,27 +224,27 @@ class EWOServiceTest {
     @Test
     void givenCitizen_thenReadingForModificationServiceWithBadRequest() {
 
-        when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
-                .thenThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST));
+        mockRestServiceServer.expect(requestTo(serverewoeai + basepathewoeai + "/eairoutes/ewosuchemitom/1")).andExpect(method(GET))
+                .andRespond(withBadRequest());
 
         assertThrows(AenderungsServiceException.class, () -> ewoService.ewoSucheMitOMAenderungsService("1"));
 
     }
 
     @Test
-    void givenCitizen_thenReadingForModificationServiceWithResourceAccessException() {
+    void givenCitizen_thenReadingForModificationServiceWithTimeout() {
 
-        when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
-                .thenThrow(new ResourceAccessException("Network error"));
+        mockRestServiceServer.expect(requestTo(serverewoeai + basepathewoeai + "/eairoutes/ewosuchemitom/1")).andExpect(method(GET))
+                .andRespond(withGatewayTimeout());
 
         assertThrows(AenderungsServiceException.class, () -> ewoService.ewoSucheMitOMAenderungsService("1"));
     }
 
     @Test
-    void givenCitizen_thenReadingForModificationServiceWithRestClientException() {
+    void givenCitizen_thenReadingForModificationServiceWithServerError() {
 
-        when(restTemplate.exchange(any(RequestEntity.class), eq(EWOBuerger.class)))
-                .thenThrow(new RestClientException("Unexpected error"));
+        mockRestServiceServer.expect(requestTo(serverewoeai + basepathewoeai + "/eairoutes/ewosuchemitom/1")).andExpect(method(GET))
+                .andRespond(withServerError());
 
         assertThrows(AenderungsServiceException.class, () -> ewoService.ewoSucheMitOMAenderungsService("1"));
     }
@@ -242,8 +254,8 @@ class EWOServiceTest {
 
         final ResponseEntity<Void> responseEntity = ResponseEntity.ok(null);
 
-        when(restTemplate.getForEntity(anyString(), eq(Void.class)))
-                .thenReturn(responseEntity);
+        mockRestServiceServer.expect(requestTo(serverewoeai + basepathewoeaiprefix + "/actuator/health")).andExpect(method(GET))
+                .andRespond(withSuccess(objectMapper.writeValueAsString(responseEntity), MediaType.APPLICATION_JSON));
 
         final ResponseEntity<String> status = ewoService.ewoEaiStatus();
 
@@ -255,23 +267,21 @@ class EWOServiceTest {
     @Test
     void givenRunningEAI_thenCheckStatusWithTimeout() {
 
-        final ResponseEntity<Void> responseEntity = ResponseEntity.status(HttpStatus.REQUEST_TIMEOUT).body(null);
-
-        when(restTemplate.getForEntity(anyString(), eq(Void.class)))
-                .thenReturn(responseEntity);
+        mockRestServiceServer.expect(requestTo(serverewoeai + basepathewoeaiprefix + "/actuator/health")).andExpect(method(GET))
+                .andRespond(withGatewayTimeout());
 
         final ResponseEntity<String> status = ewoService.ewoEaiStatus();
 
-        assertEquals(HttpStatus.REQUEST_TIMEOUT, status.getStatusCode());
+        assertEquals(HttpStatus.OK, status.getStatusCode());
         assertEquals(EhrenamtJustizUtility.STATUS_DOWN, status.getBody());
 
     }
 
     @Test
-    void givenRunningEAI_thenCheckStatusWithRestClientException() {
+    void givenRunningEAI_thenCheckStatusWithServerError() {
 
-        when(restTemplate.getForEntity(anyString(), eq(Void.class)))
-                .thenThrow(new RestClientException("Unexpected error"));
+        mockRestServiceServer.expect(requestTo(serverewoeai + basepathewoeaiprefix + "/actuator/health")).andExpect(method(GET))
+                .andRespond(withServerError());
 
         final ResponseEntity<String> status = ewoService.ewoEaiStatus();
 
