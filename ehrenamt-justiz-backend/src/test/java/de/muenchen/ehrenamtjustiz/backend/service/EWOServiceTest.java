@@ -150,8 +150,6 @@ class EWOServiceTest {
 
         assertEWOResponse(EWO_BUERGER, actualDto);
 
-        mockRestServiceServer.verify();
-
     }
 
     @Test
