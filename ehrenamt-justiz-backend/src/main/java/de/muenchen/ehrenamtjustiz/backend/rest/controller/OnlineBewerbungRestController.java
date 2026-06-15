@@ -139,7 +139,6 @@ public class OnlineBewerbungRestController {
         return nullWerte;
     }
 
-    @SuppressWarnings("PMD.AvoidLiteralsInIfCondition")
     private List<EWOBuergerDatenDto> ewoSuche(final OnlineBewerbungDatenDto onlineBewerbungDatenDto) {
         final EWOBuergerSucheDto eWOBuergerSucheDto = new EWOBuergerSucheDto();
         eWOBuergerSucheDto.setFamilienname(onlineBewerbungDatenDto.getNachname());

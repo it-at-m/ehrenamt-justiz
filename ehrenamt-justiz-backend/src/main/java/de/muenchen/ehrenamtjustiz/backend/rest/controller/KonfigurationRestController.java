@@ -49,7 +49,6 @@ public class KonfigurationRestController {
     }
 
     @GetMapping(value = "/getAktiveKonfiguration", produces = { MediaType.APPLICATION_JSON_VALUE })
-    @SuppressWarnings("PMD.AvoidLiteralsInIfCondition")
     public ResponseEntity<KonfigurationDto> getAktiveKonfiguration() {
 
         final Konfiguration[] konfiguration = konfigurationRepository.findByAktiv(true);
