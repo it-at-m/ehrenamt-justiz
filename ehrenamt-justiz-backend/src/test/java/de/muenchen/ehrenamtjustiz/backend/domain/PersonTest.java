@@ -34,7 +34,7 @@ import org.testcontainers.utility.DockerImageName;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureRestTestClient
 @ActiveProfiles(profiles = { SPRING_TEST_PROFILE, SPRING_NO_SECURITY_PROFILE })
-class PersonenTest {
+class PersonTest {
 
     @Autowired
     private RestTestClient restTestClient;
@@ -181,7 +181,7 @@ class PersonenTest {
                     .exchange()
                     .expectStatus().isNoContent();
 
-            assertThat(konfigurationRepository.findById(testEntityId)).isEmpty();
+            assertThat(personRepository.findById(testEntityId)).isEmpty();
         }
     }
 
