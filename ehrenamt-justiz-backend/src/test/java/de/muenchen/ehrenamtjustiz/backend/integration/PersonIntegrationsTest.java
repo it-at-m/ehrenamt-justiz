@@ -31,7 +31,6 @@ import java.util.Optional;
 import java.util.UUID;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +51,6 @@ import org.testcontainers.postgresql.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
-@Nested
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(
         classes = { EhrenamtJustizApplication.class },
