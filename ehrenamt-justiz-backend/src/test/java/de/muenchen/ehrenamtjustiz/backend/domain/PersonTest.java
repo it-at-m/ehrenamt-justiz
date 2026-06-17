@@ -11,7 +11,6 @@ import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
 import de.muenchen.ehrenamtjustiz.backend.testdata.KonfigurationTestDataBuilder;
 import de.muenchen.ehrenamtjustiz.backend.testdata.PersonTestDataBuilder;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -123,25 +122,12 @@ class PersonTest {
         void givenEntity_thenEntityIsSaved() {
             final Person request = new PersonTestDataBuilder().withKonfigurationid(konfigurationId).build();
 
-            final Person response = restTestClient.post()
+            restTestClient.post()
                     .uri("/personen")
                     .body(request)
                     .accept(MediaType.APPLICATION_JSON)
                     .exchange()
-                    .expectStatus().isCreated()
-                    .expectHeader().contentType(MediaType.APPLICATION_JSON)
-                    .expectBody(Person.class)
-                    .value(person -> {
-                        assertNotNull(person);
-                        assertThat(person.getFamilienname()).isEqualTo(request.getFamilienname());
-                    })
-                    .returnResult()
-                    .getResponseBody();
-
-            assertThat(response).isNotNull();
-            final Optional<Person> theEntity = personRepository.findById(response.getId());
-            assertThat(theEntity).isPresent();
-            assertThat(theEntity.get().getFamilienname()).isEqualTo(request.getFamilienname());
+                    .expectStatus().is4xxClientError(); // because of @RestResource(exported = false)
 
         }
     }
@@ -157,16 +143,7 @@ class PersonTest {
                     .body(request)
                     .accept(MediaType.APPLICATION_JSON)
                     .exchange()
-                    .expectStatus().isOk()
-                    .expectHeader().contentType(MediaType.APPLICATION_JSON)
-                    .expectBody(Person.class)
-                    .value(person -> {
-                        assertNotNull(person);
-                        assertThat(person.getId()).isEqualTo(testEntityId);
-                        assertThat(person.getFamilienname()).isEqualTo(request.getFamilienname());
-                    });
-
-            assertThat(personRepository.findById(testEntityId).orElseThrow().getFamilienname()).isEqualTo(request.getFamilienname());
+                    .expectStatus().is4xxClientError(); // because of @RestResource(exported = false)
 
         }
     }
