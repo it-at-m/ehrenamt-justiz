@@ -254,7 +254,6 @@ public class OnlineBewerbungRestController {
         return nullWerte;
     }
 
-    @SuppressWarnings("PMD.AvoidLiteralsInIfCondition")
     private List<EWOBuergerDatenDto> ewoSuche(final String vorname,
             final String nachname,
             final LocalDate geburtsdatum) {

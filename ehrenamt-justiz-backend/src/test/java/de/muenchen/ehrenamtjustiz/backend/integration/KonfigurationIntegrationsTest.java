@@ -21,10 +21,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.client.RestTestClient;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.postgresql.PostgreSQLContainer;
@@ -43,6 +46,9 @@ class KonfigurationIntegrationsTest {
 
     @Autowired
     public KonfigurationRepository konfigurationRepository;
+
+    @Autowired
+    private KonfigurationMapper konfigurationMapper;
 
     @Autowired
     private RestTestClient restTestClient;
@@ -92,10 +98,17 @@ class KonfigurationIntegrationsTest {
     void givenConfiguration_thenValidateUpdate() {
 
         final Konfiguration konfiguration = new KonfigurationTestDataBuilder().withAktiv(false).build();
+        KonfigurationDto konfigurationDto = konfigurationMapper.entity2Model(konfiguration);
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("object", konfigurationDto);
+
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
         restTestClient.post()
                 .uri("/konfiguration/updateKonfiguration")
-                .body(konfiguration)
+                .body(body)
+                .headers(hdrs -> hdrs.addAll(headers))
                 .exchange()
                 .expectStatus().isOk()
                 .expectHeader().contentType(MediaType.APPLICATION_JSON)

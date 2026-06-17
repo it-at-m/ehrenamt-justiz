@@ -8,7 +8,6 @@ import de.muenchen.ehrenamtjustiz.backend.domain.enums.DocumentSource;
 import de.muenchen.ehrenamtjustiz.backend.rest.DocumentRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.security.Authorities;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;

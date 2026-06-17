@@ -2,16 +2,9 @@ package de.muenchen.ehrenamtjustiz.backend.domain;
 
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFILE;
-import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;
 import de.muenchen.ehrenamtjustiz.backend.rest.DocumentRepository;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
@@ -24,32 +17,29 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.servlet.MockMvc;
-import org.testcontainers.containers.PostgreSQLContainer;
+import org.springframework.test.web.servlet.client.RestTestClient;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.postgresql.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
+@AutoConfigureRestTestClient
 @ActiveProfiles(profiles = { SPRING_TEST_PROFILE, SPRING_NO_SECURITY_PROFILE })
 public class DocumentTest {
     @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
+    private RestTestClient restTestClient;
 
     @Container
     @ServiceConnection
     @SuppressWarnings("unused")
-    private static final PostgreSQLContainer<?> POSTGRE_SQL_CONTAINER = new PostgreSQLContainer<>(
+    private static final org.testcontainers.postgresql.PostgreSQLContainer POSTGRE_SQL_CONTAINER = new PostgreSQLContainer(
             DockerImageName.parse(TestConstants.TESTCONTAINERS_POSTGRES_IMAGE));
 
     private UUID testEntityId;
@@ -61,6 +51,8 @@ public class DocumentTest {
 
     @Autowired
     private KonfigurationRepository konfigurationRepository;
+    @Autowired
+    private DocumentRepository documentRepository;
 
     @BeforeEach
     void setUp() {
@@ -86,26 +78,43 @@ public class DocumentTest {
     @Nested
     class GetEntity {
         @Test
-        void givenEntityId_thenReturnEntity() throws Exception {
-            mockMvc.perform(get("/document/{theEntityID}", testEntityId)
-                    .contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isOk())
-                    .andExpect(content().contentType(new MediaType("application", "hal+json")))
-                    .andExpect(jsonPath("$.id", is(testEntityId.toString())));
+        void givenEntityId_thenReturnEntity() {
+
+            restTestClient
+                    .get()
+                    .uri("/document/{theEntityID}", testEntityId)
+                    .exchange()
+                    .expectStatus().isOk()
+                    .expectHeader().contentType(new MediaType("application", "vnd.hal+json"))
+                    .expectBody(Person.class)
+                    .value(person -> {
+                        assertNotNull(person);
+                        assertThat(person.getId()).isEqualTo(testEntityId);
+                    });
         }
     }
 
     @Nested
     class SaveEntity {
         @Test
-        void givenEntity_thenEntityIsSaved() throws Exception {
+        void givenEntity_thenEntityIsSaved() {
             final Document requestDTO = getDocument();
-            final String requestBody = objectMapper.writeValueAsString(requestDTO);
 
-            mockMvc.perform(post("/document")
-                    .content(requestBody)
-                    .contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isCreated());
+            restTestClient.post()
+                    .uri("/document")
+                    .body(requestDTO)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .exchange()
+                    .expectStatus().isCreated()
+                    .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                    .expectBody(Document.class)
+                    .value(document -> {
+                        assertNotNull(document);
+                        assertThat(document.getFileName()).isEqualTo(requestDTO.getFileName());
+                    })
+                    .returnResult()
+                    .getResponseBody();
+
         }
     }
 
@@ -116,24 +125,39 @@ public class DocumentTest {
     @Nested
     class UpdateEntity {
         @Test
-        void givenEntity_thenEntityIsUpdated() throws Exception {
+        void givenEntity_thenEntityIsUpdated() {
             final Document requestDTO = getDocument();
-            final String requestBody = objectMapper.writeValueAsString(requestDTO);
 
-            mockMvc.perform(put("/document/{theEntityId}", testEntityId)
-                    .content(requestBody)
-                    .contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isNoContent());
+            restTestClient.put()
+                    .uri("/document/{theEntityId}", testEntityId)
+                    .body(requestDTO)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .exchange()
+                    .expectStatus().isOk()
+                    .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                    .expectBody(Document.class)
+                    .value(document -> {
+                        assertNotNull(document);
+                        assertThat(document.getId()).isEqualTo(testEntityId);
+                        assertThat(document.getFileName()).isEqualTo(requestDTO.getFileName());
+                    });
+
+            assertThat(documentRepository.findById(testEntityId).orElseThrow().getFileName()).isEqualTo(requestDTO.getFileName());
+
         }
     }
 
     @Nested
     class DeleteEntity {
         @Test
-        void givenEntityId_thenEntityIsDeleted() throws Exception {
-            mockMvc.perform(delete("/document/{theEntityId}", testEntityId)
-                    .contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isNoContent());
+        void givenEntityId_thenEntityIsDeleted() {
+
+            restTestClient.delete()
+                    .uri("/document/{theEntityID}", testEntityId)
+                    .exchange()
+                    .expectStatus().isNoContent();
+
+            assertThat(documentRepository.findById(testEntityId)).isEmpty();
         }
     }
 
