@@ -110,17 +110,15 @@ public class KonfigurationRestController {
     }
 
     @GetMapping(value = "/getAktiveKonfiguration", produces = { MediaType.APPLICATION_JSON_VALUE })
-    @SuppressFBWarnings("NP_NONNULL_PARAM_VIOLATION")
-    @SuppressWarnings("PMD.AvoidLiteralsInIfCondition")
     public ResponseEntity<KonfigurationDto> getAktiveKonfiguration() {
 
         final Konfiguration[] konfiguration = konfigurationRepository.findByAktiv(true);
         if (konfiguration == null) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(konfigurationMapper.entity2Model(null), HttpStatus.NOT_FOUND);
         } else if (konfiguration.length == 1) {
             return new ResponseEntity<>(konfigurationMapper.entity2Model(konfiguration[0]), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(konfigurationMapper.entity2Model(null), HttpStatus.NOT_FOUND);
         }
     }
 

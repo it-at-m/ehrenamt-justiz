@@ -338,7 +338,7 @@ const yesNoDialogVisible = ref(false);
 const invalidePersonenSelectVisible = ref(false);
 const invalidePersonen = ref<PersonenTableData[]>([]);
 const userInfoStore = useUserInfoStore();
-const user = userInfoStore.getUserInfo;
+const user = userInfoStore.userInfo;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function loadItems(options: any) {
   itemsSort.value = options.sortBy;

@@ -1,5 +1,5 @@
 # For documentation see https://github.com/sclorg/nginx-container
-FROM registry.access.redhat.com/ubi10/nginx-126:10.1-1776735323@sha256:bcc3a2f915e4d6b2b09924fec0119acb72a67605b98108779b6ea644ddcf091b
+FROM registry.access.redhat.com/ubi10/nginx-126:10.2-1781013854@sha256:606e91a7b9b534a15ae8f2691e2b484e58c23a96dd3f5636d2b059bfc2031330
 
 # Copy built online
 COPY dist/ /opt/app-root/src/public/online/

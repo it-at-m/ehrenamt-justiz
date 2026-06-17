@@ -30,7 +30,6 @@
 
 <script setup lang="ts">
 import type KonfigurationData from "@/types/KonfigurationData";
-import type { UserInfo } from "@/types/UserInfo";
 
 import { useToggle } from "@vueuse/core";
 import { computed, onMounted } from "vue";
@@ -44,7 +43,6 @@ import {
 } from "vuetify/components";
 
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";
-import { getUserInfo } from "@/api/userinfo-client";
 import TheAppBar from "@/components/TheAppBar.vue";
 import TheNavigationDrawer from "@/components/TheNavigationDrawer.vue";
 import TheSnackbarQueue from "@/components/TheSnackbarQueue.vue";
@@ -59,26 +57,16 @@ const [isNavigationShown, toggleNavigation] = useToggle();
 const snackbarStore = useSnackbarStore();
 const isConfigLoaded = computed(() => {
   return (
-    userInfoStore.getUserInfo &&
+    userInfoStore.userInfo &&
     globalSettingsStore.isKonfigurationLoadingAttempt()
   );
 });
 
 onMounted(() => {
-  loadUserInfo();
   loadActiveKonfiguration();
   // display drawer at once
   toggleNavigation();
 });
-
-/**
- * Loads UserInfo from the backend and sets it in the store.
- */
-function loadUserInfo(): void {
-  getUserInfo().then((userInfo: UserInfo) => {
-    userInfoStore.setUserInfo(userInfo);
-  });
-}
 
 /**
  * Loads active configuration from the backend and sets it in the store.

@@ -37,7 +37,7 @@ jobs:
     steps:
       - name: Maven build and release
         id: maven-release-step
-        uses: it-at-m/lhm_actions/action-templates/actions/action-maven-release@94f7e40aa557a2790abfa98a9cc9186d260b94f8 # v1.0.27
+        uses: it-at-m/lhm_actions/action-templates/actions/action-maven-release@877aafa9f0732cbc91819b60d237c351ea88f95c # v1.0.34
         with:
           app-path: ${{ inputs.module }}
           java-version: "21"

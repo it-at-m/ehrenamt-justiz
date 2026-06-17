@@ -21,7 +21,7 @@ export function getUserInfo(): Promise<UserInfo> {
     .then((response) => {
       defaultResponseHandler(
         response,
-        "Beim Laden des Users ist ein Fehler aufgetreten."
+        "Beim Laden der Userinfo ist ein Fehler aufgetreten."
       );
       return response.json();
     })

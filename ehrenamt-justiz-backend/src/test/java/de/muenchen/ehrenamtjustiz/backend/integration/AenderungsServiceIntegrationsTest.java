@@ -2,13 +2,9 @@ package de.muenchen.ehrenamtjustiz.backend.integration;
 
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
 import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFILE;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;
@@ -31,18 +27,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.http.MediaType;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.client.RestTestClient;
 import org.springframework.web.client.RestClientException;
-import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.postgresql.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
@@ -52,12 +48,12 @@ import org.testcontainers.utility.DockerImageName;
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 @ActiveProfiles(profiles = { SPRING_TEST_PROFILE, SPRING_NO_SECURITY_PROFILE })
-@AutoConfigureMockMvc
+@AutoConfigureRestTestClient
 class AenderungsServiceIntegrationsTest {
     @Container
     @ServiceConnection
     @SuppressWarnings("unused")
-    private static final PostgreSQLContainer<?> POSTGRE_SQL_CONTAINER = new PostgreSQLContainer<>(
+    private static final PostgreSQLContainer POSTGRE_SQL_CONTAINER = new PostgreSQLContainer(
             DockerImageName.parse(TestConstants.TESTCONTAINERS_POSTGRES_IMAGE));
 
     public static final String TEST_OM = "4711";
@@ -71,7 +67,7 @@ class AenderungsServiceIntegrationsTest {
     private PersonRepository personRepository;
 
     @Autowired
-    private MockMvc mockMvc;
+    private RestTestClient restTestClient;
 
     @MockitoBean
     private EhrenamtJustizService ehrenamtJustizService;
@@ -99,40 +95,56 @@ class AenderungsServiceIntegrationsTest {
 
         assertNotNull(konfigurationRepository);
         assertNotNull(personRepository);
-        assertNotNull(mockMvc);
+        assertNotNull(restTestClient);
         assertNotNull(ehrenamtJustizService);
         assertNotNull(personId);
 
     }
 
     @Test
-    void givenOMWithoutConflict_thenNoConflict() throws Exception {
+    void givenOMWithoutConflict_thenNoConflict() {
 
         Mockito.when(ehrenamtJustizService.getKonflikteAenderungsService(any(Person.class)))
                 .thenReturn(new ArrayList<>(List.of()));
 
-        mockMvc.perform(post(URI_AENDERUNGSSERVICE)
-                .contentType(MediaType.TEXT_PLAIN)
-                .content(TEST_OM))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isEmpty());
+        restTestClient.post()
+                .uri(URI_AENDERUNGSSERVICE)
+                .body(TEST_OM)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(new ParameterizedTypeReference<List<String>>() {
+                })
+                .value(konflikte -> {
+                    assertNotNull(konflikte);
+                    assertEquals(0, konflikte.size());
+                })
+                .returnResult()
+                .getResponseBody();
     }
 
     @Test
-    void givenOMWithConflict_thenConfict() throws Exception {
+    void givenOMWithConflict_thenConfict() {
 
         Mockito.when(ehrenamtJustizService.getKonflikteAenderungsService(any(Person.class)))
                 .thenReturn(new ArrayList<>(Arrays.asList("Familienname", "Vorname", "Geburtsdatum", "Geschlecht")));
 
-        mockMvc.perform(post(URI_AENDERUNGSSERVICE)
-                .contentType(MediaType.TEXT_PLAIN)
-                .content(TEST_OM))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0]").value("Familienname"))
-                .andExpect(jsonPath("$[1]").value("Vorname"))
-                .andExpect(jsonPath("$[2]").value("Geburtsdatum"))
-                .andExpect(jsonPath("$[3]").value("Geschlecht"))
-                .andExpect(jsonPath("$", hasSize(4)));
+        restTestClient.post()
+                .uri(URI_AENDERUNGSSERVICE)
+                .body(TEST_OM)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(new ParameterizedTypeReference<List<String>>() {
+                })
+                .value(konflikte -> {
+                    assertNotNull(konflikte);
+                    assertEquals("Familienname", konflikte.get(0));
+                    assertEquals("Vorname", konflikte.get(1));
+                    assertEquals("Geburtsdatum", konflikte.get(2));
+                    assertEquals("Geschlecht", konflikte.get(3));
+                    assertEquals(4, konflikte.size());
+                })
+                .returnResult()
+                .getResponseBody();
 
         final Optional<Person> person = personRepository.findById(personId);
         assertEquals(Status.KONFLIKT, person.get().getStatus());
@@ -145,39 +157,42 @@ class AenderungsServiceIntegrationsTest {
     }
 
     @Test
-    void givenOMAndException_thenIsClientError() throws Exception {
+    void givenOMAndException_thenIsClientError() {
 
         Mockito.when(ehrenamtJustizService.getKonflikteAenderungsService(any(Person.class)))
                 .thenThrow(new RestClientException("Unexpected error"));
 
-        mockMvc.perform(post(URI_AENDERUNGSSERVICE)
-                .contentType(MediaType.TEXT_PLAIN)
-                .content(TEST_OM))
-                .andExpect(status().is4xxClientError());
+        restTestClient.post()
+                .uri(URI_AENDERUNGSSERVICE)
+                .body(TEST_OM)
+                .exchange()
+                .expectStatus().isBadRequest();
 
     }
 
     @Test
-    void givenInvalidOM_thenIsClientError() throws Exception {
+    void givenInvalidOM_thenIsClientError() {
 
-        mockMvc.perform(post(URI_AENDERUNGSSERVICE)
-                .contentType(MediaType.TEXT_PLAIN)
-                .content(TEST_INVALID_OM))
-                .andExpect(status().is4xxClientError());
+        restTestClient.post()
+                .uri(URI_AENDERUNGSSERVICE)
+                .body(TEST_INVALID_OM)
+                .exchange()
+                .expectStatus().isBadRequest();
 
     }
 
     @Test
-    void givenOMAndMissingActiveConfiguration_thenIsClientError() throws Exception {
+    void givenOMAndMissingActiveConfiguration_thenIsClientError() {
 
         final Konfiguration konfiguration = konfigurationRepository.findById(activeConfigurationId).get();
         konfiguration.setAktiv(false);
         konfigurationRepository.save(konfiguration);
 
-        mockMvc.perform(post(URI_AENDERUNGSSERVICE)
-                .contentType(MediaType.TEXT_PLAIN)
-                .content(TEST_OM))
-                .andExpect(status().is4xxClientError());
+        restTestClient.post()
+                .uri(URI_AENDERUNGSSERVICE)
+                .body(TEST_OM)
+                .exchange()
+                .expectStatus().isBadRequest();
 
     }
 

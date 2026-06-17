@@ -7,7 +7,7 @@ export default class AuthService {
   static checkAuth(authority: string, t: (key: string) => string): boolean {
     const snackbarStore = useSnackbarStore();
     const userInfoStore = useUserInfoStore();
-    const userInfo = userInfoStore.getUserInfo;
+    const userInfo = userInfoStore.userInfo;
 
     if (!userInfo || !userInfo.authorities) {
       // user not yet read from database
