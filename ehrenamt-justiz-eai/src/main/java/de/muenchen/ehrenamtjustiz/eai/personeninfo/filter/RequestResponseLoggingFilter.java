@@ -246,6 +246,7 @@ public class RequestResponseLoggingFilter implements Filter {
         }
 
         @Override
+        @SuppressFBWarnings("EI_EXPOSE_REP")
         public ServletOutputStream getOutputStream() throws IOException {
             if (this.tee == null) {
                 this.bos = new ByteArrayOutputStream();
