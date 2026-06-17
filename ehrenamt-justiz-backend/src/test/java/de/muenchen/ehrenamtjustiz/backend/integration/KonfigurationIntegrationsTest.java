@@ -14,7 +14,6 @@ import de.muenchen.ehrenamtjustiz.backend.domain.dto.mapper.KonfigurationMapper;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.testdata.KonfigurationTestDataBuilder;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,6 @@ import org.testcontainers.postgresql.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
-@Nested
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(
         classes = { EhrenamtJustizApplication.class },

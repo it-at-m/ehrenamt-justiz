@@ -13,6 +13,7 @@ import de.muenchen.ehrenamtjustiz.backend.rest.PersonRepository;
 import de.muenchen.ehrenamtjustiz.backend.service.EWOService;
 import de.muenchen.ehrenamtjustiz.backend.utils.EhrenamtJustizUtility;
 import de.muenchen.ehrenamtjustiz.exception.AenderungsServiceException;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -126,6 +127,7 @@ public class EWOServiceImpl implements EWOService {
      * @return List<EWOBuergerDatenDto>
      */
     @Override
+    @SuppressFBWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     public List<EWOBuergerDatenDto> ewoSuche(final EWOBuergerSucheDto eWOBuergerSucheDto) {
 
         final List<EWOBuergerDatenDto> eWOBuerger = new ArrayList<>();
@@ -141,7 +143,6 @@ public class EWOServiceImpl implements EWOService {
 
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
             for (int i = 0; i < Objects.requireNonNull(responseEntity.getBody()).length; i++) {
-
                 final EWOBuergerDatenDto eWOBuergerDatenDto = mapToEWOBuerger(responseEntity.getBody()[i]);
                 if (eWOBuergerDatenDto != null) {
                     eWOBuerger.add(eWOBuergerDatenDto);
