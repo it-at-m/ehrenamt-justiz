@@ -103,14 +103,15 @@ public interface KonfigurationRepository extends PagingAndSortingRepository<Konf
      * Delete all {@link Konfiguration} entities.
      */
     @CacheEvict(value = CACHE, allEntries = true)
+    @PreAuthorize(Authorities.HAS_AUTHORITY_DELETE_KONFIGURATION)
     @Transactional
     void deleteAll();
 
     /**
      * Get active configuration
      *
-     * @param aktiv
-     * @return
+     * @param aktiv true/false
+     * @return Array of Configuration
      */
     Konfiguration[] findByAktiv(@Param("aktiv") boolean aktiv);
 
