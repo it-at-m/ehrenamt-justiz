@@ -64,6 +64,10 @@ public class SecurityConfiguration {
                         PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/konfiguration/getAktiveKonfiguration"),
                         // allow access to /onlinebewerbung/bewerbungSpeichern
                         PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.POST, "/onlinebewerbung/bewerbungSpeichern"),
+                        // allow access to /onlinebewerbung/pruefen
+                        PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.POST, "/onlinebewerbung/pruefen"),
+                        // allow access to /onlinebewerbung/lesenVerfassungstreueMuster
+                        PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/onlinebewerbung/lesenVerfassungstreueMuster"),
                         // allow access to /backendaenderungsservice/aenderungsservicePerson
                         PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.POST, "/backendaenderungsservice/aenderungsservicePerson"))
                         .permitAll())
@@ -88,7 +92,7 @@ public class SecurityConfiguration {
                             jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter);
                         }))
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/onlinebewerbung/bewerbungSpeichern",
+                        .ignoringRequestMatchers("/onlinebewerbung/bewerbungSpeichern", "/onlinebewerbung/pruefen",
                                 "/backendaenderungsservice/aenderungsservicePerson"));
         return http.build();
     }

@@ -65,6 +65,7 @@ const konfigurationData = ref<KonfigurationFormData>({
   altervon: 0,
   alterbis: 0,
   action: "",
+  vorlageBestaetigungverfassungstreue_file: undefined,
 });
 const isLoading = ref(true);
 const animationAktiv = ref(false);
@@ -91,7 +92,23 @@ function loadKonfiguration(): void {
         altervon: konfiguration.altervon,
         alterbis: konfiguration.alterbis,
         action: action.value,
+        vorlageBestaetigungverfassungstreue_file: undefined,
       };
+      KonfigurationApiService.getDocumentByKonfigurationId(
+        konfigurationId.value
+      )
+        .then((document) => {
+          const byteArray = Uint8Array.from(atob(document.fileData), (c) =>
+            c.charCodeAt(0)
+          );
+          konfigurationData.value.vorlageBestaetigungverfassungstreue_file =
+            new File([byteArray], document.fileName, {
+              type: document.contentType,
+            });
+        })
+        .catch(() => {
+          // No document attached for this person — leave the field undefined.
+        });
       isLoading.value = false;
     })
     .catch((err: Error) => {
@@ -107,18 +124,21 @@ function loadKonfiguration(): void {
 
 function save(): void {
   animationAktiv.value = true;
-  KonfigurationApiService.update({
-    id: konfigurationId.value,
-    ehrenamtjustizart: konfigurationData.value.ehrenamtjustizart,
-    bezeichnung: konfigurationData.value.bezeichnung,
-    aktiv: konfigurationData.value.aktiv,
-    amtsperiodevon: konfigurationData.value.amtsperiodevon,
-    amtsperiodebis: konfigurationData.value.amtsperiodebis,
-    staatsangehoerigkeit: konfigurationData.value.staatsangehoerigkeit,
-    wohnsitz: konfigurationData.value.wohnsitz,
-    altervon: konfigurationData.value.altervon,
-    alterbis: konfigurationData.value.alterbis,
-  })
+  KonfigurationApiService.updateKonfiguration(
+    {
+      id: konfigurationId.value,
+      ehrenamtjustizart: konfigurationData.value.ehrenamtjustizart,
+      bezeichnung: konfigurationData.value.bezeichnung,
+      aktiv: konfigurationData.value.aktiv,
+      amtsperiodevon: konfigurationData.value.amtsperiodevon,
+      amtsperiodebis: konfigurationData.value.amtsperiodebis,
+      staatsangehoerigkeit: konfigurationData.value.staatsangehoerigkeit,
+      wohnsitz: konfigurationData.value.wohnsitz,
+      altervon: konfigurationData.value.altervon,
+      alterbis: konfigurationData.value.alterbis,
+    },
+    konfigurationData.value.vorlageBestaetigungverfassungstreue_file
+  )
     .then(() => {
       router.push({
         name: "/konfiguration/konfigurationindex",

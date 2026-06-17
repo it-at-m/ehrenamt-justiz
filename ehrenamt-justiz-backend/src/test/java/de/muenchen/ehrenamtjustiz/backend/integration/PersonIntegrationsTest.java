@@ -39,10 +39,13 @@ import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTe
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.client.RestTestClient;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.postgresql.PostgreSQLContainer;
@@ -181,9 +184,16 @@ class PersonIntegrationsTest {
         person.setStatus(Status.INERFASSUNG);
         final Person personInErfassung = personRepository.save(person);
 
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("object", person);
+
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
         restTestClient.post()
                 .uri("/personen/cancelBewerbung")
-                .body(personInErfassung)
+                .body(body)
+                .headers(hdrs -> hdrs.addAll(headers))
                 .exchange()
                 .expectStatus().isOk()
                 .expectHeader().contentType(MediaType.APPLICATION_JSON)
@@ -392,9 +402,16 @@ class PersonIntegrationsTest {
         person.setStatus(Status.INERFASSUNG); // Muss nach update auf Bewerbung gesetzt sein
         personRepository.save(person);
 
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("object", person);
+
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
         restTestClient.post()
                 .uri("/personen/updatePerson")
-                .body(person)
+                .body(body)
+                .headers(hdrs -> hdrs.addAll(headers))
                 .exchange()
                 .expectStatus().isOk()
                 .expectHeader().contentType(MediaType.APPLICATION_JSON)
