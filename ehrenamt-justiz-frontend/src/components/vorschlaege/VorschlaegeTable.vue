@@ -310,7 +310,7 @@ const headers = ref([
     align: "start",
     sortable: false,
   },
-]);
+] as const);
 const snackbarStore = useSnackbarStore();
 const router = useRouter();
 const personenTableData = ref<PersonenTableData[]>([]);

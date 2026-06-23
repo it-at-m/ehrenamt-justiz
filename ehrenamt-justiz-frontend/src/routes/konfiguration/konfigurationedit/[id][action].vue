@@ -50,6 +50,7 @@ import { BEARBEIGUNGS_MODUS, STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const route = useRoute();
+const params = route.params as { id: string; action: string };
 const router = useRouter();
 const snackbarStore = useSnackbarStore();
 const { t } = useI18n();
@@ -73,8 +74,8 @@ const konfigurationId = ref("");
 const action = ref("");
 
 onMounted(() => {
-  konfigurationId.value = route.params.id as string;
-  action.value = route.params.action as string;
+  konfigurationId.value = params.id;
+  action.value = params.action;
   loadKonfiguration();
 });
 

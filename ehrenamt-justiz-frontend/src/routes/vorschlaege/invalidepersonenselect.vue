@@ -84,7 +84,7 @@ const headers = ref([
     align: "start",
     sortable: true,
   },
-]);
+] as const);
 const emits = defineEmits<{
   "update:modelValue": [v: boolean];
   invalidePersonenSelect: [];

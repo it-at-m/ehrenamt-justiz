@@ -32,6 +32,7 @@ import { PERSONENSTATUS, STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const route = useRoute();
+const params = route.params as { id: string; action: string };
 const router = useRouter();
 const snackbarStore = useSnackbarStore();
 const { t } = useI18n();
@@ -86,8 +87,8 @@ const personId = ref("");
 const action = ref("");
 
 onMounted(() => {
-  personId.value = route.params.id as string;
-  action.value = route.params.action as string;
+  personId.value = params.id;
+  action.value = params.action;
   loadBewerbung();
 });
 
