@@ -3,9 +3,8 @@
     <v-form
       ref="form"
       v-model="formValid"
-      :disabled="konfiguration.action == BEARBEIGUNGS_MODUS.DISPLAY_MODUS"
-      @submit="speichern"
-      @keydown.enter.prevent="speichern"
+      :disabled="konfiguration.action === BEARBEIGUNGS_MODUS.DISPLAY_MODUS"
+      @submit.prevent="speichern"
     >
       <v-row>
         <v-col>
@@ -14,24 +13,24 @@
         <v-col class="text-right">
           <v-btn
             variant="text"
-            exact
             :to="{ name: '/konfiguration/konfigurationindex' }"
-            class="ml-auto"
+            class="ml-auto mr-2"
           >
             {{ t("components.konfigurationForm.buttons.abbrechen") }}
           </v-btn>
           <v-btn
-            v-if="konfiguration.action == BEARBEIGUNGS_MODUS.EDIT_MODUS"
+            v-if="konfiguration.action === BEARBEIGUNGS_MODUS.EDIT_MODUS"
             color="accent"
+            class="mr-2"
             @click="felderLeeren"
           >
             {{ t("components.konfigurationForm.buttons.felderLeeren") }}
           </v-btn>
           <v-btn
-            v-if="konfiguration.action == BEARBEIGUNGS_MODUS.EDIT_MODUS"
+            v-if="konfiguration.action === BEARBEIGUNGS_MODUS.EDIT_MODUS"
             color="green"
             :loading="isAnimation"
-            @click="speichern"
+            type="submit"
           >
             {{ t("components.konfigurationForm.buttons.speichern") }}
           </v-btn>
@@ -183,24 +182,21 @@
 <script setup lang="ts">
 import type KonfigurationFormData from "@/types/KonfigurationFormData";
 
-import { computed, createApp, ref } from "vue";
+import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import {
   VBtn,
   VCol,
+  VFileUpload,
+  VFileUploadDropzone,
+  VFileUploadItem,
+  VFileUploadList,
   VForm,
   VRow,
   VSelect,
   VTextField,
 } from "vuetify/components";
-import {
-  VFileUpload,
-  VFileUploadDropzone,
-  VFileUploadItem,
-  VFileUploadList,
-} from "vuetify/labs/VFileUpload";
 
-import App from "@/App.vue";
 import { useRules } from "@/composables/rules";
 import { BEARBEIGUNGS_MODUS, STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
@@ -215,9 +211,8 @@ const emits = defineEmits<{
 }>();
 const rules = useRules();
 const snackbarStore = useSnackbarStore();
-/* eslint-disable @typescript-eslint/no-unused-vars */
-const myV3App = createApp(App);
-const form = ref<(typeof myV3App & { validate: () => void }) | null>(null);
+
+const form = ref<VForm | null>(null);
 
 const formValid = ref(false);
 
@@ -235,9 +230,12 @@ function felderLeeren(): void {
   konfiguration.value.wohnsitz = "";
 }
 
-function speichern(): void {
-  form.value?.validate();
-  if (!formValid.value) {
+async function speichern(): Promise<void> {
+  const result = await form.value?.validate();
+
+  const valid = typeof result === "boolean" ? result : (result?.valid ?? false);
+
+  if (!valid) {
     snackbarStore.push({
       color: STATUS_INDICATORS.ERROR,
       text: t("components.konfigurationForm.messages.fehler"),

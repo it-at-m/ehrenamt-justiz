@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="fill-height">
     <v-row class="text-center">
       <v-hover
         v-slot="{ isHovering, props }"
@@ -89,27 +89,31 @@
           }}
         </h2>
         <h2>{{ textAnzahlNeueVorschlaege }}</h2>
-        <v-btn
-          :disabled="
-            !user ||
-            !user.authorities.includes(
-              'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
-            )
-          "
-          @click="datenHerunterladen"
-          >{{ t("routes.getstartedview.buttons.datenHerunterladen") }}
-        </v-btn>
+        <div class="d-flex flex-column ga-2">
+          <v-btn
+            color="green"
+            :disabled="
+              !user ||
+              !user.authorities.includes(
+                'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
+              )
+            "
+            @click="datenHerunterladen"
+            >{{ t("routes.getstartedview.buttons.datenHerunterladen") }}
+          </v-btn>
 
-        <v-btn
-          :disabled="
-            !user ||
-            !user.authorities.includes(
-              'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
-            )
-          "
-          @click="alsBenachrichtigtMarkierenBestaetigen"
-          >{{ t("routes.getstartedview.buttons.alsBenachrichtigtMarkieren") }}
-        </v-btn>
+          <v-btn
+            color="green"
+            :disabled="
+              !user ||
+              !user.authorities.includes(
+                'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
+              )
+            "
+            @click="alsBenachrichtigtMarkierenBestaetigen"
+            >{{ t("routes.getstartedview.buttons.alsBenachrichtigtMarkieren") }}
+          </v-btn>
+        </div>
       </v-col>
     </v-row>
     <yes-no-dialog

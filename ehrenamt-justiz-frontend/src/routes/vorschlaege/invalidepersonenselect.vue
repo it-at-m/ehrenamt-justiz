@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="visible">
     <v-card>
-      <v-card-title class="text-h5">{{
+      <v-card-title class="text-headline-small">{{
         t("routes.invalidepersonenselect.title")
       }}</v-card-title>
       <v-card-text> {{ t("routes.invalidepersonenselect.text") }}</v-card-text>
@@ -14,11 +14,13 @@
           t('routes.invalidepersonenselect.table.itemsPerPageText')
         "
       >
-        <template #item="{ item }">
+        <template #item="{ internalItem }">
           <tr>
-            <td>{{ item.familienname }}</td>
-            <td>{{ item.vorname }}</td>
-            <td>{{ new Date(item.geburtsdatum).toLocaleDateString() }}</td>
+            <td>{{ internalItem.raw.familienname }}</td>
+            <td>{{ internalItem.raw.vorname }}</td>
+            <td>
+              {{ new Date(internalItem.raw.geburtsdatum).toLocaleDateString() }}
+            </td>
           </tr>
         </template>
       </v-data-table>
@@ -42,7 +44,7 @@
 <script setup lang="ts">
 import type PersonenTableData from "@/types/PersonenTableData";
 
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import {
   VBtn,
@@ -63,28 +65,26 @@ const props = defineProps<{
   invalidePersonen: PersonenTableData[];
 }>();
 
-type ReadonlyHeaders = VDataTable["$props"]["headers"];
-
-const headers: ReadonlyHeaders = computed(() => [
+const headers = ref([
   {
     title: t("routes.invalidepersonenselect.table.familienname"),
-    value: "familienname",
+    key: "familienname",
     align: "start",
     sortable: true,
   },
   {
     title: t("routes.invalidepersonenselect.table.vorname"),
-    value: "vorname",
+    key: "vorname",
     align: "start",
     sortable: true,
   },
   {
     title: t("routes.invalidepersonenselect.table.geburtsdatum"),
-    value: "geburtsdatum",
+    key: "geburtsdatum",
     align: "start",
     sortable: true,
   },
-]) as unknown as ReadonlyHeaders;
+]);
 const emits = defineEmits<{
   "update:modelValue": [v: boolean];
   invalidePersonenSelect: [];

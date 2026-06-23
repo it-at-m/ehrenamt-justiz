@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="fill-height">
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
@@ -10,7 +10,7 @@
       </v-col>
       <online-help-dialog-component :helptext="t('routes.index.onlineHelp')" />
       <v-col class="mb-4">
-        <h1 class="text-h3 font-weight-bold mb-3">
+        <h1 class="text-display-medium font-weight-bold mb-3">
           {{ t("routes.index.welcome") }}
         </h1>
       </v-col>

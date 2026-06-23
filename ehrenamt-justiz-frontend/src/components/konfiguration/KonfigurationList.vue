@@ -26,18 +26,14 @@
         }}
       </div>
     </v-list-item>
-    <template
+    <v-list-subheader
       v-if="!busy && (configuration === undefined || configuration.length < 1)"
-    >
-      <v-list-subheader>{{
+      >{{
         t("components.konfigurationList.keineKonfigurationVorhanden")
-      }}</v-list-subheader>
-    </template>
+      }}</v-list-subheader
+    >
     <template v-if="busy">
-      <v-progress-linear
-        indeterminate
-        color="accent"
-      />
+      <v-progress-linear indeterminate />
     </template>
   </v-list>
 </template>

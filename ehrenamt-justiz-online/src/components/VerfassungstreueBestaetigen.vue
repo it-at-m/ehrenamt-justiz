@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-row dense>
+    <v-row density="compact">
       <muc-callout
         type="info"
         class="w-100"
@@ -28,7 +28,7 @@
       </muc-callout>
     </v-row>
 
-    <v-row dense>
+    <v-row density="compact">
       <muc-file-dropzone
         v-model="onlineBewerbungFormData.dateiVerfassungstreue"
         :additional-information="t('verfassungstreue.additionalInformation')"
@@ -40,7 +40,7 @@
         @files="handleFiles"
       />
     </v-row>
-    <v-row dense>
+    <v-row density="compact">
       <div
         class="w-100"
         @click="dateiVerfassungstreueAnzeigen"
@@ -64,7 +64,7 @@
     <v-row class="button-row">
       <v-col
         class="button-wrapper"
-        xs="12"
+        cols="12"
         sm="12"
         md="3"
         lg="2"
@@ -82,7 +82,7 @@
       </v-col>
       <v-col
         class="button-wrapper"
-        xs="12"
+        cols="12"
         sm="9"
         md="3"
         lg="2"
@@ -196,11 +196,13 @@ function dateiVerfassungstreueAnzeigen() {
   if (!onlineBewerbungFormData.value.dateiVerfassungstreue) {
     return;
   }
-  const url = URL.createObjectURL(
+  const link = document.createElement("a");
+  link.href = window.URL.createObjectURL(
     onlineBewerbungFormData.value.dateiVerfassungstreue
   );
-  window.open(url, "_blank", "noopener,noreferrer");
-  setTimeout(() => URL.revokeObjectURL(url), 10_000);
+  link.download = onlineBewerbungFormData.value.dateiVerfassungstreue.name;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(link.href), 10_000);
 }
 </script>
 <style scoped>

@@ -2,7 +2,7 @@
   <v-container>
     <v-card flat>
       <h1
-        class="text-h5"
+        class="text-headline-small"
         style="margin-bottom: 1em"
       >
         {{ t("routes.konfigurationcreate.header") }}

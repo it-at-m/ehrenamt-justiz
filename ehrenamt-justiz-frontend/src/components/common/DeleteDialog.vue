@@ -1,11 +1,11 @@
 <template>
   <v-dialog
-    :model-value="modelValue"
+    v-model="modelValue"
     max-width="290"
     @click:outside="cancel"
   >
     <v-card>
-      <v-card-title class="text-h5">
+      <v-card-title class="text-headline-small">
         {{ t("components.deleteDialog.title") }}
       </v-card-title>
       <v-card-text v-if="descriptorString">
@@ -50,10 +50,11 @@ import {
 } from "vuetify/components";
 
 defineProps<{
-  modelValue: boolean;
   isAnimation: boolean;
   descriptorString: string;
 }>();
+
+const modelValue = defineModel<boolean>({ required: true });
 
 const emits = defineEmits<{
   cancel: [];

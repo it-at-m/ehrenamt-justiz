@@ -1,9 +1,9 @@
 <template>
-  <v-list-item :class="props.konfiguration.aktiv ? 'listitem' : ''">
-    <template #default>
-      <v-list-item-title>{{ title }}</v-list-item-title>
-      <v-list-item-subtitle>{{ subtitle }}</v-list-item-subtitle>
-    </template>
+  <v-list-item
+    :class="props.konfiguration.aktiv ? 'listitem' : ''"
+    :title="title"
+    :subtitle="subtitle"
+  >
     <template #append>
       <div
         v-if="
@@ -15,35 +15,25 @@
           :text="t('components.konfigurationListItem.tooltip.aktivSetzen')"
         >
           <template #activator="{ props }">
-            <span v-bind="props">
-              <v-btn
-                class="listitem"
-                v-bind="props"
-                :icon="mdiLightbulbOnOutline"
-                @click="requestSetActive"
-              />
-            </span>
+            <v-btn
+              class="listitem"
+              v-bind="props"
+              :icon="mdiLightbulbOnOutline"
+              @click="requestSetActive"
+            />
           </template>
         </v-tooltip>
       </div>
       <list-item-actions
-        v-if="showDelete"
         :show-set-active="true"
         :show-open="true"
         :show-edit="AuthService.checkAuth('WRITE_KONFIGURATION', t)"
-        :show-delete="AuthService.checkAuth('DELETE_KONFIGURATION', t)"
+        :show-delete="
+          showDelete && AuthService.checkAuth('DELETE_KONFIGURATION', t)
+        "
         @open="displayKonfiguration"
         @edit="editKonfiguration"
         @delete="deleteRequested"
-      />
-      <list-item-actions
-        v-else
-        :show-set-active="true"
-        :show-open="false"
-        :show-edit="AuthService.checkAuth('WRITE_KONFIGURATION', t)"
-        :show-delete="AuthService.checkAuth('DELETE_KONFIGURATION', t)"
-        @open="displayKonfiguration"
-        @edit="editKonfiguration"
       />
     </template>
   </v-list-item>
@@ -76,13 +66,7 @@ import { mdiLightbulbOnOutline } from "@mdi/js";
 import { computed, ref, useAttrs } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
-import {
-  VBtn,
-  VListItem,
-  VListItemSubtitle,
-  VListItemTitle,
-  VTooltip,
-} from "vuetify/components";
+import { VBtn, VListItem, VTooltip } from "vuetify/components";
 
 import AuthService from "@/api/AuthService";
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";

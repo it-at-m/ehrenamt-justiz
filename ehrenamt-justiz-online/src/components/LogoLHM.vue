@@ -4,7 +4,7 @@
     onclick="location.href = 'https://www.muenchen.de'"
   >
     <img
-      class="lhmimg"
+      class="lhmimg w-100"
       src="@/assets/logo-lhm-muenchen.svg"
       alt="Logo Landeshauptstadt München"
     />

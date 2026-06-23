@@ -1,28 +1,27 @@
 <template>
   <v-dialog
-    :model-value="modelValue"
+    v-model="modelValue"
     width="800"
     @click:outside="no"
   >
-    <template #activator="{ props: open }">
-      <template v-if="buttontext">
-        <v-btn
-          color="primary"
-          v-bind="open"
-        >
-          {{ buttontext }}
-        </v-btn>
-      </template>
-      <template v-else-if="icontext">
-        <v-btn
-          color="primary"
-          v-bind="open"
-        >
-          <v-icon size="large">
-            {{ icontext }}
-          </v-icon>
-        </v-btn>
-      </template>
+    <template #activator="{ props }">
+      <v-btn
+        v-if="buttontext"
+        color="primary"
+        v-bind="props"
+      >
+        {{ buttontext }}
+      </v-btn>
+      <v-btn
+        v-else-if="icontext"
+        color="primary"
+        v-bind="props"
+        icon
+      >
+        <v-icon size="large">
+          {{ icontext }}
+        </v-icon>
+      </v-btn>
     </template>
     <v-card>
       <v-card-title>
@@ -90,12 +89,13 @@ defineProps<{
   /**
    * Control flag for dialog
    */
-  modelValue: boolean;
   buttontext?: string;
   icontext?: string;
   dialogtitle: string;
   dialogtext: string;
 }>();
+
+const modelValue = defineModel<boolean>({ required: true });
 
 const emits = defineEmits<{
   no: [];

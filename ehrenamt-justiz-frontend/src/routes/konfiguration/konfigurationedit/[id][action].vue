@@ -7,12 +7,12 @@
       />
       <template v-else>
         <h1
-          class="text-h5"
+          class="text-headline-small"
           style="margin-bottom: 1em"
         >
           {{ t("routes.konfigurationedit.header") }}
           {{
-            konfigurationData.action == BEARBEIGUNGS_MODUS.EDIT_MODUS
+            konfigurationData.action === BEARBEIGUNGS_MODUS.EDIT_MODUS
               ? t("routes.konfigurationedit.bearbeiten")
               : t("routes.konfigurationedit.anzeigen")
           }}

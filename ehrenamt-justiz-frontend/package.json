@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@fontsource/roboto": "5.2.10",
-    "@muenchen/appswitcher-vue": "2.2.0",
+    "@muenchen/appswitcher-vue": "3.0.0",
     "@vueuse/core": "14.3.0",
     "export-to-csv": "1.4.0",
     "moment": "2.30.1",
