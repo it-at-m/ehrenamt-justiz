@@ -115,7 +115,7 @@ const { t } = useI18n();
 
 function displayKonfiguration() {
   router.push({
-    name: "/konfiguration/konfigurationedit/[id][action]",
+    name: "/konfiguration/konfigurationedit/[id]/[action]",
     params: {
       id: props.konfiguration.id?.toString() ?? "",
       action: BEARBEIGUNGS_MODUS.DISPLAY_MODUS,
@@ -125,7 +125,7 @@ function displayKonfiguration() {
 
 function editKonfiguration() {
   router.push({
-    name: "/konfiguration/konfigurationedit/[id][action]",
+    name: "/konfiguration/konfigurationedit/[id]/[action]",
     params: {
       id: props.konfiguration.id?.toString() ?? "",
       action: BEARBEIGUNGS_MODUS.EDIT_MODUS,

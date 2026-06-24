@@ -879,9 +879,7 @@ const geschlechtswerte: string[] = [
 ];
 
 const abbruchOderSpeichern = ref(false);
-/* eslint-disable @typescript-eslint/no-unused-vars */
-const { cancel, leave, saveLeaveDialog } = useSaveLeave(isDirty);
-/* eslint-enable @typescript-eslint/no-unused-vars */
+const { cancel, saveLeaveDialog } = useSaveLeave(isDirty);
 
 function isDirty(): boolean {
   // Switching the menu during the new-entry of a person must be prevented, as otherwise

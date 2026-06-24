@@ -361,7 +361,7 @@ function loadItems(options: any) {
 
 function editItem(item: { id: { toString: () => string } }) {
   router.push({
-    name: "/bewerbungen/bewerbungedit/[id][action]",
+    name: "/bewerbungen/bewerbungedit/[id]/[action]",
     params: {
       id: item.id.toString(),
       action: BEARBEIGUNGS_MODUS.EDIT_MODUS,
@@ -371,7 +371,7 @@ function editItem(item: { id: { toString: () => string } }) {
 
 function displayItem(item: { id: { toString: () => string } }) {
   router.push({
-    name: "/bewerbungen/bewerbungedit/[id][action]",
+    name: "/bewerbungen/bewerbungedit/[id]/[action]",
     params: {
       id: item.id.toString(),
       action: BEARBEIGUNGS_MODUS.DISPLAY_MODUS,
