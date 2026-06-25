@@ -82,7 +82,7 @@
           >
             {{ t("bewerberDaten.buttons.zurueck") }}
             <svg class="m-button__icon">
-              <use xlink:href="#icon-arrow-left"></use>
+              <use href="#icon-arrow-left"></use>
             </svg>
           </muc-button>
         </v-col>
@@ -100,7 +100,7 @@
           >
             {{ t("bewerberDaten.buttons.weiter") }}
             <svg class="m-button__icon">
-              <use xlink:href="#icon-arrow-right"></use>
+              <use href="#icon-arrow-right"></use>
             </svg>
           </muc-button>
         </v-col>
@@ -117,7 +117,7 @@
             @click="clearInputs()"
             >{{ t("bewerberDaten.buttons.leeren") }}
             <svg class="m-button__icon">
-              <use xlink:href="#icon-close"></use>
+              <use href="#icon-close"></use>
             </svg>
           </muc-button>
         </v-col>
@@ -127,7 +127,7 @@
 </template>
 
 <script setup lang="ts">
-import type OnlineBewerbungData from "@/types/OnlineBewerbungData.ts";
+import type OnlineBewerbungData from "@/types/OnlineBewerbungData";
 
 import { MucButton, MucDivider, MucInput } from "@muenchen/muc-patternlab-vue";
 import moment from "moment";

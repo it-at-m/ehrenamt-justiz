@@ -361,4 +361,7 @@ function erstellenVerfassungstreueMuster(): void {
 :deep(.m-form-step) {
   width: 100%;
 }
+.card-container {
+  display: flex !important;
+}
 </style>

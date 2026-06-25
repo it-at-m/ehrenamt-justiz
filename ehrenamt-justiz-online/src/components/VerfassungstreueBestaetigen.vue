@@ -15,7 +15,7 @@
           >
             {{ t("verfassungstreue.buttons.musterHerunterladen") }}
             <svg class="m-button__icon">
-              <use xlink:href="#icon-download"></use>
+              <use href="#icon-download"></use>
             </svg>
           </muc-button>
           <p>
@@ -76,7 +76,7 @@
         >
           {{ t("verfassungstreue.buttons.zurueck") }}
           <svg class="m-button__icon">
-            <use xlink:href="#icon-arrow-left"></use>
+            <use href="#icon-arrow-left"></use>
           </svg>
         </muc-button>
       </v-col>
@@ -94,7 +94,7 @@
         >
           {{ t("verfassungstreue.buttons.speichern") }}
           <svg class="m-button__icon">
-            <use xlink:href="#icon-floppy"></use>
+            <use href="#icon-floppy"></use>
           </svg>
         </muc-button>
       </v-col>
@@ -102,7 +102,7 @@
   </v-container>
 </template>
 <script setup lang="ts">
-import type OnlineBewerbungData from "@/types/OnlineBewerbungData.ts";
+import type OnlineBewerbungData from "@/types/OnlineBewerbungData";
 
 import {
   MucButton,
