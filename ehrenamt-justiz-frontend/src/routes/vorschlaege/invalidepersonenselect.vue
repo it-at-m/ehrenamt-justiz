@@ -8,7 +8,7 @@
       <v-data-table
         :items="invalidePersonen"
         :headers="headers"
-        multi-sort
+        :multi-sort="true"
         class="elevation-1"
         :items-per-page-text="
           t('routes.invalidepersonenselect.table.itemsPerPageText')

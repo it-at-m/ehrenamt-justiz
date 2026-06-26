@@ -488,9 +488,3 @@ function datenHerunterladen() {
   );
 }
 </script>
-
-<style scoped>
-:deep(.auskunftssperre) {
-  background: lightcoral;
-}
-</style>

@@ -26,7 +26,7 @@
       <v-col cols="2">
         <div
           v-if="bewerbung.ewo_auskunftssperre.length > 0"
-          class="text-headline-small auskunftssperre"
+          class="text-headline-small auskunftssperreDetail"
         >
           {{ t("components.bewerbungForm.header.auskunftssperre") }}
         </div>
@@ -69,7 +69,7 @@
           "
           v-model="bewerbung.validierungdeaktivieren"
           :label="t('components.bewerbungForm.header.validierungDeaktivieren')"
-          @change="validieren"
+          @update:model-value="validieren"
         />
       </v-col>
     </v-row>
@@ -723,7 +723,6 @@
             <v-row>
               <v-file-upload
                 v-model="bewerbung.bestaetigungverfassungstreue_file"
-                :show-size="true"
                 clearable
                 :rules="[rules.RULE_FILE_VERFASSUNGSTREUE]"
               >
@@ -1010,9 +1009,5 @@ const bewerbung = computed({
 <style scoped>
 .scroll {
   overflow-y: scroll;
-}
-
-.auskunftssperre {
-  color: red;
 }
 </style>

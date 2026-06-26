@@ -21,7 +21,7 @@
       <v-col cols="3">
         <div
           v-if="konfliktloesenformdata.person_auskunftssperre.length > 0"
-          class="text-headline-small auskunftssperre"
+          class="text-headline-small auskunftssperreDetail"
         >
           {{ t("components.konflikteLoesenForm.header.auskunftssperre") }}
         </div>
@@ -2357,9 +2357,5 @@ function konflikteVorhanden(): boolean {
 .button-konflikt-loesen {
   color: white;
   background-color: red;
-}
-
-.auskunftssperre {
-  color: red;
 }
 </style>

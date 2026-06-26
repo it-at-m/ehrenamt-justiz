@@ -148,9 +148,3 @@ function cancelBuergerSelect() {
   emits("cancelBuergerSelect");
 }
 </script>
-
-<style scoped>
-.auskunftssperre {
-  background: lightcoral;
-}
-</style>
