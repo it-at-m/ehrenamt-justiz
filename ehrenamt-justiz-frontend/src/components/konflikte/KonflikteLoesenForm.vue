@@ -1,7 +1,6 @@
 <template>
   <v-form
     ref="form"
-    v-model="formValid"
     class="form"
     :readonly="true"
     @submit.prevent="speichern"
@@ -249,7 +248,6 @@
                       }
                     )
                   "
-                  persistent-placeholder
                   :hide-details="true"
                 />
               </v-col>
@@ -277,7 +275,6 @@
                       }
                     )
                   "
-                  persistent-placeholder
                   :hide-details="true"
                 />
               </v-col>
@@ -329,22 +326,22 @@
                 class="col"
                 cols="6"
               >
-                <v-label class="text-title-large"
+                <span class="text-title-large"
                   >{{
                     t("components.konflikteLoesenForm.header.aktuelleDaten")
                   }}
-                </v-label>
+                </span>
               </v-col>
 
               <v-col
                 class="col"
                 cols="5"
               >
-                <v-label class="text-title-large"
+                <span class="text-title-large"
                   >{{
                     t("components.konflikteLoesenForm.header.neueDatenAusEWO")
                   }}
-                </v-label>
+                </span>
               </v-col>
             </v-row>
             <v-expansion-panels
@@ -1978,7 +1975,6 @@ import {
   VExpansionPanelText,
   VForm,
   VIcon,
-  VLabel,
   VRow,
   VSelect,
   VTab,
@@ -2008,11 +2004,9 @@ const emits = defineEmits<{
 const snackbarStore = useSnackbarStore();
 const form = ref();
 
-const formValid = ref(false);
-
 const activeExpansionPanel = ref<number[]>([]);
 
-const active_tab = ref("bewerber");
+const active_tab = ref("datenAusEWOUebernehmen");
 
 const FAMILIENNAME = "Familienname";
 const GEBURTSNAME = "Geburtsname";
@@ -2049,7 +2043,6 @@ onMounted(() => {
       text: t("components.konflikteLoesenForm.form.messages.keineEWODaten"),
     });
   }
-  active_tab.value = "datenAusEWOUebernehmen";
 
   if (isKonflikts([FAMILIENNAME, GEBURTSNAME, VORNAME])) {
     // Namen
