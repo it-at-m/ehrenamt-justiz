@@ -2,7 +2,6 @@
   <div>
     <v-form
       ref="form"
-      v-model="formValid"
       validate-on="lazy"
       @submit.prevent="inEWOSuchen"
     >
@@ -134,8 +133,6 @@ const emits = defineEmits<{
 const rules = useRules();
 const snackbarStore = useSnackbarStore();
 const form = ref();
-
-const formValid = ref(false);
 
 const { t } = useI18n();
 

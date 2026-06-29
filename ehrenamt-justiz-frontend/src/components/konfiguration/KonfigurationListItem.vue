@@ -14,10 +14,10 @@
         <v-tooltip
           :text="t('components.konfigurationListItem.tooltip.aktivSetzen')"
         >
-          <template #activator="{ props }">
+          <template #activator="{ props: tooltipProps }">
             <v-btn
               class="listitem"
-              v-bind="props"
+              v-bind="tooltipProps"
               :icon="mdiLightbulbOnOutline"
               @click="requestSetActive"
             />
