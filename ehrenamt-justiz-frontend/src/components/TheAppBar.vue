@@ -1,6 +1,6 @@
 <template>
   <v-app-bar color="primary">
-    <v-row align="center">
+    <v-row class="align-center">
       <v-col
         cols="5"
         class="d-flex align-center justify-start"

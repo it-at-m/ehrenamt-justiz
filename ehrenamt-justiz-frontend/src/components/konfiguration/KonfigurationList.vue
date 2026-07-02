@@ -2,7 +2,8 @@
   <v-list
     id="infinite-scroll"
     lines="two"
-    infinite-scroll-disabled="busy"
+    style="height: 420px; overflow-y: auto"
+    @scroll.passive="onScroll"
   >
     <div
       v-for="konfiguration in configuration"
@@ -17,8 +18,8 @@
       <v-divider class="divider" />
     </div>
 
-    <v-list-item v-if="allPagesLoaded">
-      <div class="text--secondary d-flex justify-center">
+    <v-list-item>
+      <div class="text-medium-emphasis d-flex justify-center">
         {{
           t("components.konfigurationList.eintraegeInsgesamt", {
             count: totalElements,
@@ -26,18 +27,14 @@
         }}
       </div>
     </v-list-item>
-    <template
+    <v-list-subheader
       v-if="!busy && (configuration === undefined || configuration.length < 1)"
-    >
-      <v-list-subheader>{{
+      >{{
         t("components.konfigurationList.keineKonfigurationVorhanden")
-      }}</v-list-subheader>
-    </template>
+      }}</v-list-subheader
+    >
     <template v-if="busy">
-      <v-progress-linear
-        indeterminate
-        color="accent"
-      />
+      <v-progress-linear indeterminate />
     </template>
   </v-list>
 </template>
@@ -62,7 +59,7 @@ import { useSnackbarStore } from "@/stores/snackbar";
 
 const snackbarStore = useSnackbarStore();
 
-let configuration = ref<KonfigurationData[]>([]);
+const configuration = ref<KonfigurationData[]>([]);
 
 const busy = ref(false);
 
@@ -70,7 +67,12 @@ const currentPage = ref(-1);
 
 const totalPages = ref(Number.MAX_VALUE);
 
-const totalElements = ref<number | null>(null);
+const totalElements = ref(Number.MIN_VALUE);
+
+const hasMore = computed(
+  () => configuration.value.length < totalElements.value
+);
+
 const { t } = useI18n();
 onMounted(() => {
   loadMore();
@@ -107,12 +109,17 @@ function itemDeleted(konfiguration: KonfigurationData): void {
 }
 
 function reloadItems(): void {
-  configuration = ref<KonfigurationData[]>([]);
+  configuration.value = [];
   currentPage.value = -1;
   loadMore();
 }
 
-const allPagesLoaded = computed(() => {
-  return currentPage.value >= totalPages.value - 1;
-});
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function onScroll(e: any) {
+  const el = e.target;
+  const nearBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 80;
+  if (nearBottom && hasMore.value && !busy.value) {
+    loadMore();
+  }
+}
 </script>

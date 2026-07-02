@@ -13,7 +13,6 @@
               :label="t('components.konflikteTable.suche')"
               single-line
               hide-details
-              select-strategy="all"
               clearable
               autofocus
               @keydown.enter.prevent="enableReload && reload()"
@@ -61,38 +60,38 @@
           />
         </template>
 
-        <template #[`item.konfliktfeld`]="{ item }">
+        <template #[`item.konfliktfeld`]="{ internalItem }">
           <span
-            v-for="konflikt in item.konfliktfeld"
+            v-for="konflikt in internalItem.raw.konfliktfeld"
             :key="konflikt"
           >
             {{ konflikt }} &nbsp;
           </span>
         </template>
 
-        <template #[`item.geburtsdatum`]="{ item }">
-          <span v-if="isAuskunftssperreSichtbar(item)">{{
-            new Date(item.geburtsdatum).toLocaleDateString()
+        <template #[`item.geburtsdatum`]="{ internalItem }">
+          <span v-if="isAuskunftssperreSichtbar(internalItem.raw)">{{
+            new Date(internalItem.raw.geburtsdatum).toLocaleDateString()
           }}</span>
         </template>
-        <template #[`item.derzeitausgeuebterberuf`]="{ item }">
-          <span v-if="isAuskunftssperreSichtbar(item)">{{
-            item.derzeitausgeuebterberuf
+        <template #[`item.derzeitausgeuebterberuf`]="{ internalItem }">
+          <span v-if="isAuskunftssperreSichtbar(internalItem.raw)">{{
+            internalItem.raw.derzeitausgeuebterberuf
           }}</span>
         </template>
-        <template #[`item.mailadresse`]="{ item }">
-          <span v-if="isAuskunftssperreSichtbar(item)">{{
-            item.mailadresse
+        <template #[`item.mailadresse`]="{ internalItem }">
+          <span v-if="isAuskunftssperreSichtbar(internalItem.raw)">{{
+            internalItem.raw.mailadresse
           }}</span>
         </template>
-        <template #[`item.actions`]="{ item }">
+        <template #[`item.actions`]="{ internalItem }">
           <v-tooltip location="bottom">
             <template #activator="{ props }">
               <v-icon
                 v-if="
                   AuthService.checkAuth('WRITE_EHRENAMTJUSTIZDATEN', t) &&
-                  (item.auskunftssperre == undefined ||
-                    item.auskunftssperre.length == 0 ||
+                  (internalItem.raw.auskunftssperre == undefined ||
+                    internalItem.raw.auskunftssperre.length == 0 ||
                     AuthService.checkAuth(
                       'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE',
                       t
@@ -100,7 +99,7 @@
                 "
                 v-bind="props"
                 :icon="mdiPencil"
-                @click="konfliktLoesen(item)"
+                @click="konfliktLoesen(internalItem.raw)"
               />
             </template>
             <span>{{
@@ -143,7 +142,7 @@
 import type PersonenTableData from "@/types/PersonenTableData";
 
 import { mdiPencil } from "@mdi/js";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import {
@@ -153,7 +152,6 @@ import {
   VCheckboxBtn,
   VCol,
   VContainer,
-  VDataTable,
   VDataTableServer,
   VIcon,
   VRow,
@@ -168,46 +166,46 @@ import { PERSONENSTATUS, STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const { t } = useI18n();
-const headers: ReadonlyHeaders = computed(() => [
+const headers = ref([
   {
     title: t("components.konflikteTable.table.familienname"),
-    value: "familienname",
+    key: "familienname",
     align: "start",
     sortable: true,
   },
   {
     title: t("components.konflikteTable.table.vorname"),
-    value: "vorname",
+    key: "vorname",
     align: "start",
     sortable: true,
   },
   {
     title: t("components.konflikteTable.table.geburtsdatum"),
-    value: "geburtsdatum",
+    key: "geburtsdatum",
     align: "end",
     sortable: true,
   },
   {
     title: t("components.konflikteTable.table.derzeitigerBeruf"),
-    value: "derzeitausgeuebterberuf",
+    key: "derzeitausgeuebterberuf",
     align: "start",
     sortable: true,
   },
   {
     title: t("components.konflikteTable.table.arbeitgeber"),
-    value: "arbeitgeber",
+    key: "arbeitgeber",
     align: "start",
     sortable: true,
   },
   {
     title: t("components.konflikteTable.table.mailAdresse"),
-    value: "mailadresse",
+    key: "mailadresse",
     align: "start",
     sortable: true,
   },
   {
     title: t("components.konflikteTable.table.ausgeuebteEhrenaemter"),
-    value: "ausgeuebteehrenaemter",
+    key: "ausgeuebteehrenaemter",
     align: "start",
     sortable: true,
   },
@@ -223,7 +221,7 @@ const headers: ReadonlyHeaders = computed(() => [
     align: "start",
     sortable: false,
   },
-]) as unknown as ReadonlyHeaders;
+] as const);
 
 const snackbarStore = useSnackbarStore();
 const router = useRouter();
@@ -235,7 +233,6 @@ const selectedUUIDs = ref<string[]>([]);
 const search = ref("");
 // Avoids multiple reading of the table if the Enter key is pressed during reload():
 const enableReload = ref(true);
-type ReadonlyHeaders = VDataTable["$props"]["headers"];
 const deleteDialogVisible = ref(false);
 const loadingAnimationAktiv = ref(false);
 const deleteAnimationAktiv = ref(false);
@@ -347,9 +344,3 @@ function isAuskunftssperreSichtbar(person: PersonenTableData): boolean {
   );
 }
 </script>
-
-<style scoped>
-:deep(.auskunftssperre) {
-  background: lightcoral;
-}
-</style>
