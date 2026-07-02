@@ -89,6 +89,20 @@
         :multi-sort="true"
         @update:options="loadItems"
       >
+        <template #top>
+          <delete-dialog
+            v-model="deleteDialogVisible"
+            :is-animation="deleteAnimationAktiv"
+            :descriptor-string="
+              t('components.bewerbungenTable.table.delete.dialogtext', {
+                count: selectedUUIDs.length,
+              })
+            "
+            :type-string="2"
+            @delete="deleteConfirmed"
+            @cancel="deleteCanceled"
+          />
+        </template>
         <template #[`item.geburtsdatum`]="{ internalItem }">
           <span v-if="isAuskunftssperreSichtbar(internalItem.raw)">{{
             new Date(internalItem.raw.geburtsdatum).toLocaleDateString()
@@ -210,18 +224,6 @@
       @yes="bewerberAufVorschlagslisteUebernehmen"
     />
   </v-container>
-  <delete-dialog
-    v-model="deleteDialogVisible"
-    :is-animation="deleteAnimationAktiv"
-    :descriptor-string="
-      t('components.bewerbungenTable.table.delete.dialogtext', {
-        count: selectedUUIDs.length,
-      })
-    "
-    :type-string="2"
-    @delete="deleteConfirmed"
-    @cancel="deleteCanceled"
-  />
 </template>
 
 <script setup lang="ts">

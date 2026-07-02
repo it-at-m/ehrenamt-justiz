@@ -2,6 +2,7 @@
   <v-dialog
     v-model="modelValue"
     max-width="290"
+    persistent
     @click:outside="cancel"
   >
     <v-card>
