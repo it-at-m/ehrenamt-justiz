@@ -43,11 +43,12 @@ The PostgreSQL database servers requested for the individual environments in the
 ### SQL-Commands 
 The following SQL command can be used to link all tables for an evaluation, for example:    
 ```sql
-select p.vorname, p.familienname, k.bezeichnung, s.staatsangehoerigkeit_text, f.person_attribut, a.sperrentyp from ehrju.person p
-left outer join ehrju.konfiguration k on k.id = p.konfiguration_id
-left outer join ehrju.staatsangehoerigkeit s on s.person_id = p.id
-left outer join ehrju.konfliktfeld f on f.person_id = p.id
-left outer join ehrju.auskunftssperre a on a.person_id = p.id
+select p.vorname, p.familienname, k.bezeichnung, s.staatsangehoerigkeit_text, f.person_attribut, a.sperrentyp, d.file_name from ej.person p
+left outer join ej.konfiguration k on k.id = p.konfigurationid
+left outer join ej.staatsangehoerigkeit s on s.personid = p.id
+left outer join ej.konfliktfeld f on f.personid = p.id
+left outer join ej.auskunftssperre a on a.personid = p.id
+left outer join ej.document d on d.person_id = p.id
 order by p.familienname asc
 ```
 
