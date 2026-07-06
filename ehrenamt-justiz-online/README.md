@@ -25,3 +25,15 @@ Citizens can use the online application to apply for the office of lay judge.
 <p>
     <img height="12000" src="../docs/images/OnlineBewerbungSchoeffen.PNG"  alt="Online application"/>
 </p>
+
+<p>
+    <img height="12000" src="../docs/images/OnlineBewerbungSchoeffenBewerber.PNG"  alt="Online application"/>
+</p>
+
+<p>
+    <img height="12000" src="../docs/images/OnlineBewerbungSchoeffenVerfassungstreue.PNG"  alt="Online application"/>
+</p>
+
+<p>
+    <img height="12000" src="../docs/images/OnlineBewerbungSchoeffenBewerbungUebertragen.PNG"  alt="Online application"/>
+</p>
