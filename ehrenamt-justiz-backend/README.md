@@ -28,6 +28,7 @@ The database schema currently contains 6 tables. The following table lists all t
 | staatsangehoerigkeit     | Contains the nationalities of an applicant                                      | 
 | konfliktfeld             | Contains the conflict fields (changes to EWO)                                   | 
 | auskunftssperre          | This table provides information on information blocks                           |
+| document                 | This table provides information on Confirmation of loyalty to the Constitution  |
 | flyway_schema_history    | Technical change history of the database (Flyway)                               |
 
 ## Database server
