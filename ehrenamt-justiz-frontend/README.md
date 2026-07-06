@@ -70,7 +70,6 @@ Screenshots of frontend:
     <img src="../docs/images/EJ_14_BewerbungBearbeitenVerfassungstreue.PNG"  alt="Edit additional data"/>
 </p>
 
-
 ## Overview of applicants
 
 <p>
