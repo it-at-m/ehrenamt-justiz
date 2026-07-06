@@ -64,6 +64,13 @@ Screenshots of frontend:
     <img src="../docs/images/EJ_06_BewerbungBearbeitenZusatzangaben.PNG"  alt="Edit additional data"/>
 </p>
 
+## Edit confirmation of loyalty to the Constitution
+
+<p>
+    <img src="../docs/images/EJ_14_BewerbungBearbeitenVerfassungstreue.PNG"  alt="Edit additional data"/>
+</p>
+
+
 ## Overview of applicants
 
 <p>
