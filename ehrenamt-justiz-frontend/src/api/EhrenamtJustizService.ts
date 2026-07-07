@@ -320,6 +320,7 @@ class EhrenamtJustizServiceClass {
     const date = new Date();
     link.download = dateiName + date.toISOString().substring(0, 10) + ".csv";
     link.click();
+    setTimeout(() => URL.revokeObjectURL(link.href), 10_000);
   }
 }
 

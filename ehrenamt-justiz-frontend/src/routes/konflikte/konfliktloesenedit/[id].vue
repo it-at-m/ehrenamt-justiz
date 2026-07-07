@@ -29,6 +29,7 @@ import { STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const route = useRoute();
+const params = route.params as { id: string; action: string };
 const router = useRouter();
 const snackbarStore = useSnackbarStore();
 const { t } = useI18n();
@@ -106,7 +107,7 @@ const isSavingAnimation = ref(false);
 const personenDatenId = ref("");
 
 onMounted(() => {
-  personenDatenId.value = route.params.id as string;
+  personenDatenId.value = params.id;
   loadPerson();
 });
 

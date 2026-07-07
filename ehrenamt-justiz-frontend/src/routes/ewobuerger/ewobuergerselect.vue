@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="visible">
     <v-card>
-      <v-card-title class="text-h5">{{
+      <v-card-title class="text-headline-small">{{
         t("routes.ewobuergerselect.title")
       }}</v-card-title>
       <v-card-text>{{ t("routes.ewobuergerselect.text") }}</v-card-text>
@@ -10,42 +10,42 @@
         :headers="headers"
         multi-sort
         class="elevation-1"
+        :row-props="getRowProps"
       >
-        <template #item="{ item }">
-          <tr :class="item.auskunftssperre.length > 0 ? 'auskunftssperre' : ''">
-            <td>
-              <v-tooltip location="bottom">
-                <template #activator="{ props }">
-                  <v-icon
-                    v-bind="props"
-                    :icon="mdiAccountPlus"
-                    @click="selectBuerger(item)"
-                    @keydown.enter.prevent="selectBuerger(item)"
-                  />
-                </template>
-                <span>{{
-                  t("routes.ewobuergerselect.table.actions.tooltip")
-                }}</span>
-              </v-tooltip>
-            </td>
-            <td>{{ item.familienname }}</td>
-            <td>{{ item.vorname }}</td>
-            <td>{{ new Date(item.geburtsdatum).toLocaleDateString() }}</td>
-            <td>
-              {{
-                item.auskunftssperre.length > 0
-                  ? t("routes.ewobuergerselect.table.auskunftssperre.content")
-                  : ""
-              }}
-            </td>
-            <td>
-              {{
-                item.ewoidbereitserfasst
-                  ? t("routes.ewobuergerselect.table.bereitsErfasst.contentYes")
-                  : t("routes.ewobuergerselect.table.bereitsErfasst.contentNo")
-              }}
-            </td>
-          </tr>
+        <template #[`item.actions`]="{ internalItem }">
+          <v-tooltip location="bottom">
+            <template #activator="{ props: tooltipProps }">
+              <v-icon
+                  v-bind="tooltipProps"
+                  :icon="mdiAccountPlus"
+                  @click="selectBuerger(internalItem.raw)"
+                  @keydown.enter.prevent="selectBuerger(internalItem.raw)"
+              />
+            </template>
+            <span>{{
+                t("routes.ewobuergerselect.table.actions.tooltip")
+              }}</span>
+          </v-tooltip>
+        </template>
+
+        <template #[`item.geburtsdatum`]="{ internalItem }">
+          {{ new Date(internalItem.raw.geburtsdatum).toLocaleDateString() }}
+        </template>
+
+        <template #[`item.auskunftssperre`]="{ internalItem }">
+          {{
+            internalItem.raw.auskunftssperre.length > 0
+                ? t("routes.ewobuergerselect.table.auskunftssperre.content")
+                : ""
+          }}
+        </template>
+
+        <template #[`item.ewoidbereitserfasst`]="{ internalItem }">
+          {{
+            internalItem.raw.ewoidbereitserfasst
+                ? t("routes.ewobuergerselect.table.bereitsErfasst.contentYes")
+                : t("routes.ewobuergerselect.table.bereitsErfasst.contentNo")
+          }}
         </template>
       </v-data-table>
       <v-card-actions>
@@ -65,7 +65,7 @@
 import type EWOBuergerData from "@/types/EWOBuergerData";
 
 import { mdiAccountPlus } from "@mdi/js";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import {
   VBtn,
@@ -85,46 +85,45 @@ const props = defineProps<{
   eWOBuergerData: EWOBuergerData[];
 }>();
 
-type ReadonlyHeaders = VDataTable["$props"]["headers"];
 const { t } = useI18n();
-const headers: ReadonlyHeaders = computed(() => [
+const headers = ref([
   {
     title: t("routes.ewobuergerselect.table.actions.title"),
-    value: "actions",
+    key: "actions",
     align: "start",
     sortable: false,
   },
   {
     title: t("routes.ewobuergerselect.table.familienname"),
-    value: "familienname",
+    key: "familienname",
     align: "start",
     sortable: true,
   },
   {
     title: t("routes.ewobuergerselect.table.vorname"),
-    value: "vorname",
+    key: "vorname",
     align: "start",
     sortable: true,
   },
   {
     title: t("routes.ewobuergerselect.table.geburtsdatum"),
-    value: "geburtsdatum",
+    key: "geburtsdatum",
     align: "start",
     sortable: true,
   },
   {
     title: t("routes.ewobuergerselect.table.auskunftssperre.title"),
-    value: "auskunftssperre",
+    key: "auskunftssperre",
     align: "start",
     sortable: true,
   },
   {
     title: t("routes.ewobuergerselect.table.bereitsErfasst.title"),
-    value: "ewoidbereitserfasst",
+    key: "ewoidbereitserfasst",
     align: "start",
     sortable: true,
   },
-]) as unknown as ReadonlyHeaders;
+] as const);
 const emits = defineEmits<{
   "update:modelValue": [v: boolean];
   selectBuerger: [v: EWOBuergerData];
@@ -134,6 +133,12 @@ const visible = computed({
   get: () => props.modelValue,
   set: (v) => emits("update:modelValue", v),
 });
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function getRowProps(data: any) {
+  return data.item.auskunftssperre.length > 0
+      ? { class: "auskunftssperre" }
+      : {};
+}
 function selectBuerger(eWOBuergerData: EWOBuergerData) {
   emits("selectBuerger", eWOBuergerData);
 }
@@ -142,8 +147,3 @@ function cancelBuergerSelect() {
 }
 </script>
 
-<style scoped>
-.auskunftssperre {
-  background: lightcoral;
-}
-</style>

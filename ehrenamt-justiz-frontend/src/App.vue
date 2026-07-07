@@ -10,20 +10,15 @@
       v-model="isNavigationShown"
     />
     <v-main>
-      <v-container fluid>
-        <v-progress-circular
+      <v-progress-circular
           v-if="!isConfigLoaded"
           indeterminate
-        ></v-progress-circular>
-        <router-view
-          v-else
-          v-slot="{ Component }"
-        >
-          <v-fade-transition mode="out-in">
-            <component :is="Component" />
-          </v-fade-transition>
-        </router-view>
-      </v-container>
+      ></v-progress-circular>
+      <router-view v-slot="{ Component }">
+        <v-fade-transition mode="out-in">
+          <component :is="Component" />
+        </v-fade-transition>
+      </router-view>
     </v-main>
   </v-app>
 </template>
@@ -36,7 +31,6 @@ import { computed, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import {
   VApp,
-  VContainer,
   VFadeTransition,
   VMain,
   VProgressCircular,

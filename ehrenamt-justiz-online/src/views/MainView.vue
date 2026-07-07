@@ -311,9 +311,11 @@ function erstellenVerfassungstreueMuster(): void {
             type: verfassungstreueMuster.contentType,
           }
         );
-        const url = URL.createObjectURL(verfassungstreueMusterFile);
-        window.open(url, "_blank", "noopener,noreferrer");
-        setTimeout(() => URL.revokeObjectURL(url), 10_000);
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(verfassungstreueMusterFile);
+        link.download = verfassungstreueMusterFile.name;
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(link.href), 10_000);
       } catch (err) {
         technischerfehler.value = String(err);
       }
@@ -358,5 +360,8 @@ function erstellenVerfassungstreueMuster(): void {
 }
 :deep(.m-form-step) {
   width: 100%;
+}
+.card-container {
+  display: flex !important;
 }
 </style>

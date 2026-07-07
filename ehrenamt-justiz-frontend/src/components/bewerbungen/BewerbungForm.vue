@@ -2,22 +2,22 @@
   <v-form
     ref="form"
     class="form"
-    :disabled="bewerbung.action == BEARBEIGUNGS_MODUS.DISPLAY_MODUS"
-    @keydown.enter.exact.prevent="speichern"
+    :disabled="bewerbung.action === BEARBEIGUNGS_MODUS.DISPLAY_MODUS"
+    @submit.prevent="speichern"
   >
     <v-row>
       <v-col
         class="text-left"
         cols="4"
       >
-        <div class="text-h5">
+        <div class="text-headline-small">
           {{
-            bewerbung.status == PERSONENSTATUS.STATUS_VORSCHLAG
+            bewerbung.status === PERSONENSTATUS.STATUS_VORSCHLAG
               ? t("components.bewerbungForm.header.vorschlag")
               : t("components.bewerbungForm.header.bewerbung")
           }}
           {{
-            bewerbung.action == BEARBEIGUNGS_MODUS.EDIT_MODUS
+            bewerbung.action === BEARBEIGUNGS_MODUS.EDIT_MODUS
               ? t("components.bewerbungForm.header.bearbeiten")
               : t("components.bewerbungForm.header.anzeigen")
           }}
@@ -26,7 +26,7 @@
       <v-col cols="2">
         <div
           v-if="bewerbung.ewo_auskunftssperre.length > 0"
-          class="text-h5 auskunftssperre"
+          class="text-headline-small auskunftssperreDetail"
         >
           {{ t("components.bewerbungForm.header.auskunftssperre") }}
         </div>
@@ -37,24 +37,24 @@
       >
         <v-btn
           variant="text"
-          exact
-          class="ml-auto"
+          class="ml-auto mr-2"
           @click="abbruch"
         >
           {{ t("components.bewerbungForm.buttons.abbrechen") }}
         </v-btn>
         <v-btn
-          v-if="bewerbung.action == BEARBEIGUNGS_MODUS.EDIT_MODUS"
+          v-if="bewerbung.action === BEARBEIGUNGS_MODUS.EDIT_MODUS"
           color="accent"
+          class="mr-2"
           @click="felderLeeren"
         >
           {{ t("components.bewerbungForm.buttons.felderLeeren") }}
         </v-btn>
         <v-btn
-          v-if="bewerbung.action == BEARBEIGUNGS_MODUS.EDIT_MODUS"
+          v-if="bewerbung.action === BEARBEIGUNGS_MODUS.EDIT_MODUS"
           color="green"
           :loading="isAnimation"
-          @click="speichern"
+          type="submit"
         >
           {{ t("components.bewerbungForm.buttons.speichern") }}
         </v-btn>
@@ -64,12 +64,12 @@
       <v-col class="text-left">
         <v-checkbox
           v-if="
-            bewerbung.action == BEARBEIGUNGS_MODUS.EDIT_MODUS &&
+            bewerbung.action === BEARBEIGUNGS_MODUS.EDIT_MODUS &&
             AuthService.checkAuth('READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE', t)
           "
           v-model="bewerbung.validierungdeaktivieren"
           :label="t('components.bewerbungForm.header.validierungDeaktivieren')"
-          @change="validieren"
+          @update:model-value="validieren"
         />
       </v-col>
     </v-row>
@@ -84,7 +84,6 @@
     </v-tabs>
     <v-tabs-window v-model="active_tab">
       <v-tabs-window-item
-        :key="1"
         style="padding: 1em"
         value="ewo"
         eager
@@ -300,7 +299,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="4"
+                      cols="4"
                     >
                       <v-text-field
                         v-model="bewerbung.ewo_strasse"
@@ -316,7 +315,7 @@
                       <v-row>
                         <v-col
                           class="col"
-                          md="3"
+                          cols="3"
                         >
                           <v-text-field
                             v-model="bewerbung.ewo_hausnummer"
@@ -332,7 +331,7 @@
                         </v-col>
                         <v-col
                           class="col"
-                          md="2"
+                          cols="2"
                         >
                           <v-text-field
                             v-model="bewerbung.ewo_buchstabehausnummer"
@@ -349,7 +348,7 @@
                         </v-col>
                         <v-col
                           class="col"
-                          md="2"
+                          cols="2"
                         >
                           <v-text-field
                             v-model="bewerbung.ewo_appartmentnummer"
@@ -366,7 +365,7 @@
                         </v-col>
                         <v-col
                           class="col"
-                          md="2"
+                          cols="2"
                         >
                           <v-text-field
                             v-model="bewerbung.ewo_stockwerk"
@@ -381,7 +380,7 @@
                         </v-col>
                         <v-col
                           class="col"
-                          md="2"
+                          cols="2"
                         >
                           <v-text-field
                             v-model="bewerbung.ewo_teilnummerhausnummer"
@@ -524,7 +523,6 @@
         </v-card>
       </v-tabs-window-item>
       <v-tabs-window-item
-        :key="2"
         style="padding: 1em"
         value="bewerber"
         eager
@@ -638,7 +636,7 @@
                   "
                   persistent-placeholder
                   maxlength="150"
-                  type="mail"
+                  type="email"
                   density="compact"
                   variant="outlined"
                 />
@@ -691,7 +689,6 @@
                       }
                     )
                   "
-                  variant="outlined"
                 />
               </v-col>
               <v-col class="col">
@@ -710,7 +707,6 @@
                       }
                     )
                   "
-                  variant="outlined"
                 />
               </v-col>
             </v-row>
@@ -718,7 +714,6 @@
         </v-card>
       </v-tabs-window-item>
       <v-tabs-window-item
-        :key="3"
         style="padding: 1em"
         value="bestaetigungVerfassungstreue"
         eager
@@ -728,7 +723,6 @@
             <v-row>
               <v-file-upload
                 v-model="bewerbung.bestaetigungverfassungstreue_file"
-                :show-size="true"
                 clearable
                 :rules="[rules.RULE_FILE_VERFASSUNGSTREUE]"
               >
@@ -756,7 +750,7 @@
                         clearable
                         show-size
                         @click:remove="onClickRemove(index)"
-                        @click="dateiVerfassungstrueAnzeigen(file)"
+                        @click="dateiVerfassungstrueHerunterladen(file)"
                       />
                     </template>
                   </v-file-upload-list>
@@ -790,6 +784,10 @@ import {
   VExpansionPanel,
   VExpansionPanels,
   VExpansionPanelText,
+  VFileUpload,
+  VFileUploadDropzone,
+  VFileUploadItem,
+  VFileUploadList,
   VForm,
   VRow,
   VSelect,
@@ -800,12 +798,6 @@ import {
   VTextarea,
   VTextField,
 } from "vuetify/components";
-import {
-  VFileUpload,
-  VFileUploadDropzone,
-  VFileUploadItem,
-  VFileUploadList,
-} from "vuetify/labs/VFileUpload";
 
 import AuthService from "@/api/AuthService";
 import YesNoDialog from "@/components/common/YesNoDialog.vue";
@@ -886,9 +878,7 @@ const geschlechtswerte: string[] = [
 ];
 
 const abbruchOderSpeichern = ref(false);
-/* eslint-disable @typescript-eslint/no-unused-vars */
-const { cancel, leave, saveLeaveDialog } = useSaveLeave(isDirty);
-/* eslint-enable @typescript-eslint/no-unused-vars */
+const { cancel, saveLeaveDialog } = useSaveLeave(isDirty);
 
 function isDirty(): boolean {
   // Switching the menu during the new-entry of a person must be prevented, as otherwise
@@ -922,10 +912,12 @@ function speichern(): void {
     }
   });
 }
-function dateiVerfassungstrueAnzeigen(file: File) {
-  const url = URL.createObjectURL(file);
-  window.open(url, "_blank", "noopener,noreferrer");
-  setTimeout(() => URL.revokeObjectURL(url), 10_000);
+function dateiVerfassungstrueHerunterladen(file: File) {
+  const link = document.createElement("a");
+  link.href = window.URL.createObjectURL(file);
+  link.download = file.name;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(link.href), 10_000);
 }
 
 function felderLeeren(): void {
@@ -936,9 +928,8 @@ function felderLeeren(): void {
   bewerbung.value.telefonmobil = "";
   bewerbung.value.mailadresse = "";
   bewerbung.value.ausgeuebteehrenaemter = "";
-  bewerbung.value.neuervorschlag = "";
-  bewerbung.value.warbereitstaetigals = "";
-  bewerbung.value.warbereitstaetigalsvorvorperiode = "";
+  bewerbung.value.warbereitstaetigals = "false";
+  bewerbung.value.warbereitstaetigalsvorvorperiode = "false";
 }
 
 function setFocusAufFehler() {
@@ -1018,9 +1009,5 @@ const bewerbung = computed({
 <style scoped>
 .scroll {
   overflow-y: scroll;
-}
-
-.auskunftssperre {
-  color: red;
 }
 </style>

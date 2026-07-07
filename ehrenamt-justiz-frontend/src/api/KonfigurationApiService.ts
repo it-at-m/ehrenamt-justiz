@@ -1,4 +1,4 @@
-import type DocumentData from "@/types/DocumentData.ts";
+import type DocumentData from "@/types/DocumentData";
 import type KonfigurationData from "@/types/KonfigurationData";
 
 import EntityApiService from "@/api/EntityApiService";

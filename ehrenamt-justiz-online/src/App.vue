@@ -75,6 +75,6 @@ function loadActiveKonfiguration(): void {
 }
 
 .main-container {
-  padding: 0%;
+  padding: 0;
 }
 </style>

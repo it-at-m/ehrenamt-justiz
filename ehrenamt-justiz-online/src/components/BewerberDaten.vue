@@ -3,10 +3,10 @@
     <v-form
       ref="form"
       class="m-form m-form--default"
-      @submit="checkAndNextStep"
+      @submit.prevent="checkAndNextStep"
       @keydown.enter.prevent="checkAndNextStep"
     >
-      <v-row dense>
+      <v-row density="compact">
         <muc-input
           v-model="onlineBewerbungFormData.vorname"
           :placeholder="t('bewerberDaten.vorname.label')"
@@ -16,7 +16,7 @@
           max="255"
         />
       </v-row>
-      <v-row dense>
+      <v-row density="compact">
         <muc-input
           v-model="onlineBewerbungFormData.nachname"
           :placeholder="t('bewerberDaten.nachname.label')"
@@ -26,7 +26,7 @@
           max="300"
         />
       </v-row>
-      <v-row dense>
+      <v-row density="compact">
         <muc-input
           v-model="onlineBewerbungFormData.geburtsdatum"
           :placeholder="t('bewerberDaten.geburtsdatum.label')"
@@ -37,7 +37,7 @@
           @keydown.ctrl.v="zwischenablageEinfuegen()"
         />
       </v-row>
-      <v-row dense>
+      <v-row density="compact">
         <muc-input
           v-model="onlineBewerbungFormData.beruf"
           :placeholder="t('bewerberDaten.beruf.label')"
@@ -47,7 +47,7 @@
           max="255"
         />
       </v-row>
-      <v-row dense>
+      <v-row density="compact">
         <muc-input
           v-model="onlineBewerbungFormData.telefonnummer"
           :placeholder="t('bewerberDaten.telefonnummer.label')"
@@ -56,7 +56,7 @@
           max="255"
         />
       </v-row>
-      <v-row dense>
+      <v-row density="compact">
         <muc-input
           v-model="onlineBewerbungFormData.mail"
           :placeholder="t('bewerberDaten.mail.placeholder')"
@@ -66,68 +66,68 @@
           max="150"
         />
       </v-row>
+      <muc-divider />
+      <v-row class="button-row">
+        <v-col
+            class="button-wrapper"
+            cols="12"
+            sm="3"
+            md="3"
+            lg="3"
+            xl="3"
+        >
+          <muc-button
+              variant="primary"
+              @click="previousStep"
+          >
+            {{ t("bewerberDaten.buttons.zurueck") }}
+            <svg class="m-button__icon">
+              <use href="#icon-arrow-left"></use>
+            </svg>
+          </muc-button>
+        </v-col>
+        <v-col
+            class="button-wrapper"
+            cols="12"
+            sm="3"
+            md="3"
+            lg="3"
+            xl="3"
+        >
+          <muc-button
+              variant="primary"
+              type="submit"
+          >
+            {{ t("bewerberDaten.buttons.weiter") }}
+            <svg class="m-button__icon">
+              <use href="#icon-arrow-right"></use>
+            </svg>
+          </muc-button>
+        </v-col>
+        <v-col
+            class="button-wrapper"
+            cols="12"
+            sm="3"
+            md="3"
+            lg="3"
+            xl="3"
+        >
+          <muc-button
+              variant="secondary"
+              @click="clearInputs()"
+          >{{ t("bewerberDaten.buttons.leeren") }}
+            <svg class="m-button__icon">
+              <use href="#icon-close"></use>
+            </svg>
+          </muc-button>
+        </v-col>
+      </v-row>
     </v-form>
   </v-container>
-  <muc-divider />
-  <v-row class="button-row">
-    <v-col
-      class="button-wrapper"
-      xs="12"
-      sm="12"
-      md="3"
-      lg="3"
-      xl="3"
-    >
-      <muc-button
-        variant="primary"
-        @click="previousStep"
-      >
-        {{ t("bewerberDaten.buttons.zurueck") }}
-        <svg class="m-button__icon">
-          <use xlink:href="#icon-arrow-left"></use>
-        </svg>
-      </muc-button>
-    </v-col>
-    <v-col
-      class="button-wrapper"
-      xs="12"
-      sm="12"
-      md="3"
-      lg="3"
-      xl="3"
-    >
-      <muc-button
-        variant="primary"
-        @click="checkAndNextStep"
-      >
-        {{ t("bewerberDaten.buttons.weiter") }}
-        <svg class="m-button__icon">
-          <use xlink:href="#icon-arrow-right"></use>
-        </svg>
-      </muc-button>
-    </v-col>
-    <v-col
-      class="button-wrapper"
-      xs="12"
-      sm="12"
-      md="3"
-      lg="3"
-      xl="3"
-    >
-      <muc-button
-        variant="secondary"
-        @click="clearInputs()"
-        >{{ t("bewerberDaten.buttons.leeren") }}
-        <svg class="m-button__icon">
-          <use xlink:href="#icon-close"></use>
-        </svg>
-      </muc-button>
-    </v-col>
-  </v-row>
 </template>
 
 <script setup lang="ts">
-import type OnlineBewerbungData from "@/types/OnlineBewerbungData.ts";
+import type OnlineBewerbungData from "@/types/OnlineBewerbungData";
 
 import { MucButton, MucDivider, MucInput } from "@muenchen/muc-patternlab-vue";
 import moment from "moment";

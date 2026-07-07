@@ -3,8 +3,7 @@
     <v-form
       ref="form"
       class="m-form m-form--default"
-      @submit="nextStep"
-      @keydown.enter.prevent="nextStep"
+      @submit.prevent="nextStep"
     >
       <muc-callout type="info">
         <template #content>
@@ -51,38 +50,38 @@
           {{ t("mainView.datenschutzErklaerung.content9") }}
         </template>
       </muc-callout>
+      <muc-divider />
+      <v-row class="button-row">
+        <v-col
+            class="button-wrapper"
+            cols="2"
+            sm="2"
+            md="2"
+            lg="2"
+            xl="2"
+        >
+          <muc-button
+              variant="primary"
+              type="submit"
+          >
+            {{ t("allgemeineInfo.buttons.weiter") }}
+            <svg class="m-button__icon">
+              <use href="#icon-arrow-right"></use>
+            </svg>
+          </muc-button>
+        </v-col>
+        <v-col
+            class="button-wrapper"
+            cols="10"
+            sm="10"
+            md="10"
+            lg="10"
+            xl="10"
+        >
+        </v-col>
+      </v-row>
     </v-form>
   </v-container>
-  <muc-divider />
-  <v-row class="button-row">
-    <v-col
-      class="button-wrapper"
-      xs="2"
-      sm="2"
-      md="2"
-      lg="2"
-      xl="2"
-    >
-      <muc-button
-        variant="primary"
-        @click="nextStep"
-      >
-        {{ t("allgemeineInfo.buttons.weiter") }}
-        <svg class="m-button__icon">
-          <use xlink:href="#icon-arrow-right"></use>
-        </svg>
-      </muc-button>
-    </v-col>
-    <v-col
-      class="button-wrapper"
-      xs="10"
-      sm="10"
-      md="10"
-      lg="10"
-      xl="10"
-    >
-    </v-col>
-  </v-row>
 </template>
 
 <script setup lang="ts">

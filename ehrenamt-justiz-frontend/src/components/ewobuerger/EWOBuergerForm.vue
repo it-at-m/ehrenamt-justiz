@@ -2,17 +2,17 @@
   <div>
     <v-form
       ref="form"
-      :model-value="formValid"
       validate-on="lazy"
-      @submit="inEWOSuchen"
-      @keydown.enter.prevent="inEWOSuchen"
+      @submit.prevent="inEWOSuchen"
     >
       <v-row>
         <v-col
           class="text-left"
           cols="3"
         >
-          <div class="text-h5">{{ t("components.eWOBuergerForm.header") }}</div>
+          <div class="text-headline-small">
+            {{ t("components.eWOBuergerForm.header") }}
+          </div>
         </v-col>
         <v-col
           class="text-right"
@@ -20,6 +20,7 @@
         >
           <v-btn
             color="accent"
+            class="mr-2"
             @click="felderLeeren"
           >
             {{ t("components.eWOBuergerForm.buttons.felderLeeren") }}
@@ -27,7 +28,7 @@
           <v-btn
             color="green"
             :loading="isAnimation"
-            @click="inEWOSuchen"
+            type="submit"
           >
             {{ t("components.eWOBuergerForm.buttons.inEWOSuchen") }}
           </v-btn>
@@ -132,8 +133,6 @@ const emits = defineEmits<{
 const rules = useRules();
 const snackbarStore = useSnackbarStore();
 const form = ref();
-
-const formValid = ref(false);
 
 const { t } = useI18n();
 

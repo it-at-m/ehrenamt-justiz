@@ -1,74 +1,64 @@
 <template>
-  <v-list-item-action>
-    <v-menu
+  <v-menu
       location="bottom"
       origin="center center"
       transition="scale-transition"
-    >
-      <template #activator="{ props }">
-        <v-btn
+  >
+    <template #activator="{ props }">
+      <v-btn
           variant="text"
-          icon=""
+          icon
           v-bind="props"
           @click.stop
-        >
-          <v-icon :icon="mdiDotsVertical" />
-        </v-btn>
-      </template>
-      <v-list>
-        <v-list-item
+      >
+        <v-icon :icon="mdiDotsVertical" />
+      </v-btn>
+    </template>
+    <v-list>
+      <v-list-item
           v-if="props.showOpen"
           @click.stop="open"
-        >
-          <v-list-item-title>
-            <v-icon
+      >
+        <template #title>
+          <v-icon
               class="mr-2"
               :icon="mdiEye"
-            />
-            <span>{{ t("components.listItemActions.anzeigen") }}</span>
-          </v-list-item-title>
-        </v-list-item>
-        <v-list-item
+          />
+          <span>{{ t("components.listItemActions.anzeigen") }}</span>
+        </template>
+      </v-list-item>
+      <v-list-item
           v-if="props.showEdit"
           @click.stop="edit"
-        >
-          <v-list-item-title>
-            <v-icon
+      >
+        <template #title>
+          <v-icon
               class="mr-2"
               :icon="mdiPencil"
-            />
-            <span>{{ t("components.listItemActions.bearbeiten") }}</span>
-          </v-list-item-title>
-        </v-list-item>
-        <v-list-item
+          />
+          <span>{{ t("components.listItemActions.bearbeiten") }}</span>
+        </template>
+      </v-list-item>
+      <v-list-item
           v-if="props.showDelete"
           @click.stop="deletes"
-        >
-          <v-list-item-title>
-            <v-icon
+      >
+        <template #title>
+          <v-icon
               class="mr-2"
               :icon="mdiDelete"
-            />
-            <span>{{ t("components.listItemActions.loeschen") }}</span>
-          </v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
-  </v-list-item-action>
+          />
+          <span>{{ t("components.listItemActions.loeschen") }}</span>
+        </template>
+      </v-list-item>
+    </v-list>
+  </v-menu>
 </template>
 
 <script setup lang="ts">
 import { mdiDelete, mdiDotsVertical, mdiEye, mdiPencil } from "@mdi/js";
 import { useI18n } from "vue-i18n";
-import {
-  VBtn,
-  VIcon,
-  VList,
-  VListItem,
-  VListItemAction,
-  VListItemTitle,
-  VMenu,
-} from "vuetify/components";
+import { VBtn, VIcon, VList, VListItem, VMenu } from "vuetify/components";
 
 export interface Props {
   showOpen: boolean;

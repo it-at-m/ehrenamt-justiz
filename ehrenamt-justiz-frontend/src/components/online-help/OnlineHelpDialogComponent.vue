@@ -65,5 +65,3 @@ function closeOnlineHelp(): void {
   useGlobalSettingsStore().setOnlineHelpDialogComponentVisible(false);
 }
 </script>
-
-<style scoped></style>

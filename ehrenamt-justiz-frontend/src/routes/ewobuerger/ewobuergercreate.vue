@@ -84,7 +84,7 @@ async function save() {
                   ewoBuergers[0]
                 ).then(() => {
                   router.push({
-                    name: "/bewerbungen/bewerbungedit/[id][action]",
+                    name: "/bewerbungen/bewerbungedit/[id]/[action]",
                     params: {
                       id:
                         ewoBuergers[0] && ewoBuergers[0].id
@@ -134,7 +134,7 @@ async function einBuergerAusgewaehlt(ewoBuerger: EWOBuergerData) {
       EWOBuergerApiService.vorbereitenUndSpeichernPerson(ewoBuerger).then(
         () => {
           router.push({
-            name: "/bewerbungen/bewerbungedit/[id][action]",
+            name: "/bewerbungen/bewerbungedit/[id]/[action]",
             params: {
               id: ewoBuerger.id ? ewoBuerger.id : "",
               action: BEARBEIGUNGS_MODUS.EDIT_MODUS,
