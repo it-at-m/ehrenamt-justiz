@@ -91,31 +91,31 @@
       >
         <template #top>
           <delete-dialog
-              v-model="deleteDialogVisible"
-              :is-animation="deleteAnimationAktiv"
-              :descriptor-string="
+            v-model="deleteDialogVisible"
+            :is-animation="deleteAnimationAktiv"
+            :descriptor-string="
               t('components.bewerbungenTable.table.delete.dialogtext', {
                 count: selectedUUIDs.length,
               })
             "
-              :type-string="2"
-              @delete="deleteConfirmed"
-              @cancel="deleteCanceled"
+            :type-string="2"
+            @delete="deleteConfirmed"
+            @cancel="deleteCanceled"
           />
         </template>
         <template #[`item.geburtsdatum`]="{ internalItem }">
           <span v-if="isAuskunftssperreSichtbar(internalItem.raw)">{{
-              new Date(internalItem.raw.geburtsdatum).toLocaleDateString()
+            new Date(internalItem.raw.geburtsdatum).toLocaleDateString()
           }}</span>
         </template>
         <template #[`item.derzeitausgeuebterberuf`]="{ internalItem }">
           <span v-if="isAuskunftssperreSichtbar(internalItem.raw)">{{
-              internalItem.raw.derzeitausgeuebterberuf
+            internalItem.raw.derzeitausgeuebterberuf
           }}</span>
         </template>
         <template #[`item.mailadresse`]="{ internalItem }">
           <span v-if="isAuskunftssperreSichtbar(internalItem.raw)">{{
-              internalItem.raw.mailadresse
+            internalItem.raw.mailadresse
           }}</span>
         </template>
         <template #[`item.dateiVerfassungstreue`]="{ internalItem }">

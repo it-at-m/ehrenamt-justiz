@@ -30,9 +30,9 @@
         cols="5"
       >
         <v-btn
-            :to="{ name: '/konflikte/konflikteindex' }"
-            class="ml-auto mr-2"
-            variant="text"
+          :to="{ name: '/konflikte/konflikteindex' }"
+          class="ml-auto mr-2"
+          variant="text"
         >
           {{ t("components.konflikteLoesenForm.buttons.abbrechen") }}
         </v-btn>

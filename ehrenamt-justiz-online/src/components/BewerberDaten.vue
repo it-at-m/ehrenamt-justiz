@@ -69,16 +69,16 @@
       <muc-divider />
       <v-row class="button-row">
         <v-col
-            class="button-wrapper"
-            cols="12"
-            sm="3"
-            md="3"
-            lg="3"
-            xl="3"
+          class="button-wrapper"
+          cols="12"
+          sm="3"
+          md="3"
+          lg="3"
+          xl="3"
         >
           <muc-button
-              variant="primary"
-              @click="previousStep"
+            variant="primary"
+            @click="previousStep"
           >
             {{ t("bewerberDaten.buttons.zurueck") }}
             <svg class="m-button__icon">
@@ -87,16 +87,16 @@
           </muc-button>
         </v-col>
         <v-col
-            class="button-wrapper"
-            cols="12"
-            sm="3"
-            md="3"
-            lg="3"
-            xl="3"
+          class="button-wrapper"
+          cols="12"
+          sm="3"
+          md="3"
+          lg="3"
+          xl="3"
         >
           <muc-button
-              variant="primary"
-              type="submit"
+            variant="primary"
+            type="submit"
           >
             {{ t("bewerberDaten.buttons.weiter") }}
             <svg class="m-button__icon">
@@ -105,17 +105,17 @@
           </muc-button>
         </v-col>
         <v-col
-            class="button-wrapper"
-            cols="12"
-            sm="3"
-            md="3"
-            lg="3"
-            xl="3"
+          class="button-wrapper"
+          cols="12"
+          sm="3"
+          md="3"
+          lg="3"
+          xl="3"
         >
           <muc-button
-              variant="secondary"
-              @click="clearInputs()"
-          >{{ t("bewerberDaten.buttons.leeren") }}
+            variant="secondary"
+            @click="clearInputs()"
+            >{{ t("bewerberDaten.buttons.leeren") }}
             <svg class="m-button__icon">
               <use href="#icon-close"></use>
             </svg>

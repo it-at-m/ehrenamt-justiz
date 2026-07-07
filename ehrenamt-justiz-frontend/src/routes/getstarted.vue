@@ -91,27 +91,27 @@
         <h2>{{ textAnzahlNeueVorschlaege }}</h2>
         <div class="d-flex flex-column ga-2">
           <v-btn
-              color="green"
-              :disabled="
+            color="green"
+            :disabled="
               !user ||
               !user.authorities.includes(
                 'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
               )
             "
-              @click="datenHerunterladen"
-          >{{ t("routes.getstartedview.buttons.datenHerunterladen") }}
+            @click="datenHerunterladen"
+            >{{ t("routes.getstartedview.buttons.datenHerunterladen") }}
           </v-btn>
 
           <v-btn
-              color="green"
-              :disabled="
+            color="green"
+            :disabled="
               !user ||
               !user.authorities.includes(
                 'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
               )
             "
-              @click="alsBenachrichtigtMarkierenBestaetigen"
-          >{{ t("routes.getstartedview.buttons.alsBenachrichtigtMarkieren") }}
+            @click="alsBenachrichtigtMarkierenBestaetigen"
+            >{{ t("routes.getstartedview.buttons.alsBenachrichtigtMarkieren") }}
           </v-btn>
         </div>
       </v-col>

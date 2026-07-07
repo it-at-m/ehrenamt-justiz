@@ -6,17 +6,17 @@
   >
     <template #activator="{ props }">
       <v-btn
-          v-if="buttontext"
-          color="primary"
-          v-bind="props"
+        v-if="buttontext"
+        color="primary"
+        v-bind="props"
       >
         {{ buttontext }}
       </v-btn>
       <v-btn
-          v-else-if="icontext"
-          color="primary"
-          v-bind="props"
-          icon
+        v-else-if="icontext"
+        color="primary"
+        v-bind="props"
+        icon
       >
         <v-icon size="large">
           {{ icontext }}

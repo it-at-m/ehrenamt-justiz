@@ -16,15 +16,15 @@
           <v-tooltip location="bottom">
             <template #activator="{ props: tooltipProps }">
               <v-icon
-                  v-bind="tooltipProps"
-                  :icon="mdiAccountPlus"
-                  @click="selectBuerger(internalItem.raw)"
-                  @keydown.enter.prevent="selectBuerger(internalItem.raw)"
+                v-bind="tooltipProps"
+                :icon="mdiAccountPlus"
+                @click="selectBuerger(internalItem.raw)"
+                @keydown.enter.prevent="selectBuerger(internalItem.raw)"
               />
             </template>
             <span>{{
-                t("routes.ewobuergerselect.table.actions.tooltip")
-              }}</span>
+              t("routes.ewobuergerselect.table.actions.tooltip")
+            }}</span>
           </v-tooltip>
         </template>
 
@@ -35,16 +35,16 @@
         <template #[`item.auskunftssperre`]="{ internalItem }">
           {{
             internalItem.raw.auskunftssperre.length > 0
-                ? t("routes.ewobuergerselect.table.auskunftssperre.content")
-                : ""
+              ? t("routes.ewobuergerselect.table.auskunftssperre.content")
+              : ""
           }}
         </template>
 
         <template #[`item.ewoidbereitserfasst`]="{ internalItem }">
           {{
             internalItem.raw.ewoidbereitserfasst
-                ? t("routes.ewobuergerselect.table.bereitsErfasst.contentYes")
-                : t("routes.ewobuergerselect.table.bereitsErfasst.contentNo")
+              ? t("routes.ewobuergerselect.table.bereitsErfasst.contentYes")
+              : t("routes.ewobuergerselect.table.bereitsErfasst.contentNo")
           }}
         </template>
       </v-data-table>
@@ -136,8 +136,8 @@ const visible = computed({
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function getRowProps(data: any) {
   return data.item.auskunftssperre.length > 0
-      ? { class: "auskunftssperre" }
-      : {};
+    ? { class: "auskunftssperre" }
+    : {};
 }
 function selectBuerger(eWOBuergerData: EWOBuergerData) {
   emits("selectBuerger", eWOBuergerData);
@@ -146,4 +146,3 @@ function cancelBuergerSelect() {
   emits("cancelBuergerSelect");
 }
 </script>
-

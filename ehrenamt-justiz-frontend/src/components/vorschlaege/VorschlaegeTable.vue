@@ -109,12 +109,12 @@
         </template>
         <template #[`item.derzeitausgeuebterberuf`]="{ internalItem }">
           <span v-if="isAuskunftssperreSichtbar(internalItem.raw)">{{
-              internalItem.raw.derzeitausgeuebterberuf
+            internalItem.raw.derzeitausgeuebterberuf
           }}</span>
         </template>
         <template #[`item.mailadresse`]="{ internalItem }">
           <span v-if="isAuskunftssperreSichtbar(internalItem.raw)">{{
-              internalItem.raw.mailadresse
+            internalItem.raw.mailadresse
           }}</span>
         </template>
         <template #[`item.dateiVerfassungstreue`]="{ internalItem }">

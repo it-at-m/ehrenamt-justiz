@@ -53,16 +53,16 @@
       <muc-divider />
       <v-row class="button-row">
         <v-col
-            class="button-wrapper"
-            cols="2"
-            sm="2"
-            md="2"
-            lg="2"
-            xl="2"
+          class="button-wrapper"
+          cols="2"
+          sm="2"
+          md="2"
+          lg="2"
+          xl="2"
         >
           <muc-button
-              variant="primary"
-              type="submit"
+            variant="primary"
+            type="submit"
           >
             {{ t("allgemeineInfo.buttons.weiter") }}
             <svg class="m-button__icon">
@@ -71,12 +71,12 @@
           </muc-button>
         </v-col>
         <v-col
-            class="button-wrapper"
-            cols="10"
-            sm="10"
-            md="10"
-            lg="10"
-            xl="10"
+          class="button-wrapper"
+          cols="10"
+          sm="10"
+          md="10"
+          lg="10"
+          xl="10"
         >
         </v-col>
       </v-row>

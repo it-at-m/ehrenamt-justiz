@@ -60,7 +60,7 @@
           />
         </template>
 
-        <template #[`item.konfliktfeld`]="{ internalItem  }">
+        <template #[`item.konfliktfeld`]="{ internalItem }">
           <span
             v-for="konflikt in internalItem.raw.konfliktfeld"
             :key="konflikt"
@@ -69,19 +69,19 @@
           </span>
         </template>
 
-        <template #[`item.geburtsdatum`]="{ internalItem  }">
+        <template #[`item.geburtsdatum`]="{ internalItem }">
           <span v-if="isAuskunftssperreSichtbar(internalItem.raw)">{{
             new Date(internalItem.raw.geburtsdatum).toLocaleDateString()
           }}</span>
         </template>
         <template #[`item.derzeitausgeuebterberuf`]="{ internalItem }">
           <span v-if="isAuskunftssperreSichtbar(internalItem.raw)">{{
-              internalItem.raw.derzeitausgeuebterberuf
+            internalItem.raw.derzeitausgeuebterberuf
           }}</span>
         </template>
         <template #[`item.mailadresse`]="{ internalItem }">
           <span v-if="isAuskunftssperreSichtbar(internalItem.raw)">{{
-              internalItem.raw.mailadresse
+            internalItem.raw.mailadresse
           }}</span>
         </template>
         <template #[`item.actions`]="{ internalItem }">
@@ -344,4 +344,3 @@ function isAuskunftssperreSichtbar(person: PersonenTableData): boolean {
   );
 }
 </script>
-

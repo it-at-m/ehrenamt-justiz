@@ -18,7 +18,9 @@
           <tr>
             <td>{{ internalItem.raw.familienname }}</td>
             <td>{{ internalItem.raw.vorname }}</td>
-            <td>{{ new Date(internalItem.raw.geburtsdatum).toLocaleDateString() }}</td>
+            <td>
+              {{ new Date(internalItem.raw.geburtsdatum).toLocaleDateString() }}
+            </td>
           </tr>
         </template>
       </v-data-table>

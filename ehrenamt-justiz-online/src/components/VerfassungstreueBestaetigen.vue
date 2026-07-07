@@ -64,7 +64,7 @@
     <v-row class="button-row">
       <v-col
         class="button-wrapper"
-       cols="12"
+        cols="12"
         sm="12"
         md="3"
         lg="2"
@@ -82,7 +82,7 @@
       </v-col>
       <v-col
         class="button-wrapper"
-       cols="12"
+        cols="12"
         sm="9"
         md="3"
         lg="2"

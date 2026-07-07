@@ -28,9 +28,10 @@
     </v-list-item>
     <v-list-subheader
       v-if="!busy && (configuration === undefined || configuration.length < 1)"
-    >{{
+      >{{
         t("components.konfigurationList.keineKonfigurationVorhanden")
-      }}</v-list-subheader>
+      }}</v-list-subheader
+    >
     <template v-if="busy">
       <v-progress-linear indeterminate />
     </template>
@@ -67,7 +68,7 @@ const totalPages = ref(Number.MAX_VALUE);
 
 const totalElements = ref(Number.MIN_VALUE);
 const hasMore = computed(
-    () => configuration.value.length < totalElements.value
+  () => configuration.value.length < totalElements.value
 );
 const { t } = useI18n();
 onMounted(() => {

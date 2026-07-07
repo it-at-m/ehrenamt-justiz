@@ -1,52 +1,52 @@
 <template>
   <v-menu
-      location="bottom"
-      origin="center center"
-      transition="scale-transition"
+    location="bottom"
+    origin="center center"
+    transition="scale-transition"
   >
     <template #activator="{ props }">
       <v-btn
-          variant="text"
-          icon
-          v-bind="props"
-          @click.stop
+        variant="text"
+        icon
+        v-bind="props"
+        @click.stop
       >
         <v-icon :icon="mdiDotsVertical" />
       </v-btn>
     </template>
     <v-list>
       <v-list-item
-          v-if="props.showOpen"
-          @click.stop="open"
+        v-if="props.showOpen"
+        @click.stop="open"
       >
         <template #title>
           <v-icon
-              class="mr-2"
-              :icon="mdiEye"
+            class="mr-2"
+            :icon="mdiEye"
           />
           <span>{{ t("components.listItemActions.anzeigen") }}</span>
         </template>
       </v-list-item>
       <v-list-item
-          v-if="props.showEdit"
-          @click.stop="edit"
+        v-if="props.showEdit"
+        @click.stop="edit"
       >
         <template #title>
           <v-icon
-              class="mr-2"
-              :icon="mdiPencil"
+            class="mr-2"
+            :icon="mdiPencil"
           />
           <span>{{ t("components.listItemActions.bearbeiten") }}</span>
         </template>
       </v-list-item>
       <v-list-item
-          v-if="props.showDelete"
-          @click.stop="deletes"
+        v-if="props.showDelete"
+        @click.stop="deletes"
       >
         <template #title>
           <v-icon
-              class="mr-2"
-              :icon="mdiDelete"
+            class="mr-2"
+            :icon="mdiDelete"
           />
           <span>{{ t("components.listItemActions.loeschen") }}</span>
         </template>

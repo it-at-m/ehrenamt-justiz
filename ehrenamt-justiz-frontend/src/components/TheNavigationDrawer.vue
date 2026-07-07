@@ -2,8 +2,8 @@
   <v-navigation-drawer v-model="showDrawer">
     <v-list>
       <v-list-item
-          :to="{ name: '/getstarted' }"
-          :title="t('app.navigation.getStarted')"
+        :to="{ name: '/getstarted' }"
+        :title="t('app.navigation.getStarted')"
       />
       <v-list-item
         :to="{ name: '/ewobuerger/ewobuergercreate' }"
@@ -13,7 +13,7 @@
           !globalSettingsStore.getKonfiguration
         "
         :title="t('app.navigation.bewerbungErstellen')"
-        />
+      />
       <v-list-item
         :to="{ name: '/bewerbungen/bewerbungenindex' }"
         :disabled="

@@ -1,8 +1,8 @@
 <template>
   <v-list-item
-      :class="props.konfiguration.aktiv ? 'listitem' : ''"
-      :title="title"
-      :subtitle="subtitle"
+    :class="props.konfiguration.aktiv ? 'listitem' : ''"
+    :title="title"
+    :subtitle="subtitle"
   >
     <template #append>
       <div
@@ -16,10 +16,10 @@
         >
           <template #activator="{ props: tooltipProps }">
             <v-btn
-                class="listitem"
-                v-bind="tooltipProps"
-                :icon="mdiLightbulbOnOutline"
-                @click="requestSetActive"
+              class="listitem"
+              v-bind="tooltipProps"
+              :icon="mdiLightbulbOnOutline"
+              @click="requestSetActive"
             />
           </template>
         </v-tooltip>
