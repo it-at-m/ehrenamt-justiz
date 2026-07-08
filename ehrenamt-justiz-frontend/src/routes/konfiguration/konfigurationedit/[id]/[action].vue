@@ -7,12 +7,12 @@
       />
       <template v-else>
         <h1
-          class="text-h5"
+          class="text-headline-small"
           style="margin-bottom: 1em"
         >
           {{ t("routes.konfigurationedit.header") }}
           {{
-            konfigurationData.action == BEARBEIGUNGS_MODUS.EDIT_MODUS
+            konfigurationData.action === BEARBEIGUNGS_MODUS.EDIT_MODUS
               ? t("routes.konfigurationedit.bearbeiten")
               : t("routes.konfigurationedit.anzeigen")
           }}
@@ -50,6 +50,7 @@ import { BEARBEIGUNGS_MODUS, STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const route = useRoute();
+const params = route.params as { id: string; action: string };
 const router = useRouter();
 const snackbarStore = useSnackbarStore();
 const { t } = useI18n();
@@ -73,8 +74,8 @@ const konfigurationId = ref("");
 const action = ref("");
 
 onMounted(() => {
-  konfigurationId.value = route.params.id as string;
-  action.value = route.params.action as string;
+  konfigurationId.value = params.id;
+  action.value = params.action;
   loadKonfiguration();
 });
 

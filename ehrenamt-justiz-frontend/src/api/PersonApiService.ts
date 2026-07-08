@@ -1,5 +1,5 @@
 import type PagedEntity from "@/types/base/PagedEntity";
-import type DocumentData from "@/types/DocumentData.ts";
+import type DocumentData from "@/types/DocumentData";
 import type PersonCSV from "@/types/PersonCSV";
 import type PersonData from "@/types/PersonData";
 import type PersonenTableData from "@/types/PersonenTableData";

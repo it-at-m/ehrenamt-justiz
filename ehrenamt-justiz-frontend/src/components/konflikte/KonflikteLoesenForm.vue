@@ -1,56 +1,54 @@
 <template>
   <v-form
     ref="form"
-    :model-value="formValid"
     class="form"
     :readonly="true"
-    @submit="speichern"
-    @keydown.enter.prevent="speichern"
+    @submit.prevent="speichern"
   >
     <v-row>
       <v-col
         class="text-left"
-        md="4"
+        cols="4"
       >
         <div
-          class="text-h5"
+          class="text-headline-small"
           style="margin-bottom: 1em"
         >
           {{ t("components.konflikteLoesenForm.header.konflikteLoesen") }}
         </div>
       </v-col>
-      <v-col md="3">
+      <v-col cols="3">
         <div
           v-if="konfliktloesenformdata.person_auskunftssperre.length > 0"
-          class="text-h5 auskunftssperre"
+          class="text-headline-small auskunftssperreDetail"
         >
           {{ t("components.konflikteLoesenForm.header.auskunftssperre") }}
         </div>
       </v-col>
       <v-col
         class="text-right"
-        md="5"
+        cols="5"
       >
         <v-btn
-          :disabled="!konflikteVorhanden()"
-          color="accent"
-          @click="alleUebernehmen"
-        >
-          {{ t("components.konflikteLoesenForm.buttons.alleUebernehmen") }}
-        </v-btn>
-        <v-btn
           :to="{ name: '/konflikte/konflikteindex' }"
-          class="ml-auto"
-          exact
+          class="ml-auto mr-2"
           variant="text"
         >
           {{ t("components.konflikteLoesenForm.buttons.abbrechen") }}
         </v-btn>
         <v-btn
+          :disabled="!konflikteVorhanden()"
+          color="accent"
+          class="mr-2"
+          @click="alleUebernehmen"
+        >
+          {{ t("components.konflikteLoesenForm.buttons.alleUebernehmen") }}
+        </v-btn>
+        <v-btn
           :disabled="konflikteVorhanden()"
           :loading="isSavingAnimation"
           color="green"
-          @click="speichern"
+          type="submit"
         >
           {{ t("components.konflikteLoesenForm.buttons.speichern") }}
         </v-btn>
@@ -67,7 +65,6 @@
     </v-tabs>
     <v-tabs-window v-model="active_tab">
       <v-tabs-window-item
-        :key="1"
         style="padding: 1em"
         value="bewerberZusatzangaben"
         eager
@@ -77,7 +74,7 @@
             <v-row>
               <v-col
                 class="col"
-                md="5"
+                cols="5"
               >
                 <v-text-field
                   v-model="
@@ -96,7 +93,7 @@
             <v-row>
               <v-col
                 class="col"
-                md="5"
+                cols="5"
               >
                 <v-text-field
                   v-model="konfliktloesenformdata.person_arbeitgeber"
@@ -111,7 +108,7 @@
             <v-row>
               <v-col
                 class="col"
-                md="5"
+                cols="5"
               >
                 <v-text-field
                   v-model="konfliktloesenformdata.person_telefonnummer"
@@ -128,7 +125,7 @@
             <v-row>
               <v-col
                 class="col"
-                md="5"
+                cols="5"
               >
                 <v-text-field
                   v-model="konfliktloesenformdata.person_telefongesch"
@@ -147,7 +144,7 @@
             <v-row>
               <v-col
                 class="col"
-                md="5"
+                cols="5"
               >
                 <v-text-field
                   v-model="konfliktloesenformdata.person_telefonmobil"
@@ -164,14 +161,14 @@
             <v-row>
               <v-col
                 class="col"
-                md="5"
+                cols="5"
               >
                 <v-text-field
                   v-model="konfliktloesenformdata.person_mailadresse"
                   density="compact"
                   :label="t('components.konflikteLoesenForm.form.mailAdresse')"
                   persistent-placeholder
-                  type="mail"
+                  type="email"
                   variant="outlined"
                   :hide-details="true"
                 />
@@ -180,7 +177,7 @@
             <v-row>
               <v-col
                 class="col"
-                md="5"
+                cols="5"
               >
                 <v-text-field
                   v-model="konfliktloesenformdata.person_ausgeuebteehrenaemter"
@@ -199,7 +196,7 @@
             <v-row>
               <v-col
                 class="col"
-                md="5"
+                cols="5"
               >
                 <v-text-field
                   v-model="konfliktloesenformdata.person_onlinebewerbung"
@@ -216,7 +213,7 @@
             <v-row>
               <v-col
                 class="col"
-                md="5"
+                cols="5"
               >
                 <v-text-field
                   v-model="konfliktloesenformdata.person_neuervorschlag"
@@ -233,7 +230,7 @@
             <v-row>
               <v-col
                 class="col"
-                md="5"
+                cols="5"
               >
                 <v-checkbox
                   v-model="konfliktloesenformdata.person_warbereitstaetigals"
@@ -251,8 +248,6 @@
                       }
                     )
                   "
-                  persistent-placeholder
-                  variant="outlined"
                   :hide-details="true"
                 />
               </v-col>
@@ -260,7 +255,7 @@
             <v-row>
               <v-col
                 class="col"
-                md="5"
+                cols="5"
               >
                 <v-checkbox
                   v-model="
@@ -280,8 +275,6 @@
                       }
                     )
                   "
-                  persistent-placeholder
-                  variant="outlined"
                   :hide-details="true"
                 />
               </v-col>
@@ -289,7 +282,7 @@
             <v-row>
               <v-col
                 class="col"
-                md="5"
+                cols="5"
               >
                 <v-text-field
                   v-model="konfliktloesenformdata.person_bewerbungvom"
@@ -305,7 +298,7 @@
             <v-row>
               <v-col
                 class="col"
-                md="5"
+                cols="5"
               >
                 <v-select
                   v-model="konfliktloesenformdata.person_status"
@@ -322,7 +315,6 @@
         </v-card>
       </v-tabs-window-item>
       <v-tabs-window-item
-        :key="2"
         style="padding: 1em"
         value="datenAusEWOUebernehmen"
         eager
@@ -332,24 +324,24 @@
             <v-row>
               <v-col
                 class="col"
-                md="6"
+                cols="6"
               >
-                <v-label class="text-h6"
+                <span class="text-title-large"
                   >{{
                     t("components.konflikteLoesenForm.header.aktuelleDaten")
                   }}
-                </v-label>
+                </span>
               </v-col>
 
               <v-col
                 class="col"
-                md="5"
+                cols="5"
               >
-                <v-label class="text-h6"
+                <span class="text-title-large"
                   >{{
                     t("components.konflikteLoesenForm.header.neueDatenAusEWO")
                   }}
-                </v-label>
+                </span>
               </v-col>
             </v-row>
             <v-expansion-panels
@@ -364,7 +356,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_familienname"
@@ -379,7 +371,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -409,7 +401,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(FAMILIENNAME)"
@@ -427,7 +419,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_geburtsname"
@@ -442,7 +434,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -472,7 +464,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(GEBURTSNAME)"
@@ -490,7 +482,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_vorname"
@@ -505,7 +497,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -535,7 +527,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(VORNAME)"
@@ -563,7 +555,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_geburtsdatum"
@@ -579,7 +571,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -609,7 +601,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(GEBURTSDATUM)"
@@ -628,7 +620,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-select
                         v-model="konfliktloesenformdata.person_geschlecht"
@@ -644,7 +636,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -674,7 +666,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-select
                         v-if="isKonfliktOriginal(GESCHLECHT)"
@@ -693,7 +685,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_ewoid"
@@ -710,7 +702,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -740,7 +732,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(ORDNUNGSMERKMAL)"
@@ -760,7 +752,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_akademischergrad"
@@ -777,7 +769,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -807,7 +799,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(AKADEMISCHERGRAD)"
@@ -827,7 +819,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_geburtsort"
@@ -842,7 +834,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -872,7 +864,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(GEBURTSORT)"
@@ -890,7 +882,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_geburtsland"
@@ -905,7 +897,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -935,7 +927,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(GEBURTSLAND)"
@@ -953,7 +945,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_familienstand"
@@ -968,7 +960,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -998,7 +990,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(FAMILIENSTAND)"
@@ -1016,7 +1008,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="
@@ -1035,7 +1027,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -1065,7 +1057,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(STAATSANGEHOERIGKEIT)"
@@ -1095,7 +1087,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_wohnungsgeber"
@@ -1110,7 +1102,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -1140,7 +1132,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(WOHNUNGSGEBER)"
@@ -1158,7 +1150,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_strasse"
@@ -1173,7 +1165,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -1203,7 +1195,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(STRASSE)"
@@ -1221,7 +1213,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_hausnummer"
@@ -1236,7 +1228,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -1266,7 +1258,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(HAUSNUMMER)"
@@ -1284,7 +1276,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_appartmentnummer"
@@ -1301,7 +1293,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -1331,7 +1323,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(APPARTMENTNUMMER)"
@@ -1351,7 +1343,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="
@@ -1370,7 +1362,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -1400,7 +1392,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(BUCHSTABEHAUSNUMMER)"
@@ -1420,7 +1412,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_stockwerk"
@@ -1435,7 +1427,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -1465,7 +1457,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(STOCKWERK)"
@@ -1483,7 +1475,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="
@@ -1502,7 +1494,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -1532,7 +1524,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(TEILNUMMERHAUSNUMMER)"
@@ -1554,7 +1546,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_adresszusatz"
@@ -1569,7 +1561,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -1599,7 +1591,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(ADRESSZUSATZ)"
@@ -1617,7 +1609,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_postleitzahl"
@@ -1632,7 +1624,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -1662,7 +1654,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(POSTLEITZAHL)"
@@ -1680,7 +1672,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_ort"
@@ -1693,7 +1685,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -1723,7 +1715,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(ORT)"
@@ -1739,7 +1731,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-select
                         v-model="konfliktloesenformdata.person_wohnungsstatus"
@@ -1757,7 +1749,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -1787,7 +1779,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-select
                         v-if="isKonfliktOriginal(WOHNUNGSSTATUS)"
@@ -1816,7 +1808,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-model="konfliktloesenformdata.person_inmuenchenseit"
@@ -1834,7 +1826,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -1864,7 +1856,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-text-field
                         v-if="isKonfliktOriginal(INMUENCHENSEIT)"
@@ -1885,7 +1877,7 @@
                   <v-row>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-textarea
                         v-model="konfliktloesenformdata.person_auskunftssperre"
@@ -1904,7 +1896,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="1"
+                      cols="1"
                     >
                       <v-tooltip
                         :text="
@@ -1934,7 +1926,7 @@
                     </v-col>
                     <v-col
                       class="col"
-                      md="5"
+                      cols="5"
                     >
                       <v-textarea
                         v-if="isKonfliktOriginal(AUSKUNFTSSPERRE)"
@@ -1983,7 +1975,6 @@ import {
   VExpansionPanelText,
   VForm,
   VIcon,
-  VLabel,
   VRow,
   VSelect,
   VTab,
@@ -2013,11 +2004,9 @@ const emits = defineEmits<{
 const snackbarStore = useSnackbarStore();
 const form = ref();
 
-const formValid = ref(false);
-
 const activeExpansionPanel = ref<number[]>([]);
 
-const active_tab = ref("bewerber");
+const active_tab = ref("datenAusEWOUebernehmen");
 
 const FAMILIENNAME = "Familienname";
 const GEBURTSNAME = "Geburtsname";
@@ -2054,7 +2043,6 @@ onMounted(() => {
       text: t("components.konflikteLoesenForm.form.messages.keineEWODaten"),
     });
   }
-  active_tab.value = "datenAusEWOUebernehmen";
 
   if (isKonflikts([FAMILIENNAME, GEBURTSNAME, VORNAME])) {
     // Namen
@@ -2362,9 +2350,5 @@ function konflikteVorhanden(): boolean {
 .button-konflikt-loesen {
   color: white;
   background-color: red;
-}
-
-.auskunftssperre {
-  color: red;
 }
 </style>

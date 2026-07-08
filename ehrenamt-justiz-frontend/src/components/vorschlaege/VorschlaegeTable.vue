@@ -13,7 +13,6 @@
               :label="t('components.vorschlaegeTable.suche')"
               single-line
               hide-details
-              select-strategy="all"
               clearable
               autofocus
               @keydown.enter.prevent="enableReload && reload()"
@@ -103,22 +102,22 @@
             @cancel="deleteCanceled"
           />
         </template>
-        <template #[`item.geburtsdatum`]="{ item }">
-          <span v-if="isAuskunftssperreSichtbar(item)">{{
-            new Date(item.geburtsdatum).toLocaleDateString()
+        <template #[`item.geburtsdatum`]="{ internalItem }">
+          <span v-if="isAuskunftssperreSichtbar(internalItem.raw)">{{
+            new Date(internalItem.raw.geburtsdatum).toLocaleDateString()
           }}</span>
         </template>
-        <template #[`item.derzeitausgeuebterberuf`]="{ item }">
-          <span v-if="isAuskunftssperreSichtbar(item)">{{
-            item.derzeitausgeuebterberuf
+        <template #[`item.derzeitausgeuebterberuf`]="{ internalItem }">
+          <span v-if="isAuskunftssperreSichtbar(internalItem.raw)">{{
+            internalItem.raw.derzeitausgeuebterberuf
           }}</span>
         </template>
-        <template #[`item.mailadresse`]="{ item }">
-          <span v-if="isAuskunftssperreSichtbar(item)">{{
-            item.mailadresse
+        <template #[`item.mailadresse`]="{ internalItem }">
+          <span v-if="isAuskunftssperreSichtbar(internalItem.raw)">{{
+            internalItem.raw.mailadresse
           }}</span>
         </template>
-        <template #[`item.dateiVerfassungstreue`]="{ item }">
+        <template #[`item.dateiVerfassungstreue`]="{ internalItem }">
           <v-tooltip
             v-if="AuthService.checkAuth('WRITE_EHRENAMTJUSTIZDATEN', t)"
             location="bottom"
@@ -126,7 +125,7 @@
             <template #activator="{ props }">
               <span v-bind="props">
                 <v-icon
-                  v-if="item.dateiVerfassungstreue"
+                  v-if="internalItem.raw.dateiVerfassungstreue"
                   :icon="mdiFile"
                 />
               </span>
@@ -138,7 +137,7 @@
             }}</span>
           </v-tooltip>
         </template>
-        <template #[`item.actions`]="{ item }">
+        <template #[`item.actions`]="{ internalItem }">
           <v-tooltip
             v-if="AuthService.checkAuth('WRITE_EHRENAMTJUSTIZDATEN', t)"
             location="bottom"
@@ -148,7 +147,7 @@
                 <v-icon
                   v-bind="props"
                   :icon="mdiPencil"
-                  @click="editItem(item)"
+                  @click="editItem(internalItem.raw)"
               /></span>
             </template>
             <span>{{
@@ -164,7 +163,7 @@
                 <v-icon
                   v-bind="props"
                   :icon="mdiEye"
-                  @click="displayItem(item)"
+                  @click="displayItem(internalItem.raw)"
               /></span>
             </template>
             <span>{{
@@ -224,7 +223,7 @@
 import type PersonenTableData from "@/types/PersonenTableData";
 
 import { mdiEye, mdiFile, mdiPencil } from "@mdi/js";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import {
@@ -234,7 +233,6 @@ import {
   VCheckboxBtn,
   VCol,
   VContainer,
-  VDataTable,
   VDataTableServer,
   VIcon,
   VRow,
@@ -257,62 +255,62 @@ import { useSnackbarStore } from "@/stores/snackbar";
 import { useUserInfoStore } from "@/stores/userinfo";
 
 const { t } = useI18n();
-const headers: ReadonlyHeaders = computed(() => [
+const headers = ref([
   {
     title: t("components.vorschlaegeTable.table.familienname"),
-    value: "familienname",
+    key: "familienname",
     align: "start",
     sortable: true,
   },
   {
     title: t("components.vorschlaegeTable.table.vorname"),
-    value: "vorname",
+    key: "vorname",
     align: "start",
     sortable: true,
   },
   {
     title: t("components.vorschlaegeTable.table.geburtsdatum"),
-    value: "geburtsdatum",
+    key: "geburtsdatum",
     align: "end",
     sortable: true,
   },
   {
     title: t("components.vorschlaegeTable.table.derzeitigerBeruf"),
-    value: "derzeitausgeuebterberuf",
+    key: "derzeitausgeuebterberuf",
     align: "start",
     sortable: true,
   },
   {
     title: t("components.vorschlaegeTable.table.arbeitgeber"),
-    value: "arbeitgeber",
+    key: "arbeitgeber",
     align: "start",
     sortable: true,
   },
   {
     title: t("components.vorschlaegeTable.table.mailAdresse"),
-    value: "mailadresse",
+    key: "mailadresse",
     align: "start",
     sortable: true,
   },
   {
     title: t("components.vorschlaegeTable.table.ausgeuebteEhrenaemter"),
-    value: "ausgeuebteehrenaemter",
+    key: "ausgeuebteehrenaemter",
     align: "start",
     sortable: true,
   },
   {
     title: t("components.vorschlaegeTable.table.dateiVerfassungstreue"),
-    value: "dateiVerfassungstreue",
+    key: "dateiVerfassungstreue",
     align: "start",
     sortable: false,
   },
   {
     title: t("components.vorschlaegeTable.table.actions.header"),
-    value: "actions",
+    key: "actions",
     align: "start",
     sortable: false,
   },
-]) as unknown as ReadonlyHeaders;
+] as const);
 const snackbarStore = useSnackbarStore();
 const router = useRouter();
 const personenTableData = ref<PersonenTableData[]>([]);
@@ -323,7 +321,6 @@ const selectedUUIDs = ref<string[]>([]);
 const search = ref("");
 // Avoids multiple reading of the table if the Enter key is pressed during reload():
 const enableReload = ref(true);
-type ReadonlyHeaders = VDataTable["$props"]["headers"];
 const deleteDialogVisible = ref(false);
 const loadingAnimationAktiv = ref(false);
 const deleteAnimationAktiv = ref(false);
@@ -364,7 +361,7 @@ function loadItems(options: any) {
 
 function editItem(item: { id: { toString: () => string } }) {
   router.push({
-    name: "/bewerbungen/bewerbungedit/[id][action]",
+    name: "/bewerbungen/bewerbungedit/[id]/[action]",
     params: {
       id: item.id.toString(),
       action: BEARBEIGUNGS_MODUS.EDIT_MODUS,
@@ -374,7 +371,7 @@ function editItem(item: { id: { toString: () => string } }) {
 
 function displayItem(item: { id: { toString: () => string } }) {
   router.push({
-    name: "/bewerbungen/bewerbungedit/[id][action]",
+    name: "/bewerbungen/bewerbungedit/[id]/[action]",
     params: {
       id: item.id.toString(),
       action: BEARBEIGUNGS_MODUS.DISPLAY_MODUS,
@@ -491,9 +488,3 @@ function datenHerunterladen() {
   );
 }
 </script>
-
-<style scoped>
-:deep(.auskunftssperre) {
-  background: lightcoral;
-}
-</style>
