@@ -65,7 +65,7 @@ public class OnlineBewerbungRestController {
         final Konfiguration[] konfiguration = konfigurationRepository.findByAktiv(true);
 
         // Lesen Muster aus DB
-        final Document[] documents = documentRepository.getDocumentByKonfigurationId(konfiguration[0].getId());
+        final Document[] documents = documentRepository.getDocumentByKonfigurationIdOnlineBewerbung(konfiguration[0].getId());
 
         if (documents == null || documents.length == 0) {
             return ResponseEntity.notFound().build();
