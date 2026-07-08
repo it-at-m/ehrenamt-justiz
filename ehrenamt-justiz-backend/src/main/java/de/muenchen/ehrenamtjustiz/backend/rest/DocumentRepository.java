@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,13 @@ public interface DocumentRepository extends CrudRepository<Document, UUID> {
     )
     @PreAuthorize(Authorities.HAS_AUTHORITY_READ_EHRENAMTJUSTIZDATEN)
     Document[] getDocumentByKonfigurationId(UUID konfigurationId);
+
+    @Query(
+            "SELECT d FROM Document d " +
+                    "where d.konfigurationid=?1"
+    )
+    @RestResource(exported = false)
+    Document[] getDocumentByKonfigurationIdOnlineBewerbung(UUID konfigurationId);
 
     @Query(
         "SELECT d FROM Document d " +
