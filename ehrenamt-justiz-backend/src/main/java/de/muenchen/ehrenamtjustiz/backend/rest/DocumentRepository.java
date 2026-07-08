@@ -32,7 +32,7 @@ public interface DocumentRepository extends CrudRepository<Document, UUID> {
                 "where d.konfigurationid=?1"
     )
     @RestResource(exported = false)
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("permitAll")
     Document[] getDocumentByKonfigurationIdOnlineBewerbung(UUID konfigurationId);
 
     @Query(
