@@ -29,8 +29,8 @@ public interface DocumentRepository extends CrudRepository<Document, UUID> {
     Document[] getDocumentByKonfigurationId(UUID konfigurationId);
 
     @Query(
-            "SELECT d FROM Document d " +
-                    "where d.konfigurationid=?1"
+        "SELECT d FROM Document d " +
+                "where d.konfigurationid=?1"
     )
     @RestResource(exported = false)
     Document[] getDocumentByKonfigurationIdOnlineBewerbung(UUID konfigurationId);
