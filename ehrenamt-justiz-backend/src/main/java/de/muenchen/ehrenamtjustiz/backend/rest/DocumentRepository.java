@@ -25,7 +25,6 @@ public interface DocumentRepository extends CrudRepository<Document, UUID> {
         "SELECT d FROM Document d " +
                 "where d.konfigurationid=?1"
     )
-    @PreAuthorize(Authorities.HAS_AUTHORITY_READ_EHRENAMTJUSTIZDATEN)
     Document[] getDocumentByKonfigurationId(UUID konfigurationId);
 
     @Query(
@@ -33,13 +32,12 @@ public interface DocumentRepository extends CrudRepository<Document, UUID> {
                 "where d.konfigurationid=?1"
     )
     @RestResource(exported = false)
+    @PreAuthorize("permitAll()")
     Document[] getDocumentByKonfigurationIdOnlineBewerbung(UUID konfigurationId);
 
     @Query(
         "SELECT d FROM Document d " +
-                "where d.personid=?1"
-    )
-    @PreAuthorize(Authorities.HAS_AUTHORITY_READ_EHRENAMTJUSTIZDATEN)
+                "where d.personid=?1")
     Document[] getDocumentByPersonId(UUID person);
 
     @Modifying
