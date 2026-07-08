@@ -37,7 +37,8 @@ public interface DocumentRepository extends CrudRepository<Document, UUID> {
 
     @Query(
         "SELECT d FROM Document d " +
-                "where d.personid=?1")
+                "where d.personid=?1"
+    )
     Document[] getDocumentByPersonId(UUID person);
 
     @Modifying
