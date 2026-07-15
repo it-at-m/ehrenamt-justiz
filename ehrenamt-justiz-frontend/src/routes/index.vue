@@ -45,17 +45,3 @@ onMounted(() => {
     });
 });
 </script>
-
-<style scoped>
-.UP {
-  color: limegreen;
-}
-
-.UNGNOWN {
-  color: black;
-}
-
-.DOWN {
-  color: lightcoral;
-}
-</style>

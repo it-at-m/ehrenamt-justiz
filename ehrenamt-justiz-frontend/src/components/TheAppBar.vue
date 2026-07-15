@@ -134,7 +134,6 @@ const { t } = useI18n();
 const userinfo = ref<string | undefined>("");
 const labelApp = ref(t("app.aktiveKonfigurationFehlt"));
 const ehrenamtjustizart = ref("");
-const STATUS_UP = "UP";
 const STATUS_UNKNOWN = "UNKNOWN";
 const STATUS_DOWN = "DOWN";
 const gatewayStatus = ref(STATUS_DOWN);
@@ -188,7 +187,6 @@ async function healthCheckTimer(): Promise<void> {
 }
 
 async function checkGatewayHealth(): Promise<void> {
-  gatewayStatus.value = STATUS_UP;
   checkHealth()
     .then((content: HealthState) => {
       gatewayStatus.value = content.status;
@@ -198,7 +196,6 @@ async function checkGatewayHealth(): Promise<void> {
     });
 }
 async function checkBackendStatus(): Promise<void> {
-  backendStatus.value = STATUS_UP;
   EhrenamtJustizService.checkBackendStatus()
     .then((content: string) => {
       backendStatus.value = content;
@@ -208,7 +205,6 @@ async function checkBackendStatus(): Promise<void> {
     });
 }
 async function checkEAIStatus(): Promise<void> {
-  eaiStatus.value = STATUS_UP;
   EWOBuergerApiService.checkEwoEaiStatus()
     .then((content: string) => {
       eaiStatus.value = content;
@@ -218,7 +214,6 @@ async function checkEAIStatus(): Promise<void> {
     });
 }
 async function checkAenderungsserviceStatus(): Promise<void> {
-  aenderungsserviceStatus.value = STATUS_UP;
   EWOBuergerApiService.checkAenderungsserviceStatus()
     .then((content: string) => {
       aenderungsserviceStatus.value = content;
@@ -235,3 +230,17 @@ const emit = defineEmits<{
   clickedNavIcon: [];
 }>();
 </script>
+
+<style>
+.UP {
+  color: limegreen;
+}
+
+.UNKNOWN {
+  color: black;
+}
+
+.DOWN {
+  color: lightcoral;
+}
+</style>
