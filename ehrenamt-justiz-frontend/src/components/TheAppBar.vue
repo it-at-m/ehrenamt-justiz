@@ -231,7 +231,7 @@ const emit = defineEmits<{
 }>();
 </script>
 
-<style>
+<style scoped>
 .UP {
   color: limegreen;
 }
