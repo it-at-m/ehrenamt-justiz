@@ -107,7 +107,7 @@ import type { HealthState } from "@/types/HealthState";
 
 import { mdiApps, mdiCircle, mdiHelp } from "@mdi/js";
 import { AppSwitcher } from "@muenchen/appswitcher-vue";
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import {
   VAppBar,
@@ -123,38 +123,36 @@ import {
 import { EhrenamtJustizService } from "@/api/EhrenamtJustizService";
 import { EWOBuergerApiService } from "@/api/EWOBuergerApiService";
 import { checkHealth } from "@/api/HealthService";
-import { APPSWITCHER_URL, STATUS_INDICATORS } from "@/Constants";
+import { APPSWITCHER_URL } from "@/Constants";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
-import { useSnackbarStore } from "@/stores/snackbar";
 import { useUserInfoStore } from "@/stores/userinfo";
 import { formattedEhrenamtjustizart } from "@/tools/Helper";
 
 const globalSettingsStore = useGlobalSettingsStore();
 const userInfoStore = useUserInfoStore();
-const snackbarStore = useSnackbarStore();
 const { t } = useI18n();
 const userinfo = ref<string | undefined>("");
 const labelApp = ref(t("app.aktiveKonfigurationFehlt"));
 const ehrenamtjustizart = ref("");
-const gatewayStatus = ref("DOWN");
-const backendStatus = ref("DOWN");
-const eaiStatus = ref("DOWN");
-const aenderungsserviceStatus = ref("DOWN");
+const STATUS_UNKNOWN = "UNKNOWN";
+const STATUS_DOWN = "DOWN";
+const gatewayStatus = ref(STATUS_DOWN);
+const backendStatus = ref(STATUS_DOWN);
+const eaiStatus = ref(STATUS_DOWN);
+const aenderungsserviceStatus = ref(STATUS_DOWN);
 const appswitcherBaseUrl = APPSWITCHER_URL;
-let healthCheckTimeout: ReturnType<typeof setTimeout> | null = null;
+let intervalId: ReturnType<typeof setInterval>;
 const user = computed(() => userInfoStore.userInfo);
 
 onMounted(() => {
   getUserInfo();
   getDataFromConfiguration();
   healthCheckTimer();
+  intervalId = setInterval(healthCheckTimer, 60000);
 });
 
-onUnmounted(() => {
-  if (healthCheckTimeout) {
-    clearTimeout(healthCheckTimeout);
-    healthCheckTimeout = null;
-  }
+onBeforeUnmount(() => {
+  clearInterval(intervalId);
 });
 
 /**
@@ -186,62 +184,42 @@ function healthCheckTimer(): void {
   checkBackendStatus();
   checkEAIStatus();
   checkAenderungsserviceStatus();
-
-  healthCheckTimeout = setTimeout(() => {
-    healthCheckTimer();
-  }, 60000);
 }
 
 function checkGatewayHealth(): void {
-  gatewayStatus.value = "DOWN";
   checkHealth()
     .then((content: HealthState) => {
       gatewayStatus.value = content.status;
     })
-    .catch((error: Error) => {
-      snackbarStore.push({
-        text: error.message,
-        color: STATUS_INDICATORS.ERROR,
-      });
+    .catch(() => {
+      gatewayStatus.value = STATUS_UNKNOWN;
     });
 }
 function checkBackendStatus(): void {
-  backendStatus.value = "DOWN";
   EhrenamtJustizService.checkBackendStatus()
     .then((content: string) => {
       backendStatus.value = content;
     })
-    .catch((error: Error) => {
-      snackbarStore.push({
-        text: error.message,
-        color: STATUS_INDICATORS.ERROR,
-      });
+    .catch(() => {
+      backendStatus.value = STATUS_UNKNOWN;
     });
 }
 function checkEAIStatus(): void {
-  eaiStatus.value = "DOWN";
   EWOBuergerApiService.checkEwoEaiStatus()
     .then((content: string) => {
       eaiStatus.value = content;
     })
-    .catch((error: Error) => {
-      snackbarStore.push({
-        text: error.message,
-        color: STATUS_INDICATORS.ERROR,
-      });
+    .catch(() => {
+      eaiStatus.value = STATUS_UNKNOWN;
     });
 }
 function checkAenderungsserviceStatus(): void {
-  aenderungsserviceStatus.value = "DOWN";
   EWOBuergerApiService.checkAenderungsserviceStatus()
     .then((content: string) => {
       aenderungsserviceStatus.value = content;
     })
-    .catch((error: Error) => {
-      snackbarStore.push({
-        text: error.message,
-        color: STATUS_INDICATORS.ERROR,
-      });
+    .catch(() => {
+      aenderungsserviceStatus.value = STATUS_UNKNOWN;
     });
 }
 function hilfeAnzeigen(): void {
@@ -252,3 +230,17 @@ const emit = defineEmits<{
   clickedNavIcon: [];
 }>();
 </script>
+
+<style scoped>
+.UP {
+  color: limegreen;
+}
+
+.UNKNOWN {
+  color: black;
+}
+
+.DOWN {
+  color: lightcoral;
+}
+</style>
