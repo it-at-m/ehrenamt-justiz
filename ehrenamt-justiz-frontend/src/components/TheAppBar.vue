@@ -148,7 +148,7 @@ onMounted(() => {
   getUserInfo();
   getDataFromConfiguration();
   healthCheckTimer();
-  intervalId = setInterval(healthCheckTimer, 10000);
+  intervalId = setInterval(healthCheckTimer, 60000);
 });
 
 onBeforeUnmount(() => {
@@ -179,14 +179,14 @@ function getDataFromConfiguration(): void {
   }
 }
 
-async function healthCheckTimer(): Promise<void> {
-  await checkGatewayHealth();
-  await checkBackendStatus();
-  await checkEAIStatus();
-  await checkAenderungsserviceStatus();
+function healthCheckTimer(): void {
+  checkGatewayHealth();
+  checkBackendStatus();
+  checkEAIStatus();
+  checkAenderungsserviceStatus();
 }
 
-async function checkGatewayHealth(): Promise<void> {
+function checkGatewayHealth(): void {
   checkHealth()
     .then((content: HealthState) => {
       gatewayStatus.value = content.status;
@@ -195,7 +195,7 @@ async function checkGatewayHealth(): Promise<void> {
       gatewayStatus.value = STATUS_UNKNOWN;
     });
 }
-async function checkBackendStatus(): Promise<void> {
+function checkBackendStatus(): void {
   EhrenamtJustizService.checkBackendStatus()
     .then((content: string) => {
       backendStatus.value = content;
@@ -204,7 +204,7 @@ async function checkBackendStatus(): Promise<void> {
       backendStatus.value = STATUS_UNKNOWN;
     });
 }
-async function checkEAIStatus(): Promise<void> {
+function checkEAIStatus(): void {
   EWOBuergerApiService.checkEwoEaiStatus()
     .then((content: string) => {
       eaiStatus.value = content;
@@ -213,7 +213,7 @@ async function checkEAIStatus(): Promise<void> {
       eaiStatus.value = STATUS_UNKNOWN;
     });
 }
-async function checkAenderungsserviceStatus(): Promise<void> {
+function checkAenderungsserviceStatus(): void {
   EWOBuergerApiService.checkAenderungsserviceStatus()
     .then((content: string) => {
       aenderungsserviceStatus.value = content;
