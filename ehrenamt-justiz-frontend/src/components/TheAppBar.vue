@@ -107,7 +107,7 @@ import type { HealthState } from "@/types/HealthState";
 
 import { mdiApps, mdiCircle, mdiHelp } from "@mdi/js";
 import { AppSwitcher } from "@muenchen/appswitcher-vue";
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import {
   VAppBar,
@@ -123,38 +123,37 @@ import {
 import { EhrenamtJustizService } from "@/api/EhrenamtJustizService";
 import { EWOBuergerApiService } from "@/api/EWOBuergerApiService";
 import { checkHealth } from "@/api/HealthService";
-import { APPSWITCHER_URL, STATUS_INDICATORS } from "@/Constants";
+import { APPSWITCHER_URL } from "@/Constants";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
-import { useSnackbarStore } from "@/stores/snackbar";
 import { useUserInfoStore } from "@/stores/userinfo";
 import { formattedEhrenamtjustizart } from "@/tools/Helper";
 
 const globalSettingsStore = useGlobalSettingsStore();
 const userInfoStore = useUserInfoStore();
-const snackbarStore = useSnackbarStore();
 const { t } = useI18n();
 const userinfo = ref<string | undefined>("");
 const labelApp = ref(t("app.aktiveKonfigurationFehlt"));
 const ehrenamtjustizart = ref("");
-const gatewayStatus = ref("DOWN");
-const backendStatus = ref("DOWN");
-const eaiStatus = ref("DOWN");
-const aenderungsserviceStatus = ref("DOWN");
+const STATUS_UP = "UP";
+const STATUS_UNKNOWN = "UNKNOWN";
+const STATUS_DOWN = "DOWN";
+const gatewayStatus = ref(STATUS_DOWN);
+const backendStatus = ref(STATUS_DOWN);
+const eaiStatus = ref(STATUS_DOWN);
+const aenderungsserviceStatus = ref(STATUS_DOWN);
 const appswitcherBaseUrl = APPSWITCHER_URL;
-let healthCheckTimeout: ReturnType<typeof setTimeout> | null = null;
+let intervalId: ReturnType<typeof setInterval>;
 const user = computed(() => userInfoStore.userInfo);
 
 onMounted(() => {
   getUserInfo();
   getDataFromConfiguration();
   healthCheckTimer();
+  intervalId = setInterval(healthCheckTimer, 10000);
 });
 
-onUnmounted(() => {
-  if (healthCheckTimeout) {
-    clearTimeout(healthCheckTimeout);
-    healthCheckTimeout = null;
-  }
+onBeforeUnmount(() => {
+  clearInterval(intervalId);
 });
 
 /**
@@ -181,67 +180,51 @@ function getDataFromConfiguration(): void {
   }
 }
 
-function healthCheckTimer(): void {
-  checkGatewayHealth();
-  checkBackendStatus();
-  checkEAIStatus();
-  checkAenderungsserviceStatus();
-
-  healthCheckTimeout = setTimeout(() => {
-    healthCheckTimer();
-  }, 60000);
+async function healthCheckTimer(): Promise<void> {
+  await checkGatewayHealth();
+  await checkBackendStatus();
+  await checkEAIStatus();
+  await checkAenderungsserviceStatus();
 }
 
-function checkGatewayHealth(): void {
-  gatewayStatus.value = "DOWN";
+async function checkGatewayHealth(): Promise<void> {
+  gatewayStatus.value = STATUS_UP;
   checkHealth()
     .then((content: HealthState) => {
       gatewayStatus.value = content.status;
     })
-    .catch((error: Error) => {
-      snackbarStore.push({
-        text: error.message,
-        color: STATUS_INDICATORS.ERROR,
-      });
+    .catch(() => {
+      gatewayStatus.value = STATUS_UNKNOWN;
     });
 }
-function checkBackendStatus(): void {
-  backendStatus.value = "DOWN";
+async function checkBackendStatus(): Promise<void> {
+  backendStatus.value = STATUS_UP;
   EhrenamtJustizService.checkBackendStatus()
     .then((content: string) => {
       backendStatus.value = content;
     })
-    .catch((error: Error) => {
-      snackbarStore.push({
-        text: error.message,
-        color: STATUS_INDICATORS.ERROR,
-      });
+    .catch(() => {
+      backendStatus.value = STATUS_UNKNOWN;
     });
 }
-function checkEAIStatus(): void {
-  eaiStatus.value = "DOWN";
+async function checkEAIStatus(): Promise<void> {
+  eaiStatus.value = STATUS_UP;
   EWOBuergerApiService.checkEwoEaiStatus()
     .then((content: string) => {
       eaiStatus.value = content;
     })
-    .catch((error: Error) => {
-      snackbarStore.push({
-        text: error.message,
-        color: STATUS_INDICATORS.ERROR,
-      });
+    .catch(() => {
+      eaiStatus.value = STATUS_UNKNOWN;
     });
 }
-function checkAenderungsserviceStatus(): void {
-  aenderungsserviceStatus.value = "DOWN";
+async function checkAenderungsserviceStatus(): Promise<void> {
+  aenderungsserviceStatus.value = STATUS_UP;
   EWOBuergerApiService.checkAenderungsserviceStatus()
     .then((content: string) => {
       aenderungsserviceStatus.value = content;
     })
-    .catch((error: Error) => {
-      snackbarStore.push({
-        text: error.message,
-        color: STATUS_INDICATORS.ERROR,
-      });
+    .catch(() => {
+      aenderungsserviceStatus.value = STATUS_UNKNOWN;
     });
 }
 function hilfeAnzeigen(): void {

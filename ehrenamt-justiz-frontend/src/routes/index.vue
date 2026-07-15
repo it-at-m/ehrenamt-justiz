@@ -51,6 +51,10 @@ onMounted(() => {
   color: limegreen;
 }
 
+.UNGNOWN {
+  color: black;
+}
+
 .DOWN {
   color: lightcoral;
 }
