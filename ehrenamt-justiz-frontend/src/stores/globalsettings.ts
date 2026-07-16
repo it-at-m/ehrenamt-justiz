@@ -1,10 +1,12 @@
 import type KonfigurationData from "@/types/KonfigurationData";
+import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData.ts";
 
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 
 export const useGlobalSettingsStore = defineStore("globalSetting", () => {
   const konfiguration = ref<KonfigurationData | null>(null);
+  const technischeKonfiguration = ref<TechnischeKonfigurationData | null>(null);
   const konfigurationLoadingAttempt = ref(false);
   const onlineHelpDialogComponentVisible = ref(false);
 
@@ -14,6 +16,18 @@ export const useGlobalSettingsStore = defineStore("globalSetting", () => {
 
   function setKonfiguration(payload: KonfigurationData | null): void {
     konfiguration.value = payload;
+  }
+
+  const getTechnischeKonfiguration = computed(
+    (): TechnischeKonfigurationData | null => {
+      return technischeKonfiguration.value;
+    }
+  );
+
+  function setTechnischeKonfiguration(
+    payload: TechnischeKonfigurationData | null
+  ): void {
+    technischeKonfiguration.value = payload;
   }
 
   function setKonfigurationLoadingAttempt(newValue: boolean): void {
@@ -33,6 +47,8 @@ export const useGlobalSettingsStore = defineStore("globalSetting", () => {
   return {
     getKonfiguration,
     setKonfiguration,
+    getTechnischeKonfiguration,
+    setTechnischeKonfiguration,
     setKonfigurationLoadingAttempt,
     isKonfigurationLoadingAttempt: isKonfigurationLoadingAttempt,
     setOnlineHelpDialogComponentVisible,

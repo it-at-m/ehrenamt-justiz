@@ -62,6 +62,8 @@ public class SecurityConfiguration {
                         PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/actuator/metrics"),
                         // allow access to /konfiguration/getAktiveKonfiguration
                         PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/konfiguration/getAktiveKonfiguration"),
+                        // allow access to /technischeKonfiguration/getTechnischeKonfiguration
+                        PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/technischeKonfiguration/getTechnischeKonfiguration"),
                         // allow access to /onlinebewerbung/bewerbungSpeichern
                         PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.POST, "/onlinebewerbung/bewerbungSpeichern"),
                         // allow access to /onlinebewerbung/pruefen

@@ -1,10 +1,12 @@
 import type KonfigurationData from "@/types/KonfigurationData";
+import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData.ts";
 
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 
 export interface ActiveKonfigurationState {
   konfiguration: KonfigurationData | null;
+  technischeKonfiguration: TechnischeKonfigurationData | null;
 }
 
 /**
@@ -12,6 +14,7 @@ export interface ActiveKonfigurationState {
  */
 export const useActiveKonfigurationStore = defineStore("activeconfig", () => {
   const konfiguration = ref<KonfigurationData | null>(null);
+  const technischeKonfiguration = ref<TechnischeKonfigurationData | null>(null);
 
   const getKonfiguration = computed((): KonfigurationData | null => {
     return konfiguration.value;
@@ -20,5 +23,23 @@ export const useActiveKonfigurationStore = defineStore("activeconfig", () => {
   function setKonfiguration(payload: KonfigurationData): void {
     konfiguration.value = payload;
   }
-  return { getKonfiguration, setKonfiguration };
+
+  function setTechnischeKonfiguration(
+    payload: TechnischeKonfigurationData
+  ): void {
+    technischeKonfiguration.value = payload;
+  }
+
+  const getTechnischeKonfiguration = computed(
+    (): TechnischeKonfigurationData | null => {
+      return technischeKonfiguration.value;
+    }
+  );
+
+  return {
+    getKonfiguration,
+    setKonfiguration,
+    getTechnischeKonfiguration,
+    setTechnischeKonfiguration,
+  };
 });

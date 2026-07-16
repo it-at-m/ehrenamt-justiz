@@ -2,7 +2,10 @@
   <muc-card-container class="d-flex align-center flex-column">
     <muenchen-banner />
     <muc-card
-      v-if="useActiveKonfigurationStore().getKonfiguration"
+      v-if="
+        useActiveKonfigurationStore().getKonfiguration &&
+        useActiveKonfigurationStore().getTechnischeKonfiguration
+      "
       class="d-flex align-center flex-column w-100"
       title=""
       :disabled="false"

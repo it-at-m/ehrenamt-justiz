@@ -10,6 +10,7 @@ import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
 import de.muenchen.ehrenamtjustiz.backend.TestConstants;
 import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.KonfigurationDto;
+import de.muenchen.ehrenamtjustiz.backend.domain.dto.TechnischeKonfigurationDto;
 import de.muenchen.ehrenamtjustiz.backend.domain.dto.mapper.KonfigurationMapper;
 import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
 import de.muenchen.ehrenamtjustiz.backend.testdata.KonfigurationTestDataBuilder;
@@ -85,6 +86,26 @@ class KonfigurationIntegrationsTest {
                     assertNotNull(konfigurationDto.getWohnsitz());
                     assertNotNull(konfigurationDto.getAmtsperiodevon());
                     assertNotNull(konfigurationDto.getAmtsperiodebis());
+
+                })
+                .returnResult()
+                .getResponseBody();
+
+    }
+
+    @Test
+    void givenTechnicalConfiguration_thenCheckData() {
+
+        restTestClient.get()
+                .uri("/technischeKonfiguration/getTechnischeKonfiguration")
+                .exchange()
+                .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBody(TechnischeKonfigurationDto.class)
+                .value(technischeKonfigurationDto -> {
+                    assertNotNull(technischeKonfigurationDto);
+                    assertNotNull(technischeKonfigurationDto.getBestaetigungVerfassungstreueFileExtension());
+                    assertTrue(technischeKonfigurationDto.getBestaetigungVerfassungstreueMaxSize().intValue() > 0);
 
                 })
                 .returnResult()

@@ -25,6 +25,7 @@
 
 <script setup lang="ts">
 import type KonfigurationData from "@/types/KonfigurationData";
+import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData.ts";
 
 import { useToggle } from "@vueuse/core";
 import { computed, onMounted } from "vue";
@@ -37,6 +38,7 @@ import {
 } from "vuetify/components";
 
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";
+import { TechnischeKonfigurationApiService } from "@/api/TechnischeKonfigurationApiService.ts";
 import TheAppBar from "@/components/TheAppBar.vue";
 import TheNavigationDrawer from "@/components/TheNavigationDrawer.vue";
 import TheSnackbarQueue from "@/components/TheSnackbarQueue.vue";
@@ -57,10 +59,30 @@ const isConfigLoaded = computed(() => {
 });
 
 onMounted(() => {
+  loadTechnischeKonfiguration();
+
   loadActiveKonfiguration();
+
   // display drawer at once
   toggleNavigation();
 });
+
+/**
+ * Loads technical configuration from the backend and sets it in the store.
+ */
+function loadTechnischeKonfiguration(): void {
+  TechnischeKonfigurationApiService.getTechnischeKonfiguration()
+    .then((technischeKonfigurationData: TechnischeKonfigurationData) => {
+      globalSettingsStore.setTechnischeKonfiguration(
+        technischeKonfigurationData
+      );
+    })
+    .catch(() => {
+      snackbarStore.push({
+        text: t("app.keineTechnischeKonfiguration"),
+      });
+    });
+}
 
 /**
  * Loads active configuration from the backend and sets it in the store.
@@ -83,12 +105,5 @@ function loadActiveKonfiguration(): void {
 <style>
 .main {
   background-color: white;
-}
-.UP {
-  color: limegreen;
-}
-
-.DOWN {
-  color: lightcoral;
 }
 </style>

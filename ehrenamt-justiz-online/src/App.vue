@@ -21,6 +21,20 @@
             }}
           </div>
         </muc-banner>
+        <muc-banner
+          v-if="keineTechnischeKonfiguration"
+          :title="t('app.keineTechnischeKonfiguration.title')"
+          type="emergency"
+          variant="header"
+        >
+          <div>
+            {{
+              t("app.keineTechnischeKonfiguration.text", {
+                cause: keineTechnischeKonfiguration,
+              })
+            }}
+          </div>
+        </muc-banner>
         <main-view />
       </v-container>
     </v-main>
@@ -29,6 +43,7 @@
 
 <script setup lang="ts">
 import type KonfigurationData from "@/types/KonfigurationData";
+import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData.ts";
 
 import { MucBanner } from "@muenchen/muc-patternlab-vue";
 import customIconsSprite from "@muenchen/muc-patternlab-vue/assets/icons/custom-icons.svg?raw";
@@ -43,12 +58,30 @@ import MainView from "@/views/MainView.vue";
 
 const { t } = useI18n();
 const ehrenamtJustizOnlineService = new EhrenamtJustizOnlineServiceClass(t);
+
 const activeConfigStore = useActiveKonfigurationStore();
 const keineAktiveKonfiguration = ref("");
+const keineTechnischeKonfiguration = ref("");
 
 onMounted(() => {
+  loadTechnischeKonfiguration();
+
   loadActiveKonfiguration();
 });
+
+/**
+ * Loads technical configuration from the backend and sets it in the store.
+ */
+function loadTechnischeKonfiguration(): void {
+  ehrenamtJustizOnlineService
+    .getTechnischeKonfiguration()
+    .then((technischeKonfigurationData: TechnischeKonfigurationData) => {
+      activeConfigStore.setTechnischeKonfiguration(technischeKonfigurationData);
+    })
+    .catch((reason) => {
+      keineTechnischeKonfiguration.value = reason;
+    });
+}
 
 /**
  * Loads active configuration from the backend and sets it in the store.
