@@ -11,15 +11,15 @@ class TechnischeKonfigurationApiServiceClass {
         `${EntityApiService.getBaseUrl()}/technischeKonfiguration/getTechnischeKonfiguration`,
         getGETConfig()
       )
-          .then(async (res) => {
-              if (!res.ok) {
-                  EntityApiService.handleWrongResponse(HttpMethod.GET, res);
-                  return reject(new Error(`HTTP error! status: ${res.status}`));
-              }
-              const createdInstance = await res.json();
-              resolve(createdInstance);
-          })
-          .catch((reason) => reject(EntityApiService.handleError(reason)));
+        .then(async (res) => {
+          if (!res.ok) {
+            EntityApiService.handleWrongResponse(HttpMethod.GET, res);
+            return reject(new Error(`HTTP error! status: ${res.status}`));
+          }
+          const createdInstance = await res.json();
+          resolve(createdInstance);
+        })
+        .catch((reason) => reject(EntityApiService.handleError(reason)));
     });
   }
 }
