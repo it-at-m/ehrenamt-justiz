@@ -47,11 +47,12 @@ export function useRules() {
       const maxSize =
         useGlobalSettingsStore().getTechnischeKonfiguration
           ?.bestaetigungVerfassungstreueMaxSize ?? 0;
-      const dateiEndungKorrekt = hatBestaetigungVerfassungstreueFileErlaubteEndung(
-        v.name,
-        useGlobalSettingsStore().getTechnischeKonfiguration
-          ?.bestaetigungVerfassungstreueFileExtension
-      );
+      const dateiEndungKorrekt =
+        hatBestaetigungVerfassungstreueFileErlaubteEndung(
+          v.name,
+          useGlobalSettingsStore().getTechnischeKonfiguration
+            ?.bestaetigungVerfassungstreueFileExtension
+        );
 
       return v.size > maxSize * KB_IN_BYTES * KB_IN_BYTES
         ? t("composables.rules.anhangZuGross", { maxSize })
