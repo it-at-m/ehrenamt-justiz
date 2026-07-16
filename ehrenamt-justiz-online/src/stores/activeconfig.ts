@@ -1,5 +1,5 @@
 import type KonfigurationData from "@/types/KonfigurationData";
-import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData.ts";
+import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData";
 
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";

@@ -43,7 +43,7 @@
 
 <script setup lang="ts">
 import type KonfigurationData from "@/types/KonfigurationData";
-import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData.ts";
+import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData";
 
 import { MucBanner } from "@muenchen/muc-patternlab-vue";
 import customIconsSprite from "@muenchen/muc-patternlab-vue/assets/icons/custom-icons.svg?raw";

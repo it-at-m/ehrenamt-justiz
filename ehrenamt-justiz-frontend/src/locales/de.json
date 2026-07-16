@@ -40,7 +40,7 @@
     "head": " KVR-",
     "aktiveKonfigurationFehlt": "Aktive Konfiguration fehlt",
     "keineAktiveKonfiguration": "Es konnte keine aktive Konfiguration gefunden werden! Bitte nur eine aktive Konfiguration anlegen und dann die Anwendung neu laden!",
-    "keineTechnischeKonfiguration": "Es konnte keine keine Konfiguration gefunden werden!"
+    "keineTechnischeKonfiguration": "Es konnte keine technische Konfiguration gefunden werden!"
   },
   "api": {
     "message": {

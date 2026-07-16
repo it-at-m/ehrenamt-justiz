@@ -142,9 +142,12 @@ const dateiNameVerfassungstreue = computed(() => {
     return null;
   }
 });
-const maxFileSize =
-  useActiveKonfigurationStore().getTechnischeKonfiguration
-    ?.bestaetigungVerfassungstreueMaxSize;
+
+const maxFileSize = computed(
+  () =>
+    useActiveKonfigurationStore().getTechnischeKonfiguration
+      ?.bestaetigungVerfassungstreueMaxSize
+);
 
 const previousStep = () => {
   emits("previousStep");

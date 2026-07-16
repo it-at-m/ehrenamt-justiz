@@ -105,6 +105,7 @@ class KonfigurationIntegrationsTest {
                 .value(technischeKonfigurationDto -> {
                     assertNotNull(technischeKonfigurationDto);
                     assertNotNull(technischeKonfigurationDto.getBestaetigungVerfassungstreueFileExtension());
+                    assertNotNull(technischeKonfigurationDto.getBestaetigungVerfassungstreueMaxSize());
                     assertTrue(technischeKonfigurationDto.getBestaetigungVerfassungstreueMaxSize().intValue() > 0);
 
                 })

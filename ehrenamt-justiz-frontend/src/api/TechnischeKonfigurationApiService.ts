@@ -1,4 +1,4 @@
-import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData.ts";
+import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData";
 
 import EntityApiService from "@/api/EntityApiService.ts";
 import { getGETConfig } from "@/api/FetchUtils.ts";
@@ -11,17 +11,15 @@ class TechnischeKonfigurationApiServiceClass {
         `${EntityApiService.getBaseUrl()}/technischeKonfiguration/getTechnischeKonfiguration`,
         getGETConfig()
       )
-        .then((res) => {
-          res
-            .json()
-            .then((createdInstance) => {
-              if (res.ok) return resolve(createdInstance);
-              EntityApiService.handleWrongResponse(HttpMethod.GET, res);
-              reject();
-            })
-            .catch((reason) => reject(EntityApiService.handleError(reason)));
-        })
-        .catch((reason) => reject(EntityApiService.handleError(reason)));
+          .then(async (res) => {
+              if (!res.ok) {
+                  EntityApiService.handleWrongResponse(HttpMethod.GET, res);
+                  return reject(new Error(`HTTP error! status: ${res.status}`));
+              }
+              const createdInstance = await res.json();
+              resolve(createdInstance);
+          })
+          .catch((reason) => reject(EntityApiService.handleError(reason)));
     });
   }
 }

@@ -1,5 +1,5 @@
 import type KonfigurationData from "@/types/KonfigurationData";
-import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData.ts";
+import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData";
 
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
@@ -8,6 +8,7 @@ export const useGlobalSettingsStore = defineStore("globalSetting", () => {
   const konfiguration = ref<KonfigurationData | null>(null);
   const technischeKonfiguration = ref<TechnischeKonfigurationData | null>(null);
   const konfigurationLoadingAttempt = ref(false);
+  const technischeKonfigurationLoadingAttempt = ref(false);
   const onlineHelpDialogComponentVisible = ref(false);
 
   const getKonfiguration = computed((): KonfigurationData | null => {
@@ -37,6 +38,13 @@ export const useGlobalSettingsStore = defineStore("globalSetting", () => {
     return konfigurationLoadingAttempt.value;
   }
 
+  function setTechnischeKonfigurationLoadingAttempt(newValue: boolean): void {
+    technischeKonfigurationLoadingAttempt.value = newValue;
+  }
+  function isTechnischeKonfigurationLoadingAttempt() {
+    return technischeKonfigurationLoadingAttempt.value;
+  }
+
   function setOnlineHelpDialogComponentVisible(newValue: boolean): void {
     onlineHelpDialogComponentVisible.value = newValue;
   }
@@ -51,6 +59,9 @@ export const useGlobalSettingsStore = defineStore("globalSetting", () => {
     setTechnischeKonfiguration,
     setKonfigurationLoadingAttempt,
     isKonfigurationLoadingAttempt: isKonfigurationLoadingAttempt,
+    setTechnischeKonfigurationLoadingAttempt,
+    isTechnischeKonfigurationLoadingAttempt:
+      isTechnischeKonfigurationLoadingAttempt,
     setOnlineHelpDialogComponentVisible,
     isOnlineHelpDialogComponentVisible: isOnlineHelpDialogComponentVisible,
   };

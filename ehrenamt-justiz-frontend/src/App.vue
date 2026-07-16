@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import type KonfigurationData from "@/types/KonfigurationData";
-import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData.ts";
+import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData";
 
 import { useToggle } from "@vueuse/core";
 import { computed, onMounted } from "vue";
@@ -54,7 +54,8 @@ const snackbarStore = useSnackbarStore();
 const isConfigLoaded = computed(() => {
   return (
     userInfoStore.userInfo &&
-    globalSettingsStore.isKonfigurationLoadingAttempt()
+    globalSettingsStore.isKonfigurationLoadingAttempt() &&
+    globalSettingsStore.isTechnischeKonfigurationLoadingAttempt()
   );
 });
 
@@ -76,11 +77,13 @@ function loadTechnischeKonfiguration(): void {
       globalSettingsStore.setTechnischeKonfiguration(
         technischeKonfigurationData
       );
+      globalSettingsStore.setTechnischeKonfigurationLoadingAttempt(true);
     })
     .catch(() => {
       snackbarStore.push({
         text: t("app.keineTechnischeKonfiguration"),
       });
+      globalSettingsStore.setTechnischeKonfigurationLoadingAttempt(true);
     });
 }
 
