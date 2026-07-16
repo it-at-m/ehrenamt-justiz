@@ -47,7 +47,7 @@ export function useRules() {
       const maxSize =
         useGlobalSettingsStore().getTechnischeKonfiguration
           ?.bestaetigungVerfassungstreueMaxSize ?? 0;
-      const dateiEndungKorrekt = hatErlaubteEndung(
+      const dateiEndungKorrekt = hatBestaetigungVerfassungstreueFileErlaubteEndung(
         v.name,
         useGlobalSettingsStore().getTechnischeKonfiguration
           ?.bestaetigungVerfassungstreueFileExtension
@@ -128,7 +128,7 @@ export function useRules() {
     },
   };
 
-  function hatErlaubteEndung(
+  function hatBestaetigungVerfassungstreueFileErlaubteEndung(
     dateiname: string,
     bestaetigungVerfassungstreueFileExtension: string | undefined
   ): boolean {
