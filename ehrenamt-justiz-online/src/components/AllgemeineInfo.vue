@@ -46,8 +46,6 @@
           />
           <br /><br />
           {{ t("mainView.datenschutzErklaerung.content8") }}
-          <br /><br />
-          {{ t("mainView.datenschutzErklaerung.content9") }}
         </template>
       </muc-callout>
       <muc-divider />

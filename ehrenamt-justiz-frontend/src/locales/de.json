@@ -17,8 +17,8 @@
       "staatsangehoerigkeit": "Die Staatsangehörigkeit enthält nicht {staatsangehoerigkeitAusKonfiguration}",
       "wohnsitz": "Der Wohnsitz ist nicht in {wohnsitzAusKonfiguration}",
       "numerisch": "Nur numerische Werte sind erlaubt",
-      "anhangZuGross": "Der Anhang ist zu gross. Maximal 1MB",
-      "anhangKeinPDF": "Der Anhang ist keine PDF-Datei"
+      "anhangZuGross": "Der Anhang ist zu gross. Maximal {maxSize} MByte",
+      "anhangKeinGueltigeDateiendung": "Der Anhang ist keine Datei vom Typ {dateiTypen}"
     }
   },
   "app": {
@@ -39,7 +39,8 @@
     "onlineHelp": "Online-Hilfe",
     "head": " KVR-",
     "aktiveKonfigurationFehlt": "Aktive Konfiguration fehlt",
-    "keineAktiveKonfiguration": "Es konnte keine aktive Konfiguration gefunden werden! Bitte nur eine aktive Konfiguration anlegen und dann die Anwendung neu laden!"
+    "keineAktiveKonfiguration": "Es konnte keine aktive Konfiguration gefunden werden! Bitte nur eine aktive Konfiguration anlegen und dann die Anwendung neu laden!",
+    "keineTechnischeKonfiguration": "Es konnte keine technische Konfiguration gefunden werden!"
   },
   "api": {
     "message": {

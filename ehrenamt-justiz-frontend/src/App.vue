@@ -25,6 +25,7 @@
 
 <script setup lang="ts">
 import type KonfigurationData from "@/types/KonfigurationData";
+import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData";
 
 import { useToggle } from "@vueuse/core";
 import { computed, onMounted } from "vue";
@@ -37,6 +38,7 @@ import {
 } from "vuetify/components";
 
 import { KonfigurationApiService } from "@/api/KonfigurationApiService";
+import { TechnischeKonfigurationApiService } from "@/api/TechnischeKonfigurationApiService.ts";
 import TheAppBar from "@/components/TheAppBar.vue";
 import TheNavigationDrawer from "@/components/TheNavigationDrawer.vue";
 import TheSnackbarQueue from "@/components/TheSnackbarQueue.vue";
@@ -52,15 +54,38 @@ const snackbarStore = useSnackbarStore();
 const isConfigLoaded = computed(() => {
   return (
     userInfoStore.userInfo &&
-    globalSettingsStore.isKonfigurationLoadingAttempt()
+    globalSettingsStore.isKonfigurationLoadingAttempt() &&
+    globalSettingsStore.isTechnischeKonfigurationLoadingAttempt()
   );
 });
 
 onMounted(() => {
+  loadTechnischeKonfiguration();
+
   loadActiveKonfiguration();
+
   // display drawer at once
   toggleNavigation();
 });
+
+/**
+ * Loads technical configuration from the backend and sets it in the store.
+ */
+function loadTechnischeKonfiguration(): void {
+  TechnischeKonfigurationApiService.getTechnischeKonfiguration()
+    .then((technischeKonfigurationData: TechnischeKonfigurationData) => {
+      globalSettingsStore.setTechnischeKonfiguration(
+        technischeKonfigurationData
+      );
+      globalSettingsStore.setTechnischeKonfigurationLoadingAttempt(true);
+    })
+    .catch(() => {
+      snackbarStore.push({
+        text: t("app.keineTechnischeKonfiguration"),
+      });
+      globalSettingsStore.setTechnischeKonfigurationLoadingAttempt(true);
+    });
+}
 
 /**
  * Loads active configuration from the backend and sets it in the store.
@@ -83,12 +108,5 @@ function loadActiveKonfiguration(): void {
 <style>
 .main {
   background-color: white;
-}
-.UP {
-  color: limegreen;
-}
-
-.DOWN {
-  color: lightcoral;
 }
 </style>

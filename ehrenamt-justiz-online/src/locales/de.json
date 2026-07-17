@@ -8,6 +8,10 @@
     "keineAktiveKonfiguration": {
       "title": "Keine aktive Konfiguration",
       "text": "Es konnte keine aktive Konfiguration gefunden werden! Bitte nur eine aktive Konfiguration anlegen und dann die Anwendung neu laden! Ursache: {cause}"
+    },
+    "keineTechnischeKonfiguration": {
+      "title": "Keine technische Konfiguration",
+      "text": "Es konnte keine technische Konfiguration gefunden werden! Ursache: {cause}"
     }
   },
   "bewerberDaten": {
@@ -54,6 +58,7 @@
       "http409": "Dieser Datensatz kann nicht gelöscht werden, da er von anderen Teilen des Programms noch benötigt wird.",
       "http500": "Interner Serverfehler. Es können keine Daten ermittelt werden.",
       "fehlerBeiMethodeGetAktiveKonfiguration": "Fehler beim Aufruf der Methode 'GetAktiveKonfiguration'",
+      "fehlerBeiMethodeGetTechnischeKonfiguration": "Fehler beim Aufruf der Methode 'GetTechnischeKonfiguration'",
       "fehlerBeiMethodeBewerbungSpeichern": "Fehler beim Aufruf der Methode 'BewerbungSpeichern'",
       "fehlerBeiMethodePruefen": "Fehler beim Aufruf der Methode 'pruefen'"
     }
@@ -95,7 +100,6 @@
       "content6": "Bitte beachten Sie auch die",
       "content7": "im Impressum der Landeshauptstadt München.",
       "content8": "Mit dem Absenden der Bewerbung bestätige ich, die deutsche, oder die deutsche und eine weitere Staatsangehörigkeit zu besitzen.",
-      "content9": "Nicht mit 'optional' markierte Felder sind Pflichtfelder.",
       "links": {
         "datenschutz": "Hinweise zum Datenschutz",
         "elektronischeKommunikation": "Weitere Informationen zur elektronischen Kommunikation finden sie hier"
@@ -114,11 +118,11 @@
       "musterHerunterladen": "Muster Verfassungstreue herunterladen"
     },
     "buttonText": "Bestätigung der Verfassungstreue hochladen",
-    "additionalInformation": "Maximal eine Datei mit einer maximalen Dateigröße von 1 MB",
-    "maxFileSizeWarning": "Eine Datei hat mehr als 1 MB und kann nicht angefügt werden",
+    "additionalInformation": "Maximal eine Datei mit einer maximalen Dateigröße von {maxFilesize} MB",
+    "maxFileSizeWarning": "Eine Datei ist zu gross und kann nicht angefügt werden",
     "invalidAmountWarning": "Es kann nur eine Datei hochgeladen werden",
     "invalide": "Anhang für Verfassungstreue wurde nicht hochgeladen!",
-    "keinPDF": "Anhang für Verfassungstreue ist keine PDF-Datei",
+    "anhangKeinGueltigeDateiendung": "Der Anhang ist keine Datei vom Typ {dateiTypen}",
     "dateiname": "Anhang für Bestätigung der Verfassungstreue:",
     "dateigroesse": "Dateigröße"
   }

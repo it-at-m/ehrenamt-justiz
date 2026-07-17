@@ -1,6 +1,7 @@
 import type DocumentData from "@/types/DocumentData";
 import type KonfigurationData from "@/types/KonfigurationData";
 import type OnlineBewerbungData from "@/types/OnlineBewerbungData";
+import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData";
 
 import { getGETConfig, getPOSTConfig } from "@/api/FetchUtils";
 import { API_BASE } from "@/Constants";
@@ -82,6 +83,34 @@ export class EhrenamtJustizOnlineServiceClass {
         .catch((reason) => reject(this.handleError(reason)));
     });
   }
+
+  public getTechnischeKonfiguration(): Promise<TechnischeKonfigurationData> {
+    return new Promise<TechnischeKonfigurationData>((resolve, reject) => {
+      fetch(
+        `${EhrenamtJustizOnlineServiceClass.getBaseUrl()}/technischeKonfiguration/getTechnischeKonfiguration`,
+        getGETConfig()
+      )
+        .then((res) => {
+          res
+            .json()
+            .then((createdInstance) => {
+              if (res.ok) return resolve(createdInstance);
+              this.handleWrongResponse(HttpMethod.GET, res);
+              reject(
+                new ApiError(
+                  Levels.ERROR,
+                  this.t(
+                    "ehrenamtJustizOnlineService.fehlermeldungen.fehlerBeiMethodeGetTechnischeKonfiguration"
+                  )
+                )
+              );
+            })
+            .catch((reason) => reject(this.handleError(reason)));
+        })
+        .catch((reason) => reject(this.handleError(reason)));
+    });
+  }
+
   /**
    * Gets the Pattern for 'Verfassungstreue'
    * @returns Promise<byte[]>

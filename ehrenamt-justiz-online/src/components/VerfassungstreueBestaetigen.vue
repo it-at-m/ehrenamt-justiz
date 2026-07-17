@@ -31,13 +31,18 @@
     <v-row density="compact">
       <muc-file-dropzone
         v-model="onlineBewerbungFormData.dateiVerfassungstreue"
-        :additional-information="t('verfassungstreue.additionalInformation')"
+        :additional-information="
+          t('verfassungstreue.additionalInformation', {
+            maxFilesize: maxFileSize,
+          })
+        "
         :button-text="t('verfassungstreue.buttonText')"
         :invalid-amount-warning="t('verfassungstreue.invalidAmountWarning')"
-        :max-file-size="1"
+        :max-file-size="maxFileSize"
         :multiple="false"
         :max-file-size-warning="t('verfassungstreue.maxFileSizeWarning')"
         @files="handleFiles"
+        @warning="clearFiles"
       />
     </v-row>
     <v-row density="compact">
@@ -115,7 +120,10 @@ import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { VCol, VContainer, VRow } from "vuetify/components";
 
+import { useActiveKonfigurationStore } from "@/stores/activeconfig.ts";
+
 const { t } = useI18n();
+
 const zeigeLeerenDateiNameVerfassungstreue = ref(false);
 const errorMsgDateiVerfassungstreue = ref("");
 const dateiNameVerfassungstreue = computed(() => {
@@ -134,6 +142,13 @@ const dateiNameVerfassungstreue = computed(() => {
     return null;
   }
 });
+
+const maxFileSize = computed(
+  () =>
+    useActiveKonfigurationStore().getTechnischeKonfiguration
+      ?.bestaetigungVerfassungstreueMaxSize
+);
+
 const previousStep = () => {
   emits("previousStep");
 };
@@ -159,6 +174,10 @@ function handleFiles(files: File[]) {
   onlineBewerbungFormData.value.dateiVerfassungstreue = files?.[0] ?? null;
 }
 
+function clearFiles() {
+  onlineBewerbungFormData.value.dateiVerfassungstreue = null;
+}
+
 const save = () => {
   if (isValid()) {
     emits("save");
@@ -166,14 +185,11 @@ const save = () => {
 };
 
 function isValid() {
-  let isValid = true;
-
-  isValid = validateDateiVerfassungstreue(isValid);
-
-  return isValid;
+  return validateDateiVerfassungstreue();
 }
 
-function validateDateiVerfassungstreue(isValid: boolean) {
+function validateDateiVerfassungstreue() {
+  let isValid = true;
   // Datei Verfassungstreue ist ein Pflichtfeld
   errorMsgDateiVerfassungstreue.value = "";
   zeigeLeerenDateiNameVerfassungstreue.value = false;
@@ -181,13 +197,22 @@ function validateDateiVerfassungstreue(isValid: boolean) {
     errorMsgDateiVerfassungstreue.value = t("verfassungstreue.invalide");
     zeigeLeerenDateiNameVerfassungstreue.value = true;
     isValid = false;
-  } else if (
-    !onlineBewerbungFormData.value.dateiVerfassungstreue.name
-      .toLowerCase()
-      .endsWith(".pdf")
-  ) {
-    errorMsgDateiVerfassungstreue.value = t("verfassungstreue.keinPDF");
-    isValid = false;
+  } else {
+    const bestaetigungVerfassungstreueFileExtension =
+      useActiveKonfigurationStore().getTechnischeKonfiguration
+        ?.bestaetigungVerfassungstreueFileExtension;
+    const dateiEndungKorrekt =
+      hatBestaetigungVerfassungstreueFileErlaubteEndung(
+        onlineBewerbungFormData.value.dateiVerfassungstreue.name,
+        bestaetigungVerfassungstreueFileExtension
+      );
+    if (!dateiEndungKorrekt) {
+      errorMsgDateiVerfassungstreue.value = t(
+        "verfassungstreue.anhangKeinGueltigeDateiendung",
+        { dateiTypen: bestaetigungVerfassungstreueFileExtension }
+      );
+      isValid = false;
+    }
   }
   return isValid;
 }
@@ -203,6 +228,21 @@ function dateiVerfassungstreueAnzeigen() {
   link.download = onlineBewerbungFormData.value.dateiVerfassungstreue.name;
   link.click();
   setTimeout(() => URL.revokeObjectURL(link.href), 10_000);
+}
+
+function hatBestaetigungVerfassungstreueFileErlaubteEndung(
+  dateiname: string,
+  endungenString: string | undefined
+): boolean {
+  if (!endungenString) {
+    return false;
+  }
+  const endungen = endungenString
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter((e) => e.length > 0);
+  const dateinameLower = dateiname.toLowerCase();
+  return endungen.some((endung) => dateinameLower.endsWith(`.${endung}`));
 }
 </script>
 <style scoped>

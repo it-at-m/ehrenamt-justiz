@@ -21,7 +21,10 @@ spring:
     error:
       whitelabel:
         enabled: false
-
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 # Config for spring actuator endpoints
 management:
   endpoints:
@@ -96,3 +99,8 @@ ewo:
     readtimeout: 15000
   aenderungsservice:
     basepathprefix: /public/aenderungsservice
+
+ehrju:
+  bestaetigungVerfassungstreue:
+    maxSize: 2 # Maximale größer der PDF-Datei für die Bestätigung der Verfassungstreue in MByte
+    fileExtension: pdf  # Dateienendungen mit Komma getrennt

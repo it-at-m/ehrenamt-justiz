@@ -11,6 +11,8 @@ import { useI18n } from "vue-i18n";
 
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 
+const KB_IN_BYTES = 1024;
+
 export function useRules() {
   const { t } = useI18n();
   return {
@@ -42,13 +44,24 @@ export function useRules() {
       if (v == undefined) {
         return true;
       }
-      const maxSize = 1024 * 1024; // 1 MB in Bytes
-      const isPDF =
-        v.type === "application/pdf" || v.name.toLowerCase().endsWith(".pdf");
-      return v.size > maxSize
-        ? t("composables.rules.anhangZuGross")
-        : !isPDF
-          ? t("composables.rules.anhangKeinPDF")
+      const maxSize =
+        useGlobalSettingsStore().getTechnischeKonfiguration
+          ?.bestaetigungVerfassungstreueMaxSize ?? 0;
+      const dateiEndungKorrekt =
+        hatBestaetigungVerfassungstreueFileErlaubteEndung(
+          v.name,
+          useGlobalSettingsStore().getTechnischeKonfiguration
+            ?.bestaetigungVerfassungstreueFileExtension
+        );
+
+      return v.size > maxSize * KB_IN_BYTES * KB_IN_BYTES
+        ? t("composables.rules.anhangZuGross", { maxSize })
+        : !dateiEndungKorrekt
+          ? t("composables.rules.anhangKeinGueltigeDateiendung", {
+              dateiTypen:
+                useGlobalSettingsStore().getTechnischeKonfiguration
+                  ?.bestaetigungVerfassungstreueFileExtension,
+            })
           : true;
     },
 
@@ -115,4 +128,19 @@ export function useRules() {
       return !v || /^\d+$/.test(v) || t("composables.rules.numerisch");
     },
   };
+
+  function hatBestaetigungVerfassungstreueFileErlaubteEndung(
+    dateiname: string,
+    bestaetigungVerfassungstreueFileExtension: string | undefined
+  ): boolean {
+    if (!bestaetigungVerfassungstreueFileExtension) {
+      return false;
+    }
+    const endungen = bestaetigungVerfassungstreueFileExtension
+      .split(",")
+      .map((e) => e.trim().toLowerCase())
+      .filter((e) => e.length > 0);
+    const dateinameLower = dateiname.toLowerCase();
+    return endungen.some((endung) => dateinameLower.endsWith(`.${endung}`));
+  }
 }
