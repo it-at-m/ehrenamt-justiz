@@ -74,6 +74,8 @@ The following table shows the most important configurations of the backend (appl
 | ewo.eai.server | url and port of EAI to residents' registration system | http://host.docker.internal:8085                                      |
 | ewo.eai.user | User for EAI to residents' registration system |                                                                       |
 | ewo.eai.password | Password forEAI to residents' registration system |                                                                       |
+| ehrju.bestaetigungVerfassungstreue.maxSize: | Maximum size in MB of the attachment for the declaration of loyalty to the Constitution | 2 |
+| ehrju.bestaetigungVerfassungstreue.fileExtension: | File extension of the attachment confirming loyalty to the Constitution. Separated by a comma | pdf, docx
 | sso.url |url and port to keycloak server | http://keycloak:8100                                                  |
 | sso.real | Realm used in keycloak | local_realm                                                           |
 | sso.client | Client used in keycloak | ej-app                                                                |
