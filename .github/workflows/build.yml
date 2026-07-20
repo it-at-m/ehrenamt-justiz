@@ -8,7 +8,47 @@ on:
       - "main"
 
 jobs:
+  # JOB to run change detection
+  changes:
+    runs-on: ubuntu-latest
+    # Required permissions
+    permissions:
+      pull-requests: read
+    outputs:
+      # Expose matched filters as job 'packages' output variable
+      packages: ${{ steps.filter.outputs.changes }}
+    steps:
+    - uses: it-at-m/lhm_actions/action-templates/actions/action-checkout@4ed8f906bab8111fbd9a7af8e3f4129f9b721757 # v1.2.3
+    # For pull requests it's not necessary to checkout the code
+    - uses: it-at-m/lhm_actions/action-templates/actions/action-filter@4ed8f906bab8111fbd9a7af8e3f4129f9b721757 # v1.2.3
+      id: filter
+      with:
+        base: ${{ github.ref }}
+        filters: |
+          ehrenamt-justiz-backend: 
+           - ehrenamt-justiz-backend/**
+           - .github/workflows/build.yml
+          ehrenamt-justiz-frontend: 
+           - ehrenamt-justiz-frontend/**
+           - ehrenamt-justiz-backend/api-spec/**
+           - .github/workflows/build.yml
+          ehrenamt-justiz-online: 
+           - ehrenamt-justiz-online/**
+           - ehrenamt-justiz-backend/api-spec/**
+           - .github/workflows/build.yml
+          ehrenamt-justiz-eai: 
+           - ehrenamt-justiz-eai/**
+           - ehrenamt-justiz-backend/api-spec/**
+           - .github/workflows/build.yml
+          ehrenamt-justiz-aenderungsservice: 
+           - ehrenamt-justiz-aenderungsservice/**
+           - ehrenamt-justiz-backend/api-spec/**
+           - .github/workflows/build.yml
+    - run: |
+        echo ${{ toJSON(steps.filter.outputs.changes) }}
   build:
+    if: ${{ needs.changes.outputs.packages != '' && needs.changes.outputs.packages != '[]' }}
+    needs: changes
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -18,12 +58,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include: # Add or modify paths according to your project structure
-          - app-path: ehrenamt-justiz-backend
-          - app-path: ehrenamt-justiz-frontend
-          - app-path: ehrenamt-justiz-eai
-          - app-path: ehrenamt-justiz-online
-          - app-path: ehrenamt-justiz-aenderungsservice
+        app-path: ${{ fromJSON(needs.changes.outputs.packages) }}
 
     steps:
       - uses: it-at-m/lhm_actions/action-templates/actions/action-checkout@4ed8f906bab8111fbd9a7af8e3f4129f9b721757 # v1.2.3
