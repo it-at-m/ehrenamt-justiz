@@ -63,7 +63,6 @@ jobs:
           codeql-language: java-kotlin
           codeql-buildmode: ${{ env.java-buildmode }}
           codeql-query: ${{ env.analysis-query }}
-          java-version: ${{ env.java-version }}
           path: ${{ matrix.build-path }}
   codeql-javascript-typescript-vue:
     if: ${{ needs.codeql-check-changed-files.outputs.analyze-javascript-typescript-vue == 'true' && (github.ref == 'refs/heads/main' || needs.codeql-check-changed-files.outputs.javascript-typescript-vue == 'true') }}
