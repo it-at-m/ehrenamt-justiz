@@ -13,17 +13,19 @@ body:
     attributes:
       value: "## General"
   - type: dropdown
-    id: template
+    id: component
     attributes:
-      label: Relevant documentation
+      label: Relevant component
       multiple: true
-      description: Affected documentation parts
+      description: Relevant documentation
       options:
         - ehrenamt-justiz-frontend
         - ehrenamt-justiz-backend
         - ehrenamt-justiz-eai
         - ehrenamt-justiz-online
         - ehrenamt-justiz-aenderungsservice
+        - stack
+        - cicd
         - Other
     validations:
       required: true
