@@ -1,85 +1,99 @@
 package de.muenchen.ehrenamtjustiz.backend.configuration.filter;
 
-import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
-import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFILE;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
-import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
-import de.muenchen.ehrenamtjustiz.backend.TestConstants;
-import de.muenchen.ehrenamtjustiz.backend.domain.Konfiguration;
-import de.muenchen.ehrenamtjustiz.backend.rest.KonfigurationRepository;
-import de.muenchen.ehrenamtjustiz.backend.testdata.KonfigurationTestDataBuilder;
+import de.muenchen.ehrenamtjustiz.backend.configuration.filter.nfcconverter.NfcRequestFilter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.servlet.client.RestTestClient;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.postgresql.PostgreSQLContainer;
-import org.testcontainers.utility.DockerImageName;
+import org.springframework.mock.web.MockFilterChain;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockPart;
+import org.springframework.util.StreamUtils;
 
-@Testcontainers
-@SpringBootTest(
-        classes = { EhrenamtJustizApplication.class },
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
-)
-@AutoConfigureRestTestClient
-@ActiveProfiles(profiles = { SPRING_TEST_PROFILE, SPRING_NO_SECURITY_PROFILE })
 class UnicodeFilterConfigurationTest {
-
-    @Container
-    @ServiceConnection
-    @SuppressWarnings("unused")
-    private static final PostgreSQLContainer POSTGRE_SQL_CONTAINER = new PostgreSQLContainer(
-            DockerImageName.parse(TestConstants.TESTCONTAINERS_POSTGRES_IMAGE));
-
-    private static final String ENTITY_ENDPOINT_URL = "/konfigurationen";
 
     /**
      * Decomposed string:
      * String "Ä-é" represented with unicode letters "A◌̈-e◌́"
      */
     private static final String TEXT_ATTRIBUTE_DECOMPOSED = "\u0041\u0308-\u0065\u0301";
-
     /**
      * Composed string:
      * String "Ä-é" represented with unicode letters "Ä-é".
      */
     private static final String TEXT_ATTRIBUTE_COMPOSED = "\u00c4-\u00e9";
+    private static final String HEADER_NAME_DECOMPOSED = "x-" + TEXT_ATTRIBUTE_DECOMPOSED;
+    private static final String HEADER_NAME_COMPOSED = "x-" + TEXT_ATTRIBUTE_COMPOSED;
+    private static final String PARAMETER_NAME_DECOMPOSED = "name-" + TEXT_ATTRIBUTE_DECOMPOSED;
+    private static final String PARAMETER_NAME_COMPOSED = "name-" + TEXT_ATTRIBUTE_COMPOSED;
 
-    @Autowired
-    private RestTestClient restTestClient;
-
-    @Autowired
-    private KonfigurationRepository konfigurationRepository;
+    private final NfcRequestFilter filter = new NfcRequestFilter();
 
     @Test
-    void givenDecomposedString_thenConvertToNfcNormalized() {
-        // Given
-        // Persist entity with decomposed string.
-        final Konfiguration testKonfiguration = new KonfigurationTestDataBuilder().withBezeichnung(TEXT_ATTRIBUTE_DECOMPOSED).build();
-
-        // When
-        TestConstants.KonfigurationDto response = restTestClient.post()
-                .uri(ENTITY_ENDPOINT_URL)
-                .body(testKonfiguration)
-                .exchange()
-                .expectStatus().isCreated()
-                .expectBody(TestConstants.KonfigurationDto.class)
-                .returnResult()
-                .getResponseBody();
-
-        final Konfiguration konfiguration = konfigurationRepository.findById(testKonfiguration.getId()).orElse(null);
-
-        // Check persisted entity contains a composed string via JPA repository.
-        assertNotNull(konfiguration);
-        assertNotNull(konfiguration.getBezeichnung());
-        assertEquals(TEXT_ATTRIBUTE_COMPOSED, konfiguration.getBezeichnung());
-        assertEquals(TEXT_ATTRIBUTE_COMPOSED.length(), konfiguration.getBezeichnung().length());
+    void givenWhitelistedContentType_thenNormalizeWrappedRequest() throws ServletException, IOException {
+        // setup and call
+        final HttpServletRequest wrappedRequest = filterWhitelistedRequest();
+        // test
+        assertEquals(TEXT_ATTRIBUTE_COMPOSED, wrappedRequest.getParameter(PARAMETER_NAME_COMPOSED));
+        assertEquals(TEXT_ATTRIBUTE_COMPOSED, wrappedRequest.getHeader(HEADER_NAME_COMPOSED));
+        assertEquals(TEXT_ATTRIBUTE_COMPOSED, wrappedRequest.getCookies()[0].getValue());
+        assertEquals(TEXT_ATTRIBUTE_COMPOSED, wrappedRequest.getReader().readLine());
     }
 
+    @Test
+    void givenWhitelistedContentType_thenNormalizeInputStream() throws ServletException, IOException {
+        // setup and call
+        final HttpServletRequest wrappedRequest = filterWhitelistedRequest();
+        // test
+        assertArrayEquals(
+                TEXT_ATTRIBUTE_COMPOSED.getBytes(StandardCharsets.UTF_8),
+                StreamUtils.copyToByteArray(wrappedRequest.getInputStream()));
+    }
+
+    @Test
+    void givenMultipartFormData_thenPassOriginalRequestThrough() throws ServletException, IOException {
+        // setup
+        final MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setContentType("multipart/form-data");
+        request.setRequestURI("/unicode-filter-test");
+        request.addHeader(HEADER_NAME_DECOMPOSED, TEXT_ATTRIBUTE_DECOMPOSED);
+        request.addParameter(PARAMETER_NAME_DECOMPOSED, TEXT_ATTRIBUTE_DECOMPOSED);
+        request.setCookies(new Cookie("token", TEXT_ATTRIBUTE_DECOMPOSED));
+        request.setContent(TEXT_ATTRIBUTE_DECOMPOSED.getBytes(StandardCharsets.UTF_8));
+        request.addPart(new MockPart("file", TEXT_ATTRIBUTE_DECOMPOSED.getBytes(StandardCharsets.UTF_8)));
+        final MockHttpServletResponse response = new MockHttpServletResponse();
+        final MockFilterChain filterChain = new MockFilterChain();
+        // call
+        filter.doFilter(request, response, filterChain);
+        // test
+        assertSame(request, filterChain.getRequest());
+        assertArrayEquals(
+                TEXT_ATTRIBUTE_DECOMPOSED.getBytes(StandardCharsets.UTF_8),
+                StreamUtils.copyToByteArray(((HttpServletRequest) filterChain.getRequest()).getPart("file").getInputStream()));
+    }
+
+    private HttpServletRequest filterWhitelistedRequest() throws ServletException, IOException {
+        // setup
+        final MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setContentType("application/json;charset=UTF-8");
+        request.setRequestURI("/unicode-filter-test");
+        request.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        request.addHeader(HEADER_NAME_DECOMPOSED, TEXT_ATTRIBUTE_DECOMPOSED);
+        request.addParameter(PARAMETER_NAME_DECOMPOSED, TEXT_ATTRIBUTE_DECOMPOSED);
+        request.setCookies(new Cookie("token", TEXT_ATTRIBUTE_DECOMPOSED));
+        request.setContent(TEXT_ATTRIBUTE_DECOMPOSED.getBytes(StandardCharsets.UTF_8));
+        final MockHttpServletResponse response = new MockHttpServletResponse();
+        final MockFilterChain filterChain = new MockFilterChain();
+        // call
+        filter.doFilter(request, response, filterChain);
+
+        return (HttpServletRequest) filterChain.getRequest();
+    }
 }
