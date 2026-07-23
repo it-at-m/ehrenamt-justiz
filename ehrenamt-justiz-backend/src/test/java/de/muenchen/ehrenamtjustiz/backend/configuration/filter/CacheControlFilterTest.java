@@ -1,53 +1,52 @@
 package de.muenchen.ehrenamtjustiz.backend.configuration.filter;
 
-import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
-import static de.muenchen.ehrenamtjustiz.backend.TestConstants.SPRING_TEST_PROFILE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
-import de.muenchen.ehrenamtjustiz.backend.EhrenamtJustizApplication;
-import de.muenchen.ehrenamtjustiz.backend.TestConstants;
+import jakarta.servlet.ServletException;
+import java.io.IOException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.http.HttpHeaders;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.servlet.client.RestTestClient;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.postgresql.PostgreSQLContainer;
-import org.testcontainers.utility.DockerImageName;
+import org.springframework.mock.web.MockFilterChain;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
 
-@Testcontainers
-@SpringBootTest(
-        classes = { EhrenamtJustizApplication.class },
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
-)
-@AutoConfigureRestTestClient
-@ActiveProfiles(profiles = { SPRING_TEST_PROFILE, SPRING_NO_SECURITY_PROFILE })
 class CacheControlFilterTest {
-
-    @Container
-    @ServiceConnection
-    @SuppressWarnings("unused")
-    private static final PostgreSQLContainer POSTGRE_SQL_CONTAINER = new PostgreSQLContainer(
-            DockerImageName.parse(TestConstants.TESTCONTAINERS_POSTGRES_IMAGE));
-
-    private static final String ENTITY_ENDPOINT_URL = "/personen";
 
     private static final String EXPECTED_CACHE_CONTROL_HEADER_VALUES = "no-cache, no-store, must-revalidate";
 
-    @Autowired
-    private RestTestClient restTestClient;
+    private final CacheControlFilter filter = new CacheControlFilter();
+    private MockHttpServletRequest request;
+    private MockHttpServletResponse response;
+    private MockFilterChain filterChain;
 
-    @Test
-    void givenEntityEndpoint_thenCacheControlHeadersPresent() {
-        restTestClient.get()
-                .uri(ENTITY_ENDPOINT_URL)
-                .exchange()
-                .expectStatus().isOk()
-                .expectHeader().exists(HttpHeaders.CACHE_CONTROL)
-                .expectHeader().valueEquals(HttpHeaders.CACHE_CONTROL, EXPECTED_CACHE_CONTROL_HEADER_VALUES);
+    @BeforeEach
+    void setUp() {
+        request = new MockHttpServletRequest();
+        response = new MockHttpServletResponse();
+        filterChain = new MockFilterChain();
     }
 
+    @Test
+    void givenMissingCacheControlHeader_thenAddDefaultHeader() throws ServletException, IOException {
+        // call
+        filter.doFilter(request, response, filterChain);
+        // test
+        assertEquals(EXPECTED_CACHE_CONTROL_HEADER_VALUES, response.getHeader(HttpHeaders.CACHE_CONTROL));
+        assertSame(request, filterChain.getRequest());
+        assertSame(response, filterChain.getResponse());
+    }
+
+    @Test
+    void givenExistingCacheControlHeader_thenKeepExistingValue() throws ServletException, IOException {
+        // setup
+        response.addHeader(HttpHeaders.CACHE_CONTROL, "public, max-age=60");
+        // call
+        filter.doFilter(request, response, filterChain);
+        // test
+        assertEquals("public, max-age=60", response.getHeader(HttpHeaders.CACHE_CONTROL));
+        assertSame(request, filterChain.getRequest());
+        assertSame(response, filterChain.getResponse());
+    }
 }
