@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,8 +22,8 @@ import org.springframework.security.web.servlet.util.matcher.PathPatternRequestM
  * Automatically used when not running with profile `no-security`.
  * Configures all endpoints to require authentication via access token.
  * (except the Spring Boot Actuator endpoints)
- * Additionally it configures the use of {@link KeycloakRolesAuthoritiesConverter} or
- * {@link KeycloakPermissionsAuthoritiesConverter} (with profile "keycloak-permissions")}.
+ * Additionally it configures the use of role-based authorization (via application.yml) or
+ * {@link KeycloakPermissionsAuthoritiesConverter} (when profile "keycloak-permissions" is set).
  */
 @RequiredArgsConstructor
 @Configuration
@@ -33,7 +34,6 @@ import org.springframework.security.web.servlet.util.matcher.PathPatternRequestM
 @Slf4j
 public class SecurityConfiguration {
 
-    private final Optional<KeycloakRolesAuthoritiesConverter> keycloakRolesAuthoritiesConverter;
     private final Optional<KeycloakPermissionsAuthoritiesConverter> keycloakPermissionsAuthoritiesConverter;
 
     @Bean
@@ -76,22 +76,16 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((requests) -> requests
                         .anyRequest()
                         .authenticated())
-                .oauth2ResourceServer(oAuth2ResourceServerConfigurer -> oAuth2ResourceServerConfigurer
-                        .jwt(jwtConfigurer -> {
+                .oauth2ResourceServer(oAuth2ResourceServerConfigurer -> keycloakPermissionsAuthoritiesConverter.ifPresentOrElse(
+                        converter -> oAuth2ResourceServerConfigurer.jwt(jwtConfigurer -> {
+                            log.info("Using permission-based authorization. Start without 'keycloak-permissions' profile to use role-based authorization.");
                             final JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-                            // authorities via keycloak roles scope
-                            if (keycloakRolesAuthoritiesConverter.isPresent()) {
-                                jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(
-                                        keycloakRolesAuthoritiesConverter.get());
-                            }
-                            // authorities via keycloak permissions endpoint
-                            else if (keycloakPermissionsAuthoritiesConverter.isPresent()) {
-                                jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(
-                                        keycloakPermissionsAuthoritiesConverter.get());
-                            } else {
-                                log.warn("No custom authority converter available, falling back to default.");
-                            }
+                            jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(converter);
                             jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter);
+                        }),
+                        () -> {
+                            log.info("Using role-based authorization. Start with 'keycloak-permissions' profile to use permission-based authorization.");
+                            oAuth2ResourceServerConfigurer.jwt(Customizer.withDefaults());
                         }))
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/onlinebewerbung/bewerbungSpeichern", "/onlinebewerbung/pruefen",
