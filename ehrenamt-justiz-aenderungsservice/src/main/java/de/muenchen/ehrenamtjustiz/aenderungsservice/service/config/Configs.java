@@ -6,24 +6,19 @@ import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.ClientHttpRequestFactory;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.listener.DefaultErrorHandler;
 import org.springframework.kafka.listener.KafkaListenerErrorHandler;
 import org.springframework.kafka.support.ExponentialBackOffWithMaxRetries;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 
 @Slf4j
 @Configuration
 public class Configs {
 
-    @Value("${aenderungsservice.backend.connecttimeout}")
-    private int connectTimeout;
-
-    @Value("${aenderungsservice.backend.readtimeout}")
-    private int readTimeout;
+    @Value("${aenderungsservice.backend.server}")
+    private String serverBackend;
 
     @Value("${aenderungsservice.backend.retry.maxRetries}")
     private int maxRetries;
@@ -74,22 +69,18 @@ public class Configs {
                 return null;
             }
             // Weitere Versuche gemäß Konfiguration in kafkaListenerContainerFactory
+            log.error("Fehler beim Aufruf des Backends", exception);
             throw exception;
         };
     }
 
     @Bean
-    public RestTemplate restTemplate() {
-        final RestTemplate restTemplate = new RestTemplate();
-        restTemplate.setRequestFactory(clientHttpRequestFactory());
-        return restTemplate;
-    }
+    public RestClient restClient(final RestClient.Builder restClientBuilder) {
 
-    private ClientHttpRequestFactory clientHttpRequestFactory() {
-        final HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-        factory.setConnectTimeout(connectTimeout);
-        factory.setReadTimeout(readTimeout);
-        return factory;
+        // Erstelle RestClient
+        return restClientBuilder
+                .baseUrl(serverBackend)
+                .build();
     }
 
 }

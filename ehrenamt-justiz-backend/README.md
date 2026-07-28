@@ -68,24 +68,26 @@ Important Maven commands in connection with Flyway:
 
 The following table shows the most important configurations of the backend (application-[profile].yml):
 
-| Configuration | Description | Example setting                                                       |
-| ------------- | ------------- |-----------------------------------------------------------------------|
-| spring.port | Port used to run the spring boot application  | 8086                                                                  |
-| ewo.eai.server | url and port of EAI to residents' registration system | http://host.docker.internal:8085                                      |
-| ewo.eai.user | User for EAI to residents' registration system |                                                                       |
-| ewo.eai.password | Password forEAI to residents' registration system |                                                                       |
-| ehrju.bestaetigungVerfassungstreue.maxSize: | Maximum size in MB of the attachment for the declaration of loyalty to the Constitution | 2 |
-| ehrju.bestaetigungVerfassungstreue.fileExtension: | File extension of the attachment confirming loyalty to the Constitution. Separated by a comma | pdf, docx
-| sso.url |url and port to keycloak server | http://keycloak:8100                                                  |
-| sso.real | Realm used in keycloak | local_realm                                                           |
-| sso.client | Client used in keycloak | ej-app                                                                |
-| spring.datasource.url | url, port and schema of database | jdbc:postgresql://host.docker.internal:5432/postgres?currentSchema=ej |
-| spring.datasource.username | Username for connecting to database |                                                                       |
-| spring.datasource.password | Password for connecting to database |                                                                       |
-| springdoc.show-actuator | Enables actuator | true                                                                  |
-| springdoc.swagger-ui.enabled | Enable Swagger UI | true                                                                  |
-| springdoc.api-docs.enabled | Enable API docs | true                                                                  |
-| springdoc.api-docs.version | Version of API docs | openapi_3_0                                                           |
+| Configuration                                     | Description                                                                                   | Example setting                                                       |
+|---------------------------------------------------|-----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| spring.port                                       | Port used to run the spring boot application                                                  | 8086                                                                  |
+| ewo.eai.server                                    | url and port of EAI to residents' registration system                                         | http://host.docker.internal:8085                                      |
+| ewo.eai.user                                      | User for EAI to residents' registration system                                                |                                                                       |
+| ewo.eai.password                                  | Password forEAI to residents' registration system                                             |                                                                       |
+| ehrju.bestaetigungVerfassungstreue.maxSize:       | Maximum size in MB of the attachment for the declaration of loyalty to the Constitution       | 2                                                                     |
+| ehrju.bestaetigungVerfassungstreue.fileExtension: | File extension of the attachment confirming loyalty to the Constitution. Separated by a comma | pdf, docx                                                             
+| sso.url                                           | url and port to keycloak server                                                               | http://keycloak:8100                                                  |
+| sso.real                                          | Realm used in keycloak                                                                        | local_realm                                                           |
+| sso.client                                        | Client used in keycloak                                                                       | ej-app                                                                |
+| spring.datasource.url                             | url, port and schema of database                                                              | jdbc:postgresql://host.docker.internal:5432/postgres?currentSchema=ej |
+| spring.datasource.username                        | Username for connecting to database                                                           |                                                                       |
+| spring.datasource.password                        | Password for connecting to database                                                           |                                                                       |
+| spring.http.clients.connect-timeout               | Connect timeout for the backend call                                                          | 30000                                                                 |
+| spring.http.clients.read-timeout                  | Read timeout for the backend call                                                             | 30000                                                                 |
+| springdoc.show-actuator                           | Enables actuator                                                                              | true                                                                  |
+| springdoc.swagger-ui.enabled                      | Enable Swagger UI                                                                             | true                                                                  |
+| springdoc.api-docs.enabled                        | Enable API docs                                                                               | true                                                                  |
+| springdoc.api-docs.version                        | Version of API docs                                                                           | openapi_3_0                                                           |
 
 # pgAdmin
 
