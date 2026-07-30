@@ -33,8 +33,9 @@
 
         <!-- Additional required dependencies -->
         <lombok.version>1.18.46</lombok.version>
-        <camel-spring-boot-dependencies.version>4.21.0</camel-spring-boot-dependencies.version>
         <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
+        <com.fasterxml.jackson.version>2.22.1</com.fasterxml.jackson.version>
+        <jakarta.xml.bind-api.version>4.0.5</jakarta.xml.bind-api.version>
 
         <!-- Testing -->
         <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
@@ -59,9 +60,22 @@
             <version>${spotbugs-annotations.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-openapi-java</artifactId>
-            <version>${camel-spring-boot-dependencies.version}</version>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>${jakarta.xml.bind-api.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${com.fasterxml.jackson.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${com.fasterxml.jackson.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
