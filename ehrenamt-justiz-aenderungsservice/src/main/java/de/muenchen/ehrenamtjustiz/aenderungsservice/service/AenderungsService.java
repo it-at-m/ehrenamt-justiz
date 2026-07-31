@@ -10,30 +10,26 @@ import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatusCode;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientResponseException;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 @Slf4j
 public class AenderungsService {
-    @Value("${aenderungsservice.backend.server}")
-    private String serverBackend;
 
     @Value("${aenderungsservice.backend.base-path}")
     private String basePathBackend;
 
-    private final RestTemplate restTemplate;
+    @Autowired
+    private final RestClient restClient;
 
     @Autowired
-    public AenderungsService(final RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public AenderungsService(final RestClient restClient) {
+        this.restClient = restClient;
     }
 
     @KafkaListener(
@@ -83,17 +79,16 @@ public class AenderungsService {
             throw new BadRequestException("Fehler: Die EWO-ID ist leer");
         }
 
-        final RequestEntity<String> request;
-        request = new RequestEntity<>(om, HttpMethod.POST, UriComponentsBuilder
-                .fromUriString(serverBackend)
-                .path(basePathBackend + "/backendaenderungsservice/aenderungsservicePerson")
-                .build()
-                .toUri());
-
         final ResponseEntity<List<String>> responseEntity;
         try {
-            responseEntity = restTemplate.exchange(request, new ParameterizedTypeReference<>() {
-            });
+
+            responseEntity = restClient
+                    .post()
+                    .uri(basePathBackend + "/backendaenderungsservice/aenderungsservicePerson")
+                    .body(om)
+                    .retrieve().toEntity(new ParameterizedTypeReference<>() {
+                    });
+
         } catch (RestClientResponseException rcrException) {
             log.error("Fehler beim Aufruf des Änderungsservice bei OM " + om, rcrException);
 

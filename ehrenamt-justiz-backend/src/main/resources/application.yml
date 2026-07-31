@@ -5,6 +5,10 @@ spring:
     name: "@project.artifactId@"
     group: "@project.groupId@"
     version: "@project.version@"
+  http:
+    clients:
+      connect-timeout: 30000
+      read-timeout: 30000
   data:
     web:
       pageable:
@@ -101,8 +105,6 @@ ewo:
   eai:
     basepathprefix: /public/eai
     basepath: ${ewo.eai.basepathprefix}/api/personeninfo
-    connecttimeout: 15000
-    readtimeout: 15000
   aenderungsservice:
     basepathprefix: /public/aenderungsservice
 

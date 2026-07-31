@@ -48,6 +48,8 @@ Settings in detail:
 | spring.kafka.client-id | https://docs.spring.io/spring-kafka/reference | lhm-ewo-eai-schoeffen |  |
 | spring.kafka.consumer.auto-offset-reset | https://docs.spring.io/spring-kafka/reference | earliest |  |
 | spring.kafka.consumer.enable-auto-commit | https://docs.spring.io/spring-kafka/reference | true |  |
+| spring.http.clients.connect-timeout | Connect timeout for the backend call | 30000 | |
+| spring.http.clients.read-timeout | Read timeout for the backend call | 30000 | |
 | aenderungsservice.topicPattern  | Kafka-Topics. Has to be 'lhm-ewo-eai-aenderungen-.*' | lhm-ewo-eai-aenderungen-.* | |
 | aenderungsservice.group-Id | Identifies a group of consumer instances that jointly consume messages from one or more Kafka topics. Has to start with 'lhm-ewo-eai-aenderungen-ehrenamt-justiz'. Attention: if you change an already used groupid here, all already processed om's will be processed again by the change service of Ehrenamt-Justiz. This change can be useful in the test phase of Ehrenamt-Jusitz, but it is not recommended in the production environment | lhm-ewo-eai-aenderungen-ehrenamt-justiz | lhm-ewo-eai-aenderungen-ehrenamt-justiz001 |
 
@@ -72,8 +74,6 @@ aenderungsservice:
   backend:
     server: http://localhost:8083
     base-path: /public/backendaenderungsservice
-    connecttimeout: 30000
-    readtimeout: 30000
     retry:
       maxRetries: 30
       initialInterval: 5000
@@ -84,8 +84,6 @@ aenderungsservice:
 | ------------- | ------------- | ------------- |
 | server  | Host server of backend | 'http://localhost:8083' |
 | base-path | Has to be '/public/backendaenderungsservice' | /public/backendaenderungsservice |
-| connecttimeout | Timeout when calling the backend. In milliseconds | 30000 |
-| readtimeout | Readtimeout when calling the backend. In milliseconds | 30000 |
 | maxRetries | Configuration is used, if blocking entry. Maximum number of calls if, for example, a timeout occurs when calling up the backend | 30 |
 | initialInterval | Configuration is used, if blocking entry. Waiting time after the first incorrect call of the backend | 5000 |
 | multiplier | Configuration is used, if blocking entry. Multiplier for the waiting time after a faulty call of the backend | 2.0 |

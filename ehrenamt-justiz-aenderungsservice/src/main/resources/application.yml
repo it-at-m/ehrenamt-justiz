@@ -5,6 +5,10 @@ spring:
     name: "@project.artifactId@"
     group: "@project.groupId@"
     version: "@project.version@"
+  http:
+    clients:
+      connect-timeout: 30000
+      read-timeout: 30000
 
 # Config for spring actuator endpoints
 management:
@@ -34,11 +38,10 @@ management:
   info:
     env:
       enabled: true
-  health:
-    livenessstate:
-      enabled: true
-    readinessstate:
-      enabled: true
+  otlp:
+    metrics:
+      export:
+        enabled: false
 
 logging:
   level:
@@ -69,8 +72,6 @@ aenderungsservice:
   backend:
     server: http://localhost:8083
     base-path: /public/backendaenderungsservice
-    connecttimeout: 30000
-    readtimeout: 30000
     retry:
       maxRetries: 30
       initialInterval: 5000
