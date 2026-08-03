@@ -71,6 +71,9 @@ springdoc:
     version: openapi_3_0
     enabled: false
 
+app:
+  version: "@project.version@"
+
 logging:
   level:
     root: info
@@ -86,6 +89,7 @@ logging:
       add:
         application_name: ${spring.application.name}
         application_group: ${spring.application.group}
+        application_version: ${app.version}
 
 info:
   application:
