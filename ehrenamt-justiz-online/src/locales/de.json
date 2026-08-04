@@ -41,7 +41,6 @@
     },
     "mail": {
       "label": "Mail",
-      "placeholder": "Mail-Adresse",
       "pflichtfeld": "Mail ist ein Pflichtfeld!",
       "invalide": "Valide Mail eingeben!"
     },
