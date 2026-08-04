@@ -72,7 +72,7 @@
               })
             }}
           </h2>
-          <h2  v-if="textAnzahlVorschlaege">{{ textAnzahlVorschlaege }}</h2>
+          <h2 v-if="textAnzahlVorschlaege">{{ textAnzahlVorschlaege }}</h2>
         </v-col>
       </v-hover>
       <v-col
@@ -88,7 +88,9 @@
             })
           }}
         </h2>
-        <h2  v-if="textAnzahlNeueVorschlaege">{{ textAnzahlNeueVorschlaege }}</h2>
+        <h2 v-if="textAnzahlNeueVorschlaege">
+          {{ textAnzahlNeueVorschlaege }}
+        </h2>
         <div class="d-flex flex-column ga-2">
           <v-btn
             color="action"
