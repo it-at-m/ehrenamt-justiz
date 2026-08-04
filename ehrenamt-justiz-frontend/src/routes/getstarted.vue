@@ -22,7 +22,7 @@
               })
             }}
           </h2>
-          <h2>{{ textAnzahlBewerbungen }}</h2>
+          <h2 v-if="textAnzahlBewerbungen">{{ textAnzahlBewerbungen }}</h2>
         </v-col>
       </v-hover>
       <v-hover
@@ -46,7 +46,7 @@
               })
             }}
           </h2>
-          <h2>{{ textAnzahlKonflikte }}</h2>
+          <h2 v-if="textAnzahlKonflikte">{{ textAnzahlKonflikte }}</h2>
         </v-col>
       </v-hover>
       <v-hover
@@ -72,7 +72,7 @@
               })
             }}
           </h2>
-          <h2>{{ textAnzahlVorschlaege }}</h2>
+          <h2  v-if="textAnzahlVorschlaege">{{ textAnzahlVorschlaege }}</h2>
         </v-col>
       </v-hover>
       <v-col
@@ -88,10 +88,10 @@
             })
           }}
         </h2>
-        <h2>{{ textAnzahlNeueVorschlaege }}</h2>
+        <h2  v-if="textAnzahlNeueVorschlaege">{{ textAnzahlNeueVorschlaege }}</h2>
         <div class="d-flex flex-column ga-2">
           <v-btn
-            color="green"
+            color="action"
             :disabled="
               !user ||
               !user.authorities.includes(
@@ -103,7 +103,7 @@
           </v-btn>
 
           <v-btn
-            color="green"
+            color="action"
             :disabled="
               !user ||
               !user.authorities.includes(
