@@ -26,7 +26,7 @@
             {{ t("components.eWOBuergerForm.buttons.felderLeeren") }}
           </v-btn>
           <v-btn
-            color="green"
+            color="action"
             :loading="isAnimation"
             type="submit"
           >

@@ -26,7 +26,7 @@
           {{ t("components.deleteDialog.buttons.abbrechen") }}
         </v-btn>
         <v-btn
-          color="error"
+          color="confirmDelete"
           variant="text"
           :loading="isAnimation"
           @click="deleteItem"
