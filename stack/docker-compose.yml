@@ -4,9 +4,9 @@ services:
   postgres:
     image: postgres:17.4-alpine3.20@sha256:67c27fd3b866e5e3da543b37c70654a13d45d5c4bcb3a2cd9b2813a5c9e167dd
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin
+      POSTGRES_DB: postgres
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
     ports:
       - "5432:5432"
     healthcheck: &healthcheck
@@ -22,14 +22,15 @@ services:
   pg-admin:
     image: dpage/pgadmin4:9.15.0@sha256:cefc4cc6b7d9d71a9e81e76fb9d7e14038ab5661b539a190eea1b63fa612589a
     environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
-      - PGADMIN_DEFAULT_PASSWORD=admin
-      - PGADMIN_CONFIG_SERVER_MODE=False
-      - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
-      - PGADMIN_REPLACE_SERVERS_ON_STARTUP=True
-      - PGADMIN_DISABLE_POSTFIX=True
-      - PGADMIN_LISTEN_PORT=5050
-      - PGADMIN_CONFIG_UPGRADE_CHECK_ENABLED=False
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_LISTEN_PORT: 5050
+      # pgAdmin Boolean environment variables always have to be passed as "True" / "False"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_REPLACE_SERVERS_ON_STARTUP: "True"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+      PGADMIN_DISABLE_POSTFIX: "True"
+      PGADMIN_CONFIG_UPGRADE_CHECK_ENABLED: "False"
     ports:
       - "5050:5050"
     depends_on:
@@ -39,10 +40,10 @@ services:
       test: ["CMD", "wget", "-O", "-", "http://localhost:5050/misc/ping"]
     security_opt: *security_settings
     volumes:
-      - './pgadmin/servers.json:/pgadmin4/servers.json:ro'
-      - './pgadmin/preferences.json:/pgadmin4/preferences.json:ro'
-      - './pgadmin/pgpass:/tmp/pgpass.mounted:ro'
-      - './pgadmin/data:/tmp/data'
+      - ./pgadmin/servers.json:/pgadmin4/servers.json:ro
+      - ./pgadmin/preferences.json:/pgadmin4/preferences.json:ro
+      - ./pgadmin/pgpass:/tmp/pgpass.mounted:ro
+      - ./pgadmin/data:/tmp/data
     entrypoint: >
       /bin/sh -c "
         cp -f /tmp/pgpass.mounted /tmp/pgpass;
@@ -55,11 +56,11 @@ services:
     command:
       - start-dev
     environment:
-      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
-      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
-      - KC_HEALTH_ENABLED=true
-      - KC_HTTP_PORT=8100
-      - KC_HTTP_RELATIVE_PATH=/auth
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_HEALTH_ENABLED: "true"
+      KC_HTTP_PORT: 8100
+      KC_HTTP_RELATIVE_PATH: /auth
     ports:
       - "8100:8100"
     volumes:
@@ -79,11 +80,11 @@ services:
       ADMIN_USER: admin
       ADMIN_PASSWORD: admin
       BASEURL: http://keycloak:8100/auth
-      WAIT_FOR_KEYCLOAK: 'true'
-      FAIL_ON_UNDEFINED_VARIABLES: 'true'
+      WAIT_FOR_KEYCLOAK: "true"
+      FAIL_ON_UNDEFINED_VARIABLES: "true"
       KEYCLOAK_CHANGELOG: /migration/keycloak-changelog.yml
     volumes:
-      - './keycloak/migration:/migration'
+      - ./keycloak/migration:/migration
     networks:
       - keycloak
     security_opt: *security_settings
@@ -96,47 +97,47 @@ services:
     ports:
       - "8083:8080"
     environment:
-      - ALLOWED_ORIGINS_PUBLIC=http://localhost:*, http://keycloak:8100
-      - ALLOWED_ORIGINS_CLIENTS=http://localhost:*
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_ID=sso
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_URI=http://keycloak:8100/
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_PREDICATES_0=Path=/api/sso/userinfo
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_FILTERS_0=RewritePath=/api/sso/userinfo, /auth/realms/local_realm/protocol/openid-connect/userinfo
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_1_ID=backend
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_1_URI=http://host.docker.internal:8086/
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_1_PREDICATES_0=Path=/api/ej-app-backend-service/**
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_1_FILTERS_0=RewritePath=/api/ej-app-backend-service/(?<urlsegments>.*), /$\{urlsegments}
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_2_ID=backendonline
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_2_URI=http://host.docker.internal:8086/
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_2_PREDICATES_0=Path=/public/backend/**
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_2_FILTERS_0=RewritePath=/public/backend/(?<urlsegments>.*), /$\{urlsegments}
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_ID=backendaenderungsservice
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_URI=http://host.docker.internal:8086/
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_PREDICATES_0=Path=/public/backendaenderungsservice/**
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_FILTERS_0=RewritePath=/public/backendaenderungsservice/(?<urlsegments>.*), /$\{urlsegments}
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_ID=aenderungsservice
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_URI=http://host.docker.internal:8087/
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_PREDICATES_0=Path=/public/aenderungsservice/**
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_FILTERS_0=RewritePath=/public/aenderungsservice/(?<urlsegments>.*), /$\{urlsegments}
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_ID=online
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_URI=http://host.docker.internal:8082/
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_PREDICATES_0=Path=/public/online/**
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_ID=eai
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_URI=http://host.docker.internal:8085/
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_PREDICATES_0=Path=/public/eai/**
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_FILTERS_0=RewritePath=/public/eai/(?<urlsegments>.*), /$\{urlsegments}
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_7_ID=frontend
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_7_URI=http://host.docker.internal:8081/
-      - SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_7_PREDICATES_0=Path=/**
-      - SPRING_PROFILES_ACTIVE=test, hazelcast-local
-      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI=http://keycloak:8100/auth/realms/local_realm
-      - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_SSO_ISSUERURI=$${spring.security.oauth2.resourceserver.jwt.issuer-uri}
-      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_PROVIDER=sso
-      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_CLIENTID=ej-app
-      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_CLIENTSECRET=client_secret
-      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_SCOPE=profile, openid, roles
-      - REFARCH_SECURITY_CSRF_WHITELISTED=/public/backendaenderungsservice/**, /public/aenderungsservice/**, /public/eai/**
-      - LOGGING_STRUCTURED_FORMAT_CONSOLE=
+      ALLOWED_ORIGINS_PUBLIC: http://localhost:*, http://keycloak:8100
+      ALLOWED_ORIGINS_CLIENTS: http://localhost:*
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_ID: sso
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_URI: http://keycloak:8100/
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_PREDICATES_0: Path=/api/sso/userinfo
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_FILTERS_0: RewritePath=/api/sso/userinfo, /auth/realms/local_realm/protocol/openid-connect/userinfo
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_1_ID: backend
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_1_URI: http://host.docker.internal:8086/
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_1_PREDICATES_0: Path=/api/ej-app-backend-service/**
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_1_FILTERS_0: RewritePath=/api/ej-app-backend-service/(?<urlsegments>.*), /$\{urlsegments}
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_2_ID: backendonline
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_2_URI: http://host.docker.internal:8086/
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_2_PREDICATES_0: Path=/public/backend/**
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_2_FILTERS_0: RewritePath=/public/backend/(?<urlsegments>.*), /$\{urlsegments}
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_ID: backendaenderungsservice
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_URI: http://host.docker.internal:8086/
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_PREDICATES_0=Path: /public/backendaenderungsservice/**
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_3_FILTERS_0: RewritePath=/public/backendaenderungsservice/(?<urlsegments>.*), /$\{urlsegments}
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_ID: aenderungsservice
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_URI: http://host.docker.internal:8087/
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_PREDICATES_0=Path: /public/aenderungsservice/**
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_4_FILTERS_0: RewritePath=/public/aenderungsservice/(?<urlsegments>.*), /$\{urlsegments}
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_ID: online
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_URI: http://host.docker.internal:8082/
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_5_PREDICATES_0: Path=/public/online/**
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_ID: eai
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_URI: http://host.docker.internal:8085/
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_PREDICATES_0=Path: /public/eai/**
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_6_FILTERS_0: RewritePath=/public/eai/(?<urlsegments>.*), /$\{urlsegments}
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_7_ID: frontend
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_7_URI: http://host.docker.internal:8081/
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_7_PREDICATES_0=Path: /**
+      SPRING_PROFILES_ACTIVE: test, hazelcast-local
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: http://keycloak:8100/auth/realms/local_realm
+      SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_SSO_ISSUERURI: $${spring.security.oauth2.resourceserver.jwt.issuer-uri}
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_PROVIDER: sso
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_CLIENTID: ej-app
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_CLIENTSECRET: client_secret
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_SCOPE: profile, openid, roles
+      REFARCH_SECURITY_CSRF_WHITELISTED: /public/backendaenderungsservice/**, /public/aenderungsservice/**, /public/eai/**
+      LOGGING_STRUCTURED_FORMAT_CONSOLE: ""
     networks:
       - keycloak
     extra_hosts:
@@ -147,15 +148,15 @@ services:
     security_opt: *security_settings
 
   appswitcher-server:
-    image: ghcr.io/it-at-m/appswitcher-server:1.3.0@sha256:10006bc0f3093a548cf977dd65b3df56baa8a08e42eb04872e9e51011c9e21f8
+    image: ghcr.io/it-at-m/appswitcher-server-native:1.3.0@sha256:888d2f1c8ddd59e2e9e84a833cf41cf380cc69e7e54cc10b5bd78378b666a067
     environment:
-      - SPRING_WEB_RESOURCES_STATIC_LOCATIONS=file:/workspace/static
-      - THC_PATH=/actuator/health/liveness
+      SPRING_WEB_RESOURCES_STATIC_LOCATIONS: file:/workspace/static
+      THC_PATH: /actuator/health/liveness
     ports:
       - "8084:8080"
     volumes:
-      - "./appswitcher-server/application.yml:/workspace/config/application.yml"
-      - "./appswitcher-server/static:/workspace/static"
+      - ./appswitcher-server/application.yml:/workspace/config/application.yml
+      - ./appswitcher-server/static:/workspace/static
     healthcheck:
       <<: *healthcheck
       test: ["CMD-SHELL", "/workspace/health-check"]
@@ -170,7 +171,7 @@ services:
       - backend
     image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:dev@sha256:541d3827b272e6f119f34c7c8828b13e98ecb4b2d6e1d367662e88fab230e21a
     environment:
-      - SPRING_PROFILES_ACTIVE=docker,keycloak-permissions
+      SPRING_PROFILES_ACTIVE: docker,keycloak-permissions
     ports:
       - "8086:8086"
     networks:
@@ -227,8 +228,8 @@ services:
       <<: *healthcheck
       test: [ "CMD-SHELL", "curl http://localhost:8085/actuator/health/liveness" ]
     environment:
-      - PRODUCER_USER=
-      - PRODUCER_PASSWORD=
+      PRODUCER_USER:
+      PRODUCER_PASSWORD:
 
   # If the Änderungsservice is to be started in the Docker-Compose, the following command must be executed at startup:
   # docker-compose --profile=aenderungsservice up
@@ -254,9 +255,10 @@ services:
       <<: *healthcheck
       test: ["CMD-SHELL", "curl http://localhost:8087/actuator/health/liveness"]
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - TRUST_STORE_PASSWORD=
-      - GROUP_ID=lhm-ewo-eai-aenderungen-ehrenamt-justiz
+      SPRING_PROFILES_ACTIVE: docker
+      KEY_STORE_PASSWORD:
+      TRUST_STORE_PASSWORD:
+      GROUP_ID: lhm-ewo-eai-aenderungen-ehrenamt-justiz-testDocker00204
 
 networks:
   keycloak:
