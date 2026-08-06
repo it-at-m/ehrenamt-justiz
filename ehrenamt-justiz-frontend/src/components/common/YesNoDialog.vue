@@ -41,7 +41,6 @@
         </v-btn>
         <v-btn
           id="yesnodialog-btn-yes"
-          color="primary"
           @click="yes"
         >
           {{ t("components.yesNoDialog.ja") }}
