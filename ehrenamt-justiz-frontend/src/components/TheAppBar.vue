@@ -92,6 +92,7 @@
           </template>
           <span>{{ t("app.onlineHelp") }}</span>
         </v-tooltip>
+        <theme-toggle-btn />
         <app-switcher
           v-if="appswitcherBaseUrl"
           :base-url="appswitcherBaseUrl"
@@ -123,6 +124,7 @@ import {
 import { EhrenamtJustizService } from "@/api/EhrenamtJustizService";
 import { EWOBuergerApiService } from "@/api/EWOBuergerApiService";
 import { checkHealth } from "@/api/HealthService";
+import ThemeToggleBtn from "@/components/common/ThemeToggleBtn.vue";
 import { APPSWITCHER_URL } from "@/Constants";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useUserInfoStore } from "@/stores/userinfo";

@@ -19,10 +19,3 @@ import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialog
 
 const { t } = useI18n();
 </script>
-<style scoped>
-@media (min-width: 1280px) {
-  .v-container {
-    max-width: 2000px; /* Overwritten so that the conflict table is not displayed in a tiny size and the space in the container is used */
-  }
-}
-</style>

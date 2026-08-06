@@ -4,3 +4,9 @@
 .auskunftssperreDetail {
   color: red;
 }
+
+@media (min-width: 1280px) {
+  .v-container {
+    max-width: 2000px; /* Overwritten so that the v-container table is not displayed in a tiny size and the space in the container is used */
+  }
+}

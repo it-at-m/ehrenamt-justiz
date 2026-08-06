@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 /**
- * Application class for starting the micro-service.
+ * Application class to start the micro-service.
  */
 @SpringBootApplication
 @ConfigurationPropertiesScan

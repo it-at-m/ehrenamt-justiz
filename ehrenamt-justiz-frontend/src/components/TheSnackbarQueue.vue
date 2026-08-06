@@ -3,6 +3,7 @@
     v-model="snackbarStore.queue"
     :timeout="5000"
     :color="STATUS_INDICATORS.INFO"
+    closable
   >
     <template #text="textData">
       <v-layout class="align-center">
@@ -14,27 +15,14 @@
         <p class="my-0 text-body-large">{{ textData.item.text }}</p>
       </v-layout>
     </template>
-    <template #actions="{ props, item }">
-      <v-btn
-        v-if="item.color === STATUS_INDICATORS.ERROR"
-        color="primary"
-        variant="text"
-        v-bind="props"
-      >
-        {{ t("components.theSnackbar.schliessen") }}
-      </v-btn>
-    </template>
   </v-snackbar-queue>
 </template>
 
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import { VBtn, VIcon, VLayout, VSnackbarQueue } from "vuetify/components";
+import { VIcon, VLayout, VSnackbarQueue } from "vuetify/components";
 
 import { STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const snackbarStore = useSnackbarStore();
-
-const { t } = useI18n();
 </script>
