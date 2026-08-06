@@ -35,9 +35,11 @@ export default createVuetify({
         colors: {
           primary: "#333333",
           secondary: "#FFCC00",
-          accent: "#90CAF9",
+          accent: "#0B4DA2",
           success: "#81C784",
           error: "#E57373",
+          confirmDelete: "#FF8A8A",
+          action: "#285307",
         },
       },
     },
