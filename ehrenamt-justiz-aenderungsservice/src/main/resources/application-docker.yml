@@ -2,7 +2,7 @@ server:
   port: 8087
 spring:
   kafka:
-    bootstrap-servers: lhm-cluster-kafka-tls-bootstrap-lhmeventbus-k.apps.capk.muenchen.de:443
+    bootstrap-servers: lhmeventbus-v3k.muenchen.de:443
     security.protocol: SSL
     ssl:
       key-store-password: ${KEY_STORE_PASSWORD}
