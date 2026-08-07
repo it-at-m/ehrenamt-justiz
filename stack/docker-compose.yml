@@ -169,7 +169,7 @@ services:
   backend:
     profiles:
       - backend
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:dev@sha256:269e441a6cd40fa0ebc73bcef630c62697ecd90c43cdacda20af0ff79d2bbd46
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:dev
     environment:
       SPRING_PROFILES_ACTIVE: docker,keycloak-permissions
     ports:
@@ -188,7 +188,7 @@ services:
   frontend:
     profiles:
       - frontend
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:dev@sha256:7fa835473766d77f2580ba1a8e59821e25f55c251cebc0ebaf55d43b9629b8fc
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:dev
     ports:
       - "8081:8080"
     networks:
@@ -201,7 +201,7 @@ services:
   online:
     profiles:
       - online
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:dev@sha256:917df73f2db1e09bbc97663441a55868e0d79bbd0fe637e4162ae09a666a9f15
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:dev
     ports:
       - "8082:8080"
     networks:
@@ -216,7 +216,7 @@ services:
   eai:
     profiles:
       - eai
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai:dev@sha256:7b85b097da5072ca489218c31cd435ca682385fb9381e96a5b52b8a90d824fca
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai:dev
     volumes:
       - ../ehrenamt-justiz-eai/entrypoint.sh:/usr/local/bin/entrypoint.sh:rwx
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
@@ -228,8 +228,8 @@ services:
       <<: *healthcheck
       test: [ "CMD-SHELL", "curl http://localhost:8085/actuator/health/liveness" ]
     environment:
-      PRODUCER_USER:
-      PRODUCER_PASSWORD:
+      PRODUCER_USER: schoeffen
+      PRODUCER_PASSWORD: RojMArByIPUc0W7d8ukl8KTPjZ
 
   # If the Änderungsservice is to be started in the Docker-Compose, the following command must be executed at startup:
   # docker-compose --profile=aenderungsservice up
@@ -238,7 +238,7 @@ services:
   aenderungsservice:
     profiles:
       - aenderungsservice
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice:dev@sha256:ec315a76dcd2fe6a23e3b46f83ed7440bae135fb2344e05065294356466d422e
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice:dev
     volumes:
       - ../ehrenamt-justiz-aenderungsservice/src/main/resources/truststore.jks:/etc/ssl/truststore.jks
       - ../ehrenamt-justiz-aenderungsservice/src/main/resources/kafka-auth-keystore.jks:/etc/ssl/kafka-auth-keystore.jks
@@ -256,8 +256,8 @@ services:
       test: ["CMD-SHELL", "curl http://localhost:8087/actuator/health/liveness"]
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      KEY_STORE_PASSWORD:
-      TRUST_STORE_PASSWORD:
+      KEY_STORE_PASSWORD: changeit
+      TRUST_STORE_PASSWORD: changeit
       GROUP_ID: lhm-ewo-eai-aenderungen-ehrenamt-justiz-testDocker00204
 
 networks:
