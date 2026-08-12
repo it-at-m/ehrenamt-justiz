@@ -2,7 +2,7 @@ server:
   port: 8087
 spring:
   kafka:
-    bootstrap-servers: lhm-cluster-kafka-tls-bootstrap-lhmeventbus-k.apps.capk.muenchen.de:443
+    bootstrap-servers: lhmeventbus-v3k.muenchen.de:443
     security.protocol: SSL
     ssl:
       key-store-password: ${KEY_STORE_PASSWORD}
@@ -13,7 +13,15 @@ spring:
     consumer: # Only insert everything below here if you wish to receive unread messages with the listener when it was inactive. Otherwise, only the messages that were sent during the active time of the listener will be received.
       auto-offset-reset: earliest
       enable-auto-commit: true
-
+  jmx:
+    enabled: true # additionally must set -Djava.rmi.server.hostname=localhost to use local debugging via JMX+RMI
+management:
+  endpoints:
+    access:
+      default: unrestricted
+  endpoint:
+    health:
+      show-details: always
 logging:
   include-application-group: false # disabled because application group is only relevant when deployed
   structured:
