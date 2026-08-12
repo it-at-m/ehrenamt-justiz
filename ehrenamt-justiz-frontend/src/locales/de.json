@@ -6,10 +6,6 @@
     "datenWerdenGeladen": "Daten werden geladen"
   },
   "composables": {
-    "saveLeave": {
-      "title": "Ungespeicherte Änderungen",
-      "text": "Es sind ungespeicherte Änderungen vorhanden. Wollen Sie die Seite verlassen?"
-    },
     "rules": {
       "required": "Pflichtfeld",
       "mail": "Gültige E-Mail eingeben",
