@@ -44,7 +44,7 @@
     <maven.compiler.release>${java.version}</maven.compiler.release>
 
     <!-- Utility -->
-    <refarch-tools.version>1.3.0</refarch-tools.version>
+    <refarch-tools.version>1.4.0</refarch-tools.version>
 
     <!-- Linting & Formatting -->
     <spotless-maven-plugin.version>3.9.0</spotless-maven-plugin.version>
