@@ -23,7 +23,7 @@
             cols="2"
           >
             <v-btn
-              color="error"
+              color="confirmDelete"
               @click="deleteRequested"
               >{{ t("components.konflikteTable.buttons.loeschen") }}</v-btn
             >

@@ -28,7 +28,7 @@
           </v-btn>
           <v-btn
             v-if="konfiguration.action === BEARBEIGUNGS_MODUS.EDIT_MODUS"
-            color="green"
+            color="action"
             :loading="isAnimation"
             type="submit"
           >

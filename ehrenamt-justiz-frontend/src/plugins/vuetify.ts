@@ -24,18 +24,22 @@ export default createVuetify({
         colors: {
           primary: "#333333",
           secondary: "#FFCC00",
-          accent: "#7BA4D9",
+          accent: "#0B4DA2", //  originally ‘accent: ’#7BA4D9" but changed for accessibility reasons
           success: "#69BE28",
           error: "#FF0000",
+          confirmDelete: "#AD0000",
+          action: "#285307",
         },
       },
       dark: {
         colors: {
           primary: "#333333",
           secondary: "#FFCC00",
-          accent: "#90CAF9",
+          accent: "#0B4DA2", //  originally ‘accent: ’#90CAF9" but changed for accessibility reasons
           success: "#81C784",
           error: "#E57373",
+          confirmDelete: "#FF8A8A",
+          action: "#285307",
         },
       },
     },

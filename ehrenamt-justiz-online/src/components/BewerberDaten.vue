@@ -9,7 +9,6 @@
       <v-row density="compact">
         <muc-input
           v-model="onlineBewerbungFormData.vorname"
-          :placeholder="t('bewerberDaten.vorname.label')"
           :label="t('bewerberDaten.vorname.label')"
           :required="true"
           :error-msg="errorMsgVorname"
@@ -19,7 +18,6 @@
       <v-row density="compact">
         <muc-input
           v-model="onlineBewerbungFormData.nachname"
-          :placeholder="t('bewerberDaten.nachname.label')"
           :label="t('bewerberDaten.nachname.label')"
           :required="true"
           :error-msg="errorMsgNachname"
@@ -29,7 +27,6 @@
       <v-row density="compact">
         <muc-input
           v-model="onlineBewerbungFormData.geburtsdatum"
-          :placeholder="t('bewerberDaten.geburtsdatum.label')"
           :label="t('bewerberDaten.geburtsdatum.label')"
           :required="true"
           type="date"
@@ -40,7 +37,6 @@
       <v-row density="compact">
         <muc-input
           v-model="onlineBewerbungFormData.beruf"
-          :placeholder="t('bewerberDaten.beruf.label')"
           :label="t('bewerberDaten.beruf.label')"
           :required="true"
           :error-msg="errorMsgBeruf"
@@ -50,7 +46,6 @@
       <v-row density="compact">
         <muc-input
           v-model="onlineBewerbungFormData.telefonnummer"
-          :placeholder="t('bewerberDaten.telefonnummer.label')"
           :label="t('bewerberDaten.telefonnummer.label')"
           :error-msg="errorMsgTelefonnummer"
           max="255"
@@ -59,7 +54,6 @@
       <v-row density="compact">
         <muc-input
           v-model="onlineBewerbungFormData.mail"
-          :placeholder="t('bewerberDaten.mail.placeholder')"
           :label="t('bewerberDaten.mail.label')"
           :required="true"
           :error-msg="errorMsgMail"
