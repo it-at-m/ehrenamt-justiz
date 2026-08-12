@@ -14,59 +14,59 @@ import { onBeforeRouteLeave, onBeforeRouteUpdate } from "vue-router";
  */
 
 export function useSaveLeave(isDirty: MaybeRefOrGetter<boolean>) {
-    const showDialog = ref(false);
+  const showDialog = ref(false);
 
-    const pendingNavigationDecision = ref<
-        ((allowNavigation: boolean) => void) | null
-    >(null);
+  const pendingNavigationDecision = ref<
+    ((allowNavigation: boolean) => void) | null
+  >(null);
 
-    function onBeforeRouteChange() {
-        if (!toValue(isDirty)) {
-            showDialog.value = false;
-            return true;
-        } else {
-            showDialog.value = true;
-            return new Promise<boolean>((resolve) => {
-                pendingNavigationDecision.value?.(false);
-                pendingNavigationDecision.value = resolve;
-            });
-        }
-    }
-
-    onBeforeRouteLeave(onBeforeRouteChange);
-    onBeforeRouteUpdate(onBeforeRouteChange);
-
-    function cancel(): void {
-        showDialog.value = false;
+  function onBeforeRouteChange() {
+    if (!toValue(isDirty)) {
+      showDialog.value = false;
+      return true;
+    } else {
+      showDialog.value = true;
+      return new Promise<boolean>((resolve) => {
         pendingNavigationDecision.value?.(false);
-        pendingNavigationDecision.value = null;
+        pendingNavigationDecision.value = resolve;
+      });
+    }
+  }
+
+  onBeforeRouteLeave(onBeforeRouteChange);
+  onBeforeRouteUpdate(onBeforeRouteChange);
+
+  function cancel(): void {
+    showDialog.value = false;
+    pendingNavigationDecision.value?.(false);
+    pendingNavigationDecision.value = null;
+  }
+
+  function leave(): void {
+    showDialog.value = false;
+    pendingNavigationDecision.value?.(true);
+    pendingNavigationDecision.value = null;
+  }
+
+  function onBeforeUnload(event: BeforeUnloadEvent) {
+    if (!toValue(isDirty)) {
+      return;
     }
 
-    function leave(): void {
-        showDialog.value = false;
-        pendingNavigationDecision.value?.(true);
-        pendingNavigationDecision.value = null;
-    }
+    event.preventDefault();
+  }
 
-    function onBeforeUnload(event: BeforeUnloadEvent) {
-        if (!toValue(isDirty)) {
-            return;
-        }
+  onMounted(() => {
+    window.addEventListener("beforeunload", onBeforeUnload);
+  });
 
-        event.preventDefault();
-    }
+  onUnmounted(() => {
+    window.removeEventListener("beforeunload", onBeforeUnload);
+  });
 
-    onMounted(() => {
-        window.addEventListener("beforeunload", onBeforeUnload);
-    });
-
-    onUnmounted(() => {
-        window.removeEventListener("beforeunload", onBeforeUnload);
-    });
-
-    return {
-        showDialog,
-        cancel,
-        leave,
-    };
+  return {
+    showDialog,
+    cancel,
+    leave,
+  };
 }

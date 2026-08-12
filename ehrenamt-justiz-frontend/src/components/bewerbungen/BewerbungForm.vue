@@ -764,8 +764,12 @@
   </v-form>
   <yes-no-dialog
     v-model="showDialog"
-    :dialogtitle="t('components.bewerbungForm.saveLeaveDialog.unsavedChangesDialogTitle')"
-    :dialogtext="t('components.bewerbungForm.saveLeaveDialog.unsavedChangesDialogText')"
+    :dialogtitle="
+      t('components.bewerbungForm.saveLeaveDialog.unsavedChangesDialogTitle')
+    "
+    :dialogtext="
+      t('components.bewerbungForm.saveLeaveDialog.unsavedChangesDialogText')
+    "
     @no="abbruch"
     @yes="cancel"
   />
@@ -878,10 +882,13 @@ const geschlechtswerte: string[] = [
 ];
 
 const abbruchOderSpeichern = ref(false);
-const isDirty = computed(() => (props.modelValue.status == PERSONENSTATUS.STATUS_INERFASSUNG) && !abbruchOderSpeichern.value);
+const isDirty = computed(
+  () =>
+    props.modelValue.status == PERSONENSTATUS.STATUS_INERFASSUNG &&
+    !abbruchOderSpeichern.value
+);
 
 const { cancel, showDialog } = useSaveLeave(isDirty);
-
 
 function validieren(): void {
   form.value?.validate();
