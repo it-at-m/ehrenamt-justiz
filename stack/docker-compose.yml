@@ -238,7 +238,7 @@ services:
   aenderungsservice:
     profiles:
       - aenderungsservice
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice:dev@sha256:ec315a76dcd2fe6a23e3b46f83ed7440bae135fb2344e05065294356466d422e
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice:dev@sha256:c46a9d6f0491122c91d7695970bc2f4695c2627beca747d4738798f9be604cc0
     volumes:
       - ../ehrenamt-justiz-aenderungsservice/src/main/resources/truststore.jks:/etc/ssl/truststore.jks
       - ../ehrenamt-justiz-aenderungsservice/src/main/resources/kafka-auth-keystore.jks:/etc/ssl/kafka-auth-keystore.jks
