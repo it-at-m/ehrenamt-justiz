@@ -371,8 +371,8 @@
         "dateiDurchsuchen": "Datei durchsuchen"
       },
       "saveLeaveDialog": {
-        "dialogtitle": "Sie erfassen gerade eine neue Bewerbung",
-        "dialogtext": "Erfassung der Bewerbung fortsetzen?"
+        "unsavedChangesDialogTitle": "Sie erfassen gerade eine neue Bewerbung",
+        "unsavedChangesDialogText": "Erfassung der Bewerbung fortsetzen?"
       },
       "speichern": {
         "errorMessage": "Die Eingabe ist fehlerhaft!"
