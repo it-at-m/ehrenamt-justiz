@@ -763,9 +763,13 @@
     </v-tabs-window>
   </v-form>
   <yes-no-dialog
-    v-model="saveLeaveDialog"
-    :dialogtitle="t('components.bewerbungForm.saveLeaveDialog.dialogtitle')"
-    :dialogtext="t('components.bewerbungForm.saveLeaveDialog.dialogtext')"
+    v-model="showDialog"
+    :dialogtitle="
+      t('components.bewerbungForm.saveLeaveDialog.unsavedChangesDialogTitle')
+    "
+    :dialogtext="
+      t('components.bewerbungForm.saveLeaveDialog.unsavedChangesDialogText')
+    "
     @no="abbruch"
     @yes="cancel"
   />
@@ -802,7 +806,7 @@ import {
 import AuthService from "@/api/AuthService";
 import YesNoDialog from "@/components/common/YesNoDialog.vue";
 import { useRules } from "@/composables/rules";
-import { useSaveLeave } from "@/composables/saveLeave";
+import { useSaveLeave } from "@/composables/useSaveLeave";
 import {
   BEARBEIGUNGS_MODUS,
   PERSONENSTATUS,
@@ -878,16 +882,13 @@ const geschlechtswerte: string[] = [
 ];
 
 const abbruchOderSpeichern = ref(false);
-const { cancel, saveLeaveDialog } = useSaveLeave(isDirty);
-
-function isDirty(): boolean {
-  // Switching the menu during the new-entry of a person must be prevented, as otherwise
-  // an application remains in the status “INERFASSUNG”
-  return (
+const isDirty = computed(
+  () =>
     props.modelValue.status == PERSONENSTATUS.STATUS_INERFASSUNG &&
     !abbruchOderSpeichern.value
-  );
-}
+);
+
+const { cancel, showDialog } = useSaveLeave(isDirty);
 
 function validieren(): void {
   form.value?.validate();
