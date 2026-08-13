@@ -47,7 +47,7 @@
         <v-btn
           :disabled="konflikteVorhanden()"
           :loading="isSavingAnimation"
-          color="green"
+          color="action"
           type="submit"
         >
           {{ t("components.konflikteLoesenForm.buttons.speichern") }}

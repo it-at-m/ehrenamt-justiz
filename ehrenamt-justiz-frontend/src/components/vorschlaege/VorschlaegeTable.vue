@@ -28,7 +28,7 @@
                 !user.authorities.includes('DELETE_EHRENAMTJUSTIZDATEN') ||
                 selectedUUIDs.length == 0
               "
-              color="error"
+              color="confirmDelete"
               @click="deleteRequested"
               >{{ t("components.vorschlaegeTable.buttons.loeschen") }}</v-btn
             >

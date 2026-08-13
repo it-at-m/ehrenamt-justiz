@@ -52,7 +52,7 @@
         </v-btn>
         <v-btn
           v-if="bewerbung.action === BEARBEIGUNGS_MODUS.EDIT_MODUS"
-          color="green"
+          color="action"
           :loading="isAnimation"
           type="submit"
         >
@@ -1002,7 +1002,7 @@ const bewerbung = computed({
 <style>
 /*Damit die Fehlermeldung bei den disabled-Felder auch rot angezeigt wird:*/
 .v-input__details * {
-  color: red !important;
+  color: rgb(var(--v-theme-error)) !important;
   font-weight: bold !important;
 }
 </style>
