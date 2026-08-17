@@ -176,7 +176,7 @@ services:
 
   # If the backend is to be started in the Docker-Compose, the following command must be executed at startup:
   # docker-compose --profile=backend up
-  # oder e.g.:
+  # or e.g.:
   # docker-compose --profile=backend --profile=frontend --profile=online --profile=aenderungsservice --profile=eai u
   backend:
     profiles:
@@ -195,7 +195,7 @@ services:
 
   # If the frontend is to be started in the Docker-Compose, the following command must be executed at startup:
   # docker-compose --profile=frontend up
-  # oder e.g.:
+  # or e.g.:
   # docker-compose --profile=backend --profile=frontend --profile=online --profile=aenderungsservice --profile=eai up
   frontend:
     profiles:
@@ -208,7 +208,7 @@ services:
 
   # If the online app is to be started in the Docker-Compose, the following command must be executed at startup:
   # docker-compose --profile=online up
-  # oder e.g.:
+  # or e.g.:
   # docker-compose --profile=backend --profile=frontend --profile=online --profile=aenderungsservice --profile=eai up
   online:
     profiles:
@@ -223,7 +223,7 @@ services:
   # the necessary certificates are integrated. See documentation there.
   # If the EAI is to be started in the Docker-Compose, the following command must be executed at startup:
   # docker-compose --profile=eai up
-  # oder e.g.:
+  # or e.g.:
   # docker-compose --profile=backend --profile=frontend --profile=online --profile=aenderungsservice --profile=eai up
   eai:
     profiles:
@@ -245,7 +245,7 @@ services:
 
   # If the Änderungsservice is to be started in the Docker-Compose, the following command must be executed at startup:
   # docker-compose --profile=aenderungsservice up
-  # oder e.g.:
+  # or e.g.:
   # docker-compose --profile=backend --profile=frontend --profile=online --profile=aenderungsservice --profile=eai up
   aenderungsservice:
     profiles:
@@ -268,8 +268,8 @@ services:
       test: ["CMD-SHELL", "curl http://localhost:8087/actuator/health/liveness"]
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      KEY_STORE_PASSWORD:
-      TRUST_STORE_PASSWORD:
+      KEY_STORE_PASSWORD: changeit
+      TRUST_STORE_PASSWORD: changeit
       GROUP_ID: lhm-ewo-eai-aenderungen-ehrenamt-justiz-testDocker00204
 
 networks:
