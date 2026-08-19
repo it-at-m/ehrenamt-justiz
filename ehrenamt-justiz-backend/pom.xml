@@ -304,6 +304,9 @@
                         <compilerArg>
                             -Amapstruct.defaultComponentModel=spring
                         </compilerArg>
+                        <compilerArg>
+                            -Amapstruct.unmappedTargetPolicy=ERROR
+                        </compilerArg>
                     </compilerArgs>
                 </configuration>
             </plugin>
