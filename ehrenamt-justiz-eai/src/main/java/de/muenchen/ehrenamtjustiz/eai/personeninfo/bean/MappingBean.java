@@ -44,7 +44,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-@SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.NPathComplexity", "PMD.CouplingBetweenObjects" })
+@SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.NPathComplexity" })
 public class MappingBean {
 
     @Value("${ewo.eai.benutzerid:ehrju}")
