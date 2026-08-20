@@ -110,7 +110,7 @@ class IntegrationsTest {
                 .expectBody(String.class)
                 .value(responseBody -> {
 
-                    assert responseBody != null;
+                    assertNotNull(responseBody);
                     final EWOBuerger ewoBuerger = objectMapper.readValue(responseBody, EWOBuerger.class);
 
                     assertEquals("Wimtest-zwei-ohne-Pass", ewoBuerger.getFamilienname());
@@ -185,7 +185,7 @@ class IntegrationsTest {
                     final JavaType type = objectMapper.getTypeFactory()
                             .constructCollectionType(List.class, EWOBuerger.class);
 
-                    assert responseBody != null;
+                    assertNotNull(responseBody);
                     final List<EWOBuerger> ewoBuergers = objectMapper.readValue(responseBody, type);
 
                     assertEquals("162015022725", ewoBuergers.getFirst().getOrdnungsmerkmal());
