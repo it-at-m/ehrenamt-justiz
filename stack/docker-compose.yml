@@ -11,7 +11,7 @@ x-security-settings: &security_settings
 
 services:
   postgres:
-    image: postgres:17.4-alpine3.20@sha256:67c27fd3b866e5e3da543b37c70654a13d45d5c4bcb3a2cd9b2813a5c9e167dd
+    image: postgres:17.5-alpine3.20@sha256:ccd14e0306cef4c2943a4bda5a2c6a77201a426eb2576d888e5cdc28ccddca75
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: admin
@@ -181,7 +181,7 @@ services:
   backend:
     profiles:
       - backend
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:dev@sha256:ccfa8716bdcb696d9e5b992d00701cbb9768ac4d915a28175c01057cf350d728
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:dev@sha256:e530fd95aedbf70d63b143745be7dad9e6135df66cceab193344c0bc9cb7317e
     environment:
       SPRING_PROFILES_ACTIVE: docker,keycloak-permissions
     ports:
@@ -200,7 +200,7 @@ services:
   frontend:
     profiles:
       - frontend
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:dev@sha256:240e4f6ba7995f6073ec01c311584172e9d7ff6f2aed0c60541f1a55a8d604ca
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:dev@sha256:e655d018dfb2d659d110e64700fefc5b246961387dfcb0453327cfb9bb000444
     ports:
       - "8081:8080"
     networks:
@@ -213,7 +213,7 @@ services:
   online:
     profiles:
       - online
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:dev@sha256:8f4bf32fd4fa927775f09abcfd1ca787ab32adc2cfa23d0ad58e5840ebbaab20
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:dev@sha256:e015f97bfec8a9e42c2b2a0ca0cbfa35a381c4e2bcfc955e91aaf4e12c14407b
     ports:
       - "8082:8080"
     networks:
@@ -228,7 +228,7 @@ services:
   eai:
     profiles:
       - eai
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai:dev@sha256:7b85b097da5072ca489218c31cd435ca682385fb9381e96a5b52b8a90d824fca
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai:dev@sha256:435cbf65e12a65f1b2d90da958cb6ded88676cdd8b49ea89194e69aa28e9b76a
     volumes:
       - ../ehrenamt-justiz-eai/entrypoint.sh:/usr/local/bin/entrypoint.sh:rwx
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
@@ -250,7 +250,7 @@ services:
   aenderungsservice:
     profiles:
       - aenderungsservice
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice:dev@sha256:c46a9d6f0491122c91d7695970bc2f4695c2627beca747d4738798f9be604cc0
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice:dev@sha256:40b27cef2e84055fb976c595f8aafb131bef20a7753b900afd700efca5860709
     volumes:
       - ../ehrenamt-justiz-aenderungsservice/src/main/resources/truststore.jks:/etc/ssl/truststore.jks
       - ../ehrenamt-justiz-aenderungsservice/src/main/resources/kafka-auth-keystore.jks:/etc/ssl/kafka-auth-keystore.jks
