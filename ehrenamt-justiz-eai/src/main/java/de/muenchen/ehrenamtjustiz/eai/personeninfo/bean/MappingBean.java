@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 import javax.xml.datatype.XMLGregorianCalendar;
 import org.apache.camel.Header;
 import org.apache.cxf.message.MessageContentsList;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -47,10 +47,13 @@ import org.springframework.stereotype.Component;
 @SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.NPathComplexity", "PMD.CouplingBetweenObjects" })
 public class MappingBean {
 
+    @Value("${ewo.eai.benutzerid:ehrju}")
+    private String benutzerid;
+
     public LesePersonErweitert.Anfrage toEWOLesen(@Header("om") final String om) {
         final LesePersonErweitert.Anfrage anfrage = new LesePersonErweitert.Anfrage();
         final BenutzerType benutzerType = new BenutzerType();
-        benutzerType.setBenutzerId(SecurityContextHolder.getContext().getAuthentication().getName());
+        benutzerType.setBenutzerId(benutzerid);
         anfrage.setBenutzer(benutzerType);
         anfrage.setOm(om);
         return anfrage;
@@ -85,9 +88,7 @@ public class MappingBean {
 
         final SuchePersonErweitert.Anfrage suchAnfrage = new SuchePersonErweitert.Anfrage();
         final BenutzerType benutzerType = new BenutzerType();
-        if (SecurityContextHolder.getContext() != null && SecurityContextHolder.getContext().getAuthentication() != null) {
-            benutzerType.setBenutzerId(SecurityContextHolder.getContext().getAuthentication().getName());
-        }
+        benutzerType.setBenutzerId(benutzerid);
         suchAnfrage.setBenutzer(benutzerType);
         suchAnfrage.setSuchkriterien(suchkriterien);
 
@@ -100,9 +101,8 @@ public class MappingBean {
 
         if (sucheErgebnis != null) {
 
-            if (sucheErgebnis.getFirst() instanceof SuchePersonErweitertResponse.AntwortErweitert) {
+            if (sucheErgebnis.getFirst() instanceof SuchePersonErweitertResponse.AntwortErweitert antwortErweitert) {
 
-                final SuchePersonErweitertResponse.AntwortErweitert antwortErweitert = (SuchePersonErweitertResponse.AntwortErweitert) sucheErgebnis.getFirst();
                 final List<PersonErweitert> personenErweitert = antwortErweitert.getPersonErweitert();
                 if (personenErweitert.isEmpty()) {
                     throw new PersonNotFoundException(null, "Kein Ergebnis für Suchanfrage");

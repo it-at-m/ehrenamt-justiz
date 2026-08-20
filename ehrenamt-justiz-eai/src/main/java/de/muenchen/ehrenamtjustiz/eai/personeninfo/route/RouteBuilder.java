@@ -5,7 +5,6 @@ import de.muenchen.ehrenamtjustiz.eai.personeninfo.config.Configuration;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.config.Konstanten;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.exception.DefaultErrorProjection;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.exception.Fehler;
-import java.nio.charset.StandardCharsets;
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.model.rest.RestBindingMode;
@@ -140,7 +139,6 @@ public class RouteBuilder extends BasicRouteBuilder {
                 .bean(BEAN_MAPPER, "toEWOLesen").id("mapToEWOLesen")
                 .enrich(EP_SEND_TO_EWO_PERSONENINFO, new ReplaceOldBodyStrategy())
                 .setHeader(Exchange.CONTENT_TYPE, constant(MediaType.APPLICATION_JSON_VALUE))
-                .setHeader(Exchange.CONTENT_ENCODING, constant(StandardCharsets.UTF_8))
                 .bean(BEAN_MAPPER, "fromEWOLesen").id("mapFromEWOLesen")
         ;
 
@@ -157,7 +155,6 @@ public class RouteBuilder extends BasicRouteBuilder {
                 .bean(BEAN_MAPPER, "toEWOSuche").id("mapToEWOSuche")
                 .enrich(EP_SEND_TO_EWO_PERSONENINFO_SUCHE, new ReplaceOldBodyStrategy())
                 .setHeader(Exchange.CONTENT_TYPE, constant(MediaType.APPLICATION_JSON_VALUE))
-                .setHeader(Exchange.CONTENT_ENCODING, constant(StandardCharsets.UTF_8))
                 .bean(BEAN_MAPPER, "fromEWOSuche").id("mapFromEWOSuche")
         ;
 

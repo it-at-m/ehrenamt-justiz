@@ -5,9 +5,14 @@ spring:
     name: @project.artifactId@
     group: @project.groupId@
     version: @project.version@
+  web:
+    error:
+      whitelabel:
+        enabled: false
   jackson:
-    serialization:
-      write-dates-as-timestamps: false
+    datatype:
+      datetime:
+        write-dates-as-timestamps: false
   lifecycle:
     timeout-per-shutdown-phase: 1m # Graceful shutdown: Zusätzlich kann man eine Zeitverzögerung für das Herunterfahren setzen
 
@@ -31,10 +36,6 @@ api:
     charsetName: UTF-8
     loggerName: "de.muenchen.ehrenamtjustiz.eai.personeninfo.filter.RequestResponseLoggingFilter"
 
-camel:
-  servlet:
-    mapping:
-      context-path: ${service.rest.basepath}/*
 
 service:
   rest:
@@ -86,22 +87,30 @@ management:
   endpoint:
     health:
       access: read_only
-      probes:
-        enabled: true
     info:
+      access: read_only
+    prometheus:
       access: read_only
     sbom:
       access: read_only
-  context-path: "/actuator"
   info:
-    env.enabled: true
-    java.enabled: true
-    build.enabled: true
-  health:
-    livenessstate:
+    env:
       enabled: true
-    readinessstate:
+    camel:
+      enabled: false
+    java:
       enabled: true
+    build:
+      enabled: true
+  otlp:
+    metrics:
+      export:
+        enabled: false
+  context-path: "/actuator"
 
 server:
   shutdown: "graceful"
+
+ewo:
+  eai:
+    benutzerid: ehrju
