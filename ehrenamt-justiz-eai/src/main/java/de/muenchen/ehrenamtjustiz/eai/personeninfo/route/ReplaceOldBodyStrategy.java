@@ -1,5 +1,6 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo.route;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.camel.AggregationStrategy;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
@@ -10,6 +11,7 @@ public class ReplaceOldBodyStrategy implements AggregationStrategy {
     private static final Logger LOG = LoggerFactory.getLogger(ReplaceOldBodyStrategy.class);
 
     @Override
+    @SuppressFBWarnings("NP_PARAMETER_MUST_BE_NONNULL_BUT_MARKED_AS_NULLABLE")
     public Exchange aggregate(final Exchange oldExchange, final Exchange newExchange) {
         final Message oldMessage = this.getMessageContainingBody(oldExchange);
         final Message newMessage = this.getMessageContainingBody(newExchange);

@@ -64,7 +64,8 @@ class FehlerWrapperTest {
 
     @Test
     void givenPersonNotFoundException_thenNotFoundStatus() {
-        final Exchange ex = createExchangeWithThrowable(new CamelExecutionException(null, null, new PersonNotFoundException("123", "Keine Person gefunden")));
+        final Exchange ex = createExchangeWithThrowable(
+                new CamelExecutionException("PersonNotFoundException", null, new PersonNotFoundException("123", "Keine Person gefunden")));
 
         unitUnderTest.process(ex);
 
@@ -73,7 +74,7 @@ class FehlerWrapperTest {
 
     @Test
     void givenSocketTimeoutException_thenTimeoutStatus() {
-        final Exchange ex = createExchangeWithThrowable(new CamelExecutionException(null, null, new SocketTimeoutException()));
+        final Exchange ex = createExchangeWithThrowable(new CamelExecutionException("SocketTimeoutException", null, new SocketTimeoutException()));
 
         unitUnderTest.process(ex);
 
@@ -82,7 +83,7 @@ class FehlerWrapperTest {
 
     @Test
     void givenConnectException_thenTimeoutStatus() {
-        final Exchange ex = createExchangeWithThrowable(new CamelExecutionException(null, null, new ConnectException()));
+        final Exchange ex = createExchangeWithThrowable(new CamelExecutionException("ConnectException", null, new ConnectException()));
 
         unitUnderTest.process(ex);
 
@@ -91,7 +92,7 @@ class FehlerWrapperTest {
 
     @Test
     void givenNullPointerException_thenInternalServerException() {
-        final Exchange ex = createExchangeWithThrowable(new CamelExecutionException(null, null, new NullPointerException()));
+        final Exchange ex = createExchangeWithThrowable(new CamelExecutionException("NullPointerException", null, new NullPointerException()));
 
         unitUnderTest.process(ex);
 

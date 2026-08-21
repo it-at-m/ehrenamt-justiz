@@ -1,5 +1,6 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo.exception;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.http.HttpTimeoutException;
@@ -33,6 +34,7 @@ public class FehlerWrapper implements Processor {
     private static final String UNKNOWN_ERROR_MSG = "Es ist ein unbekannter Fehler aufgetreten";
 
     @Override
+    @SuppressFBWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     public void process(final Exchange exchange) {
         Throwable cause = exchange.getProperty(Exchange.EXCEPTION_CAUGHT, Throwable.class);
         LOG.info("Exception caught > ", cause);
