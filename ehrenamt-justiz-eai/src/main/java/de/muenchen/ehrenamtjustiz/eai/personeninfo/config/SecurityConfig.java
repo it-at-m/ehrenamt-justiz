@@ -8,9 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 /**
  * WebSec-configuration
@@ -19,25 +18,29 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @Component
 public class SecurityConfig {
 
+    @Value(Configuration.BASEPATH_VALUE)
+    private String basePath;
+
     @Value("${management.context-path}")
     private String managementContextPath;
 
     @Bean
-    public SecurityFilterChain filterChain(final HttpSecurity http, final HandlerMappingIntrospector introspector) throws Exception {
+    public SecurityFilterChain filterChain(final HttpSecurity http) {
         // @formatter:off
-        final MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
+        final PathPatternRequestMatcher.Builder requestMatcherBuilder = PathPatternRequestMatcher.withDefaults();
 
-        http.authorizeHttpRequests(
-                authorize -> {
-                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET,Konstanten.PERSONENINFO_SUB_PATH_EWO_SUCHE_MIT_OM+"/**")).hasAuthority("getPersoneninfo");
-                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST,Konstanten.PERSONENINFO_SUB_PATH_EWO_SUCHE+"/**")).hasAuthority("getPersoneninfo");
-                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET,  Konstanten.API_DOC_SUB_PATH)).permitAll();
-                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/info")).permitAll();
-                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/health")).permitAll();
-                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/health/readiness")).permitAll();
-                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/health/liveness")).permitAll();
-                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/sbom")).permitAll();
-                    authorize.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, managementContextPath+"/sbom/application")).permitAll();});
+        http
+                .authorizeHttpRequests((requests) -> requests.requestMatchers(
+                    requestMatcherBuilder.matcher(HttpMethod.GET,basePath + Konstanten.PERSONENINFO_SUB_PATH_EWO_SUCHE_MIT_OM+"/**"),
+                    requestMatcherBuilder.matcher(HttpMethod.POST,basePath + Konstanten.PERSONENINFO_SUB_PATH_EWO_SUCHE+"/**")).hasAuthority("getPersoneninfo"))
+                .authorizeHttpRequests((requests) -> requests.requestMatchers(
+                    requestMatcherBuilder.matcher(HttpMethod.GET,  basePath + Konstanten.API_DOC_SUB_PATH),
+                    requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/info"),
+                    requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/health"),
+                    requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/health/readiness"),
+                    requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/health/liveness"),
+                    requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/sbom"),
+                    requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/sbom/application")).permitAll());
 
         http.csrf(AbstractHttpConfigurer::disable);
         http.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
