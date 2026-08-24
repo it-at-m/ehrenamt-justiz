@@ -165,7 +165,6 @@ public class RouteBuilder extends BasicRouteBuilder {
                 .to("{{api.cxf.producer.uri.personeninfoewosuche}}")
         ;
 
-
         //@formatter:on
     }
 }
