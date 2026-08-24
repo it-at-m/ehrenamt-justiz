@@ -1,6 +1,5 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo.exception;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.http.HttpTimeoutException;
@@ -34,18 +33,17 @@ public class FehlerWrapper implements Processor {
     private static final String UNKNOWN_ERROR_MSG = "Es ist ein unbekannter Fehler aufgetreten";
 
     @Override
-    @SuppressFBWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     public void process(final Exchange exchange) {
         Throwable cause = exchange.getProperty(Exchange.EXCEPTION_CAUGHT, Throwable.class);
         LOG.info("Exception caught > ", cause);
 
-        if (cause instanceof CamelExecutionException) {
+        if (cause instanceof CamelExecutionException && cause.getCause() != null) {
             cause = cause.getCause();
             LOG.debug("internal cause of CamelExecutionException > ", cause);
         }
 
         final Fehler fehler = new Fehler();
-        fehler.setMessage(cause.getMessage());
+        fehler.setMessage(cause == null ? null : cause.getMessage());
         if (fehler.getMessage() == null) {
             fehler.setMessage(UNKNOWN_ERROR_MSG);
         }
@@ -79,6 +77,9 @@ public class FehlerWrapper implements Processor {
      */
     protected boolean isOrHasCauseClass(final Throwable throwable, final Class<? extends Throwable> causeToCheck) {
         final List<Object> causesVisited = new ArrayList<>();
+        if (throwable == null) {
+            return false;
+        }
         Throwable cause = throwable;
         do {
             if (causeToCheck.isAssignableFrom(cause.getClass())) {

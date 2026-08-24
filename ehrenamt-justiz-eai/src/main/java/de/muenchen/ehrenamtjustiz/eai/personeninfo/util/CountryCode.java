@@ -1,7 +1,6 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo.util;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 @SuppressWarnings("PMD.ExcessivePublicCount")
@@ -267,7 +266,6 @@ public enum CountryCode {
         }
     }
 
-    @SuppressWarnings("PMD.UnusedPrivateField")
     private final String name;
     private final String alpha3;
     private final int numeric;
@@ -342,8 +340,7 @@ public enum CountryCode {
      * @return The country name.
      */
     public String getName() {
-        final Locale locale = Locale.of("", getAlpha2());
-        return locale.getDisplayCountry(Locale.GERMAN);
+        return name;
     }
 
     /**
