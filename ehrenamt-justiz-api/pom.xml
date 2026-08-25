@@ -21,7 +21,7 @@
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
 
         <!-- Linting & Formatting -->
-        <spotless-maven-plugin.version>3.9.0</spotless-maven-plugin.version>
+        <spotless-maven-plugin.version>3.10.0</spotless-maven-plugin.version>
         <itm-java-codeformat.version>1.0.10</itm-java-codeformat.version>
         <pmd-maven-plugin.version>3.28.0</pmd-maven-plugin.version>
         <spotbugs-maven-plugin.version>4.10.3.0</spotbugs-maven-plugin.version>
@@ -41,10 +41,6 @@
         <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
         <argLine /> <!-- Must be empty, definition needed for integration of Jacoco and Surefire via @{argLine} lazy property evaluation -->
 
-        <!-- Spotless P2 Mirror configuration (e.g. required when using company internal registry -->
-        <p2.username /> <!-- must be empty, override via Maven settings.xml if needed -->
-        <p2.password /> <!-- must be empty, override via Maven settings.xml if needed -->
-        <p2.mirror>download.eclipse.org</p2.mirror>
     </properties>
 
     <dependencies>
@@ -196,12 +192,6 @@
                         </includes>
                         <eclipse>
                             <file>itm-java-codeformat/java_codestyle_formatter.xml</file>
-                            <p2Mirrors>
-                                <p2Mirror>
-                                    <prefix>https://download.eclipse.org</prefix>
-                                    <url>https://${p2.username}:${p2.password}@${p2.mirror}</url>
-                                </p2Mirror>
-                            </p2Mirrors>
                         </eclipse>
                         <trimTrailingWhitespace />
                         <endWithNewline />
