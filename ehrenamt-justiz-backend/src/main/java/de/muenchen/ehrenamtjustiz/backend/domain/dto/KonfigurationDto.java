@@ -2,6 +2,7 @@ package de.muenchen.ehrenamtjustiz.backend.domain.dto;
 
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Ehrenamtjustizart;
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.UUID;
 import lombok.Data;
 
@@ -16,9 +17,9 @@ public class KonfigurationDto {
 
     private boolean aktiv;
 
-    private java.time.LocalDate amtsperiodevon;
+    private LocalDate amtsperiodevon;
 
-    private java.time.LocalDate amtsperiodebis;
+    private LocalDate amtsperiodebis;
 
     private BigInteger altervon;
 

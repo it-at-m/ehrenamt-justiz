@@ -1,5 +1,6 @@
 package de.muenchen.ehrenamtjustiz.backend.domain.dto;
 
+import java.time.LocalDate;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,6 @@ public class EWOBuergerSucheDto {
 
     private String vorname;
 
-    private java.time.LocalDate geburtsdatum;
+    private LocalDate geburtsdatum;
 
 }

@@ -13,6 +13,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.math.BigInteger;
+import java.time.LocalDate;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,12 +43,12 @@ public class Konfiguration extends BaseEntity {
     @Column(name = "amtsperiodevon")
     @NotNull @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    private java.time.LocalDate amtsperiodevon;
+    private LocalDate amtsperiodevon;
 
     @Column(name = "amtsperiodebis")
     @NotNull @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    private java.time.LocalDate amtsperiodebis;
+    private LocalDate amtsperiodebis;
 
     @Column(name = "altervon")
     @NotNull private BigInteger altervon;

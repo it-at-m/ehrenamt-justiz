@@ -3,6 +3,7 @@ package de.muenchen.ehrenamtjustiz.backend.domain.dto;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import lombok.EqualsAndHashCode;
@@ -47,12 +48,12 @@ public class PersonenTableDatenDto {
 
     // because of EI_EXPOSE_REP
     public List<String> getAuskunftssperre() {
-        return new java.util.ArrayList<>(auskunftssperre);
+        return new ArrayList<>(auskunftssperre);
     }
 
     // because of EI_EXPOSE_REP
     public List<String> getKonfliktfeld() {
-        return new java.util.ArrayList<>(konfliktfeld);
+        return new ArrayList<>(konfliktfeld);
     }
 
 }

@@ -4,6 +4,9 @@ import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Status;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import lombok.Data;
 
@@ -24,7 +27,7 @@ public class PersonDto {
 
     private String vorname;
 
-    private java.time.LocalDate geburtsdatum;
+    private LocalDate geburtsdatum;
 
     private Geschlecht geschlecht;
 
@@ -54,7 +57,7 @@ public class PersonDto {
 
     private String ort;
 
-    private java.time.LocalDate inmuenchenseit;
+    private LocalDate inmuenchenseit;
 
     private String wohnungsgeber;
 
@@ -82,30 +85,30 @@ public class PersonDto {
 
     private boolean warbereitstaetigalsvorvorperiode = false;
 
-    private java.time.LocalDate bewerbungvom;
+    private LocalDate bewerbungvom;
 
     private Status status;
 
     private String bemerkung;
 
-    private java.util.List<String> auskunftssperre = new java.util.ArrayList<>();
+    private List<String> auskunftssperre = new ArrayList<>();
 
-    private java.util.List<String> konfliktfeld = new java.util.ArrayList<>();
+    private List<String> konfliktfeld = new ArrayList<>();
 
-    private java.util.List<String> staatsangehoerigkeit = new java.util.ArrayList<>();
+    private List<String> staatsangehoerigkeit = new ArrayList<>();
 
     // because of EI_EXPOSE_REP
-    public java.util.List<String> getAuskunftssperre() {
-        return new java.util.ArrayList<>(auskunftssperre);
+    public List<String> getAuskunftssperre() {
+        return new ArrayList<>(auskunftssperre);
     }
 
     // because of EI_EXPOSE_REP
-    public java.util.List<String> getKonfliktfeld() {
-        return new java.util.ArrayList<>(konfliktfeld);
+    public List<String> getKonfliktfeld() {
+        return new ArrayList<>(konfliktfeld);
     }
 
     // because of EI_EXPOSE_REP
-    public java.util.List<String> getStaatsangehoerigkeit() {
-        return new java.util.ArrayList<>(staatsangehoerigkeit);
+    public List<String> getStaatsangehoerigkeit() {
+        return new ArrayList<>(staatsangehoerigkeit);
     }
 }
