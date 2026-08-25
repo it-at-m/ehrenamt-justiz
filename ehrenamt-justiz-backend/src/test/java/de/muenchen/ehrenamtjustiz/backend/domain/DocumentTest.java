@@ -39,7 +39,7 @@ public class DocumentTest {
     @Container
     @ServiceConnection
     @SuppressWarnings("unused")
-    private static final org.testcontainers.postgresql.PostgreSQLContainer POSTGRE_SQL_CONTAINER = new PostgreSQLContainer(
+    private static final PostgreSQLContainer POSTGRE_SQL_CONTAINER = new PostgreSQLContainer(
             DockerImageName.parse(TestConstants.TESTCONTAINERS_POSTGRES_IMAGE));
 
     private UUID testEntityId;

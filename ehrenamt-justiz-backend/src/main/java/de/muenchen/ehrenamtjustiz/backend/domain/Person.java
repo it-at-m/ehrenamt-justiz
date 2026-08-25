@@ -19,7 +19,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OrderColumn;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -63,7 +66,7 @@ public class Person extends BaseEntity {
     @Column(name = "geburtsdatum")
     @NotNull @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    private java.time.LocalDate geburtsdatum;
+    private LocalDate geburtsdatum;
 
     @Column(name = "geschlecht")
     @NotNull @Enumerated(EnumType.STRING)
@@ -111,7 +114,7 @@ public class Person extends BaseEntity {
     @Column(name = "inmuenchenseit")
     @NotNull @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    private java.time.LocalDate inmuenchenseit;
+    private LocalDate inmuenchenseit;
 
     @Column(name = "wohnungsgeber")
     @Size(max = 255) private String wohnungsgeber;
@@ -156,7 +159,7 @@ public class Person extends BaseEntity {
     @Column(name = "bewerbungvom")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    private java.time.LocalDate bewerbungvom;
+    private LocalDate bewerbungvom;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
@@ -169,42 +172,42 @@ public class Person extends BaseEntity {
     @OrderColumn(name = "lfdnr")
     @CollectionTable(name = "auskunftssperre", joinColumns = { @JoinColumn(name = "personid") })
     @ElementCollection(fetch = FetchType.EAGER)
-    @Size(max = 255) private java.util.List<String> auskunftssperre = new java.util.ArrayList<>();
+    @Size(max = 255) private List<String> auskunftssperre = new ArrayList<>();
 
     @Column(name = "person_attribut")
     @OrderColumn(name = "lfdnr")
     @CollectionTable(name = "konfliktfeld", joinColumns = { @JoinColumn(name = "personid") })
     @ElementCollection(fetch = FetchType.EAGER)
-    @Size(max = 255) private java.util.List<String> konfliktfeld = new java.util.ArrayList<>();
+    @Size(max = 255) private List<String> konfliktfeld = new ArrayList<>();
 
     @Column(name = "staatsangehoerigkeit_text")
     @OrderColumn(name = "lfdnr")
     @CollectionTable(name = "staatsangehoerigkeit", joinColumns = { @JoinColumn(name = "personid") })
     @ElementCollection(fetch = FetchType.EAGER)
-    @Size(max = 255) private java.util.List<String> staatsangehoerigkeit = new java.util.ArrayList<>();
+    @Size(max = 255) private List<String> staatsangehoerigkeit = new ArrayList<>();
 
     // because of EI_EXPOSE_REP
-    public java.util.List<String> getAuskunftssperre() {
+    public List<String> getAuskunftssperre() {
         if (auskunftssperre == null) {
             return Collections.emptyList();
         }
-        return new java.util.ArrayList<>(auskunftssperre);
+        return new ArrayList<>(auskunftssperre);
     }
 
     // because of EI_EXPOSE_REP
-    public java.util.List<String> getKonfliktfeld() {
+    public List<String> getKonfliktfeld() {
         if (konfliktfeld == null) {
             return Collections.emptyList();
         }
-        return new java.util.ArrayList<>(konfliktfeld);
+        return new ArrayList<>(konfliktfeld);
     }
 
     // because of EI_EXPOSE_REP
-    public java.util.List<String> getStaatsangehoerigkeit() {
+    public List<String> getStaatsangehoerigkeit() {
         if (staatsangehoerigkeit == null) {
             return Collections.emptyList();
         }
-        return new java.util.ArrayList<>(staatsangehoerigkeit);
+        return new ArrayList<>(staatsangehoerigkeit);
     }
 
 }

@@ -6,7 +6,10 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Geschlecht;
 import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,7 +35,7 @@ public class EWOBuergerDatenDto {
 
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    private java.time.LocalDate geburtsdatum;
+    private LocalDate geburtsdatum;
 
     private Geschlecht geschlecht;
 
@@ -46,7 +49,7 @@ public class EWOBuergerDatenDto {
 
     private String familienstand;
 
-    private java.util.List<String> staatsangehoerigkeit = new java.util.ArrayList<>();
+    private List<String> staatsangehoerigkeit = new ArrayList<>();
 
     private String wohnungsgeber;
 
@@ -64,42 +67,42 @@ public class EWOBuergerDatenDto {
 
     private String adresszusatz;
 
-    private java.util.List<String> konfliktfeld = new java.util.ArrayList<>();
+    private List<String> konfliktfeld = new ArrayList<>();
 
     private String postleitzahl;
 
     private String ort;
 
-    private java.time.LocalDate inmuenchenseit;
+    private LocalDate inmuenchenseit;
 
     private Wohnungsstatus wohnungsstatus;
 
-    private java.util.List<String> auskunftssperre = new java.util.ArrayList<>();
+    private List<String> auskunftssperre = new ArrayList<>();
 
     private boolean ewoidbereitserfasst;
 
     // because of EI_EXPOSE_REP
-    public java.util.List<String> getAuskunftssperre() {
+    public List<String> getAuskunftssperre() {
         if (auskunftssperre == null) {
             return Collections.emptyList();
         }
-        return new java.util.ArrayList<>(auskunftssperre);
+        return new ArrayList<>(auskunftssperre);
     }
 
     // because of EI_EXPOSE_REP
-    public java.util.List<String> getKonfliktfeld() {
+    public List<String> getKonfliktfeld() {
         if (konfliktfeld == null) {
             return Collections.emptyList();
         }
-        return new java.util.ArrayList<>(konfliktfeld);
+        return new ArrayList<>(konfliktfeld);
     }
 
     // because of EI_EXPOSE_REP
-    public java.util.List<String> getStaatsangehoerigkeit() {
+    public List<String> getStaatsangehoerigkeit() {
         if (staatsangehoerigkeit == null) {
             return Collections.emptyList();
         }
-        return new java.util.ArrayList<>(staatsangehoerigkeit);
+        return new ArrayList<>(staatsangehoerigkeit);
     }
 
 }
