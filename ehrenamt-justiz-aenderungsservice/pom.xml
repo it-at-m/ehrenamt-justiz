@@ -289,6 +289,7 @@
             </eclipse>
             <trimTrailingWhitespace />
             <endWithNewline />
+            <shortenFullyQualifiedTypes />
             <importOrder />
             <removeUnusedImports />
             <forbidWildcardImports />
