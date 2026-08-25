@@ -181,7 +181,7 @@ services:
   backend:
     profiles:
       - backend
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:dev@sha256:e530fd95aedbf70d63b143745be7dad9e6135df66cceab193344c0bc9cb7317e
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:dev@sha256:5ec33f8176069247176365cf32b4e0497042d8a735fc0d61f11b3b3dc8197b16
     environment:
       SPRING_PROFILES_ACTIVE: docker,keycloak-permissions
     ports:
