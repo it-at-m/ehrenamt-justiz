@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.1.0</version>
+        <!-- must match the chosen Camel version in properties -> camel-spring-boot-dependencies.version, see e.g. https://central.sonatype.com/artifact/org.apache.camel.springboot/camel-spring-boot/dependencies and search for 'spring-boot-starter' -->
+        <relativePath />
+    </parent>
     <!-- ARTIFACTID muss auch in Properties file geaendert werden -->
     <groupId>de.muenchen.ehrenamt-justiz</groupId>
     <artifactId>ehrenamt-justiz-eai</artifactId>
@@ -16,26 +27,19 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    <developers>
+        <developer>
+            <email>opensource@muenchen.de</email>
+            <url>https://github.com/it-at-m</url>
+            <organization>it@M</organization>
+        </developer>
+    </developers>
     <scm>
-        <url>https://github.com/it-at-m/ehrenamt-justiz.git</url>
         <connection>scm:git:https://github.com/it-at-m/ehrenamt-justiz.git</connection>
         <developerConnection>scm:git:https://github.com/it-at-m/ehrenamt-justiz.git</developerConnection>
         <tag>HEAD</tag>
+        <url>https://github.com/it-at-m/ehrenamt-justiz.git</url>
     </scm>
-    <developers>
-        <developer>
-            <organization>it@M</organization>
-            <email>opensource@muenchen.de</email>
-            <url>https://github.com/it-at-m</url>
-        </developer>
-    </developers>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.1.0</version> <!-- must match the chosen Camel version in properties -> camel-spring-boot-dependencies.version, see e.g. https://central.sonatype.com/artifact/org.apache.camel.springboot/camel-spring-boot/dependencies and search for 'spring-boot-starter' -->
-        <relativePath />
-    </parent>
 
     <properties>
         <!-- Compilation -->
@@ -52,12 +56,14 @@
         <itm-java-codeformat.version>1.0.10</itm-java-codeformat.version>
         <pmd-maven-plugin.version>3.28.0</pmd-maven-plugin.version>
         <spotbugs-maven-plugin.version>4.10.3.0</spotbugs-maven-plugin.version>
-        <spotbugs-annotations.version>4.10.3</spotbugs-annotations.version> <!-- must match the patch version of spotbugs-maven-plugin -->
+        <!-- spotbugs-annotations.version must match the patch version of spotbugs-maven-plugin.version -->
+        <spotbugs-annotations.version>4.10.3</spotbugs-annotations.version>
         <findsecbugs-plugin.version>1.14.0</findsecbugs-plugin.version>
 
         <!-- Testing -->
         <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
-        <argLine /> <!-- Must be empty, definition needed for integration of Jacoco and Surefire via @{argLine} lazy property evaluation -->
+        <!-- argLine must be empty, definition needed for integration of Jacoco and Surefire via @{argLine} lazy property evaluation -->
+        <argLine />
         <archunit.version>1.5.0</archunit.version>
 
         <!-- Release -->
@@ -211,8 +217,8 @@
     <build>
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
                 <filtering>true</filtering>
+                <directory>src/main/resources</directory>
             </resource>
         </resources>
         <plugins>
@@ -220,9 +226,19 @@
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-codegen-plugin</artifactId>
                 <version>${cxf.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jvnet.jaxb</groupId>
+                        <artifactId>jaxb-plugins</artifactId>
+                        <version>4.0.16</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <id>generate-sources-producer</id>
+                        <goals>
+                            <goal>wsdl2java</goal>
+                        </goals>
                         <phase>generate-sources</phase>
                         <configuration>
                             <sourceRoot>${basedir}/target/generated-sources/cxf-codegen-plugin</sourceRoot>
@@ -237,18 +253,8 @@
                                 </wsdlOption>
                             </wsdlOptions>
                         </configuration>
-                        <goals>
-                            <goal>wsdl2java</goal>
-                        </goals>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.jvnet.jaxb</groupId>
-                        <artifactId>jaxb-plugins</artifactId>
-                        <version>4.0.16</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <plugin>
@@ -295,11 +301,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <argLine>
-                        @{argLine} -Dfile.encoding=${project.build.sourceEncoding}
+                    <argLine>@{argLine} -Dfile.encoding=${project.build.sourceEncoding}
                         -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
-                        -Xshare:off
-                    </argLine>
+                        -Xshare:off</argLine>
                 </configuration>
             </plugin>
             <plugin>
@@ -335,18 +339,22 @@
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
                 <version>${spotless-maven-plugin.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>de.muenchen.oss</groupId>
-                        <artifactId>itm-java-codeformat</artifactId>
-                        <version>${itm-java-codeformat.version}</version>
-                    </dependency>
-                </dependencies>
                 <configuration>
+                    <pom>
+                        <sortPom>
+                            <expandEmptyElements>false</expandEmptyElements>
+                            <spaceBeforeCloseEmptyElement>true</spaceBeforeCloseEmptyElement>
+                            <indentAttribute>all</indentAttribute>
+                            <!-- Check mit Maven Release -->
+                            <nrOfIndentSpace>4</nrOfIndentSpace>
+                        </sortPom>
+                    </pom>
                     <java>
                         <includes>
-                            <include>src/main/java/**/*.java</include> <!-- Check application code -->
-                            <include>src/test/java/**/*.java</include> <!-- Check application tests code -->
+                            <!-- Check application code -->
+                            <include>src/main/java/**/*.java</include>
+                            <!-- Check application tests code -->
+                            <include>src/test/java/**/*.java</include>
                         </includes>
                         <excludes>
                             <exclude>src/main/java/de/muenchen/ehrenamtjustiz/eai/personeninfo/config/UserDetailsServiceImpl.java</exclude>
@@ -366,6 +374,13 @@
                         <!-- Add your own Spotless suppressions, see https://github.com/diffplug/spotless/tree/main/plugin-maven#suppressing-lint-errors -->
                     </lintSuppressions>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>de.muenchen.oss</groupId>
+                        <artifactId>itm-java-codeformat</artifactId>
+                        <version>${itm-java-codeformat.version}</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <goals>
@@ -393,6 +408,13 @@
                         <ruleset>refarch-pmd-ruleset.xml</ruleset>
                     </rulesets>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>de.muenchen.oss.refarch</groupId>
+                        <artifactId>refarch-pmd</artifactId>
+                        <version>${refarch-tools.version}</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <goals>
@@ -401,18 +423,15 @@
                         </goals>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>de.muenchen.oss.refarch</groupId>
-                        <artifactId>refarch-pmd</artifactId>
-                        <version>${refarch-tools.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
                 <version>${spotbugs-maven-plugin.version}</version>
+                <configuration>
+                    <effort>Max</effort>
+                    <excludeFilterFile>spotbugs-exclude-rules.xml</excludeFilterFile>
+                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>com.h3xstream.findsecbugs</groupId>
@@ -420,10 +439,6 @@
                         <version>${findsecbugs-plugin.version}</version>
                     </dependency>
                 </dependencies>
-                <configuration>
-                    <effort>Max</effort>
-                    <excludeFilterFile>spotbugs-exclude-rules.xml</excludeFilterFile>
-                </configuration>
                 <executions>
                     <execution>
                         <goals>
