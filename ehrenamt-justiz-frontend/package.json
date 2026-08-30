@@ -27,7 +27,7 @@
     "pinia": "4.0.3",
     "vue": "3.5.41",
     "vue-router": "5.2.0",
-    "vuetify": "4.1.9",
+    "vuetify": "4.1.12",
     "sass-embedded": "1.103.1",
     "vue-i18n": "11.4.8"
   },
