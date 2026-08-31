@@ -228,7 +228,7 @@ services:
   eai:
     profiles:
       - eai
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai:dev@sha256:cc404841bbec51c12b7b1f01f430643e17d148ba660c50a9622210de3091b3bd
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai:dev@sha256:e62b498c1b7cb487fa6ab3fb7e53362eda153542a40c1acd9ed42727a7b7b3d9
     volumes:
       - ../ehrenamt-justiz-eai/entrypoint.sh:/usr/local/bin/entrypoint.sh:rwx
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
