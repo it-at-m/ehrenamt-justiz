@@ -20,81 +20,64 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Provides a Repository for {@link Person}. This Repository is exported as a REST
- * resource.
- * <p>
- * The Repository handles CRUD Operations. Every Operation is secured and takes care of the tenancy.
- * For specific Documentation on how the generated REST point behaves, please consider the Spring
- * Data Rest Reference
- * <a href="http://docs.spring.io/spring-data/rest/docs/current/reference/html/">here</a>.
- * </p>
- */
+/// Provides a Repository for [Person]. This Repository is exported as a REST resource.
+///
+/// The Repository handles CRUD Operations. Every Operation is secured and takes care of the tenancy.
+/// For specific Documentation on how the generated REST point behaves, please consider the Spring
+/// Data Rest Reference
+/// <a href="http://docs.spring.io/spring-data/rest/docs/current/reference/html/">here</a>.
+///
 @RepositoryRestResource(collectionResourceRel = "personen", path = "personen")
 @PreAuthorize(Authorities.HAS_AUTHORITY_READ_EHRENAMTJUSTIZDATEN)
 public interface PersonRepository extends PagingAndSortingRepository<Person, UUID> { //NOSONAR
 
-    /**
-     * Name for the specific cache.
-     */
+    /// Name for the specific cache.
     String CACHE = "Person_CACHE";
 
-    /**
-     * Get one specific {@link Person} by its unique id.
-     *
-     * @param id The identifier of the {@link Person}.
-     * @return The {@link Person} with the requested id.
-     */
+    /// Get one specific [Person] by its unique id.
+    ///
+    /// @param id The identifier of the [Person].
+    /// @return The [Person] with the requested id.
     @Cacheable(value = CACHE, key = "#p0")
     Optional<Person> findById(UUID id);
 
-    /**
-     * Create or update a {@link Person}.
-     * <p>
-     * If the id already exists, the {@link Person} will be overridden, hence update.
-     * If the id does not already exist, a new {@link Person} will be created, hence
-     * create.
-     * </p>
-     *
-     * @param person The {@link Person} that will be saved.
-     * @return the saved {@link Person}.
-     */
+    /// Create or update a [Person].
+    ///
+    /// If the id already exists, the [Person] will be overridden, hence update. If the id does not
+    /// already exist, a new [Person] will be created, hence create.
+    ///
+    ///
+    /// @param person The [Person] that will be saved.
+    /// @return the saved [Person].
     @CachePut(value = CACHE, key = "#p0.id")
     @PreAuthorize("permitAll")
     @RestResource(exported = false)
     @Transactional
     <S extends Person> S save(S person);
 
-    /**
-     * Create or update a collection of {@link Person}.
-     * <p>
-     * If the id already exists, the {@link Person}s will be overridden, hence update.
-     * If the id does not already exist, the new {@link Person}s will be created, hence
-     * create.
-     * </p>
-     *
-     * @param entities The {@link Person} that will be saved.
-     * @return the collection saved {@link Person}.
-     */
+    /// Create or update a collection of [Person].
+    ///
+    /// If the id already exists, the [Person]s will be overridden, hence update. If the id does not
+    /// already exist, the new [Person]s will be created, hence create.
+    ///
+    ///
+    /// @param entities The [Person] that will be saved.
+    /// @return the collection saved [Person].
     @PreAuthorize(Authorities.HAS_AUTHORITY_WRITE_EHRENAMTJUSTIZDATEN)
     @Transactional
     <S extends Person> Iterable<S> saveAll(Iterable<S> entities);
 
-    /**
-     * Delete the {@link Person} by a specified id.
-     *
-     * @param id the unique id of the {@link Person} that will be deleted.
-     */
+    /// Delete the [Person] by a specified id.
+    ///
+    /// @param id the unique id of the [Person] that will be deleted.
     @CacheEvict(value = CACHE, key = "#p0")
     @PreAuthorize(Authorities.HAS_AUTHORITY_DELETE_EHRENAMTJUSTIZDATEN)
     @Transactional
     void deleteById(UUID id);
 
-    /**
-     * Delete a {@link Person} by entity.
-     *
-     * @param entity The {@link Person} that will be deleted.
-     */
+    /// Delete a [Person] by entity.
+    ///
+    /// @param entity The [Person] that will be deleted.
     @CacheEvict(value = CACHE, key = "#p0.id")
     @PreAuthorize(Authorities.HAS_AUTHORITY_DELETE_EHRENAMTJUSTIZDATEN)
     @Transactional
@@ -105,19 +88,15 @@ public interface PersonRepository extends PagingAndSortingRepository<Person, UUI
     @Transactional
     void deleteInErfassung(@Param("id") UUID id);
 
-    /**
-     * Delete multiple {@link Person} entities by their id.
-     *
-     * @param entities The Iterable of {@link Person} that will be deleted.
-     */
+    /// Delete multiple [Person] entities by their id.
+    ///
+    /// @param entities The Iterable of [Person] that will be deleted.
     @CacheEvict(value = CACHE, allEntries = true)
     @PreAuthorize(Authorities.HAS_AUTHORITY_DELETE_EHRENAMTJUSTIZDATEN)
     @Transactional
     void deleteAll(Iterable<? extends Person> entities);
 
-    /**
-     * Delete all {@link Person} entities.
-     */
+    /// Delete all [Person] entities.
     @CacheEvict(value = CACHE, allEntries = true)
     @PreAuthorize(Authorities.HAS_AUTHORITY_DELETE_EHRENAMTJUSTIZDATEN)
     @Transactional

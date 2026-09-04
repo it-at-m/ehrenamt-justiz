@@ -19,13 +19,11 @@ public final class EWOBuergerComparer {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
-    /**
-     * Get attributes with conflict. Compare with EWO-data
-     *
-     * @param currentBuerger Daten aus EJ
-     * @param newBuerger Daten aus EWO
-     * @return Liste von Konfliktfeldern
-     */
+    /// Get attributes with conflict. Compare with EWO-data
+    ///
+    /// @param currentBuerger Daten aus EJ
+    /// @param newBuerger Daten aus EWO
+    /// @return Liste von Konfliktfeldern
     public static List<String> getConflictFields(final EWOBuergerDatenDto currentBuerger, final EWOBuergerDatenDto newBuerger) {
 
         final List<String> conflictingFields = new ArrayList<>();

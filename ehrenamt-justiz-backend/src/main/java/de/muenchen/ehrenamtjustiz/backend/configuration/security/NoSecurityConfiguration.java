@@ -9,9 +9,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
-/**
- * Configures the security context to not require any authorization for incoming requests.
- */
+/// Configures the security context to not require any authorization for incoming requests.
 @Configuration
 @Profile("no-security")
 @EnableWebSecurity

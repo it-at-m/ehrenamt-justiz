@@ -16,19 +16,15 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 @Configuration
 public class SpringRestConfiguration implements RepositoryRestConfigurer {
 
-    /**
-     * The method returns a {@link Validator} to get correct validation error messages.
-     *
-     * @return A {@link LocalValidatorFactoryBean} to get correct validation error messages.
-     */
+    /// The method returns a [Validator] to get correct validation error messages.
+    ///
+    /// @return A [LocalValidatorFactoryBean] to get correct validation error messages.
     @Bean
     public Validator validator() {
         return new LocalValidatorFactoryBean();
     }
 
-    /**
-     * See {@link RepositoryRestConfigurer#configureRepositoryRestConfiguration}
-     */
+    /// See [RepositoryRestConfigurer#configureRepositoryRestConfiguration]
     @Override
     public void configureRepositoryRestConfiguration(final RepositoryRestConfiguration config, final CorsRegistry corsRegistry) {
         config.setRepositoryDetectionStrategy(RepositoryDetectionStrategies.DEFAULT);
@@ -36,9 +32,7 @@ public class SpringRestConfiguration implements RepositoryRestConfigurer {
         config.exposeIdsFor(Konfiguration.class, Person.class, Document.class);
     }
 
-    /**
-     * See {@link RepositoryRestConfigurer#configureValidatingRepositoryEventListener}
-     */
+    /// See [RepositoryRestConfigurer#configureValidatingRepositoryEventListener]
     @Override
     public void configureValidatingRepositoryEventListener(final ValidatingRepositoryEventListener validatingListener) {
         validatingListener.addValidator("afterCreate", validator());

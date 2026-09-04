@@ -16,15 +16,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-/**
- * Class used for defining the camel-route.<br>
- * Defines the following rest-endpoints:
- * <ul>
- * <li>GET /eairoutes/ewosuchemitom/{om} Get citizen by id
- * <li>POST /eairoutes/ewosuche search for citizens
- * </ul>
- *
- */
+/// Class used for defining the camel-route. Defines the following rest-endpoints:
+///
+/// - GET /eairoutes/ewosuchemitom/{om} Get citizen by id
+/// - POST /eairoutes/ewosuche search for citizens
+///
 @Component
 @SuppressWarnings("CPD-START")
 public class RouteBuilder extends BasicRouteBuilder {
@@ -37,14 +33,10 @@ public class RouteBuilder extends BasicRouteBuilder {
 
     private static final String BEAN_MAPPER = "mappingBean";
 
-    /**
-     * Version of the schema to be displayed in the API description
-     */
+    /// Version of the schema to be displayed in the API description
     @Value("${api.api.schema-version:unknownSchemaVersion}")
     private String schemaVersion;
-    /**
-     * Version of the service to be displayed in the API description
-     */
+    /// Version of the service to be displayed in the API description
     @Value("${api.api.service-version:unknownServiceVersion}")
     private String serviceVersion;
 
@@ -54,13 +46,11 @@ public class RouteBuilder extends BasicRouteBuilder {
     @Value("${server.port:8080}")
     private int port;
 
-    /**
-     * Init Routebuilder
-     *
-     * @param doInterceptFrom To activate the Logging-Intercepter
-     * @param doProcesstimeLogging To log outputs for time measurements
-     * @param doTracing To activate the Camel Tracer
-     */
+    /// Init Routebuilder
+    ///
+    /// @param doInterceptFrom To activate the Logging-Intercepter
+    /// @param doProcesstimeLogging To log outputs for time measurements
+    /// @param doTracing To activate the Camel Tracer
     @Autowired
     @SuppressWarnings("PMD.ConstructorCallsOverridableMethod")
     public RouteBuilder(@Value("${camel.doInterceptFrom:false}") final boolean doInterceptFrom,

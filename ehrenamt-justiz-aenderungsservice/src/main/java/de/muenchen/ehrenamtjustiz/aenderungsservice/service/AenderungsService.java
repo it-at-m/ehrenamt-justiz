@@ -47,11 +47,9 @@ public class AenderungsService {
         }
     }
 
-    /**
-     * Aufruf consume z.B. durch Unit-Test
-     *
-     * @param om EWO-OM
-     */
+    /// Aufruf consume z.B. durch Unit-Test
+    ///
+    /// @param om EWO-OM
     public HttpStatusCode consumeDirect(final String om) throws BadRequestException {
         log.debug("Änderungsservice mit EWO-OM aufgerufen: {}", om);
 

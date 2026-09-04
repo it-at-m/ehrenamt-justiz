@@ -31,12 +31,10 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-/**
- * This class represents a Person.
- * <p>
- * The entity's content will be loaded according to the reference variable.
- * </p>
- */
+/// This class represents a Person.
+///
+/// The entity's content will be loaded according to the reference variable.
+///
 @Entity
 // Definition of getter, setter, ...
 @Setter

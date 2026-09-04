@@ -37,12 +37,10 @@ public class AenderungsServiceRestController {
     @Autowired
     private final EhrenamtJustizService ehrenamtJustizService;
 
-    /**
-     * Ermitteln der Konflikte für eine Person und den Status evtl. auf KONFLIKT setzen
-     *
-     * @param om The person identifier
-     * @return HTTP status indicating success or failure
-     */
+    /// Ermitteln der Konflikte für eine Person und den Status evtl. auf KONFLIKT setzen
+    ///
+    /// @param om The person identifier
+    /// @return HTTP status indicating success or failure
     @Operation(
             summary = "Update person status auf KONFLIKT, falls Konflikte vorhanden sind",
             description = "Ermittelt die Konflikte, setzt den KONFLIKT-Status und macht einen Update auf die Tabelle Person"

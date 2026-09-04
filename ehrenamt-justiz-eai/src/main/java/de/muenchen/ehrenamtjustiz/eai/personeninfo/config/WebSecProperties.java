@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Class is used to store users and roles
- */
+/// Class is used to store users and roles
 public interface WebSecProperties {
     List<User> getUsers();
 
