@@ -29,7 +29,7 @@
     "vue-router": "5.3.0",
     "vuetify": "4.1.12",
     "sass-embedded": "1.103.1",
-    "vue-i18n": "11.4.8"
+    "vue-i18n": "11.4.10"
   },
   "devDependencies": {
     "@cyclonedx/cyclonedx-npm": "5.0.0",

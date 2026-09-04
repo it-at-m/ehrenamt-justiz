@@ -25,7 +25,7 @@
     "pinia": "4.0.3",
     "vue": "3.5.42",
     "vuetify": "4.1.12",
-    "vue-i18n": "11.4.8"
+    "vue-i18n": "11.4.10"
   },
   "devDependencies": {
     "@cyclonedx/cyclonedx-npm": "5.0.0",
