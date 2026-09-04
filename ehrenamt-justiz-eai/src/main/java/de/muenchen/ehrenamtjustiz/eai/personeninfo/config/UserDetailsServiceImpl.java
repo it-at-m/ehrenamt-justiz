@@ -10,9 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-/**
- * Class is used to load user data (user, password, roles). Used for authentication
- */
+/// Class is used to load user data (user, password, roles). Used for authentication
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class UserDetailsServiceImpl implements org.springframework.security.core.userdetails.UserDetailsService {
     private static final Logger LOG = LoggerFactory.getLogger(UserDetailsServiceImpl.class);

@@ -2,15 +2,11 @@ package de.muenchen.ehrenamtjustiz.eai.personeninfo.exception;
 
 public class Fehler {
 
-    /**
-     * ID of the error that was triggered.
-     *
-     * @see InterneFehlerCodes for defined error codes
-     */
+    /// ID of the error that was triggered.
+    ///
+    /// @see InterneFehlerCodes for defined error codes
     private String id;
-    /**
-     * Additional text to the error code. Is free text that is defined by the creator of the error.
-     */
+    /// Additional text to the error code. Is free text that is defined by the creator of the error.
     private String message;
 
     public String getId() {

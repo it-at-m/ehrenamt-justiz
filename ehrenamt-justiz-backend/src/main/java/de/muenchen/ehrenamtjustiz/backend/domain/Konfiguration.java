@@ -21,7 +21,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-// Definition of getter, setter, ...
 @Getter
 @Setter
 @ToString(callSuper = true)
