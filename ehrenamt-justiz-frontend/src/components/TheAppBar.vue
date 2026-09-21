@@ -92,12 +92,13 @@
           </template>
           <span>{{ t("app.onlineHelp") }}</span>
         </v-tooltip>
-        <theme-toggle-btn />
+        <theme-toggle-btn class="mr-2" />
         <app-switcher
           v-if="appswitcherBaseUrl"
           :base-url="appswitcherBaseUrl"
           :tags="['global']"
           :icon="mdiApps"
+          class="mr-2"
         />
       </v-col>
     </v-row>
