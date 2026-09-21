@@ -1,5 +1,6 @@
 <template>
-  <v-btn
+  <v-icon-btn
+    variant="text"
     :icon="theme.global.current.value.dark ? mdiWeatherSunny : mdiWeatherNight"
     @click="toggleTheme"
   />
@@ -8,7 +9,7 @@
 <script setup lang="ts">
 import { mdiWeatherNight, mdiWeatherSunny } from "@mdi/js";
 import { useTheme } from "vuetify";
-import { VBtn } from "vuetify/components";
+import { VIconBtn } from "vuetify/components";
 
 const theme = useTheme();
 
