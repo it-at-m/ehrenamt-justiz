@@ -92,12 +92,13 @@
           </template>
           <span>{{ t("app.onlineHelp") }}</span>
         </v-tooltip>
-        <theme-toggle-btn />
+        <theme-toggle-btn class="mr-2" />
         <app-switcher
           v-if="appswitcherBaseUrl"
           :base-url="appswitcherBaseUrl"
           :tags="['global']"
-          :icon="mdiApps"
+          variant="text"
+          class="mr-2"
         />
       </v-col>
     </v-row>
@@ -106,7 +107,7 @@
 <script setup lang="ts">
 import type { HealthState } from "@/types/HealthState";
 
-import { mdiApps, mdiCircle, mdiHelp } from "@mdi/js";
+import { mdiCircle, mdiHelp } from "@mdi/js";
 import { AppSwitcher } from "@muenchen/appswitcher-vue";
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";

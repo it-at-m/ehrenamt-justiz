@@ -100,7 +100,7 @@ services:
     <<: *security_settings
 
   refarch-gateway:
-    image: ghcr.io/it-at-m/refarch/refarch-gateway:1.9.0@sha256:688b8cdd91a59fdedc8e7b36d4b8f7740b0a1020eae7a8a49ab0da6eb9f10f1d
+    image: ghcr.io/it-at-m/refarch/refarch-gateway:1.10.0@sha256:d74e6a31e2fe255989008fbf9a8d5e024bc01f418acf8c1852558e6925db9764
     depends_on:
       init-keycloak:
         condition: service_completed_successfully
@@ -111,6 +111,7 @@ services:
     environment:
       ALLOWED_ORIGINS_PUBLIC: http://localhost:*, http://keycloak:8100
       ALLOWED_ORIGINS_CLIENTS: http://localhost:*
+      SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_TRUSTED_PROXIES: .* # required for local X-Forwarded-* headers (used by Swagger UI), do not use .* in production
       SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_ID: sso
       SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_URI: http://keycloak:8100/
       SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_PREDICATES_0: Path=/api/sso/userinfo
@@ -181,7 +182,7 @@ services:
   backend:
     profiles:
       - backend
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:dev@sha256:6ddcee4da9f6cf6d12929e502add657d0f3bd044ee2654226cdf9c37a78f8c03
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-backend:dev@sha256:856a63925bf5e6b590fefc6cb6b1038d2e797a29457f46461c259aaf1f044150
     environment:
       SPRING_PROFILES_ACTIVE: docker,keycloak-permissions
     ports:
@@ -200,7 +201,7 @@ services:
   frontend:
     profiles:
       - frontend
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:dev@sha256:df88b77effe840679ad73b8818f65ad8ab81066f532a5d9666ae3109e7c6a3f8
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:dev@sha256:d04695ab8d128949b5bd5177d2f5f9fd6213b720c4991f284aabd6f648ec0199
     ports:
       - "8081:8080"
     networks:
@@ -213,7 +214,7 @@ services:
   online:
     profiles:
       - online
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:dev@sha256:c66fddb33c51a78e5a385d6c5bf6c9421be6a15e8fb91c826d851ffc21c8b651
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:dev@sha256:3e54a652752b8b5da8b31903dfb180a60e20748bdac3237ef0e3b88bf8620957
     ports:
       - "8082:8080"
     networks:
@@ -228,7 +229,7 @@ services:
   eai:
     profiles:
       - eai
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai:dev@sha256:e62b498c1b7cb487fa6ab3fb7e53362eda153542a40c1acd9ed42727a7b7b3d9
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-eai:dev@sha256:b7c228d257962cbbc75ee5d4e0efdf30002fc5fe46c1378e147178e70b16cb33
     volumes:
       - ../ehrenamt-justiz-eai/entrypoint.sh:/usr/local/bin/entrypoint.sh:rwx
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
@@ -250,7 +251,7 @@ services:
   aenderungsservice:
     profiles:
       - aenderungsservice
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice:dev@sha256:7214a223ae369a1930662b0cb0c00606c5180e835be779194ac36e81ac804989
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-aenderungsservice:dev@sha256:4c82f911848523de4b795015d97352a4219fb30ae7cdc4c1c32dafe2a81c03a0
     volumes:
       - ../ehrenamt-justiz-aenderungsservice/src/main/resources/truststore.jks:/etc/ssl/truststore.jks
       - ../ehrenamt-justiz-aenderungsservice/src/main/resources/kafka-auth-keystore.jks:/etc/ssl/kafka-auth-keystore.jks

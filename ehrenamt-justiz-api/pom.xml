@@ -41,10 +41,10 @@
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
 
         <!-- Linting & Formatting -->
-        <spotless-maven-plugin.version>3.10.1</spotless-maven-plugin.version>
+        <spotless-maven-plugin.version>3.10.2</spotless-maven-plugin.version>
         <itm-java-codeformat.version>1.0.10</itm-java-codeformat.version>
         <pmd-maven-plugin.version>3.28.0</pmd-maven-plugin.version>
-        <spotbugs-maven-plugin.version>4.10.4.0</spotbugs-maven-plugin.version>
+        <spotbugs-maven-plugin.version>4.10.4.1</spotbugs-maven-plugin.version>
         <!-- spotbugs-annotations.version must match the patch version of spotbugs-maven-plugin.version -->
         <spotbugs-annotations.version>4.10.4</spotbugs-annotations.version>
         <findsecbugs-plugin.version>1.14.0</findsecbugs-plugin.version>
@@ -52,7 +52,7 @@
         <refarch-tools.version>1.4.0</refarch-tools.version>
 
         <!-- Additional required dependencies -->
-        <lombok.version>1.18.46</lombok.version>
+        <lombok.version>1.18.48</lombok.version>
         <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
         <com.fasterxml.jackson.version>2.22.2</com.fasterxml.jackson.version>
         <jakarta.xml.bind-api.version>4.0.5</jakarta.xml.bind-api.version>

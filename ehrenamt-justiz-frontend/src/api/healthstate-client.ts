@@ -3,7 +3,7 @@ import type { HealthState } from "@/types/HealthState";
 import { defaultResponseHandler, getGETConfig } from "@/api/FetchUtils";
 
 export function checkHealth(): Promise<HealthState> {
-  return fetch("actuator/health", getGETConfig())
+  return fetch("/actuator/health", getGETConfig())
     .then((response) => {
       defaultResponseHandler(response);
       return response.json();
