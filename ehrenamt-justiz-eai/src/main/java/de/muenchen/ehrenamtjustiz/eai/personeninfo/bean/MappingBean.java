@@ -39,10 +39,7 @@ import org.apache.cxf.message.MessageContentsList;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-/**
- * Central mapping class for converting from one data type to another
- *
- */
+/// Central mapping class for converting from one data type to another
 @Component
 @SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.NPathComplexity" })
 public class MappingBean {

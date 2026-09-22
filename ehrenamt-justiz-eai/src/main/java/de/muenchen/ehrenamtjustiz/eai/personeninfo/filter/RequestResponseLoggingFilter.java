@@ -36,9 +36,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Used for Logging requests and responses
- */
+/// Used for Logging requests and responses
 @SuppressWarnings("PMD.CouplingBetweenObjects")
 public class RequestResponseLoggingFilter implements Filter {
     private String charsetName;

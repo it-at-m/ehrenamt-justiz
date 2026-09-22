@@ -8,11 +8,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 
-/**
- * The central class for configuration of all security aspects.
- * Configures all endpoints to require authentication via access token.
- * (except the Spring Boot Actuator endpoints)
- */
+/// The central class for configuration of all security aspects. Configures all endpoints to require
+/// authentication via access token. (except the Spring Boot Actuator endpoints)
 @Configuration
 public class SecurityConfiguration {
 

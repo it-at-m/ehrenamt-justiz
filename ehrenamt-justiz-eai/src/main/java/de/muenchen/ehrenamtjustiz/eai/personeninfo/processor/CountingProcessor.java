@@ -8,9 +8,7 @@ import org.apache.camel.support.processor.DelegateAsyncProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Processor for time measurements
- */
+/// Processor for time measurements
 public class CountingProcessor extends DelegateAsyncProcessor {
     private final Logger logger;
     private final NamedNode node;

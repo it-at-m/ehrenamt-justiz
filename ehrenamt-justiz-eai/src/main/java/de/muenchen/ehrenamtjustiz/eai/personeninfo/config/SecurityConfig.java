@@ -11,10 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 import org.springframework.stereotype.Component;
 
-/**
- * WebSec-configuration
- *
- */
+/// WebSec-configuration
 @Component
 public class SecurityConfig {
 

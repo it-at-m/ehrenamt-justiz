@@ -12,13 +12,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * This class represents a BuergerSucheAnfrage
- * <p>
- * Only oid and reference will be stored in the database.
- * The entity's content will be loaded according to the reference variable.
- * </p>
- */
+/// This class represents a BuergerSucheAnfrage
+///
+/// Only oid and reference will be stored in the database. The entity's content will be loaded
+/// according to the reference variable.
+///
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

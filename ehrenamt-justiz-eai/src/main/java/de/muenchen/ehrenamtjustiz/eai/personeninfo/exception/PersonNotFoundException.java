@@ -2,10 +2,7 @@ package de.muenchen.ehrenamtjustiz.eai.personeninfo.exception;
 
 import java.io.Serial;
 
-/**
- * Exception, if no person found
- *
- */
+/// Exception, if no person found
 public class PersonNotFoundException extends RuntimeException {
 
     @Serial

@@ -6,10 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Mapping the default attributes in the event of a Spring error
- *
- */
+/// Mapping the default attributes in the event of a Spring error
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

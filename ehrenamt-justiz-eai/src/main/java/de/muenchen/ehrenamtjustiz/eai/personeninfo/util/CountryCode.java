@@ -276,20 +276,14 @@ public enum CountryCode {
         this.numeric = numeric;
     }
 
-    /**
-     * Get a CountryCode that corresponds to a given ISO 3166-1 <a
-     * href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">alpha-2</a> or <a
-     * href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3">alpha-3</a> code.
-     *
-     * @param code
-     *            An ISO 3166-1 <a
-     *            href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2"
-     *            >alpha-2</a> or <a
-     *            href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3"
-     *            >alpha-3</a> code.
-     *
-     * @return A CountryCode instance, or null if not found.
-     */
+    /// Get a CountryCode that corresponds to a given ISO 3166-1 <a
+    /// href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">alpha-2</a> or <a
+    /// href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3">alpha-3</a> code.
+    ///
+    /// @param code An ISO 3166-1 <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" >alpha-2</a>
+    ///            or <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3" >alpha-3</a> code.
+    ///
+    /// @return A CountryCode instance, or null if not found.
     public static CountryCode getByCode(final String code) {
         if (code == null) {
             return null;
@@ -319,59 +313,44 @@ public enum CountryCode {
         return ALPHA3MAP.get(code);
     }
 
-    /**
-     * Get a CountryCode that corresponds to a given <a
-     * href="http://en.wikipedia.org/wiki/ISO_3166-1_numeric">ISO 3166-1
-     * numeric</a> code.
-     *
-     * @param code
-     *            An <a href="http://en.wikipedia.org/wiki/ISO_3166-1_numeric" >ISO
-     *            3166-1 numeric</a> code.
-     *
-     * @return A CountryCode instance, or null if not found.
-     */
+    /// Get a CountryCode that corresponds to a given <a
+    /// href="http://en.wikipedia.org/wiki/ISO_3166-1_numeric">ISO 3166-1 numeric</a> code.
+    ///
+    /// @param code An <a href="http://en.wikipedia.org/wiki/ISO_3166-1_numeric" >ISO 3166-1 numeric</a>
+    ///            code.
+    ///
+    /// @return A CountryCode instance, or null if not found.
     public static CountryCode getByCode(final int code) {
         return NUMERICMAP.get(code);
     }
 
-    /**
-     * Get the country name.
-     *
-     * @return The country name.
-     */
+    /// Get the country name.
+    ///
+    /// @return The country name.
     public String getName() {
         return name;
     }
 
-    /**
-     * Get the <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" >ISO
-     * 3166-1 alpha-2</a> code.
-     *
-     * @return The <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" >ISO
-     *         3166-1 alpha-2</a> code.
-     */
+    /// Get the <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" >ISO 3166-1 alpha-2</a> code.
+    ///
+    /// @return The <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" >ISO 3166-1
+    ///         alpha-2</a> code.
     public String getAlpha2() {
         return name();
     }
 
-    /**
-     * Get the <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3" >ISO
-     * 3166-1 alpha-3</a> code.
-     *
-     * @return The <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3" >ISO
-     *         3166-1 alpha-3</a> code.
-     */
+    /// Get the <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3" >ISO 3166-1 alpha-3</a> code.
+    ///
+    /// @return The <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3" >ISO 3166-1
+    ///         alpha-3</a> code.
     public String getAlpha3() {
         return alpha3;
     }
 
-    /**
-     * Get the <a href="http://en.wikipedia.org/wiki/ISO_3166-1_numeric" >ISO
-     * 3166-1 numeric</a> code.
-     *
-     * @return The <a href="http://en.wikipedia.org/wiki/ISO_3166-1_numeric" >ISO
-     *         3166-1 numeric</a> code.
-     */
+    /// Get the <a href="http://en.wikipedia.org/wiki/ISO_3166-1_numeric" >ISO 3166-1 numeric</a> code.
+    ///
+    /// @return The <a href="http://en.wikipedia.org/wiki/ISO_3166-1_numeric" >ISO 3166-1
+    ///         numeric</a> code.
     public int getNumeric() {
         return numeric;
     }

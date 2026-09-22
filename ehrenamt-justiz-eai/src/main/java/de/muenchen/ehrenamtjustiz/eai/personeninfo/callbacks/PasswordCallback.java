@@ -6,14 +6,10 @@ import org.apache.wss4j.common.ext.WSPasswordCallback;
 
 public class PasswordCallback implements CallbackHandler {
 
-    /**
-     * Required username for calling the web service with the given password.
-     */
+    /// Required username for calling the web service with the given password.
     protected String userName;
 
-    /**
-     * Password for calling the web service with the given user.
-     */
+    /// Password for calling the web service with the given user.
     protected String userPassword;
 
     @Override
@@ -24,16 +20,12 @@ public class PasswordCallback implements CallbackHandler {
         }
     }
 
-    /**
-     * @param userName The username
-     */
+    /// @param userName The username
     public void setUserName(final String userName) {
         this.userName = userName;
     }
 
-    /**
-     * @param userPassword The password
-     */
+    /// @param userPassword The password
     public void setUserPassword(final String userPassword) {
         this.userPassword = userPassword;
     }

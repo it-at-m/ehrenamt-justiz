@@ -31,10 +31,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-/**
- * Config class that configures all additional beans that are not available as components
- *
- */
+/// Config class that configures all additional beans that are not available as components
 @org.springframework.context.annotation.Configuration
 public class Configuration {
 

@@ -8,23 +8,19 @@ import java.util.List;
 import org.apache.camel.CamelExecutionException;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.apache.cxf.interceptor.Fault;
 import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-/**
- * ErrorWrapper
- * The following error classes are handled:
- * <ul>
- * <li>{@link PersonNotFoundException} -&gt; --> http 404</li>
- * <li>{@link SocketTimeoutException} -&gt; --> http 504</li>
- * <li>{@link ConnectException} -&gt; --> http 504</li>
- * <li>{@link HttpTimeoutException} -&gt; --> http 504</li>
- * <li>{@link Fault} -&gt; Unknown error --> error code: 999</li>
- * </ul>
- */
+/// ErrorWrapper The following error classes are handled:
+///
+/// - [PersonNotFoundException] -&gt; --> http 404
+/// - [SocketTimeoutException] -&gt; --> http 504
+/// - [ConnectException] -&gt; --> http 504
+/// - [HttpTimeoutException] -&gt; --> http 504
+/// - [Fault] -&gt; Unknown error --> error code: 999
+///
 @Component
 public class FehlerWrapper implements Processor {
 
@@ -67,14 +63,12 @@ public class FehlerWrapper implements Processor {
         }
     }
 
-    /**
-     * Check whether the throwable is a cause of a certain class.
-     *
-     * @param throwable Throwable to validate
-     * @param causeToCheck Errorclass to check
-     * @return true if the Throwable or a Cause object is an instance (or derivation) of the
-     *         causeToCheck.
-     */
+    /// Check whether the throwable is a cause of a certain class.
+    ///
+    /// @param throwable Throwable to validate
+    /// @param causeToCheck Errorclass to check
+    /// @return true if the Throwable or a Cause object is an instance (or derivation) of
+    ///         the causeToCheck.
     protected boolean isOrHasCauseClass(final Throwable throwable, final Class<? extends Throwable> causeToCheck) {
         final List<Object> causesVisited = new ArrayList<>();
         if (throwable == null) {

@@ -9,9 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Class is used to clone users and roles
- */
+/// Class is used to clone users and roles
 public final class Utility {
     private Utility() {
     }
