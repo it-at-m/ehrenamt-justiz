@@ -1,7 +1,7 @@
 # Note: For base images an architecture-agnostic SHA is always preferred, see https://refarch.oss.muenchen.de/templates/deploy.html#docker-images for more info.
 
 # For documentation see https://github.com/sclorg/nginx-container
-FROM registry.access.redhat.com/ubi10/nginx-126:10.2-1788396117@sha256:f9ebfcd934f59bf1963b1e0b13c9b77c44abff4af6c2b18680c8ce1f087d01ea
+FROM registry.access.redhat.com/ubi10/nginx-126:10.2-1790750813@sha256:c7ba454e04aab177e3d2e283e679412dc90477d77848715ebabd3db9af4b45af
 
 # Copy built online
 COPY dist/ /opt/app-root/src/public/online/
