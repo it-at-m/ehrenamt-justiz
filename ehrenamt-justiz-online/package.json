@@ -24,7 +24,7 @@
     "moment": "2.31.0",
     "pinia": "4.0.3",
     "vue": "3.5.43",
-    "vuetify": "4.2.1",
+    "vuetify": "4.2.3",
     "vue-i18n": "11.4.10"
   },
   "devDependencies": {
