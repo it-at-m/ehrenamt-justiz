@@ -214,7 +214,7 @@ services:
   online:
     profiles:
       - online
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:dev@sha256:3e54a652752b8b5da8b31903dfb180a60e20748bdac3237ef0e3b88bf8620957
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-online:dev@sha256:d7ecf2808751711450a82c4adcc558f27c9a88e6afe7ea92c47333137bea9dbe
     ports:
       - "8082:8080"
     networks:
