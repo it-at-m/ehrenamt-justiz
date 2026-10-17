@@ -71,7 +71,7 @@
 
         <!-- Utility -->
         <refarch-tools.version>1.4.0</refarch-tools.version>
-        <cxf.version>4.2.3</cxf.version>
+        <cxf.version>4.2.4</cxf.version>
 
     </properties>
 
