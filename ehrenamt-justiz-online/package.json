@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@mdi/font": "7.4.47",
-    "@muenchen/muc-patternlab-vue": "11.0.1",
+    "@muenchen/muc-patternlab-vue": "12.1.0",
     "@vueuse/core": "14.4.0",
     "moment": "2.31.0",
     "pinia": "4.0.3",
