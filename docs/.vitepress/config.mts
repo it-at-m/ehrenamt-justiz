@@ -40,19 +40,30 @@ const vitepressConfig = defineConfig({
     socialLinks: [
       { icon: "github", link: "https://github.com/it-at-m/refarch-templates" },
     ],
-    outline: {
-      level: "deep",
-    },
     editLink: {
       pattern:
-        "https://github.com/it-at-m/refarch-templates/blob/main/docs/:path",
+          "https://github.com/it-at-m/refarch-templates/blob/main/docs/:path",
       text: "View this page on GitHub",
+    },
+    footer: {
+      message: `<a href="https://opensource.muenchen.de/impress.html">Impress and Contact</a>`,
+    },
+    outline: {
+      level: "deep",
     },
     search: {
       provider: "local",
     },
-    footer: {
-      message: `<a href="https://opensource.muenchen.de/impress.html">Impress and Contact</a>`,
+  },
+  markdown: {
+    image: {
+      lazyLoading: true,
+    },
+  },
+  // see https://github.com/emersonbottero/vitepress-plugin-mermaid/issues/98 and https://github.com/vitejs/devtools/pull/567
+  vite: {
+    optimizeDeps: {
+      include: ["fastdom", "fastdom/extensions/fastdom-promised.js"],
     },
   },
 });
