@@ -42,7 +42,7 @@ const vitepressConfig = defineConfig({
     ],
     editLink: {
       pattern:
-          "https://github.com/it-at-m/refarch-templates/blob/main/docs/:path",
+        "https://github.com/it-at-m/refarch-templates/blob/main/docs/:path",
       text: "View this page on GitHub",
     },
     footer: {
