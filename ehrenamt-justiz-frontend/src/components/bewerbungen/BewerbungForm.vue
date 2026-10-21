@@ -257,7 +257,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
-                        data-test="bewerbungform-familienStand-textfield"
+                        data-test="bewerbungform-geburtsdatum-textfield"
                       />
                     </v-col>
                     <v-col class="col">
@@ -487,7 +487,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
-                        data-test="bewerbungform-wohnungsstatus-textfield"
+                        data-test="bewerbungform-postleitzahl-textfield"
                       />
                     </v-col>
                     <v-col class="col">
