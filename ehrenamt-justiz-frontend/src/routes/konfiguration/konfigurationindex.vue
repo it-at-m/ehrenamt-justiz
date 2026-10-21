@@ -15,6 +15,7 @@
               fixed
               color="accent"
               :to="{ path: '/konfiguration/konfigurationcreate' }"
+              data-test="konfigurationindex-configurationcreate-button"
             >
               {{ t("routes.konfigurationindex.createKonfiguration") }}
             </v-btn>

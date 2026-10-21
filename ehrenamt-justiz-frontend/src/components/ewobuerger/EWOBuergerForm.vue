@@ -21,6 +21,7 @@
           <v-btn
             color="accent"
             class="mr-2"
+            data-test="ewobuergerform-felderleeren-button"
             @click="felderLeeren"
           >
             {{ t("components.eWOBuergerForm.buttons.felderLeeren") }}
@@ -29,6 +30,7 @@
             color="action"
             :loading="isAnimation"
             type="submit"
+            data-test="ewobuergerform-inewosuchen-button"
           >
             {{ t("components.eWOBuergerForm.buttons.inEWOSuchen") }}
           </v-btn>
@@ -45,6 +47,7 @@
             variant="outlined"
             autofocus
             maxlength="300"
+            data-test="ewobuergerform-familienname-textfield"
           />
         </v-col>
       </v-row>
@@ -58,6 +61,7 @@
             density="compact"
             variant="outlined"
             maxlength="255"
+            data-test="ewobuergerform-vorname-textfield"
           />
         </v-col>
       </v-row>
@@ -75,6 +79,7 @@
             type="date"
             density="compact"
             variant="outlined"
+            data-test="ewobuergerform-geburtsdatum-textfield"
           />
         </v-col>
       </v-row>
@@ -88,6 +93,7 @@
               )
             "
             v-model="ewobuergerdata.validierungdeaktivieren"
+            data-test="ewobuergerform-validierungdeaktivieren-checkbox"
             :label="t('components.eWOBuergerForm.validierungDeaktivieren')"
           />
         </v-col>

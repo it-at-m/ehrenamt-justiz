@@ -52,6 +52,7 @@
         <v-spacer />
         <v-btn
           variant="outlined"
+          data-test="ewobuergerselect-abbrechen-button"
           @click="cancelBuergerSelect"
         >
           {{ t("routes.ewobuergerselect.buttons.abbrechen") }}

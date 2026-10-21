@@ -21,6 +21,7 @@
         <v-spacer />
         <v-btn
           variant="text"
+          data-test="deletedialog-abbrechen-button"
           @click="cancel"
         >
           {{ t("components.deleteDialog.buttons.abbrechen") }}
@@ -28,6 +29,7 @@
         <v-btn
           color="confirmDelete"
           variant="text"
+          data-test="deletedialog-loeschen-button"
           :loading="isAnimation"
           @click="deleteItem"
         >

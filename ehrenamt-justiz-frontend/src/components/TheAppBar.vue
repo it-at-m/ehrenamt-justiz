@@ -7,6 +7,7 @@
       >
         <v-app-bar-nav-icon
           class="mx-2"
+          data-test="app-bar-nav-icon"
           @click="emit('clickedNavIcon')"
         />
         <router-link to="/">
@@ -80,13 +81,17 @@
         cols="3"
         class="d-flex align-center justify-end"
       >
-        <span>{{ userinfo }}</span>
+        <ad2-image-avatar
+          v-if="userinfo != null"
+          :username="userinfo"
+        />
         <v-tooltip location="top">
           <template #activator="{ props }">
             <span v-bind="props">
               <v-btn
                 style="font-size: 12px"
                 :icon="mdiHelp"
+                data-test="app-bar-help-button"
                 @click="hilfeAnzeigen"
             /></span>
           </template>
@@ -125,6 +130,7 @@ import {
 import { EhrenamtJustizService } from "@/api/EhrenamtJustizService";
 import { EWOBuergerApiService } from "@/api/EWOBuergerApiService";
 import { checkHealth } from "@/api/HealthService";
+import Ad2ImageAvatar from "@/components/common/Ad2ImageAvatar.vue";
 import ThemeToggleBtn from "@/components/common/ThemeToggleBtn.vue";
 import { APPSWITCHER_URL } from "@/Constants";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";

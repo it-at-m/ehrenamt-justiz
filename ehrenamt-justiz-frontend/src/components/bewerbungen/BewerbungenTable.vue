@@ -15,6 +15,7 @@
               hide-details
               clearable
               autofocus
+              data-test="bewerbungtable-suche-textfield"
               @keydown.enter.prevent="enableReload && reload()"
             ></v-text-field>
           </v-col>
@@ -28,6 +29,7 @@
                 !user.authorities.includes('DELETE_EHRENAMTJUSTIZDATEN') ||
                 selectedUUIDs.length == 0
               "
+              data-test="bewerbungtable-loeschen-button"
               color="confirmDelete"
               @click="deleteRequested"
               >{{ t("components.bewerbungenTable.buttons.loeschen") }}</v-btn
@@ -46,6 +48,7 @@
                 ) ||
                 selectedUUIDs.length == 0
               "
+              data-test="bewerbungtable-zurvorschlagsliste-button"
               color="accent"
               :loading="vorschlagsListeAnimationAktiv"
               @click="aufVorschlagslisteSetzen"
@@ -65,6 +68,7 @@
                   'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
                 )
               "
+              data-test="bewerbungtable-datenherunterladen-button"
               color="accent"
               @click="datenHerunterladen"
               >{{
@@ -183,6 +187,7 @@
                 t
               )
             "
+            data-test="bewerbungtable-bewerbungtable-datenherunterladen-checkbox"
             :indeterminate="someSelected && !allSelected"
             :model-value="allSelected"
             color="primary"

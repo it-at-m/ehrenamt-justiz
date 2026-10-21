@@ -1,46 +1,41 @@
 <template>
   <v-dialog
-    v-model="modelValue"
+    :model-value="modelValue"
+    persistent
     width="800"
-    @click:outside="no"
   >
-    <template #activator="{ props }">
+    <template #activator="{ props: open }">
       <v-btn
         v-if="buttontext"
         color="primary"
-        v-bind="props"
-      >
-        {{ buttontext }}
-      </v-btn>
-      <v-btn
+        data-test="yesno-dialog-btn-open"
+        v-bind="open"
+        :text="buttontext"
+      />
+      <v-icon-btn
         v-else-if="icontext"
         color="primary"
-        v-bind="props"
-        icon
-      >
-        <v-icon size="large">
-          {{ icontext }}
-        </v-icon>
-      </v-btn>
+        data-test="yesno-dialog-btn-open"
+        v-bind="open"
+        :icon="icontext"
+      />
     </template>
-    <v-card>
-      <v-card-title>
-        {{ dialogtitle }}
-      </v-card-title>
-      <v-card-text>
-        {{ dialogtext }}
-      </v-card-text>
+    <v-card
+      :title="dialogtitle"
+      :text="dialogtext"
+    >
       <v-card-actions>
         <v-spacer />
         <v-btn
-          id="yesnodialog-btn-no"
+          data-test="yesnodialog-btn-no"
           variant="text"
           @click="no"
         >
           {{ t("components.yesNoDialog.nein") }}
         </v-btn>
         <v-btn
-          id="yesnodialog-btn-yes"
+          data-test="yesnodialog-btn-yes"
+          color="primary"
           @click="yes"
         >
           {{ t("components.yesNoDialog.ja") }}
@@ -56,12 +51,12 @@ import {
   VBtn,
   VCard,
   VCardActions,
-  VCardText,
-  VCardTitle,
   VDialog,
-  VIcon,
+  VIconBtn,
   VSpacer,
 } from "vuetify/components";
+
+const { t } = useI18n();
 
 /**
  * The YesNo dialog is a generic dialog for yes/no queries to the user.
@@ -88,25 +83,22 @@ defineProps<{
   /**
    * Control flag for dialog
    */
+  modelValue: boolean;
   buttontext?: string;
   icontext?: string;
   dialogtitle: string;
   dialogtext: string;
 }>();
 
-const modelValue = defineModel<boolean>({ required: true });
-
-const emits = defineEmits<{
+const emit = defineEmits<{
   no: [];
   yes: [];
 }>();
 
-const { t } = useI18n();
-
 function no(): void {
-  emits("no");
+  emit("no");
 }
 function yes(): void {
-  emits("yes");
+  emit("yes");
 }
 </script>

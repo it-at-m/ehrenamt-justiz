@@ -12,8 +12,6 @@
       <konfiguration-list-item
         :konfiguration="konfiguration"
         @deleted="itemDeleted"
-        @reload-items="reloadItems"
-        @removed="false"
       />
       <v-divider class="divider" />
     </div>

@@ -17,6 +17,7 @@
           <template #activator="{ props: tooltipProps }">
             <v-btn
               class="listitem"
+              data-test="konfigurationlistitem-button"
               v-bind="tooltipProps"
               :icon="mdiLightbulbOnOutline"
               @click="requestSetActive"
@@ -29,7 +30,7 @@
         :show-open="true"
         :show-edit="AuthService.checkAuth('WRITE_KONFIGURATION', t)"
         :show-delete="
-          showDelete && AuthService.checkAuth('DELETE_KONFIGURATION', t)
+          AuthService.checkAuth('DELETE_KONFIGURATION', t)
         "
         @open="displayKonfiguration"
         @edit="editKonfiguration"
