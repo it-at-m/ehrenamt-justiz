@@ -32,6 +32,7 @@
         <v-btn
           :to="{ name: '/konflikte/konflikteindex' }"
           class="ml-auto mr-2"
+          data-test="konflikteloesenform-abbrechen-button"
           variant="text"
         >
           {{ t("components.konflikteLoesenForm.buttons.abbrechen") }}
@@ -40,6 +41,7 @@
           :disabled="!konflikteVorhanden()"
           color="accent"
           class="mr-2"
+          data-test="konflikteloesenform-alleuebernehmen-button"
           @click="alleUebernehmen"
         >
           {{ t("components.konflikteLoesenForm.buttons.alleUebernehmen") }}
@@ -49,6 +51,7 @@
           :loading="isSavingAnimation"
           color="action"
           type="submit"
+          data-test="konflikteloesenform-speichern-button"
         >
           {{ t("components.konflikteLoesenForm.buttons.speichern") }}
         </v-btn>
@@ -56,10 +59,14 @@
     </v-row>
 
     <v-tabs v-model="active_tab">
-      <v-tab value="bewerberZusatzangaben"
+      <v-tab
+        value="bewerberZusatzangaben"
+        data-test="konflikteloesenform-bewerberzusatzangaben-tab"
         >{{ t("components.konflikteLoesenForm.tab.bewerberZusatzangaben") }}
       </v-tab>
-      <v-tab value="datenAusEWOUebernehmen"
+      <v-tab
+        value="datenAusEWOUebernehmen"
+        data-test="konflikteloesenform-datenausewouebernehmen-tab"
         >{{ t("components.konflikteLoesenForm.tab.datenAusEWOUebernehmen") }}
       </v-tab>
     </v-tabs>
@@ -87,6 +94,7 @@
                   persistent-placeholder
                   variant="outlined"
                   :hide-details="true"
+                  data-test="konflikteloesenform-derzeitigerberuf-textfield"
                 />
               </v-col>
             </v-row>
@@ -102,6 +110,7 @@
                   persistent-placeholder
                   variant="outlined"
                   :hide-details="true"
+                  data-test="konflikteloesenform-arbeitgeber-textfield"
                 />
               </v-col>
             </v-row>
@@ -119,6 +128,7 @@
                   persistent-placeholder
                   variant="outlined"
                   :hide-details="true"
+                  data-test="konflikteloesenform-telefonnummerprivat-textfield"
                 />
               </v-col>
             </v-row>
@@ -138,6 +148,7 @@
                   persistent-placeholder
                   variant="outlined"
                   :hide-details="true"
+                  data-test="konflikteloesenform-telefonnummerdienstlich-textfield"
                 />
               </v-col>
             </v-row>
@@ -155,6 +166,7 @@
                   persistent-placeholder
                   variant="outlined"
                   :hide-details="true"
+                  data-test="konflikteloesenform-telefonnummermobil-textfield"
                 />
               </v-col>
             </v-row>
@@ -171,6 +183,7 @@
                   type="email"
                   variant="outlined"
                   :hide-details="true"
+                  data-test="konflikteloesenform-mailadresse-textfield"
                 />
               </v-col>
             </v-row>
@@ -190,6 +203,7 @@
                   persistent-placeholder
                   variant="outlined"
                   :hide-details="true"
+                  data-test="konflikteloesenform-ausgeuebteehrenaemter-textfield"
                 />
               </v-col>
             </v-row>
@@ -207,6 +221,7 @@
                   persistent-placeholder
                   variant="outlined"
                   :hide-details="true"
+                  data-test="konflikteloesenform-onlinebewerbung-textfield"
                 />
               </v-col>
             </v-row>
@@ -224,6 +239,7 @@
                   persistent-placeholder
                   variant="outlined"
                   :hide-details="true"
+                  data-test="konflikteloesenform-neuervorschlag-textfield"
                 />
               </v-col>
             </v-row>
@@ -249,6 +265,7 @@
                     )
                   "
                   :hide-details="true"
+                  data-test="konflikteloesenform-warbereitsalsverwaltungsrichtertaetig-checkbox"
                 />
               </v-col>
             </v-row>
@@ -276,6 +293,7 @@
                     )
                   "
                   :hide-details="true"
+                  data-test="konflikteloesenform-warbereitsinvorperiodealsverwaltungsrichtertaetig-checkbox"
                 />
               </v-col>
             </v-row>
@@ -292,6 +310,7 @@
                   type="date"
                   variant="outlined"
                   :hide-details="true"
+                  data-test="konflikteloesenform-bewerbungvom-textfield"
                 />
               </v-col>
             </v-row>
@@ -308,6 +327,7 @@
                   persistent-placeholder
                   variant="outlined"
                   :hide-details="true"
+                  data-test="konflikteloesenform-status-select"
                 />
               </v-col>
             </v-row>
@@ -347,9 +367,11 @@
             <v-expansion-panels
               v-model="activeExpansionPanel"
               multiple
+              data-test="konflikteloesenform-expansionpanels"
             >
               <v-expansion-panel
                 :title="t('components.konflikteLoesenForm.expansionPanel.name')"
+                data-test="konflikteloesenform-name-expansionpanel"
               >
                 <v-expansion-panel-text>
                   <!-- As the label of the first field is only partially displayed -->
@@ -367,6 +389,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-familienname-textfield"
                       />
                     </v-col>
                     <v-col
@@ -391,6 +414,7 @@
                               v-if="isKonfliktOriginal(FAMILIENNAME)"
                               :disabled="!isKonflikt(FAMILIENNAME)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-familienname-button"
                               @click="konfliktLoesenFamilienname()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -413,6 +437,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewofamilienname-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -430,6 +455,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-persongeburtsname-textfield"
                       />
                     </v-col>
                     <v-col
@@ -454,6 +480,7 @@
                               v-if="isKonfliktOriginal(GEBURTSNAME)"
                               :disabled="!isKonflikt(GEBURTSNAME)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-persongeburtsname-button"
                               @click="konfliktLoesenGeburtsname()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -476,6 +503,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewopersongeburtsname-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -493,6 +521,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-personvorname-textfield"
                       />
                     </v-col>
                     <v-col
@@ -517,6 +546,7 @@
                               v-if="isKonfliktOriginal(VORNAME)"
                               :disabled="!isKonflikt(VORNAME)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-personvorname-button"
                               @click="konfliktLoesenVorname()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -539,6 +569,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewopersonvorname-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -550,6 +581,7 @@
                     'components.konflikteLoesenForm.expansionPanel.personenDaten'
                   )
                 "
+                data-test="konflikteloesenform-personendaten-expansionpanel"
               >
                 <v-expansion-panel-text>
                   <v-row>
@@ -567,6 +599,7 @@
                         type="date"
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-persongeburtsdatum-textfield"
                       />
                     </v-col>
                     <v-col
@@ -591,6 +624,7 @@
                               v-if="isKonfliktOriginal(GEBURTSDATUM)"
                               :disabled="!isKonflikt(GEBURTSDATUM)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-persongeburtsdatum-button"
                               @click="konfliktLoesenGeburtsdatum()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -614,6 +648,7 @@
                         type="date"
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewopersongeburtsdatum-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -632,6 +667,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-persongeschlecht-select"
                       />
                     </v-col>
                     <v-col
@@ -656,6 +692,7 @@
                               v-if="isKonfliktOriginal(GESCHLECHT)"
                               :disabled="!isKonflikt(GESCHLECHT)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-persongeschlecht-button"
                               @click="konfliktLoesenGeschlecht()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -679,6 +716,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewopersongeschlecht-select"
                       />
                     </v-col>
                   </v-row>
@@ -698,6 +736,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ordnungsmerkmal-textfield"
                       />
                     </v-col>
                     <v-col
@@ -722,6 +761,7 @@
                               v-if="isKonfliktOriginal(ORDNUNGSMERKMAL)"
                               :disabled="!isKonflikt(ORDNUNGSMERKMAL)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-ordnungsmerkmal-button"
                               @click="konfliktLoesenOrdnungsmerkmal()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -746,6 +786,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewoordnungsmerkmal-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -765,6 +806,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-akademischergrad-textfield"
                       />
                     </v-col>
                     <v-col
@@ -789,6 +831,7 @@
                               v-if="isKonfliktOriginal(AKADEMISCHERGRAD)"
                               :disabled="!isKonflikt(AKADEMISCHERGRAD)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-akademischergrad-button"
                               @click="konfliktLoesenAkademischergrad()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -813,6 +856,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewoakademischergrad-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -830,6 +874,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-geburtsort-textfield"
                       />
                     </v-col>
                     <v-col
@@ -854,6 +899,7 @@
                               v-if="isKonfliktOriginal(GEBURTSORT)"
                               :disabled="!isKonflikt(GEBURTSORT)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-geburtsort-button"
                               @click="konfliktLoesenGeburtsort()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -876,6 +922,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewogeburtsort-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -893,6 +940,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-geburtsland-textfield"
                       />
                     </v-col>
                     <v-col
@@ -917,6 +965,7 @@
                               v-if="isKonfliktOriginal(GEBURTSLAND)"
                               :disabled="!isKonflikt(GEBURTSLAND)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-geburtsland-button"
                               @click="konfliktLoesenGeburtsland()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -939,6 +988,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewogeburtsland-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -956,6 +1006,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-familienstand-textfield"
                       />
                     </v-col>
                     <v-col
@@ -980,6 +1031,7 @@
                               v-if="isKonfliktOriginal(FAMILIENSTAND)"
                               :disabled="!isKonflikt(FAMILIENSTAND)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-familienstand-button"
                               @click="konfliktLoesenFamilienstand()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -1002,6 +1054,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewofamilienstand-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -1023,6 +1076,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-staatsangehoerigkeit-textfield"
                       />
                     </v-col>
                     <v-col
@@ -1047,6 +1101,7 @@
                               v-if="isKonfliktOriginal(STAATSANGEHOERIGKEIT)"
                               :disabled="!isKonflikt(STAATSANGEHOERIGKEIT)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-staatsangehoerigkeit-button"
                               @click="konfliktLoesenStaatsangehoerigkeiten()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -1073,6 +1128,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewostaatsangehoerigkeit-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -1082,6 +1138,7 @@
                 :title="
                   t('components.konflikteLoesenForm.expansionPanel.adresse')
                 "
+                data-test="konflikteloesenform-adresse-expansionpanel"
               >
                 <v-expansion-panel-text>
                   <v-row>
@@ -1098,6 +1155,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-wohnungsgeber-textfield"
                       />
                     </v-col>
                     <v-col
@@ -1122,6 +1180,7 @@
                               v-if="isKonfliktOriginal(WOHNUNGSGEBER)"
                               :disabled="!isKonflikt(WOHNUNGSGEBER)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-wohnungsgeber-button"
                               @click="konfliktLoesenWohnungsgeber()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -1144,6 +1203,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewowohnungsgeber-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -1161,6 +1221,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-strasse-textfield"
                       />
                     </v-col>
                     <v-col
@@ -1185,6 +1246,7 @@
                               v-if="isKonfliktOriginal(STRASSE)"
                               :disabled="!isKonflikt(STRASSE)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-strasse-button"
                               @click="konfliktLoesenStrasse()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -1207,6 +1269,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewostrasse-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -1224,6 +1287,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-hausnummer-textfield"
                       />
                     </v-col>
                     <v-col
@@ -1248,6 +1312,7 @@
                               v-if="isKonfliktOriginal(HAUSNUMMER)"
                               :disabled="!isKonflikt(HAUSNUMMER)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-hausnummer-button"
                               @click="konfliktLoesenHausnummer()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -1270,6 +1335,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewohausnummer-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -1289,6 +1355,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-appartmentnummer-textfield"
                       />
                     </v-col>
                     <v-col
@@ -1313,6 +1380,7 @@
                               v-if="isKonfliktOriginal(APPARTMENTNUMMER)"
                               :disabled="!isKonflikt(APPARTMENTNUMMER)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-appartmentnummer-button"
                               @click="konfliktLoesenAppartmentnummer()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -1337,6 +1405,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewoappartmentnummer-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -1358,6 +1427,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-buchstabehausnummer-textfield"
                       />
                     </v-col>
                     <v-col
@@ -1382,6 +1452,7 @@
                               v-if="isKonfliktOriginal(BUCHSTABEHAUSNUMMER)"
                               :disabled="!isKonflikt(BUCHSTABEHAUSNUMMER)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-buchstabehausnummer-button"
                               @click="konfliktLoesenBuchstabehausnummer()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -1406,6 +1477,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewobuchstabehausnummer-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -1423,6 +1495,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-stockwerk-textfield"
                       />
                     </v-col>
                     <v-col
@@ -1447,6 +1520,7 @@
                               v-if="isKonfliktOriginal(STOCKWERK)"
                               :disabled="!isKonflikt(STOCKWERK)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-stockwerk-button"
                               @click="konfliktLoesenStockwerk()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -1469,6 +1543,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewostockwerk-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -1490,6 +1565,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-teilnummerhausnummer-textfield"
                       />
                     </v-col>
                     <v-col
@@ -1514,6 +1590,7 @@
                               v-if="isKonfliktOriginal(TEILNUMMERHAUSNUMMER)"
                               :disabled="!isKonflikt(TEILNUMMERHAUSNUMMER)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-teilnummerhausnummer-button"
                               @click="konfliktLoesenTeilnummerhausnummer()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -1540,6 +1617,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewoteilnummerhausnummer-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -1557,6 +1635,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-adresszusatz-textfield"
                       />
                     </v-col>
                     <v-col
@@ -1581,6 +1660,7 @@
                               v-if="isKonfliktOriginal(ADRESSZUSATZ)"
                               :disabled="!isKonflikt(ADRESSZUSATZ)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-adresszusatz-button"
                               @click="konfliktLoesenAdresszusatz()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -1603,6 +1683,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewoadresszusatz-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -1620,6 +1701,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-postleitzahl-textfield"
                       />
                     </v-col>
                     <v-col
@@ -1644,6 +1726,7 @@
                               v-if="isKonfliktOriginal(POSTLEITZAHL)"
                               :disabled="!isKonflikt(POSTLEITZAHL)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-postleitzahl-button"
                               @click="konfliktLoesenPostleitzahl()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -1666,6 +1749,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewopostleitzahl-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -1681,6 +1765,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ort-textfield"
                       />
                     </v-col>
                     <v-col
@@ -1705,6 +1790,7 @@
                               v-if="isKonfliktOriginal(ORT)"
                               :disabled="!isKonflikt(ORT)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-ort-button"
                               @click="konfliktLoesenOrt()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -1725,6 +1811,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewoort-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -1745,6 +1832,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-wohnungsstatus-select"
                       />
                     </v-col>
                     <v-col
@@ -1769,6 +1857,7 @@
                               v-if="isKonfliktOriginal(WOHNUNGSSTATUS)"
                               :disabled="!isKonflikt(WOHNUNGSSTATUS)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-wohnungsstatus-button"
                               @click="konfliktLoesenWohnungsstatus()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -1794,6 +1883,7 @@
                         persistent-placeholder
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewowohnungsstatus-select"
                       />
                     </v-col>
                   </v-row>
@@ -1803,6 +1893,7 @@
                 :title="
                   t('components.konflikteLoesenForm.expansionPanel.sonstiges')
                 "
+                data-test="konflikteloesenform-sonstiges-expansionpanel"
               >
                 <v-expansion-panel-text>
                   <v-row>
@@ -1822,6 +1913,7 @@
                         type="date"
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-inmuenchenwohnhaftseit-textfield"
                       />
                     </v-col>
                     <v-col
@@ -1846,6 +1938,7 @@
                               v-if="isKonfliktOriginal(INMUENCHENSEIT)"
                               :disabled="!isKonflikt(INMUENCHENSEIT)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-inmuenchenwohnhaftseit-button"
                               @click="konfliktLoesenInMuenchenseit()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -1871,6 +1964,7 @@
                         type="date"
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewoinmuenchenwohnhaftseit-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -1892,6 +1986,7 @@
                         rows="2"
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-auskunftssperre-textarea"
                       />
                     </v-col>
                     <v-col
@@ -1916,6 +2011,7 @@
                               v-if="isKonfliktOriginal(AUSKUNFTSSPERRE)"
                               :disabled="!isKonflikt(AUSKUNFTSSPERRE)"
                               class="button-konflikt-loesen"
+                              data-test="konflikteloesenform-auskunftssperre-button"
                               @click="konfliktLoesenAuskunftssperren()"
                             >
                               <v-icon :icon="mdiTransferLeft" />
@@ -1942,6 +2038,7 @@
                         rows="2"
                         variant="outlined"
                         :hide-details="true"
+                        data-test="konflikteloesenform-ewoauskunftssperre-textarea"
                       />
                     </v-col>
                   </v-row>

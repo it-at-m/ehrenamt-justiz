@@ -76,6 +76,7 @@
             :step-items="STEPPER_ITEMS"
             :active-item="activeStep"
             :disable-previous-steps="true"
+            data-test="mainview-mucstepper"
             @change-step="changeStep"
           />
           <muc-divider />

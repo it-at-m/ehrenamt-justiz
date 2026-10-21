@@ -11,6 +11,7 @@
           <muc-link
             label="hier"
             href="https://stadt.muenchen.de/service/info/hauptabteilung-ii-buergerangelegenheiten/1080614/"
+            data-test="allgemeineinfo-abteilung-muclink"
           />
         </template>
       </muc-callout>
@@ -33,6 +34,7 @@
           <muc-link
             :label="t('mainView.datenschutzErklaerung.links.datenschutz')"
             href="https://stadt.muenchen.de/infos/impressum-datenschutz.html#datenschutz"
+            data-test="allgemeineinfo-datenschutz-muclink"
           />
           {{ t("mainView.datenschutzErklaerung.content7") }}
           <br /><br />
@@ -43,6 +45,7 @@
               )
             "
             href="https://stadt.muenchen.de/infos/elektronische-kommunikation.html"
+            data-test="allgemeineinfo-elektronischekommunikation-muclink"
           />
           <br /><br />
           {{ t("mainView.datenschutzErklaerung.content8") }}
@@ -61,6 +64,7 @@
           <muc-button
             variant="primary"
             type="submit"
+            data-test="allgemeineinfo-weiter-button"
           >
             {{ t("allgemeineInfo.buttons.weiter") }}
             <svg class="m-button__icon">

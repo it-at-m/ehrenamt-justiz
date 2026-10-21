@@ -15,6 +15,7 @@
             variant="text"
             :to="{ name: '/konfiguration/konfigurationindex' }"
             class="ml-auto mr-2"
+            data-test="konfigurationform-abbrechen-button"
           >
             {{ t("components.konfigurationForm.buttons.abbrechen") }}
           </v-btn>
@@ -22,6 +23,7 @@
             v-if="konfiguration.action === BEARBEIGUNGS_MODUS.EDIT_MODUS"
             color="accent"
             class="mr-2"
+            data-test="konfigurationform-felderLeeren-button"
             @click="felderLeeren"
           >
             {{ t("components.konfigurationForm.buttons.felderLeeren") }}
@@ -31,6 +33,7 @@
             color="action"
             :loading="isAnimation"
             type="submit"
+            data-test="konfigurationform-speichern-button"
           >
             {{ t("components.konfigurationForm.buttons.speichern") }}
           </v-btn>
@@ -47,6 +50,7 @@
             density="compact"
             variant="outlined"
             autofocus
+            data-test="konfigurationform-artehrenamtJustiz-select"
           />
         </v-col>
         <v-col class="col">
@@ -57,6 +61,7 @@
             maxlength="255"
             density="compact"
             variant="outlined"
+            data-test="konfigurationform-bezeichnung-textfield"
           />
         </v-col>
       </v-row>
@@ -73,6 +78,7 @@
             type="date"
             density="compact"
             variant="outlined"
+            data-test="konfigurationform-amtsperiodevon-textfield"
           />
         </v-col>
         <v-col
@@ -87,6 +93,7 @@
             type="date"
             density="compact"
             variant="outlined"
+            data-test="konfigurationform-amtsperiodebis-textfield"
           />
         </v-col>
       </v-row>
@@ -102,6 +109,7 @@
             persistent-placeholder
             density="compact"
             variant="outlined"
+            data-test="konfigurationform-mindestalter-textfield"
           />
         </v-col>
         <v-col
@@ -115,6 +123,7 @@
             persistent-placeholder
             density="compact"
             variant="outlined"
+            data-test="konfigurationform-hoechstalter-textfield"
           />
         </v-col>
       </v-row>
@@ -127,6 +136,7 @@
             persistent-placeholder
             density="compact"
             variant="outlined"
+            data-test="konfigurationform-staatsangehoerigkeit-textfield"
           />
         </v-col>
       </v-row>
@@ -140,6 +150,7 @@
             maxlength="255"
             density="compact"
             variant="outlined"
+            data-test="konfigurationform-wohnsitz-textfield"
           />
         </v-col>
       </v-row>
@@ -150,12 +161,14 @@
             :show-size="true"
             clearable
             :rules="[rules.RULE_FILE_VERFASSUNGSTREUE]"
+            data-test="konfigurationform-fileupload"
           >
             <template #default>
               <v-file-upload-dropzone
                 density="comfortable"
                 :title="t('components.konfigurationForm.dateiAblegen')"
                 :subtitle="t('components.konfigurationForm.dateiDurchsuchen')"
+                data-test="konfigurationform-uploaddropzone"
               ></v-file-upload-dropzone>
 
               <v-file-upload-list class="upload-list">

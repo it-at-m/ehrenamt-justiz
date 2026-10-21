@@ -15,6 +15,7 @@
               hide-details
               clearable
               autofocus
+              data-test="vorschlaegetable-suche-textfield"
               @keydown.enter.prevent="enableReload && reload()"
             ></v-text-field>
           </v-col>
@@ -29,6 +30,7 @@
                 selectedUUIDs.length == 0
               "
               color="confirmDelete"
+              data-test="vorschlaegetable-loeschen-button"
               @click="deleteRequested"
               >{{ t("components.vorschlaegeTable.buttons.loeschen") }}</v-btn
             >
@@ -44,6 +46,7 @@
                 selectedUUIDs.length == 0
               "
               color="accent"
+              data-test="vorschlaegetable-aufbewerbungslistesetzen-button"
               :loading="bewerberListeAnimationAktiv"
               @click="aufBewerberlisteSetzen"
               >{{
@@ -65,6 +68,7 @@
                 )
               "
               color="accent"
+              data-test="vorschlaegetable-datenherunterladen-button"
               @click="datenHerunterladen"
               >{{
                 t("components.vorschlaegeTable.buttons.datenHerunterladen")
@@ -187,6 +191,7 @@
             "
             :indeterminate="someSelected && !allSelected"
             :model-value="allSelected"
+            data-test="vorschlaegetable-selectall-checkbox"
             color="primary"
             @update:model-value="selectAll(!allSelected)"
           ></v-checkbox-btn>

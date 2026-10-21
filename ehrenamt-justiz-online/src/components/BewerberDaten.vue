@@ -13,6 +13,7 @@
           :required="true"
           :error-msg="errorMsgVorname"
           max="255"
+          data-test="bewerberdaten-vorname-mucinput"
         />
       </v-row>
       <v-row density="compact">
@@ -22,6 +23,7 @@
           :required="true"
           :error-msg="errorMsgNachname"
           max="300"
+          data-test="bewerberdaten-nachname-mucinput"
         />
       </v-row>
       <v-row density="compact">
@@ -31,6 +33,7 @@
           :required="true"
           type="date"
           :error-msg="errorMsgGeburtsdatum"
+          data-test="bewerberdaten-geburtsdatum-mucinput"
           @keydown.ctrl.v="zwischenablageEinfuegen()"
         />
       </v-row>
@@ -41,6 +44,7 @@
           :required="true"
           :error-msg="errorMsgBeruf"
           max="255"
+          data-test="bewerberdaten-beruf-mucinput"
         />
       </v-row>
       <v-row density="compact">
@@ -49,6 +53,7 @@
           :label="t('bewerberDaten.telefonnummer.label')"
           :error-msg="errorMsgTelefonnummer"
           max="255"
+          data-test="bewerberdaten-telefonnummer-mucinput"
         />
       </v-row>
       <v-row density="compact">
@@ -58,6 +63,7 @@
           :required="true"
           :error-msg="errorMsgMail"
           max="150"
+          data-test="bewerberdaten-mail-mucinput"
         />
       </v-row>
       <muc-divider />
@@ -72,6 +78,7 @@
         >
           <muc-button
             variant="primary"
+            data-test="bewerberdaten-zurueck-button"
             @click="previousStep"
           >
             {{ t("bewerberDaten.buttons.zurueck") }}
@@ -90,6 +97,7 @@
         >
           <muc-button
             variant="primary"
+            data-test="bewerberdaten-weiter-button"
             type="submit"
           >
             {{ t("bewerberDaten.buttons.weiter") }}
@@ -108,6 +116,7 @@
         >
           <muc-button
             variant="secondary"
+            data-test="bewerberdaten-leeren-button"
             @click="clearInputs()"
             >{{ t("bewerberDaten.buttons.leeren") }}
             <svg class="m-button__icon">

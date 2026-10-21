@@ -100,6 +100,7 @@
                 'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
               )
             "
+            data-test="getstarted-datenHerunterladen-button"
             @click="datenHerunterladen"
             >{{ t("routes.getstartedview.buttons.datenHerunterladen") }}
           </v-btn>
@@ -112,6 +113,7 @@
                 'READ_EHRENAMTJUSTIZDATEN_AUSKUNFTSSPERRE'
               )
             "
+            data-test="getstarted-alsbenachrichtigtmarkieren-button"
             @click="alsBenachrichtigtMarkierenBestaetigen"
             >{{ t("routes.getstartedview.buttons.alsBenachrichtigtMarkieren") }}
           </v-btn>

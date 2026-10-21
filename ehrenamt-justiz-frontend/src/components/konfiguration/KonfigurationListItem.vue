@@ -17,6 +17,7 @@
           <template #activator="{ props: tooltipProps }">
             <v-btn
               class="listitem"
+              data-test="konfigurationlistitem-button"
               v-bind="tooltipProps"
               :icon="mdiLightbulbOnOutline"
               @click="requestSetActive"
@@ -28,9 +29,7 @@
         :show-set-active="true"
         :show-open="true"
         :show-edit="AuthService.checkAuth('WRITE_KONFIGURATION', t)"
-        :show-delete="
-          showDelete && AuthService.checkAuth('DELETE_KONFIGURATION', t)
-        "
+        :show-delete="AuthService.checkAuth('DELETE_KONFIGURATION', t)"
         @open="displayKonfiguration"
         @edit="editKonfiguration"
         @delete="deleteRequested"
@@ -63,7 +62,7 @@
 import type KonfigurationData from "@/types/KonfigurationData";
 
 import { mdiLightbulbOnOutline } from "@mdi/js";
-import { computed, ref, useAttrs } from "vue";
+import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VBtn, VListItem, VTooltip } from "vuetify/components";
@@ -84,7 +83,6 @@ const emits = defineEmits<{
 }>();
 const snackbarStore = useSnackbarStore();
 const router = useRouter();
-const attrs = useAttrs();
 
 const deleteDialogVisible = ref(false);
 const animationAktiv = ref(false);
@@ -180,8 +178,6 @@ function setActive(): void {
 function cancelSetActive() {
   yesNoDialogVisible.value = false;
 }
-
-const showDelete = computed(() => attrs.onRemoved != null);
 </script>
 
 <style scoped>

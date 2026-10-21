@@ -26,12 +26,15 @@
       </v-data-table>
       <v-card-actions>
         <v-spacer />
-        <v-btn @click="cancelInvalidePersonenSelect">{{
-          t("routes.invalidepersonenselect.buttons.abbrechen")
-        }}</v-btn>
+        <v-btn
+          data-test="invalidepersonenselect-abbrechen-button"
+          @click="cancelInvalidePersonenSelect"
+          >{{ t("routes.invalidepersonenselect.buttons.abbrechen") }}</v-btn
+        >
         <v-btn
           class="bg-accent"
           :loading="vorschlagsListeAnimationAktiv"
+          data-test="invalidepersonenselect-validierungumgehen-button"
           @click="invalidePersonenSelect"
         >
           {{ t("routes.invalidepersonenselect.buttons.validierungUmgehen") }}

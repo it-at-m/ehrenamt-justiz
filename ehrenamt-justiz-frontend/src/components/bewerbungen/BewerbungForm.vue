@@ -38,6 +38,7 @@
         <v-btn
           variant="text"
           class="ml-auto mr-2"
+          data-test="bewerbungform-abbruch-button"
           @click="abbruch"
         >
           {{ t("components.bewerbungForm.buttons.abbrechen") }}
@@ -46,6 +47,7 @@
           v-if="bewerbung.action === BEARBEIGUNGS_MODUS.EDIT_MODUS"
           color="accent"
           class="mr-2"
+          data-test="bewerbungform-felderleeren-button"
           @click="felderLeeren"
         >
           {{ t("components.bewerbungForm.buttons.felderLeeren") }}
@@ -55,6 +57,7 @@
           color="action"
           :loading="isAnimation"
           type="submit"
+          data-test="bewerbungform-speichern-button"
         >
           {{ t("components.bewerbungForm.buttons.speichern") }}
         </v-btn>
@@ -69,18 +72,29 @@
           "
           v-model="bewerbung.validierungdeaktivieren"
           :label="t('components.bewerbungForm.header.validierungDeaktivieren')"
+          data-test="bewerbungform-validieren-checkbox"
           @update:model-value="validieren"
         />
       </v-col>
     </v-row>
     <v-tabs v-model="active_tab">
-      <v-tab value="ewo">{{ t("components.bewerbungForm.tabs.ausEwo") }}</v-tab>
-      <v-tab value="bewerber"
+      <v-tab
+        value="ewo"
+        data-test="bewerbungform-ewo-tab"
+        >{{ t("components.bewerbungForm.tabs.ausEwo") }}</v-tab
+      >
+      <v-tab
+        value="bewerber"
+        data-test="bewerbungform-bewerber-tab"
         >{{ t("components.bewerbungForm.tabs.bewerberZusatzangaben") }}
       </v-tab>
-      <v-tab value="bestaetigungVerfassungstreue">{{
-        t("components.bewerbungForm.tabs.bestaetigungVerfassungstrue")
-      }}</v-tab>
+      <v-tab
+        value="bestaetigungVerfassungstreue"
+        data-test="bewerbungform-bestaetigungVerfassungstreue-tab"
+        >{{
+          t("components.bewerbungForm.tabs.bestaetigungVerfassungstrue")
+        }}</v-tab
+      >
     </v-tabs>
     <v-tabs-window v-model="active_tab">
       <v-tabs-window-item
@@ -98,6 +112,7 @@
                 :title="
                   t('components.bewerbungForm.tabEwo.expansionPanel.name')
                 "
+                data-test="bewerbungform-ewo-expansionpanel"
               >
                 <v-expansion-panel-text>
                   <v-row>
@@ -110,6 +125,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-vorname-textfield"
                       />
                     </v-col>
                     <v-col class="col">
@@ -123,6 +139,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-familienname-textfield"
                       />
                     </v-col>
                     <v-col
@@ -144,6 +161,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-geburtsname-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -157,6 +175,7 @@
                     t
                   )
                 "
+                data-test="bewerbungform-personenDaten-expansionpanel"
                 :title="
                   t(
                     'components.bewerbungForm.tabEwo.expansionPanel.personenDaten'
@@ -176,6 +195,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-ordnungsmerkmal-textfield"
                       />
                     </v-col>
                     <v-col class="col">
@@ -188,6 +208,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-akademischerGrad-textfield"
                       />
                     </v-col>
                     <v-col class="col">
@@ -200,6 +221,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-geschlecht-select"
                       />
                     </v-col>
                     <v-col class="col">
@@ -213,6 +235,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-familienStand-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -234,6 +257,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-geburtsdatum-textfield"
                       />
                     </v-col>
                     <v-col class="col">
@@ -245,6 +269,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-geburtsort-textfield"
                       />
                     </v-col>
                     <v-col class="col">
@@ -258,6 +283,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-geburtsland-textfield"
                       />
                     </v-col>
                     <v-col class="col">
@@ -277,6 +303,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-staatsangehoerigkeit-textarea"
                       />
                     </v-col>
                   </v-row>
@@ -291,6 +318,7 @@
                     t
                   )
                 "
+                data-test="bewerbungform-adresse-expansionpanel"
                 :title="
                   t('components.bewerbungForm.tabEwo.expansionPanel.adresse')
                 "
@@ -309,6 +337,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-strasse-textfield"
                       />
                     </v-col>
                     <v-col cols="8">
@@ -327,6 +356,7 @@
                             density="compact"
                             variant="outlined"
                             disabled
+                            data-test="bewerbungform-hausnummer-textfield"
                           />
                         </v-col>
                         <v-col
@@ -344,6 +374,7 @@
                             density="compact"
                             variant="outlined"
                             disabled
+                            data-test="bewerbungform-buchstabehausnummer-textfield"
                           />
                         </v-col>
                         <v-col
@@ -361,6 +392,7 @@
                             density="compact"
                             variant="outlined"
                             disabled
+                            data-test="bewerbungform-appartmentnummer-textfield"
                           />
                         </v-col>
                         <v-col
@@ -376,6 +408,7 @@
                             density="compact"
                             variant="outlined"
                             disabled
+                            data-test="bewerbungform-stockwerk-textfield"
                           />
                         </v-col>
                         <v-col
@@ -393,6 +426,7 @@
                             density="compact"
                             variant="outlined"
                             disabled
+                            data-test="bewerbungform-teilnummerhausnummer-textfield"
                           />
                         </v-col>
                       </v-row>
@@ -409,6 +443,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-adresszusatz-textfield"
                       />
                     </v-col>
                     <v-col class="col">
@@ -421,6 +456,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-wohnungsgeber-textfield"
                       />
                     </v-col>
                     <v-col class="col">
@@ -435,6 +471,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-wohnungsstatus-select"
                       />
                     </v-col>
                   </v-row>
@@ -450,6 +487,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-postleitzahl-textfield"
                       />
                     </v-col>
                     <v-col class="col">
@@ -465,6 +503,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-ort-textfield"
                       />
                     </v-col>
                     <v-col class="col">
@@ -481,6 +520,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-inmuenchenwohnhaftseit-textfield"
                       />
                     </v-col>
                   </v-row>
@@ -494,6 +534,7 @@
                     t
                   )
                 "
+                data-test="bewerbungform-sonstiges-expansionpanel"
                 :title="
                   t('components.bewerbungForm.tabEwo.expansionPanel.sonstiges')
                 "
@@ -513,6 +554,7 @@
                         density="compact"
                         variant="outlined"
                         disabled
+                        data-test="bewerbungform-konfliktfelder-textarea"
                       />
                     </v-col>
                   </v-row>
@@ -543,6 +585,7 @@
                   density="compact"
                   variant="outlined"
                   autofocus
+                  data-test="bewerbungform-derzeitigerberuf-textfeld"
                 />
               </v-col>
               <v-col class="col">
@@ -557,6 +600,7 @@
                   maxlength="255"
                   density="compact"
                   variant="outlined"
+                  data-test="bewerbungform-arbeitgeber-textfeld"
                 />
               </v-col>
             </v-row>
@@ -576,6 +620,7 @@
                   clearable
                   rows="2"
                   auto-grow
+                  data-test="bewerbungform-ausgeuebteehrenaemter-textarea"
                   @keydown.ctrl.enter.prevent="handleKeydown"
                 />
               </v-col>
@@ -593,6 +638,7 @@
                   maxlength="255"
                   density="compact"
                   variant="outlined"
+                  data-test="bewerbungform-telefonnummerprivat-textfeld"
                 />
               </v-col>
               <v-col class="col">
@@ -607,6 +653,7 @@
                   maxlength="255"
                   density="compact"
                   variant="outlined"
+                  data-test="bewerbungform-telefonnummerdienstlich-textfeld"
                 />
               </v-col>
               <v-col class="col">
@@ -621,6 +668,7 @@
                   maxlength="255"
                   density="compact"
                   variant="outlined"
+                  data-test="bewerbungform-telefonnummermobil-textfeld"
                 />
               </v-col>
             </v-row>
@@ -639,6 +687,7 @@
                   type="email"
                   density="compact"
                   variant="outlined"
+                  data-test="bewerbungform-mailadresse-textfeld"
                 />
               </v-col>
               <v-col class="col">
@@ -654,6 +703,7 @@
                   type="date"
                   density="compact"
                   variant="outlined"
+                  data-test="bewerbungform-bewerbungvom-textfeld"
                 />
               </v-col>
               <v-col class="col">
@@ -669,6 +719,7 @@
                   :rules="[rules.RULE_REQUIRED]"
                   density="compact"
                   variant="outlined"
+                  data-test="bewerbungform-status-select"
                 />
               </v-col>
             </v-row>
@@ -689,6 +740,7 @@
                       }
                     )
                   "
+                  data-test="bewerbungform-warbereitsalsverwaltungsrichtertaetig-checkbox"
                 />
               </v-col>
               <v-col class="col">
@@ -707,6 +759,7 @@
                       }
                     )
                   "
+                  data-test="bewerbungform-warbereitsinvorperiodealsverwaltungsrichtertaetig-checkbox"
                 />
               </v-col>
             </v-row>
@@ -724,11 +777,13 @@
               <v-file-upload
                 v-model="bewerbung.bestaetigungverfassungstreue_file"
                 clearable
+                data-test="bewerbungform-bestaetigungverfassungstreue-fileupload"
                 :rules="[rules.RULE_FILE_VERFASSUNGSTREUE]"
               >
                 <template #default>
                   <v-file-upload-dropzone
                     density="comfortable"
+                    data-test="bewerbungform-bestaetigungverfassungstreue-fileuploaddropzone"
                     :title="
                       t(
                         'components.bewerbungForm.tabBestaetigungVerfassungstreue.dateiAblegen'

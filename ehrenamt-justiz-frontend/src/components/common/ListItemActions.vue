@@ -9,6 +9,7 @@
         variant="text"
         icon
         v-bind="props"
+        data-test="listitemactions-button"
         @click.stop
       >
         <v-icon :icon="mdiDotsVertical" />

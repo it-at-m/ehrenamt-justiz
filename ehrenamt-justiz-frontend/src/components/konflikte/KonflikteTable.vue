@@ -15,6 +15,7 @@
               hide-details
               clearable
               autofocus
+              data-test="konfliktetable-suche-textfield"
               @keydown.enter.prevent="enableReload && reload()"
             ></v-text-field>
           </v-col>
@@ -24,9 +25,10 @@
           >
             <v-btn
               color="confirmDelete"
+              data-test="konfliktetable-delete-button"
               @click="deleteRequested"
-              >{{ t("components.konflikteTable.buttons.loeschen") }}</v-btn
-            >
+              >{{ t("components.konflikteTable.buttons.loeschen") }}
+            </v-btn>
           </v-col>
         </v-row>
       </v-card-title>
@@ -124,6 +126,7 @@
             :indeterminate="someSelected && !allSelected"
             :model-value="allSelected"
             color="primary"
+            data-test="konfliktetable-selectall-checkbox"
             @update:model-value="selectAll(!allSelected)"
           ></v-checkbox-btn>
         </template>

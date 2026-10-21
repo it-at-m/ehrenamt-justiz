@@ -11,6 +11,7 @@
           </p>
           <muc-button
             variant="primary"
+            data-test="verfassungstreuebestaetigen-musterherunterladen-button"
             @click="erstellenVerfassungstreueMuster"
           >
             {{ t("verfassungstreue.buttons.musterHerunterladen") }}
@@ -41,6 +42,7 @@
         :max-file-size="maxFileSize"
         :multiple="false"
         :max-file-size-warning="t('verfassungstreue.maxFileSizeWarning')"
+        data-test="verfassungstreuebestaetigen-filedropzone"
         @files="handleFiles"
         @warning="clearFiles"
       />
@@ -62,6 +64,7 @@
           :required="true"
           :error-msg="errorMsgDateiVerfassungstreue"
           readonly
+          data-test="verfassungstreuebestaetigen-dateinameverfassungstreue-mucinput"
         />
       </div>
     </v-row>
@@ -77,6 +80,7 @@
       >
         <muc-button
           variant="primary"
+          data-test="verfassungstreuebestaetigen-zurueck-button"
           @click="previousStep"
         >
           {{ t("verfassungstreue.buttons.zurueck") }}
@@ -95,6 +99,7 @@
       >
         <muc-button
           variant="primary"
+          data-test="verfassungstreuebestaetigen-speichern-button"
           @click="save"
         >
           {{ t("verfassungstreue.buttons.speichern") }}

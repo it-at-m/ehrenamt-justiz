@@ -12,8 +12,6 @@
       <konfiguration-list-item
         :konfiguration="konfiguration"
         @deleted="itemDeleted"
-        @reload-items="reloadItems"
-        @removed="false"
       />
       <v-divider class="divider" />
     </div>
@@ -103,12 +101,6 @@ function itemDeleted(konfiguration: KonfigurationData): void {
   configuration.value = configuration.value.filter(
     (p) => p.id != konfiguration.id
   );
-}
-
-function reloadItems(): void {
-  configuration.value = [];
-  currentPage.value = -1;
-  loadMore();
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
