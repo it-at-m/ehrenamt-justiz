@@ -29,9 +29,7 @@
         :show-set-active="true"
         :show-open="true"
         :show-edit="AuthService.checkAuth('WRITE_KONFIGURATION', t)"
-        :show-delete="
-          AuthService.checkAuth('DELETE_KONFIGURATION', t)
-        "
+        :show-delete="AuthService.checkAuth('DELETE_KONFIGURATION', t)"
         @open="displayKonfiguration"
         @edit="editKonfiguration"
         @delete="deleteRequested"
