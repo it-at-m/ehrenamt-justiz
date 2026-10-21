@@ -103,12 +103,6 @@ function itemDeleted(konfiguration: KonfigurationData): void {
   );
 }
 
-function reloadItems(): void {
-  configuration.value = [];
-  currentPage.value = -1;
-  loadMore();
-}
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function onScroll(e: any) {
   const el = e.target;

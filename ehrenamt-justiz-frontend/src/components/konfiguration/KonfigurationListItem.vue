@@ -179,8 +179,6 @@ function setActive(): void {
 function cancelSetActive() {
   yesNoDialogVisible.value = false;
 }
-
-const showDelete = computed(() => attrs.onRemoved != null);
 </script>
 
 <style scoped>
