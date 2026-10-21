@@ -62,7 +62,7 @@
 import type KonfigurationData from "@/types/KonfigurationData";
 
 import { mdiLightbulbOnOutline } from "@mdi/js";
-import { computed, ref, useAttrs } from "vue";
+import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VBtn, VListItem, VTooltip } from "vuetify/components";
@@ -83,7 +83,6 @@ const emits = defineEmits<{
 }>();
 const snackbarStore = useSnackbarStore();
 const router = useRouter();
-const attrs = useAttrs();
 
 const deleteDialogVisible = ref(false);
 const animationAktiv = ref(false);
