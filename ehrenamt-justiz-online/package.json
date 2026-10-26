@@ -22,7 +22,7 @@
     "@muenchen/muc-patternlab-vue": "12.1.0",
     "@vueuse/core": "14.4.0",
     "moment": "2.31.0",
-    "pinia": "4.0.3",
+    "pinia": "4.1.0",
     "vue": "3.5.44",
     "vuetify": "4.2.6",
     "vue-i18n": "11.4.14"
