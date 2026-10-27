@@ -106,7 +106,7 @@
             v-model="konfiguration.altervon"
             :rules="[
               rules.required(t('composables.rules.required')),
-              rules.integer(),
+              rules.integer(t('composables.rules.numerisch')),
             ]"
             :label="t('components.konfigurationForm.mindestalter')"
             persistent-placeholder
@@ -123,7 +123,7 @@
             v-model="konfiguration.alterbis"
             :rules="[
               rules.required(t('composables.rules.required')),
-              rules.integer(),
+              rules.integer(t('composables.rules.numerisch')),
             ]"
             :label="t('components.konfigurationForm.hoechstalter')"
             persistent-placeholder
