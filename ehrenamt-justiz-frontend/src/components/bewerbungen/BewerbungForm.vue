@@ -119,7 +119,9 @@
                     <v-col class="col">
                       <v-text-field
                         v-model="bewerbung.ewo_vorname"
-                        :rules="[rules.RULE_REQUIRED]"
+                        :rules="[
+                          rules.required(t('composables.rules.required')),
+                        ]"
                         :label="t('components.bewerbungForm.tabEwo.vorname')"
                         persistent-placeholder
                         density="compact"
@@ -131,7 +133,9 @@
                     <v-col class="col">
                       <v-text-field
                         v-model="bewerbung.ewo_familienname"
-                        :rules="[rules.RULE_REQUIRED]"
+                        :rules="[
+                          rules.required(t('composables.rules.required')),
+                        ]"
                         :label="
                           t('components.bewerbungForm.tabEwo.familienname')
                         "
@@ -187,7 +191,9 @@
                     <v-col class="col">
                       <v-text-field
                         v-model="bewerbung.ewoid"
-                        :rules="[rules.RULE_REQUIRED]"
+                        :rules="[
+                          rules.required(t('composables.rules.required')),
+                        ]"
                         :label="
                           t('components.bewerbungForm.tabEwo.ordnungsmerkmal')
                         "
@@ -215,7 +221,9 @@
                       <v-select
                         v-model="bewerbung.ewo_geschlecht"
                         :items="geschlechtswerte"
-                        :rules="[rules.RULE_REQUIRED]"
+                        :rules="[
+                          rules.required(t('composables.rules.required')),
+                        ]"
                         :label="t('components.bewerbungForm.tabEwo.geschlecht')"
                         persistent-placeholder
                         density="compact"
@@ -227,7 +235,9 @@
                     <v-col class="col">
                       <v-text-field
                         v-model="bewerbung.ewo_familienstand"
-                        :rules="[rules.RULE_REQUIRED]"
+                        :rules="[
+                          rules.required(t('composables.rules.required')),
+                        ]"
                         :label="
                           t('components.bewerbungForm.tabEwo.familienStand')
                         "
@@ -246,8 +256,19 @@
                         v-model="bewerbung.ewo_geburtsdatum"
                         :rules="
                           bewerbung.validierungdeaktivieren
-                            ? [rules.RULE_REQUIRED]
-                            : [rules.RULE_REQUIRED, rules.RULE_GEBURTSDATUM]
+                            ? [rules.required(t('composables.rules.required'))]
+                            : [
+                                rules.required(t('composables.rules.required')),
+                                rules.birthDay!(
+                                  konfiguration?.amtsperiodevon,
+                                  konfiguration?.altervon,
+                                  konfiguration?.alterbis,
+                                  t('composables.rules.geburtsdatum', {
+                                    alterVon: konfiguration?.altervon,
+                                    alterBis: konfiguration?.alterbis,
+                                  })
+                                ),
+                              ]
                         "
                         :label="
                           t('components.bewerbungForm.tabEwo.geburtsdatum')
@@ -263,7 +284,9 @@
                     <v-col class="col">
                       <v-text-field
                         v-model="bewerbung.ewo_geburtsort"
-                        :rules="[rules.RULE_REQUIRED]"
+                        :rules="[
+                          rules.required(t('composables.rules.required')),
+                        ]"
                         :label="t('components.bewerbungForm.tabEwo.geburtsOrt')"
                         persistent-placeholder
                         density="compact"
@@ -275,7 +298,9 @@
                     <v-col class="col">
                       <v-text-field
                         v-model="bewerbung.ewo_geburtsland"
-                        :rules="[rules.RULE_REQUIRED]"
+                        :rules="[
+                          rules.required(t('composables.rules.required')),
+                        ]"
                         :label="
                           t('components.bewerbungForm.tabEwo.geburtsLand')
                         "
@@ -292,7 +317,15 @@
                         :rules="
                           bewerbung.validierungdeaktivieren
                             ? []
-                            : [rules.RULE_STAATSANGEHOERIGKEIT]
+                            : [
+                                rules.nationality!(
+                                  konfiguration?.staatsangehoerigkeit,
+                                  t('composables.rules.staatsangehoerigkeit', {
+                                    staatsangehoerigkeitAusKonfiguration:
+                                      konfiguration?.staatsangehoerigkeit,
+                                  })
+                                ),
+                              ]
                         "
                         :label="
                           t(
@@ -333,7 +366,9 @@
                         v-model="bewerbung.ewo_strasse"
                         :label="t('components.bewerbungForm.tabEwo.strasse')"
                         persistent-placeholder
-                        :rules="[rules.RULE_REQUIRED]"
+                        :rules="[
+                          rules.required(t('composables.rules.required')),
+                        ]"
                         density="compact"
                         variant="outlined"
                         disabled
@@ -352,7 +387,9 @@
                               t('components.bewerbungForm.tabEwo.hausnummer')
                             "
                             persistent-placeholder
-                            :rules="[rules.RULE_REQUIRED]"
+                            :rules="[
+                              rules.required(t('composables.rules.required')),
+                            ]"
                             density="compact"
                             variant="outlined"
                             disabled
@@ -467,7 +504,9 @@
                           t('components.bewerbungForm.tabEwo.wohnungsstatus')
                         "
                         persistent-placeholder
-                        :rules="[rules.RULE_REQUIRED]"
+                        :rules="[
+                          rules.required(t('composables.rules.required')),
+                        ]"
                         density="compact"
                         variant="outlined"
                         disabled
@@ -483,7 +522,9 @@
                           t('components.bewerbungForm.tabEwo.postleitzahl')
                         "
                         persistent-placeholder
-                        :rules="[rules.RULE_REQUIRED]"
+                        :rules="[
+                          rules.required(t('composables.rules.required')),
+                        ]"
                         density="compact"
                         variant="outlined"
                         disabled
@@ -495,8 +536,17 @@
                         v-model="bewerbung.ewo_ort"
                         :rules="
                           bewerbung.validierungdeaktivieren
-                            ? [rules.RULE_REQUIRED]
-                            : [rules.RULE_REQUIRED, rules.RULE_WOHNSITZ]
+                            ? [rules.required(t('composables.rules.required'))]
+                            : [
+                                rules.required(t('composables.rules.required')),
+                                rules.placeOfResidence!(
+                                  konfiguration?.wohnsitz,
+                                  t('composables.rules.wohnsitz', {
+                                    wohnsitzAusKonfiguration:
+                                      konfiguration?.wohnsitz,
+                                  })
+                                ),
+                              ]
                         "
                         :label="t('components.bewerbungForm.tabEwo.ort')"
                         persistent-placeholder
@@ -515,7 +565,9 @@
                           )
                         "
                         persistent-placeholder
-                        :rules="[rules.RULE_REQUIRED]"
+                        :rules="[
+                          rules.required(t('composables.rules.required')),
+                        ]"
                         type="date"
                         density="compact"
                         variant="outlined"
@@ -676,7 +728,7 @@
               <v-col class="col">
                 <v-text-field
                   v-model="bewerbung.mailadresse"
-                  :rules="[rules.RULE_MAIL]"
+                  :rules="[rules.email(t('composables.rules.mail'))]"
                   :label="
                     t(
                       'components.bewerbungForm.tabBewerberZusatzangaben.mailAdresse'
@@ -699,7 +751,7 @@
                     )
                   "
                   persistent-placeholder
-                  :rules="[rules.RULE_REQUIRED]"
+                  :rules="[rules.required(t('composables.rules.required'))]"
                   type="date"
                   density="compact"
                   variant="outlined"
@@ -716,7 +768,7 @@
                     )
                   "
                   persistent-placeholder
-                  :rules="[rules.RULE_REQUIRED]"
+                  :rules="[rules.required(t('composables.rules.required'))]"
                   density="compact"
                   variant="outlined"
                   data-test="bewerbungform-status-select"
@@ -733,8 +785,7 @@
                       {
                         artEhrenamtJustiz: formattedEhrenamtjustizart(
                           t,
-                          useGlobalSettingsStore().getKonfiguration
-                            ?.ehrenamtjustizart,
+                          konfiguration?.ehrenamtjustizart,
                           1
                         ),
                       }
@@ -752,8 +803,7 @@
                       {
                         artEhrenamtJustiz: formattedEhrenamtjustizart(
                           t,
-                          useGlobalSettingsStore().getKonfiguration
-                            ?.ehrenamtjustizart,
+                          konfiguration?.ehrenamtjustizart,
                           1
                         ),
                       }
@@ -778,7 +828,20 @@
                 v-model="bewerbung.bestaetigungverfassungstreue_file"
                 clearable
                 data-test="bewerbungform-bestaetigungverfassungstreue-fileupload"
-                :rules="[rules.RULE_FILE_VERFASSUNGSTREUE]"
+                :rules="[
+                  rules.commitmentToTheConstitution!(
+                    techKonfiguration?.bestaetigungVerfassungstreueMaxSize,
+                    techKonfiguration?.bestaetigungVerfassungstreueFileExtension,
+                    t('composables.rules.anhangZuGross', {
+                      maxSize:
+                        techKonfiguration?.bestaetigungVerfassungstreueMaxSize,
+                    }),
+                    t('composables.rules.anhangKeinGueltigeDateiendung', {
+                      dateiTypen:
+                        techKonfiguration?.bestaetigungVerfassungstreueFileExtension,
+                    })
+                  ),
+                ]"
               >
                 <template #default>
                   <v-file-upload-dropzone
@@ -834,6 +897,7 @@ import type BewerbungFormData from "@/types/BewerbungFormData";
 
 import { computed, nextTick, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useRules } from "vuetify";
 import {
   VBtn,
   VCard,
@@ -860,7 +924,6 @@ import {
 
 import AuthService from "@/api/AuthService";
 import YesNoDialog from "@/components/common/YesNoDialog.vue";
-import { useRules } from "@/composables/rules";
 import { useSaveLeave } from "@/composables/useSaveLeave";
 import {
   BEARBEIGUNGS_MODUS,
@@ -882,6 +945,8 @@ const emits = defineEmits<{
   cancel: [];
 }>();
 const rules = useRules();
+const konfiguration = useGlobalSettingsStore().getKonfiguration;
+const techKonfiguration = useGlobalSettingsStore().getTechnischeKonfiguration;
 const snackbarStore = useSnackbarStore();
 
 const form = ref();

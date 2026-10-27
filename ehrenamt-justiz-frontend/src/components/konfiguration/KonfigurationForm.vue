@@ -46,7 +46,7 @@
             :items="ehrenamtJustizArt"
             :label="t('components.konfigurationForm.artEhrenamtJustiz')"
             persistent-placeholder
-            :rules="[rules.RULE_REQUIRED]"
+            :rules="[rules.required(t('composables.rules.required'))]"
             density="compact"
             variant="outlined"
             autofocus
@@ -72,7 +72,7 @@
         >
           <v-text-field
             v-model="konfiguration.amtsperiodevon"
-            :rules="[rules.RULE_REQUIRED]"
+            :rules="[rules.required(t('composables.rules.required'))]"
             :label="t('components.konfigurationForm.amtsperiodeVon')"
             persistent-placeholder
             type="date"
@@ -87,7 +87,7 @@
         >
           <v-text-field
             v-model="konfiguration.amtsperiodebis"
-            :rules="[rules.RULE_REQUIRED]"
+            :rules="[rules.required(t('composables.rules.required'))]"
             :label="t('components.konfigurationForm.amtsperiodeBis')"
             persistent-placeholder
             type="date"
@@ -104,7 +104,10 @@
         >
           <v-text-field
             v-model="konfiguration.altervon"
-            :rules="[rules.RULE_REQUIRED, rules.RULE_NUMERISCH]"
+            :rules="[
+              rules.required(t('composables.rules.required')),
+              rules.integer(),
+            ]"
             :label="t('components.konfigurationForm.mindestalter')"
             persistent-placeholder
             density="compact"
@@ -118,7 +121,10 @@
         >
           <v-text-field
             v-model="konfiguration.alterbis"
-            :rules="[rules.RULE_REQUIRED, rules.RULE_NUMERISCH]"
+            :rules="[
+              rules.required(t('composables.rules.required')),
+              rules.integer(),
+            ]"
             :label="t('components.konfigurationForm.hoechstalter')"
             persistent-placeholder
             density="compact"
@@ -131,7 +137,7 @@
         <v-col class="col">
           <v-text-field
             v-model="konfiguration.staatsangehoerigkeit"
-            :rules="[rules.RULE_REQUIRED]"
+            :rules="[rules.required(t('composables.rules.required'))]"
             :label="t('components.konfigurationForm.staatsangehoerigkeit')"
             persistent-placeholder
             density="compact"
@@ -144,7 +150,7 @@
         <v-col class="col">
           <v-text-field
             v-model="konfiguration.wohnsitz"
-            :rules="[rules.RULE_REQUIRED]"
+            :rules="[rules.required(t('composables.rules.required'))]"
             :label="t('components.konfigurationForm.wohnsitz')"
             persistent-placeholder
             maxlength="255"
@@ -160,7 +166,7 @@
             v-model="konfiguration.vorlageBestaetigungverfassungstreue_file"
             :show-size="true"
             clearable
-            :rules="[rules.RULE_FILE_VERFASSUNGSTREUE]"
+            :rules="[rules.required(t('composables.rules.required'))]"
             data-test="konfigurationform-fileupload"
           >
             <template #default>
@@ -197,6 +203,7 @@ import type KonfigurationFormData from "@/types/KonfigurationFormData";
 
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useRules } from "vuetify";
 import {
   VBtn,
   VCol,
@@ -210,7 +217,6 @@ import {
   VTextField,
 } from "vuetify/components";
 
-import { useRules } from "@/composables/rules";
 import { BEARBEIGUNGS_MODUS, STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 

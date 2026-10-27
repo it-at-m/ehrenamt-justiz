@@ -40,7 +40,7 @@
         <v-col class="col">
           <v-text-field
             v-model="ewobuergerdata.familienname"
-            :rules="[rules.RULE_REQUIRED]"
+            :rules="[rules.required(t('composables.rules.required'))]"
             :label="t('components.eWOBuergerForm.familienname')"
             persistent-placeholder
             density="compact"
@@ -55,7 +55,7 @@
         <v-col class="col">
           <v-text-field
             v-model="ewobuergerdata.vorname"
-            :rules="[rules.RULE_REQUIRED]"
+            :rules="[rules.required(t('composables.rules.required'))]"
             :label="t('components.eWOBuergerForm.vorname')"
             persistent-placeholder
             density="compact"
@@ -73,8 +73,19 @@
             persistent-placeholder
             :rules="
               ewobuergerdata.validierungdeaktivieren
-                ? [rules.RULE_REQUIRED]
-                : [rules.RULE_REQUIRED, rules.RULE_GEBURTSDATUM]
+                ? [rules.required(t('composables.rules.required'))]
+                : [
+                    rules.required(t('composables.rules.required')),
+                    rules.birthDay!(
+                      konfiguration?.amtsperiodevon,
+                      konfiguration?.altervon,
+                      konfiguration?.alterbis,
+                      t('composables.rules.geburtsdatum', {
+                        alterVon: konfiguration?.altervon,
+                        alterBis: konfiguration?.alterbis,
+                      })
+                    ),
+                  ]
             "
             type="date"
             density="compact"
@@ -114,6 +125,7 @@ import type EWOBuergerSuche from "@/types/EWOBuergerSuche";
 
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useRules } from "vuetify";
 import {
   VBtn,
   VCheckbox,
@@ -124,8 +136,8 @@ import {
 } from "vuetify/components";
 
 import AuthService from "@/api/AuthService";
-import { useRules } from "@/composables/rules";
 import { STATUS_INDICATORS } from "@/Constants";
+import { useGlobalSettingsStore } from "@/stores/globalsettings.ts";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const props = defineProps<{
@@ -137,6 +149,7 @@ const emits = defineEmits<{
   save: [];
 }>();
 const rules = useRules();
+const konfiguration = useGlobalSettingsStore().getKonfiguration;
 const snackbarStore = useSnackbarStore();
 const form = ref();
 
