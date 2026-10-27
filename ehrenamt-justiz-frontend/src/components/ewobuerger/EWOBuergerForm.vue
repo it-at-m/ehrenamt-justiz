@@ -149,7 +149,9 @@ const emits = defineEmits<{
   save: [];
 }>();
 const rules = useRules();
-const konfiguration = useGlobalSettingsStore().getKonfiguration;
+
+const globalSettingsStore = useGlobalSettingsStore();
+const konfiguration = computed(() => globalSettingsStore.getKonfiguration);
 const snackbarStore = useSnackbarStore();
 const form = ref();
 

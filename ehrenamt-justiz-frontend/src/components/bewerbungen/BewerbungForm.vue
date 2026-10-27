@@ -945,8 +945,9 @@ const emits = defineEmits<{
   cancel: [];
 }>();
 const rules = useRules();
-const konfiguration = useGlobalSettingsStore().getKonfiguration;
-const techKonfiguration = useGlobalSettingsStore().getTechnischeKonfiguration;
+const globalSettingsStore = useGlobalSettingsStore();
+const konfiguration = computed(() => globalSettingsStore.getKonfiguration);
+const techKonfiguration = computed(() => globalSettingsStore.getTechnischeKonfiguration);
 const snackbarStore = useSnackbarStore();
 
 const form = ref();
