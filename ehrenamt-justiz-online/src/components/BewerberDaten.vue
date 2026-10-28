@@ -138,7 +138,7 @@ import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { VCol, VContainer, VForm, VRow } from "vuetify/components";
 
-import { useActiveKonfigurationStore } from "@/stores/activeconfig.ts";
+import { useActiveKonfigurationStore } from "@/stores/activeconfig";
 
 const form = ref();
 const errorMsgVorname = ref("");
