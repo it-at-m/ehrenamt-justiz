@@ -15,7 +15,7 @@
       "@intlify/unplugin-vue-i18n/messages"
     ],
     "paths": {
-      "@/*": ["./src/*.ts"]
+      "@/*": ["./src/*"]
     },
     "allowArbitraryExtensions": true,
     "composite": true,
