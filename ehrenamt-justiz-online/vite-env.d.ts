@@ -1,0 +1,3 @@
+interface ViteTypeOptions {
+  strictImportMetaEnv: unknown;
+}

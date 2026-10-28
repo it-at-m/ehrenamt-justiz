@@ -3,26 +3,30 @@ import { fileURLToPath, URL } from "node:url";
 import jsEslintConfig from "@eslint/js";
 import vueI18nEslintConfig from "@intlify/eslint-plugin-vue-i18n";
 import vuePrettierEslintConfigSkipFormatting from "@vue/eslint-config-prettier/skip-formatting";
-import { vueTsConfigs, withVueTs } from "@vue/eslint-config-typescript";
+import {
+  defineConfigWithVueTs,
+  vueTsConfigs,
+} from "@vue/eslint-config-typescript";
 import { ESLint } from "eslint";
 import vueEslintConfig from "eslint-plugin-vue";
 import { includeIgnoreFile } from "eslint/config";
 
-import requireDataTestConfig from "./eslint-require-data-test-plugin.js";
+import requireDataTestConfig from "./eslint-require-data-test-plugin";
 
 const prettierIgnorePath = fileURLToPath(
   new URL(".prettierignore", import.meta.url)
 );
 
-export default withVueTs(
+export default defineConfigWithVueTs(
   ESLint.defaultConfig,
   jsEslintConfig.configs.recommended,
   vueEslintConfig.configs["flat/recommended-error"],
   vueTsConfigs.strict,
   vueTsConfigs.stylistic,
-  vueI18nEslintConfig.configs.recommended,
+  // @ts-expect-error: TS2345 — plugin not providing correct ConfigInput type
+  ...vueI18nEslintConfig.configs.recommended,
   vuePrettierEslintConfigSkipFormatting,
-  requireDataTestConfig.configs["flat/muc-patternlab-vue"],
+  requireDataTestConfig.configs["flat/vuetify"],
   {
     ignores: ["dist", "target", "node_modules", "env.d.ts"],
   },
@@ -49,23 +53,32 @@ export default withVueTs(
           src: "./src",
           extensions: [".ts", ".vue"],
           ignores: [
-            // These keys are used in EhrenamtJustizOnlineService.ts dynamically and cannot be detected by static analysis:
-            "ehrenamtJustizOnlineService.fehlermeldungen.default",
-            "ehrenamtJustizOnlineService.fehlermeldungen.http404",
-            "ehrenamtJustizOnlineService.fehlermeldungen.http409",
-            "ehrenamtJustizOnlineService.fehlermeldungen.http500",
-            "ehrenamtJustizOnlineService.fehlermeldungen.fehlerBeiMethodeGetAktiveKonfiguration",
-            "ehrenamtJustizOnlineService.fehlermeldungen.fehlerBeiMethodeBewerbungSpeichern",
+            // These keys are used dynamically in Helper.ts and cannot be detected by static analysis:
+            "general.schoeffen",
+            "general.ehrenamtlicheVerwaltungsrichter",
           ],
         },
       ],
-      "vue/no-v-html": "off",
+      "vue/no-template-shadow": "off",
+      "vue/no-required-prop-with-default": "off",
     },
     settings: {
       "vue-i18n": {
         localeDir: "./src/locales/*.json",
         messageSyntaxVersion: "^11.0.0",
       },
+      "import/core-modules": ["vue-router/auto-routes"],
+    },
+    languageOptions: {
+      globals: {
+        definePage: "readonly",
+      },
+    },
+  },
+  {
+    files: ["src/routes/**/*.vue"],
+    rules: {
+      "vue/multi-word-component-names": "off",
     },
   },
   includeIgnoreFile(prettierIgnorePath, {
