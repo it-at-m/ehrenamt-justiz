@@ -99,7 +99,7 @@ describe("birthday rule tests", () => {
   ])("validates date $date as $expected", ({ date, expected }, { expect }) => {
     // given
     const validationRule = birthDayRule(
-      new Date("2028-01-01"),
+      "2028-01-01",
       18,
       120,
       errorMessageBirthDayRule

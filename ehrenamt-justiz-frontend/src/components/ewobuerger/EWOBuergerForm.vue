@@ -137,7 +137,7 @@ import {
 
 import AuthService from "@/api/AuthService";
 import { STATUS_INDICATORS } from "@/Constants";
-import { useGlobalSettingsStore } from "@/stores/globalsettings.ts";
+import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const props = defineProps<{

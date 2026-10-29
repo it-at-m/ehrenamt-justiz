@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import type KonfigurationFormData from "@/types/KonfigurationFormData";
 
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VCard, VContainer } from "vuetify/components";
@@ -37,7 +37,7 @@ const snackbarStore = useSnackbarStore();
 const router = useRouter();
 const { t } = useI18n();
 
-const konfigurationData: KonfigurationFormData = reactive({
+const konfigurationData = ref<KonfigurationFormData>({
   aktiv: false,
   ehrenamtjustizart: "VERWALTUNGSRICHTER",
   bezeichnung: "",
@@ -50,6 +50,7 @@ const konfigurationData: KonfigurationFormData = reactive({
   action: BEARBEIGUNGS_MODUS.EDIT_MODUS,
   vorlageBestaetigungverfassungstreue_file: undefined,
 });
+
 const animationAktiv = ref(false);
 
 async function save() {
@@ -58,17 +59,18 @@ async function save() {
     await KonfigurationApiService.updateKonfiguration(
       {
         id: undefined,
-        ehrenamtjustizart: konfigurationData.ehrenamtjustizart,
-        bezeichnung: konfigurationData.bezeichnung,
-        aktiv: konfigurationData.aktiv,
-        amtsperiodevon: konfigurationData.amtsperiodevon.trim(),
-        amtsperiodebis: konfigurationData.amtsperiodebis.trim(),
-        staatsangehoerigkeit: konfigurationData.staatsangehoerigkeit.trim(),
-        wohnsitz: konfigurationData.wohnsitz.trim(),
-        altervon: konfigurationData.altervon,
-        alterbis: konfigurationData.alterbis,
+        ehrenamtjustizart: konfigurationData.value.ehrenamtjustizart,
+        bezeichnung: konfigurationData.value.bezeichnung,
+        aktiv: konfigurationData.value.aktiv,
+        amtsperiodevon: konfigurationData.value.amtsperiodevon.trim(),
+        amtsperiodebis: konfigurationData.value.amtsperiodebis.trim(),
+        staatsangehoerigkeit:
+          konfigurationData.value.staatsangehoerigkeit.trim(),
+        wohnsitz: konfigurationData.value.wohnsitz.trim(),
+        altervon: konfigurationData.value.altervon,
+        alterbis: konfigurationData.value.alterbis,
       },
-      konfigurationData.vorlageBestaetigungverfassungstreue_file
+      konfigurationData.value.vorlageBestaetigungverfassungstreue_file
     );
     await router.push({
       name: "/konfiguration/konfigurationindex",
