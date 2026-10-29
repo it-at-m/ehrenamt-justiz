@@ -1,8 +1,8 @@
 import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData";
 
-import EntityApiService from "@/api/EntityApiService.ts";
-import { getGETConfig } from "@/api/FetchUtils.ts";
-import HttpMethod from "@/types/base/HttpMethod.ts";
+import EntityApiService from "@/api/EntityApiService";
+import { getGETConfig } from "@/api/FetchUtils";
+import HttpMethod from "@/types/base/HttpMethod";
 
 class TechnischeKonfigurationApiServiceClass {
   public getTechnischeKonfiguration(): Promise<TechnischeKonfigurationData> {
