@@ -28,7 +28,7 @@
     "vue": "3.5.44",
     "vue-router": "5.4.0",
     "vuetify": "4.3.1",
-    "sass-embedded": "1.105.2",
+    "sass-embedded": "1.107.0",
     "vue-i18n": "11.4.14"
   },
   "devDependencies": {
