@@ -68,7 +68,7 @@
           >
             {{ t("allgemeineInfo.buttons.weiter") }}
             <svg class="m-button__icon">
-              <use href="#icon-arrow-right"></use>
+              <use href="#icon-arrow-right" />
             </svg>
           </muc-button>
         </v-col>
@@ -79,8 +79,7 @@
           md="10"
           lg="10"
           xl="10"
-        >
-        </v-col>
+        />
       </v-row>
     </v-form>
   </v-container>

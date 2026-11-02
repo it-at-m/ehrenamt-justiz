@@ -13,7 +13,7 @@
       <v-progress-circular
         v-if="!isConfigLoaded"
         indeterminate
-      ></v-progress-circular>
+      />
       <router-view v-slot="{ Component }">
         <v-fade-transition mode="out-in">
           <component :is="Component" />

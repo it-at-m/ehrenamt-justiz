@@ -83,7 +83,7 @@
           >
             {{ t("bewerberDaten.buttons.zurueck") }}
             <svg class="m-button__icon">
-              <use href="#icon-arrow-left"></use>
+              <use href="#icon-arrow-left" />
             </svg>
           </muc-button>
         </v-col>
@@ -102,7 +102,7 @@
           >
             {{ t("bewerberDaten.buttons.weiter") }}
             <svg class="m-button__icon">
-              <use href="#icon-arrow-right"></use>
+              <use href="#icon-arrow-right" />
             </svg>
           </muc-button>
         </v-col>
@@ -120,7 +120,7 @@
             @click="clearInputs()"
             >{{ t("bewerberDaten.buttons.leeren") }}
             <svg class="m-button__icon">
-              <use href="#icon-close"></use>
+              <use href="#icon-close" />
             </svg>
           </muc-button>
         </v-col>

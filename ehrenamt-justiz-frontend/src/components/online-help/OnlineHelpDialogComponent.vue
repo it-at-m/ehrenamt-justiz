@@ -10,7 +10,7 @@
       <v-toolbar-title>{{
         t("components.onlineHelpDialogComponent.onlineHilfe")
       }}</v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-icon
         :icon="mdiClose"
         @click="closeOnlineHelp()"
