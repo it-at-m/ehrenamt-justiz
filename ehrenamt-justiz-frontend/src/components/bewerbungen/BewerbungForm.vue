@@ -857,7 +857,7 @@
                         'components.bewerbungForm.tabBestaetigungVerfassungstreue.dateiDurchsuchen'
                       )
                     "
-                  ></v-file-upload-dropzone>
+                  />
 
                   <v-file-upload-list class="upload-list">
                     <template #default="{ files, onClickRemove }">

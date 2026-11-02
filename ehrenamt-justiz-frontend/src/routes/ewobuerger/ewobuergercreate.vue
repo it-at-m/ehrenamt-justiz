@@ -11,7 +11,7 @@
         :e-w-o-buerger-data="ewoBuergerSelect"
         @cancel-buerger-select="cancelBuergerSelect"
         @select-buerger="einBuergerAusgewaehlt"
-      ></e-w-o-buerger-select>
+      />
     </v-card>
     <online-help-dialog-component
       :helptext="t('routes.ewobuergercreate.onlineHelp')"

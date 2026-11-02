@@ -17,7 +17,7 @@
               autofocus
               data-test="bewerbungtable-suche-textfield"
               @keydown.enter.prevent="enableReload && reload()"
-            ></v-text-field>
+            />
           </v-col>
           <v-col
             class="col"
@@ -192,7 +192,7 @@
             :model-value="allSelected"
             color="primary"
             @update:model-value="selectAll(!allSelected)"
-          ></v-checkbox-btn>
+          />
         </template>
         <template #no-data>
           {{ t("general.listeIstLeer") }}
@@ -209,7 +209,7 @@
           abbruchBewerberAufVorschlagslisteUebernehmen
         "
         @invalide-personen-select="bewerberAufVorschlagslisteUebernehmen"
-      ></invalide-personen-select>
+      />
     </v-card>
     <yes-no-dialog
       v-model="yesNoDialogVisible"

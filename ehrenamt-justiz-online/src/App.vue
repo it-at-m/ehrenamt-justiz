@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <div v-html="mucIconsSprite"></div>
-    <div v-html="customIconsSprite"></div>
+    <div v-html="mucIconsSprite" />
+    <div v-html="customIconsSprite" />
     <v-main style="background-color: #f5f8fa">
       <v-container
         class="main-container"

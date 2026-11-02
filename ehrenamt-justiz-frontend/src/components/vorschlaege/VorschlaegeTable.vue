@@ -17,7 +17,7 @@
               autofocus
               data-test="vorschlaegetable-suche-textfield"
               @keydown.enter.prevent="enableReload && reload()"
-            ></v-text-field>
+            />
           </v-col>
           <v-col
             class="col"
@@ -194,7 +194,7 @@
             data-test="vorschlaegetable-selectall-checkbox"
             color="primary"
             @update:model-value="selectAll(!allSelected)"
-          ></v-checkbox-btn>
+          />
         </template>
         <template #no-data>
           {{ t("general.listeIstLeer") }}

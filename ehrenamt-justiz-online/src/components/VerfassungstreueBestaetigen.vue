@@ -16,7 +16,7 @@
           >
             {{ t("verfassungstreue.buttons.musterHerunterladen") }}
             <svg class="m-button__icon">
-              <use href="#icon-download"></use>
+              <use href="#icon-download" />
             </svg>
           </muc-button>
           <p>
@@ -85,7 +85,7 @@
         >
           {{ t("verfassungstreue.buttons.zurueck") }}
           <svg class="m-button__icon">
-            <use href="#icon-arrow-left"></use>
+            <use href="#icon-arrow-left" />
           </svg>
         </muc-button>
       </v-col>
@@ -104,7 +104,7 @@
         >
           {{ t("verfassungstreue.buttons.speichern") }}
           <svg class="m-button__icon">
-            <use href="#icon-floppy"></use>
+            <use href="#icon-floppy" />
           </svg>
         </muc-button>
       </v-col>

@@ -175,7 +175,7 @@
                 :title="t('components.konfigurationForm.dateiAblegen')"
                 :subtitle="t('components.konfigurationForm.dateiDurchsuchen')"
                 data-test="konfigurationform-uploaddropzone"
-              ></v-file-upload-dropzone>
+              />
 
               <v-file-upload-list class="upload-list">
                 <template #default="{ files, onClickRemove }">
