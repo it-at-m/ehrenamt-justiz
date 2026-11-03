@@ -162,8 +162,8 @@ import {
   VTooltip,
 } from "vuetify/components";
 
-import AuthService from "@/api/AuthService";
-import { PersonApiService } from "@/api/PersonApiService";
+import AuthService from "@/apis/AuthService";
+import { PersonApiService } from "@/apis/PersonApiService";
 import DeleteDialog from "@/components/common/DeleteDialog.vue";
 import { PERSONENSTATUS, STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";

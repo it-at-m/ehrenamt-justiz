@@ -134,7 +134,7 @@ import { nextTick, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { VContainer } from "vuetify/components";
 
-import { EhrenamtJustizOnlineServiceClass } from "@/api/EhrenamtJustizOnlineService";
+import { EhrenamtJustizOnlineServiceClass } from "@/apis/EhrenamtJustizOnlineService";
 import AllgemeineInfo from "@/components/AllgemeineInfo.vue";
 import BewerberDaten from "@/components/BewerberDaten.vue";
 import LogoLHM from "@/components/LogoLHM.vue";

@@ -135,7 +135,7 @@ import {
   VTextField,
 } from "vuetify/components";
 
-import AuthService from "@/api/AuthService";
+import AuthService from "@/apis/AuthService";
 import { STATUS_INDICATORS } from "@/Constants";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { useSnackbarStore } from "@/stores/snackbar";

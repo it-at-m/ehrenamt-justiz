@@ -922,7 +922,7 @@ import {
   VTextField,
 } from "vuetify/components";
 
-import AuthService from "@/api/AuthService";
+import AuthService from "@/apis/AuthService";
 import YesNoDialog from "@/components/common/YesNoDialog.vue";
 import { useSaveLeave } from "@/composables/useSaveLeave";
 import {

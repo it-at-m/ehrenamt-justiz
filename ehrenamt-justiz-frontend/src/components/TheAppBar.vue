@@ -127,9 +127,9 @@ import {
   VTooltip,
 } from "vuetify/components";
 
-import { EhrenamtJustizService } from "@/api/EhrenamtJustizService";
-import { EWOBuergerApiService } from "@/api/EWOBuergerApiService";
-import { checkHealth } from "@/api/HealthService";
+import { EhrenamtJustizService } from "@/apis/EhrenamtJustizService";
+import { EWOBuergerApiService } from "@/apis/EWOBuergerApiService";
+import { checkHealth } from "@/apis/HealthService";
 import Ad2ImageAvatar from "@/components/common/Ad2ImageAvatar.vue";
 import ThemeToggleBtn from "@/components/common/ThemeToggleBtn.vue";
 import { APPSWITCHER_URL } from "@/Constants";

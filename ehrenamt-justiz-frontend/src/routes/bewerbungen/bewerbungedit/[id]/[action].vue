@@ -25,7 +25,7 @@ import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import { VContainer, VProgressLinear } from "vuetify/components";
 
-import { PersonApiService } from "@/api/PersonApiService";
+import { PersonApiService } from "@/apis/PersonApiService";
 import BewerbungForm from "@/components/bewerbungen/BewerbungForm.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
 import { PERSONENSTATUS, STATUS_INDICATORS } from "@/Constants";

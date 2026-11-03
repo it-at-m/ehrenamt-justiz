@@ -252,9 +252,9 @@ import {
   VTooltip,
 } from "vuetify/components";
 
-import AuthService from "@/api/AuthService";
-import { EhrenamtJustizService } from "@/api/EhrenamtJustizService";
-import { PersonApiService } from "@/api/PersonApiService";
+import AuthService from "@/apis/AuthService";
+import { EhrenamtJustizService } from "@/apis/EhrenamtJustizService";
+import { PersonApiService } from "@/apis/PersonApiService";
 import DeleteDialog from "@/components/common/DeleteDialog.vue";
 import YesNoDialog from "@/components/common/YesNoDialog.vue";
 import {

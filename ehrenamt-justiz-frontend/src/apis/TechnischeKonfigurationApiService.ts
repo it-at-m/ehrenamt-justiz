@@ -1,7 +1,7 @@
 import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData";
 
-import EntityApiService from "@/api/EntityApiService";
-import { getGETConfig } from "@/api/FetchUtils";
+import EntityApiService from "@/apis/EntityApiService";
+import { getGETConfig } from "@/apis/FetchUtils";
 import HttpMethod from "@/types/base/HttpMethod";
 
 class TechnischeKonfigurationApiServiceClass {

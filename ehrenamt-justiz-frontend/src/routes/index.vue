@@ -25,7 +25,7 @@ import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { VCol, VContainer, VImg, VRow } from "vuetify/components";
 
-import { checkHealth } from "@/api/healthstate-client";
+import { checkHealth } from "@/apis/healthstate-client";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
 import { STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";

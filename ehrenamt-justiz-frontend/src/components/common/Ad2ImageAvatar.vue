@@ -11,7 +11,7 @@
 import { computed } from "vue";
 import { VAvatar } from "vuetify/components";
 
-import { getAvatarHref } from "@/api/ad2imageavatar-client";
+import { getAvatarHref } from "@/apis/ad2imageavatar-client";
 
 const {
   username,

@@ -3,9 +3,9 @@ import type PersonCSV from "@/types/PersonCSV";
 
 import { asBlob, generateCsv, mkConfig } from "export-to-csv";
 
-import EntityApiService from "@/api/EntityApiService";
-import { getGETConfig, getPOSTConfig } from "@/api/FetchUtils";
-import { PersonApiService } from "@/api/PersonApiService";
+import EntityApiService from "@/apis/EntityApiService";
+import { getGETConfig, getPOSTConfig } from "@/apis/FetchUtils";
+import { PersonApiService } from "@/apis/PersonApiService";
 import { useGlobalSettingsStore } from "@/stores/globalsettings";
 import { formattedEhrenamtjustizart } from "@/tools/Helper";
 import HttpMethod from "@/types/base/HttpMethod";

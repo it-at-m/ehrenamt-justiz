@@ -22,8 +22,8 @@ import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import { VContainer, VProgressLinear } from "vuetify/components";
 
-import { EWOBuergerApiService } from "@/api/EWOBuergerApiService";
-import { PersonApiService } from "@/api/PersonApiService";
+import { EWOBuergerApiService } from "@/apis/EWOBuergerApiService";
+import { PersonApiService } from "@/apis/PersonApiService";
 import KonflikteLoesenForm from "@/components/konflikte/KonflikteLoesenForm.vue";
 import { STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";

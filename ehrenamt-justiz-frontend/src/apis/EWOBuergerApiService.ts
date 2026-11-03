@@ -2,9 +2,9 @@ import type EWOBuergerData from "@/types/EWOBuergerData";
 import type EWOBuergerSuche from "@/types/EWOBuergerSuche";
 import type PersonData from "@/types/PersonData";
 
-import { ApiError } from "@/api/ApiError";
-import EntityApiService from "@/api/EntityApiService";
-import { getGETConfig, getPOSTConfig } from "@/api/FetchUtils";
+import { ApiError } from "@/apis/ApiError";
+import EntityApiService from "@/apis/EntityApiService";
+import { getGETConfig, getPOSTConfig } from "@/apis/FetchUtils";
 import { STATUS_INDICATORS } from "@/Constants";
 import HttpMethod from "@/types/base/HttpMethod";
 

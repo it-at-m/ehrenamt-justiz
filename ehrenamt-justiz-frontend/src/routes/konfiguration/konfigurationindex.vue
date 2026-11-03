@@ -41,7 +41,7 @@ import {
   VRow,
 } from "vuetify/components";
 
-import AuthService from "@/api/AuthService";
+import AuthService from "@/apis/AuthService";
 import KonfigurationList from "@/components/konfiguration/KonfigurationList.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
 
