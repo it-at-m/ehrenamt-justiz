@@ -37,8 +37,8 @@ import {
   VProgressCircular,
 } from "vuetify/components";
 
-import { KonfigurationApiService } from "@/api/KonfigurationApiService";
-import { TechnischeKonfigurationApiService } from "@/api/TechnischeKonfigurationApiService.ts";
+import { KonfigurationApiService } from "@/apis/KonfigurationApiService";
+import { TechnischeKonfigurationApiService } from "@/apis/TechnischeKonfigurationApiService.ts";
 import TheAppBar from "@/components/TheAppBar.vue";
 import TheNavigationDrawer from "@/components/TheNavigationDrawer.vue";
 import TheSnackbarQueue from "@/components/TheSnackbarQueue.vue";

@@ -142,8 +142,8 @@ import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VBtn, VCol, VContainer, VHover, VRow } from "vuetify/components";
 
-import { EhrenamtJustizService } from "@/api/EhrenamtJustizService";
-import { PersonApiService } from "@/api/PersonApiService";
+import { EhrenamtJustizService } from "@/apis/EhrenamtJustizService";
+import { PersonApiService } from "@/apis/PersonApiService";
 import YesNoDialog from "@/components/common/YesNoDialog.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
 import { STATUS_INDICATORS } from "@/Constants";

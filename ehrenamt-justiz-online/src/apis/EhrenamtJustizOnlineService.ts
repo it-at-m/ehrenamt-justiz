@@ -3,7 +3,7 @@ import type KonfigurationData from "@/types/KonfigurationData";
 import type OnlineBewerbungData from "@/types/OnlineBewerbungData";
 import type TechnischeKonfigurationData from "@/types/TechnischeKonfigurationData";
 
-import { getGETConfig, getPOSTConfig } from "@/api/FetchUtils";
+import { getGETConfig, getPOSTConfig } from "@/apis/FetchUtils";
 import { API_BASE } from "@/Constants";
 import HttpMethod from "@/types/base/HttpMethod";
 import { ApiError, Levels } from "./error";

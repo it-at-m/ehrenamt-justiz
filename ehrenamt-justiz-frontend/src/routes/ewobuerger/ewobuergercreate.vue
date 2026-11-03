@@ -28,7 +28,7 @@ import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VCard, VContainer } from "vuetify/components";
 
-import { EWOBuergerApiService } from "@/api/EWOBuergerApiService";
+import { EWOBuergerApiService } from "@/apis/EWOBuergerApiService";
 import EWOBuergerForm from "@/components/ewobuerger/EWOBuergerForm.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
 import { BEARBEIGUNGS_MODUS, STATUS_INDICATORS } from "@/Constants";

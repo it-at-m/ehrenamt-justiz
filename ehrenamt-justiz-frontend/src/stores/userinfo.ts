@@ -3,7 +3,7 @@ import type { UserInfo } from "@/types/UserInfo";
 import { defineStore } from "pinia";
 import { readonly, ref } from "vue";
 
-import { getUserInfo } from "@/api/userinfo-client";
+import { getUserInfo } from "@/apis/userinfo-client";
 import { STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 

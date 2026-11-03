@@ -11,7 +11,7 @@ import {
   nationalityRule,
   placeOfResidenceRule,
   uniqueRule,
-} from "@/util/custom-rules";
+} from "@/utils/custom-rules";
 
 /**
  * Plugin that registers Vuetify-provided rules (see https://v4.vuetifyjs.com/en/features/rules/#api) and custom validation rules for use with

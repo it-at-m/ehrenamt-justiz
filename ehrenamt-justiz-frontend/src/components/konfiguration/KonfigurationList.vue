@@ -49,7 +49,7 @@ import {
   VProgressLinear,
 } from "vuetify/components";
 
-import { KonfigurationApiService } from "@/api/KonfigurationApiService";
+import { KonfigurationApiService } from "@/apis/KonfigurationApiService";
 import KonfigurationListItem from "@/components/konfiguration/KonfigurationListItem.vue";
 import { STATUS_INDICATORS } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";

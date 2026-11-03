@@ -52,7 +52,7 @@ import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { VApp, VContainer, VMain } from "vuetify/components";
 
-import { EhrenamtJustizOnlineServiceClass } from "@/api/EhrenamtJustizOnlineService";
+import { EhrenamtJustizOnlineServiceClass } from "@/apis/EhrenamtJustizOnlineService";
 import { useActiveKonfigurationStore } from "@/stores/activeconfig";
 import MainView from "@/views/MainView.vue";
 

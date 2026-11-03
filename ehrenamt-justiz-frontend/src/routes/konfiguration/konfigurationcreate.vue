@@ -27,7 +27,7 @@ import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VCard, VContainer } from "vuetify/components";
 
-import { KonfigurationApiService } from "@/api/KonfigurationApiService";
+import { KonfigurationApiService } from "@/apis/KonfigurationApiService";
 import KonfigurationForm from "@/components/konfiguration/KonfigurationForm.vue";
 import OnlineHelpDialogComponent from "@/components/online-help/OnlineHelpDialogComponent.vue";
 import { BEARBEIGUNGS_MODUS, STATUS_INDICATORS } from "@/Constants";

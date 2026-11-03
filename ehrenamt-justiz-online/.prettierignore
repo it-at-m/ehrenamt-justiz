@@ -1,4 +1,4 @@
 # Used for Prettier and ESLint
 dist
 node_modules
-src/api/generated/*/**
+src/apis/generated/*/**

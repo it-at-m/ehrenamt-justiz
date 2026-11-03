@@ -8,7 +8,7 @@ import {
   nationalityRule,
   placeOfResidenceRule,
   uniqueRule,
-} from "@/util/custom-rules";
+} from "@/utils/custom-rules";
 
 const valid = (result: unknown) => assert.isTrue(result);
 const error = (result: unknown) => assert.isString(result);

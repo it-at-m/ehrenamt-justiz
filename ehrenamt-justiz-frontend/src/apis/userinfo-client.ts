@@ -4,7 +4,7 @@ import {
   defaultCatchHandler,
   defaultResponseHandler,
   getGETConfig,
-} from "@/api/FetchUtils";
+} from "@/apis/FetchUtils";
 import { USERINFO_EMPTY } from "@/types/UserInfo";
 
 /**

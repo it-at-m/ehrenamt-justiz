@@ -67,8 +67,8 @@ import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { VBtn, VListItem, VTooltip } from "vuetify/components";
 
-import AuthService from "@/api/AuthService";
-import { KonfigurationApiService } from "@/api/KonfigurationApiService";
+import AuthService from "@/apis/AuthService";
+import { KonfigurationApiService } from "@/apis/KonfigurationApiService";
 import DeleteDialog from "@/components/common/DeleteDialog.vue";
 import ListItemActions from "@/components/common/ListItemActions.vue";
 import YesNoDialog from "@/components/common/YesNoDialog.vue";

@@ -1,8 +1,8 @@
 import type DocumentData from "@/types/DocumentData";
 import type KonfigurationData from "@/types/KonfigurationData";
 
-import EntityApiService from "@/api/EntityApiService";
-import { getGETConfig, getPOSTConfig } from "@/api/FetchUtils";
+import EntityApiService from "@/apis/EntityApiService";
+import { getGETConfig, getPOSTConfig } from "@/apis/FetchUtils";
 import HttpMethod from "@/types/base/HttpMethod";
 
 class KonfigurationApiServiceClass extends EntityApiService<KonfigurationData> {

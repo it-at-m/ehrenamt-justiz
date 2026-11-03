@@ -4,8 +4,8 @@ import type PersonCSV from "@/types/PersonCSV";
 import type PersonData from "@/types/PersonData";
 import type PersonenTableData from "@/types/PersonenTableData";
 
-import EntityApiService from "@/api/EntityApiService";
-import { getGETConfig, getPOSTConfig } from "@/api/FetchUtils";
+import EntityApiService from "@/apis/EntityApiService";
+import { getGETConfig, getPOSTConfig } from "@/apis/FetchUtils";
 import HttpMethod from "@/types/base/HttpMethod";
 
 interface SortItem {
