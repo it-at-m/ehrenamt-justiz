@@ -201,7 +201,7 @@ services:
   frontend:
     profiles:
       - frontend
-    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:dev@sha256:3de04ef1c22feb4717858370df5136f9521d2875aeea6b8c579840af00d7251d
+    image: ghcr.io/it-at-m/ehrenamt-justiz/ehrenamt-justiz-frontend:dev@sha256:990f89bcc23cb714ee0c464711828681979ef2c486b91e9f997af068fb52f2a6
     ports:
       - "8081:8080"
     networks:
