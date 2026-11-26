@@ -108,7 +108,7 @@ class EhrenamtJustizIntegrationsTest {
         final var headers = new HttpHeaders(); //NOPMD
         headers.setContentType(MediaType.APPLICATION_JSON);
         final EWOBuergerDatenDto eWOBuergerDatenDto = new EWOBuergerDatenDto();
-        eWOBuergerDatenDto.setOrdnungsmerkmal("4711");
+        eWOBuergerDatenDto.setOrdnungsmerkmal(person.getEwoid());
 
         restTestClient.post()
                 .uri("/ehrenamtjustiz/pruefenNeuePerson")

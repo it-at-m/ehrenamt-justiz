@@ -77,8 +77,8 @@ class DocumentIntegrationsTest {
 
     @BeforeEach
     void setUp() {
-        personRepository.deleteAll();
         documentRepository.deleteAll();
+        personRepository.deleteAll();
         konfigurationRepository.deleteAll();
 
         // insert new configuration
