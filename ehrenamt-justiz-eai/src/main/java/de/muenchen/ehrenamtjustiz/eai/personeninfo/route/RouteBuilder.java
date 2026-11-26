@@ -1,12 +1,16 @@
 package de.muenchen.ehrenamtjustiz.eai.personeninfo.route;
 
 import de.muenchen.ehrenamtjustiz.api.BuergerSucheAnfrage;
+import de.muenchen.ehrenamtjustiz.api.EWOBuerger;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.config.Configuration;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.config.Konstanten;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.exception.DefaultErrorProjection;
 import de.muenchen.ehrenamtjustiz.eai.personeninfo.exception.Fehler;
+import de.muenchen.ewo.generated.PersonErweitert;
+import de.muenchen.ewo.generated.SuchePersonerweitertAntwort;
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
+import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.apache.camel.model.rest.RestHostNameResolver;
 import org.apache.camel.model.rest.RestParamType;
@@ -28,8 +32,8 @@ public class RouteBuilder extends BasicRouteBuilder {
     public static final String EP_PROCESS_GET_PERSONENINFO = "direct:processGetEWOPERSONENINFO";
     public static final String EP_PROCESS_GET_PERSONENINFO_EWOSUCHE = "direct:processGetEWOPERSONENINFO_EWOSUCHE";
     public static final String EP_SEND_TO_EWO_PERSONENINFO = "direct:sndToEWOPERSONENINFO";
-
     public static final String EP_SEND_TO_EWO_PERSONENINFO_SUCHE = "direct:sndToEWOPERSONENINFO_EWOSUCHE";
+    public static final String ID_PERSONENINFOCALL = "personeninfoCall";
 
     private static final String BEAN_MAPPER = "mappingBean";
 
@@ -69,7 +73,7 @@ public class RouteBuilder extends BasicRouteBuilder {
         onException(Throwable.class)
                 .handled(true)
                 .removeHeaders("*").id("removeHeadersOnException")
-                .log(LoggingLevel.WARN, "onException von ProcessCxfRequest - ${exception}")
+                .log(LoggingLevel.WARN, "onException von ProcessRequest - ${exception}")
                 .process("fehlerWrapper").id("fehlerWrapper")
         ;
 
@@ -106,7 +110,9 @@ public class RouteBuilder extends BasicRouteBuilder {
         // Search for citizens
         rest(Konstanten.PERSONENINFO_SUB_PATH_EWO_SUCHE).description("Zugriff auf Personeninformationen von EWO über freie Suchfelder")
                 .post()
+                .bindingMode(RestBindingMode.json)
                 .type(BuergerSucheAnfrage.class)
+                .outType(EWOBuerger[].class)
                 .produces("application/json;charset=UTF-8")
                 .responseMessage().code(HttpStatus.SC_NOT_FOUND)
                 .message("Die angeforderte Ressource wurde nicht gefunden").responseModel(Fehler.class).endResponseMessage()
@@ -126,7 +132,6 @@ public class RouteBuilder extends BasicRouteBuilder {
         // preparation and post-processing to get a citizen by id
         from(EP_PROCESS_GET_PERSONENINFO)
                 .routeId(buildRouteID(EP_PROCESS_GET_PERSONENINFO))
-                .bean(BEAN_MAPPER, "toEWOLesen").id("mapToEWOLesen")
                 .enrich(EP_SEND_TO_EWO_PERSONENINFO, new ReplaceOldBodyStrategy())
                 .setHeader(Exchange.CONTENT_TYPE, constant(MediaType.APPLICATION_JSON_VALUE))
                 .bean(BEAN_MAPPER, "fromEWOLesen").id("mapFromEWOLesen")
@@ -135,16 +140,18 @@ public class RouteBuilder extends BasicRouteBuilder {
         // Call the service of registration of residents to get a citizen by id
         from(EP_SEND_TO_EWO_PERSONENINFO)
                 .routeId(buildRouteID(EP_SEND_TO_EWO_PERSONENINFO))
-                .removeHeaders("*")
-                .to("{{api.cxf.producer.uri.personeninfo}}")
-                ;
+                .removeHeaders("*", "om")
+                .setHeader(Exchange.HTTP_METHOD, constant("GET"))
+                .toD("{{api.producer.uri.personeninfo}}"+"${header.om}"+"{{api.producer.uri.personeninfoparameter}}").id(ID_PERSONENINFOCALL)
+                .convertBodyTo(String.class, "UTF-8")
+                .unmarshal().json(JsonLibrary.Jackson, PersonErweitert.class)
+        ;
 
         // preparation and post-processing to search for citizens
         from(EP_PROCESS_GET_PERSONENINFO_EWOSUCHE)
                 .routeId(EP_PROCESS_GET_PERSONENINFO_EWOSUCHE)
                 .bean(BEAN_MAPPER, "toEWOSuche").id("mapToEWOSuche")
                 .enrich(EP_SEND_TO_EWO_PERSONENINFO_SUCHE, new ReplaceOldBodyStrategy())
-                .setHeader(Exchange.CONTENT_TYPE, constant(MediaType.APPLICATION_JSON_VALUE))
                 .bean(BEAN_MAPPER, "fromEWOSuche").id("mapFromEWOSuche")
         ;
 
@@ -152,9 +159,12 @@ public class RouteBuilder extends BasicRouteBuilder {
         from(EP_SEND_TO_EWO_PERSONENINFO_SUCHE)
                 .routeId(buildRouteID(EP_SEND_TO_EWO_PERSONENINFO_SUCHE))
                 .removeHeaders("*")
-                .to("{{api.cxf.producer.uri.personeninfoewosuche}}")
+                .setHeader(Exchange.HTTP_METHOD, constant("POST"))
+                .marshal().json(JsonLibrary.Jackson, true).end()
+                .to("{{api.producer.uri.personeninfoewosuche}}")
+                .convertBodyTo(String.class, "UTF-8")
+                .unmarshal().json(JsonLibrary.Jackson, SuchePersonerweitertAntwort.class)
         ;
-
         //@formatter:on
     }
 }

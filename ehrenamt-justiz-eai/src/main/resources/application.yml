@@ -20,12 +20,13 @@ api:
   api:
     schema-version: @project.version@
     service-version: @project.version@
-  cxf:
-    producer:
-      uri:
-        personeninfo: "cxf:bean:ewoPersonErweitertServiceEndpointLesePersonErweitert?defaultOperationName=lesePersonErweitert"
-        personeninfoewosuche: "cxf:bean:ewoPersonErweitertServiceEndpointSuchePersonErweitert?defaultOperationName=suchePersonErweitert"
-      timeout: 5000
+  producer:
+    uri:
+      personeninfo: ${api.producer.host}/personen/2.0/rest/personErweitert/
+      personeninfoparameter: ?benutzerId=ehrju&authMethod=Basic&authUsername=${api.producer.user}&authPassword=RAW(${api.producer.password})&authenticationPreemptive=true&socketTimeout=${api.producer.timeout}
+      personeninfoewosuche: ${api.producer.host}/personen/2.0/rest/personErweitert/search${api.producer.uri.personeninfoewosucheparameter}
+      personeninfoewosucheparameter: ?authMethod=Basic&authUsername=${api.producer.user}&authPassword=RAW(${api.producer.password})&authenticationPreemptive=true&socketTimeout=${api.producer.timeout}
+    timeout: 5000
   auth:
     roles:
       BASIC: getPersoneninfo
@@ -53,6 +54,12 @@ info:
 
 app:
   version: "@project.version@"
+
+camel:
+  dataformat:
+    jackson:
+      module-class-names: com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+      auto-discover-object-mapper: true
 
 logging:
   level:

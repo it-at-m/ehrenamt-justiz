@@ -15,6 +15,10 @@ api:
     doTracing: true
     doProcesstimeLogging: true
     doInterceptFrom: true
+  producer:
+    user:
+    password:
+    host:
 
 logging:
   include-application-group: false # disabled because application group is only relevant when deployed
@@ -29,13 +33,5 @@ logging:
     org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer: INFO
     de.muenchen.ehrenamtjustiz.eai.personeninfo: DEBUG
     route.interceptedFrom: WARN
-    org.apache.cxf.services: INFO
     org.springframework.cache: TRACE
     org.springframework.web: DEBUG
-
-producer:
-  user: ${PRODUCER_USER}
-  password: ${PRODUCER_PASSWORD}
-ewo:
-  eai:
-    url: https://micro-ewo-apigateway-eai-service-test-ewo-eai.muenchen.de:8443/personen/2.0/soap/personErweitert
