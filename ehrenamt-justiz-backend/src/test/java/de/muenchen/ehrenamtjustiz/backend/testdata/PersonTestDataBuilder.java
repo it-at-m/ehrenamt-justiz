@@ -16,11 +16,13 @@ public class PersonTestDataBuilder {
 
     private final Person person = new Person();
 
+    private static final Random RANDOM = new Random();
+
     public PersonTestDataBuilder() {
 
         person.setId(UUID.randomUUID());
         person.setStatus(Status.VORSCHLAG);
-        person.setEwoid(String.valueOf(new Random().nextInt()));
+        person.setEwoid(String.valueOf(RANDOM.nextInt()));
         person.setFamilienname("Müller");
         person.setVorname("Hans");
         person.setGeburtsort(MUENCHEN);
