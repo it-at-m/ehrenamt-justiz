@@ -115,6 +115,8 @@ public class DocumentTest {
                     .returnResult()
                     .getResponseBody();
 
+            DocumentRepository.deleteById(requestDTO.getId());
+
         }
     }
 

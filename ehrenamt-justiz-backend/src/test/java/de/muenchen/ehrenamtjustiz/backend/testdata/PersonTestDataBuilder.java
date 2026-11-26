@@ -7,6 +7,7 @@ import de.muenchen.ehrenamtjustiz.backend.domain.enums.Wohnungsstatus;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 public class PersonTestDataBuilder {
@@ -19,7 +20,7 @@ public class PersonTestDataBuilder {
 
         person.setId(UUID.randomUUID());
         person.setStatus(Status.VORSCHLAG);
-        person.setEwoid("4711");
+        person.setEwoid(String.valueOf(new Random().nextInt()));
         person.setFamilienname("Müller");
         person.setVorname("Hans");
         person.setGeburtsort(MUENCHEN);

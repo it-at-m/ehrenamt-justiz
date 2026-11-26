@@ -1,7 +1,6 @@
 spring:
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
+  main:
+    allow-bean-definition-overriding: true
 
 logging:
   include-application-group: false # disabled because application group is only relevant when deployed
