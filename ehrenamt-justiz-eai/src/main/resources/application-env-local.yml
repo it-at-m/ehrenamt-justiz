@@ -26,6 +26,10 @@ api:
     doProcesstimeLogging: true
     doInterceptFrom: true
     doTracing: true
+  producer:
+    user:
+    password:
+    host: http://localhost:8094
 
 logging:
   include-application-group: false # disabled because application group is only relevant when deployed
@@ -40,13 +44,5 @@ logging:
     org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer: INFO
     de.muenchen.ehrenamtjustiz.eai.personeninfo: DEBUG
     route.interceptedFrom: WARN
-    org.apache.cxf.services: INFO
     org.springframework.cache: TRACE
     org.springframework.web: DEBUG
-
-producer:
-  user: schoeffen
-  password:
-ewo:
-  eai:
-    url: http://localhost:8094/personen/2.0/soap/personErweitert

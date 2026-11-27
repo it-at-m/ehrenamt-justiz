@@ -9,18 +9,13 @@ api:
         password: "$2a$10$D4vHRojMArByIPUc0W7d8ukl8KTPjZYI3zixVOkDyJwV1zfu4ngJC" #actuator
         roles:
           - "ACTUATOR_ROLE"
-
-  cxf:
-    producer:
-      uri:
-        personeninfo: "mock:cxfProducer"
-        personeninfoewosuche: "mock:cxfProducer"
-producer:
+  producer:
+    uri:
+      personeninfo: "mock:producer"
+      personeninfoewosuche: "mock:producer"
     user: ---
     password: ---
-ewo:
-  eai:
-    url: http://localhost:8094/personen/2.0/soap/personErweitert
+    host: localhost:8094
 
 logging:
   include-application-group: false # disabled because application group is only relevant when deployed

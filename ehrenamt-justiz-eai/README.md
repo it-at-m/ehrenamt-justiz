@@ -44,14 +44,14 @@ The API ist definied here:
 
 ## Configuration
 
-Configuration of this EAI in application-[profile].yml:
+Some important Configuration of this EAI in application-[profile].yml:
 
 | Configuration | Description                                                                                                                                                                                          | Default setting |
 | ------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ------------- |
 | spring.port | Port used to run the spring boot application                                                                                                                                                         | 8085 |
-| ewo.eai.url | url of residents' registration system                                                                                                                                                                | http://.... |
-| producer.user | User for authentication on residents' registration system.  In a podman environment, this user must be defined in docker-compose.yml in the environment variable “PRODUCER_USER”.            |  |
-| producer.password | Password for authentication on residents' registration system. In a podman environment, this password must be defined in docker-compose.yml in the environment variable “PRODUCER_PASSWORD”. |  |
+| api.producer.user | User for authentication on residents' registration system.  In a podman environment, this user must be defined in docker-compose.yml in the environment variable “PRODUCER_USER”.            |  |
+| api.producer.password | Password for authentication on residents' registration system. In a podman environment, this password must be defined in docker-compose.yml in the environment variable “PRODUCER_PASSWORD”. |  |
+| api.producer.host | Host for calling  residents' registration system. | http://localhost:8094 |
 | api.auth.users.username | User for authentication on this EAI                                                                                                                                                                  |  |
 | api.auth.users.password | Password for authentication on this EAI                                                                                                                                                              |  |
 
@@ -101,5 +101,4 @@ logging:
     org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer: INFO
     de.muenchen.ehrenamtjustiz.eai.personeninfo: DEBUG
     route.interceptedFrom: WARN
-    org.apache.cxf.services: INFO
 ```

@@ -1,17 +1,12 @@
 {"properties": [{
-    "name": "producer.user",
-    "type": "java.lang.String",
-    "description": "User to authenticate at the resident registration system"
-  },
+  "name": "api.producer.user",
+  "type": "java.lang.String",
+  "description": "User to authenticate at the resident registration system"
+},
   {
-    "name": "producer.password",
+    "name": "api.producer.password",
     "type": "java.lang.String",
     "description": "Password to authenticate at the resident registration system"
-  },
-  {
-    "name": "ewo.eai.url",
-    "type": "java.lang.String",
-    "description": "Technical address (url) for the residents' registration system"
   },
   {
     "name": "api.basicroutebuilder.doProcesstimeLogging",
@@ -34,19 +29,29 @@
     "description": "Authentication (user, password and roles) on this EAI"
   },
   {
-    "name": "api.cxf.producer.uri.personeninfoewosuche",
+    "name": "api.producer.uri.personeninfoewosuche",
     "type": "java.lang.String",
-    "description": "CXF-Bean used for calling the residents' registration system. Used for searching a citizen"
+    "description": "Producer uri used for calling the residents' registration system. Used for searching a citizen"
   },
   {
-    "name": "api.cxf.producer.uri.personeninfo",
+    "name": "api.producer.uri.personeninfoewosucheparameter",
     "type": "java.lang.String",
-    "description": "CXF-Bean used for calling the residents' registration system. Used for retrieving a specific citizen by the id"
+    "description": "Additional parameter for producer uri used for calling the residents' registration system. Used for searching a citizen"
   },
   {
-    "name": "api.cxf.producer.timeout",
+    "name": "api.producer.uri.personeninfo",
     "type": "java.lang.String",
-    "description": "Timeout for the CXF-Bean used for calling the residents' registration system"
+    "description": "Producer uri used for calling the residents' registration system. Used for retrieving a specific citizen by the id"
+  },
+  {
+    "name": "api.producer.uri.personeninfoparameter",
+    "type": "java.lang.String",
+    "description": "Additional parameter for producer uri used for calling the residents' registration system. Used for retrieving a specific citizen by the id"
+  },
+  {
+    "name": "api.producer.timeout",
+    "type": "java.lang.String",
+    "description": "Timeout used for calling the residents' registration system"
   },
   {
     "name": "api.auth.roles.BASIC",

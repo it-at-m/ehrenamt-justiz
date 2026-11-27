@@ -1,95 +1,173 @@
 {
-  "personErweitert": {
-    "ordnungsmerkmal": "162015039514",
-    "personstatus": "AKTUELLER_FESTER_EINWOHNER",
-    "geburtsdaten": {
-      "datum": {
-        "datum": "1990-09-20"
+  "auskunftssperre": null,
+  "ordnungsmerkmal": "1",
+  "personstatus": "AKTUELLER_FESTER_EINWOHNER",
+  "geburtsdaten": {
+    "datum": {
+      "datum": "1940-01-03"
+    },
+    "ort": "München",
+    "staat": null
+  },
+  "geschlecht": "m",
+  "sterbedaten": null,
+  "familienstanddaten": {
+    "familienstand": "VH",
+    "datum": "1981-06-06"
+  },
+  "namen": {
+    "vornamen": [
+      {
+        "vorname": "Christopher",
+        "rufname": true
       },
-      "ort": "Lagos"
+      {
+        "vorname": "Manfred",
+        "rufname": false
+      }
+    ],
+    "familienname": {
+      "name": "König",
+      "namensbestandteil": null,
+      "unstrukturierteSchreibweise": "König"
     },
-    "geschlecht": "m",
-    "familienstanddaten": {
-      "familienstand": "LD"
-    },
+    "geburtsname": null,
+    "ehename": null,
+    "familiennameNachPass": null,
+    "ordensname": null,
+    "kuenstlername": null,
+    "doktorgrad": null
+  },
+  "doktorgradNachweis": null,
+  "sperren": [
+    {
+      "frist": null,
+      "grund": "5"
+    }
+  ],
+  "religion": "rk",
+  "wahldaten": null,
+  "zuzugsdaten": {
+    "zuzugEu": null,
+    "zuzugSamtgemeinde": null,
+    "zuzugOrtsteil": null,
+    "zuzugBund": null,
+    "zuzugLand": null,
+    "zuzugRegierungsbezirk": null,
+    "zuzugKreis": null,
+    "zuzugGemeinde": "1940-01-03",
+    "mitHauptwohnungGemeldetSeit": null
+  },
+  "wohnungen": [
+    {
+      "_type": "aktuelleWohnung",
+      "melderegisterAnschrift": {
+        "gemeindeschluessel": "09162000",
+        "hausnummer": "10",
+        "buchstabeHausnummer": null,
+        "teilnummerHausnummer": null,
+        "ort": "München",
+        "ortsteil": null,
+        "postleitzahl": "80906",
+        "stockwerk": null,
+        "appartmentnummer": null,
+        "strasse": "Taulerstr.",
+        "wohnungsgeber": null,
+        "zusatz": null,
+        "staat": null,
+        "anschriftUnbekannt": null,
+        "sperrvermerk": false,
+        "strassenschluessel": "76"
+      },
+      "einzug": "1940-01-03",
+      "auszug": {
+        "jahr": null,
+        "jahrMonat": null,
+        "datum": null
+      },
+      "statuswechsel": null,
+      "meldungStatuswechsel": null,
+      "meldungEinzug": null,
+      "meldungAuszug": null,
+      "innerhalb": true,
+      "belegGebunden": false,
+      "gefoerdert": false,
+      "scheinadresse": false,
+      "nutzungszustand": "EINZIGE_WOHNUNG"
+    }
+  ],
+  "passdaten": [],
+  "partner": {
     "namen": {
       "vornamen": [
         {
-          "vorname": "Franklin",
-          "rufname": "true"
+          "vorname": "Hildegard",
+          "rufname": true
         }
       ],
       "familienname": {
-        "name": "Wimtest-zwei-ohne-Pass"
-      }
-    },
-    "zuzugsdaten": {
-      "zuzugSamtgemeinde": "2020-04-09",
-      "zuzugOrtsteil": "2020-04-09",
-      "zuzugBund": "2020-04-09",
-      "zuzugLand": "2020-04-09",
-      "zuzugRegierungsbezirk": "2020-04-09",
-      "zuzugKreis": "2020-04-09",
-      "zuzugGemeinde": "2020-04-09",
-      "mitHauptwohnungGemeldetSeit": "2020-04-09"
-    },
-    "wohnungen": [
-      {
-        "@type": "ns2:AktuelleWohnungType",
-        "melderegisterAnschrift": {
-          "gemeindeschluessel": "09162000",
-          "hausnummer": "0",
-          "ort": "München",
-          "postleitzahl": "80538",
-          "strasse": "Alexandrastr.",
-          "sperrvermerk": "false",
-          "strassenschluessel": "77"
-        },
-        "einzug": "2020-04-09",
-        "meldungEinzug": {
-          "art": "PERSOENLICHE_MELDUNG",
-          "datum": "2020-04-16"
-        },
-        "innerhalb": "true",
-        "belegGebunden": "false",
-        "gefoerdert": "false",
-        "scheinadresse": "false",
-        "nutzungszustand": "EINZIGE_WOHNUNG"
+        "name": "König",
+        "namensbestandteil": null,
+        "unstrukturierteSchreibweise": "König"
       },
-      {
-        "@type": "ns2:ZuzugsWohnungType",
-        "melderegisterAnschrift": {
-          "staat": "232"
-        },
-        "auszug": {
-          "datum": "2020-04-09"
-        },
-        "meldungAuszug": {
-          "art": "PERSOENLICHE_MELDUNG",
-          "datum": "2020-04-16"
-        },
-        "innerhalb": "false",
-        "belegGebunden": "false",
-        "gefoerdert": "false",
-        "scheinadresse": "false",
-        "ausFrueherenMeldeverhaeltnissen": "false",
-        "zuzugsWohnungsStatus": "DIREKTE_ZUZUGSWOHNUNG",
-        "vorherigerStatus": "EW"
-      }
-    ],
-    "passdaten": [{
-      "art": "12",
-      "serienummer": "12345002",
-      "ausstellendeBehoerde": "Lagos Druckerei",
-      "ausstellungsdatum": "2000-01-06",
-      "ablaufdatum": "2010-01-05"
-    }],
-    "artStaatsangehoerigkeit": "7",
-    "staatsangehoerigkeiten": [{
-      "schluessel": "232",
-      "text": "nigerianisch",
-      "nichtEuBuerger": "false",
-      "staatEuMitglied": "false"
-    }]
-  }
+      "geburtsname": {
+        "name": "Hahner",
+        "namensbestandteil": null,
+        "unstrukturierteSchreibweise": "Hahner"
+      },
+      "ehename": null,
+      "familiennameNachPass": null,
+      "ordensname": null,
+      "kuenstlername": null,
+      "doktorgrad": null
+    },
+    "art": "VH",
+    "ordnungsmerkmal": "2005",
+    "sperren": [],
+    "personstatus": "AKTUELLER_FESTER_EINWOHNER",
+    "geburtsdatum": {
+      "datum": "1959-11-14"
+    },
+    "geschlecht": "w",
+    "anschrift": {
+      "gemeindeschluessel": "09162000",
+      "hausnummer": "10",
+      "buchstabeHausnummer": null,
+      "teilnummerHausnummer": null,
+      "ort": "München",
+      "ortsteil": null,
+      "postleitzahl": "80906",
+      "stockwerk": null,
+      "appartmentnummer": null,
+      "strasse": "Taulerstr.",
+      "wohnungsgeber": null,
+      "zusatz": null,
+      "staat": null,
+      "anschriftUnbekannt": null,
+      "sperrvermerk": false,
+      "strassenschluessel": "76"
+    },
+    "sterbedaten": null
+  },
+  "kinder": [],
+  "vertreter": [],
+  "fruehereNamen": null,
+  "waffenrechtlicheErlaubnisErweitert": [],
+  "sprengstoffrechtlicheErlaubnisErweitert": [],
+  "waffenbesitzVerbot": [],
+  "verlustDeutscheStaatsangehoerigkeit": null,
+  "optionsDeutscherDaten": null,
+  "artStaatsangehoerigkeit": "1",
+  "frueheresOm": null,
+  "zukuenftigesOm": null,
+  "staatsangehoerigkeiten": [
+    {
+      "schluessel": "000",
+      "text": "deutsch",
+      "art": null,
+      "nachweisdaten": null,
+      "nichtEuBuerger": false,
+      "staatEuMitglied": true
+    }
+  ]
 }

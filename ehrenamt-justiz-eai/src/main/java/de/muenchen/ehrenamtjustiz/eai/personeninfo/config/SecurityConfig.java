@@ -28,16 +28,17 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests((requests) -> requests.requestMatchers(
-                    requestMatcherBuilder.matcher(HttpMethod.GET,basePath + Konstanten.PERSONENINFO_SUB_PATH_EWO_SUCHE_MIT_OM+"/**"),
-                    requestMatcherBuilder.matcher(HttpMethod.POST,basePath + Konstanten.PERSONENINFO_SUB_PATH_EWO_SUCHE+"/**")).hasAuthority("getPersoneninfo"))
+                        requestMatcherBuilder.matcher(HttpMethod.GET,basePath + Konstanten.PERSONENINFO_SUB_PATH_EWO_SUCHE_MIT_OM+"/**"),
+                        requestMatcherBuilder.matcher(HttpMethod.POST,basePath + Konstanten.PERSONENINFO_SUB_PATH_EWO_SUCHE+"/**")).hasAuthority("getPersoneninfo"))
                 .authorizeHttpRequests((requests) -> requests.requestMatchers(
-                    requestMatcherBuilder.matcher(HttpMethod.GET,  basePath + Konstanten.API_DOC_SUB_PATH),
-                    requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/info"),
-                    requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/health"),
-                    requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/health/readiness"),
-                    requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/health/liveness"),
-                    requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/sbom"),
-                    requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/sbom/application")).permitAll());
+                        requestMatcherBuilder.matcher(HttpMethod.GET,  basePath + Konstanten.API_DOC_SUB_PATH),
+                        requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/info"),
+                        requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/health"),
+                        requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/health/readiness"),
+                        requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/health/liveness"),
+                        requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/sbom"),
+                        requestMatcherBuilder.matcher(HttpMethod.GET, managementContextPath+"/sbom/application"),
+                        requestMatcherBuilder.matcher("/error")).permitAll());
 
         http.csrf(AbstractHttpConfigurer::disable);
         http.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
